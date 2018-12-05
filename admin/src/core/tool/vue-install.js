@@ -98,7 +98,7 @@ export default {
                     let code = data.status;
                     let message = data.msg;
 
-                    if(code == "2000"){
+                    if(code == "200"){
                         defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});

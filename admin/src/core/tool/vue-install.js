@@ -2,7 +2,7 @@
 import Q from "q";
 import _this from "../../main";
 
-const proxy_key = "/api/";
+const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 
 let param = function(obj) {
     var query = '';

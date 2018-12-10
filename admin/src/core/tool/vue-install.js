@@ -68,8 +68,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch((err)=> {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    _this.alert.showAlert("error",url + " request server error!");
                 });
                 return defer.promise;
             },
@@ -104,8 +103,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    _this.alert.showAlert("error",url + " request server error!");
                 });
                 return defer.promise;
             },
@@ -137,8 +135,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    throw new Error(url + " request server error!");                    
                 });
                 return defer.promise;
             },

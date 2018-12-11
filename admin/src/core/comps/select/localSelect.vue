@@ -63,7 +63,7 @@
          * @returns
          */
         clickInput(){
-            if(this.datas.searchName != ""){
+            if(this.datas.searchName == ""){
                 this.datas = {
                     searchName:"",
                     bottomArray:[],

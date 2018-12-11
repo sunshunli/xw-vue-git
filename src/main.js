@@ -6,8 +6,24 @@ import router from './router/index.js';
 
 import VueCoreInstance from "./core/tool/vue-install";
 
-Vue.use(VueCoreInstance);
+import alert from "./core/comps/alert/alert.js";
+import LeButton from "./core/comps/button/button.vue";
+import LeCheckboxList from "./core/comps/checkbox/checkboxList.vue";
+import VInput from "./core/comps/input/vInput.vue";
+import CInput from "./core/comps/input/cInput.vue";
+import LocalSelect from "./core/comps/select/localSelect.vue";
+import TableList from "./core/comps/table/tableList.vue";
+import FileUpload from "./core/comps/upload/upload.vue";
 
+Vue.use(VueCoreInstance);
+Vue.use(alert);
+Vue.use(LeButton);
+Vue.use(LeCheckboxList);
+Vue.use(VInput);
+Vue.use(CInput);
+Vue.use(LocalSelect);
+Vue.use(TableList);
+Vue.use(FileUpload);
 
 Vue.config.productionTip = false;
 

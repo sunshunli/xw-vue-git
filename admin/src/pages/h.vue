@@ -6,6 +6,8 @@
             <select v-model="selectProject">
                 <option v-for="(item,index) in projects" :key="index" :value="item.value">{{item.name}}</option>
             </select>
+            <local-select ref="ss" displayName="name" displayValue="value"></local-select>
+            
         </div>
 
         <input type="text" v-model="path" />
@@ -51,7 +53,10 @@ export default {
                 result.push({name:item.substring(item.lastIndexOf('/')+1),value:item});
             });
             this.projects = result;
+            this.$refs['ss'].init(result);
         })
+
+        
     }
 }
 </script>

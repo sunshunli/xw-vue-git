@@ -5,16 +5,16 @@ import Vuex from 'vuex';
 import App from './App.vue';
 import router from './router/index.js';
 
-import VueCoreInstance from "./core/tool/vue-install";
+import VueFetchInstance from "./core/tool/fetch-install";
+import Alert from "./core/comps/alert/alert.js";
+import CusComp from "./core/comps/comp.js";
 
-import Alert from "./core/comps/alert/alert";
-
-Vue.use(Vuex);
-Vue.use(VueCoreInstance);
+Vue.use(VueFetchInstance);
 Vue.use(Alert);
+Vue.use(CusComp);
 
 router.afterEach(function(to, from, next){
-
+  
 });
 
 /* eslint-disable no-new */

@@ -1,18 +1,26 @@
 
 <template>
     <div>
-
         <div>Step 1:选择项目:
-            <select v-model="selectProject">
-                <option v-for="(item,index) in projects" :key="index" :value="item.value">{{item.name}}</option>
+            <select v-model="project.selectProject">
+                <option v-for="(item,index) in project.projects" :key="index" :value="item.value">{{item.name}}</option>
             </select>
-            <local-select ref="ss" displayName="name" displayValue="value"></local-select>
-            
+            <!-- <local-select ref="ss" displayName="name" displayValue="value"></local-select> -->
         </div>
 
-        <input type="text" v-model="path" />
+        <div>
+            Step 2:配置属性
+            <input type="button" value="添加字段" @click="add" />
 
-        <input type="button" value="创建模块" @click="create" placeholder="自动创建view，api，store" />
+            <div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <!-- <input type="text" v-model="path" />
+
+        <input type="button" value="创建模块" @click="create" placeholder="自动创建view，api，store" /> -->
     </div>
 </template>
 
@@ -23,8 +31,21 @@ export default {
     name:"H",
     data(){
         return {
-            selectProject:"",
-            projects:[],
+            project:{
+                selectProject:"",
+                projects:[],
+            },
+            config:{
+                fieldTypes:[
+                    {name:"text",value:"text"},
+                    {name:"select",value:"select"},
+                    {name:"checkbox",value:"checkbox"},
+                    {name:"datepicker",value:"datepicker"},
+                ],
+               cols:[
+                   {name:"",key:"",fieldType:"",isConvert:false,displayName:"",displayValue:"",showSearch:false}
+               ]
+            },
             path:""
         }
     },
@@ -32,6 +53,19 @@ export default {
 
     },
     methods:{
+        getProjects(){
+            this.ajax.getFetch("/comp/getProjects").then(d=>{
+                let result = [{name:"请选择",value:""}];
+                d.data && d.data.split('\r\n').forEach(item => {
+                    result.push({name:item.substring(item.lastIndexOf('/')+1),value:item});
+                });
+                this.project.projects = result;
+                this.$refs['ss'].init(result);
+            })
+        },
+        add(){
+
+        },
         create(){
             if(!this.path || !this.selectProject){
                 this.alert.showAlert("warning","必须输入项目和模块名称!");
@@ -47,16 +81,7 @@ export default {
         }
     },
     mounted(){
-        this.ajax.getFetch("/comp/getProjects").then(d=>{
-            let result = [{name:"请选择",value:""}];
-            d.data && d.data.split('\r\n').forEach(item => {
-                result.push({name:item.substring(item.lastIndexOf('/')+1),value:item});
-            });
-            this.projects = result;
-            this.$refs['ss'].init(result);
-        })
-
-        
+        this.getProjects();
     }
 }
 </script>

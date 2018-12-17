@@ -125,7 +125,9 @@ module.exports = (env = {}) =>{
             port: "9999",
             proxy: {
                 '/api': {
-                    target: 'http://127.0.0.1:9998/',
+                    // target: 'http://127.0.0.1:9998/',
+                    target:"http://10.112.19.229:8080/",
+                    // target: 'https://voice.lenovouat.com/',
                     pathRewrite: {
                         "^/api": ""
                     },

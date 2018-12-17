@@ -14,10 +14,14 @@
 
             <div>
                 <div>
-
+                    
                 </div>
             </div>
         </div>
+
+        <input type="button" value = "Strat" @click="start()"/>
+        <input type="button" value = "Stop" @click="stop()"/>
+
         <!-- <input type="text" v-model="path" />
 
         <input type="button" value="创建模块" @click="create" placeholder="自动创建view，api，store" /> -->
@@ -25,6 +29,11 @@
 </template>
 
 <script>
+
+const audio_context = new AudioContext;
+let recorder = null;
+
+import $ from "jquery";
 
 export default {
     components:{},
@@ -53,6 +62,65 @@ export default {
 
     },
     methods:{
+        startUserMedia(stream){
+            let input = audio_context.createMediaStreamSource(stream);
+            recorder = new Recorder(input);
+            console.log('Recorder initialised.');
+        },
+        start(){
+            recorder.record();
+            console.log('Recording...');
+        },
+        stop(){
+            let that = this;
+            recorder.stop();
+            let params = {
+                "param-data":"dtp=lenovo/leSumsung/android&ver=1.0.0&did=83102d26aaca24ba&uid=30323575&stm=0&key=a&ssm=true&vdm=music&rvr=&sce=cmd&ntt=wifi&aue=speex-wb;7&auf=audio/L16;rate=16000&dev=lenovo.rt.urc.lv.develop&ixid=1545031939343&pidx=1&over=1&rsts=0&spts=0&fpts=0&cpts=0&lrts=0",
+                "appKey":"levoice001",
+                "recognition":true,
+                "saveFlag": false,
+                voiceData:null
+            }
+            recorder && recorder.exportWAV(function(blob) {
+                let reader = new FileReader();
+                reader.readAsArrayBuffer(blob, 'utf-8');
+                reader.onload = function (e) {
+                    var buf = new Uint16Array(reader.result);
+                    var buf2=[5,0,0,0];
+                    var buf4=new Uint16Array(buf.length+4);
+                        buf4[0]=5;
+                        buf4[1]=0;
+                        buf4[2]=0;
+                        buf4[3]=0;
+                    for(let i=0;i<buf.length;i++){
+                        buf4[i+4]=buf[i];
+                    }
+                    params.voiceData =  new Blob([buf4]);
+
+                    var formData = new FormData();
+                    formData.append("param-data", params["param-data"]);
+                    formData.append("voiceData", params.voiceData);
+                    formData.append("appKey", params.appKey);
+                    formData.append("recognition",params.recognition);
+                    formData.append("saveFlag",params.saveFlag);
+
+                    var request = new XMLHttpRequest();
+                    var URL = "/api/voice/recognize";
+                    request.open("POST", URL);
+                    request.onreadystatechange=function() {
+                        // updateStatus(request.responseText);
+                        console.log("completed");
+                    };
+                    // var accountid = window.localStorage.getItem('accountid');
+                    // var lenkey = window.localStorage.getItem('lenkey');
+                    // var secrkey = window.localStorage.getItem('secrkey');
+                    // request.setRequestHeader('channel','cloudasr');
+                    // request.setRequestHeader('lenovokey',lenkey);
+                    // request.setRequestHeader('secretkey',secrkey);
+                    request.send(formData);
+                }
+            });
+        },
         getProjects(){
             this.ajax.getFetch("/comp/getProjects").then(d=>{
                 let result = [{name:"请选择",value:""}];
@@ -82,6 +150,11 @@ export default {
     },
     mounted(){
         this.getProjects();
+
+        navigator.getUserMedia({audio: true}, this.startUserMedia, function(e) {
+            __log('No live audio input: ' + e);
+        });
+
     }
 }
 </script>

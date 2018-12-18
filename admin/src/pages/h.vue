@@ -30,7 +30,6 @@
 
 <script>
 
-const audio_context = new AudioContext;
 let recorder = null;
 
 import $ from "jquery";
@@ -63,11 +62,13 @@ export default {
     },
     methods:{
         startUserMedia(stream){
+            let audio_context = new AudioContext();
             let input = audio_context.createMediaStreamSource(stream);
             recorder = new Recorder(input);
             console.log('Recorder initialised.');
         },
         start(){
+            recorder.clear();
             recorder.record();
             console.log('Recording...');
         },
@@ -81,7 +82,7 @@ export default {
                 "saveFlag": false,
                 voiceData:null
             }
-            recorder && recorder.exportWAV(function(blob) {
+            recorder && recorder.exportMonoWAV(function(blob) {
                 let reader = new FileReader();
                 reader.readAsArrayBuffer(blob, 'utf-8');
                 reader.onload = function (e) {

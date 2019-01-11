@@ -127,6 +127,10 @@ module.exports = (env = {}) =>{
                 '/api': {
                     target: 'http://127.0.0.1:9998/',
                     // target:"http://10.112.19.229:8080/",
+<<<<<<< HEAD
+=======
+                    // target: 'https://voice.lenovouat.com/',
+>>>>>>> 202d33690ad220e7973d9a939710c5e6682c5cd3
                     pathRewrite: {
                         "^/api": ""
                     },

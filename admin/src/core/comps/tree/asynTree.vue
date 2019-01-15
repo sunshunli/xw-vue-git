@@ -31,17 +31,7 @@ export default {
         }
     },
     methods:{
-        getItemById(item){
-            this.state.data.forEach(d=>{
-                if(d.__tmpId == item.__tmpId){
-                    d.hasChildren = item.hasChildren;
-                    d[this.childrenKey] = item[this.childrenKey];
-                    d["name"] = item["name"]
-                }
-            })
-        },
         accpetItemNotice(data){
-            this.getItemById(data);
             this.state = {
                 data:this.state.data
             }
@@ -49,17 +39,15 @@ export default {
         },
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
-            for (let index = 0; index < originData.length; index++) {
-                const element = originData[index];
-                element.__tmpId = Math.ceil(Math.random()*10000000000000000);
+            originData.forEach(element=>{
+                element.__tmpId = Math.ceil(Math.random()*10000000000000);
                 element.hasChildren = false;
                 element.cls = "";
                 element[this.childrenKey] = [];
-            }
+            })
             this.state = {
                 data:originData
             };
-            debugger
         }
     },
     mounted(){},

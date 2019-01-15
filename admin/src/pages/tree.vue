@@ -31,13 +31,13 @@ export default {
     },
     mounted(){
         window.setTimeout(d=>{
-            this.data = [
+            let data = [
                 {name:"A",id:1},
                 {name:"B",id:1},
                 {name:"C",id:1},
                 {name:"D",id:1}
             ];
-            this.$refs["tree"].init(this.data);
+            this.$refs["tree"].init(data);
         },1000)
     }
 }

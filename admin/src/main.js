@@ -12,6 +12,7 @@ import CusComp from "./core/comps/comp.js";
 Vue.use(VueFetchInstance);
 Vue.use(Alert);
 Vue.use(CusComp);
+Vue.use(Vuex);
 
 router.afterEach(function(to, from, next){
   

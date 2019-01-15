@@ -15,7 +15,6 @@
     import BodySection from "./body.vue";
     import PagingSection from "./paging.vue";
     import Util from "../../tool/commonUtil.js";
-    import CommonUtil from '../../tool/commonUtil.js';
     
     export default {
         components: {HeaderSection,BodySection,PagingSection},

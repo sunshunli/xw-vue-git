@@ -29,8 +29,10 @@
                     </span>
                 </div>
             </td>
-            <td v-if="actions && actions.length != 0">
-                <button v-if="actionShowFn(x,row)" v-for="(x,i) in actions" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action && x.action(row)}" :key="i">{{x.val}}</button>
+             <td v-if="actions && actions.length != 0">
+                <div v-for="(x,i) in actions" class="btnContent" :key="i">
+                     <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button>
+                </div>
             </td>
         </tr>
     </tbody>
@@ -107,7 +109,6 @@
         }
     }
 </script>
-
 <style scoped>
     .tableList .relative{
         position: relative;
@@ -123,11 +124,8 @@
     
     .btn{
         margin: 0 5px;
-        border: none;
         border-radius: 4px;
-        color: #fff;
         padding: 2px 10px;
-        cursor:pointer;
     }
 
     button.edit{
@@ -137,7 +135,48 @@
    button.delete{
         background-color: #f56c6c;
     } 
-    button.disabled{
-        background-color: gray;
+    .bg-gray{
+        background-color: #fafafa;
     }
+
+
+
+/* 新Btn样式 */ 
+
+button.btn{
+    border:none;
+}
+
+.del{
+        color: #fff;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+
+.edit1{
+        background-color: #409eff;
+        color:#fff;
+}
+
+.publish{
+        color: #fff;
+    background-color: #e6a23c;
+}
+
+.pc{
+    color: #fff;
+    background-color: #67c23a;
+}
+
+.wap{
+    background-color: #d2c41c;
+    color: #fff;
+}
+
+.btnContent{
+        width: auto;
+    height: auto;
+    display: inline-block;
+}
+
 </style>

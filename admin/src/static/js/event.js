@@ -21,4 +21,4 @@ var EventPublisher = function(){
         }
     }
 }
-var eventCtl = new EventPublisher();
+var _eventPublisher = new EventPublisher();

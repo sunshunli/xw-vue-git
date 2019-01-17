@@ -8,7 +8,7 @@
                 :displayName="displayName"
                 :childrenKey="childrenKey"
                 :asynOptions="asynOptions"
-                :accpetItemNotice="accpetItemNotice"
+                :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
             ></tree-item>
         </div>
     </div>
@@ -19,6 +19,12 @@
 import TreeItem from "./treeItem.vue";
 import CommonUtil from '../../tool/commonUtil';
 
+const ACTIONKEY = {
+    OPEN:"open",
+    UPDATECHILDREN:"updateChilden",
+    CHECK:"check"
+}
+
 export default {
     name:"LeAsynTree",
     components:{TreeItem},
@@ -26,31 +32,65 @@ export default {
     data(){
         return {
             state:{
-                data:[]
-            }
+                data:[],
+            },
+            EVENTPUBLISHKEY:Math.ceil(Math.random()*10000000000000) + "_TREE_NOTICEKEY"
         }
     },
     methods:{
-        accpetItemNotice(data){
-            this.state = {
-                data:this.state.data
+        //遍历tree的数据源，根据__tmpId找到当前节点
+        getNodeById(arr,id){
+            let res = null;
+            for(let i =0;i<arr.length;i++){
+                if(arr[i].__tmpId == id){
+                    res = arr[i];
+                    return res;
+                }
+                let children = arr[i].children;
+                if(children && children.length >0){
+                    let _tmp = this.getNodeById(children,id);
+                    if(_tmp){
+                        res = _tmp;
+                        return res;
+                    }
+                }
             }
-            console.log(this.state.data);
+            return res;
         },
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
             originData.forEach(element=>{
                 element.__tmpId = Math.ceil(Math.random()*10000000000000);
                 element.hasChildren = false;
-                element.cls = "";
                 element[this.childrenKey] = [];
+                element.cls = "";
+                element['level'] = 1;
+                element.open = false;
+                element.parentId = -1;
             })
             this.state = {
                 data:originData
             };
         }
     },
-    mounted(){},
+    mounted(){
+        //订阅所有
+        let that = this;
+        _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
+            let item = that.getNodeById(that.state.data,d.__tmpId);
+            //新增子节点
+            if(d.actionKey == ACTIONKEY.UPDATECHILDREN){
+                item.hasChildren = d.data.hasChildren;
+                item[that.childrenKey] = d.data[that.childrenKey];
+                item.open = d.data.open;
+            }
+            //展开操作, 与children是否有数据无关
+            else if(d.actionKey == ACTIONKEY.OPEN){
+                item.open = d.data.open;
+            }
+            
+        })
+    },
     // computed:{
     //     dataSource(){
     //         this.state.data.map(item => {

@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:style="paddingLeft">
+    <div class="ML12">
         <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
         {{item[displayName]}}
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
@@ -29,7 +29,6 @@ export default {
     props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
-            paddingLeft: "margin-left:"+ "12px"
 
         }
     },
@@ -118,6 +117,10 @@ export default {
 <style>
     div{
         color: #606266;
+    }
+
+    .ML12{
+        margin-left:12px;
     }
 
     .treeContent button{

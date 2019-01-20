@@ -120,11 +120,10 @@ export default {
 
     .treeContent button::before{
         color: #a7acb5;
-        width: 12px;
         height: 12px;
         display: inline-block;
         text-align: center;
-        padding: 6px;
+        padding: 5px;
         padding-left: 0;
         vertical-align: baseline;
     }

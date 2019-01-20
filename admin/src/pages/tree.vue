@@ -28,8 +28,8 @@ export default {
         }
     },
     methods:{
-        itemClick(item,data){
-            debugger
+        itemClick(item){
+            
         }
     },
     mounted(){

@@ -36,7 +36,6 @@ export default {
         getTestData(item){
             
             let name = item[this.displayName] + "_";
-            console.log(name);
             if(name == "A_" || name == "A_0_"){
                 return [{name:name + "0",id:2},
                 {name:name + "1",id:3}];
@@ -46,6 +45,7 @@ export default {
         },
         clickItem(item,data){
             if(!item.hasChildren){
+                console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
                 window.setTimeout(d=>{
                     let tmp = this.asynOptions.analysis(this.getTestData(item));
@@ -82,6 +82,7 @@ export default {
                 //     }
                 // })
             }else{
+                console.log("展开操作");
                 let cls = "";
                 if(item[this.childrenKey] && item[this.childrenKey].length != 0){
                     if(item.cls == "fa-caret-right"){

@@ -89,7 +89,7 @@ export default {
                 item.cls = d.data.cls;
             }
             //当前项选中的callback
-            this.itemClick(item,this.state.data);  
+            this.itemClick(item);
         })
     },
     // computed:{

@@ -117,21 +117,28 @@ export default {
 
     .treeContent button{
         color: #606266;
+        padding:0;
     }
 
     .treeContent button::before{
         color: #a7acb5;
+        width: 12px;
         height: 12px;
         display: inline-block;
         text-align: center;
-        padding: 5px;
-        padding-left: 0;
         vertical-align: baseline;
+        padding: 6px 0;
     }
 
     .treeContent .fa-caret-left::before{
         color: #fff;
     }
 
+     .treeContent .fa-caret-load{
+         background: url(../../../static/images/loading.gif) 0 0 no-repeat;
+         background-size: 100%;
+         width: 12px;
+         height: 12px;
+     }
 
 </style>

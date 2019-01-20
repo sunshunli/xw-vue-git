@@ -29,7 +29,8 @@ export default {
     props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
-            paddingLeft: "padding-left:"+this.item.level * 9 + "px"
+            paddingLeft: "margin-left:"+ "12px"
+
         }
     },
     methods:{

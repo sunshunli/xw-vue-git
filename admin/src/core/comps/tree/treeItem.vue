@@ -36,6 +36,8 @@ export default {
         getTestData(item){
             
             let name = item[this.displayName] + "_";
+            return [{name:name + "0",id:2},
+                {name:name + "1",id:3}];
             if(name == "A_" || name == "A_0_"){
                 return [{name:name + "0",id:2},
                 {name:name + "1",id:3}];
@@ -77,7 +79,7 @@ export default {
                         tmpObject.data["cls"] = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },2000)
+                },100)
                 // this.ajax.getFetch(_url).then(d=>{
                 //     let tmp = this.asynOptions.analysis(d);
                 //     if(tmp && tmp.length != 0){

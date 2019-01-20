@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="treeContent">
         <le-asyn-tree
             displayName="name"
             childrenKey="children"
@@ -44,5 +44,10 @@ export default {
 </script>
 
 <style>
-
+    /* .treeContent{
+        width: auto;
+        border: 1px solid red;
+        float: left;
+        padding: 24px;
+    } */
 </style>

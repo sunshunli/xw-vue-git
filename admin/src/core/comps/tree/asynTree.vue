@@ -1,16 +1,14 @@
 
 <template>
     <div>
-        <div>
-            <tree-item
-                v-for="(item,index) in state.data" :key="index"
-                :item="item"
-                :displayName="displayName"
-                :childrenKey="childrenKey"
-                :asynOptions="asynOptions"
-                :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
-            ></tree-item>
-        </div>
+        <tree-item
+            v-for="(item,index) in state.data" :key="index"
+            :item="item"
+            :displayName="displayName"
+            :childrenKey="childrenKey"
+            :asynOptions="asynOptions"
+            :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
+        ></tree-item>
     </div>
 </template>
 

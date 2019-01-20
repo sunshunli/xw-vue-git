@@ -137,10 +137,14 @@ export default {
     }
 
      .treeContent .fa-caret-load{
-         background: url(../../../static/images/loading.gif) 0 0 no-repeat;
-         background-size: 100%;
-         width: 12px;
-         height: 12px;
+        background: url(/static/images/loading.gif?03ce3dc…) 0 0 no-repeat;
+        background-size: 100%;
+        width: 12px;
+        height: 23px;
+        padding: 6px 0;
+        background-position: center;
+        vertical-align: baseline;
+        background-position-y: 5px;
      }
 
 </style>

@@ -58,6 +58,10 @@ export default {
         font-size: 14px;
     }
 
+    .treeContent div{
+        line-height: 24px;
+    }
+
     .treeContent button{
         border: none;
         background-color: transparent;

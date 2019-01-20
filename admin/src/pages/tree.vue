@@ -44,10 +44,20 @@ export default {
 </script>
 
 <style>
-    /* .treeContent{
+    .treeContent{
         width: auto;
         border: 1px solid red;
         float: left;
         padding: 24px;
-    } */
+        padding-left: 0;
+        text-align: left;
+        color: #606266;
+        font-size: 14px;
+    }
+
+    .treeContent button{
+        border: none;
+        background-color: transparent;
+        outline: none;
+    }
 </style>

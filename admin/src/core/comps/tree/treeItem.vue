@@ -1,6 +1,6 @@
 <template>
     <div v-bind:style="paddingLeft">
-        <button @click="clickItem(item)">{{item[displayName]}}</button>
+        <button @click="clickItem(item)" class="fa fa-caret-down">{{item[displayName]}}</button>
         {{item.level * 18 +"---"+ item.hasChildren}}
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
@@ -114,5 +114,24 @@ export default {
 </script>
 
 <style>
+    div{
+        color: #606266;
+    }
+
+    .treeContent button{
+        color: #606266;
+    }
+
+    .treeContent button::before{
+        color: #a7acb5;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        text-align: center;
+        padding: 6px;
+        padding-left: 0;
+        vertical-align: baseline;
+    }
+
 
 </style>

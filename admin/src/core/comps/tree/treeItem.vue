@@ -47,6 +47,8 @@ export default {
             if(!item.hasChildren){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
+                //发送ajax请求, 改变loading状态
+                item.cls = "fa-caret-load";
                 window.setTimeout(d=>{
                     let tmp = this.asynOptions.analysis(this.getTestData(item));
 
@@ -75,7 +77,7 @@ export default {
                         tmpObject.data["cls"] = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },100)
+                },2000)
                 // this.ajax.getFetch(_url).then(d=>{
                 //     let tmp = this.asynOptions.analysis(d);
                 //     if(tmp && tmp.length != 0){

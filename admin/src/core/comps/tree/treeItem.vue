@@ -131,5 +131,9 @@ export default {
         vertical-align: baseline;
     }
 
+    .treeContent .fa-caret-left::before{
+        color: #fff;
+    }
+
 
 </style>

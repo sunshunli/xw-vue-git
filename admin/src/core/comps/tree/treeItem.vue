@@ -133,5 +133,11 @@ export default {
         color: #fff;
     }
 
+     .treeContent .fa-caret-load{
+         background: url(../../../static/images/loading.gif) 0 0 no-repeat;
+         background-size: 100%;
+         width: 12px;
+         height: 12px;
+     }
 
 </style>

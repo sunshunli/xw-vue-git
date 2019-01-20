@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div v-bind:style="paddingLeft">
         <button @click="clickItem(item)">{{item[displayName]}}</button>
-        {{item.open +"---"+ item.hasChildren}}
+        {{item.level * 18 +"---"+ item.hasChildren}}
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
                 v-for="(x,index) in item.children"
@@ -29,7 +29,7 @@ export default {
     props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
-            
+            paddingLeft: "padding-left:"+this.item.level * 18 + "px"
         }
     },
     methods:{

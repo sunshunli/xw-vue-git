@@ -6,6 +6,7 @@
             childrenKey="children"
             :asynOptions="asynOptions"
             ref="tree"
+            :itemClick="itemClick"
         ></le-asyn-tree>
     </div>
 </template>
@@ -27,7 +28,9 @@ export default {
         }
     },
     methods:{
-
+        itemClick(item,data){
+            debugger
+        }
     },
     mounted(){
         window.setTimeout(d=>{

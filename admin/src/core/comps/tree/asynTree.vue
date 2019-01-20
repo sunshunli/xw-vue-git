@@ -26,7 +26,7 @@ const ACTIONKEY = {
 export default {
     name:"LeAsynTree",
     components:{TreeItem},
-    props:["displayName","childrenKey","asynOptions"],
+    props:["displayName","childrenKey","asynOptions","itemClick"],
     data(){
         return {
             state:{
@@ -75,22 +75,21 @@ export default {
         //订阅所有
         let that = this;
         _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
-            debugger
             let item = that.getNodeById(that.state.data,d.__tmpId);
-            //新增子节点
+            //ajax请求获取子节点数据
             if(d.actionKey == ACTIONKEY.UPDATECHILDREN){
                 item.hasChildren = d.data.hasChildren;
                 item[that.childrenKey] = d.data[that.childrenKey];
                 item.open = d.data.open;
                 item.cls = d.data.cls;
             }
-            //展开操作, 与children是否有数据无关
+            //判断是否有children，进行展开的样式处理
             else if(d.actionKey == ACTIONKEY.OPEN){
-                debugger
                 item.open = d.data.open;
                 item.cls = d.data.cls;
             }
-            
+            //当前项选中的callback
+            this.itemClick(item,this.state.data);  
         })
     },
     // computed:{

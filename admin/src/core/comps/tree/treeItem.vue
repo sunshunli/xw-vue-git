@@ -1,7 +1,7 @@
 <template>
     <div v-bind:style="paddingLeft">
-        <button @click="clickItem(item)" class="fa" :class="item.cls">{{item[displayName]}}</button>
-        {{item.level * 18 +"---"+ item.hasChildren}}
+        <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
+        {{item[displayName]}}
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
                 v-for="(x,index) in item.children"
@@ -29,7 +29,7 @@ export default {
     props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
-            paddingLeft: "padding-left:"+this.item.level * 18 + "px"
+            paddingLeft: "padding-left:"+this.item.level * 9 + "px"
         }
     },
     methods:{
@@ -79,8 +79,6 @@ export default {
                 // this.ajax.getFetch(_url).then(d=>{
                 //     let tmp = this.asynOptions.analysis(d);
                 //     if(tmp && tmp.length != 0){
-                //         item.hasChildren = true;
-                //         item[this.childrenKey] = tmp;
                 //     }
                 // })
             }else{

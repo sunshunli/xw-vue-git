@@ -1,6 +1,6 @@
 <template>
     <div v-bind:style="paddingLeft">
-        <button @click="clickItem(item)" class="fa fa-caret-down">{{item[displayName]}}</button>
+        <button @click="clickItem(item)" class="fa" :class="item.cls">{{item[displayName]}}</button>
         {{item.level * 18 +"---"+ item.hasChildren}}
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
@@ -34,33 +34,47 @@ export default {
     },
     methods:{
         getTestData(item){
+            
             let name = item[this.displayName] + "_";
-            return [{name:name + "0",id:2},
+            console.log(name);
+            if(name == "A_" || name == "A_0_"){
+                return [{name:name + "0",id:2},
                 {name:name + "1",id:3}];
+            }else{
+                return [];
+            }
         },
         clickItem(item,data){
             if(!item.hasChildren){
                 let _url  = this.asynOptions.getUrl(item);
                 window.setTimeout(d=>{
                     let tmp = this.asynOptions.analysis(this.getTestData(item));
+
+                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
+                    let tmpObject = {actionKey:ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+
                     if(tmp && tmp.length != 0){
                         //处理子节点数据源
                         tmp.forEach(x => {
                             x.__tmpId = Math.ceil(Math.random()*10000000000000000);
                             x.hasChildren = false;
                             x[this.childrenKey] = [];
-                            x.cls = "";
+                            x.cls = "fa-caret-right";
                             x.level = item.level + 1;
                             x.open = false;
                             x.parentId = item.__tmpId;
                         });
-                        //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                        let tmpObject = {actionKey:ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
                         tmpObject.data[this.childrenKey] = tmp;
                         tmpObject.data["hasChildren"] = true;
                         tmpObject.data["open"] = true;
-                        _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
+                        tmpObject.data["cls"] = "fa-caret-down";
+                    }else{
+                        tmpObject.data[this.childrenKey] = [];
+                        tmpObject.data["hasChildren"] = false;
+                        tmpObject.data["open"] = false;
+                        tmpObject.data["cls"] = "fa-caret-left";
                     }
+                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
                 },100)
                 // this.ajax.getFetch(_url).then(d=>{
                 //     let tmp = this.asynOptions.analysis(d);
@@ -70,45 +84,29 @@ export default {
                 //     }
                 // })
             }else{
+                let cls = "";
+                if(item[this.childrenKey] && item[this.childrenKey].length != 0){
+                    if(item.cls == "fa-caret-right"){
+                        cls = "fa-caret-down";
+                    }else{
+                        cls = "fa-caret-right";
+                    }
+                }else{
+                    cls = "fa-caret-left";
+                }
+
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
-                        open:!item.open
+                        open:!item.open,
+                        cls:cls
                     }
                 });
             }
         },
     },
     mounted(){
-        // let array = [
-        //     {name:1,id:1,children:[
-        //         {name:"1-1",id:"2",children:[{
-        //             name:"1-1-1",id:"35"
-        //         }]},
-        //         {name:"1-2",id:"24",children:[
-        //             {name:"1-2-1",id:"3"}
-        //         ]},
-        //         {name:"1-3",id:"25",children:[
-        //             {name:"1-2-1",id:"4"}
-        //         ]}
-        //     ]},
-        //     {name:2,id:12,children:[
-        //         {name:"2-1",id:"2",children:[{
-        //             name:"2-1-1",id:"39"
-        //         }]},
-        //         {name:"2-2",id:"9",children:[
-        //             {name:"2-2-1",id:"10"}
-        //         ]},
-        //         {name:"2-3",id:"9",children:[
-        //             {name:"2-2-1",id:"13"},
-        //             {name:"2-2-2",id:"15"},
-        //             {name:"2-2-3",id:"11"}
-        //         ]}
-        //     ]}
-        // ];
-        // let res = this.getNodeById(array,"35");
-        // console.log(res);
     }
 }
 </script>

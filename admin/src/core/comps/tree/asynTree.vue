@@ -61,7 +61,7 @@ export default {
                 element.__tmpId = Math.ceil(Math.random()*10000000000000);
                 element.hasChildren = false;
                 element[this.childrenKey] = [];
-                element.cls = "";
+                element.cls = "fa-caret-right";
                 element['level'] = 1;
                 element.open = false;
                 element.parentId = -1;
@@ -75,16 +75,20 @@ export default {
         //订阅所有
         let that = this;
         _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
+            debugger
             let item = that.getNodeById(that.state.data,d.__tmpId);
             //新增子节点
             if(d.actionKey == ACTIONKEY.UPDATECHILDREN){
                 item.hasChildren = d.data.hasChildren;
                 item[that.childrenKey] = d.data[that.childrenKey];
                 item.open = d.data.open;
+                item.cls = d.data.cls;
             }
             //展开操作, 与children是否有数据无关
             else if(d.actionKey == ACTIONKEY.OPEN){
+                debugger
                 item.open = d.data.open;
+                item.cls = d.data.cls;
             }
             
         })

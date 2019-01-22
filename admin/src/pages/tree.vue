@@ -29,7 +29,7 @@ export default {
     },
     methods:{
         itemClick(item){
-            
+            console.log(item);
         }
     },
     mounted(){

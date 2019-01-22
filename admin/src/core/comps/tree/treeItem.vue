@@ -1,7 +1,7 @@
 <template>
     <div v-bind:style="paddingLeft">
         <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
-        {{item[displayName]}}
+        <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
                 v-for="(x,index) in item.children"
@@ -21,7 +21,8 @@
 const ACTIONKEY = {
     OPEN:"open",
     UPDATECHILDREN:"updateChilden",
-    CHECK:"check"
+    CHECK:"check",
+    SELECTEDITEM:"selectedItem"
 }
 
 export default {
@@ -109,16 +110,26 @@ export default {
                 });
             }
         },
+        selectItem(item){
+            _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                actionKey:ACTIONKEY.SELECTEDITEM,
+                __tmpId:item.__tmpId,
+                selectedItem:item
+            });
+        }
     },
     mounted(){
     }
 }
 </script>
 
-<style>
+<style scoped>
     div{
         color: #606266;
     }
+     .tree-item-name{
+         cursor:pointer;
+     } 
 
     .treeContent button{
         color: #606266;

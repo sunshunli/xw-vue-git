@@ -20,7 +20,8 @@ import CommonUtil from '../../tool/commonUtil';
 const ACTIONKEY = {
     OPEN:"open",
     UPDATECHILDREN:"updateChilden",
-    CHECK:"check"
+    CHECK:"check",
+    SELECTEDITEM:"selectedItem"
 }
 
 export default {
@@ -88,8 +89,10 @@ export default {
                 item.open = d.data.open;
                 item.cls = d.data.cls;
             }
-            //当前项选中的callback
-            this.itemClick(item);
+            //当前项选中的callback            
+            else if(d.actionKey == ACTIONKEY.SELECTEDITEM){
+                this.itemClick(item);
+            }
         })
     },
     // computed:{

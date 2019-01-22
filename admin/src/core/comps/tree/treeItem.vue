@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:style="paddingLeft">
+    <div class="ML12">
         <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
         <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
@@ -30,7 +30,6 @@ export default {
     props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
-            paddingLeft: "margin-left:"+ "12px"
 
         }
     },
@@ -130,6 +129,10 @@ export default {
      .tree-item-name{
          cursor:pointer;
      } 
+
+    .ML12{
+        margin-left:12px;
+    }
 
     .treeContent button{
         color: #606266;

@@ -66,6 +66,7 @@ export default {
                 element['level'] = 1;
                 element.open = false;
                 element.parentId = -1;
+                element.color = "";
             })
             this.state = {
                 data:originData
@@ -89,24 +90,17 @@ export default {
                 item.open = d.data.open;
                 item.cls = d.data.cls;
             }
-            //当前项选中的callback            
+            //当前项选中的callback
             else if(d.actionKey == ACTIONKEY.SELECTEDITEM){
+                if(item.color){
+                    item.color = "";
+                }else{
+                    item.color = "color";
+                }
                 this.itemClick(item);
             }
         })
-    },
-    // computed:{
-    //     dataSource(){
-    //         this.state.data.map(item => {
-    //             item.hasChildren = false;
-    //             item[this.childrenKey] = [];
-    //             item.cls = "";
-    //             item.__tmpId = Math.ceil(Math.random()*10000000000000000);
-    //         });
-    //         debugger
-    //         return [...this.state.data];
-    //     }
-    // }
+    }
 }
 </script>
 

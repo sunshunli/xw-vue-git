@@ -1,7 +1,7 @@
 <template>
     <div class="ML12">
         <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
-        <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
+        <span class="tree-item-name" :class="item.color" @click="selectItem(item)">{{item[displayName]}}</span>     
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
             <tree-item
                 v-for="(x,index) in item.children"
@@ -35,7 +35,6 @@ export default {
     },
     methods:{
         getTestData(item){
-            
             let name = item[this.displayName] + "_";
             return [{name:name + "0",id:2},
                 {name:name + "1",id:3}];
@@ -65,6 +64,7 @@ export default {
                             x.hasChildren = false;
                             x[this.childrenKey] = [];
                             x.cls = "fa-caret-right";
+                            x.color = "";
                             x.level = item.level + 1;
                             x.open = false;
                             x.parentId = item.__tmpId;
@@ -126,10 +126,12 @@ export default {
     div{
         color: #606266;
     }
-     .tree-item-name{
-         cursor:pointer;
-     } 
-
+    .tree-item-name{
+        cursor:pointer;
+    } 
+    .color{
+        color: chartreuse;
+    }
     .ML12{
         margin-left:12px;
     }

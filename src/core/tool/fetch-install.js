@@ -2,7 +2,7 @@
 import Q from "q";
 import _this from "../../main";
 
-const proxy_key = "/api/";
+const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 
 let param = function(obj) {
     var query = '';
@@ -34,7 +34,6 @@ let param = function(obj) {
         // else if(value===null){
         //     query += encodeURIComponent(name) + '=null&'
         // }
-        //debugger;
     }
 
     return query.length ? query.substr(0, query.length - 1) : query;
@@ -42,37 +41,6 @@ let param = function(obj) {
 
 export default {
     install:function(Vue){
-        Vue.prototype.alert = {
-            showConfirm:(title,cb)=>{
-                _this.$confirm(title, '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                    }).then(() => {
-                        if(cb){cb()};
-                    }).catch(() => {
-                        // this.showAlertMsg('info','操作异常!');
-                    }
-                ); 
-            },
-            showAlert:function(type,msg){
-                if(arguments.length == 1){
-                    type = "success";
-                    msg = arguments[0];
-                }
-                _this.$message({
-                    type: type?type:'success',
-                    message: msg?msg:'操作成功'
-                });
-            },
-            showNotify:function(type,msg,title){
-                _this.$notify({
-                    title: title?title:'警告',
-                    type: type?type:'error',
-                    message: msg?msg:"操作成功"
-                }); 
-            }
-        }
         Vue.prototype.ajax = {
             getFetch:function(url){
                 if(!url){
@@ -92,20 +60,15 @@ export default {
                 };
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
-                    let message = data.message?data.message:data.msg;
-                    
-                    if(code == "701"){
-                        _this.$router.push({path:"/login"});
-                    }else{                
-                        if(code == "200"){
-                            defer.resolve({data:data.data,params:data.params});
-                        }else{
-                            defer.reject({data: message});
-                        } 
+                    let message = data.msg;
+
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
+                    }else{
+                        defer.reject({data: message});
                     }
                 }).catch((err)=> {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    _this.alert.showAlert("error",url + " request server error!");
                 });
                 return defer.promise;
             },
@@ -132,20 +95,15 @@ export default {
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
                     let code = data.status;
-                    let message = data.message?data.message:data.msg;
-                    
-                    if(code == "701"){
-                        _this.$router.push({path:"/login"});
-                    }else{                
-                        if(code == "200"){
-                            defer.resolve({data:data.data,params:data.params});
-                        }else{
-                            defer.reject({data: message});
-                        } 
+                    let message = data.msg;
+
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
+                    }else{
+                        defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    _this.alert.showAlert("error",url + " request server error!");
                 });
                 return defer.promise;
             },
@@ -169,20 +127,15 @@ export default {
                 
                 fetch(url,options).then(d =>d.json()).then( (data)=> {  
                     let code = data.status;
-                    let message = data.message?data.message:data.msg;
-                    
-                    if(code == "701"){
-                        _this.$router.push({path:"/login"});
-                    }else{                
-                        if(code == "200"){
-                            defer.resolve({data:data.data,params:data.params});
-                        }else{
-                            defer.reject({data: message});
-                        } 
+                    let message = data.msg;
+
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
+                    }else{
+                        defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    defer.reject({data: "Server Error!"});
-                    throw new Error(url + " request server error!");
+                    throw new Error(url + " request server error!");                    
                 });
                 return defer.promise;
             },

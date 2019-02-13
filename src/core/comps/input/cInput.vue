@@ -33,7 +33,7 @@ const Ctl = function(){
 let ctl = new Ctl();
 
 export default {
-    name:"CInput",
+    name:"ChangeInput",
     props:["getUrl"],
     data(){
         return {

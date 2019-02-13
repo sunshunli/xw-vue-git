@@ -70,11 +70,11 @@ export default {
 
         },
         create(){
-            if(!this.path || !this.selectProject){
+            if(!this.path || !this.project.selectProject){
                 this.alert.showAlert("warning","必须输入项目和模块名称!");
                 return;
             }
-            this.ajax.postFetch("/comp/createModule",{moduleName:this.path,projectPath:this.selectProject}).then(d=>{
+            this.ajax.postFetch("/comp/createModule",{moduleName:this.path,projectPath:this.project.selectProject}).then(d=>{
                 this.alert.showAlert("success","新增成功!");
             },r=>{
                 this.alert.showAlert("warning",r.data);

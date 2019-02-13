@@ -3,15 +3,12 @@
  */
 
 let CommonUtil = {
-    getProxyPath:function(){
-        if(window.location.href.indexOf('lenovo') == -1){
-            return "/api";
-        }
-        return "";
-    },
     throwError:function(str){
         console.log(str);
         //throw new Error(str);
+    },
+    string:{
+        
     },
     object:{
         equalsObject(source,target){
@@ -108,9 +105,9 @@ let CommonUtil = {
          * return undefined
          * demo:
          * function resizeDiv(){
-             *      let div = document.querySelector("#div1");
-             *      div.style.height = div.offsetWidth + "px";
-             * }
+         *      let div = document.querySelector("#div1");
+         *      div.style.height = div.offsetWidth + "px";
+         * }
          * throttle(resizeDiv);
          * **/
         throttle:function(method,context) {
@@ -130,6 +127,7 @@ let CommonUtil = {
                 }else{
                     item.ck = false;
                 }
+                item.cls = "";
                 item.__tmpId = Math.ceil(Math.random()*10000000000000000);
             });
             return data;
@@ -276,7 +274,7 @@ let CommonUtil = {
             })
             return array;
         },
-        insertItem:function(array, item){
+        insertItem:function(array, items){
             if(array instanceof Array == false){
                 CommonUtil.throwError("params[array] must be Array in removeItems method");
                 return;
@@ -291,20 +289,27 @@ let CommonUtil = {
             })
             return array;
         },
-        uniq:function(array){
+        uniq:function(array,field){
             if(array instanceof Array == false){
                 CommonUtil.throwError("params[array] must be Array in uniq method");
                 return;
             }
-            let res = [];
-            let items = {};
-            for (let i = 0; i < array.length; i++) {
-                if (!items[JSON.stringify(array[i])]) {
-                    res.push(array[i]);
-                    items[JSON.stringify(array[i])] = 1;
+            if(!field){
+                var result = [], hash = {};
+                for (var i = 0, elem; (elem = array[i]) != null; i++) {
+                    if (!hash[elem]) {
+                        result.push(elem);
+                        hash[elem] = true;
+                    }
                 }
+                return result;
+            }else{
+                var hash = {};
+                return array.reduce(function (item, next) {
+                  hash[next[field]] ? '' : hash[next[field]] = true && item.push(next);
+                   return item;
+                }, []);
             }
-            return res;
         },
         getSimpleValuesByField:function(array,field){
             if(array instanceof Array == false){
@@ -312,8 +317,21 @@ let CommonUtil = {
                 return;
             }
             let res = [];
-            array.map(function(item){
+            array.forEach(function(item){
                 res.push(item[field]);
+            })
+            return res;
+        },
+        getFieldsByCk:(array,field)=>{
+            if(array instanceof Array == false){
+                CommonUtil.throwError("params[array] must be Array in getSimpleValuesByField method");
+                return;
+            }
+            let res = [];
+            array.forEach(function(item){
+                if(item.ck){
+                    res.push(item[field]);
+                }
             })
             return res;
         },
@@ -335,20 +353,54 @@ let CommonUtil = {
                 res = _private.sortByNumAndChar(array, field, desc);
             }
             return res;
+        },
+        getChannelsForCoupon:function(arr1,arr2){
+            let res = [];
+            arr1.forEach(d=>{
+                arr2.forEach(x=>{
+                    if(x.id == d){
+                        res.push(x.title);
+                    }
+                })
+            })
+            return res;
         }
     },
     date:{
         date:function(val){
+            if(!val){return "";}
             let d = new Date(val);
-            return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate()
+            let m = d.getMonth()+1;
+            m = m>=10?m:"0"+m;
+            let day = d.getDate();
+            day = d.getDate()>=10?d.getDate():"0"+d.getDate();
+            return d.getFullYear() + "-" + m + "-" + day;
         },
         dateTime:function(val){
             return this.date(val) + " " + this.time(val);
         },
         time:function(val){
+            if(!val){return "";}
             let d = new Date(val);
-            let t = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-            return t;
+            let h = d.getHours() >=10?d.getHours():"0"+d.getHours();
+            let m = d.getMinutes() >=10?d.getMinutes():"0"+d.getMinutes();
+            let s = d.getSeconds() >=10?d.getSeconds():"0"+d.getSeconds();
+            return h + ":" + m + ":" +s;
+        },
+        //当前月的第一天
+        getCurrentMonthFirst(){
+            let date=new Date();
+            date.setDate(1);
+            return this.date(date);
+        },
+        //当前月的最后一天
+        getCurrentMonthLast(){
+            let date=new Date();
+            let currentMonth=date.getMonth();
+            let nextMonth=++currentMonth;
+            let nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
+            let oneDay=1000*60*60*24;
+            return this.date(new Date(nextMonthFirstDay-oneDay));
         }
     }
 }

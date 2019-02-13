@@ -68,9 +68,12 @@
 					<li>
 						<span class="labelName">运 动:</span>	 
 						<div class="checkboxList">
-							<input type="checkbox" name="checkbox1" value="checkbox复选1"/> 								<span>跑步</span>
-							<input type="checkbox" name="checkbox1" value="checkbox复选2"/> 								<span>举重</span>
-							<input type="checkbox" name="checkbox1" value="checkbox复选3"/><span>写代码</span>
+                            <input type="checkbox" name="checkbox1" value="checkbox复选1"/> 								
+                            <span>跑步</span>
+                            <input type="checkbox" name="checkbox1" value="checkbox复选2"/> 								
+                            <span>举重</span>
+                            <input type="checkbox" name="checkbox1" value="checkbox复选3"/>
+                            <span>写代码</span>
 						</div>
 					</li>
 					<li>
@@ -112,7 +115,7 @@
 						<input type="file" value="请选择文件" />
 					</li>
 					<li class="btnGroup">
-						<button>提 交</button>
+						<button>提 交1111</button>
 						<button id="cancel" class="cancel">取 消</button>
 					</li>
 				</ul>
@@ -122,6 +125,8 @@
 		</div>
 </template>
 <script>
+import <%= data.name %> from '<%= data.filePath %>';
+
 export default {
     name:"",
     data(){

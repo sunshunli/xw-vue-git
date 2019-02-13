@@ -2,7 +2,7 @@
     <div class="ML12">
         <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
         <span class="tree-item-name" :class="item.color" @click="selectItem(item)">{{item[displayName]}}</span>     
-        <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.open">
+        <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.expand">
             <tree-item
                 v-for="(x,index) in item.children"
                 :item="x"
@@ -66,17 +66,17 @@ export default {
                             x.cls = "fa-caret-right";
                             x.color = "";
                             x.level = item.level + 1;
-                            x.open = false;
+                            x.expand = false;
                             x.parentId = item.__tmpId;
                         });
                         tmpObject.data[this.childrenKey] = tmp;
                         tmpObject.data["hasChildren"] = true;
-                        tmpObject.data["open"] = true;
+                        tmpObject.data["expand"] = true;
                         tmpObject.data["cls"] = "fa-caret-down";
                     }else{
                         tmpObject.data[this.childrenKey] = [];
                         tmpObject.data["hasChildren"] = false;
-                        tmpObject.data["open"] = false;
+                        tmpObject.data["expand"] = false;
                         tmpObject.data["cls"] = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
@@ -103,7 +103,7 @@ export default {
                     actionKey:ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
-                        open:!item.open,
+                        open:!item.expand,
                         cls:cls
                     }
                 });

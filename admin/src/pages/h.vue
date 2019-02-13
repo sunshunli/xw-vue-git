@@ -19,15 +19,13 @@
             </div>
         </div>
 
-        <input type="text" v-model="path" />
+        <input type="text" v-model="path" placeholder="自动创建view，api，store" />
 
-        <input type="button" value="创建模块" @click="create" placeholder="自动创建view，api，store" />
+        <input type="button" value="创建模块" @click="create" />
     </div>
 </template>
 
 <script>
-
-let recorder = null;
 
 import $ from "jquery";
 
@@ -86,7 +84,7 @@ export default {
         }
     },
     mounted(){
-        // this.getProjects();
+        this.getProjects();
     }
 }
 </script>

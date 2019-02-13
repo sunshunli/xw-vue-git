@@ -64,7 +64,7 @@ export default {
                 element[this.childrenKey] = [];
                 element.cls = "fa-caret-right";
                 element['level'] = 1;
-                element.open = false;
+                element.expand = false;
                 element.parentId = -1;
                 element.color = "";
             })
@@ -82,12 +82,12 @@ export default {
             if(d.actionKey == ACTIONKEY.UPDATECHILDREN){
                 item.hasChildren = d.data.hasChildren;
                 item[that.childrenKey] = d.data[that.childrenKey];
-                item.open = d.data.open;
+                item.expand = d.data.expand;
                 item.cls = d.data.cls;
             }
             //判断是否有children，进行展开的样式处理
             else if(d.actionKey == ACTIONKEY.OPEN){
-                item.open = d.data.open;
+                item.expand = d.data.expand;
                 item.cls = d.data.cls;
             }
             //当前项选中的callback

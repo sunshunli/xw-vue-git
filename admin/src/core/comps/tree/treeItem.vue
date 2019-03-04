@@ -1,6 +1,6 @@
 <template>
     <div class="ML12">
-        <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
+        <button @click="expandNode(item)" class="fa" :class="item.cls"></button>
         <span class="tree-item-name" :class="item.color" @click="selectItem(item)">{{item[displayName]}}</span>     
         <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.expand">
             <tree-item
@@ -13,17 +13,11 @@
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
             ></tree-item>
         </div>
-    </div>    
+    </div>
 </template>
 
 <script>
-
-const ACTIONKEY = {
-    OPEN:"open",
-    UPDATECHILDREN:"updateChilden",
-    CHECK:"check",
-    SELECTEDITEM:"selectedItem"
-}
+import KEYS from "./config.js";
 
 export default {
     name:"TreeItem",
@@ -45,7 +39,7 @@ export default {
                 return [];
             }
         },
-        clickItem(item,data){
+        expandNode(item,data){
             if(!item.hasChildren){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
@@ -53,23 +47,13 @@ export default {
                 item.cls = "fa-caret-load";
                 window.setTimeout(d=>{
                     let tmp = this.asynOptions.analysis(this.getTestData(item));
-
+                    
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
 
-                    if(tmp && tmp.length != 0){
-                        //处理子节点数据源
-                        tmp.forEach(x => {
-                            x.__tmpId = Math.ceil(Math.random()*10000000000000000);
-                            x.hasChildren = false;
-                            x[this.childrenKey] = [];
-                            x.cls = "fa-caret-right";
-                            x.color = "";
-                            x.level = item.level + 1;
-                            x.expand = false;
-                            x.parentId = item.__tmpId;
-                        });
-                        tmpObject.data[this.childrenKey] = tmp;
+                    if(tmp && tmp instanceof Array && tmp.length != 0){
+                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
+                        tmpObject.data[this.childrenKey] = tmpData;
                         tmpObject.data["hasChildren"] = true;
                         tmpObject.data["expand"] = true;
                         tmpObject.data["cls"] = "fa-caret-down";
@@ -87,7 +71,7 @@ export default {
                 //     }
                 // })
             }else{
-                console.log("展开操作");
+                console.log("展开折叠操作");
                 let cls = "";
                 if(item[this.childrenKey] && item[this.childrenKey].length != 0){
                     if(item.cls == "fa-caret-right"){
@@ -100,10 +84,10 @@ export default {
                 }
 
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:ACTIONKEY.OPEN,
+                    actionKey:KEYS.ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
-                        open:!item.expand,
+                        expand:!item.expand,
                         cls:cls
                     }
                 });
@@ -111,7 +95,7 @@ export default {
         },
         selectItem(item){
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                actionKey:ACTIONKEY.SELECTEDITEM,
+                actionKey:KEYS.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item
             });

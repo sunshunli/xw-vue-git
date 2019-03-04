@@ -30,6 +30,10 @@ export default {
     methods:{
         itemClick(item){
             console.log(item);
+            //异步操作，更新当前节点
+            window.setTimeout(d=>{
+                this.$refs["tree"].updateSingleNode(item,{name:"xxx",children:[{name:"new",id:"123"}]});
+            },1000)
         }
     },
     mounted(){

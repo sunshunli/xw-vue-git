@@ -16,13 +16,7 @@
 
 import TreeItem from "./treeItem.vue";
 import CommonUtil from '../../tool/commonUtil';
-
-const ACTIONKEY = {
-    OPEN:"open",
-    UPDATECHILDREN:"updateChilden",
-    CHECK:"check",
-    SELECTEDITEM:"selectedItem"
-}
+import KEYS from "./config.js";
 
 export default {
     name:"LeAsynTree",
@@ -58,19 +52,17 @@ export default {
         },
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
-            originData.forEach(element=>{
-                element.__tmpId = Math.ceil(Math.random()*10000000000000);
-                element.hasChildren = false;
-                element[this.childrenKey] = [];
-                element.cls = "fa-caret-right";
-                element['level'] = 1;
-                element.expand = false;
-                element.parentId = -1;
-                element.color = "";
-            })
+            let tmpData = KEYS.INITATTRIBUTE(originData,null,true);
             this.state = {
-                data:originData
+                data:tmpData
             };
+        },
+        updateSingleNode(node,data){
+            node[this.displayName] = data.name?data.name:node[this.displayName];
+            if(data.children instanceof Array && data.children.length != 0){
+                let tmpData = KEYS.INITATTRIBUTE(data.children,node,false);
+                node[this.childrenKey] = tmpData;
+            }
         }
     },
     mounted(){
@@ -79,19 +71,20 @@ export default {
         _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
             let item = that.getNodeById(that.state.data,d.__tmpId);
             //ajax请求获取子节点数据
-            if(d.actionKey == ACTIONKEY.UPDATECHILDREN){
+            if(d.actionKey == KEYS.ACTIONKEY.UPDATECHILDREN){
+                debugger
                 item.hasChildren = d.data.hasChildren;
                 item[that.childrenKey] = d.data[that.childrenKey];
                 item.expand = d.data.expand;
                 item.cls = d.data.cls;
             }
             //判断是否有children，进行展开的样式处理
-            else if(d.actionKey == ACTIONKEY.OPEN){
+            else if(d.actionKey == KEYS.ACTIONKEY.OPEN){
                 item.expand = d.data.expand;
                 item.cls = d.data.cls;
             }
             //当前项选中的callback
-            else if(d.actionKey == ACTIONKEY.SELECTEDITEM){
+            else if(d.actionKey == KEYS.ACTIONKEY.SELECTEDITEM){
                 if(item.color){
                     item.color = "";
                 }else{

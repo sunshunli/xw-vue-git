@@ -14,7 +14,7 @@
 <script>
 
 import TreeItem from "./treeItem.vue";
-import CommonUtil from '../../tool/commonUtil';
+import CommonUtil from '../../tool/commonUtil.js';
 import KEYS from "./config.js";
 
 export default {
@@ -93,6 +93,22 @@ export default {
             if(data.__children && data.__children instanceof Array && data.__children.length != 0){
                 let tmpData = KEYS.INITATTRIBUTE(data.__children,node,false);
                 node.__children = tmpData;
+            }
+        },
+        /**
+         * @description 删除节点
+         * @param node 需要删除的节点
+         */
+        deleteSingleNode(node){
+            debugger
+            let parentNode = this.getNodeById(this.state.data,node.__parentId);
+            //非根节点
+            if(parentNode){
+                CommonUtil.arrayServer.removeItems(parentNode.__children,[node]);
+            }
+            //根节点
+            else{
+                CommonUtil.arrayServer.removeItems(this.state.data,[node]);
             }
         }
     },

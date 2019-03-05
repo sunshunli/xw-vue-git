@@ -68,18 +68,16 @@ export default {
                 }
             }
         },
+        /**
+         * @description 初始化并且默认获取第一个根节点
+         * @returns node
+         */
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
             let tmpData = KEYS.INITATTRIBUTE(originData,null,true);
             this.state = {
                 data:tmpData
             };
-        },
-        /**
-         * @description 默认获取第一个根节点
-         * @returns node
-         */
-        getDefaultNode(){
             if(this.state.data.length >0){
                 return this.state.data[0];
             }

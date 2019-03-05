@@ -100,7 +100,6 @@ export default {
          * @param node 需要删除的节点
          */
         deleteSingleNode(node){
-            debugger
             let parentNode = this.getNodeById(this.state.data,node.__parentId);
             //非根节点
             if(parentNode){

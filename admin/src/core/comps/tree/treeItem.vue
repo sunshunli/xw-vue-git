@@ -64,6 +64,7 @@ export default {
                 //     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
                 // },100)
                 this.ajax.getFetch(_url).then(d=>{
+                    //asynOptions 函数必须返回数组
                     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
                     
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)

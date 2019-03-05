@@ -34,7 +34,6 @@ export default {
 /* @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css'); */
 @import url("../src/static/css/app.css");
 @import url("../src/static/css/font-awesome.css");
-@import url("../src/static/css/le-alert-comp.css");
 
 /* *{font-size: 12px;} */
 #app {

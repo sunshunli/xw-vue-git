@@ -5,7 +5,6 @@
             v-for="(item,index) in state.data" :key="index"
             :item="item"
             :displayName="displayName"
-            :childrenKey="childrenKey"
             :asynOptions="asynOptions"
             :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
         ></tree-item>
@@ -21,11 +20,11 @@ import KEYS from "./config.js";
 export default {
     name:"LeAsynTree",
     components:{TreeItem},
-    props:["displayName","childrenKey","asynOptions","itemClick"],
+    props:["displayName","asynOptions","itemClick"],
     data(){
         return {
             state:{
-                data:[],
+                data:[]
             },
             EVENTPUBLISHKEY:Math.ceil(Math.random()*10000000000000) + "_TREE_NOTICEKEY"
         }
@@ -39,8 +38,8 @@ export default {
                     res = arr[i];
                     return res;
                 }
-                let children = arr[i].children;
-                if(children && children.length >0){
+                let children = arr[i].__children;
+                if(children instanceof Array && children && children.length >0){
                     let _tmp = this.getNodeById(children,id);
                     if(_tmp){
                         res = _tmp;
@@ -57,11 +56,16 @@ export default {
                 data:tmpData
             };
         },
+        /**
+         * @description 更新单个节点
+         * @param node 当前节点
+         * @param data 传输的数据,格式{__displayName:"a",__children:[]}
+         */
         updateSingleNode(node,data){
-            node[this.displayName] = data.name?data.name:node[this.displayName];
-            if(data.children instanceof Array && data.children.length != 0){
-                let tmpData = KEYS.INITATTRIBUTE(data.children,node,false);
-                node[this.childrenKey] = tmpData;
+            node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
+            if(data.__children && data.__children instanceof Array && data.__children.length != 0){
+                let tmpData = KEYS.INITATTRIBUTE(data.__children,node,false);
+                node.__children = tmpData;
             }
         }
     },
@@ -72,23 +76,22 @@ export default {
             let item = that.getNodeById(that.state.data,d.__tmpId);
             //ajax请求获取子节点数据
             if(d.actionKey == KEYS.ACTIONKEY.UPDATECHILDREN){
-                debugger
-                item.hasChildren = d.data.hasChildren;
-                item[that.childrenKey] = d.data[that.childrenKey];
-                item.expand = d.data.expand;
-                item.cls = d.data.cls;
+                item.__hasChildren = d.data.hasChildren;
+                item.__children = d.data.children;
+                item.__expand = d.data.expand;
+                item.__cls = d.data.cls;
             }
             //判断是否有children，进行展开的样式处理
             else if(d.actionKey == KEYS.ACTIONKEY.OPEN){
-                item.expand = d.data.expand;
-                item.cls = d.data.cls;
+                item.__expand = d.data.expand;
+                item.__cls = d.data.cls;
             }
             //当前项选中的callback
             else if(d.actionKey == KEYS.ACTIONKEY.SELECTEDITEM){
-                if(item.color){
-                    item.color = "";
+                if(item.__color){
+                    item.__color = "";
                 }else{
-                    item.color = "color";
+                    item.__color = "color";
                 }
                 this.itemClick(item);
             }

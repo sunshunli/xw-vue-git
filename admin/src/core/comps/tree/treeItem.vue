@@ -1,14 +1,13 @@
 <template>
     <div class="ML12">
-        <button @click="expandNode(item)" class="fa" :class="item.cls"></button>
-        <span class="tree-item-name" :class="item.color" @click="selectItem(item)">{{item[displayName]}}</span>     
-        <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.expand">
+        <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
+        <span class="tree-item-name" :class="item.__color" @click="selectItem(item)">{{item[displayName]}}</span>     
+        <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
             <tree-item
-                v-for="(x,index) in item.children"
+                v-for="(x,index) in item.__children"
                 :item="x"
                 :key="index"
                 :displayName="displayName"
-                :childrenKey="childrenKey"
                 :asynOptions="asynOptions"
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
             ></tree-item>
@@ -21,7 +20,7 @@ import KEYS from "./config.js";
 
 export default {
     name:"TreeItem",
-    props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
+    props:["item","displayName","asynOptions","EVENTPUBLISHKEY"],
     data(){
         return {
 
@@ -40,28 +39,27 @@ export default {
             }
         },
         expandNode(item,data){
-            if(!item.hasChildren){
+            if(!item.__hasChildren){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
-                item.cls = "fa-caret-load";
-                window.setTimeout(d=>{
-                    let tmp = this.asynOptions.analysis(this.getTestData(item));
+                item.__cls = "fa-caret-load";
+                window.setTimeout(()=>{
+                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
                     
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
                     let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-
                     if(tmp && tmp instanceof Array && tmp.length != 0){
                         let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
-                        tmpObject.data[this.childrenKey] = tmpData;
-                        tmpObject.data["hasChildren"] = true;
-                        tmpObject.data["expand"] = true;
-                        tmpObject.data["cls"] = "fa-caret-down";
+                        tmpObject.data.children = tmpData;
+                        tmpObject.data.hasChildren = true;
+                        tmpObject.data.expand = true;
+                        tmpObject.data.cls = "fa-caret-down";
                     }else{
-                        tmpObject.data[this.childrenKey] = [];
-                        tmpObject.data["hasChildren"] = false;
-                        tmpObject.data["expand"] = false;
-                        tmpObject.data["cls"] = "fa-caret-left";
+                        tmpObject.data.children = [];
+                        tmpObject.data.hasChildren = false;
+                        tmpObject.data.expand = false;
+                        tmpObject.data.cls = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
                 },100)
@@ -73,8 +71,8 @@ export default {
             }else{
                 console.log("展开折叠操作");
                 let cls = "";
-                if(item[this.childrenKey] && item[this.childrenKey].length != 0){
-                    if(item.cls == "fa-caret-right"){
+                if(item.__children && item.__children instanceof Array && item.__children.length != 0){
+                    if(item.__cls == "fa-caret-right"){
                         cls = "fa-caret-down";
                     }else{
                         cls = "fa-caret-right";
@@ -87,7 +85,7 @@ export default {
                     actionKey:KEYS.ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
-                        expand:!item.expand,
+                        expand:!item.__expand,
                         cls:cls
                     }
                 });

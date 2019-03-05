@@ -1,6 +1,6 @@
 
 <template>
-    <div class="treeContent">
+    <div class="treeContent" style="height:2000px;border:1px solid bule">
         <le-asyn-tree
             displayName="name"
             :asynOptions="asynOptions"
@@ -45,6 +45,14 @@ export default {
                 {name:"D",id:1}
             ];
             this.$refs["tree"].init(data);
+
+            this.alert.showAlert("success","success!!!!");
+
+            this.alert.showConfirm("提示",d=>{
+
+            })
+
+            this.alert.showNotify("success","更新成功！！！");
         },1000)
     }
 }

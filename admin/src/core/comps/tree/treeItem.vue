@@ -141,7 +141,7 @@ export default {
         text-align: left;
         color: #606266;
         font-size: 14px;
-        padding:6px;
+        padding:2px;
         overflow: hidden;
         text-overflow:ellipsis;
         white-space: nowrap;

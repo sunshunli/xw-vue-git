@@ -18,7 +18,6 @@ export default {
             data:[],
             asynOptions:{
                 getUrl:d=>{
-                    debugger
                     return "xxx"
                 },
                 analysis:d=>{
@@ -32,7 +31,7 @@ export default {
             console.log(item);
             //异步操作，更新当前节点
             window.setTimeout(d=>{
-                this.$refs["tree"].updateSingleNode(item,{__displayName:"xxx",__children:[{name:"new",id:"123"}]});
+                // this.$refs["tree"].updateSingleNode(item,{__displayName:"xxx",__children:[{name:"new",id:"123"}]});
             },1000)
         }
     },
@@ -46,13 +45,13 @@ export default {
             ];
             this.$refs["tree"].init(data);
 
-            this.alert.showAlert("success","success!!!!");
+            // this.alert.showAlert("success","success!!!!");
 
-            this.alert.showConfirm("提示",d=>{
+            // this.alert.showConfirm("提示",d=>{
 
-            })
+            // })
 
-            this.alert.showNotify("success","更新成功！！！");
+            // this.alert.showNotify("success","更新成功！！！");
         },1000)
     }
 }

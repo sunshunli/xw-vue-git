@@ -49,12 +49,41 @@ export default {
             }
             return res;
         },
+        setSingleColor(arr,node){
+            for(let i =0;i<arr.length;i++){
+                if(arr[i].__tmpId == node.__tmpId){
+                    if(arr[i].__color){
+                        arr[i].__color = "";
+                    }else{
+                        arr[i].__color = "color";
+                    }
+                }else{
+                    if(arr[i].__color){
+                        arr[i].__color = "";
+                    }
+                }
+                let children = arr[i].__children;
+                if(children instanceof Array && children && children.length >0){
+                    this.setSingleColor(children,node);
+                }
+            }
+        },
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
             let tmpData = KEYS.INITATTRIBUTE(originData,null,true);
             this.state = {
                 data:tmpData
             };
+        },
+        /**
+         * @description 默认获取第一个根节点
+         * @returns node
+         */
+        getDefaultNode(){
+            if(this.state.data.length >0){
+                return this.state.data[0];
+            }
+            return [];
         },
         /**
          * @description 更新单个节点
@@ -88,11 +117,7 @@ export default {
             }
             //当前项选中的callback
             else if(d.actionKey == KEYS.ACTIONKEY.SELECTEDITEM){
-                if(item.__color){
-                    item.__color = "";
-                }else{
-                    item.__color = "color";
-                }
+                this.setSingleColor(this.state.data,item);
                 this.itemClick(item);
             }
         })

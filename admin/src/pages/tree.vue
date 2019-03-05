@@ -3,7 +3,6 @@
     <div class="treeContent">
         <le-asyn-tree
             displayName="name"
-            childrenKey="children"
             :asynOptions="asynOptions"
             ref="tree"
             :itemClick="itemClick"

@@ -1,7 +1,9 @@
 <template>
-    <div class="ML12">
-        <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
-        <span class="tree-item-name" :class="item.__color" @click="selectItem(item)">{{item[displayName]}}</span>     
+    <div class="ML12" >
+        <div :class="item.__color">
+            <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
+            <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
+        </div>
         <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
             <tree-item
                 v-for="(x,index) in item.__children"
@@ -131,7 +133,8 @@ export default {
         color:#fff;
     }
     .ML12{
-        margin-left:12px;
+        padding-left:12px;
+        padding-right: 12px;
     }
 
     .treeContent button{

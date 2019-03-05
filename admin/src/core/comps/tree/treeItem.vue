@@ -46,28 +46,8 @@ export default {
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
                 item.__cls = "fa-caret-load";
-                window.setTimeout(()=>{
-                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
-                    
-                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-                    if(tmp && tmp instanceof Array && tmp.length != 0){
-                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
-                        tmpObject.data.children = tmpData;
-                        tmpObject.data.hasChildren = true;
-                        tmpObject.data.expand = true;
-                        tmpObject.data.cls = "fa-caret-down";
-                    }else{
-                        tmpObject.data.children = [];
-                        tmpObject.data.hasChildren = false;
-                        tmpObject.data.expand = false;
-                        tmpObject.data.cls = "fa-caret-left";
-                    }
-                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },100)
-                // this.ajax.getFetch(_url).then(d=>{
-                //     //asynOptions 函数必须返回数组
-                //     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                // window.setTimeout(()=>{
+                //     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
                     
                 //     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
                 //     let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
@@ -84,7 +64,27 @@ export default {
                 //         tmpObject.data.cls = "fa-caret-left";
                 //     }
                 //     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                // })
+                // },100)
+                this.ajax.getFetch(_url).then(d=>{
+                    //asynOptions 函数必须返回数组
+                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                    
+                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
+                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    if(tmp && tmp instanceof Array && tmp.length != 0){
+                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
+                        tmpObject.data.children = tmpData;
+                        tmpObject.data.hasChildren = true;
+                        tmpObject.data.expand = true;
+                        tmpObject.data.cls = "fa-caret-down";
+                    }else{
+                        tmpObject.data.children = [];
+                        tmpObject.data.hasChildren = false;
+                        tmpObject.data.expand = false;
+                        tmpObject.data.cls = "fa-caret-left";
+                    }
+                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
+                })
             }else{
                 console.log("展开折叠操作");
                 let cls = "";

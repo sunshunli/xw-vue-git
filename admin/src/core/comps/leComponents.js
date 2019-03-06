@@ -8,6 +8,7 @@ import LocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
+import LeForm from "../comps/input/form.vue";
 
 export default{
     install:function(Vue){
@@ -19,5 +20,6 @@ export default{
         Vue.component('TableList',TableList);
         Vue.component('FileUpload',FileUpload);
         Vue.component('LeAsynTree',LeAsynTree);
+        Vue.component('LeForm',LeForm);
     }
 }

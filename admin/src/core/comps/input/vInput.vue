@@ -8,6 +8,7 @@
                 </div>
             </div>
             <p class="text-left" v-show="state.showError">{{errorMsg}}</p>
+            <slot></slot>
         </div>
 
         <!-- <div class="inputGreenIcon">
@@ -34,6 +35,7 @@
         props:["errorMsg","vType"],
         data(){
             return {
+                leInputValidate:true,
                 vValue:"",
                 state:{
                     flag:false,

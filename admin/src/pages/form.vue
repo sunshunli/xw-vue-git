@@ -5,8 +5,8 @@
         <le-form ref="form1">
             sub
             
-            <v-input ref="name1" msg="请输入数字111">
-                继续验证：<v-input ref="name2" msg="请输入汉字222"></v-input>
+            <v-input type="text" ref="name1" msg="请输入数字111" on vType='email'>
+                继续验证：<v-input type="date" ref="name2" msg="请输入汉字222"></v-input>
             </v-input>
             <input type="text" value="sss" />
 

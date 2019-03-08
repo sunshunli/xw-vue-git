@@ -7,24 +7,9 @@
                     <span class="input-group-text icon" v-bind:class="state.successIcon"></span>
                 </div>
             </div>
-            <p class="text-left" v-show="state.showError">{{errorMsg}}</p>
+            <p class="text-left" v-show="state.showError">{{msg}}</p>
             <slot></slot>
         </div>
-
-        <!-- <div class="inputGreenIcon">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                <div class="input-group-append">
-                    <span class="input-group-text icon icon-duihao"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="inputIcon">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -32,10 +17,11 @@
     import Util from "../../../core/tool/commonUtil";
     export default{
         name:"VInput",
-        props:["errorMsg","vType"],
+        props:["msg","vType","regex","off"],
         data(){
             return {
-                leInputValidate:true,
+                //所有需要验证的组件必须带上这个type=validataInput属性
+                type:"validataInput",
                 vValue:"",
                 state:{
                     flag:false,
@@ -43,6 +29,15 @@
                     borderCls:"inputIcon",//inputRedIcon inputGreenIcon inputIcon
                     successIcon:""//icon-cuo,icon-duihao
                 }
+            }
+        },
+        computed:{
+            //一旦开启off 表示停止验证
+            validata(){
+                if(this.off != undefined){
+                    return false;
+                }
+                return true;
             }
         },
         methods:{
@@ -64,7 +59,9 @@
                 }
             },
             changeEvent(e){
-                this.setIsSuccess(this.verify(this.vValue));
+                if(this.validata){
+                    this.setIsSuccess(this.verify(this.vValue));
+                }
             },
             verify(val){
                 var reg = /^[0-9]*$/;
@@ -73,17 +70,15 @@
                 }
                 return true;
             },
-            getResult(){
+            getVerifyResult(){
                 return {
-                    success:this.state.flag,
-                    value:this.vValue
+                    success:this.off!=undefined?true:this.state.flag,
+                    value:this.vValue,
+                    msg:this.off!=undefined?"当前组件不需要验证":this.msg
                 }
             }
         },
         mounted () {
-            
-        },
-        created () {
             
         }
     }

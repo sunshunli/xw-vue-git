@@ -1,8 +1,8 @@
 
+import func from './vue-temp/vue-editor-bridge';
 
 <template>
     <div>
-        LeForm  123
         <slot></slot>
     </div>
 </template>
@@ -19,7 +19,7 @@ export default {
         getAllSubComponents(arr){
             if(arr && arr instanceof Array && arr.length >=1){
                 for(let i =0;i< arr.length;i++){
-                    if(arr[i].leInputValidate){
+                    if(arr[i].off == undefined && arr[i].type == "validataInput"){
                         this.subComps.push(arr[i]);
                     }
                     
@@ -31,11 +31,41 @@ export default {
             }else{
                 return;
             }
+        },
+        validate(){
+            this.subComps = [];
+            this.getAllSubComponents(this.$children);
+            
+            if(this.subComps.length == 0){
+                return {
+                    success:true,
+                    errorInfo:[],
+                    msg:"没有找到需要验证的组件"
+                }
+            }else{
+                let tmp = this.subComps;
+                let count = 0;
+                let res = {success:false,info:[]};
+                for(let i=0;i<tmp.length;i++){
+                    let vInputRes = tmp[i].getVerifyResult();
+                    if(!vInputRes.success){
+                        count++;
+                        res.info.push(vInputRes.msg);
+                    }
+                }
+                res.success = count == 0?true:false;
+                return new Promise(function(resolve,reject){
+                    if(res.success){
+                        resolve(res);
+                    }else{
+                        reject(res);
+                    }
+                })
+            }
+
         }
     },
     mounted(){
-        debugger
-        let comps = this.getAllSubComponents(this.$children);
     }
 }
 </script>

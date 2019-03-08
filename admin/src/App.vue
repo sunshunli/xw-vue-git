@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-/* @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css'); */
+@import url("../src/static/css/bootstrap.min.css");
 @import url("../src/static/css/app.css");
 @import url("../src/static/css/font-awesome.css");
 

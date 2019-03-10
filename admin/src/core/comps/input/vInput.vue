@@ -2,7 +2,7 @@
     <div>
         <div v-bind:class="state.borderCls">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" v-model="vValue" aria-label="Amount (to the nearest dollar)" v-on:input="changeEvent()">
+                <input type="text" class="form-control" v-model="vValue" v-on:input="changeEvent()" />
                 <div class="input-group-append">
                     <span class="input-group-text icon" v-bind:class="state.successIcon"></span>
                 </div>

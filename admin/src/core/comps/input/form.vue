@@ -34,6 +34,7 @@ export default {
         validate(){
             this.subComps = [];
             this.getAllSubComponents(this.$children);
+            debugger
             
             if(this.subComps.length == 0){
                 return {

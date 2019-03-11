@@ -7,7 +7,7 @@
                     <span class="input-group-text icon" v-bind:class="state.successIcon"></span>
                 </div>
             </div>
-            <p class="text-left" v-show="state.showError">{{msg}}</p>
+            <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
             <slot></slot>
         </div>
     </div>
@@ -15,9 +15,12 @@
 
 <script>
     import Util from "../../../core/tool/commonUtil";
+
     export default{
         name:"VInput",
-        props:["msg","vType","regex","off"],
+        //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
+        // props:["msg","vType","regex","off"],
+        props:[],
         data(){
             return {
                 //所有需要验证的组件必须带上这个type=validataInput属性
@@ -74,11 +77,13 @@
                 return {
                     success:this.off!=undefined?true:this.state.flag,
                     value:this.vValue,
-                    msg:this.off!=undefined?"当前组件不需要验证":this.msg
+                    msg:this.off!=undefined?"当前组件不需要验证":this.$attrs.msg
                 }
             }
         },
         mounted () {
+            1
+            debugger
             
         }
     }

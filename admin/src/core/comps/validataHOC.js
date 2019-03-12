@@ -48,7 +48,7 @@ function ValidataHOC(Component){
                 }
                 //其他非空组件验证，radioList，checkboxList，selectList
                 else{
-                    return currentComp.getValue()?true:false; 
+                    return currentComp.getValue()?true:false;
                 }
             },
             setIsSuccess(value){

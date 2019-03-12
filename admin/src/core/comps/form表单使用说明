@@ -2,7 +2,8 @@
 <v-input vType="number" msg="正整数22" on></v-input>
 vType：验证类型，具体类型见input下面的config.js
 msg：错误信息
-2：required表示必填
+2：required表示必填,该属性只对input有效
+3：验证非空组件，比如radioList  checkboxList selectList等，只要开启了on就是验证非空，无需required
 
 验证组件开发过程须知：
 1：所有的组件必须2个方法：getValue(必须返回字符串) 和 setValue

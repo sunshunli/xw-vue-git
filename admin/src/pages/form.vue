@@ -10,10 +10,10 @@
             继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
 
             LeRadioList
-            <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" required on></le-radio-list>
+            <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
             LeCheckboxList
-            <le-checkbox-list ref='cl1' display-name="name" msg="复选框必填" display-value="code" required on></le-checkbox-list>
+            <le-checkbox-list ref='cl1' display-name="name" msg="复选框必填" display-value="code" on></le-checkbox-list>
 
 
             <le-button value="提交" @click="submit"></le-button>

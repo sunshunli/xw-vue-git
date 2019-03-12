@@ -89,7 +89,7 @@ export default {
             let res = this.state.data.filter(item=>{
                 return item.ck == true;
             });
-            return res && res.length ==1?res[0][this.displayValue]:null;
+            return res && res.length ==1?res[0][this.displayValue]:"";
         }
     },
     mounted(){

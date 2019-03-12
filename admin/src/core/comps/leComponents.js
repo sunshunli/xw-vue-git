@@ -29,34 +29,34 @@ export default{
 }
 
 
-//父类
-var Parent = function(){
+// //父类
+// var Parent = function(){
 
-    this.msg = "";
-    this.showMsgTag = false;
-    this.validataFn = function(){
+//     this.msg = "";
+//     this.showMsgTag = false;
+//     this.validataFn = function(){
 
-    }
+//     }
 
-    this.showMsg = function(flag){
-        this.showMsgTag = flag;
-    }
-}
+//     this.showMsg = function(flag){
+//         this.showMsgTag = flag;
+//     }
+// }
 
-//input
-var SubInput = function(){
-    Parent.apply(this,[]);
+// //input
+// var SubInput = function(){
+//     Parent.apply(this,[]);
 
-    this.validataFn = function(){
-        //todo
-    }
-}
+//     this.validataFn = function(){
+//         //todo
+//     }
+// }
 
-//radio
-var SubRadio = function(){
-    Parent.apply(this,[]);
+// //radio
+// var SubRadio = function(){
+//     Parent.apply(this,[]);
 
-    this.validataFn = function(){
-        //todo
-    }
-}
+//     this.validataFn = function(){
+//         //todo
+//     }
+// }

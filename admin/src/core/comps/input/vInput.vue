@@ -38,7 +38,7 @@
         methods:{
             changeEvent(e){
                 if(this.$attrs.checkIsOff()){
-                    this.setIsSuccess(this.$attrs.verify(this.vValue));
+                    this.$attrs.setIsSuccess(this.$attrs.verify(this.vValue));
                 }
             },
             getValue(){

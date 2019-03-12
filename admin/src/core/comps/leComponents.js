@@ -2,6 +2,7 @@
 
 import LeButton from "./button/button.vue";
 import LeCheckboxList from "./checkbox/checkboxList.vue";
+import LeRadioList from "./radio/radioList.vue";
 import VInput from "./input/vInput.vue";
 import AutoComplete from "./input/autoComplete.vue";
 import LocalSelect from "./select/localSelect.vue";
@@ -16,6 +17,7 @@ export default{
     install:function(Vue){
         Vue.component('LeButton',LeButton);
         Vue.component('LeCheckboxList',LeCheckboxList);
+        Vue.component('LeRadioList',ValidataHOC(LeRadioList));
         Vue.component('VInput',ValidataHOC(VInput));
         Vue.component('AutoComplete',AutoComplete);
         Vue.component('LocalSelect',LocalSelect);

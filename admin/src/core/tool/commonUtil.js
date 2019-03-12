@@ -8,7 +8,10 @@ let CommonUtil = {
         //throw new Error(str);
     },
     string:{
-        
+        replaceAll:function(value,findText,replaceText){
+            let regExp = new RegExp(findText, "g");
+            return value.replace(regExp, replaceText);
+        }
     },
     object:{
         equalsObject(source,target){

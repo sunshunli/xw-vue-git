@@ -1,5 +1,6 @@
 <template>
     <div>
+        123
         <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
             <i class="fa" :class="item.cls"></i>
@@ -13,14 +14,16 @@
 const _checkedCls = "fa-dot-circle-o";
 const _unCheckedCls = "fa-circle-o";
 
-
 import CommonUtil from "../../tool/commonUtil.js";
+import ValidataHOC from "../input/validataHOC.js";
+
 export default {
     name:"LeRadioList",
     props:["displayName","displayValue"],
     data(){
         return {
            data:[],
+           validataComponentType:"Radio",
            name:Math.ceil(Math.random()*10000000)
         }
     },

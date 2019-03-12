@@ -23,11 +23,11 @@
         props:[],
         data(){
             return {
-                //所有需要验证的组件必须带上这个type=validataInput属性
-                type:"validataInput",
+                //所有需要验证的组件必须带上这个validataType属性，这个属性的值可以为input，select，radio等需要验证的组件 
+                validataComponentType:"Input",
                 vValue:"",
                 state:{
-                    flag:false,
+                    flag:true,
                     showError:false,
                     borderCls:"inputIcon",//inputRedIcon inputGreenIcon inputIcon
                     successIcon:""//icon-cuo,icon-duihao
@@ -35,13 +35,7 @@
             }
         },
         computed:{
-            //一旦开启off 表示停止验证
-            validata(){
-                if(this.off != undefined){
-                    return false;
-                }
-                return true;
-            }
+            
         },
         methods:{
             setIsSuccess(flag){
@@ -62,29 +56,18 @@
                 }
             },
             changeEvent(e){
-                if(this.validata){
-                    this.setIsSuccess(this.verify(this.vValue));
+                if(this.$attrs.checkIsOff()){
+                    this.setIsSuccess(this.$attrs.verify(this.vValue));
                 }
             },
-            verify(val){
-                var reg = /^[0-9]*$/;
-                if (!reg.test(val)) {
-                    return false;
-                }
-                return true;
+            getValue(){
+                return this.vValue;
             },
-            getVerifyResult(){
-                return {
-                    success:this.off!=undefined?true:this.state.flag,
-                    value:this.vValue,
-                    msg:this.off!=undefined?"当前组件不需要验证":this.$attrs.msg
-                }
+            getIsSuccess(){
+                return this.state.flag;
             }
         },
         mounted () {
-            1
-            debugger
-            
         }
     }
 </script>

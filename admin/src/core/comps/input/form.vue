@@ -18,7 +18,7 @@ export default {
         getAllSubComponents(arr){
             if(arr && arr instanceof Array && arr.length >=1){
                 for(let i =0;i< arr.length;i++){
-                    if(arr[i].off == undefined && arr[i].type == "validataInput"){
+                    if(arr[i].$attrs.checkIsOff && arr[i].$attrs.checkIsOff() && arr[i].validataComponentType != undefined){
                         this.subComps.push(arr[i]);
                     }
                     
@@ -35,7 +35,6 @@ export default {
             this.subComps = [];
             this.getAllSubComponents(this.$children);
             debugger
-            
             if(this.subComps.length == 0){
                 return {
                     success:true,
@@ -46,11 +45,13 @@ export default {
                 let tmp = this.subComps;
                 let count = 0;
                 let res = {success:false,info:[]};
+                let errorComps = [];
                 for(let i=0;i<tmp.length;i++){
-                    let vInputRes = tmp[i].getVerifyResult();
+                    let vInputRes = tmp[i].$attrs.getVerifyResult();
                     if(!vInputRes.success){
                         count++;
                         res.info.push(vInputRes.msg);
+                        errorComps.push(tmp[i]);
                     }
                 }
                 res.success = count == 0?true:false;
@@ -58,6 +59,10 @@ export default {
                     if(res.success){
                         resolve(res);
                     }else{
+                        //显示出错组件的错误信息
+                        errorComps.forEach(comp=>{
+                            comp.setIsSuccess(false);
+                        })
                         reject(res);
                     }
                 })

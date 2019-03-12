@@ -16,7 +16,6 @@ const _checkedCls = "fa-dot-circle-o";
 const _unCheckedCls = "fa-circle-o";
 
 import CommonUtil from "../../tool/commonUtil.js";
-import ValidataHOC from "../input/validataHOC.js";
 
 export default {
     name:"LeRadioList",
@@ -64,6 +63,7 @@ export default {
             this.resetData();
             item.ck = true;
             item.cls = _checkedCls;
+            this.state.showError = false;
 
             this.$emit("change",item,this.state.data);
         },

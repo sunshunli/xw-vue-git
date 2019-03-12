@@ -5,9 +5,9 @@
         <le-form ref="form1">
             sub
             
-            <v-input ref="i1" type="text" msg="正整数11" vType='number'></v-input>
+            <v-input ref="i1" type="text" msg="正整数11" vType='number' on></v-input>
 
-            继续验证：<v-input vType="number" msg="正整数22" required on></v-input>
+            继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
 
             LeRadioList
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" required on></le-radio-list>

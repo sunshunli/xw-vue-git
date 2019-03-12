@@ -1,6 +1,5 @@
 
-import Util from "../../../core/tool/commonUtil.js";
-import KEYS from "./config.js";
+import KEYS from "../comps/input/config.js";
 
 function ValidataHOC(Component){
     return {
@@ -30,8 +29,8 @@ function ValidataHOC(Component){
             getVerifyResult(){
                 let currentComp = this.$children[0];
                 let value = currentComp.getValue();
-                let isSuccess = currentComp.$attrs.getIsSuccess();
-                //必填
+                let isSuccess = this.getIsSuccess();
+                //验证是否必填
                 if(this.$attrs.required != undefined && value == ""){
                     isSuccess = false;
                 }
@@ -45,7 +44,7 @@ function ValidataHOC(Component){
                 let currentComp = this.$children[0];
                 //input验证
                 if(currentComp.validataComponentType == "Input"){
-                    return currentComp.state.showError;
+                    return !currentComp.state.showError;
                 }
                 //其他非空组件验证，radioList，checkboxList，selectList
                 else{

@@ -33,12 +33,9 @@ export default {
             }
         },
         validate(){
-            for(let i=0;i<this.subComps.length;i++){
-                this.subComps[i].$attrs.setIsSuccess(false);
-            }
             this.subComps = [];
             this.getAllSubComponents(this.$children);
-            
+            console.log(this.subComps);
             if(this.subComps.length == 0){
                 return new Promise(function(resolve,reject){
                     resolve({

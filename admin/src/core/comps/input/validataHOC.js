@@ -72,7 +72,7 @@ function ValidataHOC(Component){
                 }
                 //其他非空组件，radioList，checkboxList，selectList错误信息的隐藏和显示
                 else{
-                    currentComp.data().state.showError = !value;
+                    currentComp.state.showError = !value;
                 }
                 
             }

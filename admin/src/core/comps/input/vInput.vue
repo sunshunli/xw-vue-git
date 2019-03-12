@@ -8,7 +8,6 @@
                 </div>
             </div>
             <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
-            <slot></slot>
         </div>
     </div>
 </template>
@@ -27,7 +26,6 @@
                 validataComponentType:"Input",
                 vValue:"",
                 state:{
-                    flag:true,
                     showError:false,
                     borderCls:"inputIcon",//inputRedIcon inputGreenIcon inputIcon
                     successIcon:""//icon-cuo,icon-duihao
@@ -38,23 +36,6 @@
             
         },
         methods:{
-            setIsSuccess(flag){
-                if(flag){
-                    this.state = {
-                        borderCls:"inputGreenIcon",
-                        successIcon:"icon-duihao",
-                        showError:false,
-                        flag:true
-                    }
-                }else{
-                    this.state = {
-                        borderCls:"inputRedIcon",
-                        successIcon:"icon-cuo",
-                        showError:true,
-                        flag:false
-                    }
-                }
-            },
             changeEvent(e){
                 if(this.$attrs.checkIsOff()){
                     this.setIsSuccess(this.$attrs.verify(this.vValue));
@@ -63,8 +44,8 @@
             getValue(){
                 return this.vValue;
             },
-            getIsSuccess(){
-                return this.state.flag;
+            setValue(value){
+                this.vValue = value;
             }
         },
         mounted () {

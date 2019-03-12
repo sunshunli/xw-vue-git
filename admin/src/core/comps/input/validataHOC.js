@@ -9,12 +9,12 @@ function ValidataHOC(Component){
             getCurrentComponent(){
                 return this.$children[0];
             },
-            //校验是否开启验证
+            //校验是否开启验证, 默认关闭，如需要开启 加on标识
             checkIsOff(){
-                if(this.$attrs.off != undefined){
-                    return false;
+                if(this.$attrs.on != undefined){
+                    return true;
                 }
-                return true;
+                return false;
             },
             //正则验证方法
             verify(val){
@@ -30,17 +30,51 @@ function ValidataHOC(Component){
             getVerifyResult(){
                 let currentComp = this.$children[0];
                 let value = currentComp.getValue();
-                let isSuccess = currentComp.getIsSuccess();
+                let isSuccess = currentComp.$attrs.getIsSuccess();
                 //必填
                 if(this.$attrs.required != undefined && value == ""){
                     isSuccess = false;
                 }
-
                 return {
                     success:isSuccess,
                     value:value,
                     msg:this.$attrs.msg
                 }
+            },
+            getIsSuccess(){
+                let currentComp = this.$children[0];
+                //input验证
+                if(currentComp.validataComponentType == "Input"){
+                    return currentComp.state.showError;
+                }
+                //其他非空组件验证，radioList，checkboxList，selectList
+                else{
+                    return currentComp.getValue()?true:false; 
+                }
+            },
+            setIsSuccess(value){
+                let currentComp = this.$children[0];
+                //设置input错误信息的隐藏和显示
+                if(currentComp.validataComponentType == "Input"){
+                    if(value){
+                        currentComp.state = {
+                            borderCls:"inputGreenIcon",
+                            successIcon:"icon-duihao",
+                            showError:false,
+                        }
+                    }else{
+                        currentComp.state = {
+                            borderCls:"inputRedIcon",
+                            successIcon:"icon-cuo",
+                            showError:true,
+                        }
+                    }
+                }
+                //其他非空组件，radioList，checkboxList，selectList错误信息的隐藏和显示
+                else{
+                    currentComp.data().state.showError = !value;
+                }
+                
             }
         },
         mounted(){
@@ -62,11 +96,14 @@ function ValidataHOC(Component){
                 if(Component.data().validataComponentType && Component.data().validataComponentType == "Input"){
                     this.$set(this.$attrs, "verify", this.verify);
                 }
+                //传递是否显示错误信息的方法
+                this.$set(this.$attrs, "getIsSuccess", this.getIsSuccess);
+                this.$set(this.$attrs, "setIsSuccess", this.setIsSuccess);
+                this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
             }
             //检测验证开关，通过attrs传递下去
             this.$set(this.$attrs, "checkIsOff", this.checkIsOff);
-            this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
-            
+
             return h(Component,{
                 on: this.$listeners,
                 props: this.$props,

@@ -5,12 +5,12 @@
         <le-form ref="form1">
             sub
             
-            <v-input ref="i1" type="text" msg="请输入email" vType='positive'></v-input>
+            <v-input ref="i1" type="text" msg="正整数11" vType='number'></v-input>
 
-            继续验证：<v-input vType="number" msg="正整数" required></v-input>
+            继续验证：<v-input vType="number" msg="正整数22" required on></v-input>
 
             LeRadioList
-            <le-radio-list ref="r1" display-name="name" display-value="code" required></le-radio-list>
+            <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" required on></le-radio-list>
 
             <le-button value="提交" @click="submit"></le-button>
         </le-form>

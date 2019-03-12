@@ -1,4 +1,5 @@
 
+import func from './vue-temp/vue-editor-bridge';
 
 <template>
     <div>
@@ -32,15 +33,20 @@ export default {
             }
         },
         validate(){
+            for(let i=0;i<this.subComps.length;i++){
+                this.subComps[i].$attrs.setIsSuccess(false);
+            }
             this.subComps = [];
             this.getAllSubComponents(this.$children);
-            debugger
+            
             if(this.subComps.length == 0){
-                return {
-                    success:true,
-                    errorInfo:[],
-                    msg:"没有找到需要验证的组件"
-                }
+                return new Promise(function(resolve,reject){
+                    resolve({
+                        success:true,
+                        errorInfo:[],
+                        msg:"没有找到需要验证的组件"
+                    })
+                })
             }else{
                 let tmp = this.subComps;
                 let count = 0;
@@ -61,7 +67,7 @@ export default {
                     }else{
                         //显示出错组件的错误信息
                         errorComps.forEach(comp=>{
-                            comp.setIsSuccess(false);
+                            comp.$attrs.setIsSuccess(false);
                         })
                         reject(res);
                     }

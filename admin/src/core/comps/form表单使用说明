@@ -5,5 +5,6 @@ msg：错误信息
 2：required表示必填
 
 验证组件开发过程须知：
-1：所有的组件必须2个方法：getValue 和 setValue
+1：所有的组件必须2个方法：getValue(必须返回字符串) 和 setValue
 2：data里面必须包含state对象，state至少包含1个属性，showError，这个属性表示是否显示错误信息
+3：在组件的data里面添加属性validataComponentType：Radio/Checkbox或者其他

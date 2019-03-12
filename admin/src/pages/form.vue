@@ -12,6 +12,10 @@
             LeRadioList
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" required on></le-radio-list>
 
+            LeCheckboxList
+            <le-checkbox-list ref='cl1' display-name="name" msg="复选框必填" display-value="code" required on></le-checkbox-list>
+
+
             <le-button value="提交" @click="submit"></le-button>
         </le-form>
     </div>
@@ -39,7 +43,14 @@ export default {
             {name:"bbb",code:"2"},
             {name:"ccc",code:"3"},
         ]
+        let cd = [
+            {name:"aaa",code:"1"},
+            {name:"bbb",code:"2"},
+            {name:"ccc",code:"3"},
+        ]
         this.$refs["r1"].getCurrentComponent().init(rd);
+        this.$refs["cl1"].getCurrentComponent().init(cd);
+        
     }
 }
 </script>

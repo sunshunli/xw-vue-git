@@ -16,7 +16,7 @@ import ValidataHOC from "./validataHOC.js";
 export default{
     install:function(Vue){
         Vue.component('LeButton',LeButton);
-        Vue.component('LeCheckboxList',LeCheckboxList);
+        Vue.component('LeCheckboxList',ValidataHOC(LeCheckboxList));
         Vue.component('LeRadioList',ValidataHOC(LeRadioList));
         Vue.component('VInput',ValidataHOC(VInput));
         Vue.component('AutoComplete',AutoComplete);

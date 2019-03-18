@@ -2,7 +2,9 @@
     <div class="ML12" >
          <div class = "fa-item" :class="item.__color">
             <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
-            <input type="checkbox" name="test"/>
+            <!-- <input type="checkbox" name="test"/> -->
+            <span class="fa fa-checkBox fa-check-square"></span>
+            <span class="fa fa-checkBox"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
         <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
@@ -146,6 +148,7 @@ export default {
         overflow: hidden;
         text-overflow:ellipsis;
         white-space: nowrap;
+        position: relative;
     }
     .fa-item button{
         color: #606266;
@@ -178,4 +181,22 @@ export default {
         vertical-align: baseline;
         background-position-y: 5px;
      }
+    
+    .fa-checkBox{
+        width: 12px;
+        height: 12px;
+        border: 1px solid #337ab7;
+        display: inline-block;
+        border-radius: 2px;
+        margin-right: 2px;
+        vertical-align: sub;
+    }
+
+    .fa-check-square:before{
+        color: #337ab7;
+        position: absolute;
+        top: 10px;
+        left: 18px;
+    }
+
 </style>

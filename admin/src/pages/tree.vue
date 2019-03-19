@@ -2,11 +2,13 @@
 <template>
     <div class="treeContent" style="height:2000px;border:1px solid bule">
         <button @click="deleteNode">删除节点</button>
+        <button @click="getNodes">获取被选中节点</button>
         <le-asyn-tree
             displayName="name"
             :asynOptions="asynOptions"
             ref="tree"
             :itemClick="itemClick"
+            checkbox
         ></le-asyn-tree>
         
     </div>
@@ -40,6 +42,10 @@ export default {
         },
         deleteNode(){
             this.$refs["tree"].deleteSingleNode(this.selectNode);
+        },
+        getNodes(){
+            let res = this.$refs["tree"].b();
+            debugger
         }
     },
     mounted(){

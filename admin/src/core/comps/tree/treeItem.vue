@@ -2,9 +2,7 @@
     <div class="ML12" >
          <div class = "fa-item" :class="item.__color">
             <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
-            <!-- <input type="checkbox" name="test"/> -->
-            <span class="fa fa-checkBox fa-check-square"></span>
-            <span class="fa fa-checkBox"></span>
+            <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
         <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
@@ -15,6 +13,7 @@
                 :displayName="displayName"
                 :asynOptions="asynOptions"
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
+                :checkbox = "checkbox"
             ></tree-item>
         </div>
     </div>
@@ -25,13 +24,16 @@ import KEYS from "./config.js";
 
 export default {
     name:"TreeItem",
-    props:["item","displayName","asynOptions","EVENTPUBLISHKEY"],
+    props:["item","displayName","asynOptions","EVENTPUBLISHKEY","checkbox"],
     data(){
         return {
 
         }
     },
     methods:{
+        /**
+         * @description 模拟ajax，造测试数据
+         */
         getTestData(item){
             let name = item[this.displayName] + "_";
             return [{name:name + "0",id:2},
@@ -43,34 +45,30 @@ export default {
                 return [];
             }
         },
-        expandNode(item,data){
+        /**
+         * @description checkbox状态改变的事件
+         */
+        changeCheckboxStatus(item){
+            if(this.checkbox != undefined){
+                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                    actionKey:KEYS.ACTIONKEY.CHECKBOX,
+                    __tmpId:item.__tmpId,
+                    checkboxStatus:!item.__checkboxStatus
+                });
+            }
+        },
+        /**
+         * @description 展开节点操作，包含无子节点数据情况下的ajax请求和有数据情况下的显示和隐藏
+         * @param item: 当前选中节点
+         */
+        expandNode(item){
             if(!item.__hasChildren){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
                 item.__cls = "fa-caret-load";
-                window.setTimeout(()=>{
-                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
-                    
-                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-                    if(tmp && tmp instanceof Array && tmp.length != 0){
-                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
-                        tmpObject.data.children = tmpData;
-                        tmpObject.data.hasChildren = true;
-                        tmpObject.data.expand = true;
-                        tmpObject.data.cls = "fa-caret-down";
-                    }else{
-                        tmpObject.data.children = [];
-                        tmpObject.data.hasChildren = false;
-                        tmpObject.data.expand = false;
-                        tmpObject.data.cls = "fa-caret-left";
-                    }
-                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },100)
-                // this.ajax.getFetch(_url).then(d=>{
-                //     //asynOptions 函数必须返回数组
-                //     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                // window.setTimeout(()=>{
+                //     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
                     
                 //     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
                 //     let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
@@ -87,7 +85,27 @@ export default {
                 //         tmpObject.data.cls = "fa-caret-left";
                 //     }
                 //     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                // })
+                // },100)
+                this.ajax.getFetch(_url).then(d=>{
+                    //asynOptions 函数必须返回数组
+                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                    
+                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
+                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    if(tmp && tmp instanceof Array && tmp.length != 0){
+                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
+                        tmpObject.data.children = tmpData;
+                        tmpObject.data.hasChildren = true;
+                        tmpObject.data.expand = true;
+                        tmpObject.data.cls = "fa-caret-down";
+                    }else{
+                        tmpObject.data.children = [];
+                        tmpObject.data.hasChildren = false;
+                        tmpObject.data.expand = false;
+                        tmpObject.data.cls = "fa-caret-left";
+                    }
+                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
+                })
             }else{
                 console.log("展开折叠操作");
                 let cls = "";
@@ -111,6 +129,10 @@ export default {
                 });
             }
         },
+        /**
+         * @description 选中当前项事件，会传递到root触发选中回调
+         * @param item:当前选中项
+         */
         selectItem(item){
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:KEYS.ACTIONKEY.SELECTEDITEM,
@@ -132,8 +154,9 @@ export default {
         cursor:pointer;
     } 
     .ML12 .color{
-        background:#f55!important;
-        color:#fff!important;
+        /* background:#f55!important;
+        color:#fff!important; */
+        color: red !important;
     }
     .ML12{
         padding-left:6px;

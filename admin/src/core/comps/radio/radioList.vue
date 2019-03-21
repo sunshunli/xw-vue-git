@@ -3,8 +3,7 @@
         123
         <span class="span" @click="changeCK(item)" v-for="(item,index) in state.data" :key="index">
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-            <i class="fa" :class="item.cls"></i>
-            <input class="ck" type="radio" :checked="item.ck" :name="name"/>
+            <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
         </span>
         <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
@@ -13,7 +12,7 @@
 <script>
 
 const _checkedCls = "fa-dot-circle-o";
-const _unCheckedCls = "fa-circle-o";
+const _unCheckedCls = "";
 
 import CommonUtil from "../../tool/commonUtil.js";
 
@@ -39,11 +38,7 @@ export default {
          * @returns
          */
         init(data){
-            let _data = CommonUtil.object.addPrimaryAndCk(data);
-            _data.forEach(item=>{
-                item.cls = _unCheckedCls;
-            });
-            this.state.data = _data;
+            this.state.data = CommonUtil.object.addPrimaryAndCk(data);
         },
         /**
          * @description 重置数据源
@@ -52,7 +47,6 @@ export default {
         resetData(){
             this.state.data.forEach(item=>{
                 item.ck = false;
-                item.cls = _unCheckedCls;
             })
         },
         /**
@@ -62,7 +56,6 @@ export default {
         changeCK(item){
             this.resetData();
             item.ck = true;
-            item.cls = _checkedCls;
             this.state.showError = false;
 
             this.$emit("change",item,this.state.data);
@@ -76,7 +69,6 @@ export default {
             this.resetData();
             this.data.forEach(item=>{
                 if(item[this.displayValue] == val){
-                    item.cls = _checkedCls;
                     item.ck = true;
                 }
             })  
@@ -90,10 +82,10 @@ export default {
                 return item.ck == true;
             });
             return res && res.length ==1?res[0][this.displayValue]:"";
-        }
+        },
+        
     },
     mounted(){
-        
     }
 }
 </script>

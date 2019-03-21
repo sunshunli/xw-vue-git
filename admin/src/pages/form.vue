@@ -13,8 +13,7 @@
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
             LeCheckboxList
-            <le-checkbox-list ref='cl1' display-name="name" msg="复选框必填" display-value="code" on></le-checkbox-list>
-
+            <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
 
             <le-button value="提交" @click="submit"></le-button>
         </le-form>
@@ -35,6 +34,9 @@ export default {
             }).catch(e=>{
                 debugger
             })
+        },
+        changecks(data){
+            console.log("11");
         }
     },
     mounted(){

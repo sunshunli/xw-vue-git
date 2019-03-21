@@ -1,7 +1,11 @@
 
 <template>
     <div>
-        <le-checkbox v-for="(item,index) in data" :key="index" :checked="item.ck" @change="changeCkList(item)" :lable-name="item[displayName]"></le-checkbox>
+        <span class="span" v-for="(item,index) in data" :key="index">
+            <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
+            <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'" @click="changeItem(item)"></span>
+        </span>
+        
         <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
@@ -9,10 +13,9 @@
 <script>
 
 import CommonUtil from "../../tool/commonUtil.js";
-import LeCheckbox from "./checkbox.vue";
+
 export default {
     name:"LeCheckboxList",
-    components:{LeCheckbox},
     props:["displayName","displayValue"],
     data(){
         return {
@@ -34,15 +37,24 @@ export default {
         init(data){
             this.data = CommonUtil.object.addPrimaryAndCk(data);
         },
-        
+        /**
+         * @description 重置数据源
+         * @returns
+         */
+        resetData(){
+            this.data.forEach(item=>{
+                item.ck = false;
+            })
+        },
         /**
          * @description checkbox的change事件 会触发checkboxList的change回调
          * @param item 当前的选中项
          * @returns
          */
-        changeCkList(item){
+        changeItem(item){
             item.ck = !item.ck;
-            this.$emit('change',this.getCheckedItems());
+            let res = this.getCheckedItems();
+            this.$emit('change',res);
             if(this.$attrs.checkIsOff()){
                 this.state.showError = this.getValue() == ""?true:false;
             }
@@ -56,6 +68,10 @@ export default {
         getCheckedItems(){
             return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
         },
+        /**
+         * @description 对外暴露getValue方法
+         * @returns 类型:字符串,为兼容validataHOC，必须返回字符串
+         */
         getValue(){
             let res = this.getCheckedItems().vals.join(',');
             return res;

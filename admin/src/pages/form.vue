@@ -12,6 +12,9 @@
             LeRadioList
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
+            LeDatePicker
+            <le-date-picker></le-date-picker>
+
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
 

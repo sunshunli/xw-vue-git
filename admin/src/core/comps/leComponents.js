@@ -10,6 +10,7 @@ import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
 import LeForm from "../comps/input/form.vue";
+import LeDatePicker from "../comps/datepicker/date.vue";
 
 import ValidataHOC from "./validataHOC.js";
 
@@ -24,6 +25,7 @@ export default{
         Vue.component('TableList',TableList);
         Vue.component('FileUpload',FileUpload);
         Vue.component('LeAsynTree',LeAsynTree);
+        Vue.component('LeDatePicker',LeDatePicker);
         Vue.component('LeForm',LeForm);
     }
 }

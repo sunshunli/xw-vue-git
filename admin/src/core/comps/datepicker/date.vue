@@ -5,25 +5,25 @@
         <!-- 添加current激活input current样式  去掉则是默认样式 -->
         <div class="div-box current">
             <i class="icon-date fa fa-calendar"></i>
-            <input type="text" class="date" />
+            <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
         </div>
         <!-- 展开下拉 -->
-        <div class="picker-box">
+        <div class="picker-box" v-show="isShowPicker">
             <div class="picker-header">
                 <button>
-                    <i class="fa fa-angle-double-left" @click="prevYear"></i>
+                    <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
                 </button>
                 <button>
-                    <i class="fa fa-angle-left" @click="prevMonth"></i>
+                    <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
                 </button>
                 <div class="hearderText">
                     {{state.currentYear}}/{{state.currentMonth}}
                 </div>
                 <button>
-                    <i class="fa fa-angle-right" @click="nextMonth"></i>
+                    <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
                 </button>
                 <button>
-                    <i class="fa fa-angle-double-right" @click="nextYear"></i>
+                    <i class="fa fa-angle-double-right" @click.stop="nextYear"></i>
                 </button>
             </div>
             <div class="picker-body">
@@ -31,15 +31,8 @@
                     <tr>
                         <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
                     </tr>
-                    <tr v-for="(item,index) in state.data" :key="index">
-                        <td :class="x.month != state.currentMonth?'disable':''" v-for="(x,idx) in item" :key="idx">{{x.day}}</td>
-                        <!-- <td class="disable">30</td>
-                        <td>1</td>
-                        <td class="current">2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td> -->
+                    <tr v-for="(item,index) in data" :key="index">
+                        <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x.day}}</td>
                     </tr>
                 </table>
             </div>
@@ -50,8 +43,12 @@
 <script>
 
 const _tool = {
-    init(year,month){
-
+    vueComp:null,
+    /**
+     * @description _tool引用vue组件实例，方便获取当前state内容，只允许使用，不允许更改
+     */
+    init(vueComp){
+        _tool.vueComp = vueComp;
     },
     /**
      * @description 根据年月获取当前月有多少天
@@ -143,20 +140,40 @@ const _tool = {
         let allData = [];
         //push上个月填充的数据
         for(let i = prevDaylen;i>0;i--){
-            allData.push({year:prevMonthDays.year,month:prevMonthDays.month,day:prevMonthDays.days - i + 1});
+            allData.push({year:prevMonthDays.year,month:prevMonthDays.month,day:prevMonthDays.days - i + 1,cls:"disable"});
         }
-        //push当前月填充的数据
+        //push当前月填充的数据，控制选中日期的样式，分为2种情况
+        //如果还没有选择日期
+        let tmp = {y:0,m:0,d:0};
+        if(_tool.vueComp.selectDay == ""){
+            tmp = {y:new Date().getFullYear(),m:new Date().getMonth() + 1,d:new Date().getDate()};
+        }
+        //如果选择了日期
+        else{
+            let _arr = _tool.vueComp.selectDay.split('-');
+            tmp = {y:_arr[0],m:_arr[1],d:_arr[2]};
+        }
         for(let i=1;i<=currentDays;i++){
-            allData.push({year:year,month:month,day:i});
+            if(i == tmp.d && year == tmp.y && month == tmp.m){
+                allData.push({year:year,month:month,day:i,cls:"current"});
+            }else{
+                allData.push({year:year,month:month,day:i,cls:""});
+            }
         }
+        
         //push下个月剩余的数据
         let nextDaysLen = 42 - (prevDaylen + currentDays);
         let nextMonthDays = this.getNextMonthDays(year,month);
         for(let i = 1;i<=nextDaysLen;i++){
-            allData.push({year:nextMonthDays.year,month:nextMonthDays.month,day:i});
+            allData.push({year:nextMonthDays.year,month:nextMonthDays.month,day:i,cls:"disable"});
         }
         return allData;
     },
+    /**
+     * @description 数组分组
+     * @param data:42个数据源，分为6个数组
+     * @returns Array
+     */
     groupArray(data){
         let res = [];
         for(let i=0;i<6;i++){
@@ -172,11 +189,8 @@ const _tool = {
 
 import Week from "./config.js";
 
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth() + 1;
-
 /**
- * @description 日期格式  6*7  
+ * @description 日期格式  6(row)*7(col)
  */
 
 export default {
@@ -184,75 +198,185 @@ export default {
     data(){
         return {
             state:{
-                currentYear:currentYear,
-                currentMonth:currentMonth,
-                data:[]
+                currentYear:new Date().getFullYear(),
+                currentMonth:new Date().getMonth() + 1,
+                currentDay:new Date().getDate(),
             },
-            currentDay:0
+            data:[],
+            selectDay:"",
+            isShowPicker:false
         }
     },
     computed:{
         Weeks(){
             return Week.data;
+        },
+        selectDayStr(){
+            if(this.selectDay == ""){
+                return "";
+            }
+            let tmp = this.selectDay.split('-');
+            let y = tmp[0];
+            let m = parseInt(tmp[1]);
+            let d = parseInt(tmp[2]);
+            m = m<10?"0"+m:m;
+            d = d<10?"0"+d:d;
+            return y + "-" + m + "-" + d;
         }
     },
     methods:{
+        /**
+         * @description 根据年份，月份 初始化日期控件数据源
+         * @param year:年份
+         * @param month:月份
+         * @returns
+         */
+        initPicker(year,month){
+            let days = _tool.getFullData(year,month);
+            this.data = _tool.groupArray(days);
+        },
+        /**
+         * @description 点击其他地方，隐藏picker选择层
+         * @returns
+         */
+        pickerBodyClick(){
+            this.isShowPicker = false;
+        },
+        /**
+         * @description 点击文本框显示picker选择层, 每次点击根据选中的日期来复位
+         * @returns
+         */
+        showPicker(){
+            this.isShowPicker = true;
+            if(this.selectDay){
+                this.setValue(this.selectDayStr);
+            }else{
+                this.setValue(this.state.currentYear + "-" + this.state.currentMonth + "-" + this.state.currentDay);
+                this.selectDay = "";
+            }
+        },
+        /**
+         * @description 日期弹出层选中事件
+         * @param x:当前选中项，{year:0,month:0,day:0,cls:""}
+         * @returns
+         */
+        selectItem(x){
+            this.data.forEach(arr => {
+                arr.forEach(element=>{
+                    if(element.cls == "current"){
+                        if(element.month == this.state.currentMonth){
+                            element.cls = "";
+                        }else{
+                            element.cls = "disable";
+                        }
+                    }
+                })
+            });
+            x.cls = "current";
+            this.state.currentDay = x.day;
+            this.selectDay = x.year + "-" + x.month + "-" + x.day;
+            this.isShowPicker = false;
+            debugger
+        },
+        /**
+         * @description 上一年切换事件
+         * @returns
+         */
         prevYear(){
-            let year = this.state.currentYear - 1;
-            let month = this.state.currentMonth;
-            let data = _tool.getFullData(year,month);
+            let year = parseInt(this.state.currentYear) - 1;
+            let month = parseInt(this.state.currentMonth);
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                data:_tool.groupArray(data)
+                currentDay:this.state.currentDay
             }
+            this.initPicker(year,month);
         },
+        /**
+         * @description 上一月切换事件
+         * @returns
+         */
         prevMonth(){
-            let year = this.state.currentYear;
-            let month = this.state.currentMonth;
+            let year = parseInt(this.state.currentYear);
+            let month = parseInt(this.state.currentMonth);
             if(month == 1){
                 month = 12;
                 year = year - 1;
             }else{
                 month = month - 1;
             }
-            let data = _tool.getFullData(year,month);
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                data:_tool.groupArray(data)
+                currentDay:this.state.currentDay
             }
+            this.initPicker(year,month);
         },
+        /**
+         * @description 下一月切换事件
+         * @returns
+         */
         nextMonth(){
-            let year = this.state.currentYear;
-            let month = this.state.currentMonth;
+            let year = parseInt(this.state.currentYear);
+            let month = parseInt(this.state.currentMonth);
             if(month == 12){
                 month = 1;
                 year = year + 1;
             }else{
                 month = month + 1;
             }
-            let data = _tool.getFullData(year,month);
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                data:_tool.groupArray(data)
+                currentDay:this.state.currentDay
             }
+            this.initPicker(year,month);
         },
+        /**
+         * @description 下一年切换事件
+         * @returns
+         */
         nextYear(){
-            let year = this.state.currentYear + 1;
-            let month = this.state.currentMonth;
-            let data = _tool.getFullData(year,month);
+            let year = parseInt(this.state.currentYear) + 1;
+            let month = parseInt(this.state.currentMonth);
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                data:_tool.groupArray(data)
+                currentDay:this.state.currentDay
             }
+
+            this.initPicker(year,month);
+        },
+        /**
+         * @description 设置当前值
+         * @param str:字符串，2019-03-25格式
+         * @returns
+         */
+        setValue(str){
+            let _arr = str && str.split('-');
+            this.state = {
+                currentYear:_arr[0],
+                currentMonth:parseInt(_arr[1]),
+                currentDay:parseInt(_arr[2])
+            }
+            this.selectDay = str;
+            this.initPicker(_arr[0],parseInt(_arr[1]));
+        },
+        /**
+         * @description 获取当前组件的值，为validataHOC准备
+         * @returns str:字符串
+         */
+        getValue(){
+            return this.selectDayStr;
         }
     },
     mounted(){
-        let days = _tool.getFullData(this.state.currentYear,this.state.currentMonth);
-        this.state.data = _tool.groupArray(days);
+        _tool.init(this);
+        this.initPicker(this.state.currentYear,this.state.currentMonth);
+        document.body.addEventListener("click",this.pickerBodyClick,false);
+    },
+    beforeDestroy () {
+        document.body.removeEventListener("click",this.pickerBodyClick);
     }
 }
 </script>

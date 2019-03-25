@@ -122,7 +122,7 @@ const _tool = {
         return res;
     },
     /**
-     * @description 组装日历面板上面的 5*7 = 35天所有数据源
+     * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
      * @param year:年份
      * @param month:月份
      * @returns Array[]

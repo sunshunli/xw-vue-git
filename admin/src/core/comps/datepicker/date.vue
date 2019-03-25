@@ -191,6 +191,11 @@ import Week from "./config.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
+ * @param state.currentYear, state.currentMonth, state.currentDay控制picker弹出层的年和月的选择
+ * @param selectDay控制所选择的值，也就是文本框里面的值
+ * @param 这2者不可以统一用state里面的值来标识
+ * @param isShowPicker控制是否显示弹出层
+ * @param data:Array 根据年月日来组合需要的数据源，该数据源必须分组，也就是必须调用initPicker方法
  */
 
 export default {
@@ -276,7 +281,6 @@ export default {
             this.state.currentDay = x.day;
             this.selectDay = x.year + "-" + x.month + "-" + x.day;
             this.isShowPicker = false;
-            debugger
         },
         /**
          * @description 上一年切换事件

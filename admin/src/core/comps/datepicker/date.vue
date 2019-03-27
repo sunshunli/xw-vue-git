@@ -37,12 +37,14 @@
                 </table>
             </div>
         </div>
+
+        <p class="text-left" v-show="state.showError">{{msg}}</p>
     </div>
 </template>
 
 <script>
 
-const _tool = {
+let _tool = {
     vueComp:null,
     /**
      * @description _tool引用vue组件实例，方便获取当前state内容，只允许使用，不允许更改
@@ -187,7 +189,7 @@ const _tool = {
     }
 }
 
-import Week from "./config.js";
+import Config from "./config.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
@@ -200,12 +202,15 @@ import Week from "./config.js";
 
 export default {
     name:"LeDatePicker",
+    props:["msg"],
     data(){
         return {
+            validataComponentType:"DatePicker",
             state:{
                 currentYear:new Date().getFullYear(),
                 currentMonth:new Date().getMonth() + 1,
                 currentDay:new Date().getDate(),
+                showError:false
             },
             data:[],
             selectDay:"",
@@ -214,7 +219,7 @@ export default {
     },
     computed:{
         Weeks(){
-            return Week.data;
+            return Config.Week;
         },
         selectDayStr(){
             if(this.selectDay == ""){
@@ -281,6 +286,7 @@ export default {
             this.state.currentDay = x.day;
             this.selectDay = x.year + "-" + x.month + "-" + x.day;
             this.isShowPicker = false;
+            this.state.showError = false;
         },
         /**
          * @description 上一年切换事件
@@ -381,6 +387,7 @@ export default {
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);
+        _tool = null;
     }
 }
 </script>

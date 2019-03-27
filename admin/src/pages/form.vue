@@ -13,7 +13,7 @@
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
             LeDatePicker
-            <le-date-picker ref="d1"></le-date-picker>
+            <le-date-picker ref="d1" msg="时间不允许为空" on required></le-date-picker>
 
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
@@ -57,7 +57,7 @@ export default {
         this.$refs["cl1"].getCurrentComponent().init(cd);
         
 
-        // this.$refs["d1"].setValue("2019-04-23");
+        this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
     }
 }
 </script>

@@ -11,9 +11,6 @@
 
 <script>
 
-const _checkedCls = "fa-dot-circle-o";
-const _unCheckedCls = "";
-
 import CommonUtil from "../../tool/commonUtil.js";
 
 export default {

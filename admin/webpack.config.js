@@ -33,14 +33,14 @@ module.exports = (env = {}) =>{
     }]));
     plugins.push(new HtmlWebpackPlugin({template: './src/index.html'}));
 
+    const ver = new Date().getTime();
     return {
-
         entry: './src/main.js',//入口
         output: {
             path: path.resolve(__dirname, './dist'),//输出结果
             publicPath: env.production ? './' : '/', //文件路径
-            filename: '[name].js',
-            chunkFilename: '[id].chunk.js'
+            filename: '[name].js?v='+ver,
+            chunkFilename: '[id].chunk.js?v='+ver
         },
         module: {
             rules: [

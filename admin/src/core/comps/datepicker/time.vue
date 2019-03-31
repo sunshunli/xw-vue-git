@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     
 ul,li{
     padding:0;
@@ -81,12 +81,12 @@ li{
     line-height: 32px;
 }
 
-.timeContent{
+/deep/ .timeContent{
     width: 200px;
     height: auto;
 }
 
-.timeContent .searchBar{
+/deep/ .timeContent .searchBar{
     width: 200px;
     height: 40px;
     position: relative;

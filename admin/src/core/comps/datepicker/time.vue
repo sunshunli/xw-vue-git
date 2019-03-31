@@ -5,7 +5,6 @@
             <i class="fa fa-clock-o clock"></i>
             <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()"/>
             <i class="fa fa-times-circle clearTime" @click.stop="clearTime"></i>
-            <input type="button" value="del"  @click.stop="clearTime" />
         </div>
         <div class="timePicker" v-show="isShowPicker">
             <div class="timePanel">
@@ -106,9 +105,9 @@ export default {
         scrollHandle(event,data,tag){
             let dom = event.target;
 
-            var sHeight = $(dom).scrollTop();
-            var curSelectLi = Math.floor(sHeight / 30);
-            var yu = sHeight % 30;
+            let sHeight = $(dom).scrollTop();
+            let curSelectLi = Math.floor(sHeight / 30);
+            let yu = sHeight % 30;
             if(curSelectLi == 0){
                 if(yu <10){
                     this.nextSelect = 0;
@@ -233,7 +232,6 @@ li{
 
 .timeContent .searchBar i.clearTime{
     left: 176px;
-    display: none;
 }
 
 .timeContent .timeInput{

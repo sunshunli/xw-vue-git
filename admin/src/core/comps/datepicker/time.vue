@@ -4,7 +4,8 @@
         <div class="searchBar">
             <i class="fa fa-clock-o clock"></i>
             <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()"/>
-            <i class="fa fa-times-circle clearTime"></i>
+            <i class="fa fa-times-circle clearTime" @click.stop="clearTime"></i>
+            <input type="button" value="del"  @click.stop="clearTime" />
         </div>
         <div class="timePicker" v-show="isShowPicker">
             <div class="timePanel">
@@ -162,6 +163,9 @@ export default {
                 $(minDom).scrollTop(parseInt(mHeight) * 30);
                 $(secDom).scrollTop(parseInt(sHeight) * 30);
             },0)
+        },
+        clearTime(){
+            this.setValue("00:00:00");
         }
     },
     mounted(){

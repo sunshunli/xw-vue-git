@@ -50,7 +50,7 @@ export default {
             state:{
                 showError:false
             },
-            //选择谈层
+            //是否显示弹层
             isShowPicker:false,
             //每次组件初始化都会赋上唯一的key
             KEYS:{
@@ -59,7 +59,9 @@ export default {
                 secDomKey:Math.ceil(Math.random()*1000000000000),
             },
             //计算滚动时候的下个位置的li的索引
-            nextSelect:0
+            nextSelect:0,
+            //标识是否清空，在滚动的时候清除这个标识
+            isClear:false
         }
     },
     computed:{
@@ -82,6 +84,9 @@ export default {
             return currentItem.length!=0?currentItem[0].name:new Date().getSeconds();
         },
         currentTime(){
+            if(this.isClear){
+                return "";
+            }
             return this.currentHour + ":"+ this.currentMin + ":" + this.currentSec;
         }
     },
@@ -96,13 +101,18 @@ export default {
             })
         },
         showPicker(){
-            this.setValue(this.currentHour + ":" + this.currentMin + ":" + this.currentSec);
+            if(this.isClear){
+                this.setValue();
+            }else{
+                this.setValue(this.currentHour + ":" + this.currentMin + ":" + this.currentSec);
+            }
             this.isShowPicker = true;
         },
         pickerBodyClick(){
              this.isShowPicker = false;
         },
         scrollHandle(event,data,tag){
+            this.isClear = false;
             let dom = event.target;
 
             let sHeight = $(dom).scrollTop();
@@ -164,7 +174,9 @@ export default {
             },0)
         },
         clearTime(){
-            this.setValue("00:00:00");
+            this.isClear = true;
+            this.setValue();
+            this.isShowPicker = false;
         }
     },
     mounted(){

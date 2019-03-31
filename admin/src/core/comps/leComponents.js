@@ -27,7 +27,7 @@ export default{
         Vue.component('FileUpload',FileUpload);
         Vue.component('LeAsynTree',LeAsynTree);
         Vue.component('LeDatePicker',ValidataHOC(LeDatePicker));
-        Vue.component('LeTimePicker',LeTimePicker);
+        Vue.component('LeTimePicker',ValidataHOC(LeTimePicker));
         Vue.component('LeForm',LeForm);
     }
 }

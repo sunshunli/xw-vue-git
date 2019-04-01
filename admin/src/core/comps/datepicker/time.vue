@@ -88,7 +88,6 @@ export default {
             return currentItem.length!=0?currentItem[0].name:s;
         },
         currentTime(){
-            console.log(1);
             if(this.isClear){
                 return "";
             }

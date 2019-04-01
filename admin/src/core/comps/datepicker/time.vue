@@ -4,7 +4,7 @@
         <div class="searchBar">
             <i class="fa fa-clock-o clock"></i>
             <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()" readonly/>
-            <i class="fa fa-times-circle clearTime" @click.stop="clearTime"></i>
+            <i class="fa fa-times-circle clearTime" @click.stop="clearTimeEvent"></i>
         </div>
         <div class="timePicker" v-show="isShowPicker">
             <div class="timePanel">
@@ -61,7 +61,8 @@ export default {
             //计算滚动时候的下个位置的li的索引
             nextSelect:0,
             //标识是否清空，在滚动的时候清除这个标识
-            isClear:true
+            isClear:true,
+            // currentTime:""
         }
     },
     computed:{
@@ -87,6 +88,7 @@ export default {
             return currentItem.length!=0?currentItem[0].name:s;
         },
         currentTime(){
+            console.log(1);
             if(this.isClear){
                 return "";
             }
@@ -141,7 +143,12 @@ export default {
         },
         setValue(str){
             if(!str){
-                str = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
+                let h = new Date().getHours()>=10?new Date().getHours():"0"+new Date().getHours();
+                let m = new Date().getMinutes()>=10?new Date().getMinutes():"0"+new Date().getMinutes();
+                let s = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
+                str = h + ":" + m + ":" + s;
+            }else{
+                this.isClear = false;
             }
             let tmp = str.split(':');
             
@@ -176,7 +183,7 @@ export default {
                 $(secDom).scrollTop(parseInt(sHeight) * 30);
             },0)
         },
-        clearTime(){
+        clearTimeEvent(){
             this.isClear = true;
             this.isShowPicker = false;
         }
@@ -197,8 +204,6 @@ export default {
         },false);
 
         document.body.addEventListener("click",this.pickerBodyClick,false);
-
-        this.setValue();
     },
     beforeDestroy(){
         let hourDom = this.$refs[this.KEYS.hourDomKey];

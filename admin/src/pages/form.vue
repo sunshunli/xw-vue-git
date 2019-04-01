@@ -61,7 +61,7 @@ export default {
         
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
-        // this.$refs["t1"].getCurrentComponent().setValue("10:40:59");
+        this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
     }
 }
 </script>

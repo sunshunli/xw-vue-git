@@ -3,7 +3,7 @@
     <div class="timeContent">
         <div class="searchBar">
             <i class="fa fa-clock-o clock"></i>
-            <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()"/>
+            <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()" readonly/>
             <i class="fa fa-times-circle clearTime" @click.stop="clearTime"></i>
         </div>
         <div class="timePicker" v-show="isShowPicker">

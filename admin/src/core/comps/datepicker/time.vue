@@ -61,7 +61,7 @@ export default {
             //计算滚动时候的下个位置的li的索引
             nextSelect:0,
             //标识是否清空，在滚动的时候清除这个标识
-            isClear:false
+            isClear:true
         }
     },
     computed:{
@@ -69,19 +69,22 @@ export default {
             let currentItem =  this.hours.filter(el=>{
                 return el.cls == "active";
             });
-            return currentItem.length!=0?currentItem[0].name:new Date().getHours();
+            let h = new Date().getHours()>=10?new Date().getHours():"0"+new Date().getHours();
+            return currentItem.length!=0?currentItem[0].name:h;
         },
         currentMin(){
             let currentItem =  this.minutes.filter(el=>{
                 return el.cls == "active";
             });
-            return currentItem.length!=0?currentItem[0].name:new Date().getMinutes();
+            let m = new Date().getMinutes()>=10?new Date().getMinutes():"0"+new Date().getMinutes();
+            return currentItem.length!=0?currentItem[0].name:m;
         },
         currentSec(){
             let currentItem =  this.seconds.filter(el=>{
                 return el.cls == "active";
             });
-            return currentItem.length!=0?currentItem[0].name:new Date().getSeconds();
+            let s = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
+            return currentItem.length!=0?currentItem[0].name:s;
         },
         currentTime(){
             if(this.isClear){
@@ -175,7 +178,6 @@ export default {
         },
         clearTime(){
             this.isClear = true;
-            this.setValue();
             this.isShowPicker = false;
         }
     },

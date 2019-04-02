@@ -4,7 +4,7 @@
 <template>
     <div class = "le_dialog_mask">
         <!-- width height 为option传入   margin为计算 width/height的一半 + 10(padding)-->
-        <div class = "le_dialog_box"  style = "width:800px;height:300px;margin-left:-410px;margin-top:-160px;">
+        <div class = "le_dialog_box" style="width:700px;height:300px;">
             <!-- 顶部 -->
             <div class="le_dialog_top">
                 <div class="le_dialog_title">标题</div>
@@ -37,12 +37,8 @@
             </div>
             <div class = "le_dialog_bottom">
                 <!-- 使用button组件的css 可以改为引入button组件 -->
-                <button class = "le_dialog_confirm">
-                    <i class = "fa fa-check"></i>确认
-                </button>
-                <button class = "le_dialog_cancel">
-                    <i class = "fa fa-close"></i>取消
-                </button>
+                <button class = "le_dialog_confirm">确认</button>
+                <button class = "le_dialog_cancel">取消</button>
             </div>
         </div>
     </div>
@@ -84,13 +80,10 @@ export default {
     }
     /* dialog  box */
     .le_dialog_box{
-        width:500px;
-        height:300px;
         position:fixed;
         left:50%;
         top:50%;
-        margin-top:-160px;
-        margin-left:-260px;
+        transform: translate(-50%,-50%);
         background:#fff;
         border-radius: 7px;
         padding:10px;
@@ -103,6 +96,8 @@ export default {
         justify-content:space-between;
         flex-direction:column;
 
+        padding: 30px 35px;
+        border-radius: 3px;
     }
 
     /* 上面部分 */
@@ -115,14 +110,16 @@ export default {
         display:-ms-flexbox; 
         display:flex;
         justify-content:space-between;
+        border-bottom: 1px solid #dcdfe6;
+        margin-bottom: 20px;
     }
     /* 标题 */
     .le_dialog_title{
         color:#333;
-        font-size:20px;
+        font-size:18px;
         line-height:35px;
-        padding-bottom:5px;
-        font-weight:800;
+        padding-bottom:0;
+        font-weight:normal;
         text-align: left;
         margin-left: 4px;
         overflow: hidden;
@@ -143,6 +140,9 @@ export default {
         /* 火狐禁用滚动条 */
         overflow:-moz-hidden-unscrollable!important;
         overflow:scroll;
+        font-size: 14px;
+        color: #606266;
+        text-align: left;
     
     }
     /* 滚动条整体的样式 */
@@ -165,27 +165,24 @@ export default {
     /* 底部 */
     .le_dialog_bottom{
         display:flex;
-        height:35px;
-        padding-top:5px;
+        padding-top:20px;
         width:100%;
         justify-content:flex-end;
     }
     .le_dialog_bottom button{
-            height: 35px;
-            line-height: 35px;
-            padding: 0 20px;
-            border: none;
-            border-radius: 3px;
-            border: 1px solid #dcdfe6;
-            border-color: #dcdfe6;
-            color: #fff;
-            font-size: 14px !important;
-            cursor: pointer;
-            outline:none;
+        padding: 6px 16px;
+        border-radius: 3px;
+        border: 1px solid #dcdfe6;
+        color: #fff;
+        font-size: 14px !important;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
     }
     /* 确认按钮 */
     .le_dialog_bottom .le_dialog_confirm{
         background-color: #409EFF;
+        border: none;
     }
     /* 取消按钮 */
     .le_dialog_bottom .le_dialog_cancel{

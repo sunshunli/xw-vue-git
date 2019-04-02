@@ -21,6 +21,8 @@
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
 
+            LeDialog
+            <le-dialog></le-dialog>
             <le-button value="提交" @click="submit"></le-button>
         </le-form>
     </div>
@@ -61,7 +63,7 @@ export default {
         
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
-        this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
+        // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
     }
 }
 </script>

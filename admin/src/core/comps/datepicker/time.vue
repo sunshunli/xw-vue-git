@@ -26,7 +26,7 @@
             </div>
         </div>
 
-         <p class="text-left" v-show="state.showError">{{msg}}</p>
+         <p class="text-left" v-show="state.showError">{{msg?msg:"未设置日期控件的错误提示信息"}}</p>
     </div>
 </template>
 
@@ -111,6 +111,7 @@ export default {
                 this.setValue(this.currentHour + ":" + this.currentMin + ":" + this.currentSec);
             }
             this.isShowPicker = true;
+            this.state.showError = false;
         },
         pickerBodyClick(){
              this.isShowPicker = false;
@@ -137,7 +138,6 @@ export default {
             }else{
                 this.nextSelect = 0;
             };
-            var li = $(dom).children('li')[this.nextSelect];
             this.setCls(data,this.nextSelect,tag);
         },
         setValue(str){
@@ -182,9 +182,15 @@ export default {
                 $(secDom).scrollTop(parseInt(sHeight) * 30);
             },0)
         },
+        getValue(){
+            return this.currentTime;
+        },
         clearTimeEvent(){
             this.isClear = true;
             this.isShowPicker = false;
+            if(this.$attrs.checkIsOff()){
+                this.state.showError = true;
+            }
         }
     },
     mounted(){

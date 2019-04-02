@@ -1,6 +1,4 @@
 
-
-
 <template>
     <div class = "le_dialog_mask">
         <!-- width height 为option传入   margin为计算 width/height的一半 + 10(padding)-->
@@ -14,26 +12,7 @@
             </div>
             <div class = "le_dialog_contine">
                 内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内
-                容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字
-                内容区文字内容区文字内容区文字内容区文字内容区文字
+                
             </div>
             <div class = "le_dialog_bottom">
                 <!-- 使用button组件的css 可以改为引入button组件 -->
@@ -95,8 +74,7 @@ export default {
         display:flex;
         justify-content:space-between;
         flex-direction:column;
-
-        padding: 30px 35px;
+        padding: 20px 35px;
         border-radius: 3px;
     }
 
@@ -157,7 +135,7 @@ export default {
         -ms-scroll-rails: none;
         -ms-content-zoom-limit-min: 100%;
         -ms-content-zoom-limit-max: 500%;
-        -ms-scroll-snap-type: proximity;
+        /* -ms-scroll-snap-type: proximity; */
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
         overflow: auto;

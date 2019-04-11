@@ -18,6 +18,9 @@
             LeTimePicker
             <le-time-picker ref="t1" msg="时间不允许为空"></le-time-picker>
 
+            LeDateTimePicker
+            <le-date-time-picker ref="t1" msg="时间不允许为空"></le-date-time-picker>
+
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
             <le-button value="Form提交" @click="submit"></le-button>

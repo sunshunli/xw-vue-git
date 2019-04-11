@@ -1,44 +1,48 @@
 
 
 <template>
-    <div style="margin-top:100px;margin-left:500px;">
-        <!-- 添加current激活input current样式  去掉则是默认样式 -->
-        <div class="div-box current">
-            <i class="icon-date fa fa-calendar"></i>
-            <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
-        </div>
-        <!-- 展开下拉 -->
-        <div class="picker-box" v-show="isShowPicker">
-            <div class="picker-header">
-                <button>
-                    <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
-                </button>
-                <button>
-                    <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
-                </button>
-                <div class="hearderText">
-                    {{state.currentYear}}/{{state.currentMonth}}
-                </div>
-                <button>
-                    <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
-                </button>
-                <button>
-                    <i class="fa fa-angle-double-right" @click.stop="nextYear"></i>
-                </button>
-            </div>
-            <div class="picker-body">
-                <table>
-                    <tr>
-                        <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
-                    </tr>
-                    <tr v-for="(item,index) in data" :key="index">
-                        <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x.day}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <div >
+        <div style = "display:inline-block;position:relative;">
+            <!-- 添加current激活input current样式  去掉则是默认样式 -->
+            <div class="div-box current" >
+                <i class="icon-date fa fa-calendar"></i>
+                <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <i class="icon-del fa fa-close"></i>
 
-        <p class="text-left" v-show="state.showError">{{msg}}</p>
+            </div>
+            <!-- 展开下拉 -->
+            <div  class="picker-box" v-show="isShowPicker">
+                <div class="picker-header">
+                    <button>
+                        <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
+                    </button>
+                    <button>
+                        <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
+                    </button>
+                    <div class="hearderText">
+                        {{state.currentYear}}/{{state.currentMonth}}
+                    </div>
+                    <button>
+                        <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
+                    </button>
+                    <button>
+                        <i class="fa fa-angle-double-right" @click.stop="nextYear"></i>
+                    </button>
+                </div>
+                <div class="picker-body">
+                    <table>
+                        <tr>
+                            <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
+                        </tr>
+                        <tr v-for="(item,index) in data" :key="index">
+                            <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x.day}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <p class="text-left" v-show="state.showError">{{msg}}</p>
+        </div>
     </div>
 </template>
 
@@ -418,9 +422,11 @@ export default {
         box 
     */
     .div-box {
-        display: inline-block;
-        position: relative;
+        width: 200px;
         height: 30px;
+        /* display: inline-block; */
+        margin:0 auto;
+        position: relative;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -429,6 +435,7 @@ export default {
         user-select: none;
         border: 1px solid #aeaeae;
         box-sizing: content-box;
+        text-align:left;
     }
 
     .div-box.current {
@@ -441,7 +448,9 @@ export default {
     .div-box.current .icon-date{
         color:#409EFF;
     }
-
+    .div-box.current .icon-del{
+        color:#409EFF;
+    }
     /* 
         icon 默认
         */
@@ -450,16 +459,21 @@ export default {
         position: absolute;
         left: 0;
         z-index: 5;
-        /*引入图片图片*/
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
         margin: 5px;
         font-size: 20px;
     }
-
+    .icon-del {
+        color: #aeaeae;
+        position: absolute;
+        right: 0;
+        z-index: 5;
+        margin: 5px;
+        margin-top:8px;
+        font-size: 14px;
+    }
     /* 
         date选择器
-        */
+    */
     .date {
         padding-left: 27px;
         outline: none;
@@ -467,13 +481,15 @@ export default {
     }
 
     .picker-box {
+        /* display: inline-block; */
         width: 250px;
         border: 1px solid #aeaeae;
         box-sizing: border-box;
         margin-top: 4px;
+        position: absolute;
+        background:#fff;
+        
     }
-
-
     /* 选择器头部 */
     .picker-header {
         display: flex;

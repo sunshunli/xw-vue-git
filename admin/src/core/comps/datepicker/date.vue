@@ -363,14 +363,25 @@ export default {
          * @returns
          */
         setValue(str){
-            let _arr = str && str.split('-');
-            this.state = {
-                currentYear:_arr[0],
-                currentMonth:parseInt(_arr[1]),
-                currentDay:parseInt(_arr[2])
+            if(!str){
+                this.state = {
+                    currentYear:new Date().getFullYear(),
+                    currentMonth:parseInt(new Date().getMonth() + 1),
+                    currentDay:parseInt(new Date().getDate())
+                }
+                this.selectDay = "";
+                this.initPicker(this.state.currentYear,this.state.currentMonth);
+            }else{
+                let _arr = str && str.split('-');
+                this.state = {
+                    currentYear:_arr[0],
+                    currentMonth:parseInt(_arr[1]),
+                    currentDay:parseInt(_arr[2])
+                }
+                this.selectDay = str;
+                this.initPicker(_arr[0],parseInt(_arr[1]));
             }
-            this.selectDay = str;
-            this.initPicker(_arr[0],parseInt(_arr[1]));
+            
         },
         /**
          * @description 获取当前组件的值，为validataHOC准备

@@ -20,11 +20,13 @@
 
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
-
-            LeDialog
-            <le-dialog></le-dialog>
-            <le-button value="提交" @click="submit"></le-button>
+            <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
+
+        LeDialog
+        <le-dialog title="弹出层" width="500" height="500" ref='dialog' :cb="dialogCb"></le-dialog>
+        <le-button value="open" @click="open"></le-button>
+        <le-button value="close" @click="close"></le-button>
     </div>
 </template>
 
@@ -45,6 +47,15 @@ export default {
         },
         changecks(data){
             console.log("11");
+        },
+        dialogCb(){
+            console.log(this.$refs['dialog'].showDialog);
+        },
+        open(){
+            this.$refs['dialog'].open();
+        },
+        close(){
+            this.$refs['dialog'].close();
         }
     },
     mounted(){
@@ -63,7 +74,7 @@ export default {
         
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
-        // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
+        this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
     }
 }
 </script>

@@ -1,23 +1,22 @@
 
 <template>
-    <div class = "le_dialog_mask">
+    <div class = "le_dialog_mask" v-show="showDialog">
         <!-- width height 为option传入   margin为计算 width/height的一半 + 10(padding)-->
-        <div class = "le_dialog_box" style="width:700px;height:300px;">
+        <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
             <div class="le_dialog_top">
-                <div class="le_dialog_title">标题</div>
+                <div class="le_dialog_title">{{title?title:"标题"}}</div>
                 <div class="le_dialog_closeIcon">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close" @click="close"></i>
                 </div>
             </div>
             <div class = "le_dialog_contine">
-                内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内容区文字内
-                
+                <slot></slot>
             </div>
             <div class = "le_dialog_bottom">
                 <!-- 使用button组件的css 可以改为引入button组件 -->
-                <button class = "le_dialog_confirm">确认</button>
-                <button class = "le_dialog_cancel">取消</button>
+                <button class = "le_dialog_confirm" @click="ok">确认</button>
+                <button class = "le_dialog_cancel" @click="close">取消</button>
             </div>
         </div>
     </div>
@@ -26,13 +25,33 @@
 <script>
 export default {
     name:"LeDialog",
+    props:["title","width","height","cb"],
     data(){
         return {
-
+            showDialog:false
+        }
+    },
+    computed:{
+        dialogStyle(){
+            return {
+                width:this.width?this.width + "px" : 700 + "px",
+                height:this.height?this.height + "px" : 300 + "px",
+            }
         }
     },
     methods:{
-
+        open(){
+            this.showDialog = true;
+        },
+        close(){
+            this.showDialog = false;
+        },
+        ok(){
+            if(this.cb){
+                this.cb();
+            }
+            this.close();
+        }
     },
     mounted(){
 

@@ -1,6 +1,4 @@
 
-import func from './vue-temp/vue-editor-bridge';
-
 <template>
     <div>
         <slot></slot>

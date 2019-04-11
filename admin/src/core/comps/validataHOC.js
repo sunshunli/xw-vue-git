@@ -37,7 +37,7 @@ function ValidataHOC(Component){
                 return {
                     success:isSuccess,
                     value:value,
-                    msg:this.$attrs.msg
+                    msg:this.$attrs.msg?this.$attrs.msg:this.$props.msg //兼容属性在$attrs和$props里面(是否显示声明属性都可以)
                 }
             },
             getIsSuccess(){
@@ -73,7 +73,6 @@ function ValidataHOC(Component){
                 else{
                     currentComp.state.showError = !value;
                 }
-                
             }
         },
         mounted(){

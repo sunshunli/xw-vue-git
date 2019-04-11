@@ -2,34 +2,34 @@
 
 <template>
     <div>
-        <le-form ref="form1">
-            sub
-            
-            <v-input ref="i1" type="text" msg="正整数11" vType='number' on></v-input>
-
-            继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
-
-            LeRadioList
-            <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
-
-            LeDatePicker
-            <le-date-picker ref="d1" msg="日期不允许为空" on required></le-date-picker>
-
-            LeTimePicker
-            <le-time-picker ref="t1" msg="时间不允许为空"></le-time-picker>
-
-            LeDateTimePicker
-            <le-date-time-picker ref="t1" msg="时间不允许为空"></le-date-time-picker>
-
-            LeCheckboxList
-            <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
-            <le-button value="Form提交" @click="submit"></le-button>
-        </le-form>
-
         LeDialog
-        <le-dialog title="弹出层" width="500" height="500" ref='dialog' :cb="dialogCb"></le-dialog>
+        <le-dialog title="弹出层" width="700" height="600" confirm-text="Save" cancel-text="Close" ref='dialog' :cb="submit">
+            <le-form ref="form1">
+                form
+                
+                <v-input ref="i1" type="text" msg="正整数11" vType='number' on></v-input>
+
+                继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
+
+                LeRadioList
+                <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
+
+                LeDatePicker
+                <le-date-picker ref="d1" msg="日期不允许为空" on></le-date-picker>
+
+                LeTimePicker
+                <le-time-picker ref="t1" msg="时间不允许为空" on></le-time-picker>
+
+                LeDateTimePicker
+                <le-date-time-picker ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>
+
+                LeCheckboxList
+                <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
+                <!-- <le-button value="Form提交" @click="submit"></le-button> -->
+            </le-form>
+
+        </le-dialog>
         <le-button value="open" @click="open"></le-button>
-        <le-button value="close" @click="close"></le-button>
     </div>
 </template>
 
@@ -37,14 +37,16 @@
 export default {
     name:"FormValidate",
     data(){
-        return {}
+        return {
+            showDialogFlag:false
+        }
     },
     methods:{
         submit(){
             let res = this.$refs["form1"].validate();
             res.then(d=>{
                 debugger
-            }).catch(e=>{
+            }).catch((error)=>{
                 debugger
             })
         },
@@ -56,9 +58,6 @@ export default {
         },
         open(){
             this.$refs['dialog'].open();
-        },
-        close(){
-            this.$refs['dialog'].close();
         }
     },
     mounted(){

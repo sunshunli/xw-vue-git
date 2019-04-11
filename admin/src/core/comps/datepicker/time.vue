@@ -6,7 +6,7 @@
             <input type="text" v-model="currentTime" class="timeInput" @click.stop="showPicker()" readonly/>
             <i class="fa fa-times-circle clearTime" @click.stop="clearTimeEvent"></i>
         </div>
-        <div class="timePicker" v-show="isShowPicker">
+        <div class="timePicker" v-show="isShowPicker" @click.stop>
             <div class="timePanel">
                 <div class="hour">
                     <ul :ref="KEYS.hourDomKey">

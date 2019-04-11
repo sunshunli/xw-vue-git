@@ -15,8 +15,8 @@
             </div>
             <div class = "le_dialog_bottom">
                 <!-- 使用button组件的css 可以改为引入button组件 -->
-                <button class = "le_dialog_confirm" @click="ok">确认</button>
-                <button class = "le_dialog_cancel" @click="close">取消</button>
+                <button class="le_dialog_confirm" @click="save">{{confirmText?confirmText:"确定"}}</button>
+                <button class="le_dialog_cancel" @click="close">{{cancelText?cancelText:"取消"}}</button>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
 <script>
 export default {
     name:"LeDialog",
-    props:["title","width","height","cb"],
+    props:["title","width","height","cb","confirmText","cancelText"],
     data(){
         return {
             showDialog:false
@@ -46,11 +46,11 @@ export default {
         close(){
             this.showDialog = false;
         },
-        ok(){
-            if(this.cb){
-                this.cb();
-            }
-            this.close();
+        /**
+         * @description 
+         */
+        save(){
+            this.cb && this.cb();
         }
     },
     mounted(){

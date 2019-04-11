@@ -7,11 +7,10 @@
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
                 <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
-                <i class="icon-del fa fa-close"></i>
-
+                <i class="fa fa-times-circle" @click.stop="clearDateEvent"></i>
             </div>
             <!-- 展开下拉 -->
-            <div  class="picker-box" v-show="isShowPicker">
+            <div class="picker-box" v-show="isShowPicker" @click.stop>
                 <div class="picker-header">
                     <button>
                         <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
@@ -41,7 +40,7 @@
                 </div>
             </div>
 
-            <p class="text-left" v-show="state.showError">{{msg}}</p>
+            <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
 </template>
@@ -201,20 +200,20 @@ import Config from "./config.js";
  * @param selectDay控制所选择的值，也就是文本框里面的值
  * @param 这2者不可以统一用state里面的值来标识
  * @param isShowPicker控制是否显示弹出层
- * @param data:Array 根据年月日来组合需要的数据源，该数据源必须分组，也就是必须调用initPicker方法
+ * @param data:Array 根据年月日来组合需要的数据源，该数据源必须分组，也就是必须调用setPickerDateSource方法
  */
 
 export default {
     name:"LeDatePicker",
-    props:["msg"],
+    // props:["msg"],
     data(){
         return {
             validataComponentType:"DatePicker",
             state:{
+                showError:false,
                 currentYear:new Date().getFullYear(),
                 currentMonth:new Date().getMonth() + 1,
-                currentDay:new Date().getDate(),
-                showError:false
+                currentDay:new Date().getDate()
             },
             data:[],
             selectDay:"",
@@ -245,9 +244,15 @@ export default {
          * @param month:月份
          * @returns
          */
-        initPicker(year,month){
+        setPickerDateSource(year,month){
             let days = _tool.getFullData(year,month);
             this.data = _tool.groupArray(days);
+        },
+        clearDateEvent(){
+            this.setValue();
+            if(this.$attrs.checkIsOff()){
+                this.state.showError = true;
+            }
         },
         /**
          * @description 点击其他地方，隐藏picker选择层
@@ -262,12 +267,7 @@ export default {
          */
         showPicker(){
             this.isShowPicker = true;
-            if(this.selectDay){
-                this.setValue(this.selectDayStr);
-            }else{
-                this.setValue(this.state.currentYear + "-" + this.state.currentMonth + "-" + this.state.currentDay);
-                this.selectDay = "";
-            }
+            this.selectDay?this.setValue(this.selectDayStr):this.setValue();
         },
         /**
          * @description 日期弹出层选中事件
@@ -302,9 +302,10 @@ export default {
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                currentDay:this.state.currentDay
+                currentDay:this.state.currentDay,
+                showError:this.state.showError
             }
-            this.initPicker(year,month);
+            this.setPickerDateSource(year,month);
         },
         /**
          * @description 上一月切换事件
@@ -322,9 +323,10 @@ export default {
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                currentDay:this.state.currentDay
+                currentDay:this.state.currentDay,
+                showError:this.state.showError
             }
-            this.initPicker(year,month);
+            this.setPickerDateSource(year,month);
         },
         /**
          * @description 下一月切换事件
@@ -342,9 +344,10 @@ export default {
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                currentDay:this.state.currentDay
+                currentDay:this.state.currentDay,
+                showError:this.state.showError
             }
-            this.initPicker(year,month);
+            this.setPickerDateSource(year,month);
         },
         /**
          * @description 下一年切换事件
@@ -356,10 +359,11 @@ export default {
             this.state = {
                 currentYear:year,
                 currentMonth:month,
-                currentDay:this.state.currentDay
+                currentDay:this.state.currentDay,
+                showError:this.state.showError
             }
 
-            this.initPicker(year,month);
+            this.setPickerDateSource(year,month);
         },
         /**
          * @description 设置当前值
@@ -371,19 +375,21 @@ export default {
                 this.state = {
                     currentYear:new Date().getFullYear(),
                     currentMonth:parseInt(new Date().getMonth() + 1),
-                    currentDay:parseInt(new Date().getDate())
+                    currentDay:parseInt(new Date().getDate()),
+                    showError:this.state.showError
                 }
                 this.selectDay = "";
-                this.initPicker(this.state.currentYear,this.state.currentMonth);
+                this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
             }else{
                 let _arr = str && str.split('-');
                 this.state = {
                     currentYear:_arr[0],
                     currentMonth:parseInt(_arr[1]),
-                    currentDay:parseInt(_arr[2])
+                    currentDay:parseInt(_arr[2]),
+                    showError:this.state.showError
                 }
                 this.selectDay = str;
-                this.initPicker(_arr[0],parseInt(_arr[1]));
+                this.setPickerDateSource(_arr[0],parseInt(_arr[1]));
             }
             
         },
@@ -397,7 +403,7 @@ export default {
     },
     mounted(){
         _tool.init(this);
-        this.initPicker(this.state.currentYear,this.state.currentMonth);
+        this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
     },
     beforeDestroy () {

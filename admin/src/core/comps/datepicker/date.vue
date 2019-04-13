@@ -7,7 +7,7 @@
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
                 <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
-                <i class="fa fa-times-circle" @click.stop="clearDateEvent"></i>
+                <i class="fa fa-times-circle icon-del" @click.stop="clearDateEvent"></i>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
@@ -433,72 +433,59 @@ export default {
         box 
     */
     .div-box {
-        width: 200px;
-        height: 30px;
-        /* display: inline-block; */
-        margin:0 auto;
+        max-width: 200px;
+        width:100%;
+        height: 40px;
         position: relative;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        border: 1px solid #aeaeae;
-        box-sizing: content-box;
-        text-align:left;
+        cursor: pointer;
+    }
+    .div-box i {
+        position: absolute;
+        top: 12px;
+        color: #c0c4cc;
+        font-weight: normal;
     }
 
-    .div-box.current {
-        border: 1px solid #409EFF!important;
-        box-sizing: content-box;
+    .div-box .icon-date{
+        left:10px;
     }
-    .div-box input {
-        border:0px solid #fff;
-    }
-    .div-box.current .icon-date{
-        color:#409EFF;
-    }
-    .div-box.current .icon-del{
-        color:#409EFF;
-    }
-    /* 
-        icon 默认
-        */
-    .icon-date {
-        color: #cfcfcf;
-        position: absolute;
-        left: 0;
-        z-index: 5;
-        margin: 5px;
-        font-size: 20px;
-    }
-    .icon-del {
-        color: #aeaeae;
-        position: absolute;
-        right: 0;
-        z-index: 5;
-        margin: 5px;
-        margin-top:8px;
-        font-size: 14px;
+    .div-box .icon-del {
+        right:10px
     }
     /* 
         date选择器
     */
     .date {
-        padding-left: 27px;
-        outline: none;
-        height: 30px;
+       -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 26px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    max-width: 200px;
+    width:100%;
+
     }
 
     .picker-box {
         /* display: inline-block; */
-        width: 250px;
-        border: 1px solid #aeaeae;
-        box-sizing: border-box;
+        width: 270px;
+        /* border: 1px solid #aeaeae; */
+        /* box-sizing: border-box; */
         margin-top: 4px;
         position: absolute;
+        left:0;
         background:#fff;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+        z-index:999
         
     }
     /* 选择器头部 */
@@ -507,7 +494,7 @@ export default {
         /* display: inline-block; */
         width: 100%;
         border-bottom: 1px solid #aeaeae;
-        line-height: 1.8em;
+        line-height: 2em;
 
     }
 

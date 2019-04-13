@@ -240,12 +240,14 @@ li{
 }
 
 .timeContent{
-    width: 200px;
+    max-width: 200px;
     height: auto;
+    width:100%;
 }
 
 .timeContent .searchBar{
-    width: 200px;
+    max-width: 200px;
+    width:100%;
     height: 40px;
     position: relative;
     cursor: pointer;
@@ -254,13 +256,15 @@ li{
 .timeContent .searchBar i{
     position: absolute;
     top: 12px;
-    left: 10px;
+    /* left: 10px; */
     color: #c0c4cc;
     font-weight: normal;
 }
-
+.timeContent .searchBar .clock{
+    left:10px;
+}
 .timeContent .searchBar i.clearTime{
-    left: 176px;
+    right:10px;
 }
 
 .timeContent .timeInput{
@@ -278,7 +282,8 @@ li{
     outline: none;
     padding: 0 26px;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 200px;
+    max-width: 200px;
+    width:100%;
 }
 
 .timeContent .timePicker{
@@ -294,7 +299,8 @@ li{
     z-index: 1000;
     user-select: none;
     box-sizing: content-box;
-    margin-left: 8px;
+    margin-top:3px;
+    /* margin-left: 8px; */
 }
 
 .timeContent .timePicker .timePanel{

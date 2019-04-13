@@ -10,14 +10,22 @@
                 </div>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
-                    <div class="picker-header">
-                        <div class = "ipt">
+                    <div class="picker-header" style = "height:300px;">
+                        <div class = "ipt" >
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>
-                        <div class = "ipt">
+                        <div class = "ipt" style = "margin-left:10px;">
                             <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
                         </div>
-                        <input type="button" value="确定" @click="getDateTime"/>
+                    </div>
+                    <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
+                        <button>
+                            确定
+                        </button>
+                        <button class = "text">
+                            此刻
+                        </button>
+                        <div style ="clear:both;"></div>
                     </div>
                 </div>
             </div>
@@ -131,7 +139,7 @@ export default {
     /* 日期 */
      .picker-box {
         /* display: inline-block; */
-        width: 300px;
+        width: 270px;
         /* border: 1px solid #aeaeae; */
         box-sizing: border-box;
         margin-top: 1px;
@@ -144,21 +152,28 @@ export default {
     }
     /* 选择器头部 */
     .picker-header {
-        display: flex;
-        /* display: inline-block; */
         width: 100%;
         line-height: 1.8em;
-
+        display:flex;
     }
     .picker-header .ipt{
         display:inline-block;
-        position:relative;
-        width:140px;
-        border-radius:3px;
-        border:1px solid #aeaeae;
-        height:30px;
+        width:130px;
         margin:10px;
+        margin-left:0px;
+        position:relative;
         
     }
+    .picker-bottom button{
+        float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:10px;background:#fff;
+        outline: none;
+        border:1px solid #dcdfe6;
+        border-radius:3px;
 
+    }
+    .picker-bottom button.text{
+        border:0px solid #fff;
+        color:#409EFF;
+        
+    }
 </style>

@@ -15,14 +15,14 @@
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
-                            <le-time-picker :ref='timeKey'></le-time-picker>
+                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
                         </div>
                     </div>
                     <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
-                        <button @click="getDateTimeStr">
+                        <button @click.stop="getDateTimeStr">
                             确定
                         </button>
-                        <button class = "text">
+                        <button class = "text" @click.stop="getNow">
                             此刻
                         </button>
                         <div style ="clear:both;"></div>
@@ -32,6 +32,7 @@
             <!-- 时间 -->
             <i class="fa fa-times-circle clearTime" @click="clearDateTime"></i>
         </div>
+        <p class="text-left" v-show="state.showError">{{msg?msg:"未设置日期时间控件的错误提示信息"}}</p>
     </div>
 </template>
 <script>
@@ -41,16 +42,32 @@ import LeTimePicker from "./time.vue";
 
 export default {
     name:"LeDateTimePicker",
+    props:["msg"],
     components: {LeDatePicker,LeTimePicker},
     data(){
         return {
+            validataComponentType:"DateTimePicker",
             dateKey:Math.ceil(Math.random()*100000000000000),
             timeKey:Math.ceil(Math.random()*100000000000000),
             dateTimeStr:"",
-            showDateTimePicker:false
+            showDateTimePicker:false,
+            state:{
+                showError:false
+            },
         }
     },
-    computed: {
+    watch:{
+        dateTimeStr(val){
+            if(val == ""){
+                if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                    this.state.showError = true;
+                }else{
+                    this.state.showError = false;
+                }
+            }else{
+                this.state.showError = false;
+            }
+        }
     },
     methods:{
         getDateTimeStr(){
@@ -75,12 +92,31 @@ export default {
         clearDateTime(){
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
-            this.$refs[this.dateKey].setValue();
-            this.$refs[this.timeKey].setValue();
+            this.initDateAndTime();
+        },
+        initDateAndTime(){
+            this.$refs[this.dateKey].setValue(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate());
+            this.$refs[this.timeKey].setValue(new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+        },
+        getNow(){
+            this.initDateAndTime();
+            this.getDateTimeStr();
+        },
+        getValue(){
+            return this.dateTimeStr;
+        },
+        setValue(str){
+            if(!str){
+                this.initDateAndTime();
+            }else{
+                this.dateTimeStr = str;
+                this.$refs[this.dateKey].setValue(str.split(' ')[0]);
+                this.$refs[this.timeKey].setValue(str.split(' ')[1]);
+            }
         }
     },
     mounted(){
-        this.$refs[this.dateKey].setValue();
+        this.initDateAndTime();
     }
 }   
 </script>

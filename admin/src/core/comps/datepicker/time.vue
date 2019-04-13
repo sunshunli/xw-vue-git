@@ -25,14 +25,14 @@
                 </div>
                 
             </div>
-            <div class = "timeButtom">
-                <button>
+            <div class = "timeButtom" v-show="isDatetimePicker != undefined">
+                <button @click.stop="closePicker">
                     确定
                 </button>
             </div>
         </div>
 
-         <p class="text-left" v-show="state.showError">{{msg?msg:"未设置日期控件的错误提示信息"}}</p>
+        <p class="text-left" v-show="state.showError">{{msg?msg:"未设置日期控件的错误提示信息"}}</p>
     </div>
 </template>
 
@@ -43,7 +43,7 @@ import $ from "jquery";
 
 export default {
     name:"LeTimePicker",
-    props:["msg"],
+    props:["msg","isDatetimePicker"],
     data(){
         return {
             //validataHOC组件属性

@@ -9,8 +9,9 @@
             <v-input ref="i1" type="text" msg="正整数11" vType='number' on></v-input>
 
             继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
+
             LeDateTimePicker
-            <le-date-time-picker ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>
+            <le-date-time-picker ref="dt1" msg="日期and时间不允许为空" on></le-date-time-picker>
             LeRadioList
             <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
@@ -23,8 +24,8 @@
             
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
-            <!-- <le-button value="Form提交" @click="submit"></le-button> -->
-        
+            
+            <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
 
         LeDialog
@@ -75,10 +76,10 @@ export default {
         ]
         this.$refs["r1"].getCurrentComponent().init(rd);
         this.$refs["cl1"].getCurrentComponent().init(cd);
-        
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
-        this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
+        // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
+        // this.$refs["dt1"].getCurrentComponent().setValue("2018-06-21 21:41:51");
     }
 }
 </script>

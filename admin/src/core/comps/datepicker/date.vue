@@ -48,13 +48,6 @@
 <script>
 
 let _tool = {
-    vueComp:null,
-    /**
-     * @description _tool引用vue组件实例，方便获取当前state内容，只允许使用，不允许更改
-     */
-    init(vueComp){
-        _tool.vueComp = vueComp;
-    },
     /**
      * @description 根据年月获取当前月有多少天
      * @param year:年份
@@ -126,54 +119,7 @@ let _tool = {
         }
         return res;
     },
-    /**
-     * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
-     * @param year:年份
-     * @param month:月份
-     * @returns Array[]
-     */
-    getFullData(year,month){
-        let res = [];
-        //获取当前月第一天是周几
-        let week = this.getWeek(year,month);
-        //获取当前月一起多少天
-        let currentDays = this.getDays(year,month);
-        //上个月的数据条数
-        let prevDaylen = week - 1;
-        //获取上一个月有多少天
-        let prevMonthDays = this.getPrevMonthDays(year,month);
-        let allData = [];
-        //push上个月填充的数据
-        for(let i = prevDaylen;i>0;i--){
-            allData.push({year:prevMonthDays.year,month:prevMonthDays.month,day:prevMonthDays.days - i + 1,cls:"disable"});
-        }
-        //push当前月填充的数据，控制选中日期的样式，分为2种情况
-        //如果还没有选择日期
-        let tmp = {y:0,m:0,d:0};
-        if(_tool.vueComp.selectDay == ""){
-            tmp = {y:new Date().getFullYear(),m:new Date().getMonth() + 1,d:new Date().getDate()};
-        }
-        //如果选择了日期
-        else{
-            let _arr = _tool.vueComp.selectDay.split('-');
-            tmp = {y:_arr[0],m:_arr[1],d:_arr[2]};
-        }
-        for(let i=1;i<=currentDays;i++){
-            if(i == tmp.d && year == tmp.y && month == tmp.m){
-                allData.push({year:year,month:month,day:i,cls:"current"});
-            }else{
-                allData.push({year:year,month:month,day:i,cls:""});
-            }
-        }
-        
-        //push下个月剩余的数据
-        let nextDaysLen = 42 - (prevDaylen + currentDays);
-        let nextMonthDays = this.getNextMonthDays(year,month);
-        for(let i = 1;i<=nextDaysLen;i++){
-            allData.push({year:nextMonthDays.year,month:nextMonthDays.month,day:i,cls:"disable"});
-        }
-        return allData;
-    },
+    
     /**
      * @description 数组分组
      * @param data:42个数据源，分为6个数组
@@ -205,7 +151,7 @@ import Config from "./config.js";
 
 export default {
     name:"LeDatePicker",
-    // props:["msg"],
+    props:["selectDayCallback","isDatetimePicker"],
     data(){
         return {
             validataComponentType:"DatePicker",
@@ -239,18 +185,66 @@ export default {
     },
     methods:{
         /**
+         * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
+         * @param year:年份
+         * @param month:月份
+         * @returns Array[]
+         */
+        getFullData(year,month){
+            let res = [];
+            //获取当前月第一天是周几
+            let week = _tool.getWeek(year,month);
+            //获取当前月一起多少天
+            let currentDays = _tool.getDays(year,month);
+            //上个月的数据条数
+            let prevDaylen = week - 1;
+            //获取上一个月有多少天
+            let prevMonthDays = _tool.getPrevMonthDays(year,month);
+            let allData = [];
+            //push上个月填充的数据
+            for(let i = prevDaylen;i>0;i--){
+                allData.push({year:prevMonthDays.year,month:prevMonthDays.month,day:prevMonthDays.days - i + 1,cls:"disable"});
+            }
+            //push当前月填充的数据，控制选中日期的样式，分为2种情况
+            //如果还没有选择日期
+            let tmp = {y:0,m:0,d:0};
+            if(this.selectDay == ""){
+                tmp = {y:new Date().getFullYear(),m:new Date().getMonth() + 1,d:new Date().getDate()};
+            }
+            //如果选择了日期
+            else{
+                let _arr = this.selectDay.split('-');
+                tmp = {y:_arr[0],m:_arr[1],d:_arr[2]};
+            }
+            for(let i=1;i<=currentDays;i++){
+                if(i == tmp.d && year == tmp.y && month == tmp.m){
+                    allData.push({year:year,month:month,day:i,cls:"current"});
+                }else{
+                    allData.push({year:year,month:month,day:i,cls:""});
+                }
+            }
+            
+            //push下个月剩余的数据
+            let nextDaysLen = 42 - (prevDaylen + currentDays);
+            let nextMonthDays = _tool.getNextMonthDays(year,month);
+            for(let i = 1;i<=nextDaysLen;i++){
+                allData.push({year:nextMonthDays.year,month:nextMonthDays.month,day:i,cls:"disable"});
+            }
+            return allData;
+        },
+        /**
          * @description 根据年份，月份 初始化日期控件数据源
          * @param year:年份
          * @param month:月份
          * @returns
          */
         setPickerDateSource(year,month){
-            let days = _tool.getFullData(year,month);
+            let days = this.getFullData(year,month);
             this.data = _tool.groupArray(days);
         },
         clearDateEvent(){
             this.setValue();
-            if(this.$attrs.checkIsOff()){
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
                 this.state.showError = true;
             }
         },
@@ -259,7 +253,9 @@ export default {
          * @returns
          */
         pickerBodyClick(){
-            this.isShowPicker = false;
+            if(this.isDatetimePicker == undefined){
+                this.isShowPicker = false;
+            }
         },
         /**
          * @description 点击文本框显示picker选择层, 每次点击根据选中的日期来复位
@@ -268,6 +264,13 @@ export default {
         showPicker(){
             this.isShowPicker = true;
             this.selectDay?this.setValue(this.selectDayStr):this.setValue();
+        },
+        /**
+         * @description 关闭选择层
+         * @returns
+         */
+        closePicker(){
+            this.isShowPicker = false;
         },
         /**
          * @description 日期弹出层选中事件
@@ -289,8 +292,11 @@ export default {
             x.cls = "current";
             this.state.currentDay = x.day;
             this.selectDay = x.year + "-" + x.month + "-" + x.day;
-            this.isShowPicker = false;
+            if(this.isDatetimePicker == undefined){
+                this.isShowPicker = false;
+            }
             this.state.showError = false;
+            this.selectDayCallback && this.selectDayCallback();
         },
         /**
          * @description 上一年切换事件
@@ -389,7 +395,7 @@ export default {
                     showError:this.state.showError
                 }
                 this.selectDay = str;
-                this.setPickerDateSource(_arr[0],parseInt(_arr[1]));
+                this.setPickerDateSource(_arr[0],parseInt(_arr[1]),parseInt(_arr[2]));
             }
             
         },
@@ -402,7 +408,6 @@ export default {
         }
     },
     mounted(){
-        _tool.init(this);
         this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
     },

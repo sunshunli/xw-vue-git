@@ -37,7 +37,7 @@ import $ from "jquery";
 
 export default {
     name:"LeTimePicker",
-    props:["msg"],
+    props:["msg","isDatetimePicker"],
     data(){
         return {
             //validataHOC组件属性
@@ -113,8 +113,13 @@ export default {
             this.isShowPicker = true;
             this.state.showError = false;
         },
+        closePicker(){
+            this.isShowPicker = false;
+        },
         pickerBodyClick(){
-             this.isShowPicker = false;
+            if(this.isDatetimePicker == undefined){
+                this.isShowPicker = false;
+            }
         },
         scrollHandle(event,data,tag){
             this.isClear = false;
@@ -188,7 +193,7 @@ export default {
         clearTimeEvent(){
             this.isClear = true;
             this.isShowPicker = false;
-            if(this.$attrs.checkIsOff()){
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
                 this.state.showError = true;
             }
         }

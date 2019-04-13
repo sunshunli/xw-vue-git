@@ -5,17 +5,20 @@
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
                 <!-- 展示文字的地方 -->
-                <div class = "dateTimeText">
-                    2018/09/09 10:10:10
+                <div class = "dateTimeText" @click="showDateTimePickerHandle">
+                    {{dateTimeStr}}
                 </div>
                 <!-- 展开日期下拉 -->
-                <div class="picker-box">
+                <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header">
-                        <div class = "ipt">2018/05/10</div>
-                        <div class = "ipt">00:00:00</div>  
-                    
+                        <div class = "ipt">
+                            <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
+                        </div>
+                        <div class = "ipt">
+                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
+                        </div>
+                        <input type="button" value="确定" @click="getDateTime"/>
                     </div>
-                   
                 </div>
             </div>
             <!-- 时间 -->
@@ -25,18 +28,47 @@
     </div>
 </template>
 <script>
-import Config from "./config.js";
+
+import LeDatePicker from "./date.vue";
+import LeTimePicker from "./time.vue";
+
 export default {
-        data(){
-            return {
-                
-                
+    name:"LeDateTimePicker",
+    components: {LeDatePicker,LeTimePicker},
+    data(){
+        return {
+            dateKey:Math.ceil(Math.random()*100000000000000),
+            timeKey:Math.ceil(Math.random()*100000000000000),
+            dateTimeStr:"",
+            showDateTimePicker:false
+        }
+    },
+    computed: {
+    },
+    methods:{
+        getDateTime(){
+            let dateComp = this.$refs[this.dateKey];
+            let timeComp = this.$refs[this.timeKey];
+            let dataStr = dateComp.getValue();
+            let timeStr = timeComp.getValue();
+            if(!dataStr || !timeStr){
+                this.dateTimeStr =  "";
+            }else{
+                this.dateTimeStr = dataStr + " " + timeStr;
+                dateComp.closePicker();
+                timeComp.closePicker();
+                this.showDateTimePicker = false;
             }
         },
-        computed: {
-           
-        },
-        
+        showDateTimePickerHandle(){
+            this.showDateTimePicker = true;
+            this.$refs[this.dateKey].showPicker();
+            this.$refs[this.timeKey].showPicker();
+        }
+    },
+    mounted(){
+        this.$refs[this.dateKey].setValue(new Date().getFullYear() +"-" + (new Date().getMonth() + 1) + "-" + new Date().getDate());
+    }
 }   
 </script>
 <style scoped>

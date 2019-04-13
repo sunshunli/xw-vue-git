@@ -15,11 +15,11 @@
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
-                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
+                            <le-time-picker :ref='timeKey'></le-time-picker>
                         </div>
                     </div>
                     <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
-                        <button>
+                        <button @click="getDateTimeStr">
                             确定
                         </button>
                         <button class = "text">
@@ -30,8 +30,7 @@
                 </div>
             </div>
             <!-- 时间 -->
-            
-            <i class="fa fa-times-circle clearTime"></i>
+            <i class="fa fa-times-circle clearTime" @click="clearDateTime"></i>
         </div>
     </div>
 </template>
@@ -54,7 +53,7 @@ export default {
     computed: {
     },
     methods:{
-        getDateTime(){
+        getDateTimeStr(){
             let dateComp = this.$refs[this.dateKey];
             let timeComp = this.$refs[this.timeKey];
             let dataStr = dateComp.getValue();
@@ -72,10 +71,16 @@ export default {
             this.showDateTimePicker = true;
             this.$refs[this.dateKey].showPicker();
             this.$refs[this.timeKey].showPicker();
+        },
+        clearDateTime(){
+            this.dateTimeStr = "";
+            this.showDateTimePicker = false;
+            this.$refs[this.dateKey].setValue();
+            this.$refs[this.timeKey].setValue();
         }
     },
     mounted(){
-        this.$refs[this.dateKey].setValue(new Date().getFullYear() +"-" + (new Date().getMonth() + 1) + "-" + new Date().getDate());
+        this.$refs[this.dateKey].setValue();
     }
 }   
 </script>

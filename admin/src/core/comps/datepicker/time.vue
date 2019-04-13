@@ -23,6 +23,12 @@
                         <li :class="h.cls" v-for="(h,idx) in seconds" :key="idx">{{h.name}}</li>
                     </ul>
                 </div>
+                
+            </div>
+            <div class = "timeButtom">
+                <button>
+                    确定
+                </button>
             </div>
         </div>
 
@@ -391,5 +397,18 @@ li{
 .timeContent .active{
     color: #409eff;
     font-size: 16px;
+}
+.timeButtom{
+    text-align: right;
+    width:100%;
+    height:40px;
+    border-top:1px solid #f2f2f2;
+    margin-top:2px;
+}
+.timeButtom button{
+    float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:8px;background:#fff;
+        outline: none;
+        border:1px solid #dcdfe6;
+        border-radius:3px;
 }
 </style>

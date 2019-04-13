@@ -88,7 +88,7 @@ export default {
    
     .dataTimePicker{
         display:inline-block;
-        width: 292px;
+        width: 274px;
         height: auto;
         border: 1px solid #dcdfe6;
         border-radius: 4px;

@@ -125,7 +125,7 @@ export default {
         pickerBodyClick(){
             this.isShowPicker = false;
         },
-        scrollHandle(event,data,tag){
+        scrollHandle(event,data){
             this.isClear = false;
             let dom = event.target;
 
@@ -147,7 +147,7 @@ export default {
             }else{
                 this.nextSelect = 0;
             };
-            this.setCls(data,this.nextSelect,tag);
+            this.setCls(data,this.nextSelect);
         },
         setValue(str){
             if(!str){

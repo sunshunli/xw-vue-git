@@ -23,7 +23,7 @@
                 <button id="confirm" type="button" @click.stop="ok">确定</button>
             </div>
         </div>
-         <p class="text-left" v-show="state.showError">{{msg?msg:"未设置日期控件的错误提示信息"}}</p>
+         <p class="text-left" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
     </div>
 </template>
 

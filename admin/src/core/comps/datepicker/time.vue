@@ -269,7 +269,6 @@ li{
     width: 190px;
     height: auto;
     margin: 0 auto;
-    border: 1px solid #282b31;
     background-color: #fff;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
     border-radius: 2px;
@@ -356,7 +355,7 @@ li{
 }
 
 .timeContent .timePicker .timeBtnGroup button{
-    width: 40px;
+    width: 46px;
     height: 100%;
     text-align: center;
     background-color: transparent;

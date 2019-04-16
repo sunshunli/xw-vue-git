@@ -238,8 +238,11 @@ li{
 .timeContent .searchBar .clock{
     left:10px;
 }
-.timeContent .searchBar i.clearTime{
-    right:10px;
+.timeContent .searchBar .clearTime{
+    right: 10px;
+    position: absolute;
+    top: 12px;
+    color: #c0c4cc;
 }
 
 .timeContent .timeInput{

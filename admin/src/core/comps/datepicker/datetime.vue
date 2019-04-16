@@ -87,7 +87,6 @@ export default {
         showDateTimePickerHandle(){
             this.showDateTimePicker = true;
             this.$refs[this.dateKey].showPicker();
-            this.$refs[this.timeKey].showPicker();
         },
         clearDateTime(){
             this.dateTimeStr = "";

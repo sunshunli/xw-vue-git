@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="timeBtnGroup">
-                <button id="cancel" type="button" @click.stop="close">关闭</button>
+                <button id="cancel" type="button" @click.stop="closePicker">关闭</button>
                 <button id="confirm" type="button" @click.stop="ok">确定</button>
             </div>
         </div>
@@ -69,7 +69,7 @@ export default {
             this.state.showError = false;
         },
         //关闭
-        close(){
+        closePicker(){
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
         },
         //显示选择层,并且滚动
@@ -105,6 +105,9 @@ export default {
         },
         //设置值
         setValue(str){
+            //给dom赋值
+            str?this.getJQDom(this.KEYS.timeInputDomKey).html(str):this.getJQDom(this.KEYS.timeInputDomKey).html("");
+
             let hourDom = $("div [name="+this.KEYS.hourDomKey+"]");
             let minDom = $("div [name="+this.KEYS.minDomKey+"]");
             let secDom = $("div [name="+this.KEYS.secDomKey+"]");
@@ -115,8 +118,6 @@ export default {
                 let s = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
                 str = h + ":" + m + ":" + s;
             }
-            //给dom赋值
-            this.getJQDom(this.KEYS.timeInputDomKey).html(str);
             let currentHour = str.split(':')[0];
             let currentMin = str.split(':')[1];
             let currentSec = str.split(':')[2];
@@ -238,8 +239,11 @@ li{
 .timeContent .searchBar .clock{
     left:10px;
 }
-.timeContent .searchBar i.clearTime{
-    right:10px;
+.timeContent .searchBar .clearTime{
+    right: 10px;
+    position: absolute;
+    top: 12px;
+    color: #c0c4cc;
 }
 
 .timeContent .timeInput{
@@ -266,7 +270,6 @@ li{
     width: 190px;
     height: auto;
     margin: 0 auto;
-    border: 1px solid #282b31;
     background-color: #fff;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
     border-radius: 2px;
@@ -353,7 +356,7 @@ li{
 }
 
 .timeContent .timePicker .timeBtnGroup button{
-    width: 40px;
+    width: 46px;
     height: 100%;
     text-align: center;
     background-color: transparent;

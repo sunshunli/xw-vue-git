@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="timeBtnGroup">
-                <button id="cancel" type="button" @click.stop="close">关闭</button>
+                <button id="cancel" type="button" @click.stop="closePicker">关闭</button>
                 <button id="confirm" type="button" @click.stop="ok">确定</button>
             </div>
         </div>
@@ -69,7 +69,7 @@ export default {
             this.state.showError = false;
         },
         //关闭
-        close(){
+        closePicker(){
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
         },
         //显示选择层,并且滚动
@@ -105,6 +105,9 @@ export default {
         },
         //设置值
         setValue(str){
+            //给dom赋值
+            str?this.getJQDom(this.KEYS.timeInputDomKey).html(str):this.getJQDom(this.KEYS.timeInputDomKey).html("");
+
             let hourDom = $("div [name="+this.KEYS.hourDomKey+"]");
             let minDom = $("div [name="+this.KEYS.minDomKey+"]");
             let secDom = $("div [name="+this.KEYS.secDomKey+"]");
@@ -115,8 +118,6 @@ export default {
                 let s = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
                 str = h + ":" + m + ":" + s;
             }
-            //给dom赋值
-            this.getJQDom(this.KEYS.timeInputDomKey).html(str);
             let currentHour = str.split(':')[0];
             let currentMin = str.split(':')[1];
             let currentSec = str.split(':')[2];

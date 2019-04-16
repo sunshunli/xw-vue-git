@@ -92,7 +92,7 @@ export default {
         clearDateTime(){
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
-            this.initDateAndTime();
+            this.setValue();
         },
         initDateAndTime(){
             let y = new Date().getFullYear();

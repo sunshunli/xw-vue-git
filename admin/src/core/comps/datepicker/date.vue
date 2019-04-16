@@ -457,27 +457,27 @@ export default {
     */
     .date {
        -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 26px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    max-width: 200px;
-    width:100%;
-
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        padding: 0 26px;
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        max-width: 200px;
+        width:100%;
+        text-align: center;
     }
 
     .picker-box {
         /* display: inline-block; */
-        width: 270px;
+        width: 290px;
         /* border: 1px solid #aeaeae; */
         /* box-sizing: border-box; */
         margin-top: 4px;

@@ -267,7 +267,7 @@ li{
 
 .timeContent .timePicker{
     display: none;
-    width: 190px;
+    width: 199px;
     height: auto;
     margin: 0 auto;
     background-color: #fff;

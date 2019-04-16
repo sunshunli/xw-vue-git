@@ -21,7 +21,14 @@
 
             LeTimePicker
             <le-time-picker ref="t1" msg="时间不允许为空" on></le-time-picker>
+            <le-time-picker ref="t2" msg="时间不允许为空" on></le-time-picker>
             
+            <p style="text-align:left">----------------新的时间选择器-----------------------</p>
+            <le-time-picker1 ref="t1" msg="时间不允许为空" on></le-time-picker1>
+            <le-time-picker1 style="float:right;position:relative" ref="t2" msg="时间不允许为空" on></le-time-picker1>
+            <p style="text-align:left">----------------新的时间选择器-----------------------</p>
+           
+
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
             

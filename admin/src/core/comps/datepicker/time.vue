@@ -208,6 +208,7 @@ export default {
         let minDom = this.$refs[this.KEYS.minDomKey];
         let secDom = this.$refs[this.KEYS.secDomKey];
         hourDom.addEventListener("scroll",e=>{
+            console.log(e)
             this.scrollHandle(e,that.hours);
         },false);
         minDom.addEventListener("scroll",e=>{

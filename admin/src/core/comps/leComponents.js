@@ -12,6 +12,8 @@ import LeAsynTree from "./tree/asynTree.vue";
 import LeForm from "../comps/input/form.vue";
 import LeDatePicker from "../comps/datepicker/date.vue";
 import LeTimePicker from "../comps/datepicker/time.vue";
+import LeTimePicker1 from "../comps/datepicker/time1.vue";
+
 import LeDateTimePicker from "../comps/datepicker/datetime.vue";
 
 import LeDialog from "../comps/dialog/dialog.vue";
@@ -31,6 +33,7 @@ export default{
         Vue.component('LeAsynTree',LeAsynTree);
         Vue.component('LeDatePicker',ValidataHOC(LeDatePicker));
         Vue.component('LeTimePicker',ValidataHOC(LeTimePicker));
+        Vue.component('LeTimePicker1',LeTimePicker1);
         Vue.component('LeDateTimePicker',ValidataHOC(LeDateTimePicker));
         Vue.component('LeDialog',LeDialog);
         Vue.component('LeForm',LeForm);

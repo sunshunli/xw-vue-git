@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /**
+     * @description 简易MVC  单向线，Ctl控制model和view，model驱动视图，视图自身不能改变自身
+     * @returns
+     */
+    let Model = function(){
+
+        this.pos = {x:0,y:0};
+        this.size = {width:20,height:20};
+
+        this.updatePos = function(pos){
+            this.pos.x = pos.x;
+            this.pos.y = pos.y;
+        }
+    }
+
+    let View = function(){
+        this.el = document.createElement("div");
+        this.el.style.position = "absolute";
+        this.el.style.border = "1px solid red";
+        
+        this.setSize = function(size){
+            this.el.style.width = size.width + "px";
+            this.el.style.height = size.height + "px";
+        }
+
+        this.update = function(pos){
+            this.el.style.top = pos.y + "px";
+            this.el.style.left = pos.x + "px";
+        }
+        document.body.append(this.el);
+    }
+
+    let Controller = function(model,view){
+        this.init = function(){
+            this.model = model;
+            this.view = view;
+            this.view.setSize(model.size);
+            return this;
+        }
+
+        this.move = function(){
+            document.addEventListener("keydown",(e)=>{
+                if(e.keyCode==39){
+                    this.model.updatePos({x:this.model.pos.x + this.model.size.width,y:this.model.pos.y});
+                    this.view.update(this.model.pos);
+                }
+            },false);
+        }
+    }
+
+    let _model = new Model();
+    let _view = new View();
+    let _ctl = new Controller(_model,_view);
+    _ctl.init().move();
+</script>

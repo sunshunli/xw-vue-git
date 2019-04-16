@@ -17,17 +17,9 @@
 
             LeDatePicker
             <le-date-picker ref="d1" msg="日期不允许为空" on></le-date-picker>
-            <le-date-picker ref="d2" msg="日期不允许为空" on></le-date-picker>
 
             LeTimePicker
             <le-time-picker ref="t1" msg="时间不允许为空" on></le-time-picker>
-            <le-time-picker ref="t2" msg="时间不允许为空" on></le-time-picker>
-            
-            <p style="text-align:left">----------------新的时间选择器-----------------------</p>
-            <le-time-picker1 ref="t1" msg="时间不允许为空" on></le-time-picker1>
-            <le-time-picker1 style="float:right;position:relative" ref="t2" msg="时间不允许为空" on></le-time-picker1>
-            <p style="text-align:left">----------------新的时间选择器-----------------------</p>
-           
 
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
@@ -86,7 +78,7 @@ export default {
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
         // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
-        // this.$refs["dt1"].getCurrentComponent().setValue("2018-06-21 21:41:51");
+        this.$refs["dt1"].getCurrentComponent().setValue("2018-06-21 21:41:51");
     }
 }
 </script>

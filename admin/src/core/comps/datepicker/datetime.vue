@@ -15,7 +15,7 @@
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
-                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
+                            <le-time-picker :ref='timeKey'></le-time-picker>
                         </div>
                     </div>
                     <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
@@ -95,8 +95,14 @@ export default {
             this.initDateAndTime();
         },
         initDateAndTime(){
-            this.$refs[this.dateKey].setValue(new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate());
-            this.$refs[this.timeKey].setValue(new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+            let y = new Date().getFullYear();
+            let m = parseInt(new Date().getMonth() + 1)>10?(new Date().getMonth() + 1):"0"+(new Date().getMonth() + 1);
+            let d = parseInt(new Date().getDate())>10?(new Date().getDate()):"0"+(new Date().getDate());
+            let hh = new Date().getHours()>=10?new Date().getHours():"0"+new Date().getHours();
+            let mm = new Date().getMinutes()>=10?new Date().getMinutes():"0"+new Date().getMinutes();
+            let ss = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
+            this.$refs[this.dateKey].setValue(y + "-" + m + "-" + d);
+            this.$refs[this.timeKey].setValue(hh + ":" + mm + ":" + ss);
         },
         getNow(){
             this.initDateAndTime();

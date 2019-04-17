@@ -129,7 +129,7 @@ export default {
    
     .dataTimePicker{
         display:inline-block;
-        width: 274px;
+        width: 290px;
         height: auto;
         border: 1px solid #dcdfe6;
         border-radius: 4px;
@@ -138,7 +138,7 @@ export default {
 
     }
     .current .dataTimePicker{
-       border: 1px solid #409EFF!important;
+       /* border: 1px solid #409EFF!important; */
         box-sizing: content-box;
     }
     .dataTimePicker .date-box,.dataTimePicker .time-box{
@@ -185,7 +185,7 @@ export default {
     /* 日期 */
      .picker-box {
         /* display: inline-block; */
-        width: 270px;
+        width: 290px;
         /* border: 1px solid #aeaeae; */
         box-sizing: border-box;
         margin-top: 1px;
@@ -203,11 +203,12 @@ export default {
         display:flex;
     }
     .picker-header .ipt{
-        display:inline-block;
-        width:130px;
-        margin:10px;
-        margin-left:0px;
-        position:relative;
+        display: inline-block;
+        width: 140px;
+        margin: 10px;
+        margin-left: 0px;
+        position: relative;
+        margin-right: 0;
         
     }
     .picker-bottom button{

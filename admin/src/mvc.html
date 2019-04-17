@@ -5,64 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="http://js1cdn.clubstatic.lenovo.com.cn/thinkpc/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
     
 </body>
 </html>
 <script>
-    /**
-     * @description 简易MVC  单向线，Ctl控制model和view，model驱动视图，视图自身不能改变自身
-     * @returns
-     */
-    let Model = function(){
 
-        this.pos = {x:0,y:0};
-        this.size = {width:20,height:20};
+    var SuperView = function(){
+        this.detailEl = $("<div tag='detail'></div>");
+        this.quickEl = $("<div tag='quick'></div>");
+        this.stagesEl = $("<div tag='stages'></div>");
+        this.netEl = $("<div tag='net'></div>");
+        this.priceEl = $("<div tag='price'></div>");
 
-        this.updatePos = function(pos){
-            this.pos.x = pos.x;
-            this.pos.y = pos.y;
+        //渲染详情
+        this.renderDetail = function(data){}
+        //渲染快捷支付
+        this.renderQuickPay = function(data){}
+        //渲染分期支付
+        this.renderStagesPay = function(){}
+        //渲染网银支付
+        this.renderNetPay = function(data){}
+        //渲染价格
+        this.renderPrice = function(data){}
+        //渲染价格
+        this.setActive = function(el){}
+    }
+
+    var Model = function(){
+        this.detailData = null;
+        this.quickPayData = null;
+        this.stagesPayData = null;
+        this.netPayData = null;
+
+        this.selectItem = null;
+
+        this.setSelectItem = function(item){
+            this.selectItem = item;
+        }
+
+        this.findEntityByKey = function(key,data){
+            var res = null;
+            for(var i=0;i<data.length;i++){
+                if(data[i].key == key){
+                    res = data[i];
+                    break;
+                }
+            }
+            return res;
+        }
+
+        this.findDataByFlag = function(flag){
+            var res = [];
+            for(var i=0;i<this.quickPayData.length;i++){
+                if(flag == this.quickPayData[i].flag){
+                    res = this.quickPayData;
+                    break;
+                }
+            }
+            for(var i=0;i<this.stagesPayData.length;i++){
+                var tmp = this.stagesPayData[i].children;
+                for(var k=0;k<tmp.length;k++){
+                    if(tmp[k] == flag){
+                        res = tmp;
+                    }
+                }
+            }
+            for(var i=0;i<this.netPayData.length;i++){
+                if(flag == this.netPayData[i].flag){
+                    res = this.netPayData;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        this.init = function(data){
+            //todo 
+            this.detailData = null;
+            this.quickPayData = null;
+            this.stagesPayData = null;
+            this.netPayData = null;
         }
     }
 
-    let View = function(){
-        this.el = document.createElement("div");
-        this.el.style.position = "absolute";
-        this.el.style.border = "1px solid red";
+    var PCView = function(){
+        SuperView.apply(this,[]);
+
+        this.renderDetail = function(data){
+            $("div.container").append($(this.detailEl));
+        }
+
+        this.renderQuickPay = function(data){
+            $("div.container").append($(this.quickEl));
+        }
+
+        this.renderStagesPay = function(){
+            $("div.container").append($(this.stagesEl));
+        }
+
+        this.renderNetPay = function(data){
+            $("div.container").append($(this.netEl));
+        }
+
+        this.renderPrice = function(data){
+            $("div.container").append($(this.priceEl));
+        }
+
+        this.setActive = function(el){
+            $("div.container li").removeClass("active");
+            $(el).addClass("active");
+        }
+    }
+
+    var WapView = function(){
+        SuperView.apply(this,[]);
         
-        this.setSize = function(size){
-            this.el.style.width = size.width + "px";
-            this.el.style.height = size.height + "px";
+        this.renderDetail = function(data){
+            $("div.container").append($(this.detailEl));
         }
 
-        this.update = function(pos){
-            this.el.style.top = pos.y + "px";
-            this.el.style.left = pos.x + "px";
+        this.renderQuickPay = function(data){
+            $("div.container").append($(this.quickEl));
         }
-        document.body.append(this.el);
+
+        this.renderStagesPay = function(){
+            $("div.container").append($(this.stagesEl));
+        }
+
+        this.renderNetPay = function(data){
+            $("div.container").append($(this.netEl));
+        }
+
+        this.renderPrice = function(data){
+            $("div.container").append($(this.priceEl));
+        }
+
+        this.setActive = function(el){
+            $("div.container li").removeClass("active");
+            $(el).addClass("active");
+        }
     }
+
 
     let Controller = function(model,view){
+        this.model = model;
+        this.view = view;
+
         this.init = function(){
-            this.model = model;
-            this.view = view;
-            this.view.setSize(model.size);
+            //ajax callback
+            var data = [];
+            this.model.init(data);
+            this.model.setSelectItem(null);
+
+            this.view.renderDetail(this.model.detailData);
+
+            this.view.renderQuickPay(this.model.quickPayData);
+            this.view.renderStagesPay(this.model.stagesPayData);
+            this.view.renderNetPay(this.model.netPayData);
+
+            this.view.renderPrice(this.model.selectItem);
             return this;
         }
 
-        this.move = function(){
-            document.addEventListener("keydown",(e)=>{
-                if(e.keyCode==39){
-                    this.model.updatePos({x:this.model.pos.x + this.model.size.width,y:this.model.pos.y});
-                    this.view.update(this.model.pos);
-                }
-            },false);
+        this.regEvent = function(){
+            var that = this;
+            $("div.container").on("click","li",function(){
+                //标识数据源
+                var flag = $(this).attr("flag");
+                var data = that.model.findDataByFlag(flag);
+                var selectItem = that.model.findEntityByKey($(this).attr("key"),data);
+                //改变selectItem
+                that.setSelectItem(selectItem);
+                //改变样式
+                that.view.setActive($(this));
+
+                //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
+                that.view.renderPrice(that.model.selectItem);
+            })
         }
     }
 
     let _model = new Model();
-    let _view = new View();
+    let _view = new WapView();
     let _ctl = new Controller(_model,_view);
-    _ctl.init().move();
+    _ctl.init().regEvent();
 </script>

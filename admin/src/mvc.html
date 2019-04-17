@@ -8,10 +8,334 @@
     <script src="http://js1cdn.clubstatic.lenovo.com.cn/thinkpc/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-    
+    <div class="container">
+
+    </div>
 </body>
 </html>
 <script>
+    var testData = {
+	"result": {
+		"lenovo_pay_cashier_response": {
+			"t": {
+				"suppprtPayType": {
+					"netBankList": [
+                        {
+						"bankCode": "ICBCB2C",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_gsyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p><p><span>不支持5000元以上订单</span><span>支付</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "CMB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_zsyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "CCB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_jsyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p><p><span>不支持5000元以上订单</span><span>支付</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "BOCB2C",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_zgyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "ABC",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_nyyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "GDB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_gfyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "CIB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_xyyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "POSTGC",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_youzheng.png",
+						"channelCode": "3"
+					}, {
+						"bankCode": "COMM",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_jtyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "SPDB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_pufa.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "FDB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_fcyh.png",
+						"channelCode": "3"
+					}, {
+						"bankCode": "HZCBB2C",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_hzyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "SHBANK",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_shyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "NBBANK",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_nbyh.png",
+						"channelCode": "3"
+					}, {
+						"bankCode": "CITIC-DEBIT",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_zxyh.png",
+						"tip": "<p><span>支持：借记卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "CEB-DEBIT",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_gdyh.png",
+						"tip": "<p><span>支持：借记卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "BJRCB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_bjnsyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "BJBANK",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_bjyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}, {
+						"bankCode": "SHRCB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_shnsyh.png",
+						"tip": "<p><span>支持：借记卡和信用卡</span></p>",
+						"channelCode": "3"
+					}],
+					"installmentChannelList": [
+                        {
+						"code": "11",
+						"icon": "https://m2.lefile.cn/pay/images/pic-01_03.png",
+						"installmentInfos": [
+                            {
+							"installmentSingle": {
+								"amount": "442.62",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 3,
+							"installmentRate": "2.3",
+							"installmentTotal": {
+								"amount": "1327.85",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}, {
+							"installmentSingle": {
+								"amount": "226.07",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 6,
+							"installmentRate": "4.5",
+							"installmentTotal": {
+								"amount": "1356.41",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}, {
+							"installmentSingle": {
+								"amount": "116.28",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 12,
+							"installmentRate": "7.5",
+							"installmentTotal": {
+								"amount": "1395.35",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}],
+						"selected": 0,
+						"tips": "<p style=\"margin: 15px 0px;font-size: 15px;\">3. 订单提交支付后无法改期数,如需改请重新下单。</p>"
+					    }, {
+                        "code": "21",
+                        "name":"招行分期",
+						"icon": "https://m2.lefile.cn/pay/images/cmbxyk.png",
+						"installmentInfos": [{
+							"installmentSingle": {
+								"amount": "445.65",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 3,
+							"installmentRate": "3",
+							"installmentTotal": {
+								"amount": "1336.94",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}, {
+							"installmentSingle": {
+								"amount": "225.42",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 6,
+							"installmentRate": "4.2",
+							"installmentTotal": {
+								"amount": "1352.52",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}, {
+							"installmentSingle": {
+								"amount": "114.66",
+								"currencyCode": "CNY"
+							},
+							"installmentNum": 12,
+							"installmentRate": "6",
+							"installmentTotal": {
+								"amount": "1375.88",
+								"currencyCode": "CNY"
+							},
+							"installmentRatePro": "0",
+							"selected": 0
+						}],
+						"selected": 0,
+						"tips": "<br style=\"margin: 15px 0px;font-size: 12px;\"><span style=\"font-size: 12px;color:red;\"> 提醒:</span><br>仅限购买Lenovo电脑类商品,每单金额至少300元,每单最高限额5万元。<br>持卡人申请账单分期一经审核通过,则不能撤销,<span style=\"font-size: 12px;font-weight:bold;\">不能对分期金额和期数进行更改。</span><br>成功办理账单分期后,每期应还本金和每期手续费均计入持卡人信用卡人民币账户。<br>分期每期应还本金=分期本金总额5206期期数,每期应还本金(精确到分)逐月计入持卡人信用卡人民币账户,余数计入最后一期。"
+					}],
+					"b2bNetBankList": [
+                        {
+						"bankCode": "ICBCBTB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_icbc.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}, {
+						"bankCode": "ABCBTB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_abc.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}, {
+						"bankCode": "CCBBTB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_ccb.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}, {
+						"bankCode": "SPDBB2B",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_pufa.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}, {
+						"bankCode": "BOCBTB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_boc.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}, {
+						"bankCode": "CMBBTB",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_cmb.png",
+						"tip": "<p＞<span＞支持：借记卡和信用卡</span＞</p＞",
+						"channelCode": "5"
+					}],
+					"b2bPlatPayChannelList": [
+                    {
+						"code": "23",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/b2b_unionpay.png",
+						"name": "银联支付",
+						"terminal": 1,
+						"selected": 0
+					}],
+					"platPayChannelList": [
+                        {
+						"code": "1",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_zfb.png",
+						"name": "支付宝",
+						"terminal": 1,
+						"selected": 1
+					}, {
+						"code": "16",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_weixin.png.png",
+						"name": "微信支付",
+						"terminal": 1,
+						"selected": 0
+					}, {
+						"code": "61",
+						"icon": "https://m2.lefile.cn/pay/images/banks/jieji/payOnline_yinlian.png",
+						"name": "银联支付",
+						"terminal": 1,
+						"selected": 0
+					}]
+				},
+				"payPortalOrder": {
+					"orderType": "0",
+					"taxDeliveryInfo": "",
+					"subject": "联想Z5s 4GB+64GB 星夜灰",
+					"freight": {
+						"amount": "0.00",
+						"currencyCode": "CNY"
+					},
+					"orderStatus": 0,
+					"payWay": 3,
+					"failureTime": 1555488311000,
+					"showTradeNo": "19429299",
+					"point": 0,
+					"residualOrder": false,
+					"subMerid": "sm23462",
+					"orderTime": 1555487457221,
+					"outTradeNo": "194292990011",
+					"faId": "36d0caa1-af7a-459b-b147-04b86ad25dd7",
+					"merid": "mm20906",
+					"payment": 100,
+					"shopId": "1",
+					"virAmount": {
+						"amount": "0.00",
+						"currencyCode": "CNY"
+					},
+					"taxType": "D",
+					"deliveryInfo": "王瑞奇 181****2356 浙江省_杭州市_滨江区_北里甲24号中国民航科学技术研究院",
+					"refundMoney": {
+						"amount": "0.00",
+						"currencyCode": "CNY"
+					},
+					"terminal": "3",
+					"paymentWay": "1",
+					"taxInfo": "个人",
+					"handselOrder": false,
+					"lenovoId": "10057830455",
+					"createTime": 1555487457221,
+					"totalFee": {
+						"amount": "1298.00",
+						"currencyCode": "CNY"
+					},
+					"expirationTime": "2019-04-17 16:05:11",
+					"currencyCode": "CNY",
+					"payStatus": 0,
+					"rewardLedou": "0"
+				}
+			},
+			"success": true,
+			"resultCode": "0",
+			"version": 0,
+			"resultMsg": ""
+		},
+		"status": 200
+	},
+	"msg": "操作成功",
+	"code": 0,
+	"success": true,
+	"resultCode": "0"
+}
+
+    var map = {
+        "tcQuick":"个人快捷支付",
+        "tcStages":"分期",
+        "tcNet":"银行卡",
+        "tbnetPay":"企业网银",
+        "bCNunionPay":"企业网银",
+        "CNY":"元"
+    }
 
     var SuperView = function(){
         this.detailEl = $("<div tag='detail'></div>");
@@ -36,9 +360,17 @@
 
     var Model = function(){
         this.detailData = null;
+
+        //2c快捷支付平台，支付宝，微信，中国银联
         this.quickPayData = null;
+        //2c 分期支付，蚂蚁花呗，招行分期
         this.stagesPayData = null;
+        //2c，网银支付
         this.netPayData = null;
+        //2b 企业网银
+        this.tbnetPayData = null;
+        //2b 中国银联
+        this.tbCNunionPayData = null;
 
         this.selectItem = null;
 
@@ -46,48 +378,87 @@
             this.selectItem = item;
         }
 
-        this.findEntityByKey = function(key,data){
+        this.findEntityByKey = function(key,data,tag){
             var res = null;
-            for(var i=0;i<data.length;i++){
-                if(data[i].key == key){
-                    res = data[i];
-                    break;
+            if(tag){
+                for(var i=0;i<data.length;i++){
+                    var tmp = data[i].__children;
+                    for(var k=0;k<tmp.length;k++){
+                        if(tmp[k].__key == key){
+                            res = tmp[k];
+                            break;
+                        }
+                    }
+                    
                 }
-            }
-            return res;
-        }
-
-        this.findDataByFlag = function(flag){
-            var res = [];
-            for(var i=0;i<this.quickPayData.length;i++){
-                if(flag == this.quickPayData[i].flag){
-                    res = this.quickPayData;
-                    break;
-                }
-            }
-            for(var i=0;i<this.stagesPayData.length;i++){
-                var tmp = this.stagesPayData[i].children;
-                for(var k=0;k<tmp.length;k++){
-                    if(tmp[k] == flag){
-                        res = tmp;
+            }else{
+                for(var i=0;i<data.length;i++){
+                    if(data[i].__key == key){
+                        res = data[i];
+                        break;
                     }
                 }
             }
-            for(var i=0;i<this.netPayData.length;i++){
-                if(flag == this.netPayData[i].flag){
-                    res = this.netPayData;
-                    break;
-                }
-            }
+            
             return res;
         }
 
+        this.dealData = function(data,tag){
+            if(tag == "tcQuick"){
+                for(var i=0;i<data.length;i++){
+                    data[i].__key = Math.ceil(Math.random()*1000000000000000000);
+                    data[i].__priceName = data[i].name;
+                    data[i].__price = this.detailData.totalFee.amount;
+                    data[i].__priceUnit = this.detailData.totalFee.currencyCode;
+                    if(data[i].selected == "1"){
+                        this.selectItem = data[i];
+                    }
+                }
+            }else if(tag == "tcStages"){
+                for(var i=0;i<data.length;i++){
+                    var tmp = data[i].installmentInfos;
+                    for(var k=0;k<tmp.length;k++){
+                        tmp[k].__key = Math.ceil(Math.random()*1000000000000000000);
+                        tmp[k].__priceName = map[tag];
+                        tmp[k].__price = tmp[k].installmentTotal.amount;
+                        tmp[k].__priceUnit = tmp[k].installmentTotal.currencyCode;
+                        if(tmp[k].selected == "1"){
+                            this.selectItem = tmp[k];
+                        }
+                    }
+                    data[i].__children = tmp;
+                }
+            }else if(tag == "tcNet"){
+                for(var i=0;i<data.length;i++){
+                    data[i].__key = Math.ceil(Math.random()*1000000000000000000);
+                    data[i].__priceName = map[tag];
+                    data[i].__price = this.detailData.totalFee.amount;
+                    data[i].__priceUnit = this.detailData.totalFee.currencyCode;
+                    if(data[i].selected == "1"){
+                        this.selectItem = data[i];
+                    }
+                }
+            }else if(tag == "tbnetPay" || tag == "bCNunionPay"){
+                for(var i=0;i<data.length;i++){
+                    data[i].__key = Math.ceil(Math.random()*1000000000000000000);
+                    data[i].__priceName = map[tag];;
+                    data[i].__price = this.detailData.totalFee.amount;
+                    data[i].__priceUnit = this.detailData.totalFee.currencyCode;
+                    if(data[i].selected == "1"){
+                        this.selectItem = data[i];
+                    }
+                }
+            }
+            return data;
+        }
+
         this.init = function(data){
-            //todo 
-            this.detailData = null;
-            this.quickPayData = null;
-            this.stagesPayData = null;
-            this.netPayData = null;
+            this.detailData = data.payPortalOrder;
+            this.quickPayData = this.dealData(data.suppprtPayType.platPayChannelList,"tcQuick");
+            this.stagesPayData = this.dealData(data.suppprtPayType.installmentChannelList,"tcStages");
+            this.netPayData = this.dealData(data.suppprtPayType.netBankList,"tcNet");
+            this.tbnetPayData = this.dealData(data.suppprtPayType.netBankList,"tbnetPay");
+            this.tbCNunionPayData = this.dealData(data.suppprtPayType.netBankList,"bCNunionPay");
         }
     }
 
@@ -124,23 +495,43 @@
         SuperView.apply(this,[]);
         
         this.renderDetail = function(data){
+            $(this.detailEl).html("商品名称:"+data.subject);
             $("div.container").append($(this.detailEl));
         }
 
         this.renderQuickPay = function(data){
+            var html = "<ul>";
+            for(var i=0;i<data.length;i++){
+                html += "<li key='"+data[i].__key+"' tag='tcQuick'>"+data[i].__priceName+"</li>";
+            }
+            html += "</ul>";
+            $(this.quickEl).html($(html));
             $("div.container").append($(this.quickEl));
         }
 
-        this.renderStagesPay = function(){
+        this.renderStagesPay = function(data){
+            var html = "<ul>";
+            for(var i=0;i<data.length;i++){
+                var tmp = data[i].__children;
+                for(var k=0;k<tmp.length;k++){
+                    html += "<li key='"+tmp[k].__key+"' tag='tcStages'>分期1</li>";
+                }
+            }
+            html += "</ul>";
+            $(this.stagesEl).html($(html));
             $("div.container").append($(this.stagesEl));
         }
 
-        this.renderNetPay = function(data){
-            $("div.container").append($(this.netEl));
+        this.renderPrice = function(data){
+            $(this.priceEl).html(data.__priceName + "支付" + data.__price + map[data.__priceUnit]);
+            $("div.container").append($(this.priceEl));
         }
 
-        this.renderPrice = function(data){
-            $("div.container").append($(this.priceEl));
+        this.renderAll = function(datas){
+            this.renderDetail(datas.detailData);
+            this.renderQuickPay(datas.quickPayData);
+            this.renderStagesPay(datas.stagesPayData);
+            this.renderPrice(datas.priceData);
         }
 
         this.setActive = function(el){
@@ -149,36 +540,47 @@
         }
     }
 
-
     let Controller = function(model,view){
         this.model = model;
         this.view = view;
 
         this.init = function(){
             //ajax callback
-            var data = [];
-            this.model.init(data);
-            this.model.setSelectItem(null);
+            var data = testData.result;
+            this.model.init(data.lenovo_pay_cashier_response.t);
 
-            this.view.renderDetail(this.model.detailData);
+            var datas = {
+                detailData:this.model.detailData,
+                quickPayData:this.model.quickPayData,
+                stagesPayData:this.model.stagesPayData,
+                netPayData:this.model.netPayData,
+                tbnetPayData:this.model.tbnetPayData,
+                tbCNunionPayData:this.model.tbCNunionPayData,
+                priceData:this.model.selectItem
+            }
 
-            this.view.renderQuickPay(this.model.quickPayData);
-            this.view.renderStagesPay(this.model.stagesPayData);
-            this.view.renderNetPay(this.model.netPayData);
-
-            this.view.renderPrice(this.model.selectItem);
+            this.view.renderAll(datas);
             return this;
         }
 
         this.regEvent = function(){
             var that = this;
             $("div.container").on("click","li",function(){
-                //标识数据源
-                var flag = $(this).attr("flag");
-                var data = that.model.findDataByFlag(flag);
-                var selectItem = that.model.findEntityByKey($(this).attr("key"),data);
+                var tag = $(this).attr("tag");
+                var selectItem = null;
+                if(tag == "tcQuick"){
+                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.quickPayData);
+                }else if(tag == "tcStages"){
+                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.stagesPayData,"tcStages");
+                }else if(tag == "tcNet"){
+                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.netPayData);
+                }else if(tag == "tbnetPay"){
+                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.tbnetPayData);
+                }else if(tag == "bCNunionPay"){
+                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.tbCNunionPayData);
+                }
                 //改变selectItem
-                that.setSelectItem(selectItem);
+                that.model.setSelectItem(selectItem);
                 //改变样式
                 that.view.setActive($(this));
 

@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<title>Document</title>
+	<link rel="stylesheet" href="https://m1.lenovouat.com/lenovo_common_search/lenovo_wap/css/bootstrap.min.css"/>
     <script src="http://js1cdn.clubstatic.lenovo.com.cn/thinkpc/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-    <div class="container">
+	<div class="pay_wap">
+		<div class="container">
 
-    </div>
+		</div>
+	</div>
 </body>
 </html>
 <script>
+	 //计算字体大小的
+	 var offWidth = window.screen.width / 375 *100;  
+    console.log('字体大小为：：' + offWidth)
+    document.getElementsByTagName("html")[0].style.fontSize = offWidth + 'px';
     var testData = {
 	"result": {
 		"lenovo_pay_cashier_response": {
@@ -116,6 +123,7 @@
 					"installmentChannelList": [
                         {
 						"code": "11",
+						"name":"蚂蚁花呗",
 						"icon": "https://m2.lefile.cn/pay/images/pic-01_03.png",
 						"installmentInfos": [
                             {
@@ -156,7 +164,7 @@
 								"currencyCode": "CNY"
 							},
 							"installmentRatePro": "0",
-							"selected": 0
+							"selected": 1
 						}],
 						"selected": 0,
 						"tips": "<p style=\"margin: 15px 0px;font-size: 15px;\">3. 订单提交支付后无法改期数,如需改请重新下单。</p>"
@@ -495,35 +503,88 @@
         SuperView.apply(this,[]);
         
         this.renderDetail = function(data){
-            $(this.detailEl).html("商品名称:"+data.subject);
-            $("div.container").append($(this.detailEl));
+			var html = '<div class="orderInfo">'
+						+'<div class="clearfix">'
+						+'<span class="fl orderName">订单金额</span>'
+						+'<span class="fr orderAmount">'+data.totalFee.amount+'</span>'
+						+'</div>'
+						+'<div class="clearfix">'
+						+'<span class="fl orderName">订单编号</span>'
+						+'<span class="fr orderCode">'+data.showTradeNo+'</span>'
+						+'</div>'
+						+'</div>';
+			$(this.detailEl).html(html);
+			$("div.container").append($(this.detailEl));
         }
 
         this.renderQuickPay = function(data){
-            var html = "<ul>";
-            for(var i=0;i<data.length;i++){
-                html += "<li key='"+data[i].__key+"' tag='tcQuick'>"+data[i].__priceName+"</li>";
-            }
-            html += "</ul>";
+			console.log(data)
+			var html = '<div class="payment fastPayment">'
+						+'<div class="payName">快捷支付</div>'
+						+'<div class="payContent">'
+						+'<ul class="wayList">';
+						for(var i=0;i<data.length;i++){
+							if(data[i].selected == 1){
+								html += '<li class="way priceDetail active" key="' + data[i].__key+ '" tag="tcQuick">'	
+							}else{
+								html += '<li class="way priceDetail" key="' + data[i].__key+ '" tag="tcQuick">'	
+							}
+								html+= '<img class="crad_icon" src="'+data[i].icon+'"/>'
+								+'<span class="cardName">'+data[i].__priceName+'</span>'
+								+'<span class="select_card"></span>'
+								+"</li>";
+						}
+						html += "</ul></div></div>";
             $(this.quickEl).html($(html));
             $("div.container").append($(this.quickEl));
         }
 
         this.renderStagesPay = function(data){
-            var html = "<ul>";
+			console.log(data);
+			var html = '<div class="payment fastPayment" id="fenqi">'
+					  +'<div class="payName">分期支付</div>'
+					  +'<div class="payContent">'
+					  +'<ul class="wayList">'
             for(var i=0;i<data.length;i++){
+				html+= '<li class="way">'
+						+'<div class="cardInfo">'
+						+'<img class="crad_icon" src="'+data[i].icon+'"/>'
+						+'<span class="cardName">'+data[i].name+'</span>'
+						+'<span class="line"></span>'
+						+'<span>信用卡</span>'
+						+'<span class="fenqi_card fr"></span>'
+						+'<span class="fr qishu">3期免息</span>'
+						+'</div>'							
+						+'<ul class="periodsInfo">'
                 var tmp = data[i].__children;
                 for(var k=0;k<tmp.length;k++){
-                    html += "<li key='"+tmp[k].__key+"' tag='tcStages'>分期1</li>";
-                }
+					if(tmp[k].selected == 1){
+						html += '<li class="priceDetail active" key="'+tmp[k].__key+ '" tag="tcStages">'
+					}else{
+						html += '<li class="priceDetail" key="'+tmp[k].__key+ '" tag="tcStages">'
+					}
+						html+='<span class="num">'+tmp[k].installmentNum+'期</span>'
+						+'<span class="money">约 '+tmp[k].installmentSingle.amount +' ×  ' + tmp[k].installmentNum +'</span>'
+						+'<span class="select_card"></span>'
+						+'<span class="rate">费率'+ tmp[k].installmentRate +'%</span>'
+						+'</li>'
+					}
+				html += '</ul>';
             }
-            html += "</ul>";
+            html += "</li></ul></div></div>";
             $(this.stagesEl).html($(html));
             $("div.container").append($(this.stagesEl));
         }
 
         this.renderPrice = function(data){
-            $(this.priceEl).html(data.__priceName + "支付" + data.__price + map[data.__priceUnit]);
+			var html = '<div class="payNum">'
+				+'<a class="payLink">'
+				+'<span class="selectWayName">'+data.__priceName+'</span>'
+				+'<span>'+data.__price+'</span>'
+				+ map[data.__priceUnit]
+				+'</a>'
+				+'</div>';
+			$(this.priceEl).html(html);
             $("div.container").append($(this.priceEl));
         }
 
@@ -565,7 +626,7 @@
 
         this.regEvent = function(){
             var that = this;
-            $("div.container").on("click","li",function(){
+            $("div.container").on("click","li.priceDetail",function(){
                 var tag = $(this).attr("tag");
                 var selectItem = null;
                 if(tag == "tcQuick"){
@@ -587,7 +648,23 @@
                 //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
                 that.view.renderPrice(that.model.selectItem);
             })
-        }
+	   
+			$("div.container").on('click','.cardInfo',function(){
+				var arr = $(this).children('.fenqi_card');
+				var brother = $(this).next('.periodsInfo');
+				if(brother && brother.length !==0){
+					if($(brother).css('display') == 'block'){
+						$(brother).slideUp();
+						$(arr).removeClass('open');
+						$(this).css('border-bottom','none')
+					}else{
+						$(brother).slideDown();
+						$(arr).addClass('open');
+						$(this).css('border-bottom','1px solid #eaeaea')
+					}
+				}
+			});
+		}
     }
 
     let _model = new Model();
@@ -595,3 +672,408 @@
     let _ctl = new Controller(_model,_view);
     _ctl.init().regEvent();
 </script>
+<style>
+
+*{
+    padding:0;
+    margin: 0;
+    list-style:none;
+    text-decoration: none;
+    font-style: normal;
+}
+
+body{
+    background-color: #fff;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:active,a:link,a:hover{
+    text-decoration: none;
+}
+
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+
+.pay_wap{
+    width: 100%;
+	text-align: center;
+	margin-bottom: 0.48rem;
+}
+
+.pay_wap .container{
+    width: 100%;
+    padding:0;
+    background-color: #f5f2f2;
+}
+
+.pay_wap .header{
+    font-size: 0.17rem;
+    color: #000000;
+    text-align: center;
+    height: 0.44rem;
+    line-height: 0.44rem;
+    padding: 0 0.16rem;
+    background-color: #fff;
+}
+
+.pay_wap .header .goBack{
+    display: block;
+    width: 0.24rem;
+    height: 0.24rem;
+    float: left;
+    margin-top: 0.1rem;
+    background: url(https://p2.lefile.cn/product/adminweb/2019/04/19/e6b50220-f4b0-407d-940e-f7d41ce922c4.png) 0 0 no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.pay_wap .payTime{
+    width: 100%;
+    height: 0.4rem;
+    background: #FDD9D6;
+    padding: 0 0.16rem;
+    font-size: 0.12rem;
+    color: #F4364C;
+    letter-spacing: 0.14px;
+    line-height: 0.14rem;
+}
+
+.pay_wap .payTime p{
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin: 0;
+    font-size: 0.12rem;
+}
+ 
+.pay_wap .payTime p i{
+    width:0.2rem;
+    height: 0.2rem;
+    line-height: 0.2rem;
+    text-align: center;
+    display: inline-block;
+    background-color: #F4364C;
+    border-radius: 0.02rem;
+    color: #fff;
+    margin: 0 0.035rem;
+}
+
+.pay_wap .orderInfo{
+    width: 100%;
+    height: 0.78rem;
+    font-size: 0.14rem;
+    padding: 0 0.16rem;
+    padding-top: 0.19rem;
+    padding-bottom: 0.18rem;
+    margin-bottom: 0.08rem;
+    background-color: #fff;
+}
+
+.pay_wap .orderInfo div{
+    width: 100%;
+    height: 0.14rem;
+    line-height: 0.14rem;
+    text-align: left;
+    margin-bottom:0.11rem;
+}
+
+.pay_wap .orderInfo div:nth-child(2){
+    margin-bottom: 0;
+}
+
+.pay_wap .orderInfo .orderName{
+    font-size: 0.14rem;
+    color: #4A4A4A;
+    line-height: 0.14rem;
+}
+
+.pay_wap .orderInfo .orderAmount{
+    font-size: 0.16rem;
+    color: #F4364C;
+    text-align: right;
+    line-height: 0.16rem;
+}
+
+.pay_wap .payment{
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    margin-bottom: 0.09rem;
+}
+
+.pay_wap .payment.yinhangka{
+    padding-bottom: 0.5rem;
+}
+
+.pay_wap .payment .payName{
+    width: 100%;
+    height: 0.44rem;
+    line-height: 0.44rem;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 0.14rem;
+    color: #4A4A4A;
+    letter-spacing: -0.1px;
+    padding-left: 0.16rem;
+}
+
+.pay_wap .payment .payContent{
+    width: 100%;
+    padding-left: 0.16rem;
+}
+
+.pay_wap .payment#fenqi .payContent{
+    padding-left: 0;
+}
+
+.pay_wap .payment .wayList{
+    width: 100%;
+    margin: 0;
+}
+
+.pay_wap .payment .wayList li{
+    width: 100%;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    border-bottom: 1px solid #eaeaea;
+    text-align: left;
+    font-size: 0.16rem;
+    color: #000000;
+    letter-spacing: -0.11px;
+    padding-right: 0.16rem;
+}
+
+.pay_wap .payment .wayList li:last-child{
+	border-bottom: none;
+}
+
+.pay_wap #fenqi .wayList li.way{
+    height: auto;
+    padding-right: 0;
+    border-bottom: none;
+    padding-left: 0.16rem;
+}
+
+.pay_wap #fenqi .wayList li.way:last-child{
+    border-bottom:none;
+}
+
+.pay_wap #fenqi .wayList li.way{
+    border-top: 1px solid #eaeaea;
+}
+
+.pay_wap #fenqi .wayList li.way:first-child{
+    border-top:none;
+}
+
+.pay_wap #fenqi .wayList li.way .periodsInfo{
+    padding-left: 0.4rem;
+    display: none;
+}
+
+.pay_wap #fenqi .wayList li.way .periodsInfo.open{
+    display: block;
+}
+
+.pay_wap .payment .wayList .crad_icon{
+    width: 0.24rem;
+    height: 0.24rem;
+    float: left;
+    margin-top:0.2rem; 
+    margin-right: 0.16rem;
+}
+
+.pay_wap .payment .wayList .select_card{
+    width: 0.2rem;
+    height: 0.2rem;
+    margin-top: 0.22rem;
+    float: right;
+    border: 1px solid #eaeaea;
+    border-radius: 50%;
+}
+
+.pay_wap .payment .wayList .active .select_card{
+    background: url(https://p2.lefile.cn/product/adminweb/2019/04/19/5bfe93f8-d154-4232-ac67-579e63d88fb2.png) 0 0 no-repeat;
+    background-size: 100%;
+    background-position: center;
+    border: none;
+}
+
+.pay_wap .payment .cardInfo{
+    height: 0.64rem;
+    line-height: 0.64rem;
+    width: 100%;
+    height: 0.64rem;
+    padding-right: 0.16rem;
+}
+
+.pay_wap .payment .cardInfo .line{
+    width: 1px ;
+    height: 0.24rem;
+    display: inline-block;
+    background-image: linear-gradient(-180deg, #F0F1F1 0%, #9A9494 50%, #EBEBEB 100%);
+    margin-top: 0.2rem;
+    vertical-align: top;
+}
+
+.pay_wap .payment .cardInfo .qishu{
+    font-size: 0.14rem;
+    color: #4A4A4A;
+    letter-spacing: -0.1px;
+    text-align: right;
+}
+
+.pay_wap .payment .cardInfo .fenqi_card{
+    width: 0.2rem;
+    height: 0.2rem;
+    margin-top: 0.22rem;
+    margin-left: 0.04rem;
+    float: right;
+    border-radius: 50%;
+    background: url(https://p4.lefile.cn/product/adminweb/2019/04/19/9c5b34c0-ba10-4819-94e4-186369d84560.png) 0 0 no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.pay_wap .payment .cardInfo .fenqi_card.open{
+    background: url(https://p1.lefile.cn/product/adminweb/2019/04/19/1a7c828c-5898-4dfd-b2e9-5739561cf4d5.png) 0 0 no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.pay_wap #fenqi .wayList li.way li{
+    border-bottom: 1px solid #eaeaea;
+    padding-right: 0.16rem;
+}
+
+.pay_wap #fenqi .wayList li.way li:last-child{
+    border-bottom:none;
+}
+
+.pay_wap #fenqi .wayList li.way li span{
+    font-size: 0.14rem;
+    color: #000000;
+    letter-spacing: -0.1px;
+    line-height: 0.14rem;
+}
+
+.pay_wap #fenqi .wayList .way .num{
+    margin-right: 0.32rem;
+}
+
+.pay_wap #fenqi .wayList .way .rate{
+  float: right;
+  line-height: 0.64rem;
+}
+.pay_wap #fenqi .wayList .way .select_card{
+    float: right;
+    margin-left: 0.06rem;
+}
+
+
+.pay_wap .payNum{
+    width: 100%;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    background-color: #F4364C;
+    position: fixed;
+    bottom: 0;
+}
+
+.pay_wap .payNum a{
+    font-size: 0.14rem;
+    color: #FFFFFF !important;
+    letter-spacing: -0.1px;
+    text-align: center;
+    line-height: 0.48rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    float: left;
+}
+
+.pay_wap .mask{
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.pay_wap .leaveContent{
+    display: none;
+    width: 2.4rem;
+    height: 1.47rem;
+    background-color: #f6f6f6;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 0.1rem;
+    overflow: hidden;
+}
+
+.pay_wap .leaveContent .dialogMsg{
+    width: 100%;
+    height: 1.02rem;
+    border-bottom: 1px solid #eaeaea;
+    padding:0.2rem 0.24rem 0;
+}
+
+.pay_wap .leaveContent .dialogMsg .ask{
+    font-size: 0.17rem;
+    color: #000000;
+    letter-spacing: -0.41px;
+    text-align: center;
+    line-height: 0.17rem;
+}
+
+.pay_wap .leaveContent .dialogMsg .prompt{
+    font-size: 0.13rem;
+    color: #000000;
+    letter-spacing: -0.08px;
+    text-align: center;
+    line-height: 0.16rem;
+}
+
+.pay_wap .leaveContent .btnGroup{
+    width: 100%;
+    height: 0.43rem;
+}
+
+.pay_wap .leaveContent .btnGroup a{
+    width: 50%;
+    height: 100%;
+    line-height: 0.43rem;
+    float: left;
+    text-align: center;
+    color: #007AFF;
+    border-right: 1px solid #eaeaea;
+    cursor: pointer;
+}
+
+.pay_wap .leaveContent .btnGroup a:last-child(){
+    border-right: none;
+}
+
+.pay_wap .leaveContent .btnGroup a .yes{
+    font-weight:600;
+}
+
+.pay_wap .leaveContent .btnGroup a input{
+    width: 100%;
+    height: 100%;
+}
+
+</style>
+

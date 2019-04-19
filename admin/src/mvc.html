@@ -11,7 +11,11 @@
 <body>
 	<div class="pay_wap">
 		<div class="container">
-
+				<div tag='detail'></div>
+				<div tag='quick'></div>
+				<div tag='stages'></div>
+				<div tag='net'></div>
+				<div tag='price'></div>
 		</div>
 	</div>
 </body>
@@ -343,11 +347,11 @@
     }
 
     var SuperView = function(){
-        this.detailEl = $("<div tag='detail'></div>");
-        this.quickEl = $("<div tag='quick'></div>");
-        this.stagesEl = $("<div tag='stages'></div>");
-        this.netEl = $("<div tag='net'></div>");
-        this.priceEl = $("<div tag='price'></div>");
+        this.detailEl = $('div[tag="detail"]');
+        this.quickEl = $('div[tag="quick"]');
+        this.stagesEl = $('div[tag="stages"]');
+        this.netEl = $('div[tag="net"]');
+        this.priceEl = $('div[tag="price"]');
 
         //渲染详情
         this.renderDetail = function(data){}
@@ -361,7 +365,7 @@
         this.renderPrice = function(data){}
         //设置选中状态
         this.setActive = function(el){}
-		//视图的事件注册
+		//视图的dom事件注册
 		this.regEvent = function(){}
     }
 
@@ -505,7 +509,7 @@
 			var html = '<div class="orderInfo">'
 						+'<div class="clearfix">'
 						+'<span class="fl orderName">订单金额</span>'
-						+'<span class="fr orderAmount">'+data.totalFee.amount+'</span>'
+						+'<span class="fr orderAmount">¥'+data.totalFee.amount+'</span>'
 						+'</div>'
 						+'<div class="clearfix">'
 						+'<span class="fl orderName">订单编号</span>'
@@ -513,7 +517,6 @@
 						+'</div>'
 						+'</div>';
 			$(this.detailEl).html(html);
-			$("div.container").append($(this.detailEl));
         }
 
         this.renderQuickPay = function(data){
@@ -535,7 +538,6 @@
 						}
 						html += "</ul></div></div>";
             $(this.quickEl).html($(html));
-            $("div.container").append($(this.quickEl));
         }
 
         this.renderStagesPay = function(data){
@@ -572,7 +574,6 @@
             }
             html += "</li></ul></div></div>";
             $(this.stagesEl).html($(html));
-            $("div.container").append($(this.stagesEl));
         }
 
         this.renderPrice = function(data){
@@ -584,7 +585,6 @@
 				+'</a>'
 				+'</div>';
 			$(this.priceEl).html(html);
-            $("div.container").append($(this.priceEl));
         }
 
         this.renderAll = function(datas){
@@ -926,8 +926,8 @@ a:active,a:link,a:hover{
     height: 0.24rem;
     display: inline-block;
     background-image: linear-gradient(-180deg, #F0F1F1 0%, #9A9494 50%, #EBEBEB 100%);
-    margin-top: 0.2rem;
-    vertical-align: top;
+	vertical-align: top;
+	margin: 0.2rem 0.06rem 0;
 }
 
 .pay_wap .payment .cardInfo .qishu{

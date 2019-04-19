@@ -12,10 +12,27 @@
 	<div class="pay_wap">
 		<div class="container">
 				<div tag='detail'></div>
-				<div tag='quick'></div>
-				<div tag='stages'></div>
+				<div tag='quick'>
+                    <div class="payment fastPayment">
+						<div class="payName">快捷支付</div>
+                        <div class="payContent"></div>
+                    </div>
+                </div>
+				<div tag='stages'>
+                    <div class="payment fastPayment" id="fenqi">
+                        <div class="payName">分期支付</div>
+                        <div class="payContent">
+                            <ul class="wayList">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 				<div tag='net'></div>
-				<div tag='price'></div>
+				<div tag='price'>
+                    <div class="payNum">
+                        <a class="payLink"></a>
+                    </div>
+                </div>
 		</div>
 	</div>
 </body>
@@ -348,10 +365,10 @@
 
     var SuperView = function(){
         this.detailEl = $('div[tag="detail"]');
-        this.quickEl = $('div[tag="quick"]');
-        this.stagesEl = $('div[tag="stages"]');
+        this.quickEl = $('div[tag="quick"] .payContent');
+        this.stagesEl = $('div[tag="stages"] .wayList');
         this.netEl = $('div[tag="net"]');
-        this.priceEl = $('div[tag="price"]');
+        this.priceEl = $('div[tag="price"] .payLink');
 
         //渲染详情
         this.renderDetail = function(data){}
@@ -521,10 +538,7 @@
 
         this.renderQuickPay = function(data){
 			console.log(data)
-			var html = '<div class="payment fastPayment">'
-						+'<div class="payName">快捷支付</div>'
-						+'<div class="payContent">'
-						+'<ul class="wayList">';
+			var html = '<ul class="wayList">';
 						for(var i=0;i<data.length;i++){
 							if(data[i].selected == 1){
 								html += '<li class="way priceDetail active" key="' + data[i].__key+ '" tag="tcQuick">'	
@@ -536,16 +550,13 @@
 								+'<span class="select_card"></span>'
 								+"</li>";
 						}
-						html += "</ul></div></div>";
+						html += "</ul>";
             $(this.quickEl).html($(html));
         }
 
         this.renderStagesPay = function(data){
 			console.log(data);
-			var html = '<div class="payment fastPayment" id="fenqi">'
-					  +'<div class="payName">分期支付</div>'
-					  +'<div class="payContent">'
-					  +'<ul class="wayList">'
+			var html = '';
             for(var i=0;i<data.length;i++){
 				html+= '<li class="way">'
 						+'<div class="cardInfo">'
@@ -572,18 +583,14 @@
 					}
 				html += '</ul>';
             }
-            html += "</li></ul></div></div>";
+            html += "</li>";
             $(this.stagesEl).html($(html));
         }
 
         this.renderPrice = function(data){
-			var html = '<div class="payNum">'
-				+'<a class="payLink">'
-				+'<span class="selectWayName">'+data.__priceName+'</span>'
+			var html = '<span class="selectWayName">'+data.__priceName+'</span>'
 				+'<span>'+data.__price+'</span>'
 				+ map[data.__priceUnit]
-				+'</a>'
-				+'</div>';
 			$(this.priceEl).html(html);
         }
 

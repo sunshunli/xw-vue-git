@@ -6,6 +6,251 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
     <script src="http://js1cdn.clubstatic.lenovo.com.cn/thinkpc/js/jquery-1.8.3.min.js"></script>
+    <style>
+            * {
+              margin: 0;
+              padding: 0;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+            }
+            
+            
+            .container{
+                width:1200px;
+                margin:0 auto;
+                padding-bottom:70px;
+            }
+            
+            .container .inline{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .container .detailIcon img{
+                width:100px;
+            }
+            .container .detailCenter {
+                width:870px;
+                padding-left:20px;
+            }
+            .container .detailCenter .detailTip{
+                font-weight:800;
+                font-size:16px;
+                line-height:30px;
+            }
+            .container .detailText{
+                color:#aeaeae;
+                font-size:14px;
+                line-height:28px;
+            }
+            .container .detailRight{
+                width:200px;
+                vertical-align: bottom;
+                text-align:right;
+                
+            }
+            .container .detailRight p{
+                color:#aeaeae;
+                font-size:12px;
+                line-height:28px;
+                
+            }
+            .container .detailRight p .detailMount{
+                font-size:20px;
+                line-height:28px;
+                font-weight: 800;
+            }
+            .container .detailRight .showDetail{
+                color:#7ea8df;
+                line-height:20px;
+                font-size:12px;
+                cursor:pointer;
+            }
+            .container .detailDorn{
+                width:1080px;
+                border-top:1px solid #efefef;
+                margin-left: 120px;
+                display:none;
+                height:0px;
+            }
+            .red{
+                color:#f00;
+            }
+            .quickPay,.stagesPay,.netPay,.tbnetPay{
+                width:1200px;
+                background:#fff;
+                padding-top:20px;
+                padding-bottom:20px;
+                margin-top:10px;
+                position: relative;
+            }
+            .boxTitle{
+                border-left: 5px solid  #f00;
+                padding-left:20px;
+            }
+            .quickPay li,.stagesPay li,.netPay li,.tbnetPay li {
+                display: inline-block;
+                border : 1px solid #efefef;
+                margin-left:20px;
+                margin-top:20px;
+            }
+            .quickPay li img ,.stagesPay li img,.netPay li img,.tbnetPay li img{
+                width:178px;
+            }
+            .active{
+                border:1px solid #f00!important;
+                box-sizing:border-box!important;
+            }
+            .container{
+                background:#efefef;
+            }
+            
+                .stagesPay .box{
+                    margin-top:10px;
+                }
+             .stagesPay .title{
+                padding:15px;
+                display: inline-block;
+            }
+            .stagesPay .current{
+                border:1px solid #efefef;
+                border-bottom:1px solid #fff;
+                position:relative;
+                z-index: 99;
+                
+            }
+            .stagesPay .title img{
+                cursor: pointer;
+            
+                margin-left:10px;
+                border:1px solid #efefef;
+            }
+            .stagesPay .current img{
+                border:0px solid #fff;
+            } 
+            .stagesPay .content{
+                border-top:1px solid #efefef;
+                /* height:0px;
+                overflow: hidden; */
+                display:none;
+                position:relative;
+                margin-top:-1px;
+                z-index: 0;
+            
+            }
+            .stagesPay .content li {
+                padding-left:50px;
+                padding-right:50px;
+                padding-top:20px;
+                padding-bottom:20px;
+                text-align: center;
+                color:#f00;
+                cursor:pointer;
+            
+            }
+            .stagesPay .content li p {
+                width:250px;
+                overflow: hidden;
+                color:#aeaeae;
+                height:42px;
+            }
+            .stagesPay .content li .tmpLi{
+                width:250px;
+            
+            }
+            .stagesPay .content li .cli{
+                display:inline-block;
+                padding:5px 15px 5px 15px;
+                margin-top:10px;
+                border:1px solid #f00;
+                font-size:12px;
+                line-height:24px;
+                
+            
+            }
+            .netHideBtn,.netShowBtn,.tbnetHideBtn,.tbnetShowBtn{
+                width:180px!important;
+                vertical-align: top;
+                text-align:center;
+                line-height:64px;
+                cursor:pointer!important;
+
+            }
+            .netHide,.tbnetHide{
+                display:none!important;
+            }
+         
+            ul li {
+                list-style: none;
+            }
+            .bottomPrice{
+                position:fixed;
+                bottom:0;
+                background:#fff;
+                width:1200px;
+                text-align:right;
+            }
+            .bottomPrice .helpText{
+                width:200px;
+                text-align:left;
+
+            }
+            .bottomPrice .helpText a{
+                text-decoration: none;
+                color:#85aad9;
+                line-height:30px;
+                font-size:14px;
+
+            }
+            .bottomPrice .helpText img{
+                width:14px;
+                
+                vertical-align: middle;                
+            }
+            .bottomPrice div{
+                /* float: right; */
+                display: inline-block;
+                /* vertical-align: bottom; */
+            
+            }
+            .bottomPrice div.submit{
+                line-height:50px;
+                width:214px;
+                text-align:center;
+                font-size:20px;
+                background:#f00;
+                color:#fff;
+            }
+            .bottomPrice div.submit:hover{
+                background:#f33;
+                cursor:pointer;
+            }
+            .bottomPrice .priceText{
+                height:50px;
+                padding-right:20px;
+                font-size:14px;
+                color:#aeaeae;
+                width:786px;
+            }
+            .bottomPrice .priceText .price{
+                color:#f00;
+                font-weight:800;
+                font-size:20px;
+            }
+            .bottomPrice .priceText .price .c{
+                font-size:14px;
+            }
+            .bottomPrice:after{
+            content:"";
+            display:block;
+            visibility:hidden;
+            clear:both;
+            height:0;
+            }
+            .bottomPrice{ /* 为了照顾ie6浏览器*/
+                zoom:1;
+            }
+     </style>
 </head>
 <body>
 		<div class="container">
@@ -349,7 +594,7 @@
         this.stagesEl = $("<div tag='stages'></div>");
         this.netEl = $("<div tag='net'></div>");
         this.priceEl = $("<div tag='price'></div>");
-
+        this.tbnetEl = $("<div tag='tbnet'></div>");
         //渲染详情
         this.renderDetail = function(data){}
         //渲染快捷支付
@@ -465,14 +710,14 @@
             this.quickPayData = this.dealData(data.suppprtPayType.platPayChannelList,"tcQuick");
             this.stagesPayData = this.dealData(data.suppprtPayType.installmentChannelList,"tcStages");
             this.netPayData = this.dealData(data.suppprtPayType.netBankList,"tcNet");
-            this.tbnetPayData = this.dealData(data.suppprtPayType.netBankList,"tbnetPay");
-            this.tbCNunionPayData = this.dealData(data.suppprtPayType.netBankList,"bCNunionPay");
+            this.tbnetPayData = this.dealData(data.suppprtPayType.b2bNetBankList,"tbnetPay");
+            this.tbCNunionPayData = this.dealData(data.suppprtPayType.b2bPlatPayChannelList,"bCNunionPay");
         }
     }
 
    
     var PCView = function(){
- 
+        
         SuperView.apply(this,[]);
         // 画详细信息头
         this.renderDetail = function(data){
@@ -614,14 +859,14 @@
 				html += "</div>"
 				html += "<ul>";
 					for(var i=0;i<data.length;i++){
-						if(i == 12){
+						if(i == 11){
 							html += "<li class = 'netShow netShowBtn'>查看更多</li>"
 							html += "<li class = 'netHide' key='"+data[i].__key+"' tag='tcNet'>";
 								html += "<img src = '"+data[i].icon+"'/>";
 							html += "</li>"
 							continue;
 						}
-						if(i<=11){
+						if(i<11){
 							html += "<li class = 'netShow'  key='"+data[i].__key+"' tag='tcNet'>";
 								html += "<img src = '"+data[i].icon+"'/>";
 							html += "</li>"
@@ -653,7 +898,7 @@
 				
 			});
 			$(".netHideBtn").on("click",function(){
-				$(".netShow:gt(11)").addClass("netHide").removeClass("netShow");
+				$(".netShow:gt(10)").addClass("netHide").removeClass("netShow");
 				$(".netHideBtn").addClass("netHide");
 				$(".netHideBtn").removeClass("netShow");
 				$(".netShowBtn").addClass("netShow");
@@ -661,21 +906,24 @@
 			});
 
 		}
-		this.renderTbnetPayData = function(data){
+        // 企业网银
+        this.renderTbnetPayData = function(data){
+           
 			var html = "<div class = 'tbnetPay'>";
 					html += "<div class = 'boxTitle' >"
 						html+= "企业网银"
 					html += "</div>"
-					html += "<ul>";
+                    html += "<ul>";
+                        
 						for(var i=0;i<data.length;i++){
-							if(i == 12){
-								html += "<div class = 'tbnetShow tbnetShowBtn'>查看更多</div>"
+							if(i == 11){
+								html += "<li class = 'tbnetShow tbnetShowBtn'>查看更多</li>"
 								html += "<li class = 'tbnetHide' key='"+data[i].__key+"' tag='tbnetPay'>";
 									html += "<img src = '"+data[i].icon+"'/>";
 								html += "</li>"
 								continue;
 							}
-							if(i<=11){
+							if(i<=10){
 								html += "<li class = 'tbnetShow'  key='"+data[i].__key+"' tag='tbnetPay'>";
 									html += "<img src = '"+data[i].icon+"'/>";
 								html += "</li>"
@@ -689,7 +937,7 @@
 						}
 
 						if(data.length>11){
-							html += "<div class = 'tbnetHide tbnetHideBtn'>收起更多</div>"
+							html += "<li class = 'tbnetHide tbnetHideBtn'>收起更多</li>"
 						}
 						
 						
@@ -706,7 +954,7 @@
 				
 			});
 			$(".tbnetHideBtn").on("click",function(){
-				$(".tbnetShow:gt(11)").addClass("tbnetHide").removeClass("tbnetShow");
+				$(".tbnetShow:gt(10)").addClass("tbnetHide").removeClass("tbnetShow");
 				$(".tbnetHideBtn").addClass("tbnetHide");
 				$(".tbnetHideBtn").removeClass("tbnetShow");
 				$(".tbnetShowBtn").addClass("tbnetShow");
@@ -714,6 +962,7 @@
 			});
 
 		}
+        // 银联
         this.renderTbCNunion = function(data){
 			var html = "";
 		
@@ -730,9 +979,13 @@
 				// $("div.container").append($(this.tbnetEl));
 
 		}
-		this.renderPrice = function(data){
+        // 底部-价格
+        this.renderPrice = function(data){
 			var html = "";
-			html+="<div class = 'bottomPrice'>"
+            html+="<div class = 'bottomPrice'>"
+                html += "<div class = 'helpText'>"
+                    html += "<a href = '#'>支付常见问题<span><img src = 'https://p3.lefile.cn/product/adminweb/2019/04/19/31e09789-9cbe-44a5-83bb-faea5e4345ed.png'/></span></a>"
+                html += "</div>"
 				html += "<div class = 'priceText'>"
 					html += data.__priceName + "支付:" + "<span class = 'price'> "+data.__price + " <span class = 'c'>"+map[data.__priceUnit]+"</span></span>";
 				html += "</div>"
@@ -742,6 +995,18 @@
             $(this.priceEl).html($(html));
 
             $("div.container").append($(this.priceEl));
+            $(".submit").on("click",function(){
+                console.log(_ctl.model.selectItem)
+                if(_ctl.model.selectItem.__priceName == "微信"){
+                    alert("微信支付应当弹窗")
+                }else if(_ctl.model.selectItem.__priceName == "支付宝" || _ctl.model.selectItem.__priceName == "银联支付"){
+                    alert("支付宝或者银联支付code"+ _ctl.model.selectItem.code);
+                }else if(_ctl.model.selectItem.__priceName == "分期"){
+                    alert("分期支付逻辑")
+                }else{
+                    alert("银行卡code" + _ctl.model.selectItem.bankCode);
+                }
+            })
         }
 		
         this.renderAll = function(datas){
@@ -762,6 +1027,7 @@
             var that = this;
             $("div.container").on("click","li",function(){
                 var tag = $(this).attr("tag");
+                if(tag == undefined)return ;
                 var selectItem = null;
                 if(tag == "tcQuick"){
                     selectItem = model.findEntityByKey($(this).attr("key"),model.quickPayData);
@@ -782,6 +1048,7 @@
                 //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
                 that.renderPrice(model.selectItem);
             })
+            
         }
 
         
@@ -812,7 +1079,6 @@
                 tbCNunionPayData:this.model.tbCNunionPayData,
                 priceData:this.model.selectItem
             }
-
             this.view.renderAll(datas);
             return this;
         }
@@ -827,227 +1093,5 @@
     let _ctl = new Controller(_model,_view);
     _ctl.init().regEvent();
 </script>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
-
-.container{
-	width:1200px;
-	margin:0 auto;
-	padding-bottom:70px;
-}
-
-.container .inline{
-	display: inline-block;
-	vertical-align: middle;
-}
-.container .detailIcon img{
-	width:100px;
-}
-.container .detailCenter {
-	width:870px;
-	padding-left:20px;
-}
-.container .detailCenter .detailTip{
-	font-weight:800;
-	font-size:16px;
-	line-height:30px;
-}
-.container .detailText{
-	color:#aeaeae;
-	font-size:14px;
-	line-height:28px;
-}
-.container .detailRight{
-	width:200px;
-	vertical-align: bottom;
-	text-align:right;
-	
-}
-.container .detailRight p{
-	color:#aeaeae;
-	font-size:12px;
-	line-height:28px;
-	
-}
-.container .detailRight p .detailMount{
-	font-size:20px;
-	line-height:28px;
-	font-weight: 800;
-}
-.container .detailRight .showDetail{
-	color:#7ea8df;
-	line-height:20px;
-	font-size:12px;
-	cursor:pointer;
-}
-.container .detailDorn{
-	width:1080px;
-	border-top:1px solid #efefef;
-	margin-left: 120px;
-	display:none;
-	height:0px;
-}
-.red{
-	color:#f00;
-}
-.quickPay,.stagesPay,.netPay,.tbnetPay{
-	width:1200px;
-	background:#fff;
-	padding-top:20px;
-	padding-bottom:20px;
-	margin-top:10px;
-	position: relative;
-}
-.boxTitle{
-	border-left: 5px solid  #f00;
-	padding-left:20px;
-}
-.quickPay li,.stagesPay li,.netPay li,.tbnetPay li {
-	display: inline-block;
-	border : 1px solid #efefef;
-	margin-left:20px;
-	margin-top:20px;
-}
-.active{
-	border:1px solid #f00!important;
-	box-sizing:border-box!important;
-}
-.container{
-	background:#efefef;
-}
-
-	.stagesPay .box{
-		margin-top:10px;
-	}
- .stagesPay .title{
-	padding:15px;
-	display: inline-block;
-}
-.stagesPay .current{
-	border:1px solid #efefef;
-	border-bottom:1px solid #fff;
-	position:relative;
-	z-index: 99;
-	
-}
-.stagesPay .title img{
-	cursor: pointer;
-
-	margin-left:10px;
-	border:1px solid #efefef;
-}
-.stagesPay .current img{
-	border:0px solid #fff;
-} 
-.stagesPay .content{
-	border-top:1px solid #efefef;
-	/* height:0px;
-	overflow: hidden; */
-	display:none;
-	position:relative;
-	margin-top:-1px;
-	z-index: 0;
-
-}
-.stagesPay .content li {
-	padding-left:50px;
-	padding-right:50px;
-	padding-top:20px;
-	padding-bottom:20px;
-	text-align: center;
-	color:#f00;
-	cursor:pointer;
-
-}
-.stagesPay .content li p {
-	width:250px;
-	overflow: hidden;
-	color:#aeaeae;
-	height:42px;
-}
-.stagesPay .content li .tmpLi{
-	width:250px;
-
-}
-.stagesPay .content li .cli{
-	display:inline-block;
-	padding:5px 15px 5px 15px;
-	margin-top:10px;
-	border:1px solid #f00;
-	font-size:12px;
-	line-height:24px;
-	
-
-}
-.netHideBtn,.netShowBtn{
-	width:190px!important;
-	vertical-align: top;
-	text-align:center;
-	line-height:67px;
-}
-.netHide{
-	display:none!important;
-}
-ul li {
-	list-style: none;
-}
-.bottomPrice{
-	position:fixed;
-	bottom:0;
-	background:#fff;
-	width:1200px;
-	text-align:right;
-
-
-}
-.bottomPrice div{
-	/* float: right; */
-	display: inline-block;
-	/* vertical-align: bottom; */
-
-}
-.bottomPrice div.submit{
-	line-height:50px;
-	width:214px;
-	text-align:center;
-	font-size:20px;
-	background:#f00;
-	color:#fff;
-}
-.bottomPrice div.submit:hover{
-    background:#f33;
-    cursor:pointer;
-}
-.bottomPrice .priceText{
-	height:50px;
-	padding-right:20px;
-	font-size:14px;
-	color:#aeaeae;
-}
-.bottomPrice .priceText .price{
-	color:#f00;
-	font-weight:800;
-	font-size:20px;
-}
-.bottomPrice .priceText .price .c{
-	font-size:14px;
-}
-.bottomPrice:after{
-content:"";
-display:block;
-visibility:hidden;
-clear:both;
-height:0;
-}
-.bottomPrice{ /* 为了照顾ie6浏览器*/
-	zoom:1;
-}
-</style>
 

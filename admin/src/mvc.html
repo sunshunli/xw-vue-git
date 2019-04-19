@@ -17,10 +17,7 @@
 </body>
 </html>
 <script>
-	 //计算字体大小的
-	 var offWidth = window.screen.width / 375 *100;  
-    console.log('字体大小为：：' + offWidth)
-    document.getElementsByTagName("html")[0].style.fontSize = offWidth + 'px';
+	
     var testData = {
 	"result": {
 		"lenovo_pay_cashier_response": {
@@ -362,8 +359,10 @@
         this.renderNetPay = function(data){}
         //渲染价格
         this.renderPrice = function(data){}
-        //渲染价格
+        //设置选中状态
         this.setActive = function(el){}
+		//视图的事件注册
+		this.regEvent = function(){}
     }
 
     var Model = function(){
@@ -593,7 +592,52 @@
             this.renderQuickPay(datas.quickPayData);
             this.renderStagesPay(datas.stagesPayData);
             this.renderPrice(datas.priceData);
+
+			var offWidth = window.screen.width / 375 *100;  
+			console.log('字体大小为：：' + offWidth)
+			document.getElementsByTagName("html")[0].style.fontSize = offWidth + 'px';
         }
+
+		this.regEvent = function(model){
+			var that = this;
+			$("div.container").on("click","li.priceDetail",function(){
+                var tag = $(this).attr("tag");
+                var selectItem = null;
+                if(tag == "tcQuick"){
+                    selectItem = model.findEntityByKey($(this).attr("key"),model.quickPayData);
+                }else if(tag == "tcStages"){
+                    selectItem = model.findEntityByKey($(this).attr("key"),model.stagesPayData,"tcStages");
+                }else if(tag == "tcNet"){
+                    selectItem = model.findEntityByKey($(this).attr("key"),model.netPayData);
+                }else if(tag == "tbnetPay"){
+                    selectItem = model.findEntityByKey($(this).attr("key"),model.tbnetPayData);
+                }else if(tag == "bCNunionPay"){
+                    selectItem = model.findEntityByKey($(this).attr("key"),model.tbCNunionPayData);
+                }
+                //改变selectItem
+                model.setSelectItem(selectItem);
+                //改变样式
+                that.setActive($(this));
+                //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
+                that.renderPrice(model.selectItem);
+            })
+	   
+			$("div.container").on('click','.cardInfo',function(){
+				var arr = $(this).children('.fenqi_card');
+				var brother = $(this).next('.periodsInfo');
+				if(brother && brother.length !==0){
+					if($(brother).css('display') == 'block'){
+						$(brother).slideUp();
+						$(arr).removeClass('open');
+						$(this).css('border-bottom','none')
+					}else{
+						$(brother).slideDown();
+						$(arr).addClass('open');
+						$(this).css('border-bottom','1px solid #eaeaea')
+					}
+				}
+			});
+		}
 
         this.setActive = function(el){
             $("div.container li").removeClass("active");
@@ -625,45 +669,7 @@
         }
 
         this.regEvent = function(){
-            var that = this;
-            $("div.container").on("click","li.priceDetail",function(){
-                var tag = $(this).attr("tag");
-                var selectItem = null;
-                if(tag == "tcQuick"){
-                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.quickPayData);
-                }else if(tag == "tcStages"){
-                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.stagesPayData,"tcStages");
-                }else if(tag == "tcNet"){
-                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.netPayData);
-                }else if(tag == "tbnetPay"){
-                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.tbnetPayData);
-                }else if(tag == "bCNunionPay"){
-                    selectItem = that.model.findEntityByKey($(this).attr("key"),that.model.tbCNunionPayData);
-                }
-                //改变selectItem
-                that.model.setSelectItem(selectItem);
-                //改变样式
-                that.view.setActive($(this));
-
-                //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
-                that.view.renderPrice(that.model.selectItem);
-            })
-	   
-			$("div.container").on('click','.cardInfo',function(){
-				var arr = $(this).children('.fenqi_card');
-				var brother = $(this).next('.periodsInfo');
-				if(brother && brother.length !==0){
-					if($(brother).css('display') == 'block'){
-						$(brother).slideUp();
-						$(arr).removeClass('open');
-						$(this).css('border-bottom','none')
-					}else{
-						$(brother).slideDown();
-						$(arr).addClass('open');
-						$(this).css('border-bottom','1px solid #eaeaea')
-					}
-				}
-			});
+            this.view.regEvent(this.model);
 		}
     }
 

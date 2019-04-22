@@ -21,17 +21,8 @@
                 margin:0 auto;
                 padding-bottom:70px;
             }
-            .tips{
-                position: absolute;
-                bottom:0px;
-                z-index:9999;
-                background:#fff;
-                width:100%;
-                height:auto;
-            }
-            .tips p {
-                height:auto;
-            }
+        
+            
             .container .inline{
                 display: inline-block;
                 vertical-align: middle;
@@ -109,18 +100,23 @@
                 margin-left:20px;
                 margin-top:20px;
 				position: relative;
+    			/* overflow: visible; */
+				cursor:pointer;
 				
             }
 			.netPay li .tips {
 				position: absolute;
-				top: 51px;
 				left: 0px;
+				margin-top:2px;
 				width: 100%;
 				background: #447799;
 				color: #ffffff;
 				border-radius: 4px;
-				height:auto;
+				height: auto;
 				z-index: 10;
+				opacity: 0;
+				display: none;
+
 			}
             .quickPay li img ,.stagesPay li img,.netPay li img,.tbnetPay li img{
                 width:178px;
@@ -754,7 +750,6 @@
 
         this.init = function(data){
             this.detailData = data.payPortalOrder;
-			
             this.quickPayData = this.dealData(data.suppprtPayType.platPayChannelList,"tcQuick");
             this.stagesPayData = this.dealData(data.suppprtPayType.installmentChannelList,"tcStages");
             this.netPayData = this.dealData(data.suppprtPayType.netBankList,"tcNet");
@@ -933,13 +928,13 @@
 								html += "<img src = '"+data[i].icon+"'/>";
 								if(data[i].tip){
 									html += "<div class = 'tips'>"
-										html += data[i].tips
+										html += data[i].tip
 									html += "<div>"
 								}
 								
 							html += "</li>"
 						}
-
+						
 						
 					}
 					if(data.length>11){
@@ -952,13 +947,35 @@
 				html += "</ul>";
 			html += "</div>"
 			$(this.netEl).html($(html));
+			
 			// 展开收起
             $("div.container").append($(this.netEl));
 			$(".netShowBtn").on("click",function(){
+				// 注销所有enter
+				$(".netShow").off("mouseenter")
+				$(".netShow").off("mouseleave");
 				$(".netHide").addClass("netShow");
 				$(".netHide").removeClass("netHide");
 				$(".netShowBtn").addClass("netHide");
 				$(".netShowBtn").removeClass("netShow");
+				// 重新定义enter
+				$(".netShow").on("mouseenter",function(){
+					$(this).find(".tips").css({
+						display:"block"
+					}).animate({
+						opacity:"1"
+					});
+
+				})
+				$(".netShow").on("mouseleave",function(){
+					$(this).find(".tips").animate({
+							opacity:"0"
+						},300,function(){
+							$(this).css({
+								display:"none"
+							})
+						});
+				})
 				
 			});
 			$(".netHideBtn").on("click",function(){
@@ -968,6 +985,22 @@
 				$(".netShowBtn").addClass("netShow");
 				$(".netShowBtn").removeClass("netHide");
 			});
+			$(".netShow").on("mouseenter",function(){
+				$(this).find(".tips").css({
+						display:"block"
+					}).animate({
+						opacity:"1"
+					},300);
+			})
+			$(".netShow").on("mouseleave",function(){
+				$(this).find(".tips").animate({
+						opacity:"0"
+					},300,function(){
+						$(this).css({
+							display:"none"
+						})
+					});
+			})
 
 		}
         // 企业网银

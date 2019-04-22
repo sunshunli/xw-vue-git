@@ -21,7 +21,17 @@
                 margin:0 auto;
                 padding-bottom:70px;
             }
-            
+            .tips{
+                position: absolute;
+                bottom:0px;
+                z-index:9999;
+                background:#fff;
+                width:100%;
+                height:auto;
+            }
+            .tips p {
+                height:auto;
+            }
             .container .inline{
                 display: inline-block;
                 vertical-align: middle;
@@ -71,6 +81,7 @@
                 border-top:1px solid #efefef;
                 margin-left: 120px;
                 display:none;
+                padding-top:10px;
                 height:0px;
             }
             .red{
@@ -88,14 +99,32 @@
                 border-left: 5px solid  #f00;
                 padding-left:20px;
             }
+            .boxTitle span{
+                margin-left:10px;
+                font-size:12px;
+            }
             .quickPay li,.stagesPay li,.netPay li,.tbnetPay li {
                 display: inline-block;
                 border : 1px solid #efefef;
                 margin-left:20px;
                 margin-top:20px;
+				position: relative;
+				
             }
+			.netPay li .tips {
+				position: absolute;
+				top: 51px;
+				left: 0px;
+				width: 100%;
+				background: #447799;
+				color: #ffffff;
+				border-radius: 4px;
+				height:auto;
+				z-index: 10;
+			}
             .quickPay li img ,.stagesPay li img,.netPay li img,.tbnetPay li img{
                 width:178px;
+				height: 56px;
             }
             .active{
                 border:1px solid #f00!important;
@@ -182,6 +211,7 @@
          
             ul li {
                 list-style: none;
+                position:relative;
             }
             .bottomPrice{
                 position:fixed;
@@ -250,10 +280,26 @@
             .bottomPrice{ /* 为了照顾ie6浏览器*/
                 zoom:1;
             }
+			/* 遮罩层样式 */
+			.container .cover{
+				position:fixed;
+				left:0;
+				top:0;
+				width:100%;
+				height:100%;
+				background:rgba(0,0,0,0.5);
+				z-index:100;
+				display:none;
+			}
+			/* 显示时候禁用滚动条 */
+			body.coverShow {
+				overflow: hidden;
+			}
      </style>
 </head>
 <body>
-		<div class="container">
+		<div class="container ">
+			<div class = "cover"></div>
 
 		</div>
 </body>
@@ -578,7 +624,7 @@
     var map = {
         "tcQuick":"个人快捷支付",
         "tcStages":"分期",
-        "tcNet":"银行卡",
+        "tcNet":"银行借记卡及信用卡",
         "tbnetPay":"企业网银",
         "bCNunionPay":"企业网银",
         "CNY":"元"
@@ -657,6 +703,7 @@
         }
 
         this.dealData = function(data,tag){
+			console.log(data);
             if(tag == "tcQuick"){
                 for(var i=0;i<data.length;i++){
                     data[i].__key = Math.ceil(Math.random()*1000000000000000000);
@@ -707,6 +754,7 @@
 
         this.init = function(data){
             this.detailData = data.payPortalOrder;
+			
             this.quickPayData = this.dealData(data.suppprtPayType.platPayChannelList,"tcQuick");
             this.stagesPayData = this.dealData(data.suppprtPayType.installmentChannelList,"tcStages");
             this.netPayData = this.dealData(data.suppprtPayType.netBankList,"tcNet");
@@ -764,7 +812,7 @@
 						display:"block",
 					})
 					$(".detailDorn").animate({
-						height:"114px"
+						height:"124px"
 					},300);
 					
 				}else{
@@ -796,6 +844,7 @@
 					for(var i=0;i<data.length;i++){
 						html += "<li key='"+data[i].__key+"' tag='tcQuick'>";
 							html += "<img src = '"+data[i].icon+"'/>";
+							
 						html += "</li>"
 					}
 				html += "</ul>";
@@ -833,9 +882,14 @@
 														html += "<div class = 'cli'>选择该分期</div>";
 													html += "</li>";
 											}
-										html += "</ul>"										
+										html += "</ul>"		
+										html += "<div style = 'width:1100px;margin:0 auto'>"
+											html += data[i].tips
+										html += "</div>"								
 									html += "</div>"
 								}
+								// debugger;
+								// conosle.log(data);
 							html += "</div>"
 							
 						html += "</div>"
@@ -861,18 +915,28 @@
 					for(var i=0;i<data.length;i++){
 						if(i == 11){
 							html += "<li class = 'netShow netShowBtn'>查看更多</li>"
-							html += "<li class = 'netHide' key='"+data[i].__key+"' tag='tcNet'>";
-								html += "<img src = '"+data[i].icon+"'/>";
-							html += "</li>"
+							
 							continue;
 						}
 						if(i<11){
+							console.log(data[i]);
 							html += "<li class = 'netShow'  key='"+data[i].__key+"' tag='tcNet'>";
 								html += "<img src = '"+data[i].icon+"'/>";
+								if(data[i].tip){
+									html += "<div class = 'tips'>"
+										html += data[i].tip
+									html += "<div>"
+								}
 							html += "</li>"
 						}else{
 							html += "<li class = 'netHide' key='"+data[i].__key+"' tag='tcNet'>";
 								html += "<img src = '"+data[i].icon+"'/>";
+								if(data[i].tip){
+									html += "<div class = 'tips'>"
+										html += data[i].tips
+									html += "<div>"
+								}
+								
 							html += "</li>"
 						}
 
@@ -911,7 +975,8 @@
            
 			var html = "<div class = 'tbnetPay'>";
 					html += "<div class = 'boxTitle' >"
-						html+= "企业网银"
+                        html+= "企业网银支付"
+                        html += "<span class = 'red'>建议使用IE8以上浏览器</span>"
 					html += "</div>"
                     html += "<ul>";
                         
@@ -919,17 +984,21 @@
 							if(i == 11){
 								html += "<li class = 'tbnetShow tbnetShowBtn'>查看更多</li>"
 								html += "<li class = 'tbnetHide' key='"+data[i].__key+"' tag='tbnetPay'>";
-									html += "<img src = '"+data[i].icon+"'/>";
+                                    html += "<img src = '"+data[i].icon+"'/>";
+                                    html += "<div class = 'tips'>"+data[i].tip+"</div>"
 								html += "</li>"
 								continue;
 							}
 							if(i<=10){
 								html += "<li class = 'tbnetShow'  key='"+data[i].__key+"' tag='tbnetPay'>";
-									html += "<img src = '"+data[i].icon+"'/>";
+                                    html += "<img src = '"+data[i].icon+"'/>";
+                                    
+                                    html += "<div class = 'tips'>"+data[i].tip.toString()+"</div>"
 								html += "</li>"
 							}else{
 								html += "<li class = 'tbnetHide' key='"+data[i].__key+"' tag='tbnetPay'>";
-									html += "<img src = '"+data[i].icon+"'/>";
+                                    html += "<img src = '"+data[i].icon+"'/>";
+                                    html += "<div class = 'tips'>"+data[i].tip+"</div>"
 								html += "</li>"
 							}
 
@@ -942,7 +1011,8 @@
 						
 						
 						html += "</ul>";
-				html += "</div>"
+                html += "</div>"
+                
 			$(this.tbnetEl).html($(html));
 			// 展开收起
             $("div.container").append($(this.tbnetEl));
@@ -997,7 +1067,7 @@
             $("div.container").append($(this.priceEl));
             $(".submit").on("click",function(){
                 console.log(_ctl.model.selectItem)
-                if(_ctl.model.selectItem.__priceName == "微信"){
+                if(_ctl.model.selectItem.__priceName == "微信支付"){
                     alert("微信支付应当弹窗")
                 }else if(_ctl.model.selectItem.__priceName == "支付宝" || _ctl.model.selectItem.__priceName == "银联支付"){
                     alert("支付宝或者银联支付code"+ _ctl.model.selectItem.code);
@@ -1027,10 +1097,12 @@
             var that = this;
             $("div.container").on("click","li",function(){
                 var tag = $(this).attr("tag");
+				
                 if(tag == undefined)return ;
                 var selectItem = null;
                 if(tag == "tcQuick"){
                     selectItem = model.findEntityByKey($(this).attr("key"),model.quickPayData);
+					
                 }else if(tag == "tcStages"){
                     selectItem = model.findEntityByKey($(this).attr("key"),model.stagesPayData,"tcStages");
                 }else if(tag == "tcNet"){
@@ -1044,9 +1116,12 @@
                 model.setSelectItem(selectItem);
                 //改变样式
                 that.setActive($(this));
-
+				
                 //根据selectItem需要渲染price，that.model.selectItem里面存有name和price
                 that.renderPrice(model.selectItem);
+				if(selectItem.__priceName == "微信支付"){
+						alert("微信支付弹窗");
+				}
             })
             
         }
@@ -1068,6 +1143,7 @@
         this.init = function(){
             //ajax callback
             var data = testData.result;
+			
             this.model.init(data.lenovo_pay_cashier_response.t);
 
             var datas = {

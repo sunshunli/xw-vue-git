@@ -6,7 +6,7 @@
         <le-form ref="form1">
             form
             
-            <v-input ref="i1" type="text" msg="正整数11" vType='number' on></v-input>
+            <v-input type="text" msg="正整数11" vType='number' on></v-input>
 
             继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
 

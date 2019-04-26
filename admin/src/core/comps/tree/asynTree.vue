@@ -54,7 +54,7 @@ let _tool = {
                 }
             }
             let children = arr[i].__children;
-            if(children instanceof Array && children && children.length >0){
+            if(children && children instanceof Array && children.length >0){
                 _tool.setSingleColor(children,node);
             }
         }

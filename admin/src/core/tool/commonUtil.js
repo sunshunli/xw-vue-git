@@ -181,6 +181,8 @@ let CommonUtil = {
             let cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
             if(expires instanceof Date){
                 cookieText += "; expires=" + expires.toGMTString();
+            }else{
+                cookieText += "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
             }
             document.cookie = cookieText+";path=/;domain="+document.domain;
         },

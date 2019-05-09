@@ -10,7 +10,6 @@
             :itemClick="itemClick"
             checkbox
         ></le-asyn-tree>
-        
     </div>
 </template>
 
@@ -23,10 +22,10 @@ export default {
             data:[],
             asynOptions:{
                 getUrl:d=>{
-                    return "xxx"
+                    return "/goods/index/queryList/115?parentUnit="+d.unitCode
                 },
                 analysis:d=>{
-                    return d;
+                    return d.data.data;
                 }
             }
         }
@@ -45,27 +44,17 @@ export default {
         },
         getNodes(){
             let res = this.$refs["tree"].b();
-            debugger
+        },
+        getTreeData(id){
+            this.ajax.getFetch("/goods/index/queryList/115?parentUnit="+id).then(d=>{
+                this.$refs["tree"].init(d.data.data);
+            }).catch(e=>{
+                debugger
+            })
         }
     },
     mounted(){
-        window.setTimeout(d=>{
-            let data = [
-                {name:"A",id:1},
-                {name:"B",id:1},
-                {name:"C",id:1},
-                {name:"D",id:1}
-            ];
-            this.$refs["tree"].init(data);
-
-            // this.alert.showAlert("success","success!!!!");
-
-            // this.alert.showConfirm("提示",d=>{
-
-            // })
-
-            // this.alert.showNotify("success","更新成功！！！");
-        },1000)
+       this.getTreeData(0);
     }
 }
 </script>

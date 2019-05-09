@@ -48,7 +48,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+Math.ceil(Math.random()*10000000);
+                url = url + symbol + "ran="+_idSeed.newId();
                 let defer = Q.defer();
                 let headers = {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -60,10 +60,9 @@ export default {
                 };
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
-                    let message = data.msg;
-
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    let message = data.message;
+                    if(code == "0"){
+                        defer.resolve({data:data.result,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -78,7 +77,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+Math.ceil(Math.random()*10000000);
+                url = url + symbol + "ran="+_idSeed.newId();
                 let defer = Q.defer();
                 let headers = {
                     // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -95,10 +94,10 @@ export default {
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
                     let code = data.status;
-                    let message = data.msg;
+                    let message = data.message;
 
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    if(code == "0" || code == "200"){
+                        defer.resolve({data:data.result,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -113,7 +112,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+Math.ceil(Math.random()*10000000);
+                url = url + symbol + "ran="+_idSeed.newId();
                 
                 let defer = Q.defer();
                 
@@ -127,10 +126,10 @@ export default {
                 
                 fetch(url,options).then(d =>d.json()).then( (data)=> {  
                     let code = data.status;
-                    let message = data.msg;
+                    let message = data.message;
 
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    if(code == "0"){
+                        defer.resolve({data:data.result,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }

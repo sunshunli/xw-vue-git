@@ -1,6 +1,5 @@
 
-
-import DEFINE_KEY from "./Define.js";
+import KEYS from "../comps/input/config.js";
 
 function ValidataHOC(Component){
     return {
@@ -18,7 +17,7 @@ function ValidataHOC(Component){
             },
             //正则验证方法
             verify(val){
-                var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
+                var reg = KEYS[this.$attrs.vType];
                 reg = new RegExp(reg);
                 if (!reg.test(val)) {
                     return false;

@@ -1,4 +1,5 @@
 
+import "./alert.css";
 import $ from "jquery";
 
 const _show_message_type = {

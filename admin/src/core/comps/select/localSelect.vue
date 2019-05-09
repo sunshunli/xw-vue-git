@@ -26,15 +26,15 @@
     props:["multiple","displayName","displayValue"],
     components: {LeftSection,BottomSection},
     data () {
-      return {
-        borderCls:"",
-        data:[],
-        datas:{
-            searchName:"",
-            bottomArray:[],
-            leftArray:[],
+        return {
+            borderCls:"",
+            data:[],
+            datas:{
+                searchName:"",
+                bottomArray:[],
+                leftArray:[],
+            }
         }
-      }
     },
     computed:{
         /**

@@ -23,7 +23,7 @@ export default {
                 data:[],
             },
             validataComponentType:"Radio",
-            name:Math.ceil(Math.random()*10000000)
+            name:_idSeed.newId(),
         }
     },
     computed:{

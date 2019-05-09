@@ -1,40 +1,11 @@
 <template>
     <div>
-        <!-- http://fontawesome.dashgame.com/ -->
-        
-        <!-- <button class="submit"><i class="fa fa-cloud-download"></i>下载</button>
-        <button class="submit"><i class="fa fa-cloud-upload"></i>上传</button>
-        <button class="add"><i class="fa fa-file"></i>新建</button>
-        <button class="delete"><i class="fa fa-trash-o fa-lg"></i>删除</button>	
-        <button class="submit"><i class="fa fa-check"></i>提交</button>
-        <button class="default"><i class="fa fa-rotate-left"></i>返回</button>
-        <button class="search"><i class="fa fa-search"></i>查询</button>
-        <button class="add"><i class="fa fa-edit"></i>修改</button>
-        <button class="start"><i class="fa fa-play"></i>启用</button>
-        <button class="stop"><i class="fa fa-stop"></i>停用</button>
-        <button class="info"><i class="fa fa-info-circle"></i>详情</button>	 -->
-
         <button @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</button>	
-    
     </div>
 </template>
 <script>
 
-const _button_map = {
-    "down":{cls:"submit",iCls:"fa-cloud-download"},
-    "upload":{cls:"submit",iCls:"fa-cloud-upload"},
-    "create":{cls:"add",iCls:"fa-file"},
-    "delete":{cls:"delete",iCls:"fa-trash-o fa-lg"},
-    "submit":{cls:"submit",iCls:"fa-check"},
-    "back":{cls:"back",iCls:"fa-rotate-left"},
-    "search":{cls:"search",iCls:"fa-search"},
-    "edit":{cls:"add",iCls:"fa-edit"},
-    "play":{cls:"start",iCls:"fa-play"},
-    "stop":{cls:"stop",iCls:"fa-stop"},
-    "info":{cls:"info",iCls:"fa-info-circle"},
-    "setting":{cls:"back",iCls:"fa-cog"},
-    "default":{cls:"default",iCls:""}
-}
+import DEFINE_KEY from "../Define.js";
 
 export default {
     name:"LeButton",
@@ -64,7 +35,7 @@ export default {
         },
         data(){
             let tmp = {cls:"",iCls:"",value:""};
-            tmp = _button_map[this._type];
+            tmp = DEFINE_KEY.BUTTON_CONFIG[this._type];
             if(this.cdisabled){
                 tmp.cls = tmp.cls + " isDisabled";
             }else{

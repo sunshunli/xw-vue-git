@@ -5,8 +5,9 @@
 </template>
 
 <script>
-import $ from "jquery";
+
 import CommonUtil from "../../tool/commonUtil.js";
+
 const Ctl = function(){
 
     this.promises = [];

@@ -131,7 +131,7 @@ let CommonUtil = {
                     item.ck = false;
                 }
                 item.cls = "";
-                item.__tmpId = Math.ceil(Math.random()*10000000000000000);
+                item.__tmpId = _idSeed.newId();
             });
             return data;
         },

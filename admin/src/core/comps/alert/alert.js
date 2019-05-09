@@ -1,26 +1,7 @@
 
 import "./alert.css";
 import $ from "jquery";
-
-const _show_message_type = {
-    "success":{cls:"msgSucces",iCls:"fa fa-check-circle"},
-    "warning":{cls:"msgWarning",iCls:"fa fa-exclamation-circle"},
-    "info":{cls:"msgInfo",iCls:"fa fa-info-circle"},
-    "error":{cls:"msgError",iCls:"fa fa-times-circle"},
-    "default":{cls:"msgSucces",iCls:"fa fa-check-circle"}
-}
-
-const _show_notify_type = {
-    "success":{cls:"noticeSucces",iCls:"fa fa-check-circle"},
-    "warning":{cls:"noticeWarning",iCls:"fa fa-exclamation-circle"},
-    "info":{cls:"noticeInfo",iCls:"fa fa-info-circle"},
-    "error":{cls:"noticeError",iCls:"fa fa-times-circle"},
-    "default":{cls:"noticeSucces",iCls:"fa fa-check-circle"}
-}
-
-const _alert_colse_time = 2000;
-const _notify_colse_time = 3000;
-
+import DEFINE_KEY from "../Define.js";
 
 let _le_alert = {
     showMessage:(type,msg)=>{
@@ -30,9 +11,9 @@ let _le_alert = {
         if(!msg){
             msg = "NULL!";
         }
-        let res = _show_message_type[type];
+        let res = DEFINE_KEY.ALERT_CONFIG.SHOW_ALERT_CLS_TYPE[type];
         if(!res){
-            res = _show_message_type["default"];
+            res = DEFINE_KEY.ALERT_CONFIG.SHOW_ALERT_CLS_TYPE["default"];
         }
 
         let parentDiv = $("<div class='le_alert content'></div>");
@@ -50,7 +31,7 @@ let _le_alert = {
                 $(parentDiv).animate({top:'-50px',opacity:0,'z-index':0},500,()=>{
                     $(parentDiv).remove();
                 })
-            },_alert_colse_time)
+            },DEFINE_KEY.ALERT_CONFIG.ALERT_CLOSE_TIME)
         })
     },
     showConfirm:(title,cb)=>{
@@ -91,9 +72,9 @@ let _le_alert = {
         if(!msg){
             msg = "NULL!";
         }
-        let res = _show_notify_type[type];
+        let res = DEFINE_KEY.ALERT_CONFIG.SHOW_NOTICE_CLS_TYPE[type];
         if(!res){
-            res = _show_notify_type["default"];
+            res = DEFINE_KEY.ALERT_CONFIG.SHOW_NOTICE_CLS_TYPE["default"];
         }
         let parentDiv = $('<div class="le_alert notice '+res.cls+'"></div>');
         let html ='<div class="noticeTs"><i class="'+res.iCls+'"></i>提示</div>'+
@@ -104,10 +85,7 @@ let _le_alert = {
         $(parentDiv).animate({right:'16px',top:'16px'},100,()=>{
             setTimeout(()=>{
                 $(parentDiv).remove();
-                // $(parentDiv).animate({right:'16px',top:'-100px'},500,()=>{
-                //     $(parentDiv).remove();
-                // })
-            },_notify_colse_time)
+            },DEFINE_KEY.ALERT_CONFIG.NOTICE_CLOSE_TIME)
         })
 
         $("body").on("click","span[tag=le-show-notify-close]",function(){

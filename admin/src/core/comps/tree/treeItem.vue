@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import KEYS from "./config.js";
+import DEFINE_KEY from "../Define.js";
 
 export default {
     name:"TreeItem",
@@ -32,26 +32,12 @@ export default {
     },
     methods:{
         /**
-         * @description 模拟ajax，造测试数据
-         */
-        getTestData(item){
-            let name = item[this.displayName] + "_";
-            return [{name:name + "0",id:2},
-                {name:name + "1",id:3}];
-            if(name == "A_" || name == "A_0_"){
-                return [{name:name + "0",id:2},
-                {name:name + "1",id:3}];
-            }else{
-                return [];
-            }
-        },
-        /**
          * @description checkbox状态改变的事件
          */
         changeCheckboxStatus(item){
             if(this.checkbox != undefined){
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:KEYS.ACTIONKEY.CHECKBOX,
+                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.CHECKBOX,
                     __tmpId:item.__tmpId,
                     checkboxStatus:!item.__checkboxStatus
                 });
@@ -67,13 +53,14 @@ export default {
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
                 item.__cls = "fa-caret-load";
-                window.setTimeout(()=>{
-                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(this.getTestData(item));
+                this.ajax.getFetch(_url).then(d=>{
+                    //asynOptions 函数必须返回数组
+                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
                     
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    let tmpObject = {actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
                     if(tmp && tmp instanceof Array && tmp.length != 0){
-                        let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
+                        let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(tmp,item,false);
                         tmpObject.data.children = tmpData;
                         tmpObject.data.hasChildren = true;
                         tmpObject.data.expand = true;
@@ -85,27 +72,7 @@ export default {
                         tmpObject.data.cls = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },100)
-                // this.ajax.getFetch(_url).then(d=>{
-                //     //asynOptions 函数必须返回数组
-                //     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
-                    
-                //     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                //     let tmpObject = {actionKey:KEYS.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-                //     if(tmp && tmp instanceof Array && tmp.length != 0){
-                //         let tmpData = KEYS.INITATTRIBUTE(tmp,item,false);
-                //         tmpObject.data.children = tmpData;
-                //         tmpObject.data.hasChildren = true;
-                //         tmpObject.data.expand = true;
-                //         tmpObject.data.cls = "fa-caret-down";
-                //     }else{
-                //         tmpObject.data.children = [];
-                //         tmpObject.data.hasChildren = false;
-                //         tmpObject.data.expand = false;
-                //         tmpObject.data.cls = "fa-caret-left";
-                //     }
-                //     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                // })
+                })
             }else{
                 console.log("展开折叠操作");
                 let cls = "";
@@ -120,7 +87,7 @@ export default {
                 }
 
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:KEYS.ACTIONKEY.OPEN,
+                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
                         expand:!item.__expand,
@@ -135,7 +102,7 @@ export default {
          */
         selectItem(item){
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                actionKey:KEYS.ACTIONKEY.SELECTEDITEM,
+                actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item
             });

@@ -1,5 +1,4 @@
-
-let KEYS = {
+let ASYNTREE_CONFIG = {
     /**
      * @description 初始化数据源，添加自定义属性，根节点__parentId:-1，初始化__level:1
      * @param data:需要初始化的数据源数组，必填
@@ -9,7 +8,7 @@ let KEYS = {
     INITATTRIBUTE(data,currentNode,isRoot){
         if(data && data instanceof Array && data.length != 0){
             data.forEach(element=>{
-                element.__tmpId = Math.ceil(Math.random()*10000000000000);
+                element.__tmpId = _idSeed.newId();
                 element.__hasChildren = false;
                 element.__children = [];
                 element.__cls = "fa-caret-right";
@@ -38,4 +37,8 @@ let KEYS = {
     }
 }
 
-export default KEYS;
+let DEFINE_KEY = {
+    ASYNTREE_CONFIG:ASYNTREE_CONFIG
+}
+
+export default DEFINE_KEY;

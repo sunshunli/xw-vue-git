@@ -1,96 +1,83 @@
 <template>
-    <div class="ML12">
-        <button @click="clickItem(item)" class="fa" :class="item.cls"></button>
-        <span class="tree-item-name" :class="item.color" @click="selectItem(item)">{{item[displayName]}}</span>     
-        <div v-if="item.hasChildren && item.hasChildren.length != 0" v-show="item.expand">
+    <div class="ML12" >
+         <div class = "fa-item" :class="item.__color">
+            <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
+            <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
+            <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
+        </div>
+        <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
             <tree-item
-                v-for="(x,index) in item.children"
+                v-for="(x,index) in item.__children"
                 :item="x"
                 :key="index"
                 :displayName="displayName"
-                :childrenKey="childrenKey"
                 :asynOptions="asynOptions"
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
+                :checkbox = "checkbox"
             ></tree-item>
         </div>
-    </div>    
+    </div>
 </template>
 
 <script>
-
-const ACTIONKEY = {
-    OPEN:"open",
-    UPDATECHILDREN:"updateChilden",
-    CHECK:"check",
-    SELECTEDITEM:"selectedItem"
-}
+import DEFINE_KEY from "../Define.js";
 
 export default {
     name:"TreeItem",
-    props:["item","displayName","childrenKey","asynOptions","EVENTPUBLISHKEY"],
+    props:["item","displayName","asynOptions","EVENTPUBLISHKEY","checkbox"],
     data(){
         return {
 
         }
     },
     methods:{
-        getTestData(item){
-            let name = item[this.displayName] + "_";
-            return [{name:name + "0",id:2},
-                {name:name + "1",id:3}];
-            if(name == "A_" || name == "A_0_"){
-                return [{name:name + "0",id:2},
-                {name:name + "1",id:3}];
-            }else{
-                return [];
+        /**
+         * @description checkbox状态改变的事件
+         */
+        changeCheckboxStatus(item){
+            if(this.checkbox != undefined){
+                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.CHECKBOX,
+                    __tmpId:item.__tmpId,
+                    checkboxStatus:!item.__checkboxStatus
+                });
             }
         },
-        clickItem(item,data){
-            if(!item.hasChildren){
+        /**
+         * @description 展开节点操作，包含无子节点数据情况下的ajax请求和有数据情况下的显示和隐藏
+         * @param item: 当前选中节点
+         */
+        expandNode(item){
+            if(!item.__hasChildren){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
-                item.cls = "fa-caret-load";
-                window.setTimeout(d=>{
-                    let tmp = this.asynOptions.analysis(this.getTestData(item));
-
+                item.__cls = "fa-caret-load";
+                this.ajax.getFetch(_url).then(d=>{
+                    //asynOptions 函数必须返回数组
+                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                    
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-
-                    if(tmp && tmp.length != 0){
-                        //处理子节点数据源
-                        tmp.forEach(x => {
-                            x.__tmpId = Math.ceil(Math.random()*10000000000000000);
-                            x.hasChildren = false;
-                            x[this.childrenKey] = [];
-                            x.cls = "fa-caret-right";
-                            x.color = "";
-                            x.level = item.level + 1;
-                            x.expand = false;
-                            x.parentId = item.__tmpId;
-                        });
-                        tmpObject.data[this.childrenKey] = tmp;
-                        tmpObject.data["hasChildren"] = true;
-                        tmpObject.data["expand"] = true;
-                        tmpObject.data["cls"] = "fa-caret-down";
+                    let tmpObject = {actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    if(tmp && tmp instanceof Array && tmp.length != 0){
+                        let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(tmp,item,false);
+                        tmpObject.data.children = tmpData;
+                        tmpObject.data.hasChildren = true;
+                        tmpObject.data.expand = true;
+                        tmpObject.data.cls = "fa-caret-down";
                     }else{
-                        tmpObject.data[this.childrenKey] = [];
-                        tmpObject.data["hasChildren"] = false;
-                        tmpObject.data["expand"] = false;
-                        tmpObject.data["cls"] = "fa-caret-left";
+                        tmpObject.data.children = [];
+                        tmpObject.data.hasChildren = false;
+                        tmpObject.data.expand = false;
+                        tmpObject.data.cls = "fa-caret-left";
                     }
                     _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                },100)
-                // this.ajax.getFetch(_url).then(d=>{
-                //     let tmp = this.asynOptions.analysis(d);
-                //     if(tmp && tmp.length != 0){
-                //     }
-                // })
+                })
             }else{
-                console.log("展开操作");
+                console.log("展开折叠操作");
                 let cls = "";
-                if(item[this.childrenKey] && item[this.childrenKey].length != 0){
-                    if(item.cls == "fa-caret-right"){
+                if(item.__children && item.__children instanceof Array && item.__children.length != 0){
+                    if(item.__cls == "fa-caret-right"){
                         cls = "fa-caret-down";
                     }else{
                         cls = "fa-caret-right";
@@ -100,18 +87,22 @@ export default {
                 }
 
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:ACTIONKEY.OPEN,
+                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
-                        open:!item.expand,
+                        expand:!item.__expand,
                         cls:cls
                     }
                 });
             }
         },
+        /**
+         * @description 选中当前项事件，会传递到root触发选中回调
+         * @param item:当前选中项
+         */
         selectItem(item){
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                actionKey:ACTIONKEY.SELECTEDITEM,
+                actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item
             });
@@ -129,19 +120,34 @@ export default {
     .tree-item-name{
         cursor:pointer;
     } 
-    .color{
-        color: chartreuse;
+    .ML12 .color{
+        /* background:#f55!important;
+        color:#fff!important; */
+        color: red !important;
     }
     .ML12{
-        margin-left:12px;
+        padding-left:6px;
+        padding-right: 6px;
     }
-
-    .treeContent button{
+    .ML12 .fa-item{
+        padding-left: 0;
+        text-align: left;
+        color: #606266;
+        font-size: 14px;
+        padding:2px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        position: relative;
+    }
+    .fa-item button{
         color: #606266;
         padding:0;
+        border: none;
+        background-color: transparent;
+        outline: none;
     }
-
-    .treeContent button::before{
+    .fa-item button::before{
         color: #a7acb5;
         width: 12px;
         height: 12px;
@@ -151,11 +157,11 @@ export default {
         padding: 6px 0;
     }
 
-    .treeContent .fa-caret-left::before{
-        color: #fff;
+    .fa-item .fa-caret-left::before{
+        color: transparent;
     }
 
-     .treeContent .fa-caret-load{
+    .fa-item .fa-caret-load{
         background: url(/static/images/loading.gif?03ce3dc…) 0 0 no-repeat;
         background-size: 100%;
         width: 12px;
@@ -165,5 +171,22 @@ export default {
         vertical-align: baseline;
         background-position-y: 5px;
      }
+    
+    .fa-checkBox{
+        width: 12px;
+        height: 12px;
+        border: 1px solid #337ab7;
+        display: inline-block;
+        border-radius: 2px;
+        margin-right: 2px;
+        vertical-align: sub;
+    }
+
+    .fa-check-square:before{
+        color: #337ab7;
+        position: absolute;
+        top: 10px;
+        left: 18px;
+    }
 
 </style>

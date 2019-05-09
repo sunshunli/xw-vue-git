@@ -29,6 +29,7 @@
 
 <script>
 
+import Config from "./config.js";
 import $ from "jquery";
 
 export default {

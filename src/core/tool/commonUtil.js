@@ -8,7 +8,10 @@ let CommonUtil = {
         //throw new Error(str);
     },
     string:{
-        
+        replaceAll:function(value,findText,replaceText){
+            let regExp = new RegExp(findText, "g");
+            return value.replace(regExp, replaceText);
+        }
     },
     object:{
         equalsObject(source,target){
@@ -128,7 +131,7 @@ let CommonUtil = {
                     item.ck = false;
                 }
                 item.cls = "";
-                item.__tmpId = Math.ceil(Math.random()*10000000000000000);
+                item.__tmpId = _idSeed.newId();
             });
             return data;
         },
@@ -178,6 +181,8 @@ let CommonUtil = {
             let cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
             if(expires instanceof Date){
                 cookieText += "; expires=" + expires.toGMTString();
+            }else{
+                cookieText += "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
             }
             document.cookie = cookieText+";path=/;domain="+document.domain;
         },

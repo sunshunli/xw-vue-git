@@ -16,7 +16,7 @@
 
 import TreeItem from "./treeItem.vue";
 import CommonUtil from '../../tool/commonUtil.js';
-import KEYS from "./config.js";
+import DEFINE_KEY from "../Define.js";
 import treeItemVue from './treeItem.vue';
 
 let _tool = {
@@ -164,7 +164,7 @@ export default {
             state:{
                 data:[]
             },
-            EVENTPUBLISHKEY:Math.ceil(Math.random()*10000000000000) + "_TREE_NOTICEKEY",
+            EVENTPUBLISHKEY:_idSeed.newId() + "_TREE_NOTICEKEY",
         }
     },
     methods:{
@@ -175,7 +175,7 @@ export default {
         init(data){
             let originData = CommonUtil.object.deepArrayClone(data);
             _tool.initOriginData(originData);
-            let tmpData = KEYS.INITATTRIBUTE(originData,null,true);
+            let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(originData,null,true);
             this.state = {
                 data:tmpData
             };
@@ -192,7 +192,7 @@ export default {
         updateSingleNode(node,data){
             node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
             if(data.__children && data.__children instanceof Array && data.__children.length != 0){
-                let tmpData = KEYS.INITATTRIBUTE(data.__children,node,false);
+                let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(data.__children,node,false);
                 node.__children = tmpData;
             }
         },
@@ -243,24 +243,24 @@ export default {
                 return;
             }
             //无children情况下，展开事件（ajax请求）
-            if(d.actionKey == KEYS.ACTIONKEY.UPDATECHILDREN){
+            if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.UPDATECHILDREN){
                 item.__hasChildren = d.data.hasChildren;
                 item.__children = d.data.children;
                 item.__expand = d.data.expand;
                 item.__cls = d.data.cls;
             }
             //有children的情况下，展开事件
-            else if(d.actionKey == KEYS.ACTIONKEY.OPEN){
+            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN){
                 item.__expand = d.data.expand;
                 item.__cls = d.data.cls;
             }
             //当前项选中事件，执行callback
-            else if(d.actionKey == KEYS.ACTIONKEY.SELECTEDITEM){
+            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.SELECTEDITEM){
                 _tool.setSingleColor(this.state.data,item);
                 this.itemClick(item);
             }
             //checkbox状态变化事件
-            else if(d.actionKey == KEYS.ACTIONKEY.CHECKBOX){
+            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.CHECKBOX){
                 //改变所有子节点的checkbox状态
                 _tool.setChildrenCheckboxStatus(item,d.checkboxStatus);
                 //改变所有父节点的checkbox状态

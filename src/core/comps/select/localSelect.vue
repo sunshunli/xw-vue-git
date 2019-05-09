@@ -3,7 +3,7 @@
     <div style="position:relative">
         <div class="searchMulSelect" :class="borderCls" @click.stop="focusInput">
 			<!--选中的标签-->
-			<div class="tags">			
+			<div class="tags">
 				
 				<left-section :display-name="displayName" :data="datas.leftArray" :notice-parent="noticeFromLeft"></left-section>
 				

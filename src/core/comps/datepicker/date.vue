@@ -138,7 +138,7 @@ let _tool = {
     }
 }
 
-import DEFINE_KEY from "../Define.js";
+import Config from "./config.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
@@ -168,7 +168,7 @@ export default {
     },
     computed:{
         Weeks(){
-            return DEFINE_KEY.DATE_TIME_PICKER_CONFIG.WEEK;
+            return Config.Week;
         },
         selectDayStr(){
             if(this.selectDay == ""){

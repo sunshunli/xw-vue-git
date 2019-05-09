@@ -22,7 +22,7 @@
         name: "PagingSection",
         data(){
             return {
-                goIndexKey:Math.ceil(Math.random()*10000000000)
+                goIndexKey:_idSeed.newId(),
             }
         },
         computed:{

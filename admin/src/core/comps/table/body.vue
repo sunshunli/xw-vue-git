@@ -46,7 +46,7 @@
         props:["actions","data","cols","accpetHBNotice","showCk","singleSelected"],
         data(){
             return {
-                radioKey:Math.ceil(Math.random()*10000000)
+                radioKey:_idSeed.newId(),
             }
         },
         computed:{

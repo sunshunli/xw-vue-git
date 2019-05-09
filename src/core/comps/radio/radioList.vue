@@ -1,27 +1,29 @@
 <template>
     <div>
-        <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
+        123
+        <span class="span" @click="changeCK(item)" v-for="(item,index) in state.data" :key="index">
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-            <i class="fa" :class="item.cls"></i>
-            <input class="ck" type="radio" :checked="item.ck" :name="name"/>
+            <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
         </span>
+        <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
 
 <script>
 
-const _checkedCls = "fa-dot-circle-o";
-const _unCheckedCls = "fa-circle-o";
-
-
 import CommonUtil from "../../tool/commonUtil.js";
+
 export default {
     name:"LeRadioList",
     props:["displayName","displayValue"],
     data(){
         return {
-           data:[],
-           name:Math.ceil(Math.random()*10000000)
+            state:{
+                showError:false,
+                data:[],
+            },
+            validataComponentType:"Radio",
+            name:_idSeed.newId(),
         }
     },
     computed:{
@@ -33,20 +35,15 @@ export default {
          * @returns
          */
         init(data){
-            let _data = CommonUtil.object.addPrimaryAndCk(data);
-            _data.forEach(item=>{
-                item.cls = _unCheckedCls;
-            });
-            this.data = _data;
+            this.state.data = CommonUtil.object.addPrimaryAndCk(data);
         },
         /**
          * @description 重置数据源
          * @returns
          */
         resetData(){
-            this.data.forEach(item=>{
+            this.state.data.forEach(item=>{
                 item.ck = false;
-                item.cls = _unCheckedCls;
             })
         },
         /**
@@ -56,27 +53,36 @@ export default {
         changeCK(item){
             this.resetData();
             item.ck = true;
-            item.cls = _checkedCls;
+            this.state.showError = false;
 
-            this.$emit("change",item,this.data);
+            this.$emit("change",item,this.state.data);
         },
         /**
          * @description 设置选中项, 数据回写用
          * @param val 单个值
          * @returns
          */
-        setChecked(val){
+        setValue(val){
             this.resetData();
             this.data.forEach(item=>{
                 if(item[this.displayValue] == val){
-                    item.cls = _checkedCls;
                     item.ck = true;
                 }
             })  
-        }
+        },
+        /**
+         * @description 获取选中的值
+         * @returns
+         */
+        getValue(){
+            let res = this.state.data.filter(item=>{
+                return item.ck == true;
+            });
+            return res && res.length ==1?res[0][this.displayValue]:"";
+        },
+        
     },
     mounted(){
-        
     }
 }
 </script>

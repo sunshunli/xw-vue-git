@@ -16,7 +16,7 @@
         name: "FileUpload",
         data(){
             return {
-                fkey:Math.ceil(Math.random()*1000000000),
+                fkey:M_idSeed.newId(),
                 showLoading:false,
                 src:""
             }

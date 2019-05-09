@@ -3,6 +3,7 @@
     <div class="treeContent" style="height:2000px;border:1px solid bule">
         <button @click="deleteNode">删除节点</button>
         <button @click="getNodes">获取被选中节点</button>
+        <button @click="reSet">reSet</button>
         <le-asyn-tree
             displayName="name"
             :asynOptions="asynOptions"
@@ -43,7 +44,8 @@ export default {
             this.$refs["tree"].deleteSingleNode(this.selectNode);
         },
         getNodes(){
-            let res = this.$refs["tree"].b();
+            let res = this.$refs["tree"].getAllCheckedNodes();
+            console.log(res);
         },
         getTreeData(id){
             this.ajax.getFetch("/goods/index/queryList/115?parentUnit="+id).then(d=>{
@@ -51,6 +53,9 @@ export default {
             }).catch(e=>{
                 debugger
             })
+        },
+        reSet(){
+            this.$refs["tree"].reset();
         }
     },
     mounted(){

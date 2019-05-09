@@ -19,9 +19,9 @@
     name: 'BottomSection',
     props:['data','noticeParent','searchKey','displayName'],
     data () {
-      return {
-        
-      }
+		return {
+			
+		}
     },
     methods:{
       selectItem:function(item){

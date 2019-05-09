@@ -161,6 +161,7 @@ export default {
     props:["displayName","asynOptions","itemClick",'checkbox'],
     data(){
         return {
+            originData:null,
             state:{
                 data:[]
             },
@@ -173,9 +174,9 @@ export default {
          * @returns node/null
          */
         init(data){
-            let originData = CommonUtil.object.deepArrayClone(data);
-            _tool.initOriginData(originData);
-            let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(originData,null,true);
+            this.originData = CommonUtil.object.cloneObj(data);
+            _tool.initOriginData(data);
+            let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(data,null,true);
             this.state = {
                 data:tmpData
             };
@@ -183,6 +184,16 @@ export default {
                 return this.state.data[0];
             }
             return null;
+        },
+        reset(){
+            let _originData = CommonUtil.object.cloneObj(this.originData);
+            this.state = {
+                data:DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(_originData,null,true)
+            };
+            this._originData = _originData;
+        },
+        setChecked(ids){
+            
         },
         /**
          * @description 更新单个节点
@@ -271,6 +282,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
+

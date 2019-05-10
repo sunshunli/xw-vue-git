@@ -4,6 +4,11 @@
         <button @click="deleteNode">删除节点</button>
         <button @click="getNodes">获取被选中节点</button>
         <button @click="reSet">reSet</button>
+        <button @click="bind">bind</button>
+        <button @click="expandAll(true)">expand</button>
+        <button @click="expandAll(false)">unExpand</button>
+        <button @click="checkall(true)">checkAll</button>
+        <button @click="checkall(false)">unCheckAll</button>
         <le-asyn-tree
             displayName="name"
             :asynOptions="asynOptions"
@@ -11,10 +16,20 @@
             :itemClick="itemClick"
             checkbox
         ></le-asyn-tree>
+
+        <le-local-tree
+            displayName="name"
+            ref="tree1"
+            :itemClick="itemClick"
+            childrenKey="children"
+            checkbox
+        ></le-local-tree>
     </div>
 </template>
 
 <script>
+
+import Uint from "../core/tool/commonUtil.js";
 export default {
     name:"TreeTest",
     data(){
@@ -45,21 +60,47 @@ export default {
         },
         getNodes(){
             let res = this.$refs["tree"].getAllCheckedNodes();
-            console.log(res);
+            let res1 = this.$refs["tree1"].getAllCheckedNodes();
+            console.log(res,res1);
         },
         getTreeData(id){
             this.ajax.getFetch("/goods/index/queryList/115?parentUnit="+id).then(d=>{
                 this.$refs["tree"].init(d.data.data);
             }).catch(e=>{
-                debugger
+                this.alert.showAlert("error",e.data);
             })
         },
         reSet(){
             this.$refs["tree"].reset();
+            this.$refs["tree1"].reset();
+        },
+        bind(){
+            this.$refs["tree1"].bindCKByField("id",[1,3,4,5]);
+        },
+        expandAll(flag){
+            this.$refs["tree1"].expandAll(flag);
+        },
+        checkall(flag){
+            this.$refs["tree1"].checkAll(flag);
         }
     },
     mounted(){
-       this.getTreeData(0);
+        this.getTreeData(0);
+
+        let localTreeData = [
+            {name:"A",age:1,id:1},
+            {name:"B",age:2,children:[
+                {name:"B1",age:3,id:12},
+                {name:"B2",age:4,children:[
+                    {name:"B2_1",age:5,id:3},
+                    {name:"B2_1",age:6,id:4},
+                ]}
+            ]},
+            {name:"C",age:7,children:[
+                {name:"C1_1",age:8,id:5},
+            ]},
+        ];
+        this.$refs["tree1"].init(localTreeData);
     }
 }
 </script>

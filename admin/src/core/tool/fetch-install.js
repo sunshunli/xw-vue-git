@@ -60,7 +60,7 @@ export default {
                 };
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
-                    let message = data.message;
+                    let message = data.message?data.message:data.msg;
                     if(code == "0"){
                         defer.resolve({data:data.result,params:data.params});
                     }else{
@@ -94,7 +94,7 @@ export default {
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
                     let code = data.status;
-                    let message = data.message;
+                    let message = data.message?data.message:data.msg;
 
                     if(code == "0" || code == "200"){
                         defer.resolve({data:data.result,params:data.params});
@@ -126,7 +126,7 @@ export default {
                 
                 fetch(url,options).then(d =>d.json()).then( (data)=> {  
                     let code = data.status;
-                    let message = data.message;
+                    let message = data.message?data.message:data.msg;
 
                     if(code == "0"){
                         defer.resolve({data:data.result,params:data.params});

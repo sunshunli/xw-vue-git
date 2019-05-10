@@ -11,10 +11,20 @@
             :itemClick="itemClick"
             checkbox
         ></le-asyn-tree>
+
+        <le-asyn-tree
+            displayName="name"
+            :asynOptions="asynOptions"
+            ref="tree1"
+            :itemClick="itemClick"
+            checkbox
+        ></le-asyn-tree>
     </div>
 </template>
 
 <script>
+
+import Uint from "../core/tool/commonUtil.js";
 export default {
     name:"TreeTest",
     data(){
@@ -45,17 +55,21 @@ export default {
         },
         getNodes(){
             let res = this.$refs["tree"].getAllCheckedNodes();
-            console.log(res);
+            let res1 = this.$refs["tree1"].getAllCheckedNodes();
+            console.log(res,res1);
         },
         getTreeData(id){
             this.ajax.getFetch("/goods/index/queryList/115?parentUnit="+id).then(d=>{
                 this.$refs["tree"].init(d.data.data);
+
+                this.$refs["tree1"].init(Uint.object.cloneObj(d.data.data));
             }).catch(e=>{
-                debugger
+                this.alert.showAlert("error",e.data);
             })
         },
         reSet(){
             this.$refs["tree"].reset();
+            this.$refs["tree1"].reset();
         }
     },
     mounted(){

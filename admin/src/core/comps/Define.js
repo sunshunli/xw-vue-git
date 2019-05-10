@@ -1,11 +1,11 @@
-let ASYNTREE_CONFIG = {
+let TREE_CONFIG = {
     /**
      * @description 初始化数据源，添加自定义属性，根节点__parentId:-1，初始化__level:1
      * @param data:需要初始化的数据源数组，必填
      * @param currentNode:当前节点，根节点时传入null
      * @param isRoot:是否根节点
      */
-    INITATTRIBUTE(data,currentNode,isRoot){
+    ASYNINITATTRIBUTE(data,currentNode,isRoot){
         if(data && data instanceof Array && data.length != 0){
             data.forEach(element=>{
                 element.__tmpId = _idSeed.newId();
@@ -110,7 +110,7 @@ let INPUT_VALIDATA_TYPES = {
 }
 
 let DEFINE_KEY = {
-    ASYNTREE_CONFIG:ASYNTREE_CONFIG,
+    TREE_CONFIG:TREE_CONFIG,
     BUTTON_CONFIG:BUTTON_CONFIG,
     ALERT_CONFIG:ALERT_CONFIG,
     DATE_TIME_PICKER_CONFIG:DATE_TIME_PICKER_CONFIG,

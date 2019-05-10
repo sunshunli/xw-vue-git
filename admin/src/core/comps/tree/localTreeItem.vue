@@ -11,7 +11,6 @@
                 :item="x"
                 :key="index"
                 :displayName="displayName"
-                :asynOptions="asynOptions"
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
                 :checkbox = "checkbox"
             ></tree-item>
@@ -24,7 +23,7 @@ import DEFINE_KEY from "../Define.js";
 
 export default {
     name:"TreeItem",
-    props:["item","displayName","asynOptions","EVENTPUBLISHKEY","checkbox"],
+    props:["item","displayName","EVENTPUBLISHKEY","checkbox"],
     data(){
         return {
 
@@ -44,57 +43,29 @@ export default {
             }
         },
         /**
-         * @description 展开节点操作，包含无子节点数据情况下的ajax请求和有数据情况下的显示和隐藏
+         * @description 展开节点操作
          * @param item: 当前选中节点
          */
         expandNode(item){
-            if(!item.__hasChildren){
-                console.log("ajax请求");
-                let _url  = this.asynOptions.getUrl(item);
-                //发送ajax请求, 改变loading状态
-                item.__cls = "fa-caret-load";
-                this.ajax.getFetch(_url).then(d=>{
-                    //asynOptions 函数必须返回数组
-                    let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
-                    
-                    //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
-                    if(tmp && tmp instanceof Array && tmp.length != 0){
-                        let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(tmp,item,false);
-                        tmpObject.data.children = tmpData;
-                        tmpObject.data.hasChildren = true;
-                        tmpObject.data.expand = true;
-                        tmpObject.data.cls = "fa-caret-down";
-                    }else{
-                        tmpObject.data.children = [];
-                        tmpObject.data.hasChildren = false;
-                        tmpObject.data.expand = false;
-                        tmpObject.data.cls = "fa-caret-left";
-                    }
-                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
-                })
-            }else{
-                console.log("展开折叠操作");
-                let cls = "";
-                if(item.__children && item.__children instanceof Array && item.__children.length != 0){
-                    if(item.__cls == "fa-caret-right"){
-                        cls = "fa-caret-down";
-                    }else{
-                        cls = "fa-caret-right";
-                    }
+            let cls = "";
+            if(item.__children && item.__children instanceof Array && item.__children.length != 0){
+                if(item.__cls == "fa-caret-right"){
+                    cls = "fa-caret-down";
                 }else{
-                    cls = "fa-caret-left";
+                    cls = "fa-caret-right";
                 }
-
-                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN,
-                    __tmpId:item.__tmpId,
-                    data:{
-                        expand:!item.__expand,
-                        cls:cls
-                    }
-                });
+            }else{
+                cls = "fa-caret-left";
             }
+
+            _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN,
+                __tmpId:item.__tmpId,
+                data:{
+                    expand:!item.__expand,
+                    cls:cls
+                }
+            });
         },
         /**
          * @description 选中当前项事件，会传递到root触发选中回调

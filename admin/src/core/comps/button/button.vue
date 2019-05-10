@@ -119,8 +119,8 @@ export default {
     }
 
     .publish{
-        background-color: #9e9191;
-        border-color: #9e9191;
+        background-color: #16d047;
+        border-color: #16d047;
     }
 
     .start{

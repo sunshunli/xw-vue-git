@@ -2,8 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 import HelloWorld from '../components/HelloWorld.vue';
-import Login from '../components/login/login.vue';
-import AdminLogin from '../components/login/localLogin.vue';
+
 import AuthHOC from "../components/authHOC/authHoc.js";
 import Input from "../components/input.vue"
 

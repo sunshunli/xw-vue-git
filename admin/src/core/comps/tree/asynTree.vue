@@ -92,9 +92,6 @@ export default {
             };
             this._originData = _originData;
         },
-        setChecked(ids){
-            
-        },
         /**
          * @description 更新单个节点
          * @param node 当前节点

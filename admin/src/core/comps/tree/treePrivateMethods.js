@@ -86,7 +86,8 @@ let _tool = {
                 _tool.getAllCheckboxNodesExcludeParent(_children);
             }
         }
-    }
+    },
+    
 }
 
 export default _tool;

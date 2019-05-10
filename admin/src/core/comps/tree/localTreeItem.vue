@@ -36,7 +36,7 @@ export default {
         changeCheckboxStatus(item){
             if(this.checkbox != undefined){
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                    actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.CHECKBOX,
+                    actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,
                     __tmpId:item.__tmpId,
                     checkboxStatus:!item.__checkboxStatus
                 });
@@ -59,7 +59,7 @@ export default {
             }
 
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN,
+                actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN,
                 __tmpId:item.__tmpId,
                 data:{
                     expand:!item.__expand,
@@ -73,7 +73,7 @@ export default {
          */
         selectItem(item){
             _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
-                actionKey:DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.SELECTEDITEM,
+                actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item
             });
@@ -133,7 +133,7 @@ export default {
     }
 
     .fa-item .fa-caret-load{
-        background: url(/static/images/loading.gif?03ce3dc…) 0 0 no-repeat;
+        background: url("/static/images/loading.gif") 0 0 no-repeat;
         background-size: 100%;
         width: 12px;
         height: 23px;

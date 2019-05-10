@@ -9,6 +9,7 @@ import LocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
+import LeLocalTree from "./tree/localTree.vue";
 import LeForm from "../comps/input/form.vue";
 import LeDatePicker from "../comps/datepicker/date.vue";
 import LeTimePicker from "../comps/datepicker/time.vue";
@@ -28,6 +29,7 @@ export default{
         Vue.component('TableList',TableList);
         Vue.component('FileUpload',FileUpload);
         Vue.component('LeAsynTree',LeAsynTree);
+        Vue.component('LeLocalTree',LeLocalTree);
         Vue.component('LeDatePicker',ValidataHOC(LeDatePicker));
         Vue.component('LeTimePicker',ValidataHOC(LeTimePicker));
         Vue.component('LeDateTimePicker',ValidataHOC(LeDateTimePicker));

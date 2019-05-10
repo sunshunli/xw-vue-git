@@ -162,7 +162,7 @@ export default {
     }
 
     .fa-item .fa-caret-load{
-        background: url(/static/images/loading.gif?03ce3dc…) 0 0 no-repeat;
+        background: url("/static/images/loading.gif") 0 0 no-repeat;
         background-size: 100%;
         width: 12px;
         height: 23px;

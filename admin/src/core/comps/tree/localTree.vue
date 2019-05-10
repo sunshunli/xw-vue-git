@@ -12,18 +12,19 @@
 </template>
 <script>
 
-import TreeItem from "./asycTreeItem.vue";
+import TreeItem from "./localTreeItem.vue";
 import CommonUtil from '../../tool/commonUtil.js';
 import DEFINE_KEY from "../Define.js";
 import _tool from "./treePrivateMethods.js";
 
 export default {
-    name:"LeAsynTree",
+    name:"LeLocalTree",
     components:{TreeItem},
-    props:["displayName","itemClick",'checkbox'],
+    props:["displayName","itemClick",'checkbox','childrenKey'],
     data(){
         return {
             originData:null,
+            level:0,
             state:{
                 data:[]
             },
@@ -69,15 +70,34 @@ export default {
                 });
             }
         },
+        initAttributeData(data,item){
+            if(data && data instanceof Array && data.length != 0){
+                this.level++;
+                for(let i=0;i<data.length;i++){
+                    data[i].__tmpId = _idSeed.newId();
+                    data[i].__children = data[i][this.childrenKey]&&data[i][this.childrenKey] != 0?data[i][this.childrenKey]:[];
+                    data[i].__hasChildren = data[i].__children.length > 0 ?true:false;
+                    data[i].__cls = "fa-caret-right";
+                    data[i].__level = this.level;
+                    data[i].__expand = false;
+                    data[i].__parentId = item?item.__tmpId:-1;
+                    data[i].__color = "";
+                    data[i].__checkboxStatus = false;
+
+                    let tmp = data[i].children;
+                    this.initAttributeData(tmp,data[i]);
+                }
+            }
+        },
         /**
          * @description 初始化并且默认获取第一个根节点
          * @returns node/null
          */
         init(data){
             this.originData = CommonUtil.object.cloneObj(data);
-            let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(data,null,true);
+            this.initAttributeData(data);
             this.state = {
-                data:tmpData
+                data:data
             };
             if(this.state.data.length > 0){
                 return this.state.data[0];
@@ -87,12 +107,90 @@ export default {
         reset(){
             let _originData = CommonUtil.object.cloneObj(this.originData);
             this.state = {
-                data:DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(_originData,null,true)
+                data:DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(_originData,null,true)
             };
             this._originData = _originData;
         },
-        setChecked(ids){
-            
+        /**
+         * @description 根据数据源，需绑定字段，绑定数据来递归绑定
+         * @param {Array} data 
+         * @param {String} field 
+         * @param {Array} array 
+         */
+        recurrentStatus(data,field,array){
+            if(data && data instanceof Array && data.length >0){
+                for(let i=0;i<data.length;i++){
+                    if(array && array instanceof Array && array.indexOf(data[i][field]) != -1){
+                        data[i].__checkboxStatus = true;
+                    }else{
+                        data[i].__checkboxStatus = false;
+                    }
+                    let _children = data[i][this.childrenKey];
+                    if(_children && _children instanceof Array && _children.length != 0){
+                        this.recurrentStatus(_children,field,array);
+                    }
+                }
+            }
+        },
+        /**
+         * @description 递归，展开折叠所有
+         * @param {Array} data 
+         * @param {beanloon} flag 
+         */
+        recurrentExpand(data,flag){
+            if(data && data instanceof Array && data.length >0){
+                for(let i=0;i<data.length;i++){
+                    let _children = data[i][this.childrenKey];
+                    if(flag){
+                        data[i].__expand = true;
+                        if(_children && _children instanceof Array && _children.length != 0){
+                            data[i].__cls = "fa-caret-down";
+                        }else{
+                            data[i].__cls = "fa-caret-left";
+                        }
+                    }else{
+                        data[i].__expand = false;
+                        data[i].__cls = "fa-caret-right";
+                    }
+                    if(_children && _children instanceof Array && _children.length != 0){
+                        this.recurrentExpand(_children,flag);
+                    }
+                }
+            }
+        },
+        /**
+         * @description 递归，是否选中所有
+         * @param {Array} data 
+         * @param {beanloon} flag 
+         */
+        recurrentChecked(data,flag){
+            if(data && data instanceof Array && data.length > 0){
+                for(let i=0;i<data.length;i++){
+                    data[i].__checkboxStatus = flag;
+                    let _children = data[i][this.childrenKey];
+                    if(_children && _children instanceof Array && _children.length != 0){
+                        this.recurrentChecked(_children,flag);
+                    }
+                }
+            }
+        },
+        /**
+         * @description 对外暴露绑定方法
+         * @param {String} field 
+         * @param {Array} array 
+         */
+        bindCKByField(field,array){
+            this.recurrentStatus(this.state.data,field,array);
+        },
+        /**
+         * @description 对外暴露展开折叠所有方法
+         * @param {beanloon} flag 
+         */
+        expandAll(flag){
+            this.recurrentExpand(this.state.data,flag);
+        },
+        checkAll(flag){
+            this.recurrentChecked(this.state.data,flag);
         },
         /**
          * @description 更新单个节点
@@ -102,7 +200,7 @@ export default {
         updateSingleNode(node,data){
             node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
             if(data.__children && data.__children instanceof Array && data.__children.length != 0){
-                let tmpData = DEFINE_KEY.ASYNTREE_CONFIG.INITATTRIBUTE(data.__children,node,false);
+                let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data.__children,node,false);
                 node.__children = tmpData;
             }
         },
@@ -152,18 +250,18 @@ export default {
             if(!item){
                 return;
             }
-            //展开折叠事件
-            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.OPEN){
+            //有children的情况下，展开事件
+            else if(d.actionKey == DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN){
                 item.__expand = d.data.expand;
                 item.__cls = d.data.cls;
             }
             //当前项选中事件，执行callback
-            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.SELECTEDITEM){
+            else if(d.actionKey == DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM){
                 _tool.setSingleColor(this.state.data,item);
                 this.itemClick(item);
             }
             //checkbox状态变化事件
-            else if(d.actionKey == DEFINE_KEY.ASYNTREE_CONFIG.ACTIONKEY.CHECKBOX){
+            else if(d.actionKey == DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX){
                 //改变所有子节点的checkbox状态
                 this.setChildrenCheckboxStatus(item,d.checkboxStatus);
                 //改变所有父节点的checkbox状态
@@ -177,4 +275,3 @@ export default {
 <style scoped>
 
 </style>
-

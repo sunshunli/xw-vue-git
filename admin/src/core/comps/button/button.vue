@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <button @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</button>	
-    </div>
+    <button @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</button>	
 </template>
 <script>
 
@@ -73,7 +71,7 @@ export default {
     .default{
         background-color: #fff;
         color: #4c4545;
-        border-color:#fff;
+        border-color:#4c4545;
     }
 
     .back{

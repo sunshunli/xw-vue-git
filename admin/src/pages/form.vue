@@ -2,7 +2,22 @@
 
 <template>
     <div>
-
+        <le-button type="search" value="Search"></le-button>
+        <le-button type="create" value="New"></le-button>
+        <le-button type="edit" value="Modify"></le-button>
+        <le-button type="info" value="info"></le-button>
+        <le-button type="warning" value="warning"></le-button>
+        <le-button type="enable" value="enable"></le-button>
+        <le-button type="disable" value="disable"></le-button>
+        <le-button type="publish" value="publish"></le-button>
+        <le-button type="down" value="down"></le-button>
+        <le-button type="upload" value="upload"></le-button>
+        <le-button type="submit" value="submit"></le-button>
+        <le-button type="back" value="back"></le-button>
+        <le-button type="play" value="play"></le-button>
+        <le-button type="stop" value="stop"></le-button>
+        <le-button type="setting" value="setting"></le-button>
+        <le-button type="default" value="default"></le-button>
         <le-form ref="form1">
             form
             

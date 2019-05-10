@@ -85,6 +85,9 @@ export default {
             }
             return null;
         },
+        /**
+         * @description 重置所有
+         */
         reset(){
             let _originData = CommonUtil.object.cloneObj(this.originData);
             this.state = {

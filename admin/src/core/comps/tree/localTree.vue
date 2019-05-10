@@ -24,7 +24,6 @@ export default {
     data(){
         return {
             originData:null,
-            level:0,
             state:{
                 data:[]
             },
@@ -70,20 +69,27 @@ export default {
                 });
             }
         },
-        initAttributeData(data,item){
+        /**
+         * @description 递归初始化数据源
+         * @param {Array} data 
+         * @param {Object} parentNode 
+         */
+        initAttributeData(data,parentNode){
             if(data && data instanceof Array && data.length != 0){
-                this.level++;
                 for(let i=0;i<data.length;i++){
+                    data[i].__parentId = parentNode?parentNode.__tmpId:-1;
+                    if(!parentNode){
+                        data[i].__level = 1;
+                    }else{
+                        data[i].__level = parentNode.__level + 1;
+                    }
                     data[i].__tmpId = _idSeed.newId();
                     data[i].__children = data[i][this.childrenKey]&&data[i][this.childrenKey] != 0?data[i][this.childrenKey]:[];
                     data[i].__hasChildren = data[i].__children.length > 0 ?true:false;
                     data[i].__cls = "fa-caret-right";
-                    data[i].__level = this.level;
                     data[i].__expand = false;
-                    data[i].__parentId = item?item.__tmpId:-1;
                     data[i].__color = "";
                     data[i].__checkboxStatus = false;
-
                     let tmp = data[i].children;
                     this.initAttributeData(tmp,data[i]);
                 }
@@ -104,10 +110,14 @@ export default {
             }
             return null;
         },
+        /**
+         * @description 重置所有
+         */
         reset(){
             let _originData = CommonUtil.object.cloneObj(this.originData);
+            this.initAttributeData(_originData);
             this.state = {
-                data:DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(_originData,null,true)
+                data:_originData
             };
             this._originData = _originData;
         },
@@ -189,6 +199,10 @@ export default {
         expandAll(flag){
             this.recurrentExpand(this.state.data,flag);
         },
+        /**
+         * @description 对外暴露checkbox选中方法
+         * @param {beanloon} flag 
+         */
         checkAll(flag){
             this.recurrentChecked(this.state.data,flag);
         },

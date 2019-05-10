@@ -1,6 +1,6 @@
 <template>
     <div class="ML12" >
-         <div class = "fa-item" :class="item.__color">
+         <div class = "fa-item" :class="item.__color" :style="'margin-left:'+(item.__level-1)*10+'px'">
             <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     

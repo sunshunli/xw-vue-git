@@ -45,12 +45,16 @@ let BUTTON_CONFIG = {
     "submit":{cls:"submit",iCls:"fa-check"},
     "back":{cls:"back",iCls:"fa-rotate-left"},
     "search":{cls:"search",iCls:"fa-search"},
-    "edit":{cls:"add",iCls:"fa-edit"},
+    "edit":{cls:"edit",iCls:"fa-edit"},
     "play":{cls:"start",iCls:"fa-play"},
+    "enable":{cls:"enable",iCls:"fa-play-circle"},
+    "disable":{cls:"disable",iCls:"fa-ban"},
+    "publish":{cls:"publish",iCls:"fa-bolt"},
     "stop":{cls:"stop",iCls:"fa-stop"},
     "info":{cls:"info",iCls:"fa-info-circle"},
     "setting":{cls:"back",iCls:"fa-cog"},
-    "default":{cls:"default",iCls:""}
+    "default":{cls:"default",iCls:""},
+    "warning":{cls:"warning",iCls:"fa-exclamation-circle"},
 }
 
 let ALERT_CONFIG = {

@@ -72,47 +72,82 @@ export default {
     }
     .default{
         background-color: #fff;
-        color:#606266;
+        color: #4c4545;
+        border-color:#fff;
     }
 
     .back{
         background-color: #fff;
-        color:#606266;
+        color:#cf320f;
     }
     .add{
-        background-color: #67c23a;
+        background-color: #90b900;
+        border-color: #90b900;
     }
 
     .delete{
         background-color: #f56c6c;
+        border-color: #f56c6c;
+    }
+
+    .edit{
+        background-color: #16d047;
+        border-color: #16d047;
     }
 
     .submit{
         background-color: #409EFF;
+        border-color: #409EFF;
     }
 
     .back{
         background-color: #c4c4c4;
+        border-color: #c4c4c4;
     }
 
     .search{
-        background-color: #d5a6d2;
+        background-color: #209e91;
+        border-color: #209e91;
     }
 
-    .edit{
-        background-color: #606f7f;
+    .enable{
+        background-color: #23dbf9;
+        border-color: #23dbf9;
+    }
+
+    .disable{
+        background-color: #e85656;
+        border-color: #e85656;
+    }
+
+    .publish{
+        background-color: #9e9191;
+        border-color: #9e9191;
     }
 
     .start{
-        background-color: #e6a23c;
+        background-color: #7cc341;
+        border-color: #7cc341;
     }
 
     .stop{
         background-color: #f56c6c;
+        border-color: #f56c6c;
     }
 
     .info{
-        background-color: #3f9f14;
+        background-color: #2dacd1;
+        border-color: #2dacd1;
+    }
+
+    .danger{
+        background-color: #e85656;
+        border-color:#e85656;
+    }
+
+    .warning{
+        background-color: #dfb81c;
+        border-color: #dfb81c;
     }
 
     button i{

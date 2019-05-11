@@ -69,18 +69,18 @@ export default {
         cursor: pointer;
     }
     .default{
-        background-color: #fff;
-        color: #4c4545;
-        border-color:#4c4545;
+        background-color: #ff36b6;
+        color: #fff;
+        border-color:#ff36b6;
     }
 
     .back{
         background-color: #fff;
-        color:#cf320f;
+        color:#fff;
     }
     .add{
-        background-color: #90b900;
-        border-color: #90b900;
+        background-color: #42b1ff;
+        border-color: #42b1ff;
     }
 
     .delete{
@@ -89,38 +89,59 @@ export default {
     }
 
     .edit{
-        background-color: #16d047;
-        border-color: #16d047;
+        background-color: #6c81ff;
+        border-color: #6c81ff;
     }
 
     .submit{
-        background-color: #409EFF;
-        border-color: #409EFF;
+        background-color: #ea4cf0;
+        border-color: #ea4cf0;
     }
 
     .back{
-        background-color: #c4c4c4;
-        border-color: #c4c4c4;
+        background-color: #3699ff;
+        border-color: #3699ff;
+    }
+
+    .setting{
+        background-color:#9d72ff;
+        border-color: #9d72ff; 
+        color: #fff;
     }
 
     .search{
-        background-color: #209e91;
-        border-color: #209e91;
+        background-color: #00ded1;
+        border-color: #00ded1;
     }
 
     .enable{
-        background-color: #23dbf9;
-        border-color: #23dbf9;
+        background-color: #42d5ff;
+        border-color: #42d5ff;
     }
 
     .disable{
-        background-color: #e85656;
-        border-color: #e85656;
+        background-color: #c24cee;
+        border-color: #c24cee;
     }
 
     .publish{
-        background-color: #16d047;
-        border-color: #16d047;
+        background-color: #62e082;
+        border-color: #62e082;
+    }
+
+    .down{
+        background-color: #f3bf34;
+        border-color: #f3bf34;
+    }
+
+    .upload{
+        background-color: #46f0c6;
+        border-color: #46f0c6;
+    }
+
+    .play{
+        background-color: #6c81ff;
+        border-color:#6c81ff;
     }
 
     .start{
@@ -129,13 +150,13 @@ export default {
     }
 
     .stop{
-        background-color: #f56c6c;
-        border-color: #f56c6c;
+        background-color: #62e082;
+        border-color: #62e082;
     }
 
     .info{
-        background-color: #2dacd1;
-        border-color: #2dacd1;
+        background-color: #9d72ff;
+        border-color: #9d72ff;
     }
 
     .danger{
@@ -144,8 +165,8 @@ export default {
     }
 
     .warning{
-        background-color: #dfb81c;
-        border-color: #dfb81c;
+        background-color: #ff33a6;
+        border-color: #ff33a6;
     }
 
     button i{

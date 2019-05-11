@@ -38,21 +38,21 @@ let TREE_CONFIG = {
 }
 
 let BUTTON_CONFIG = {
-    "down":{cls:"submit",iCls:"fa-cloud-download"},
-    "upload":{cls:"submit",iCls:"fa-cloud-upload"},
+    "down":{cls:"down",iCls:"fa-cloud-download"},
+    "upload":{cls:"upload",iCls:"fa-cloud-upload"},
     "create":{cls:"add",iCls:"fa-file"},
     "delete":{cls:"delete",iCls:"fa-trash-o fa-lg"},
     "submit":{cls:"submit",iCls:"fa-check"},
     "back":{cls:"back",iCls:"fa-rotate-left"},
     "search":{cls:"search",iCls:"fa-search"},
     "edit":{cls:"edit",iCls:"fa-edit"},
-    "play":{cls:"start",iCls:"fa-play"},
+    "play":{cls:"play",iCls:"fa-play"},
     "enable":{cls:"enable",iCls:"fa-play-circle"},
     "disable":{cls:"disable",iCls:"fa-ban"},
     "publish":{cls:"publish",iCls:"fa-bolt"},
     "stop":{cls:"stop",iCls:"fa-stop"},
     "info":{cls:"info",iCls:"fa-info-circle"},
-    "setting":{cls:"back",iCls:"fa-cog"},
+    "setting":{cls:"setting",iCls:"fa-cog"},
     "default":{cls:"default",iCls:""},
     "warning":{cls:"warning",iCls:"fa-exclamation-circle"},
 }

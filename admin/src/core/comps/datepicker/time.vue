@@ -221,6 +221,7 @@ li{
     display: inline-block;
     margin: 10px 20px;
     vertical-align: middle;
+    position: relative;
 }
 
 .timeContent .searchBar{

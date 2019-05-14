@@ -114,6 +114,7 @@
 
 <script>
 
+import Unit from "../core/tool/commonUtil.js";
 import Config from "./createConfig.js";
 
 export default {
@@ -155,7 +156,7 @@ export default {
             })
         },
         add(){
-            this.config.cols.push(this.config.defaultCol);
+            this.config.cols.push(Unit.object.cloneObj(this.config.defaultCol));
         },
         create(){
             if(!this.path || !this.project.selectProject){

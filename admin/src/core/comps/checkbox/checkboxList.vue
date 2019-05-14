@@ -1,12 +1,12 @@
 
 <template>
-    <div>
+    <div class="checkboxContent">
         <span class="span" v-for="(item,index) in data" :key="index">
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
             <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'" @click="changeItem(item)"></span>
         </span>
         
-        <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
+        <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
 
@@ -102,6 +102,13 @@ export default {
 </script>
 
 <style scoped>
+    .checkboxContent .span{
+        margin: 10px 20px;
+        display: inline-block;
+    }
 
+       .checkboxContent .span .fa{
+           vertical-align: middle;
+       }
 </style>
 

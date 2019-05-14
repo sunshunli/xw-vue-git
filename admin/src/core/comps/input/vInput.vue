@@ -54,7 +54,11 @@
 </script>
 
 <style scoped>
-    .inputRedIcon input{border-right: 0;border-color: red;outline: none;}
+    .inputRedIcon{
+        display: inline-block;
+        margin: 10px 20px;
+    }
+    .inputRedIcon input{border-right: 1;border-color: red;outline: none;}
     .inputRedIcon div span.icon{background: #fff;border-color: red;color: red;}
     .inputRedIcon p{color: red;}
 

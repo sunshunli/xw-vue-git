@@ -5,7 +5,7 @@
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
             <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
         </span>
-        <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
+        <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
 

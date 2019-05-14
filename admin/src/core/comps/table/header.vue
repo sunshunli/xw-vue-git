@@ -39,7 +39,7 @@
         },
         computed:{
             defaultCols:function(){
-                return Util.object.addPrimaryAndCk(Util.object.deepArrayClone(this.originCols),true);
+                return Util.object.addPrimaryAndCk(Util.object.cloneObj(this.originCols),true);
             }
         },
         methods:{

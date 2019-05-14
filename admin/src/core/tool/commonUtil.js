@@ -60,9 +60,6 @@ let CommonUtil = {
             }
             return null;
         },
-        deepArrayClone(data){
-            return [...data];
-        },
         getProperties(obj){
             let res = [];
             if(!obj){

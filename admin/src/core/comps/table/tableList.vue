@@ -37,7 +37,7 @@
         },
         computed:{
             originCols:function(){
-                return Util.object.deepArrayClone(this.options.map);
+                return Util.object.cloneObj(this.options.map);
             },
             showCk:function(){
                 return this.options.showCk;

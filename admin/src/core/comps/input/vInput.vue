@@ -63,5 +63,9 @@
     .inputGreenIcon div span.icon{background: #fff;font-size: 16px;color: rgb(72, 255, 0);}
     .inputGreenIcon p{display: none}
 
-    .inputIcon{border-right: 0;}
+    .inputIcon{
+        border-right: 0;
+        display: inline-block;
+        margin: 10px 20px;
+    }
 </style>

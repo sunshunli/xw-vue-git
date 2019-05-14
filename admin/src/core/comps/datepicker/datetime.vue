@@ -140,6 +140,8 @@ export default {
     .current .dataTimePicker{
        /* border: 1px solid #409EFF!important; */
         box-sizing: content-box;
+        display: inline-block;
+        margin: 10px 20px;
     }
     .dataTimePicker .date-box,.dataTimePicker .time-box{
         width: 120px;

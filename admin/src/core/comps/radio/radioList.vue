@@ -91,6 +91,8 @@ export default {
     .span{
         position:relative;
         cursor: pointer;
+        display: inline-block;
+        margin: 10px 20px;
     }
     .ck{
         position:absolute;

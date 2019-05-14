@@ -438,6 +438,8 @@ export default {
         height: 40px;
         position: relative;
         cursor: pointer;
+        display: inline-block;
+        margin: 10px 20px;
     }
     .div-box i {
         position: absolute;

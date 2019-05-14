@@ -218,6 +218,9 @@ li{
     max-width: 200px;
     height: auto;
     width:100%;
+    display: inline-block;
+    margin: 10px 20px;
+    vertical-align: middle;
 }
 
 .timeContent .searchBar{

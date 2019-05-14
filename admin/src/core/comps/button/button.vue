@@ -69,9 +69,9 @@ export default {
         cursor: pointer;
     }
     .default{
-        background-color: #ff36b6;
-        color: #fff;
-        border-color:#ff36b6;
+        background-color: #fff;
+        color: #3e3a3a;
+        border-color:#3e3a3a;
     }
 
     .back{

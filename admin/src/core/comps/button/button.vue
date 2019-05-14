@@ -71,7 +71,7 @@ export default {
     .default{
         background-color: #fff;
         color: #3e3a3a;
-        border-color:#3e3a3a;
+        border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
     }
 
     .back{

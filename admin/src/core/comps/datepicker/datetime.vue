@@ -187,11 +187,12 @@ export default {
     /* 日期 */
      .picker-box {
         /* display: inline-block; */
-        width: 290px;
+        /* width: 290px; */
+        width: 330px;
         /* border: 1px solid #aeaeae; */
         box-sizing: border-box;
         margin-top: 1px;
-        left:0;
+        left:-20px;
         position: absolute;
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);

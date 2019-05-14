@@ -219,7 +219,7 @@ li{
     height: auto;
     width:100%;
     display: inline-block;
-    margin: 10px 20px;
+    margin: 5px 20px;
     vertical-align: middle;
     position: relative;
 }

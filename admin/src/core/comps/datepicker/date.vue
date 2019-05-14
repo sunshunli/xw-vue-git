@@ -439,7 +439,7 @@ export default {
         position: relative;
         cursor: pointer;
         display: inline-block;
-        margin: 10px 20px;
+        margin: 5px 20px;
     }
     .div-box i {
         position: absolute;
@@ -479,7 +479,8 @@ export default {
 
     .picker-box {
         /* display: inline-block; */
-        width: 290px;
+        /* width: 290px; */
+        width: 330px;
         /* border: 1px solid #aeaeae; */
         /* box-sizing: border-box; */
         margin-top: 4px;

@@ -62,7 +62,7 @@
     .inputRedIcon div span.icon{background: #fff;border-color: red;color: red;}
     .inputRedIcon p{color: red;}
 
-
+    .inputGreenIcon{display: inline-block;}
     .inputGreenIcon input{border-right: 0;}
     .inputGreenIcon div span.icon{background: #fff;font-size: 16px;color: rgb(72, 255, 0);}
     .inputGreenIcon p{display: none}

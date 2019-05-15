@@ -124,7 +124,7 @@
          */
         noticeFromBottom(item){
             //多选
-            if(this.multiple){
+            if(this.multiple != undefined){
                 if(item.ck){
                     item.ck = false;
                     item.cls = "";

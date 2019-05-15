@@ -1,6 +1,6 @@
 <template>
 
-    <div style="position:relative">
+    <div style="position:relative" class="selectContent">
         <div class="searchMulSelect" :class="borderCls" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
@@ -205,6 +205,13 @@
 <style>
     .blueborder{
         border-color:#409eff !important;
+    }
+    
+    .selectContent{
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+        vertical-align: middle;
     }
     
     .searchMulSelect{

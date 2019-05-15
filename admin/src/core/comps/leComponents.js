@@ -5,7 +5,7 @@ import LeCheckboxList from "./checkbox/checkboxList.vue";
 import LeRadioList from "./radio/radioList.vue";
 import VInput from "./input/vInput.vue";
 import AutoComplete from "./input/autoComplete.vue";
-import LocalSelect from "./select/localSelect.vue";
+import LeLocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
@@ -25,7 +25,7 @@ export default{
         Vue.component('LeRadioList',ValidataHOC(LeRadioList));
         Vue.component('VInput',ValidataHOC(VInput));
         Vue.component('AutoComplete',AutoComplete);
-        Vue.component('LocalSelect',LocalSelect);
+        Vue.component('LeLocalSelect',ValidataHOC(LeLocalSelect));
         Vue.component('TableList',TableList);
         Vue.component('FileUpload',FileUpload);
         Vue.component('LeAsynTree',LeAsynTree);

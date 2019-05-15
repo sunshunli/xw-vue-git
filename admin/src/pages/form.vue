@@ -39,6 +39,9 @@
             LeCheckboxList
             <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
             
+            LeLocalSelect
+            <le-local-select multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select>
+
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
 
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import Unit from "../core/tool/commonUtil.js";
 export default {
     name:"FormValidate",
     data(){
@@ -85,11 +89,15 @@ export default {
         ]
         let cd = [
             {name:"aaa",code:"1"},
+            {name:"aaa1",code:"1"},
+            {name:"aaa2",code:"1"},
             {name:"bbb",code:"2"},
             {name:"ccc",code:"3"},
         ]
         this.$refs["r1"].getCurrentComponent().init(rd);
         this.$refs["cl1"].getCurrentComponent().init(cd);
+
+        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(cd));
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
         // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");

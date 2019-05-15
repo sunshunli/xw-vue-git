@@ -13,6 +13,8 @@
 		
 		<!--下拉弹出框-->
 		<bottom-section :display-name="displayName" :searchKey="datas.searchName" :data="datas.bottomArray" :notice-parent="noticeFromBottom"></bottom-section>
+    
+        <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
 
@@ -22,11 +24,15 @@
   import BottomSection from "./bottom.vue";
 
   export default {
-    name: 'LocalSelect',
+    name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue"],
     components: {LeftSection,BottomSection},
     data () {
         return {
+            validataComponentType:"Radio",
+            state:{
+                showError:false,
+            },
             borderCls:"",
             data:[],
             datas:{
@@ -120,8 +126,8 @@
             //多选
             if(this.multiple){
                 if(item.ck){
-                item.ck = false;
-                item.cls = "";
+                    item.ck = false;
+                    item.cls = "";
                 }else{
                     item.ck = true;
                     item.cls = "active";
@@ -162,7 +168,13 @@
          * @returns items:所选的对象数组，vals:所选的值集合
          */
         getSelectedItems(){
-            return CommonUtil.object.cloneObj(CommonUtil.object.getCheckedItems(this.originData,this.displayValue));
+            return CommonUtil.object.getCheckedItems(this.originData,this.displayValue);
+        },
+        getValue(){
+            return this.getSelectedItems().vals.join(',');
+        },
+        setValue(){
+            
         },
         /**
          * @description 清空

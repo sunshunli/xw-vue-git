@@ -58,14 +58,12 @@ function ValidataHOC(Component){
                 if(currentComp.validataComponentType == "Input"){
                     if(value){
                         currentComp.state = {
-                            borderCls:"inputGreenIcon",
-                            successIcon:"icon-duihao",
+                            successIcon:"fa-check-circle-o",
                             showError:false,
                         }
                     }else{
                         currentComp.state = {
-                            borderCls:"inputRedIcon",
-                            successIcon:"icon-cuo",
+                            successIcon:"fa-times-circle-o",
                             showError:true,
                         }
                     }

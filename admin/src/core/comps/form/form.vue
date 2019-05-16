@@ -1,7 +1,13 @@
 
 <template>
-    <div>
-        <slot></slot>
+    <div class="formStyle">
+        <div class="container">
+            <div class="medium formDiv">
+                <form>
+                    <slot></slot>
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,4 +83,32 @@ export default {
 
 <style scoped>
     
+    *{
+        margin: 0;
+        padding: 0;
+        outline: none;
+        text-decoration: none;
+        list-style: none;
+    }
+
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+
+    .formStyle{
+        width: 100%;
+    }
+
+    .formStyle .container{
+        width: 800px;
+        overflow-y: scroll;
+        padding: 30px 0; 
+    }
+
+    .formStyle .container .formDiv{
+        overflow: hidden;
+        min-height: 500px;
+        text-align: left;
+    }
 </style>

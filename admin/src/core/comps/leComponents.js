@@ -1,5 +1,4 @@
 
-
 import LeButton from "./button/button.vue";
 import LeCheckboxList from "./checkbox/checkboxList.vue";
 import LeRadioList from "./radio/radioList.vue";
@@ -10,7 +9,7 @@ import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
 import LeLocalTree from "./tree/localTree.vue";
-import LeForm from "../comps/input/form.vue";
+import LeForm from "../comps/form/form.vue";
 import LeDatePicker from "../comps/datepicker/date.vue";
 import LeTimePicker from "../comps/datepicker/time.vue";
 import LeDateTimePicker from "../comps/datepicker/datetime.vue";
@@ -37,36 +36,3 @@ export default{
         Vue.component('LeForm',LeForm);
     }
 }
-
-
-// //父类
-// var Parent = function(){
-
-//     this.msg = "";
-//     this.showMsgTag = false;
-//     this.validataFn = function(){
-
-//     }
-
-//     this.showMsg = function(flag){
-//         this.showMsgTag = flag;
-//     }
-// }
-
-// //input
-// var SubInput = function(){
-//     Parent.apply(this,[]);
-
-//     this.validataFn = function(){
-//         //todo
-//     }
-// }
-
-// //radio
-// var SubRadio = function(){
-//     Parent.apply(this,[]);
-
-//     this.validataFn = function(){
-//         //todo
-//     }
-// }

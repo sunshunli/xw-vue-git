@@ -18,12 +18,15 @@
         <le-button type="stop" value="stop"></le-button>
         <le-button type="setting" value="setting"></le-button>
         <le-button type="default" value="default"></le-button>
-        <le-form ref="form1">
-            form
-            
-            <v-input type="text" msg="正整数11" vType='number' on></v-input>
 
-            继续验证：<v-input vType="number" msg="正整数22" on required></v-input>
+
+    <v-input label="年龄" type="text"></v-input>
+
+        <le-form ref="form1">
+            
+            <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
+
+            <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
 
             LeDateTimePicker
             <le-date-time-picker ref="dt1" msg="日期and时间不允许为空" on></le-date-time-picker>

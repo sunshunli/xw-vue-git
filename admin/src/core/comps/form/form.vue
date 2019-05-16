@@ -168,7 +168,7 @@ export default {
     }
     
     .formStyle .form-item .form-item-input{
-        width: 88%;
+        /* width: 88%; */
         height: 40px;
         font-size: 14px;
         line-height: 40px;

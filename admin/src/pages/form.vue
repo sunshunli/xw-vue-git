@@ -19,8 +19,9 @@
         <le-button type="setting" value="setting"></le-button>
         <le-button type="default" value="default"></le-button>
 
-
     <v-input label="年龄" type="text"></v-input>
+    <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
+    <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
 
         <le-form ref="form1">
             
@@ -28,22 +29,17 @@
 
             <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
 
-            LeDateTimePicker
-            <le-date-time-picker ref="dt1" msg="日期and时间不允许为空" on></le-date-time-picker>
-            LeRadioList
-            <le-radio-list ref="r1" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
+            <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
 
-            LeDatePicker
-            <le-date-picker ref="d1" msg="日期不允许为空" on></le-date-picker>
+            <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
+           
+            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
 
-            LeTimePicker
-            <le-time-picker ref="t1" msg="时间不允许为空" on></le-time-picker>
+            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空" on></le-time-picker>
 
-            LeCheckboxList
-            <le-checkbox-list @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
-            
-            LeLocalSelect
-            <le-local-select multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select>
+            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on></le-date-time-picker>           
+
+            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
 
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>

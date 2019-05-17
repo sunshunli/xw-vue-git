@@ -108,7 +108,7 @@ export default {
 
     .formStyle .container .formDiv{
         overflow: hidden;
-        min-height: 500px;
+        min-height: 1000px;
         text-align: left;
         padding:10px 0;
     }

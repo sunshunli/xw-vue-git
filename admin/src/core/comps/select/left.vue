@@ -46,7 +46,7 @@
 	    white-space: nowrap;
 	    box-sizing: border-box;
 	    border-color: transparent;
-	    margin: 2px 0 2px 6px;
+	    margin: 7px 0 2px 6px;
 	    background-color: #f0f2f5;
 	    color: #909399;
 	    padding-right: 25px;

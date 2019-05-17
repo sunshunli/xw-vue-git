@@ -1,13 +1,15 @@
 
 
 <template>
-    <div >
-        <div style = "display:inline-block;position:relative;">
+    <div class="form-item">
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div class="form-item-div" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input type="text" class="date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input type="text" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clearDateEvent"></i>
+                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
@@ -40,7 +42,6 @@
                 </div>
             </div>
 
-            <p class="text-left" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
 </template>
@@ -433,13 +434,13 @@ export default {
         box 
     */
     .div-box {
-        max-width: 200px;
+        /* max-width: 200px; */
         width:100%;
         height: 40px;
         position: relative;
         cursor: pointer;
         display: inline-block;
-        margin: 5px 20px;
+        /* margin: 5px 20px; */
     }
     .div-box i {
         position: absolute;
@@ -472,7 +473,7 @@ export default {
         outline: none;
         padding: 0 26px;
         transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        max-width: 200px;
+        /* max-width: 200px; */
         width:100%;
         text-align: center;
     }
@@ -549,5 +550,125 @@ export default {
     .picker-body table td:hover {
         background: #f55;
         color: #fff;
+    }
+
+
+
+    .form-item{
+        width: 55%;
+        text-align: left;
+        margin:0 0 10px 0;
+    }
+
+    .form-item .form-item-label{
+        width: 18%;
+        margin-right: 10px;
+        text-align: right;
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 14px;
+        color: #606266;
+        line-height: 40px;
+        padding: 0;
+        box-sizing: border-box;
+        margin-bottom: 0;
+    }
+    .medium .form-item .form-item-label{
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
+    .small .form-item .form-item-label{
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+    }
+    .mini .form-item .form-item-label{
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+    }
+    .form-item .form-item-div{
+        display: inline-block;
+        line-height: normal;
+        width: 35%;
+        vertical-align: top;
+    }
+    .requireed::before{
+        content: "*";
+        color: #f56c6c;
+        font-size: 12px;
+        margin-right: 2px;
+    }
+    .form-item .form-item-input{
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+        line-height: 40px;
+        display: inline-block;
+        border: 1px solid #dcdfe6;
+        border-radius: 5px;
+        padding: 0 8% 0 4%;
+        color: #606266;
+        outline: none;
+    }
+    .form-item .form-item-input:focus{
+        border: 1px solid #409eff;
+        outline: none;
+    }
+    .medium .form-item .form-item-input{
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
+    .small .form-item .form-item-input{
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+    }
+    .mini .form-item .form-item-input{
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+    }
+
+    .form-item .promptMsg{
+        font-size: 12px;
+        color: #f56c6c;
+        line-height: 20px;
+        text-align: left;
+        position: absolute;
+    }
+
+    .medium .fa-check-circle-o .form-item-input{
+        border: 1px solid #67c23a;
+    }
+
+    .small .fa-check-circle-o .form-item-input{
+        border: 1px solid #67c23a;
+    }
+
+    .mini .fa-check-circle-o .form-item-input{
+        border: 1px solid #67c23a;
+    }
+
+    .medium .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
+    }
+
+    .small .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
+    }
+
+    .mini .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
+    }
+
+    .fa-times-circle-o:before{
+        content:'';
+    }
+
+    .fa-check-circle-o:before{
+        content:'';
     }
 </style>

@@ -1,29 +1,32 @@
 
 <template>
-    <div class="timeContent" :name="KEYS.ROOTDOM">
-        <div class="searchBar">
+    <div class="form-item timeContent" :name="KEYS.ROOTDOM">
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div class="form-item-div">
+            <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
                 <div class="timeInput" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clearTimeStr"></div>
-        </div>
-        <div class="timePicker" :name="KEYS.timePanelDomKey">
-            <div class="timePanel">
-                <div class="hour">
-                    <ul :name="KEYS.hourDomKey"></ul>
+                <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
+            </div>
+            <div class="timePicker" :name="KEYS.timePanelDomKey">
+                <div class="timePanel">
+                    <div class="hour">
+                        <ul :name="KEYS.hourDomKey"></ul>
+                    </div>
+                    <div class="minute">
+                        <ul :name="KEYS.minDomKey"></ul>
+                    </div>
+                    <div class="seconds">
+                        <ul :name="KEYS.secDomKey"></ul>
+                    </div>
                 </div>
-                <div class="minute">
-                    <ul :name="KEYS.minDomKey"></ul>
-                </div>
-                <div class="seconds">
-                    <ul :name="KEYS.secDomKey"></ul>
+                <div class="timeBtnGroup">
+                    <button id="cancel" type="button" @click.stop="closePicker">关闭</button>
+                    <button id="confirm" type="button" @click.stop="ok">确定</button>
                 </div>
             </div>
-            <div class="timeBtnGroup">
-                <button id="cancel" type="button" @click.stop="closePicker">关闭</button>
-                <button id="confirm" type="button" @click.stop="ok">确定</button>
-            </div>
         </div>
-         <p class="text-left" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
     </div>
 </template>
 
@@ -215,7 +218,7 @@ li{
 }
 
 .timeContent{
-    max-width: 200px;
+    /* max-width: 200px; */
     height: auto;
     width:100%;
     display: inline-block;
@@ -225,7 +228,7 @@ li{
 }
 
 .timeContent .searchBar{
-    max-width: 200px;
+    /* max-width: 200px; */
     width:100%;
     height: 40px;
     position: relative;
@@ -264,7 +267,7 @@ li{
     outline: none;
     padding: 0 26px;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    max-width: 200px;
+    /* max-width: 200px; */
     width:100%;
 }
 
@@ -389,4 +392,130 @@ li{
         border:1px solid #dcdfe6;
         border-radius:3px;
 }
+
+
+
+
+.form-item{
+    width: 55%;
+    text-align: left;
+    margin:0 0 10px 0;
+}
+
+.form-item .form-item-label{
+    width: 18%;
+    margin-right: 10px;
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+.medium .form-item .form-item-label{
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+}
+.small .form-item .form-item-label{
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+}
+.mini .form-item .form-item-label{
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+}
+.form-item .form-item-div{
+    display: inline-block;
+    line-height: normal;
+    width: 35%;
+    vertical-align: top;
+    position: relative;
+}
+.requireed::before{
+    content: "*";
+    color: #f56c6c;
+    font-size: 12px;
+    margin-right: 2px;
+}
+.form-item .form-item-input{
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    display: inline-block;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    padding: 0 8% 0 4%;
+    color: #606266;
+    outline: none;
+}
+.form-item .form-item-input:focus{
+    border: 1px solid #409eff;
+    outline: none;
+}
+.medium .form-item .form-item-input{
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+}
+.small .form-item .form-item-input{
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+}
+.mini .form-item .form-item-input{
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+}
+
+.form-item .promptMsg{
+    font-size: 12px;
+    color: #f56c6c;
+    line-height: 20px;
+    text-align: left;
+    position: absolute;
+}
+
+.medium .fa-check-circle-o .timeInput{
+    border: 1px solid #67c23a;
+}
+
+.small .fa-check-circle-o .timeInput{
+    border: 1px solid #67c23a;
+}
+
+.mini .fa-check-circle-o .timeInput{
+    border: 1px solid #67c23a;
+}
+
+.medium .fa-times-circle-o .timeInput{
+    border: 1px solid #f56c6c;
+}
+
+.small .fa-times-circle-o .timeInput{
+    border: 1px solid #f56c6c;
+}
+
+.mini .fa-times-circle-o .timeInput{
+    border: 1px solid #f56c6c;
+}
+
+.fa-times-circle-o:before{
+    content:'';
+}
+
+.fa-check-circle-o:before{
+    content:'';
+}
+
+
+
+
 </style>

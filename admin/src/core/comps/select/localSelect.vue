@@ -1,20 +1,23 @@
 <template>
 
-    <div style="position:relative" class="selectContent">
-        <div class="searchMulSelect" :class="borderCls" @click.stop="focusInput">
+    <div style="position:relative" class="form-item selectContent">
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div class="form-item-div searchMulSelect" :class="borderCls" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
 				
 				<left-section :display-name="displayName" :data="datas.leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
 				<input ref="inputdom" @click.stop="clickInput" type="text" class="searchMsg" @input="inputChange" v-model="datas.searchName" />
-			</div>
-		</div>
+			
+                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            </div>
 		
-		<!--下拉弹出框-->
-		<bottom-section :display-name="displayName" :searchKey="datas.searchName" :data="datas.bottomArray" :notice-parent="noticeFromBottom"></bottom-section>
-    
-        <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
+            <!--下拉弹出框-->
+            <bottom-section :display-name="displayName" :searchKey="datas.searchName" :data="datas.bottomArray" :notice-parent="noticeFromBottom"></bottom-section>
+        
+            <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
+        </div>
     </div>
 </template>
 
@@ -230,8 +233,7 @@
 	    padding: 0 5px;
 	    width: 280px;
         cursor: pointer;
-        margin-left: 8px;
-        margin-top: 8px;
+       margin: 0;
 	}
 	
 	.searchMulSelect input:focus{
@@ -244,7 +246,7 @@
 	    z-index: 2270;
 	    position: absolute;
 	    top: 48px;
-	    left: 8px;
+	    left: 0;
 	    border: 1px solid #e4e7ed;
 	    border-radius: 4px;
 	    background-color: #fff;
@@ -254,12 +256,14 @@
 	}
 	
 	.searchMulSelect .tags{
-		max-width: 100%;
-		position: absolute;
-	    line-height: normal;
-	    white-space: normal;
-	    z-index: 1;
-	    top: 5px; 
+		width: 100%;
+        height: 100%;
+        position: absolute;
+        line-height: normal;
+        white-space: normal;
+        z-index: 1;
+        top: 0;
+        left: 0;
 	}
 	
 	.searchMulSelect .searchMsg{
@@ -269,7 +273,8 @@
 	    font-size: 14px;
 	    border:none;
 	    padding: 0 5px;
-	    height: 28px;
+	    height: 100%;
+        line-height: 100%;
 	    background-color: transparent;
 	    width: 40px;
 	    vertical-align: top;

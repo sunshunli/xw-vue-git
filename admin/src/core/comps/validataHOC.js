@@ -56,13 +56,12 @@ function ValidataHOC(Component){
                 }
             },
             setIsSuccess(value){
-                debugger
                 let currentComp = this.$children[0];
                 //设置input错误信息的隐藏和显示
                 if(currentComp.validataComponentType == "Input"){
                     currentComp.state = {
                         successIcon:value?"fa-check-circle-o":"fa-times-circle-o",
-                        showError:value?true:false,
+                        showError:!value?true:false,
                     }
                 }
                 //其他非空组件，radioList，checkboxList，selectList错误信息的隐藏和显示

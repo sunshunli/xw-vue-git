@@ -160,7 +160,8 @@ export default {
                 showError:false,
                 currentYear:new Date().getFullYear(),
                 currentMonth:new Date().getMonth() + 1,
-                currentDay:new Date().getDate()
+                currentDay:new Date().getDate(),
+                successIcon:""
             },
             data:[],
             selectDay:"",
@@ -247,6 +248,7 @@ export default {
             this.setValue();
             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
                 this.state.showError = true;
+                this.state.successIcon = "fa-times-circle-o";
             }
         },
         /**

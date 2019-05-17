@@ -66,7 +66,10 @@ function ValidataHOC(Component){
                 }
                 //其他非空组件，radioList，checkboxList，selectList错误信息的隐藏和显示
                 else{
-                    currentComp.state.showError = !value;
+                    currentComp.state = {
+                        successIcon:value?"fa-check-circle-o":"fa-times-circle-o",
+                        showError:!value?true:false,
+                    }
                 }
             }
         },

@@ -1,7 +1,7 @@
 
 
 <template>
-    <div>
+    <div style="text-align:left;">
         <le-button type="search" value="Search"></le-button>
         <le-button type="create" value="New"></le-button>
         <le-button type="edit" value="Modify"></le-button>
@@ -19,9 +19,19 @@
         <le-button type="setting" value="setting"></le-button>
         <le-button type="default" value="default"></le-button>
 
-    <v-input label="年龄" type="text"></v-input>
-    <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
-    <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
+        <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
+        <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
+        <!-- <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+        <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>  -->
+        <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
+        <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"  on required></le-time-picker>
+        <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
+        <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+        <le-button value="Form提交" @click="submit"></le-button>
+
+
+        <h3>------------------------------------------------------------------------------------------------------</h3>
+
 
         <le-form ref="form1">
             
@@ -44,11 +54,10 @@
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
 
-        LeDialog
         <le-dialog title="弹出层" width="700" height="300" confirm-text="Save" cancel-text="Close" ref='dialog' :cb="submit">
             
         </le-dialog>
-        <le-button value="open" @click="open"></le-button>
+        dialog: <le-button value="open" @click="open"></le-button>
     </div>
 </template>
 

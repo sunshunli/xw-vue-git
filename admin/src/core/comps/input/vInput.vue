@@ -118,6 +118,15 @@
         font-size: 14px;
     }
 
+    .form-item i{
+        position: absolute;
+        top: 12px;
+        color: #c0c4cc;
+        font-weight: normal;
+        right: 10px;
+        cursor: pointer;
+    }
+
     .medium .form-item i{
         position: absolute;
         top: 12px;
@@ -125,6 +134,10 @@
         font-weight: normal;
         right: 10px;
         cursor: pointer;
+    }
+
+    .mini .form-item i{
+        top: 7px;
     }
 
     .small .form-item .form-item-input{

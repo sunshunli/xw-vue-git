@@ -3,6 +3,7 @@
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <input type="text" class="form-item-input" v-model="vValue" v-on:input="changeEvent()" />
+            <i class="fa fa-times-circle icon-del" @click.stop="clearDateEvent"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
@@ -116,6 +117,29 @@
         line-height: 40px;
         font-size: 14px;
     }
+
+    .form-item i{
+        position: absolute;
+        top: 12px;
+        color: #c0c4cc;
+        font-weight: normal;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .medium .form-item i{
+        position: absolute;
+        top: 12px;
+        color: #c0c4cc;
+        font-weight: normal;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .mini .form-item i{
+        top: 7px;
+    }
+
     .small .form-item .form-item-input{
         height: 34px;
         line-height: 34px;
@@ -127,10 +151,6 @@
         font-size: 12px;
     }
 
-
-
-    
-
     .form-item .promptMsg{
         font-size: 12px;
         color: #f56c6c;
@@ -139,27 +159,11 @@
         position: absolute;
     }
 
-    .medium .fa-check-circle-o .form-item-input{
+    .fa-check-circle-o .form-item-input{
         border: 1px solid #67c23a;
     }
 
-    .small .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
-    .mini .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
-    .medium .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .small .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .mini .fa-times-circle-o .form-item-input{
+    .fa-times-circle-o .form-item-input{
         border: 1px solid #f56c6c;
     }
 
@@ -170,55 +174,5 @@
     .fa.fa-check-circle-o{
         position: relative;
     }
-
-    /* 错误图标 */
-    .fa-times-circle-o:before{
-        content: "\f05c";
-        position: absolute;
-        top: 14px;
-        right: 8px;
-        font-size: 12px;
-        color: #f56c6c;
-    }
-
-    .medium .fa-times-circle-o:before{
-        top: 14px;
-    }
-
-    .small .fa-times-circle-o:before{
-        top: 12px;
-    }
-
-    .mini .fa-times-circle-o:before{
-        top: 9px;
-    }
-
-    /* 正确图标 */
-    .fa-check-circle-o:before{
-        content: "\f05d";
-        position: absolute;
-        top: 14px;
-        right: 8px;
-        font-size: 12px;
-        color: #67c23a;
-    }
-
-    .medium .fa-check-circle-o:before{
-        top: 15px;
-    }
-
-    .small .fa-check-circle-o:before{
-        top: 12px;
-    }
-
-    .mini .fa-check-circle-o:before{
-        top: 10px;
-    }
-
-
-
-
-    
-
 
 </style>

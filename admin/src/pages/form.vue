@@ -45,7 +45,7 @@
         </le-form>
 
         LeDialog
-        <le-dialog title="弹出层" width="700" height="600" confirm-text="Save" cancel-text="Close" ref='dialog' :cb="submit">
+        <le-dialog title="弹出层" width="700" height="300" confirm-text="Save" cancel-text="Close" ref='dialog' :cb="submit">
             
         </le-dialog>
         <le-button value="open" @click="open"></le-button>

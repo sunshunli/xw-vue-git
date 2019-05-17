@@ -515,7 +515,21 @@ li{
     content:'';
 }
 
+ .picker-header .ipt .form-item .form-item-label{ 
+        display: none;
+    }
 
+.picker-header .medium .ipt .form-item .form-item-label{
+        display: none;
+}
+
+.ipt .form-item .form-item-div{
+    width:100%;
+}
+
+.ipt .timeContent .timeInput{
+    text-align: center;
+}
 
 
 </style>

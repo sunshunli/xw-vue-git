@@ -671,4 +671,14 @@ export default {
     .fa-check-circle-o:before{
         content:'';
     }
+
+
+
+     .picker-header .ipt .form-item .form-item-label{ 
+        display: none;
+    }
+
+    .picker-header .medium .ipt .form-item .form-item-label{
+         display: none;
+    }
 </style>

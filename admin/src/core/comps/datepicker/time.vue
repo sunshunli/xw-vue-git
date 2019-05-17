@@ -399,7 +399,7 @@ li{
 .form-item{
     width: 55%;
     text-align: left;
-    margin:0 0 10px 0;
+    margin:0 0 22px 0;
 }
 
 .form-item .form-item-label{

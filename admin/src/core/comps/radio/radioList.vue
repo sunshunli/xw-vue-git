@@ -1,6 +1,5 @@
 <template>
     <div>
-        123
         <span class="span" @click="changeCK(item)" v-for="(item,index) in state.data" :key="index">
             <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
             <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>

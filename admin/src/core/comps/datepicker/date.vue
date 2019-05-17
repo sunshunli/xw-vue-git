@@ -300,6 +300,7 @@ export default {
             }
             this.state.showError = false;
             this.selectDayCallback && this.selectDayCallback();
+            this.state.successIcon = "fa-check-circle-o"
         },
         /**
          * @description 上一年切换事件

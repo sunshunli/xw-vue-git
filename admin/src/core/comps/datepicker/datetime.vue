@@ -1,7 +1,7 @@
 <template>
     <div class = "form-item current">
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class = "form-item-div dataTimePicker">
+        <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
@@ -53,7 +53,8 @@ export default {
             dateTimeStr:"",
             showDateTimePicker:false,
             state:{
-                showError:false
+                showError:false,
+                successIcon:''
             },
         }
     },
@@ -83,6 +84,7 @@ export default {
                 dateComp.closePicker();
                 timeComp.closePicker();
                 this.showDateTimePicker = false;
+                this.state.successIcon = "fa-check-circle-o";
             }
         },
         showDateTimePickerHandle(){
@@ -93,6 +95,7 @@ export default {
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
             this.setValue();
+            this.state.successIcon = "fa-times-circle-o";
         },
         initDateAndTime(){
             let y = new Date().getFullYear();

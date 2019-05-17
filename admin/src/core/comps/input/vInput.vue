@@ -3,7 +3,7 @@
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <input type="text" class="form-item-input" v-model="vValue" v-on:input="changeEvent()" />
-            <i class="fa fa-times-circle icon-del" @click.stop="clearDateEvent"></i>
+            <i class="fa fa-times-circle icon-del" @click.stop="clearInputEvent"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
@@ -42,6 +42,9 @@
             },
             setValue(value){
                 this.vValue = value;
+            },
+            clearInputEvent(){
+                this.setValue("");
             }
         },
         mounted () {

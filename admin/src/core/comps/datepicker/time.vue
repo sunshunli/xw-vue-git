@@ -2,7 +2,7 @@
 <template>
     <div class="form-item timeContent" :name="KEYS.ROOTDOM">
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class="form-item-div">
+        <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
                 <div class="timeInput" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
@@ -43,7 +43,8 @@ export default {
             validataComponentType:"TimePicker",
             //验证组件需要的错误信息提示
             state:{
-                showError:false
+                showError:false,
+                successIcon:''
             },
             //每次组件初始化都会赋上唯一的key
             KEYS:{
@@ -69,6 +70,7 @@ export default {
             this.getJQDom(this.KEYS.timeInputDomKey).html(res.join(':'));
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             this.state.showError = false;
+            this.state.successIcon = "fa-check-circle-o";
         },
         //关闭
         closePicker(){
@@ -182,6 +184,7 @@ export default {
             }
             this.setValue();
             this.getJQDom(this.KEYS.timeInputDomKey).html("");
+            this.state.successIcon = "fa-times-circle-o";
         }
     },
     mounted(){
@@ -392,9 +395,6 @@ li{
         border:1px solid #dcdfe6;
         border-radius:3px;
 }
-
-
-
 
 .form-item{
     width: 55%;

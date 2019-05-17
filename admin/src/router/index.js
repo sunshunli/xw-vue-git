@@ -5,6 +5,7 @@ const H = r=>require.ensure([],()=>r(require("../pages/h.vue")),"H");
 const TreeTest = r=>require.ensure([],()=>r(require("../pages/tree.vue")),"TreeTest");
 const FormValidate = r=>require.ensure([],()=>r(require("../pages/form.vue")),"FormValidate");
 const Login = r=>require.ensure([],()=>r(require("../pages/login/login.vue")),"Login");
+const TestPage = r=>require.ensure([],()=>r(require("../pages/test.vue")),"TestPage");
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ const routers = [
         path: '/form',
         name: 'form',
         component: FormValidate
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: TestPage
     }
 ];
 

@@ -118,7 +118,6 @@ import Unit from "../core/tool/commonUtil.js";
 import Config from "./createConfig.js";
 
 export default {
-    components:{},
     name:"H",
     data(){
         return {

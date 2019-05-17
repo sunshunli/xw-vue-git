@@ -187,10 +187,7 @@ export default {
 
     /* 日期 */
      .picker-box {
-        /* display: inline-block; */
-        /* width: 290px; */
         width: 330px;
-        /* border: 1px solid #aeaeae; */
         box-sizing: border-box;
         margin-top: 1px;
         left:-20px;
@@ -198,7 +195,7 @@ export default {
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         z-index:10000;
-        
+        margin-bottom: 30px;
     }
     /* 选择器头部 */
     .picker-header {
@@ -208,13 +205,14 @@ export default {
     }
     .picker-header .ipt{
         display: inline-block;
-        width: 140px;
+        /* width: 140px; */
+        width: 50%;
         margin: 10px;
         margin-left: 0px;
         position: relative;
         margin-right: 0;
-        
     }
+
     .picker-bottom button{
         float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:10px;background:#fff;
         outline: none;
@@ -356,4 +354,13 @@ export default {
     .fa-check-circle-o:before{
         content:'';
     }
+
+
+    .picker-header .ipt .form-item{ 
+        width: 100%;
+    }
+
+   
+
+
 </style>

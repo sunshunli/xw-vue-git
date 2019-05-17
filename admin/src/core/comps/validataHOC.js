@@ -18,6 +18,9 @@ function ValidataHOC(Component){
             },
             //正则验证方法
             verify(val){
+                if(this.$attrs.required != undefined && val == ""){
+                    return false;
+                }
                 var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                 reg = new RegExp(reg);
                 if (!reg.test(val)) {
@@ -53,6 +56,7 @@ function ValidataHOC(Component){
                 }
             },
             setIsSuccess(value){
+                debugger
                 let currentComp = this.$children[0];
                 //设置input错误信息的隐藏和显示
                 if(currentComp.validataComponentType == "Input"){

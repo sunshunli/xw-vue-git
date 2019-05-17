@@ -319,31 +319,7 @@ export default {
         border: 1px solid #67c23a;
     }
 
-    .medium .fa-check-circle-o.dataTimePicker{
-        border: 1px solid #67c23a;
-    }
-
-    .small .fa-check-circle-o.dataTimePicker{
-        border: 1px solid #67c23a;
-    }
-
-    .mini .fa-check-circle-o.dataTimePicker{
-        border: 1px solid #67c23a;
-    }
-
     .fa-times-circle-o.dataTimePicker{
-        border: 1px solid #f56c6c;
-    }
-
-    .medium .fa-times-circle-o.dataTimePicker{
-        border: 1px solid #f56c6c;
-    }
-
-    .small .fa-times-circle-o.dataTimePicker{
-        border: 1px solid #f56c6c;
-    }
-
-    .mini .fa-times-circle-o.dataTimePicker{
         border: 1px solid #f56c6c;
     }
 
@@ -354,7 +330,6 @@ export default {
     .fa-check-circle-o:before{
         content:'';
     }
-
 
     .picker-header .ipt .form-item{ 
         width: 100%;

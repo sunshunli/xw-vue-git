@@ -640,27 +640,11 @@ export default {
         position: absolute;
     }
 
-    .medium .fa-check-circle-o .form-item-input{
+    .fa-check-circle-o .form-item-input{
         border: 1px solid #67c23a;
     }
 
-    .small .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
-    .mini .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
-    .medium .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .small .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .mini .fa-times-circle-o .form-item-input{
+    .fa-times-circle-o .form-item-input{
         border: 1px solid #f56c6c;
     }
 
@@ -672,9 +656,7 @@ export default {
         content:'';
     }
 
-
-
-     .picker-header .ipt .form-item .form-item-label{ 
+    .picker-header .ipt .form-item .form-item-label{ 
         display: none;
     }
 

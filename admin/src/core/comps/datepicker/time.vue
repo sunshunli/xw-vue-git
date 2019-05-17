@@ -483,27 +483,11 @@ li{
     position: absolute;
 }
 
-.medium .fa-check-circle-o .timeInput{
+.fa-check-circle-o .timeInput{
     border: 1px solid #67c23a;
 }
 
-.small .fa-check-circle-o .timeInput{
-    border: 1px solid #67c23a;
-}
-
-.mini .fa-check-circle-o .timeInput{
-    border: 1px solid #67c23a;
-}
-
-.medium .fa-times-circle-o .timeInput{
-    border: 1px solid #f56c6c;
-}
-
-.small .fa-times-circle-o .timeInput{
-    border: 1px solid #f56c6c;
-}
-
-.mini .fa-times-circle-o .timeInput{
+.fa-times-circle-o .timeInput{
     border: 1px solid #f56c6c;
 }
 
@@ -515,9 +499,9 @@ li{
     content:'';
 }
 
- .picker-header .ipt .form-item .form-item-label{ 
-        display: none;
-    }
+.picker-header .ipt .form-item .form-item-label{ 
+    display: none;
+}
 
 .picker-header .medium .ipt .form-item .form-item-label{
         display: none;

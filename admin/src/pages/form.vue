@@ -35,11 +35,11 @@
            
             <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
 
-            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空" on></le-time-picker>
+            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"  on required></le-time-picker>
 
-            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on></le-date-time-picker>           
+            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
 
-            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
+            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>

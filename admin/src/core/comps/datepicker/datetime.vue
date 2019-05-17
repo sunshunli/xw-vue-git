@@ -313,6 +313,8 @@ export default {
         line-height: 20px;
         text-align: left;
         position: absolute;
+        top: 42px;
+        left: -1px;
     }
 
     .fa-check-circle-o.dataTimePicker{

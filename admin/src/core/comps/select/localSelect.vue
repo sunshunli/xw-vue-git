@@ -15,8 +15,6 @@
 		
             <!--下拉弹出框-->
             <bottom-section :display-name="displayName" :searchKey="datas.searchName" :data="datas.bottomArray" :notice-parent="noticeFromBottom"></bottom-section>
-        
-            <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
 </template>
@@ -213,7 +211,6 @@
     .selectContent{
         position: relative;
         display: inline-block;
-        margin: 10px;
         vertical-align: middle;
     }
     

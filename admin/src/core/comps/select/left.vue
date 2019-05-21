@@ -56,9 +56,9 @@
     }
 	
 	.searchMulSelect .selectedTagBox .selectedTag i{
-		width: 14px;
-	    height: 14px;
-	    line-height: 14px;
+		width: 12px;
+	    height: 12px;
+	    line-height: 12px;
 	    display: inline-block;
 	    position: absolute;
 	    top: 5px;

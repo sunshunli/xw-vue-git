@@ -1,22 +1,22 @@
 <template>
 	<div>
-		<div class="selectList" v-show="data.length == 0?false:true">
+		<div class="selectList" v-show="showButtom">
 			<ul>
 				<li @click.stop="selectItem(item)" v-for="(item,index) in data" :key="index" :class="item.cls">{{item[displayName]}}</li>
 			</ul>
 		</div>
-		<div class="selectList" v-show="searchKey && data.length == 0?true:false">
+		<!-- <div class="selectList" v-show="searchKey && data.length == 0?true:false">
 			<ul>
 				<li style="text-align:center">无数据</li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </template>
 <script>
 
   export default {
-    name: 'BottomSection',
-    props:['data','noticeParent','searchKey','displayName'],
+    name: 'ButtomSection',
+    props:['showButtom','data','noticeParent','searchKey','displayName'],
     data () {
 		return {
 			

@@ -7,15 +7,15 @@
 			<div class="tags">
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
 
-				<left-section :display-name="displayName" :data="datas.leftArray" :notice-parent="noticeFromLeft"></left-section>
+				<left-section :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input ref="inputdom" @click.stop="clickInput" type="text" class="searchMsg" @input="inputChange" v-model="datas.searchName" />
+				<input ref="inputdom" @click.stop="clickInput" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
 		
             <!--下拉弹出框-->
-            <bottom-section :display-name="displayName" :searchKey="datas.searchName" :data="datas.bottomArray" :notice-parent="noticeFromBottom"></bottom-section>
+            <buttom-section :show-buttom="showButtom" :display-name="displayName" :searchKey="searchName" :data="buttomArray" :notice-parent="noticeFromButtom"></buttom-section>
         </div>
     </div>
 </template>
@@ -23,12 +23,12 @@
 <script>
   import CommonUtil from '../../tool/commonUtil.js';
   import LeftSection from "./left.vue";
-  import BottomSection from "./bottom.vue";
+  import ButtomSection from "./buttom.vue";
 
   export default {
     name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue"],
-    components: {LeftSection,BottomSection},
+    components: {LeftSection,ButtomSection},
     data () {
         return {
             validataComponentType:"Radio",
@@ -36,24 +36,26 @@
                 successIcon:"",
                 showError:false,
             },
-            dataSource:[],
-            datas:{
-                searchName:"",
-                bottomArray:[],
-                leftArray:[],
-            }
+            searchName:"",
+            data:[],
+            showButtom:false
         }
     },
     computed:{
         /**
-         * @description 根据传递过来的数据源，深度clone一个源数据
+         * @description 根据输入关键字来搜索
+         * @returns 查询后的Array
          */
-        originData(){
-            let tmp = CommonUtil.object.cloneObj(this.dataSource);
-            if(tmp && tmp instanceof Array){
-                return CommonUtil.object.addPrimaryAndCk(tmp);
+        buttomArray(){
+            if(this.searchName != ""){
+                return this.data.filter(item=>{
+                    return item[this.displayName].indexOf(this.searchName) != -1;
+                })
             }
-            return [];
+            return this.data;
+        },
+        leftArray(){
+            return CommonUtil.object.getCheckedItems(this.data).items;
         }
     },
     methods:{
@@ -80,15 +82,7 @@
          * @returns
          */
         clickInput(){
-            if(this.datas.searchName == ""){
-                this.datas = {
-                    searchName:"",
-                    bottomArray:[],
-                    leftArray:this.datas.leftArray
-                }
-            }else{
-                this.datas.bottomArray = this.fliterOriginData();
-            }
+            this.showButtom = true;
         },
         /**
          * @description 搜索框的change事件，并且需要动态改变input框的宽度
@@ -97,16 +91,6 @@
         inputChange(){
             let offsetWidth = parseInt(this.$refs["inputdom"].offsetWidth);
             this.$refs["inputdom"].style.width = (offsetWidth + 5) + "px";
-            this.datas.bottomArray = this.fliterOriginData();
-        },
-        /**
-         * @description 根据输入关键字来搜索
-         * @returns 查询后的Array
-         */
-        fliterOriginData(){
-            return this.originData.filter(item=>{
-                return item[this.displayName].indexOf(this.datas.searchName) != -1;
-            })
         },
         /**
          * @description 设置数据源
@@ -114,77 +98,65 @@
          * @returns 
          */
         init(data){
-            this.dataSource = CommonUtil.object.cloneObj(data);
+            let tmp = CommonUtil.object.cloneObj(data);
+            this.data = CommonUtil.object.addPrimaryAndCk(tmp);
         },
         /**
-         * @description 更新数据源，更新完后分发到2个子组件
+         * @description 组件验证以及分发change事件
          * @returns
          */
-        updateDataSource(item){
-            this.datas = {
-                searchName:"",
-                bottomArray:this.originData,
-                leftArray:CommonUtil.object.getCheckedItems(this.originData).items
+        onEmit(){
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                if(this.leftArray.length == 0){
+                    this.setStateByFlag(false);
+                }else{
+                    this.setStateByFlag(true);
+                }
             }
-
             this.$emit("change",this.getSelectedItems());
         },
         /**
-         * @description bottom组件发来的更新通知,更新数据源
+         * @description buttom组件发来的更新通知,更新数据源
          * @returns
          */
-        noticeFromBottom(item){
+        noticeFromButtom(item){
             //多选
             if(this.multiple != undefined){
-                if(item.ck){
-                    item.ck = false;
-                    item.cls = "";
-                }else{
-                    item.ck = true;
-                    item.cls = "active fa fa-check";
-                }
+                item.ck = !item.ck;
+                item.cls = !item.ck?"":"active fa fa-check"
             }else{
                 //单选
-                this.originData.forEach(el=>{
+                this.data.forEach(el=>{
                     el.ck = false;
                     el.cls = "";
                 })
                 item.ck = true;
                 item.cls = "active fa fa-check";
             }
-            this.updateDataSource(item);
+            this.searchName = "";
+            this.onEmit();
         },
         /**
          * @description left组件发来的更新通知，更新数据源
          * @returns
          */
         noticeFromLeft(item){
-            debugger
             item.cls = "";
             item.ck = false;
-            this.updateDataSource(item);
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                if(CommonUtil.object.getCheckedItems(this.originData).items.length == 0){
-                    this.setStateByFlag(false);
-                }
-            }
+            this.onEmit();
         },
         /**
          * @description 点击其他地方的时候,隐藏buttom组件并重置边框样式
          */
         bodyClick(){
-            this.datas = {
-                searchName:"",
-                bottomArray:[],
-                leftArray:CommonUtil.object.getCheckedItems(this.originData).items
-            }
+            this.showButtom = false;
         },
         /**
          * @description 获取所选项
          * @returns items:所选的对象数组，vals:所选的值集合
          */
         getSelectedItems(){
-            return CommonUtil.object.getCheckedItems(this.originData,this.displayValue);
+            return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
         },
         getValue(){
             return this.getSelectedItems().vals.join(',');
@@ -197,20 +169,23 @@
          * @returns 
          */
         clear(){
-            this.dataSource = [];
+            this.data.forEach(item=>{
+                item.cls = "";
+                item.ck = false;
+            })
             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
                 this.setStateByFlag(false);
             }
         }
     },
-    mounted () {
+    mounted(){
         /**
          * @description 添加时间监听
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
     },
-    beforeDestroy () {
+    beforeDestroy(){
         /**
          * @description 在组件销毁之前，取消事件监听
          * @returns

@@ -32,50 +32,45 @@
 </script>
 
 <style scoped>
-	.selectList li.active:after{
-		font-family: "iconfont" !important;
-	    font-size: 12px;
-	    font-style: normal;
-	    -webkit-font-smoothing: antialiased;
-	    position: absolute;
-	    top: 0;
-	    right: 10px;
-	    content: "\e501";
-	    color:  #409eff;;
-	}
-    .selectList li{
-		font-size: 14px;
-	    padding: 0 20px;
-	    position: relative;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    color: #606266;
-	    height: 34px;
-	    line-height: 34px;
-	    box-sizing: border-box;
-	    cursor: pointer;
-	}
-	
-	.selectList li:hover{
-		background-color: #f5f7fa
-	}
-	
-	.selectList li i{
-		display: inline-block;
-	    position: absolute;
-	    top: 0;
-	    right: 5px;
-	    width: 16px;
-	    height: 100%;
-	    font-size: 12px;
-	}
-	
-	.selectList li.active{
-		color: #409eff;
-	}
-	
-	.selectList li.active i{
-		color: #409eff;
-	}
+.fa-check:before {
+    content: "\F00C";
+    position: absolute;
+    right: 10px;
+}
+.selectList li{
+		width: 100%;
+	font-size: 14px;
+	padding: 0 20px;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #606266;
+	height: 34px;
+	line-height: 34px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.selectList li:hover{
+	background-color: #f5f7fa
+}
+
+.selectList li i{
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	width: 16px;
+	height: 100%;
+	font-size: 12px;
+}
+
+.selectList li.active{
+	color: #409eff;
+}
+
+.selectList li.active i{
+	color: #409eff;
+}
 </style>

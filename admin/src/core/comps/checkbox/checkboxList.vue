@@ -176,7 +176,7 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 35%;
+        width: 80%;
         vertical-align: top;
     }
     .requireed::before{

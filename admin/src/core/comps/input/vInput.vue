@@ -103,7 +103,8 @@
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 35%;
+        /* width: 35%; */
+        width: 80%;
         vertical-align: top;
     }
     .requireed::before{
@@ -113,7 +114,8 @@
         margin-right: 2px;
     }
     .form-item .form-item-input{
-        width: 100%;
+        /* width: 100%; */
+        width: 50%;
         height: 40px;
         font-size: 14px;
         line-height: 40px;
@@ -139,7 +141,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 10px;
+        right: 51%;
         cursor: pointer;
     }
 
@@ -148,7 +150,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 10px;
+        right: 51%;
         cursor: pointer;
     }
 

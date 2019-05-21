@@ -101,9 +101,11 @@ export default {
     }
 
     .formStyle .container{
-        width: 800px;
+        /* width: 800px; */
+        width: 100%;
         overflow-y: scroll;
         padding: 30px 0; 
+        border: 1px solid red;
     }
 
     .formStyle .container .formDiv{

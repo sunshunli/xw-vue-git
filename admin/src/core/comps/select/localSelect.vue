@@ -195,7 +195,7 @@
   }
 </script>
 
-<style>
+<style scoped>
     .blueborder{
         border-color:#409eff !important;
     }
@@ -222,7 +222,8 @@
 	    padding: 0 5px;
 	    width: 280px;
         cursor: pointer;
-       margin: 0;
+        margin: 0;
+        vertical-align: middle;
 	}
 	
 	.searchMulSelect input:focus{
@@ -284,6 +285,10 @@
 
     .searchMulSelect.fa-times-circle-o {
         border: 1px solid #f56c6c;
+    }
+
+    .form-item .form-item-div{
+        width: 39.8%;
     }
 
 </style>

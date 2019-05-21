@@ -258,7 +258,7 @@ li{
     left:10px;
 }
 .timeContent .searchBar .clearTime{
-    right: 10px;
+    right: 51%;
     position: absolute;
     top: 12px;
     color: #c0c4cc;
@@ -280,7 +280,7 @@ li{
     padding: 0 26px;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
     /* max-width: 200px; */
-    width:100%;
+    width:50%;
 }
 
 .timeContent .timePicker{
@@ -442,8 +442,8 @@ li{
 .form-item .form-item-div{
     display: inline-block;
     line-height: normal;
-    width: 35%;
-    vertical-align: top;
+    width: 80%;
+    vertical-align: middle;
     position: relative;
 }
 .requireed::before{

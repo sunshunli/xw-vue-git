@@ -142,7 +142,11 @@ export default {
 }   
 </script>
 <style scoped>
-   
+    
+    .dataTimePicker /deep/.medium .form-item .form-item-input {
+        border: 3px solid red;
+    }
+
     .dataTimePicker{
         display:inline-block;
         width: 290px;
@@ -279,7 +283,7 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 35%;
+        width: 39.8%;
         vertical-align: top;
     }
     .requireed::before{
@@ -350,7 +354,10 @@ export default {
         width: 100%;
     }
 
-   
+   .dataTimePicker .medium .form-item .form-item-input{
+        width: 100%;
+        border: 1px solid yellowgreen;
+    }
 
 
 </style>

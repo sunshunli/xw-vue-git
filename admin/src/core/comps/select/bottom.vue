@@ -12,7 +12,6 @@
 		</div>
 	</div>
 </template>
-
 <script>
 
   export default {
@@ -24,9 +23,9 @@
 		}
     },
     methods:{
-      selectItem:function(item){
-          this.noticeParent(item);
-      }
+		selectItem(item){
+			this.noticeParent(item);
+		}
     }
   }
 </script>

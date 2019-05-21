@@ -21,7 +21,7 @@
       }
     },
     methods:{
-      removeItem:function(item){
+      removeItem(item){
           this.noticeParent(item);
       }
     }

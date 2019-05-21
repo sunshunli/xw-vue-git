@@ -158,6 +158,8 @@
          * @returns
          */
         noticeFromLeft(item){
+            debugger
+            item.cls = "";
             item.ck = false;
             this.updateDataSource(item);
             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){

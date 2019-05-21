@@ -278,4 +278,12 @@
 
     }
 
+    .searchMulSelect.fa-check-circle-o {
+        border: 1px solid #67c23a;
+    }
+
+    .searchMulSelect.fa-times-circle-o {
+        border: 1px solid #f56c6c;
+    }
+
 </style>

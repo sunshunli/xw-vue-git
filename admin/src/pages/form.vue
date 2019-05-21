@@ -52,7 +52,7 @@
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
 
-        <le-dialog title="弹出层" width="1000" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
+        <le-dialog title="弹出层" width="500" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
             <le-form ref="form2">
             
                 <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>

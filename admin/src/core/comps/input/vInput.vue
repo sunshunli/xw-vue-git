@@ -75,7 +75,7 @@
 
     .form-item .form-item-label{
         width: 18%;
-        margin-right: 10px;
+        margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
@@ -88,7 +88,7 @@
     }
     .medium .form-item .form-item-label{
         height: 40px;
-        line-height: 40px;
+        line-height: normal;
         font-size: 14px;
     }
     .small .form-item .form-item-label{
@@ -106,7 +106,7 @@
         line-height: normal;
         /* width: 35%; */
         width: 80%;
-        vertical-align: top;
+        vertical-align: text-bottom;
     }
     .requireed::before{
         content: "*";

@@ -255,7 +255,7 @@ export default {
 
     .form-item .form-item-label{
         width: 18%;
-        margin-right: 10px;
+        margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
@@ -268,7 +268,7 @@ export default {
     }
     .medium .form-item .form-item-label{
         height: 40px;
-        line-height: 40px;
+        line-height: normal;
         font-size: 14px;
     }
     .small .form-item .form-item-label{
@@ -285,7 +285,7 @@ export default {
         display: inline-block;
         line-height: normal;
         width: 39.8%;
-        vertical-align: top;
+        vertical-align: text-bottom;
     }
     .requireed::before{
         content: "*";

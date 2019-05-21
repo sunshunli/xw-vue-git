@@ -291,6 +291,7 @@
 
     .form-item .form-item-div{
         width: 39.8%;
+        vertical-align: text-bottom;
     }
 
 </style>

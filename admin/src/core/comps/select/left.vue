@@ -8,7 +8,6 @@
             <span>+{{data.length-1}}</span>
         </span>
     </span>
-    
 </template>
 
 <script>

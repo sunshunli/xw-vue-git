@@ -4,6 +4,7 @@ import DEFINE_KEY from "./Define.js";
 
 function ValidataHOC(Component){
     return {
+        inheritAttrs:false,
         methods:{
             //因为HOC没有直接return 当前的Component，所以在界面上面引用的时候，组件返回的是HOC组件, 要拿到具体的子组件必须调用这个方法
             getCurrentComponent(){
@@ -84,7 +85,7 @@ function ValidataHOC(Component){
                     this.$set(this.$attrs, "verify", this.verify);
                 }
                 //传递是否显示错误信息的方法
-                this.$set(this.$attrs, "getIsSuccess", this.getIsSuccess);
+                // this.$set(this.$attrs, "getIsSuccess", this.getIsSuccess);
                 this.$set(this.$attrs, "setIsSuccess", this.setIsSuccess);
                 this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
             }

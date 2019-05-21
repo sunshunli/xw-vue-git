@@ -37,10 +37,12 @@ import $ from "jquery";
 export default {
     name:"LeTimePicker",
     props:["msg"],
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
             //validataHOC组件属性
             validataComponentType:"TimePicker",
+            
             //验证组件需要的错误信息提示
             state:{
                 showError:false,

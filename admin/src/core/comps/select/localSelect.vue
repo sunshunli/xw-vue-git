@@ -5,7 +5,8 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
-				
+                <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+
 				<left-section :display-name="displayName" :data="datas.leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
 				<input ref="inputdom" @click.stop="clickInput" type="text" class="searchMsg" @input="inputChange" v-model="datas.searchName" />
@@ -291,6 +292,15 @@
 	    background-color: transparent;
 	    width: 40px;
 	    vertical-align: top;
-	}
+    }
+    
+    .tags .icon-del{
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #c0c4cc;
+        font-weight: normal;
+
+    }
 
 </style>

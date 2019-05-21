@@ -191,4 +191,11 @@
         position: relative;
     }
 
+    .searchMulSelect .icon-del{
+        position: absolute;
+        top: 12px;
+        color: #c0c4cc;
+        font-weight: normal;
+    }
+
 </style>

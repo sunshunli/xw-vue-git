@@ -32,6 +32,7 @@ import CommonUtil from "../../tool/commonUtil.js";
 export default {
     name:"LeCheckboxList",
     props:["displayName","displayValue"],
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
             validataComponentType:"Checkbox",

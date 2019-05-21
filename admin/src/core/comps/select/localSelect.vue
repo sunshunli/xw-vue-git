@@ -29,9 +29,11 @@
     name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue"],
     components: {LeftSection,ButtomSection},
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
         return {
             validataComponentType:"Radio",
+            
             state:{
                 successIcon:"",
                 showError:false,

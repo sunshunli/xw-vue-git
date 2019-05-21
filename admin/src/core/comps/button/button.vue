@@ -8,6 +8,7 @@ import DEFINE_KEY from "../Define.js";
 export default {
     name:"LeButton",
     props:["type","value","disabled"],
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
             

@@ -45,6 +45,7 @@ export default {
     name:"LeDateTimePicker",
     props:["msg"],
     components: {LeDatePicker,LeTimePicker},
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
             validataComponentType:"DateTimePicker",

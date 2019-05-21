@@ -1,22 +1,14 @@
 <template>
-    <!-- <div>
-        <span class="span" @click="changeCK(item)" v-for="(item,index) in state.data" :key="index">
-            <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-            <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
-        </span>
-        <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p>
-    </div> -->
-
-        <div class="form-item">
-            <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-            <div  class="form-item-div fa" :class="state.successIcon">
-                <span class="span" @click="changeCK(item)" v-for="(item,index) in state.data" :key="index">
-                    <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-                    <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
-                </span>
-                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-            </div>
+    <div class="form-item">
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div  class="form-item-div fa" :class="state.successIcon">
+            <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
+                <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
+                <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
+            </span>
+            <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
+    </div>
 </template>
 
 <script>
@@ -29,9 +21,10 @@ export default {
     data(){
         return {
             state:{
+                successIcon:"",
                 showError:false,
-                data:[],
             },
+            data:[],
             validataComponentType:"Radio",
             name:_idSeed.newId(),
         }
@@ -41,18 +34,28 @@ export default {
     },
     methods:{
         /**
+         * @description 设置成功失败的状态
+         * @param {bool} flag为 true or false
+         */
+        setStateByFlag(flag){
+            this.state = {
+                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                showError:!flag?true:false
+            }
+        },
+        /**
          * @description 设置数据源，自动添加ck属性来控制是否选中状态
          * @returns
          */
         init(data){
-            this.state.data = CommonUtil.object.addPrimaryAndCk(data);
+            this.data = CommonUtil.object.addPrimaryAndCk(data);
         },
         /**
          * @description 重置数据源
          * @returns
          */
         resetData(){
-            this.state.data.forEach(item=>{
+            this.data.forEach(item=>{
                 item.ck = false;
             })
         },
@@ -65,7 +68,7 @@ export default {
             item.ck = true;
             this.state.showError = false;
 
-            this.$emit("change",item,this.state.data);
+            this.$emit("change",item,this.data);
         },
         /**
          * @description 设置选中项, 数据回写用
@@ -85,7 +88,7 @@ export default {
          * @returns
          */
         getValue(){
-            let res = this.state.data.filter(item=>{
+            let res = this.data.filter(item=>{
                 return item.ck == true;
             });
             return res && res.length ==1?res[0][this.displayValue]:"";

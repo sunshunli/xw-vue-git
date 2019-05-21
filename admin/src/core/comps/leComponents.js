@@ -3,7 +3,6 @@ import LeButton from "./button/button.vue";
 import LeCheckboxList from "./checkbox/checkboxList.vue";
 import LeRadioList from "./radio/radioList.vue";
 import VInput from "./input/vInput.vue";
-import AutoComplete from "./input/autoComplete.vue";
 import LeLocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
 import FileUpload from "./upload/upload.vue";
@@ -23,7 +22,6 @@ export default{
         Vue.component('LeCheckboxList',ValidataHOC(LeCheckboxList));
         Vue.component('LeRadioList',ValidataHOC(LeRadioList));
         Vue.component('VInput',ValidataHOC(VInput));
-        Vue.component('AutoComplete',AutoComplete);
         Vue.component('LeLocalSelect',ValidataHOC(LeLocalSelect));
         Vue.component('TableList',TableList);
         Vue.component('FileUpload',FileUpload);

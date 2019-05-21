@@ -2,7 +2,7 @@
 
     <div style="position:relative" class="form-item selectContent">
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class="form-item-div searchMulSelect" :class="borderCls" @click.stop="focusInput">
+        <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
 				
@@ -32,10 +32,10 @@
         return {
             validataComponentType:"Radio",
             state:{
+                successIcon:"",
                 showError:false,
             },
-            borderCls:"",
-            data:[],
+            dataSource:[],
             datas:{
                 searchName:"",
                 bottomArray:[],
@@ -48,7 +48,7 @@
          * @description 根据传递过来的数据源，深度clone一个源数据
          */
         originData(){
-            let tmp = CommonUtil.object.cloneObj(this.data);
+            let tmp = CommonUtil.object.cloneObj(this.dataSource);
             if(tmp && tmp instanceof Array){
                 return CommonUtil.object.addPrimaryAndCk(tmp);
             }
@@ -57,12 +57,21 @@
     },
     methods:{
         /**
+         * @description 设置成功失败的状态
+         * @param {bool} flag为 true or false
+         */
+        setStateByFlag(flag){
+            this.state = {
+                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                showError:!flag?true:false
+            }
+        },
+        /**
          * @description 点击整体div，触发焦点到input框上面(输入框初始宽度不够)
          * @returns
          */
         focusInput(){
             this.$refs["inputdom"].focus();
-            this.borderCls = "blueborder";
             this.clickInput();
         },
         /**
@@ -104,7 +113,7 @@
          * @returns 
          */
         init(data){
-            this.data = data;
+            this.dataSource = CommonUtil.object.cloneObj(data);
         },
         /**
          * @description 更新数据源，更新完后分发到2个子组件
@@ -162,7 +171,6 @@
                 bottomArray:[],
                 leftArray:CommonUtil.object.getCheckedItems(this.originData).items
             }
-            this.borderCls = "";
         },
         /**
          * @description 获取所选项
@@ -182,8 +190,10 @@
          * @returns 
          */
         clear(){
-            this.borderCls = "";
-            this.data = [];
+            this.dataSource = [];
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                this.setStateByFlag(false);
+            }
         }
     },
     mounted () {

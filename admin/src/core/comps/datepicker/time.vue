@@ -44,7 +44,7 @@ export default {
             //验证组件需要的错误信息提示
             state:{
                 showError:false,
-                successIcon:''
+                successIcon:""
             },
             //每次组件初始化都会赋上唯一的key
             KEYS:{
@@ -61,6 +61,16 @@ export default {
         }
     },
     methods:{
+        /**
+         * @description 设置成功失败的状态
+         * @param {bool} flag为 true or false
+         */
+        setStateByFlag(flag){
+            this.state = {
+                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                showError:!flag?true:false
+            }
+        },
         //确定
         ok(){
             let res = [];
@@ -179,12 +189,11 @@ export default {
             return $("div [name="+key+"]");
         },
         clearTimeStr(){
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.state.showError = true;
-            }
             this.setValue();
             this.getJQDom(this.KEYS.timeInputDomKey).html("");
-            this.state.successIcon = "fa-times-circle-o";
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                this.setStateByFlag(false);
+            }
         }
     },
     mounted(){

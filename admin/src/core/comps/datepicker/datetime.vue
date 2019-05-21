@@ -58,20 +58,30 @@ export default {
             },
         }
     },
-    watch:{
-        dateTimeStr(val){
-            if(val == ""){
-                if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                    this.state.showError = true;
-                }else{
-                    this.state.showError = false;
-                }
-            }else{
-                this.state.showError = false;
-            }
-        }
-    },
+    // watch:{
+    //     dateTimeStr(val){
+    //         if(val == ""){
+    //             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+    //                 this.state.showError = true;
+    //             }else{
+    //                 this.state.showError = false;
+    //             }
+    //         }else{
+    //             this.state.showError = false;
+    //         }
+    //     }
+    // },
     methods:{
+        /**
+         * @description 设置成功失败的状态
+         * @param {bool} flag为 true or false
+         */
+        setStateByFlag(flag){
+            this.state = {
+                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                showError:!flag?true:false
+            }
+        },
         getDateTimeStr(){
             let dateComp = this.$refs[this.dateKey];
             let timeComp = this.$refs[this.timeKey];
@@ -95,7 +105,9 @@ export default {
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
             this.setValue();
-            this.state.successIcon = "fa-times-circle-o";
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                this.setStateByFlag(false);
+            }
         },
         initDateAndTime(){
             let y = new Date().getFullYear();

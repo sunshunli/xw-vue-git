@@ -186,6 +186,15 @@ export default {
         }
     },
     methods:{
+        setStateByFlag(flag){
+            this.state = {
+                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                showError:!flag?true:false,
+                currentYear:this.state.currentYear,
+                currentMonth:this.state.currentMonth,
+                currentDay:this.state.currentDay
+            }
+        },
         /**
          * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
          * @param year:年份
@@ -247,8 +256,7 @@ export default {
         clearDateEvent(){
             this.setValue();
             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.state.showError = true;
-                this.state.successIcon = "fa-times-circle-o";
+                this.setStateByFlag(false);
             }
         },
         /**

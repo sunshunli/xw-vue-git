@@ -32,6 +32,16 @@
             
         },
         methods:{
+            /**
+             * @description 设置成功失败的状态
+             * @param {bool} flag为 true or false
+             */
+            setStateByFlag(flag){
+                this.state = {
+                    successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
+                    showError:!flag?true:false
+                }
+            },
             changeEvent(e){
                 if(this.$attrs.checkIsOff()){
                     this.$attrs.setIsSuccess(this.$attrs.verify(this.vValue));
@@ -45,6 +55,9 @@
             },
             clearInputEvent(){
                 this.setValue("");
+                if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                    this.setStateByFlag(false);
+                }
             }
         },
         mounted () {

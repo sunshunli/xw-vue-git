@@ -61,13 +61,13 @@ export default {
                     }
                 }
                 res.success = count == 0?true:false;
-                return new Promise(function(resolve,reject){
+                return new Promise((resolve,reject)=>{
                     if(res.success){
                         resolve(res);
                     }else{
                         //显示出错组件的错误信息
                         errorComps.forEach(comp=>{
-                            comp.$attrs.setIsSuccess(false);
+                            comp.setStateByFlag(false);
                         })
                         reject(res);
                     }

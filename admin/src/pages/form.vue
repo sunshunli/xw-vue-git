@@ -19,14 +19,14 @@
         <le-button type="setting" value="setting"></le-button>
         <le-button type="default" value="default"></le-button>
 
-        <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
-        <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
+        <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
+        <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
         <!-- <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
         <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>  -->
-        <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
-        <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"  on required></le-time-picker>
-        <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
-        <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+        <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
+        <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
+        <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>           
+        <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
        
         <h3>------------------------------------------------------------------------------------------------------</h3>
 
@@ -88,22 +88,17 @@ export default {
         }
     },
     mounted(){
-        let rd = [
-            {name:"aaa",code:"1"},
-            {name:"bbb",code:"2"},
-            {name:"ccc",code:"3"},
-        ]
-        let cd = [
+        let data = [
             {name:"aaa",code:"1"},
             {name:"aaa1",code:"1"},
             {name:"aaa2",code:"1"},
             {name:"bbb",code:"2"},
             {name:"ccc",code:"3"},
         ]
-        this.$refs["r1"].getCurrentComponent().init(rd);
-        this.$refs["cl1"].getCurrentComponent().init(cd);
+        this.$refs["r1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["cl1"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
-        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(cd));
+        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
         // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");

@@ -140,7 +140,7 @@
                     item.cls = "";
                 }else{
                     item.ck = true;
-                    item.cls = "active";
+                    item.cls = "active fa fa-check";
                 }
             }else{
                 //单选
@@ -149,7 +149,7 @@
                     el.cls = "";
                 })
                 item.ck = true;
-                item.cls = "active";
+                item.cls = "active fa fa-check";
             }
             this.updateDataSource(item);
         },

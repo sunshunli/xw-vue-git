@@ -159,8 +159,12 @@
          */
         noticeFromLeft(item){
             item.ck = false;
-            item.cls = "";
             this.updateDataSource(item);
+            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
+                if(CommonUtil.object.getCheckedItems(this.originData).items.length == 0){
+                    this.setStateByFlag(false);
+                }
+            }
         },
         /**
          * @description 点击其他地方的时候,隐藏buttom组件并重置边框样式

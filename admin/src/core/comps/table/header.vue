@@ -90,6 +90,6 @@
     }
     .colsModal .bot input{width: 50px;line-height: 15px;margin: 0 5px;}
     .menu{position: absolute;left:10px;top:0;font-size: 20px;}
-    thead tr th{border:1px solid rgba(0,0,0,0.09);border-bottom:2px solid rgba(0,0,0,0.09);font-weight: 600;text-align: center;
+    thead tr th{border:1px solid rgba(0,0,0,0.09);border-bottom:none;font-weight: 600;text-align: center;
     color:rgba(0,0,0,0.85);font-size: 14px;}
 </style>

@@ -195,7 +195,7 @@ export default {
     .clearTime{
         position: absolute;
         top: 12px;
-        right: 1%;
+        right: 2%;
         color: #c0c4cc;
         font-weight: normal;
     }

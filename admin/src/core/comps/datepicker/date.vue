@@ -465,7 +465,7 @@ export default {
         left:10px;
     }
     .div-box .icon-del {
-        right:1%;
+        right:2%;
     }
     /* 
         date选择器

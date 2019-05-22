@@ -143,7 +143,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 1%;
+        right: 2%;
         cursor: pointer;
     }
 
@@ -152,7 +152,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 1%;
+        right: 2%;
         cursor: pointer;
     }
 

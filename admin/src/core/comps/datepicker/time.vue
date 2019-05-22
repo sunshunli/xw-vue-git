@@ -260,7 +260,7 @@ li{
     left:10px;
 }
 .timeContent .searchBar .clearTime{
-    right: 1%;
+    right: 2%;
     position: absolute;
     top: 12px;
     color: #c0c4cc;

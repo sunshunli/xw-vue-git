@@ -27,7 +27,6 @@
         <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
         <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>           
         <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
-      
 
         <le-form ref="form1" style="width:600px">
             
@@ -50,8 +49,8 @@
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
 
-        <le-dialog title="弹出层" width="500" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
-            <le-form ref="form2">
+        <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
+            <le-form ref="form2" style="width:600px">
             
                 <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
 

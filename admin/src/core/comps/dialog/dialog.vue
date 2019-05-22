@@ -135,11 +135,12 @@ export default {
         font-size: 14px;
         color: #606266;
         text-align: left;
-    
     }
     /* 滚动条整体的样式 */
     .le_dialog_contine::-webkit-scrollbar{
-        width:0px;
+        width: 1px;
+        height:10px;
+        /* background-color:transparent; */
     }
     /* ie */
     .le_dialog_contine{

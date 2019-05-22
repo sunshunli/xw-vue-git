@@ -36,6 +36,22 @@
     position: absolute;
     right: 10px;
 }
+
+  .selectList{
+		min-width: 100%;
+	    transform-origin: center top 0px;
+	    z-index: 2270;
+	    position: absolute;
+	    top: 48px;
+	    left: 0;
+	    border: 1px solid #e4e7ed;
+	    border-radius: 4px;
+	    background-color: #fff;
+	    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+	    box-sizing: border-box;
+	    margin: 5px 0;
+	}
+
 .selectList li{
 		width: 100%;
 	font-size: 14px;

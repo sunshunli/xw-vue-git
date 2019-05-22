@@ -25,6 +25,16 @@
   import LeftSection from "./left.vue";
   import ButtomSection from "./buttom.vue";
 
+    const getItemByDisplayValue = (data,displayValue,value)=>{
+        let res = null;
+        data.forEach(item=>{
+            if(item[displayValue] == value){
+                res = item;
+            }
+        })
+        return res;
+    }
+
   export default {
     name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue"],
@@ -33,7 +43,6 @@
     data () {
         return {
             validataComponentType:"Radio",
-            
             state:{
                 successIcon:"",
                 showError:false,
@@ -84,7 +93,10 @@
          * @returns
          */
         clickInput(){
-            this.showButtom = true;
+            if(this.data.length != 0){
+                this.showButtom = true;
+            }
+            
         },
         /**
          * @description 搜索框的change事件，并且需要动态改变input框的宽度
@@ -160,11 +172,28 @@
         getSelectedItems(){
             return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
         },
+        /**
+         * @description 获取选中项的displayValue的集合
+         * @returns {String} 逗号分隔的字符串
+         */
         getValue(){
+            if(this.data.length ==0){
+                return "";
+            }
             return this.getSelectedItems().vals.join(',');
         },
-        setValue(){
-            
+        /**
+         * @description 设置选中项
+         * @param {ids} displayValue的集合, 逗号分隔
+         */
+        setValue(ids){
+            ids && ids.split && ids.split(',').forEach(val=>{
+                let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
+                if(tmp){
+                    tmp.cls = "active fa fa-check";
+                    tmp.ck = true;
+                }
+            })
         },
         /**
          * @description 清空

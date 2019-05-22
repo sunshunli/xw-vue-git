@@ -445,9 +445,6 @@ export default {
     /* 
         box 
     */
-    .div-box{
-        width: 50%;
-    }
     form .form-item .form-item-div .div-box {
         /* max-width: 200px; */
         width:100%;
@@ -468,7 +465,7 @@ export default {
         left:10px;
     }
     .div-box .icon-del {
-        right:51%;
+        right:1%;
     }
     /* 
         date选择器
@@ -570,13 +567,14 @@ export default {
 
 
     .form-item{
-        width: 55%;
+        width: 32%;
+        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 18%;
+        width: 17%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -636,7 +634,7 @@ export default {
         height: 40px;
         line-height: 40px;
         font-size: 14px;
-        width: 50%;
+        width: 100%;
     }
 
     .small .form-item .form-item-input{

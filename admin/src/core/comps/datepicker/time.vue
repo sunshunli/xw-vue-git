@@ -260,7 +260,7 @@ li{
     left:10px;
 }
 .timeContent .searchBar .clearTime{
-    right: 51%;
+    right: 1%;
     position: absolute;
     top: 12px;
     color: #c0c4cc;
@@ -282,7 +282,7 @@ li{
     padding: 0 26px;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
     /* max-width: 200px; */
-    width:50%;
+    width:100%;
 }
 
 .timeContent .timePicker{
@@ -408,13 +408,14 @@ li{
 }
 
 .form-item{
-    width: 55%;
+    width:32%;
+    float: left;
     text-align: left;
     margin:0 0 22px 0;
 }
 
 .form-item .form-item-label{
-    width: 18%;
+    width: 17%;
     height: 40px;
     margin-right: 1%;
     text-align: right;

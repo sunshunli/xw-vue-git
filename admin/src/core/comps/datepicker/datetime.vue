@@ -143,10 +143,6 @@ export default {
 }   
 </script>
 <style scoped>
-    
-    .dataTimePicker /deep/.medium .form-item .form-item-input {
-        border: 3px solid red;
-    }
 
     .dataTimePicker{
         display:inline-block;
@@ -199,7 +195,7 @@ export default {
     .clearTime{
         position: absolute;
         top: 12px;
-        right: 10px;
+        right: 1%;
         color: #c0c4cc;
         font-weight: normal;
     }
@@ -210,7 +206,7 @@ export default {
         width: 330px;
         box-sizing: border-box;
         margin-top: 1px;
-        left:-20px;
+        left:0;
         position: absolute;
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
@@ -248,13 +244,14 @@ export default {
 
 
     .form-item{
-        width: 55%;
+        width: 32%;
+        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 18%;
+        width: 17%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -284,7 +281,7 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 39.8%;
+        width: 80%;
         vertical-align: text-bottom;
     }
     .requireed::before{

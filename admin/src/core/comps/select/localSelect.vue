@@ -204,8 +204,9 @@
     
     .selectContent{
         position: relative;
-        display: inline-block;
         vertical-align: middle;
+        width: 32%;
+        float: left;
     }
     
     .searchMulSelect{
@@ -275,7 +276,7 @@
     .tags .icon-del{
         position: absolute;
         top: 12px;
-        right: 10px;
+        right: 1%;
         color: #c0c4cc;
         font-weight: normal;
 
@@ -290,7 +291,7 @@
     }
 
     .form-item .form-item-div{
-        width: 39.8%;
+        width: 80%;
         vertical-align: text-bottom;
     }
 

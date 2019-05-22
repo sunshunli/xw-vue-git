@@ -116,20 +116,21 @@ export default {
 
 
     .form-item{
-        width: 55%;
+        width: 32%;
+        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 18%;
+        width: 17%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
         font-size: 14px;
         color: #606266;
-        line-height: 40px;
+        line-height: normal;
         padding: 0;
         box-sizing: border-box;
         margin-bottom: 0;

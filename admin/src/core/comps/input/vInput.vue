@@ -68,13 +68,15 @@
 
 <style scoped>
     .form-item{
-        width: 55%;
+        /* width: 55%; */
+        width: 32%;
+        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 18%;
+        width: 17%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -114,8 +116,8 @@
         margin-right: 2px;
     }
     .form-item .form-item-input{
-        /* width: 100%; */
-        width: 50%;
+        width: 100%;
+        /* width: 50%; */
         height: 40px;
         font-size: 14px;
         line-height: 40px;
@@ -141,7 +143,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 51%;
+        right: 1%;
         cursor: pointer;
     }
 
@@ -150,7 +152,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 51%;
+        right: 1%;
         cursor: pointer;
     }
 

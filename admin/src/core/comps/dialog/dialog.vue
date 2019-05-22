@@ -89,6 +89,7 @@ export default {
         flex-direction:column;
         padding: 20px 35px;
         border-radius: 3px;
+        min-width: 400px;
     }
 
     /* 上面部分 */

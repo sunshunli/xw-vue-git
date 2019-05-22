@@ -21,25 +21,23 @@
 
         <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
         <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
-        <!-- <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
-        <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>  -->
+        <le-radio-list label="性别" ref="r3" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+        <le-checkbox-list label="爱好" @change='changecks' ref='cl3' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list> 
         <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
         <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
         <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>           
         <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
-       
-        <h3>------------------------------------------------------------------------------------------------------</h3>
+      
 
-
-        <le-form ref="form1">
+        <le-form ref="form1" style="width:600px">
             
             <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
 
             <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
 
-            <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+            <le-radio-list label="性别" ref="r2" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
 
-            <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
+            <le-checkbox-list label="爱好" @change='changecks' ref='cl2' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
            
             <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
 
@@ -124,6 +122,13 @@ export default {
         ]
         this.$refs["r1"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["cl1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+
+        this.$refs["r2"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["cl2"].getCurrentComponent().init(Unit.object.cloneObj(data));
+
+        this.$refs["r3"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["cl3"].getCurrentComponent().init(Unit.object.cloneObj(data));
+
 
         this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
 

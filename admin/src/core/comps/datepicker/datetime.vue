@@ -178,11 +178,12 @@ export default {
         line-height: 40px;
         outline: none;
         transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        width: 240px;
+        width: 87%;
 
         /* border:none; */
     }
     .dataTimePicker .date-box{
+        width: 87%;
         margin-left:26px;
     }
     .icon-date{
@@ -198,6 +199,7 @@ export default {
         right: 2%;
         color: #c0c4cc;
         font-weight: normal;
+        cursor: pointer;
     }
    
 

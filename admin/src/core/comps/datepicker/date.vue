@@ -458,6 +458,7 @@ export default {
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
+        cursor: pointer;
     }
 
     .div-box .icon-date{
@@ -634,9 +635,13 @@ export default {
         display: inline-block;
         border: 1px solid #dcdfe6;
         border-radius: 5px;
-        padding: 0 8% 0 4%;
+        padding: 0 8% 0 12%;
         color: #606266;
         outline: none;
+        text-align: left;
+    }
+    form  .form-item .form-item-input{
+        padding:  0 8% 0 6%;
     }
     .form-item .form-item-input:focus{
         border: 1px solid #409eff;
@@ -647,6 +652,7 @@ export default {
         line-height: 40px;
         font-size: 14px;
         width: 100%;
+        text-align: left;
     }
 
     .small .form-item .form-item-input{

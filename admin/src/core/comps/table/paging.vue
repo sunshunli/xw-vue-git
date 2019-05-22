@@ -65,7 +65,7 @@
     .button{
         cursor: pointer;
         background-color: #5bc0de;
-        width: 46px;
+        /* width: 46px; */
         height: 20px;
         display: inline-block;
         color: #fff;
@@ -74,6 +74,7 @@
 
     .pagination>li>a.button{
         color:#fff;
+        height: 100%;
     }
 
     .paging{height: 26px; margin: 30px 0; line-height: 26px;}

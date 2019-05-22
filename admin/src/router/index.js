@@ -7,6 +7,8 @@ const FormValidate = r=>require.ensure([],()=>r(require("../pages/form.vue")),"F
 const Login = r=>require.ensure([],()=>r(require("../pages/login/login.vue")),"Login");
 const TestPage = r=>require.ensure([],()=>r(require("../pages/test.vue")),"TestPage");
 
+const DemoPage = r=>require.ensure([],()=>r(require("../pages/demoPage.vue")),"DemoPage");
+
 Vue.use(Router);
 
 const routers = [
@@ -34,6 +36,10 @@ const routers = [
         path: '/test',
         name: 'test',
         component: TestPage
+    },{
+        path:'/demopage',
+        mame:'demopage',
+        component:DemoPage
     }
 ];
 

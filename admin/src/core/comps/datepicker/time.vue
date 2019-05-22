@@ -264,6 +264,7 @@ li{
     position: absolute;
     top: 12px;
     color: #c0c4cc;
+    cursor: pointer;
 }
 
 .timeContent .timeInput{

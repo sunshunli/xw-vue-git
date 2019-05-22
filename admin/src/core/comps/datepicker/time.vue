@@ -414,8 +414,9 @@ li{
     margin:0 0 22px 0;
 }
 
+
 .form-item .form-item-label{
-    width: 17%;
+    width: 47%;
     height: 40px;
     margin-right: 1%;
     text-align: right;
@@ -427,6 +428,10 @@ li{
     padding: 0;
     box-sizing: border-box;
     margin-bottom: 0;
+}
+
+form .form-item .form-item-label{
+    width: 17%;
 }
 .medium .form-item .form-item-label{
     height: 40px;
@@ -446,10 +451,15 @@ li{
 .form-item .form-item-div{
     display: inline-block;
     line-height: normal;
-    width: 80%;
+    width: 50%;
     vertical-align: text-bottom;
     position: relative;
 }
+
+form .form-item .form-item-div{
+    width: 80%;
+}
+
 .requireed::before{
     content: "*";
     color: #f56c6c;

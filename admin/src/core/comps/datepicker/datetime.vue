@@ -248,10 +248,11 @@ export default {
         float: left;
         text-align: left;
         margin:0 0 22px 0;
+        margin-top: -2px;
     }
 
     .form-item .form-item-label{
-        width: 17%;
+        width: 47%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -263,6 +264,11 @@ export default {
         box-sizing: border-box;
         margin-bottom: 0;
     }
+
+    form .form-item .form-item-label{
+        width: 17%;
+    }
+
     .medium .form-item .form-item-label{
         height: 40px;
         line-height: normal;
@@ -281,9 +287,14 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 80%;
+        width: 49.7%;
         vertical-align: text-bottom;
     }
+
+    form  .form-item .form-item-div{
+        width:80%;
+    }
+
     .requireed::before{
         content: "*";
         color: #f56c6c;

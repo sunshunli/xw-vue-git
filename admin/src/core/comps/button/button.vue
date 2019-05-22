@@ -1,5 +1,8 @@
 <template>
-    <button @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</button>	
+    <!-- <button @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</button>	 -->
+    <span @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+
+
 </template>
 <script>
 
@@ -57,20 +60,28 @@ export default {
         border-color: #a0cfff;
         cursor: not-allowed;
     }
-    button{
-        height: 28px;
-        line-height: 28px;
-        padding: 0 13px;
-        border: none;
+    span{
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
         outline: none;
         border-radius: 3px;
         border: 1px solid #dcdfe6;
-        border-color: #dcdfe6;
         color: #fff;
         font-size: 12px !important;
         cursor: pointer;
+        padding: 0 13px 0 22px;
+        position: relative;
     }
+
+    span .fa{
+        position: absolute;
+        top: 10px;
+        left: 5px;
+    }
+
     .default{
+        padding: 0 13px;
         background-color: #fff;
         color: #3e3a3a;
         border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);

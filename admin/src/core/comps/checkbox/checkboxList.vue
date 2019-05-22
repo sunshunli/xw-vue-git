@@ -147,8 +147,10 @@ export default {
         margin:0 0 22px 0;
     }
 
+
+
     .form-item .form-item-label{
-        width: 17%;
+         width: 17%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -160,6 +162,7 @@ export default {
         box-sizing: border-box;
         margin-bottom: 0;
     }
+
     .medium .form-item .form-item-label{
         height: 40px;
         line-height: normal;
@@ -175,12 +178,18 @@ export default {
         line-height: 28px;
         font-size: 12px;
     }
+
     .form-item .form-item-div{
+        width: 80%;
+    }
+   
+    form  .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
+        vertical-align: text-bottom;
         width: 80%;
-       vertical-align: text-bottom;
     }
+
     .requireed::before{
         content: "*";
         color: #f56c6c;

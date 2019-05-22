@@ -24,9 +24,9 @@
         <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
         <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
         <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>           
-        <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select> 
-        <le-radio-list label="性别" ref="r3" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
-        <le-checkbox-list label="爱好" @change='changecks' ref='cl3' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list> 
+        <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" display-value="code"></le-local-select> 
+        <le-radio-list label="性别" ref="r3" display-name="name" msg="单选框必填" display-value="code"></le-radio-list>
+        <le-checkbox-list label="爱好" @change='changecks' ref='cl3' display-name="name" msg="复选框必填1" display-value="code"></le-checkbox-list> 
         
 
         <le-form ref="form1" style="width:600px">
@@ -45,7 +45,7 @@
 
             <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
 
-            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+            <le-local-select label="模糊搜索" multiple ref="s2" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
             <le-button value="Form提交" @click="submit"></le-button>
         </le-form>
@@ -67,12 +67,14 @@
 
                 <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
 
-                <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+                <le-local-select label="模糊搜索" multiple ref="s3" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
                 <le-button value="Form提交" @click="submit"></le-button>
             </le-form>
         </le-dialog>
         <le-button value="open" @click="open"></le-button>
+
+        <le-button value="设置下拉框的值" @click="setVal"></le-button>
     </div>
 </template>
 
@@ -110,15 +112,26 @@ export default {
             }).catch((error)=>{
                 debugger
             })
+        },
+        setVal(){
+            this.$refs["s2"].getCurrentComponent().setValue("1,2,3")
+            this.$refs["s3"].getCurrentComponent().setValue("1,2,3")
         }
     },
     mounted(){
         let data = [
             {name:"aaa",code:"1"},
-            {name:"aaa1",code:"1"},
-            {name:"aaa2",code:"1"},
-            {name:"bbb",code:"2"},
-            {name:"ccc",code:"3"},
+            {name:"aaa1",code:"2"},
+            {name:"aaa2",code:"3"},
+            {name:"bbb",code:"4"},
+            {name:"ccc",code:"5"},
+        ]
+        let data1 = [
+            {name:"qqq",code:"1"},
+            {name:"www",code:"2"},
+            {name:"rrr",code:"3"},
+            {name:"ddd",code:"4"},
+            {name:"ttt",code:"5"},
         ]
         this.$refs["r1"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["cl1"].getCurrentComponent().init(Unit.object.cloneObj(data));
@@ -130,7 +143,9 @@ export default {
         this.$refs["cl3"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
 
-        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data1));
+        this.$refs["s2"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["s3"].getCurrentComponent().init(Unit.object.cloneObj(data1));
 
         this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
         // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");

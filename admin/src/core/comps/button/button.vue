@@ -67,12 +67,19 @@ export default {
         outline: none;
         border-radius: 3px;
         border: 1px solid #dcdfe6;
-        border-color: #dcdfe6;
         color: #fff;
         font-size: 12px !important;
         cursor: pointer;
-        padding: 0 13px;
+        padding: 0 13px 0 22px;
+        position: relative;
     }
+
+    span .fa{
+        position: absolute;
+        top: 10px;
+        left: 5px;
+    }
+
     .default{
         background-color: #fff;
         color: #3e3a3a;

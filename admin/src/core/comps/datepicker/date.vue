@@ -641,7 +641,7 @@ export default {
         text-align: left;
     }
     form  .form-item .form-item-input{
-        padding:  0 8% 0 7%;
+        padding: 0 26px;
     }
     .form-item .form-item-input:focus{
         border: 1px solid #409eff;

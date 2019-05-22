@@ -62,6 +62,7 @@ export default {
         line-height: 28px;
         padding: 0 13px;
         border: none;
+        outline: none;
         border-radius: 3px;
         border: 1px solid #dcdfe6;
         border-color: #dcdfe6;

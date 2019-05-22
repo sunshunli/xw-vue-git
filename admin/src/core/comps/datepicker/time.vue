@@ -415,13 +415,14 @@ li{
 
 .form-item .form-item-label{
     width: 18%;
+    height: 40px;
     margin-right: 1%;
     text-align: right;
     vertical-align: middle;
     display: inline-block;
     font-size: 14px;
     color: #606266;
-    line-height: 40px;
+    line-height: normal;
     padding: 0;
     box-sizing: border-box;
     margin-bottom: 0;

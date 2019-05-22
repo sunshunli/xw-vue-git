@@ -583,7 +583,7 @@ export default {
         display: inline-block;
         font-size: 14px;
         color: #606266;
-        line-height: 40px;
+        line-height: normal;
         padding: 0;
         box-sizing: border-box;
         margin-bottom: 0;

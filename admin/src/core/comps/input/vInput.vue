@@ -81,7 +81,7 @@
         display: inline-block;
         font-size: 14px;
         color: #606266;
-        line-height: 40px;
+        line-height: normal;
         padding: 0;
         box-sizing: border-box;
         margin-bottom: 0;
@@ -93,18 +93,17 @@
     }
     .small .form-item .form-item-label{
         height: 34px;
-        line-height: 34px;
+        line-height: normal;
         font-size: 14px;
     }
     .mini .form-item .form-item-label{
         height: 28px;
-        line-height: 28px;
+        line-height: normal;
         font-size: 12px;
     }
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        /* width: 35%; */
         width: 80%;
         vertical-align: text-bottom;
     }

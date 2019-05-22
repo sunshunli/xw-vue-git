@@ -426,7 +426,6 @@ export default {
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);
-        _tool = null;
     }
 }
 </script>

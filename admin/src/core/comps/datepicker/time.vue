@@ -201,20 +201,20 @@ export default {
     mounted(){
         this.setValue();
         //为3个ul添加滚动事件
-        this.getJQDom(this.KEYS.hourDomKey).get(0).addEventListener("scroll",(e)=>{
-            this.scrollFun($(e.target));
-        },false)
-        this.getJQDom(this.KEYS.minDomKey).get(0).addEventListener("scroll",(e)=>{
-            this.scrollFun($(e.target));
-        },false)
-        this.getJQDom(this.KEYS.secDomKey).get(0).addEventListener("scroll",(e)=>{
-            this.scrollFun($(e.target));
-        },false)
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll").on("scroll",e=>{
+            this.scrollFun(e.target);
+        })
+        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll").on("scroll",e=>{
+            this.scrollFun(e.target);
+        })
+        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll").on("scroll",e=>{
+            this.scrollFun(e.target);
+        })
     },
     beforeDestroy(){
-        this.getJQDom(this.KEYS.hourDomKey).removeEventListener("scroll",this.scrollHandle);
-        this.getJQDom(this.KEYS.minDomKey).removeEventListener("scroll",this.scrollHandle);
-        this.getJQDom(this.KEYS.secDomKey).removeEventListener("scroll",this.scrollHandle);
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll")
+        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll")
+        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll")
     }
 }
 </script>

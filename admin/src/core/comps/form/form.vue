@@ -36,6 +36,9 @@ export default {
                 return;
             }
         },
+        resetForm(){
+            
+        },
         validate(){
             this.subComps = [];
             this.getAllSubComponents(this.$children);

@@ -62,7 +62,22 @@ export default {
                     // return "/site/siteManage/selectSiteList?nameLike=&tanentId=&status=&curPage=1&pageSize=10&ran=2571772";
                     return "/goods/index/queryList/115?parentUnit=0&ran=10069";
                 },
+                actions:[
+                    {key:"add",val:"修改"},
+                    {key:"add",val:"删除"},
+                    {key:"add",val:"发布"},
+                    {key:"add",val:"启用"},
+                    {key:"add",val:"停用"},
+                ],
                 map:[
+                    {key:'code',val:'名称'},
+                    {key:'createBy',val:'地址'},
+                    {key:'unitCode',val:'编码'},
+                    {key:'createBy',val:'创建时间'},
+                    {key:'code',val:'名称'},
+                    {key:'createBy',val:'地址'},
+                    {key:'unitCode',val:'编码'},
+                    {key:'createBy',val:'创建时间'},
                     {key:'code',val:'名称'},
                     {key:'createBy',val:'地址'},
                     {key:'unitCode',val:'编码'},
@@ -142,6 +157,8 @@ export default {
         min-height: 600px;
         overflow: scroll;
         padding: 20px;
+        /* background: url("https://p2.lefile.cn/product/adminweb/2019/05/23/d7b50040-4f55-4a8e-aaf5-d5731edde5d1.jpg") 0 0 no-repeat; */
+        background-size: 100% 100%;
     }
 
     .searchContent .searchItem{
@@ -161,4 +178,5 @@ export default {
         text-align: right;
         padding: 10px 0 ;
     }
+
 </style>

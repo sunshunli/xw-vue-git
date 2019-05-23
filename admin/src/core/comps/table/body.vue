@@ -123,7 +123,7 @@
     tbody tr td{color: rgba(0,0,0,0.65);border: 1px solid #ddd;vertical-align: middle;text-align: center; }
     
     .btn{
-        margin: 0 5px;
+        /* margin: 0 5px; */
         border-radius: 4px;
         padding: 2px 10px;
     }

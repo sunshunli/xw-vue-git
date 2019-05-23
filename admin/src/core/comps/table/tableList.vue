@@ -237,6 +237,7 @@
       overflow: hidden;
       border-radius:0;
       border-top: 1px solid #ddd;
+      table-layout: fixed;
     }
   
     table thead{

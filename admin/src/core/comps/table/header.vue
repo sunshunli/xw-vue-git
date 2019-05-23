@@ -86,10 +86,18 @@
     .colsModal p input{float: left;margin-left: 15px;margin-right: 15px;}
     .thCols {position: relative;}
     .thCols:nth-of-type(2){
-        width:250px;
+        /* width:250px; */
     }
     .colsModal .bot input{width: 50px;line-height: 15px;margin: 0 5px;}
     .menu{position: absolute;left:10px;top:0;font-size: 20px;}
     thead tr th{border:1px solid rgba(0,0,0,0.09);border-bottom:none;font-weight: 600;text-align: center;
-    color:rgba(0,0,0,0.85);font-size: 14px;}
+    color:rgba(0,0,0,0.85);font-size: 14px;min-width: 50px; }
+    .table thead tr th:first-child{
+        width: 50px;
+        min-width: auto;
+    }
+
+     .table thead tr th.thCols{
+         width: auto;
+     }
 </style>

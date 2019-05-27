@@ -25,7 +25,7 @@
                 vValue:"",
                 state:{
                     showError:false,
-                    successIcon:""//icon-cuo,icon-duihao
+                    successIcon:""
                 }
             }
         },

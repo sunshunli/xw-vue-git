@@ -6,6 +6,8 @@
         
         <img v-show="src" style="width:100px;height:100px" :src="src" />
         <!-- <input type="button" style="margin-left:10px;" class="btn btn-info" @click="upload" value="上传" /> -->
+
+        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
 
@@ -14,11 +16,16 @@
         components: {},
         props:["options"],
         name: "FileUpload",
+        validataComponentType:"FileUpload",
         data(){
             return {
-                fkey:M_idSeed.newId(),
+                fkey:_idSeed.newId(),
                 showLoading:false,
-                src:""
+                src:"",
+                state:{
+                    showError:false,
+                    successIcon:""
+                }
             }
         },
         computed:{
@@ -39,13 +46,6 @@
             }
         },
         methods:{
-            /**
-             * @description 设置图片的路径, 数据回写的时候需要
-             * @returns
-             */
-            setImgSrc(src){
-                this.src = src;
-            },
             /**
              * @description filechange事件
              * @returns
@@ -96,7 +96,7 @@
                 }
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
-                    this.options.analysis?this.setImgSrc(this.options.analysis(result)):this.setImgSrc(result); 
+                    this.options.analysis?this.setValue(this.options.analysis(result)):this.setValue(result); 
                     this.alert.showAlert("success","上传成功");
                     this.showLoading = false;
                     this.reloadFileInput();
@@ -107,13 +107,15 @@
                     this.reloadFileInput();
                     this.completedCallback&&this.completedCallback({success:false,data:err});
                 });
-                
+            },
+            getValue(){
+                return this.src;
+            },
+            setValue(val){
+                this.src = val;
             }
         },
-        created(){
-            
-        },
-        mounted () {
+        mounted(){
             
         }
     }

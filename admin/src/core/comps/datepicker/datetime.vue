@@ -109,6 +109,7 @@ export default {
         setValue(str){
             if(!str){
                 this.initDateAndTime();
+                this.dateTimeStr = "";
             }else{
                 this.dateTimeStr = str;
                 this.$refs[this.dateKey].setValue(str.split(' ')[0]);

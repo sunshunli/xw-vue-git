@@ -28,10 +28,9 @@
         <le-radio-list label="性别" ref="r3" display-name="name" msg="单选框必填" display-value="code"></le-radio-list>
         <le-checkbox-list label="爱好" @change='changecks' ref='cl3' display-name="name" msg="复选框必填1" display-value="code"></le-checkbox-list> 
         
-
         <le-form ref="form1" style="width:600px">
             
-            <v-input label="年龄" type="text" msg="正整数11" vType='number' on></v-input>
+            <v-input label="年龄" msg="正整数11"></v-input>
 
             <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
 
@@ -47,7 +46,7 @@
 
             <le-local-select label="模糊搜索" multiple ref="s2" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
-            <le-button value="Form提交" @click="submit"></le-button>
+            <le-button value="Form提交" @click="submit('form1')"></le-button>
         </le-form>
 
         <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
@@ -69,12 +68,14 @@
 
                 <le-local-select label="模糊搜索" multiple ref="s3" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
-                <le-button value="Form提交" @click="submit"></le-button>
+                <le-button value="Form提交" @click="submit('form2')"></le-button>
             </le-form>
         </le-dialog>
         <le-button value="open" @click="open"></le-button>
 
         <le-button value="设置下拉框的值" @click="setVal"></le-button>
+
+        <le-button value="重置" type='back' @click="resetForm"></le-button>
     </div>
 </template>
 
@@ -88,8 +89,8 @@ export default {
         }
     },
     methods:{
-        submit(){
-            let res = this.$refs["form1"].validate();
+        submit(id){
+            let res = this.$refs[id].validate();
             res.then(d=>{
                 debugger
             }).catch((error)=>{
@@ -116,6 +117,9 @@ export default {
         setVal(){
             this.$refs["s2"].getCurrentComponent().setValue("1,2,3")
             this.$refs["s3"].getCurrentComponent().setValue("1,2,3")
+        },
+        resetForm(){
+            this.$refs["form1"].reset();
         }
     },
     mounted(){

@@ -3,7 +3,7 @@
         <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <input type="text" class="form-item-input" v-model="vValue" v-on:input="changeEvent()" />
-            <i class="fa fa-times-circle icon-del" @click.stop="clearInputEvent"></i>
+            <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
     </div>
@@ -29,23 +29,10 @@
                 }
             }
         },
-        computed:{
-            
-        },
         methods:{
-            /**
-             * @description 设置成功失败的状态
-             * @param {bool} flag为 true or false
-             */
-            setStateByFlag(flag){
-                this.state = {
-                    successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                    showError:!flag?true:false
-                }
-            },
             changeEvent(e){
-                if(this.$attrs.checkIsOff()){
-                    this.$attrs.setIsSuccess(this.$attrs.verify(this.vValue));
+                if(this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
                 }
             },
             getValue(){
@@ -54,10 +41,10 @@
             setValue(value){
                 this.vValue = value;
             },
-            clearInputEvent(){
+            clear(){
                 this.setValue("");
-                if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                    this.setStateByFlag(false);
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
                 }
             }
         },

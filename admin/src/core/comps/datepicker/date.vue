@@ -8,7 +8,7 @@
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
                 <input type="text" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
-                <i class="fa fa-times-circle icon-del" @click.stop="clearDateEvent"></i>
+                <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
             <!-- 展开下拉 -->
@@ -187,15 +187,6 @@ export default {
         }
     },
     methods:{
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false,
-                currentYear:this.state.currentYear,
-                currentMonth:this.state.currentMonth,
-                currentDay:this.state.currentDay
-            }
-        },
         /**
          * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
          * @param year:年份
@@ -254,10 +245,10 @@ export default {
             let days = this.getFullData(year,month);
             this.data = _tool.groupArray(days);
         },
-        clearDateEvent(){
-            this.setValue();
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.setStateByFlag(false);
+        clear(){
+            this.setValue("");
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         /**
@@ -309,7 +300,10 @@ export default {
             }
             this.state.showError = false;
             this.selectDayCallback && this.selectDayCallback();
-            this.state.successIcon = "fa-check-circle-o"
+
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
+            }
         },
         /**
          * @description 上一年切换事件

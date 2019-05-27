@@ -31,7 +31,7 @@
                 </div>
             </div>
             <!-- 时间 -->
-            <i class="fa fa-times-circle clearTime" @click="clearDateTime"></i>
+            <i class="fa fa-times-circle clearTime" @click="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置日期时间控件的错误提示信息"}}</p>
         </div>
     </div>
@@ -59,30 +59,7 @@ export default {
             },
         }
     },
-    // watch:{
-    //     dateTimeStr(val){
-    //         if(val == ""){
-    //             if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-    //                 this.state.showError = true;
-    //             }else{
-    //                 this.state.showError = false;
-    //             }
-    //         }else{
-    //             this.state.showError = false;
-    //         }
-    //     }
-    // },
     methods:{
-        /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
         getDateTimeStr(){
             let dateComp = this.$refs[this.dateKey];
             let timeComp = this.$refs[this.timeKey];
@@ -95,19 +72,21 @@ export default {
                 dateComp.closePicker();
                 timeComp.closePicker();
                 this.showDateTimePicker = false;
-                this.state.successIcon = "fa-check-circle-o";
+            }
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         showDateTimePickerHandle(){
             this.showDateTimePicker = true;
             this.$refs[this.dateKey].showPicker();
         },
-        clearDateTime(){
+        clear(){
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
-            this.setValue();
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.setStateByFlag(false);
+            this.setValue("");
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         initDateAndTime(){

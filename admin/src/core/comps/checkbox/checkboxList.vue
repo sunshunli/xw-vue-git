@@ -1,28 +1,15 @@
 
 <template>
-    <!-- <div class="checkboxContent">
-        <span class="span" v-for="(item,index) in data" :key="index">
-            <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-            <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'" @click="changeItem(item)"></span>
-        </span> -->
-        
-        <!-- <p class="text-center" v-show="state.showError">{{$attrs.msg}}</p> -->
-    
-
-
     <div class="form-item">
-            <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-            <div  class="form-item-div fa" :class="state.successIcon">
-                <span class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
-                    <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
-                    <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'"></span>
-                </span>
-                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-            </div>
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div class="form-item-div fa" :class="state.successIcon">
+            <span class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
+                <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
+                <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'"></span>
+            </span>
+            <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
-
-<!-- </div> -->
-
+    </div>
 </template>
 
 <script>
@@ -43,35 +30,13 @@ export default {
             data:[]
         }
     },
-    computed:{
-
-    },
     methods:{
-        /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
         /**
          * @description 设置数据源，自动添加ck属性来控制是否选中状态
          * @returns
          */
         init(data){
             this.data = CommonUtil.object.addPrimaryAndCk(data);
-        },
-        /**
-         * @description 重置数据源
-         * @returns
-         */
-        resetData(){
-            this.data.forEach(item=>{
-                item.ck = false;
-            })
         },
         /**
          * @description checkbox的change事件 会触发checkboxList的change回调
@@ -82,8 +47,8 @@ export default {
             item.ck = !item.ck;
             let res = this.getCheckedItems();
             this.$emit('change',res);
-            if(this.$attrs.checkIsOff()){
-                this.state.showError = this.getValue() == ""?true:false;
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         /**
@@ -105,13 +70,19 @@ export default {
         },
         /**
          * @description 回写的方法，设置checkbox选中状态
-         * @param vals 必须为数组, 必须设置displayValue为需要传递的value字段
+         * @param vals 必须为数组, 必须设置displayValue为需要传递的value字段，如果传入空，则重置所有
          * @return
          */
         setValue(vals){
+            if(!vals){
+                this.data.forEach(item=>{
+                    item.ck = false;
+                })
+                return;
+            }
             this.data.forEach(item=>{
                 let cked = false;
-                vals.forEach(x=>{
+                vals.split && vals.split(',').forEach(x=>{
                     if(item[this.displayValue] == x){
                         cked = true;
                     }
@@ -120,7 +91,7 @@ export default {
                     item.ck = true;
                 }
             })
-        },
+        }
     },
     mounted(){
 

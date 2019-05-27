@@ -6,7 +6,7 @@
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
                 <div class="timeInput" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
-                <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clearTimeStr"></div>
+                <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
             <div class="timePicker" :name="KEYS.timePanelDomKey">
@@ -81,8 +81,9 @@ export default {
             });
             this.getJQDom(this.KEYS.timeInputDomKey).html(res.join(':'));
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
-            this.state.showError = false;
-            this.state.successIcon = "fa-check-circle-o";
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
+            }
         },
         //关闭
         closePicker(){
@@ -190,11 +191,11 @@ export default {
         getJQDom(key){
             return $("div [name="+key+"]");
         },
-        clearTimeStr(){
+        clear(){
             this.setValue();
             this.getJQDom(this.KEYS.timeInputDomKey).html("");
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.setStateByFlag(false);
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         }
     },

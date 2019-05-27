@@ -20,10 +20,14 @@ export default {
         }
     },
     methods:{
+        initSubComponents(){
+            this.subComps = [];
+            this.getAllSubComponents(this.$children);
+        },
         getAllSubComponents(arr){
             if(arr && arr instanceof Array && arr.length >=1){
                 for(let i =0;i< arr.length;i++){
-                    if(arr[i].$attrs.checkIsOff && arr[i].$attrs.checkIsOff() && arr[i].validataComponentType != undefined){
+                    if(arr[i].$attrs.checkVerifyEnabled && arr[i].$attrs.checkVerifyEnabled() && arr[i].validataComponentType != undefined){
                         this.subComps.push(arr[i]);
                     }
                     
@@ -36,12 +40,19 @@ export default {
                 return;
             }
         },
-        resetForm(){
-            
+        reset(){
+            this.initSubComponents();
+            this.subComps.forEach(comp=>{
+                //先执行自身重写的reset方法，如果没有重写，执行HOC组件传递过来的方法
+                if(comp.reset){
+                    comp.reset();
+                }else{
+                    comp.$attrs.reset && comp.$attrs.reset();
+                }
+            })
         },
         validate(){
-            this.subComps = [];
-            this.getAllSubComponents(this.$children);
+            this.initSubComponents();
             if(this.subComps.length == 0){
                 return new Promise(function(resolve,reject){
                     resolve({
@@ -70,7 +81,7 @@ export default {
                     }else{
                         //显示出错组件的错误信息
                         errorComps.forEach(comp=>{
-                            comp.setStateByFlag(false);
+                            comp.$attrs.setStateByFlag(2);
                         })
                         reject(res);
                     }
@@ -80,6 +91,7 @@ export default {
         }
     },
     mounted(){
+        this.initSubComponents();
     }
 }
 </script>

@@ -35,16 +35,6 @@ export default {
     },
     methods:{
         /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
-        /**
          * @description 设置数据源，自动添加ck属性来控制是否选中状态
          * @returns
          */
@@ -78,11 +68,13 @@ export default {
          */
         setValue(val){
             this.resetData();
-            this.data.forEach(item=>{
-                if(item[this.displayValue] == val){
-                    item.ck = true;
-                }
-            })  
+            if(val){
+                this.data.forEach(item=>{
+                    if(item[this.displayValue] == val){
+                        item.ck = true;
+                    }
+                })  
+            }
         },
         /**
          * @description 获取选中的值

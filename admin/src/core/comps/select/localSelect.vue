@@ -71,16 +71,6 @@
     },
     methods:{
         /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
-        /**
          * @description 点击整体div，触发焦点到input框上面(输入框初始宽度不够)
          * @returns
          */
@@ -120,12 +110,8 @@
          * @returns
          */
         onEmit(){
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                if(this.leftArray.length == 0){
-                    this.setStateByFlag(false);
-                }else{
-                    this.setStateByFlag(true);
-                }
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
             this.$emit("change",this.getSelectedItems());
         },
@@ -184,9 +170,16 @@
         },
         /**
          * @description 设置选中项
-         * @param {ids} displayValue的集合, 逗号分隔
+         * @param {ids} displayValue的集合, 逗号分隔, 如果传入空，则重置所有
          */
         setValue(ids){
+            if(!ids){
+                this.data.forEach(item=>{
+                    item.cls = "";
+                    item.ck = false;
+                })
+                return;
+            }
             ids && ids.split && ids.split(',').forEach(val=>{
                 let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
                 if(tmp){
@@ -204,8 +197,8 @@
                 item.cls = "";
                 item.ck = false;
             })
-            if(this.$attrs.checkIsOff && this.$attrs.checkIsOff()){
-                this.setStateByFlag(false);
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         }
     },

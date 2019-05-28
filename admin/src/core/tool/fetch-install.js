@@ -123,13 +123,12 @@ export default {
                 if(data){
                     options.body = data;
                 }
-                
-                fetch(url,options).then(d =>d.json()).then( (data)=> {  
+                fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
                     let message = data.message?data.message:data.msg;
 
-                    if(code == "0"){
-                        defer.resolve({data:data.result,params:data.params});
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }

@@ -54,7 +54,6 @@ function ValidataHOC(Component){
             //获取组件验证结果
             getVerifyResult(){
                 let currentComp = this.$children[0];
-                debugger
                 let value = currentComp.getValue();
                 let isSuccess = false;
                 if(currentComp.validataComponentType == "Input"){

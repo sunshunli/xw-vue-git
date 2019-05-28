@@ -14,6 +14,11 @@ Vue.use(Router);
 const routers = [
     {
         path: '/',
+        name: 'login',
+        component: Login
+    },
+    {
+        path: '/main',
         name: 'h',
         component: H
     },

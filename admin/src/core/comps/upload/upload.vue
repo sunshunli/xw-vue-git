@@ -1,11 +1,13 @@
 <template>
-    <div class="upaload">
+    <div class="form-item upaload">
+        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <span  class="input-file">请选择
         <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
         <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
         
-        <img v-show="src" style="width:100px;height:100px" :src="src" />
-        <!-- <input type="button" style="margin-left:10px;" class="btn btn-info" @click="upload" value="上传" /> -->
+        <div v-show="src.length>0">
+            <span v-for="(item,index) in src" :key="index"><a target="_blank" :href="item.src">{{item.name}}</a></span>
+        </div>
 
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
@@ -15,13 +17,14 @@
     export default {
         components: {},
         props:["options"],
-        name: "FileUpload",
-        validataComponentType:"FileUpload",
+        name: "LeUpload",
+        inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
             return {
+                validataComponentType:"FileUpload",
                 fkey:_idSeed.newId(),
                 showLoading:false,
-                src:"",
+                src:[],
                 state:{
                     showError:false,
                     successIcon:""
@@ -29,6 +32,9 @@
             }
         },
         computed:{
+            multiple(){
+                return this.options.multiple?true:false;
+            },
             fname(){
                 return this.options.fname;
             },
@@ -42,7 +48,15 @@
                 return this.options.vtype?this.options.vtype:"";
             },
             size(){
-                return this.options.size?this.options.size:"9999";
+                if(this.options.size){
+                    let re = /^[0-9]+.?[0-9]*$/;
+                    if (!re.test(this.size)) {
+                        return 100;
+            　　     }
+                        return parseFloat(this.options.size);
+                }else{
+                    return 100;
+                }
             }
         },
         methods:{
@@ -50,7 +64,7 @@
              * @description filechange事件
              * @returns
              */
-            change:function(){
+            change(){
                 let val = this.$refs[this.fkey].value;
                 this.upload();
             },
@@ -58,24 +72,24 @@
              * @description 重置file-input的value，防止value一样的情况下再次点击file-input按钮不生效
              * @returns
              */
-            reloadFileInput:function(){
+            reloadFileInput(){
                 this.$refs[this.fkey].value = "";
             },
             /**
              * @description 上传的主体方法
              * @returns
              */
-            upload:function(){
+            upload(){
                 if(!this.url || !this.fname){
                     this.alert.showAlert("error","上传url和fname必须配置!");
                     return;
                 }
                 let dom = this.$refs[this.fkey];
+                let fileObj = dom.files[0];
                 let formData = new FormData();
-                formData.append(this.fname,dom.files[0]);
-                
+                formData.append(this.fname,fileObj);
+                let fileName = fileObj.name;
                 if(this.vtype){
-                    let fileName = dom.files[0].name;
                     var suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
                         this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
@@ -83,23 +97,25 @@
                     }
                 }
                 if(this.size){
-                    let size = dom.files[0].size;
-                    let re = /^[0-9]+.?[0-9]*$/;
-                    let maxSize = parseFloat(this.size);
-                    if (!re.test(this.size)) {
-                　　　　maxSize = 999;
-            　　     }
-                    if(size > maxSize * 1024 *1024){
-                        this.alert.showAlert("info","文件大小必须小于:"+ this.size + "M");
+                    let fileSize = fileObj.size;
+                    if(fileSize > this.size * 1024 *1024){
+                        this.alert.showAlert("info","文件大小必须小于:"+ this.size + "MB");
                         return;
                     }
                 }
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
-                    this.options.analysis?this.setValue(this.options.analysis(result)):this.setValue(result); 
+                    let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
+                    if(!this.multiple){
+                        this.src.length = 0;
+                    }
+                    this.src.push({src:src,name:fileName});
                     this.showLoading = false;
                     this.reloadFileInput();
+                    if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                        this.$attrs.setVerifyCompState();
+                    }
                     this.completedCallback&&this.completedCallback({success:true,data:result});
                 }).catch((err) => {
                     this.showLoading = false;
@@ -109,10 +125,28 @@
                 });
             },
             getValue(){
-                return this.src;
+                return this.src.join(',');
             },
-            setValue(val){
-                this.src = val;
+            setValue(vals,names){
+                if(!vals){
+                    this.src = [];
+                    return;
+                }
+                this.src = [];
+                let path = [];
+                let fileName = [];
+                if(names && names.split && vals && vals.split ){
+                    path = vals.split(',');
+                    fileName = names.split(',');
+                }else{
+                    path = vals.split(',');
+                    for(let i = 0; i< path.length; i++){
+                        fileName.push(path[i].substring(path[i].lastIndexOf('.') - 1));
+                    }
+                }
+                for(let i = 0; i<path.length; i++){
+                    this.src.push({src:path[i],name:fileName[i]});
+                }
             }
         },
         mounted(){

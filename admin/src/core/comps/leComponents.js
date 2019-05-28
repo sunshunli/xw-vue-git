@@ -5,7 +5,7 @@ import LeRadioList from "./radio/radioList.vue";
 import VInput from "./input/vInput.vue";
 import LeLocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
-import FileUpload from "./upload/upload.vue";
+import LeUpload from "./upload/upload.vue";
 import LeAsynTree from "./tree/asynTree.vue";
 import LeLocalTree from "./tree/localTree.vue";
 import LeForm from "../comps/form/form.vue";
@@ -24,7 +24,7 @@ export default{
         Vue.component('VInput',ValidataHOC(VInput));
         Vue.component('LeLocalSelect',ValidataHOC(LeLocalSelect));
         Vue.component('TableList',TableList);
-        Vue.component('FileUpload',ValidataHOC(FileUpload));
+        Vue.component('LeUpload',ValidataHOC(LeUpload));
         Vue.component('LeAsynTree',LeAsynTree);
         Vue.component('LeLocalTree',LeLocalTree);
         Vue.component('LeDatePicker',ValidataHOC(LeDatePicker));

@@ -30,7 +30,7 @@
             login() {
                 this.ajax.postFetch("/login",{userid:this.username,password:this.password}).then(d=>{
                     // commonUtil.cookie.setCookie("userName",d.data.uname);
-                    this.$router.push({path:"/tree"});
+                    this.$router.push({path:"/form"});
                 })
             }
         }

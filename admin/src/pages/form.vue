@@ -68,6 +68,8 @@
 
                 <le-local-select label="模糊搜索" multiple ref="s3" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
+                <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>                
+
                 <le-button value="Form提交" @click="submit('form2')"></le-button>
             </le-form>
         </le-dialog>
@@ -85,7 +87,19 @@ export default {
     name:"FormValidate",
     data(){
         return {
-            showDialogFlag:false
+            showDialogFlag:false,
+            uploadOptions:{
+                multiple:true,
+                url:"/file/img/upload",
+                completedCallback:(d)=>{
+                    console.log(d);
+                },
+                vtype:"jpg,png,gif",
+                fname:"file",
+                analysis:(d)=>{
+                    return d.data;
+                }
+            }
         }
     },
     methods:{

@@ -1,7 +1,5 @@
 
-
-
-let _tool = {
+let _treeTool = {
     /**
      * @description 所有被选中的节点集合
      */
@@ -27,7 +25,7 @@ let _tool = {
             }
             let children = arr[i].__children;
             if(children && children instanceof Array && children.length >0){
-                _tool.setSingleColor(children,node);
+                _treeTool.setSingleColor(children,node);
             }
         }
     },
@@ -46,7 +44,7 @@ let _tool = {
             }
             let children = arr[i].__children;
             if(children instanceof Array && children && children.length >0){
-                let _tmp = _tool.getNodeById(children,id);
+                let _tmp = _treeTool.getNodeById(children,id);
                 if(_tmp){
                     res = _tmp;
                     return res;
@@ -63,11 +61,11 @@ let _tool = {
     getAllCheckedNodes(arr){
         for(let i =0;i<arr.length;i++){
             if(arr[i].__checkboxStatus){
-                _tool.checkedNodes.push(arr[i]);
+                _treeTool.checkedNodes.push(arr[i]);
             }
             let _children = arr[i].__children;
             if(_children && _children instanceof Array && _children.length >0){
-                _tool.getAllCheckedNodes(_children);
+                _treeTool.getAllCheckedNodes(_children);
             }
         }
     },
@@ -79,15 +77,15 @@ let _tool = {
     getAllCheckboxNodesExcludeParent(arr){
         for(let i =0;i<arr.length;i++){
             if(arr[i].__checkboxStatus && arr[i].__hasChildren == false){
-                _tool.checkedNodes.push(arr[i]);
+                _treeTool.checkedNodes.push(arr[i]);
             }
             let _children = arr[i].__children;
             if(_children && _children instanceof Array && _children.length >0){
-                _tool.getAllCheckboxNodesExcludeParent(_children);
+                _treeTool.getAllCheckboxNodesExcludeParent(_children);
             }
         }
     },
     
 }
 
-export default _tool;
+export default _treeTool;

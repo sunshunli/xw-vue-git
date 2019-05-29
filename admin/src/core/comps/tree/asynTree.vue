@@ -16,7 +16,7 @@
 import TreeItem from "./asynTreeItem.vue";
 import CommonUtil from '../../tool/commonUtil.js';
 import DEFINE_KEY from "../Define.js";
-import _tool from "./treePrivateMethods.js";
+import _treeTool from "./treePrivateMethods.js";
 
 export default {
     name:"LeAsynTree",
@@ -47,7 +47,7 @@ export default {
                 })
                 node.__checkboxStatus = count == node.__children.length?true:false;
 
-                let parentNode = _tool.getNodeById(this.state.data,node.__parentId);
+                let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
                 this.setParentCheckBoxStatus(parentNode);
             }
         },
@@ -112,7 +112,7 @@ export default {
          * @param node 需要删除的节点
          */
         deleteSingleNode(node){
-            let parentNode = _tool.getNodeById(this.state.data,node.__parentId);
+            let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
             //非根节点
             if(parentNode){
                 CommonUtil.arrayServer.removeItems(parentNode.__children,[node]);
@@ -127,18 +127,18 @@ export default {
          * @returns Array
          */
         getAllCheckedNodes(){
-            _tool.checkedNodes = [];
-            _tool.getAllCheckedNodes(this.state.data);
-            return _tool.checkedNodes;
+            _treeTool.checkedNodes = [];
+            _treeTool.getAllCheckedNodes(this.state.data);
+            return _treeTool.checkedNodes;
         },
         /**
          * @description 获取所有被选中子节点，不包含parentNode
          * @returns Array
          */
         getAllCheckboxNodesExcludeParent(){
-            _tool.checkedNodes = [];
-            _tool.getAllCheckboxNodesExcludeParent(this.state.data);
-            return _tool.checkedNodes;
+            _treeTool.checkedNodes = [];
+            _treeTool.getAllCheckboxNodesExcludeParent(this.state.data);
+            return _treeTool.checkedNodes;
         }
     },
     mounted(){
@@ -148,7 +148,7 @@ export default {
          * @description 处理所有订阅事件
          */
         _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
-            let item = _tool.getNodeById(that.state.data,d.__tmpId);
+            let item = _treeTool.getNodeById(that.state.data,d.__tmpId);
             //如果数据错误，没有找到当前节点，直接return
             if(!item){
                 return;
@@ -167,7 +167,7 @@ export default {
             }
             //当前项选中事件，执行callback
             else if(d.actionKey == DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM){
-                _tool.setSingleColor(this.state.data,item);
+                _treeTool.setSingleColor(this.state.data,item);
                 this.itemClick(item);
             }
             //checkbox状态变化事件
@@ -175,7 +175,7 @@ export default {
                 //改变所有子节点的checkbox状态
                 this.setChildrenCheckboxStatus(item,d.checkboxStatus);
                 //改变所有父节点的checkbox状态
-                this.setParentCheckBoxStatus(_tool.getNodeById(that.state.data,item.__parentId));
+                this.setParentCheckBoxStatus(_treeTool.getNodeById(that.state.data,item.__parentId));
             }
         })
     }

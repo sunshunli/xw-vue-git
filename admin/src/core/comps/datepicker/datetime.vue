@@ -1,6 +1,6 @@
 <template>
     <div class = "form-item current">
-        <label class="form-item-label" :class="$attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>

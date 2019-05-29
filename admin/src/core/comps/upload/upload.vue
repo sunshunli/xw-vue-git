@@ -5,8 +5,8 @@
         <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
         <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
         
-        <div v-show="src.length>0">
-            <span v-for="(item,index) in src" :key="index"><a target="_blank" :href="item.src">{{item.name}}</a></span>
+        <div class="fileList" v-show="src.length>0">
+            <span v-for="(item,index) in src" :key="index"><a target="_blank" :href="item.src">{{item.name}}</a><i class="fa fa-times"></i></span>
         </div>
 
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
@@ -189,4 +189,52 @@
     filter: alpha(opacity=0);
 }
 .loading{width:24px;}
+
+.fileList{
+    width: 82.5%;
+    float: right;
+}
+
+.fileList span{
+    display: inline-block;
+    padding: 0 10px;
+    height: 24px;
+    line-height: 22px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(64,158,255,.2);
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-color: transparent;
+    margin: 7px 0 2px 6px;
+    background-color: #f0f2f5;
+    color: #909399;
+    padding-right: 25px;
+    position: relative;
+    max-width: 230px;
+    overflow: hidden;
+}
+
+.fileList span a{
+    color: #606266;
+}
+
+.fileList .fa-times{
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    font-size: 12px;
+    font-size: 12px;
+    font-style: normal;
+    background-color: #c8cacd;
+    border-radius: 9px;
+    color: #fff3f3;
+    text-align: center;
+    cursor: pointer;
+}
+
 </style>

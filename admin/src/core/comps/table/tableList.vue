@@ -230,14 +230,11 @@
 
 <style scoped>
     .table{
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      border-radius: 6px 6px 0 0;
-      overflow: hidden;
-      border-radius:0;
-      border-top: 1px solid #ddd;
-      table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        border-radius: 6px 6px 0 0;
+        overflow: hidden;
     }
   
     table thead{
@@ -245,6 +242,7 @@
         line-height: 38px;
         font-size: 14px;
         color: #fff;
+        background-color: #e3e3e3;
     }
 
     table tbody{

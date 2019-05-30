@@ -68,17 +68,17 @@ export default {
                     return "/goods/index/queryList/115?parentUnit=0&ran=10069";
                 },
                 actions:[
-                    {key:"add",val:"修改"},
-                    {key:"add",val:"删除"},
-                    {key:"add",val:"发布"},
-                    {key:"add",val:"启用"},
-                    {key:"add",val:"停用"},
+                    {key:"edit",val:"Modify",type:'edit'},
+                    // {key:"delete",val:"delete",type:'delete'},
+                    // {key:"publish",val:"publish",type:'publish'},
+                    // {key:"enable",val:"enable",type:'enable'},
+                    // {key:"disable",val:"disable",type:'disable'},
                 ],
                 map:[
-                    {key:'code',val:'名称'},
-                    {key:'createBy',val:'地址'},
+                    {key:'code',val:'名称名称名称名称'},
+                    {key:'createBy',val:'地址地址'},
                     {key:'unitCode',val:'编码'},
-                    {key:'createBy',val:'创建时间'},
+                    {key:'createBy',val:'创建时间创建时间'},
                     {key:'code',val:'名称'},
                     {key:'createBy',val:'地址'},
                     {key:'unitCode',val:'编码'},
@@ -186,7 +186,8 @@ export default {
 
      .navbar{
         height: 75px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        box-shadow: 0 1px 0 0 hsla(0,0%,100%,.12);
         margin: 0 auto;
         margin-bottom: 30px;
     }

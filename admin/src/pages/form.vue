@@ -20,8 +20,8 @@
         <le-button type="default" value="default"></le-button>
 
         <div class="navbar clearfix">
-            <h1 class="al-title ng-binding" id="crumbsTitle">Tenant</h1>
-            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>Global Admin</li><li>Baseinfo</li></ul>
+            <h1 class="al-title ng-binding" id="crumbsTitle">DemoPage</h1>
+            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>DemoPage</li></ul>
         </div>
 
         <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>

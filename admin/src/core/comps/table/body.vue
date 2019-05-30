@@ -9,6 +9,11 @@
                     <input type="checkbox" :checked="row.ck" />
                 </div>
             </td>
+            <td v-if="actions && actions.length != 0">
+                <div v-for="(x,i) in actions" class="btnContent" :key="i">
+                     <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button>
+                </div>
+            </td>
             
             <td v-for="(item,idx) in cols" :key="idx">
                 <div v-if="item.etype == 'img'">
@@ -27,11 +32,6 @@
                     <span v-if="!item.convert && !item.action">
                         {{getValByFieldInRow(item,row)}}
                     </span>
-                </div>
-            </td>
-             <td v-if="actions && actions.length != 0">
-                <div v-for="(x,i) in actions" class="btnContent" :key="i">
-                     <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button>
                 </div>
             </td>
         </tr>

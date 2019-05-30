@@ -3,8 +3,8 @@
 <template>
     <div class="searchContent">
         <div class="navbar clearfix">
-            <h1 class="al-title ng-binding" id="crumbsTitle">Tenant</h1>
-            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>Global Admin</li><li>Baseinfo</li></ul>
+            <h1 class="al-title ng-binding" id="crumbsTitle">DemoPage</h1>
+            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>DemoPage</li></ul>
         </div>
 
         <div class="searchItem">

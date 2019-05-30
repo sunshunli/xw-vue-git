@@ -2,6 +2,11 @@
 
 <template>
     <div class="searchContent">
+        <div class="navbar clearfix">
+            <h1 class="al-title ng-binding" id="crumbsTitle">Tenant</h1>
+            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>Global Admin</li><li>Baseinfo</li></ul>
+        </div>
+
         <div class="searchItem">
             <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
             <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
@@ -177,6 +182,50 @@ export default {
         margin-bottom: 10px;
         text-align: right;
         padding: 10px 0 ;
+    }
+
+     .navbar{
+        height: 75px;
+        border-bottom: 1px solid #ddd;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .navbar h1.al-title {
+        font-weight: 700;
+        color: #000;
+        float: left;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        font-size: 24px;
+        opacity: .9;
+        padding-top: 17px;
+        padding-bottom: 27px;
+    }
+
+    .navbar .al-breadcrumb {
+        background: 0 0;
+        color: #000;
+        margin: 0;
+        float: right;
+        margin-top: 13px;
+    }
+
+    .navbar .al-breadcrumb li {
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .navbar .breadcrumb>li, .pagination {
+        display: inline-block;
+    }
+    
+    .breadcrumb>li+li:before {
+        padding: 0 5px;
+        color: #ccc;
+        /* content: "/\00a0"; */
+        content: "/";
     }
 
 </style>

@@ -19,14 +19,10 @@
         <le-button type="setting" value="setting"></le-button>
         <le-button type="default" value="default"></le-button>
 
-
-
         <div class="navbar clearfix">
             <h1 class="al-title ng-binding" id="crumbsTitle">Tenant</h1>
             <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>Global Admin</li><li>Baseinfo</li></ul>
         </div>
-
-
 
         <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
         <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
@@ -185,7 +181,6 @@ export default {
     .navbar{
         height: 75px;
         border-bottom: 1px solid #ddd;
-        width: 84%;
         margin: 0 auto;
         margin-bottom: 30px;
     }

@@ -69,6 +69,7 @@ export default {
         cursor: pointer;
         padding: 0 13px 0 22px;
         position: relative;
+        margin: 3px;
     }
 
     span .fa{

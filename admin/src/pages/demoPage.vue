@@ -10,10 +10,10 @@
         <div class="searchItem">
             <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
             <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
-            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
-            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
-            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>           
             <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select>  
+            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>                       
+            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
+            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
         </div>
 
         <div class="btnGroup">
@@ -69,10 +69,10 @@ export default {
                 },
                 actions:[
                     {key:"edit",val:"Modify",type:'edit'},
-                    // {key:"delete",val:"delete",type:'delete'},
-                    // {key:"publish",val:"publish",type:'publish'},
-                    // {key:"enable",val:"enable",type:'enable'},
-                    // {key:"disable",val:"disable",type:'disable'},
+                    {key:"delete",val:"delete",type:'delete'},
+                    {key:"publish",val:"publish",type:'publish'},
+                    {key:"enable",val:"enable",type:'enable'},
+                    {key:"disable",val:"disable",type:'disable'},
                 ],
                 map:[
                     {key:'code',val:'名称名称名称名称'},
@@ -159,6 +159,7 @@ export default {
 
 <style scoped>
     .searchContent{
+        min-width: 900px;
         min-height: 600px;
         overflow: scroll;
         padding: 20px;

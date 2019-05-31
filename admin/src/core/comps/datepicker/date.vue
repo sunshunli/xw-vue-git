@@ -3,7 +3,7 @@
 <template>
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class="form-item-div" :class="state.successIcon" style = "display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
@@ -492,7 +492,7 @@ export default {
         /* box-sizing: border-box; */
         margin-top: 4px;
         position: absolute;
-        left:0;
+        left:-100px;
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         z-index:999

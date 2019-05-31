@@ -6,7 +6,7 @@
                     <input type="checkbox" :checked="ck" @click="setAll" />
                 </div>
             </th>
-            <th v-if="actions && actions.length != 0">
+            <th class="opration" v-if="actions && actions.length != 0">
                 操作
             </th>
             
@@ -99,5 +99,9 @@
 
      .table thead tr th.thCols{
          width: auto;
+     }
+
+     .table thead tr th.opration{
+         width: 300px;
      }
 </style>

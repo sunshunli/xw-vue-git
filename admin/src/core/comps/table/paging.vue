@@ -5,12 +5,12 @@
                 <li class="page-item"><a class="page-link span">总条数:{{count}}</a></li>
                 <li class="page-item" @click="this.prev"><a class="page-link button" >上一页</a></li>
                 <li class="page-item" @click="this.next"><a class="page-link button" >下一页</a></li>                
-                <li class="page-item"><a class="page-link span">当前页</a></li>
+                <li class="page-item"><a class="page-link span">当前页:</a></li>
                 <li class="page-item"><a class="page-link span">{{index}}/{{total}}</a></li>
-                <li class="page-item"><span class="page-link span">跳至</span></li>                        
+                <!-- <li class="page-item"><span class="page-link span">跳至</span></li>                        
                 <li class="page-item"><input type="text" :ref="this.goIndexKey" class="enter-number" placeholder=''/></li>
                 <li class="page-item"><span class="page-link span">页</span></li>                        
-                <li class="page-item" @click="this.goToIndex"><a class="page-link button">确定</a></li>               
+                <li class="page-item" @click="this.goToIndex"><a class="page-link button">确定</a></li>                -->
             </ul>
         </nav>
     </div>
@@ -65,16 +65,17 @@
     .button{
         cursor: pointer;
         background-color: #5bc0de;
-        /* width: 46px; */
-        height: 20px;
         display: inline-block;
         color: #fff;
         font-size: 12px;
+        padding: 0 6px;
+        border: none;
     }
 
     .pagination>li>a.button{
         color:#fff;
-        height: 100%;
+        height: 26px;
+        line-height: 26px;
     }
 
     .paging{height: 26px; margin: 30px 0; line-height: 26px;}
@@ -91,14 +92,19 @@
     .paging span{padding: 0 5px;}
     .pageNumCls{margin-right: 20px;float:right;font-size:14px;text-align:center;}
     .pagination{
-        list-style: none;overflow: hidden;
+        list-style: none;overflow: hidden;font-weight: 600;
     }
     .pagination>li{
-        display: block;float: left;margin-left: 8px;
+        display: block;float: left;margin-left: 8px;height: auto;
     }
     .pagination>li>a, .pagination>li>span{
         border-radius: 3px;line-height: 20px;color: rgba(0,0,0,0.65);
     }
+
+    .pagination li .span{
+        padding-right: 0;
+    }
+
     .pagination .enter-number{
         height:18px;
         line-height:18px;
@@ -106,11 +112,15 @@
         border: 1px solid rgba(217,217,217,1);vertical-align:sub;line-height: 20px;width: 30px;
         padding: 0 5px;border-radius: 6px;outline: none;
     }
-</style>
-<style scoped>
+
     .span{   border:1px #fff solid!important; }
     .span:hover{
         background-color:#fff!important;
     }
 
+    .button:hover{
+        background-color: rgba(0,0,0,0.5);
+    }
+
 </style>
+

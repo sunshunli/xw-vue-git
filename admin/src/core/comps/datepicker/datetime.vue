@@ -181,6 +181,14 @@ export default {
         font-weight: normal;
         cursor: pointer;
     }
+
+    .dataTimePicker /deep/ .dataPicker .picker-box{
+        left: 0;
+    }
+
+    .ipt .form-item /deep/ .form-item-div .form-item-input{
+        text-align: center;
+    }
    
 
     /* 日期 */
@@ -188,7 +196,7 @@ export default {
         width: 330px;
         box-sizing: border-box;
         margin-top: 1px;
-        left:0;
+        left:-100px;
         position: absolute;
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);

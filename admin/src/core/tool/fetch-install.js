@@ -63,6 +63,8 @@ export default {
                     let message = data.message?data.message:data.msg;
                     if(code == "0"){
                         defer.resolve({data:data.result,params:data.params});
+                    }else if(code == "200"){
+                        defer.resolve(data);
                     }else{
                         defer.reject({data: message});
                     }

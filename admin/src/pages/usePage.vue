@@ -18,17 +18,15 @@
 
         <div class="leftBox">
             <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
-        
         </div>
 
-        <div class="rightBox">
+        <div class="rightBox" v-show="cleckedtreeItem">
             <div class="btnGroup">
                 <le-button type="create" value="New" @click="open"></le-button>
                 <le-button type="info" value="info" @click="getInfo"></le-button>
             </div>
             <table-list :ref="tk1" :options="options"></table-list>
         </div>
-
 
         <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
             <le-form ref="form2" style="width:600px">
@@ -50,8 +48,6 @@
                 <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>                
             </le-form>
         </le-dialog>
-
-
     </div>
 </template>
 
@@ -61,7 +57,10 @@ export default {
     name:"demoValidate",
     data(){
         return {
-            tbListParams:{},
+            cleckedtreeItem:false,
+            tbListParams:{
+                type:''
+            },
             selectNode:null,
             showDialogFlag:false,
             asynOptions:{
@@ -91,13 +90,16 @@ export default {
             options:{
                 showCk:true,
                 getUrl:()=>{
-                    if(this.tbListParams.type !== "" && this.tbListParams.type !== null && this.tbListParams.type !== undefined){
-                        return "/tree/category/querytreenode?type="+this.tbListParams.type + "&parentId="+this.tbListParams.parentId
-                         +"&parentCode="+this.tbListParams.parentCode + "&searchkeys=&sortParam=Order_ASC,CreateTime_DESC"
-                    }   
+                    var that = this;
+                    if(that.tbListParams.type !== "" && that.tbListParams.type !== null && that.tbListParams.type !== undefined){
+                        return "/tree/category/querytreenode?type="+that.tbListParams.type + "&parentId="+that.tbListParams.parentId
+                         +"&parentCode="+that.tbListParams.parentCode + "&searchkeys=&sortParam=Order_ASC,CreateTime_DESC"
+                    }else{
+                        return ""
+                    } 
                 },
                 actions:[
-                    {key:"edit",val:"Modify",type:'edit'},
+                    {key:"edit",val:"Modify",type:'edit',action:this.deleteItem},
                     {key:"delete",val:"delete",type:'delete',action:this.deleteItem},
                 ],
                 map:[
@@ -117,10 +119,14 @@ export default {
                     size:10
                 },
                 analysis:(data)=>{
-                    if(data.data.length !== 0){
+                    if(data.data !==null && data.data.length !== 0){
                         return {
                             data:data.data,
                             count:data.data.length
+                        };
+                    }else{
+                        return  {
+                            
                         };
                     }
                 }
@@ -134,6 +140,7 @@ export default {
         },
         //树的方法
         itemClick(item){
+            this.cleckedtreeItem = true;
             console.log(item);
             this.selectNode = item;
             this.tbListParams = {
@@ -145,7 +152,9 @@ export default {
         },
         getTreeData(type){
              this.ajax.getFetch("/tree/category/querytreenode?type="+type).then(d=>{
-                this.$refs["tree1"].init(d.data);
+                 var that = this;
+                that.$refs["tree1"].init(d.data);
+                tthathis.selectNode = d.data[0];
             }).catch(e=>{
                 this.alert.showAlert("error",e.data);
             })
@@ -214,7 +223,7 @@ export default {
                     // order: 2,
                     // type: 17
                 };
-                that.ajax.postFetch("/site/siteMap/add",param1).then(d=>{
+                that.ajax.postFetch("site/siteMap/add",param1).then(d=>{
                     that.getTreeData(17);
                 }).catch(e=>{
                     ththatis.alert.showAlert("error",e.data);
@@ -228,14 +237,6 @@ export default {
         }
     },
     mounted(){
-        let data = [
-            {name:"aaa",code:"1"},
-            {name:"aaa1",code:"1"},
-            {name:"aaa2",code:"1"},
-            {name:"bbb",code:"2"},
-            {name:"ccc",code:"3"},
-        ];
-
         let _newOpen=[{code:"1",name:'<是>'},{code:"0",name:'<否>'}];
         let _links=[{code:"1",name:'<是>'},{code:"0",name:'<否>'}];
         let _isShowOrHide = [{code:"1",name:'<否>'},{code:"0",name:'<是>'}];

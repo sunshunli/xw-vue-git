@@ -229,8 +229,17 @@
         vertical-align: middle;
         width: 32%;
         float: left;
+        text-align: left;
+        margin-bottom: 22px;
     }
     
+    .selectContent label{
+        width: 47%;
+        text-align: right;
+        margin-right: 1%; 
+        color: #606266;
+    }
+
     .searchMulSelect{
 		position: relative;
 	    background-color: #fff;
@@ -299,7 +308,7 @@
 
     .form-item .form-item-div{
         width: 50%;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
 
     form  .form-item .form-item-div{

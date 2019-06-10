@@ -8,22 +8,22 @@
         </div>
 
         <div class="searchItem">
-             <v-input label="原地址" type="text" msg="正整数11" vType='number'></v-input>
-            <v-input label="推广ID" type="text" msg="正整数11" vType='number'></v-input>
-            <le-local-select label="租户" ref="s1" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select> 
-            <le-local-select label="推广渠道" ref="s2" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select>
-            <le-local-select label="推广类型" ref="s3" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select>
-             
-            <le-date-picker label="开始时间" ref="d1" msg="日期不允许为空"></le-date-picker>
-            <le-date-picker label="结束时间" ref="d2" msg="日期不允许为空"></le-date-picker>
+            <v-input label="年龄" type="text" msg="正整数11" vType='number'></v-input>
+            <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
+            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code"></le-local-select>  
+            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空"></le-date-time-picker>                       
+            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
+            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
+        </div>
+
+        <div class="leftBox">
+            <le-local-select ref="s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
+            <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
         </div>
 
         <div class="rightBox" v-show="cleckedtreeItem">
             <div class="btnGroup">
-                <le-button type="search" value="Search" @click="search"></le-button>
                 <le-button type="create" value="New" @click="open"></le-button>
-                <le-button type="enable" value="enable" @click="enable(true)"></le-button>
-                <le-button type="disable" value="disable" @click="enable(false)"></le-button>
                 <le-button type="info" value="info" @click="getInfo"></le-button>
             </div>
             <table-list :ref="tk1" :options="options"></table-list>
@@ -48,9 +48,7 @@
 
                 <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>    
 
-                <le-local-select ref="s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
                 
-                <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
 
             </le-form>
         </le-dialog>
@@ -100,21 +98,28 @@ export default {
             options:{
                 showCk:true,
                 getUrl:()=>{
-                    return "/spread/siteSpread/getPage?siteId=9f746cfa-b5e8-49ab-82d6-86cbedce8119&tanentId=&beginTimeWapper=&endTimeWapper=&targetUrl=&channel=&type=&generalizeId=&"       
+                    var that = this;
+                    if(that.tbListParams.type !== "" && that.tbListParams.type !== null && that.tbListParams.type !== undefined){
+                        return "/tree/category/querytreenode?type="+that.tbListParams.type + "&parentId="+that.tbListParams.parentId
+                         +"&parentCode="+that.tbListParams.parentCode + "&searchkeys=&sortParam=Order_ASC,CreateTime_DESC"
+                    }else{
+                        return ""
+                    } 
                 },
-                actions:[
-                    {key:"edit",val:"Modify",type:'edit',action:this.deleteItem},
-                    {key:"delete",val:"delete",type:'delete',action:this.deleteItem},
-                ],
+                // actions:[
+                //     {key:"edit",val:"Modify",type:'edit',action:deleteItem},
+                //     {key:"delete",val:"delete",type:'delete',action:deleteItem},
+                // ],
                 map:[
-                    {key:'proxyUrl',val:'推广地址'},
-                    {key:'targetUrl',val:'原地址'},
-                    {key:'channel',val:'推广渠道'},
-                    {key:'type',val:'推广类型'},
-                    {key:'id',val:'推广ID'},
-                    {key:'status',val:'状态'},
-                    {key:'updateTimeStr',val:'有效时间'},
+                    {key:'name',val:'名称名称名称名称'},
+                    {key:'descriptions',val:'分类名称描述'},
+                    {key:'level',val:'分类层级'},
+                    {key:'createBy',val:'创建时间创建时间'},
+                    {key:'col0',val:'链接'},
+                    {key:'order',val:'排序'},
+                    {key:'code',val:'编码'},
                 ],
+               
                 pageOption:{
                     sizeKey:"pageSize",
                     indexKey:"currentPage",
@@ -124,8 +129,8 @@ export default {
                 analysis:(data)=>{
                     if(data.data !==null && data.data.length !== 0){
                         return {
-                            data:data.data.dataList,
-                            count:data.data.count
+                            data:data.data,
+                            count:data.data.length
                         };
                     }else{
                         return  {
@@ -243,9 +248,6 @@ export default {
         },
         deleteItem(item){
             console.log(item)
-        },
-        enable(flag){
-            console.log(flag)
         }
     },
     mounted(){
@@ -359,9 +361,9 @@ export default {
     .rightBox{
         border: 1px solid green;
         float: left;
-        width: 100%;
+        width: 78%;
         height: 100%;
-        min-height: 500px;
+         min-height: 500px;
     }
 
     .leftBox /deep/ .selectContent{

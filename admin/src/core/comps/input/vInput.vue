@@ -99,7 +99,7 @@
         display: inline-block;
         line-height: normal;
         width: 50%;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
 
     form  .form-item .form-item-div{

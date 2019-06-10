@@ -608,7 +608,7 @@ export default {
         line-height: normal;
         /* width: 35%; */
         width:50% ;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
 
     form  .form-item .form-item-div{

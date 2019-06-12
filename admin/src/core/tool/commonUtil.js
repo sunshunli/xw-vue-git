@@ -1,11 +1,32 @@
 /**
  * Created by wupeng5 on 2018/2/1.
  */
-
+import q from "q";
+import $ from "jquery";
+const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 let CommonUtil = {
     throwError:function(str){
         console.log(str);
         //throw new Error(str);
+    },
+    http(url,type,data){
+        let defer = q.defer();
+        $.ajax({
+            url:proxy_key + url,
+            type:type?type:"get",
+            data:data? data:null,
+            success:(data)=>{
+                var data =$.parseJSON(data);
+                // if(data.status == 200 ){
+                //     defer.resolve(data);
+                // }else{
+                //     defer.reject(data.msg);
+                // }
+                defer.resolve(data);
+            },
+          
+        })
+        return defer.promise;
     },
     string:{
         replaceAll:function(value,findText,replaceText){

@@ -128,7 +128,7 @@ export default {
         margin-bottom: 0;
     }
     .medium .form-item .form-item-label{
-        height: 40px;
+        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }
@@ -146,7 +146,7 @@ export default {
         display: inline-block;
         line-height: normal;
         width: 80%;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
     .requireed::before{
         content: "*";

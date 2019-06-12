@@ -240,6 +240,10 @@
         color: #606266;
     }
 
+    .medium .selectContent label{
+        width: 17%;
+    }
+
     .searchMulSelect{
 		position: relative;
 	    background-color: #fff;

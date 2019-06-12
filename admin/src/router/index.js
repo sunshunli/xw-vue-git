@@ -9,6 +9,7 @@ const TestPage = r=>require.ensure([],()=>r(require("../pages/test.vue")),"TestP
 
 const DemoPage = r=>require.ensure([],()=>r(require("../pages/demoPage.vue")),"DemoPage");
 const UsePage = r=> require.ensure([],()=>(require("../pages/usePage.vue")),"UsePage");
+const UsePageAdd = r=> require.ensure([],()=>(require("../pages/usePageAdd.vue")),"UsePageAdd");
 Vue.use(Router);
 
 const routers = [
@@ -49,6 +50,10 @@ const routers = [
         path:'/usePage',
         name:'UsePage',
         component:UsePage
+    },{
+        path:'/usePageAdd',
+        name:'UsePageAdd',
+        component:UsePageAdd
     }
 ];
 

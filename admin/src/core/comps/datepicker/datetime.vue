@@ -260,7 +260,7 @@ export default {
     }
 
     .medium .form-item .form-item-label{
-        height: 40px;
+        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }
@@ -278,7 +278,7 @@ export default {
         display: inline-block;
         line-height: normal;
         width: 49.7%;
-        vertical-align: text-bottom;
+        vertical-align: middle;
     }
 
     form  .form-item .form-item-div{

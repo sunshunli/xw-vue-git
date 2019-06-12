@@ -3,22 +3,21 @@
 <template>
     <div class="searchContent">
         <div class="navbar clearfix">
-            <h1 class="al-title ng-binding" id="crumbsTitle">Navigation Management</h1>
+            <h1 class="al-title ng-binding" id="crumbsTitle">页面推广</h1>
             <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>UsePage</li></ul>
         </div>
 
         <div class="searchItem">
-             <v-input label="原地址" type="text" msg="正整数11" vType='number'></v-input>
-            <v-input label="推广ID" type="text" msg="正整数11" vType='number'></v-input>
-            <le-local-select label="租户" ref="s1" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select> 
-            <le-local-select label="推广渠道" ref="s2" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select>
-            <le-local-select label="推广类型" ref="s3" display-name="name" msg="下拉框必选" display-value="code" on required></le-local-select>
-             
-            <le-date-picker label="开始时间" ref="d1" msg="日期不允许为空"></le-date-picker>
-            <le-date-picker label="结束时间" ref="d2" msg="日期不允许为空"></le-date-picker>
+            <v-input label="原地址" ref="targetUrl" type="text" msg="正整数11" vType='number'></v-input>
+            <v-input label="推广ID" ref="generalizeId" type="text" msg="正整数11" vType='number'></v-input>
+            <le-local-select label="租户" ref="tanentId" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-local-select label="推广渠道" ref="channel" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-local-select label="推广类型" ref="type" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-date-time-picker label="开始时间" ref="d1"></le-date-time-picker>
+            <le-date-time-picker label="结束时间" ref="d2"></le-date-time-picker>
         </div>
 
-        <div class="rightBox" v-show="cleckedtreeItem">
+        <div class="rightBox">
             <div class="btnGroup">
                 <le-button type="search" value="Search" @click="search"></le-button>
                 <le-button type="create" value="New" @click="open"></le-button>
@@ -29,28 +28,17 @@
             <table-list :ref="tk1" :options="options"></table-list>
         </div>
 
-        <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
+        <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save(addOrEdit,edititemId)">
             <le-form ref="form2" style="width:600px">
             
-                <v-input label="名称" ref="name" type="text" on required></v-input>
+                <v-input label="推广地址" :disabled="isInfo" msg="推广地址必填" ref="tgdz" type="text" on required></v-input>
 
-                <v-input label="链接" ref="link" msg="包含 协议头 https:" on required></v-input>
+                <v-input label="原地址" :disabled="isInfo" ref="ydz" msg="原地址必填" on required></v-input>
 
-                 <v-input label="描述" ref="desc" vtype="text"></v-input>
+                <v-input label="失效默认地址" :disabled="isInfo" ref="sxdz" msg="失效默认地址必填" vtype="text" on required></v-input>
 
-                <v-input label="排序" ref="order" vType="number" msg="提示：大于0的整数" on required></v-input>
-
-                <le-local-select label="是否新窗口打开" ref="s3" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select>
-             
-                <le-local-select label="是否显示" ref="s4" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select>
-             
-                <le-local-select label="是否外链" ref="s5" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select>
-
-                <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>    
-
-                <le-local-select ref="s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
-                
-                <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
+                <le-date-time-picker :disabled="isInfo" label="开始时间" msg="开始时间必填" ref="dt1" on required></le-date-time-picker>
+                <le-date-time-picker :disabled="isInfo" label="结束时间" msg="结束时间必填" ref="dt2" on required></le-date-time-picker>
 
             </le-form>
         </le-dialog>
@@ -63,8 +51,9 @@ export default {
     name:"demoValidate",
     data(){
         return {
-            selectTreeType : '',
-            cleckedtreeItem:false,
+            edititemId :'',
+            addOrEdit :'add',
+            isInfo:false,
             tbListParams:{
                 type:'',
                 parentId:'',
@@ -72,38 +61,22 @@ export default {
             },
             selectNode:null,
             showDialogFlag:false,
-            asynOptions:{
-                getUrl:d=>{
-                    var that =this;
-                    // if(this.tbListParams.type !== "" && this.tbListParams.type !== null && this.tbListParams.type !== undefined){
-                        return "/tree/category/querytreenode?type="+that.tbListParams.type + "&parentId="+that.tbListParams.parentId
-                         +"&parentCode="+this.tbListParams.parentCode + "&searchkeys=&sortParam=Order_ASC,CreateTime_DESC"
-                    // }
-                },
-                analysis:d=>{
-                    return d.data;
-                }
-            },
-            uploadOptions:{
-                multiple:true,
-                url:"/file/img/upload",
-                completedCallback:(d)=>{
-                    console.log(d);
-                },
-                vtype:"jpg,png,gif",
-                fname:"file",
-                analysis:(d)=>{
-                    return d.data;
-                }
-            },
             tk1:'demoTableList',
             options:{
                 showCk:true,
                 getUrl:()=>{
-                    return "/spread/siteSpread/getPage?siteId=9f746cfa-b5e8-49ab-82d6-86cbedce8119&tanentId=&beginTimeWapper=&endTimeWapper=&targetUrl=&channel=&type=&generalizeId=&"       
+                    var that =this;
+                    return "/spread/siteSpread/getPage?siteId=9f746cfa-b5e8-49ab-82d6-86cbedce8119&tanentId="
+                    +that.$refs["tanentId"].$children[0].getValue()
+                    +"&beginTimeWapper="+that.$refs["d1"].$children[0].getValue()+"&endTimeWapper="
+                    +that.$refs["d2"].$children[0].getValue()+"&targetUrl="
+                    +that.$refs["targetUrl"].$children[0].vValue+"&channel="
+                    +that.$refs["channel"].$children[0].getValue()+"&type="
+                    +that.$refs["type"].$children[0].getValue()+"&generalizeId="
+                    +that.$refs["generalizeId"].$children[0].vValue;     
                 },
                 actions:[
-                    {key:"edit",val:"Modify",type:'edit',action:this.deleteItem},
+                    {key:"edit",val:"Modify",type:'edit',action:this.editItem},
                     {key:"delete",val:"delete",type:'delete',action:this.deleteItem},
                 ],
                 map:[
@@ -112,12 +85,12 @@ export default {
                     {key:'channel',val:'推广渠道'},
                     {key:'type',val:'推广类型'},
                     {key:'id',val:'推广ID'},
-                    {key:'status',val:'状态'},
+                    {key:'status',val:'状态',convert:this.formateStatus},
                     {key:'updateTimeStr',val:'有效时间'},
                 ],
                 pageOption:{
                     sizeKey:"pageSize",
-                    indexKey:"currentPage",
+                    indexKey:"curPage",
                     index:1,
                     size:10
                 },
@@ -126,10 +99,6 @@ export default {
                         return {
                             data:data.data.dataList,
                             count:data.data.count
-                        };
-                    }else{
-                        return  {
-                            
                         };
                     }
                 }
@@ -141,33 +110,6 @@ export default {
             let tk = this.$refs[this.tk1];
             tk.search(tk.getParams().index);
         },
-        //树的方法
-        itemClick(item){
-            console.log(item)
-            this.cleckedtreeItem = true;
-            this.selectNode = item;
-            this.tbListParams = {
-                parentId : item.iD,
-                parentCode : item.code,
-                type : item.type,
-            };
-            this.search();
-        },
-        reloadTree(){
-            this.selectTreeType = this.$refs['s2'].$children[0].leftArray[0].code;
-            this.getTreeData(this.selectTreeType);
-        },
-        getTreeData(type){
-             this.ajax.getFetch("/tree/category/querytreenode?type="+type).then(d=>{
-                var that = this;
-                that.$refs["tree1"].init(d.data);
-                that.selectNode = d.data[0];
-                 console.log(that.selectNode)
-                that.itemClick(d.data[0]);
-            }).catch(e=>{
-                this.alert.showAlert("error",e.data);
-            })
-        },
         submit(){
             // let res = this.$refs["form1"].validate();
             // res.then(d=>{
@@ -176,98 +118,147 @@ export default {
             //     debugger
             // })
         },
-        changecks(data){
-            console.log("11");
-        },
-        dialogCb(){
-            console.log(this.$refs['dialog'].showDialog);
-        },
         open(){
-            this.$refs['dialog'].open();
+            this.$router.push({path:'/usePageAdd'})
         },
         getInfo(){
-            this.$refs['dialog'].open();
+            this.isInfo = true;
             var item = this.$refs[this.tk1].getCheckedItems();
-            console.log(item);
-            this.ajax.getFetch("/tree/category/querytreenode?type=17&parentId="+this.selectNode.id+'&code='+item.data[0].code).then(d=>{
-                var that = this;
-                var data = d.data[0];
-                that.$refs['name'].getCurrentComponent().setValue(data.name);
-                that.$refs['link'].getCurrentComponent().setValue(data.col0);
-                that.$refs['desc'].getCurrentComponent().setValue(data.descriptions);
-                that.$refs['order'].getCurrentComponent().setValue(data.order);
-                that.$refs['s3'].getCurrentComponent().setValue(data.col1);
-                that.$refs['s4'].getCurrentComponent().setValue(data.col2);
-                that.$refs['s5'].getCurrentComponent().setValue(data.col4);
-
-            });
+            if(item.data.length !== 1){
+                this.alert.showAlert('error','请选择一条数据')
+            }else{
+                this.$refs['dialog'].open();
+                this.ajax.getFetch("/spread/siteSpread/detail?id="+item.data[0].id).then(d=>{
+                    var that = this;
+                    var data = d.data.opt.dataList[0];
+                    that.$refs['tgdz'].getCurrentComponent().setValue(data.spreadUrl);
+                    that.$refs['ydz'].getCurrentComponent().setValue(data.targetUrl);
+                    that.$refs['sxdz'].getCurrentComponent().setValue(data.defaultUrl);
+                    this.$refs["dt1"].getCurrentComponent().setValue(data.beginTimeStr);
+                    this.$refs["dt2"].getCurrentComponent().setValue(data.endTimeStr);
+                    this.edititemId = data.id;
+                });
+            }  
+            
         },
-        save(){
+        save(flag,editItemId){
             let res = this.$refs["form2"].validate();
             res.then(d=>{
                 var that = this;
                 var param1 = {
-                    name: that.$refs['name'].$children[0].vValue,
-                    descriptions: that.$refs['desc'].$children[0].vValue,
-                    parentId:that.selectNode.id,
-                    siteId: that.selectNode.id,
-                    tenantId: 1,
-                    col0: that.$refs['link'].$children[0].vValue,
-                    col1: that.$refs['s3'].$children[0].leftArray[0].code,
-                    col2: that.$refs['s4'].$children[0].leftArray[0].code,
-                    col3: {},
-                    col4: that.$refs['s5'].$children[0].leftArray[0].code,
-                    order: 1,
-                    type: 17
-                    // name: 'zhouuzouzo',
-                    // descriptions: '',
-                    // parentId: '3ec36007-78af-4530-a931-07e4ff228fb5',
-                    // siteId: '3ec36007-78af-4530-a931-07e4ff228fb5',
-                    // tenantId: 1,
-                    // col0: '',
-                    // col1: 1,
-                    // col2: 0,
-                    // col3: {},
-                    // col4: 0,
-                    // order: 2,
-                    // type: 17
+                    tanentId: 12,
+                    siteId: '9f746cfa-b5e8-49ab-82d6-86cbedce8119',
+                    proxyUri:that.$refs['tgdz'].$children[0].vValue,
+                    targetUrl: that.$refs['ydz'].$children[0].vValue,
+                    defaultUrl: that.$refs['sxdz'].$children[0].vValue,
+                    beginTimeWapper: that.$refs['dt1'].$children[0].getValue(),
+                    endTimeWapper: that.$refs['dt2'].$children[0].getValue(),
                 };
-                that.ajax.postFetch("site/siteMap/add",param1).then(d=>{
-                    that.getTreeData(17);
+                var url = '';
+                if(flag == 'edit'){
+                    param1.id= editItemId;
+                    url = '/spread/siteSpread/update'
+                }else{
+                    url = '/spread/siteSpread/add'
+                };
+                Unit.http(url,"post",param1).then(d=>{
+                    console.log(d)
+                    var that = this;
+                    if(d.status == 200){
+                        that.alert.showAlert('success',d.msg);
+                        that.$refs['dialog'].close();
+                        that.search();
+                    }else{
+                        that.alert.showAlert('error',d.msg);
+                    }
                 }).catch(e=>{
-                    ththatis.alert.showAlert("error",e.data);
-                })
+                    context.alert.showAlert("error",e.data?e.data:"<#接口异常,操作失败#>");
+                });
             }).catch((error)=>{
                 console.log(error)
             })
         },
-        deleteItem(item){
-            console.log(item)
+        deleteItem(row){
+            console.log(row)
         },
         enable(flag){
-            console.log(flag)
-        }
+            var item = this.$refs[this.tk1].getCheckedItems();
+            if(item.data.length !== 1){
+                this.alert.showAlert('error','请选择一条数据')
+            }else{
+                var param ={
+                ids:item.data[0].id,
+                    enable:flag
+                };
+                Unit.http('/spread/siteSpread/trigger',"post",param).then(d=>{
+                    var that = this;
+                    that.alert.showAlert('success','成功');
+                    that.search();
+                }).catch(e=>{
+                    context.alert.showAlert("error",e.data?e.data:"<#接口异常,操作失败#>");
+                });
+            }
+        },
+        editItem(row){
+            this.isInfo = false;
+            this.addOrEdit = 'edit';
+            this.getInfo();
+            this.save(this.addOrEdit,this.edititemId);
+        },
+        deleteItem(row){
+            var item = this.$refs[this.tk1].getCheckedItems();
+            if(item.data.length !== 1){
+                this.alert.showAlert('error','请选择一条数据')
+            }else{
+                Unit.http("/spread/siteSpread/delete",'post',{'ids': item.data[0].id}).then(d=>{
+                   if(d.status == 200){
+                       this.alert.showAlert('success','删除成功');
+                       this.search()
+                   }else{
+                       this.alert.showAlert('error',d.msg)
+                   }
+                });
+            }
+        },
+        //转换类型
+        formateStatus:function(row,item){
+            var res = '';
+            switch(item.status){
+            case 0:
+                return res="禁用";
+                break;
+            case 1:
+                return res="启用";
+                break;
+            case 2:
+                return res="新建";
+                break;
+            case 3:
+                return res="修改";
+                break;
+            case 4:
+                return res="删除";
+                break;
+            }
+        },
     },
     mounted(){
-        let _newOpen=[{code:"1",name:'<是>'},{code:"0",name:'<否>'}];
-        let _links=[{code:"1",name:'<是>'},{code:"0",name:'<否>'}];
-        let _isShowOrHide = [{code:"1",name:'<否>'},{code:"0",name:'<是>'}];
-
-        this.$refs["s3"].getCurrentComponent().init(Unit.object.cloneObj(_newOpen));
-        this.$refs["s4"].getCurrentComponent().init(Unit.object.cloneObj(_links));
-        this.$refs["s5"].getCurrentComponent().init(Unit.object.cloneObj(_isShowOrHide));
-       
-        this.getTreeData(17);
-        this.ajax.getFetch("/auth/dict/getdictmap?keys=MallType,TreeType").then(d=>{
+        this.ajax.getFetch("/auth/dict/getdictmap?keys=MallType").then(d=>{
             var that = this;
-            var _TreeType = [];
-            for(var item in d.data.TreeType){
-                _TreeType.push({code:item,name:d.data.TreeType[item]})
-            }
-            that.$refs["s2"].getCurrentComponent().init(Unit.object.cloneObj(_TreeType));
-            that.$refs["s2"].setValue(_TreeType[0]);
-            that.$refs["tree1"].init(d.data);
-            that.selectNode = d.data[0];
+           
+            var _MallType = [];
+            for(var item in d.data.MallType){
+                _MallType.push({code:item,name:d.data.MallType[item]})
+            };
+            var _channels=[{name:'Pc',code:'1'},{name:'App',code:'2'},{name:'Wap',code:'3'},{name:'Normal',code:'4'},{name:'Drianage',code:'5'},{name:'Activity',code:'6'},{name:'IOEHumanService',code:'7'},{name:'M4HumanService',code:'8'},{name:'HumanService"',code:'9'}];
+            var _types=[{name:'Normal',code:'0'},{name:'C2C',code:'1'},{name:'OMO',code:'2'},{name:'Service',code:'3'}];
+
+            that.$refs["tanentId"].getCurrentComponent().init(Unit.object.cloneObj(_MallType));
+            that.$refs["channel"].getCurrentComponent().init(Unit.object.cloneObj(_channels));
+            that.$refs["type"].getCurrentComponent().init(Unit.object.cloneObj(_types));
+            // this.$refs["dt1"].getCurrentComponent().setValue("2018-06-10 11:11:51");
+            // this.$refs["dt2"].getCurrentComponent().setValue("2018-06-21 21:41:51");
+            // that.$refs["s1"].setValue(_MallType[0]);
         }).catch(e=>{
             this.alert.showAlert("error",e.data);
         })
@@ -357,7 +348,6 @@ export default {
         min-height: 500px;
     }
     .rightBox{
-        border: 1px solid green;
         float: left;
         width: 100%;
         height: 100%;

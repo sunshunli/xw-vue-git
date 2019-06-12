@@ -237,4 +237,14 @@
     cursor: pointer;
 }
 
+.formStyle .form-item{
+    text-align: left;
+}
+
+.upaload label{
+    width: 17%;
+    text-align: right;
+    margin-right: 6px;
+}
+
 </style>

@@ -419,7 +419,7 @@ li{
 
 .form-item .form-item-label{
     width: 47%;
-    height: 40px;
+    height: auto;
     margin-right: 1%;
     text-align: right;
     vertical-align: middle;
@@ -437,9 +437,10 @@ form .form-item .form-item-label{
     width: 17%;
 }
 .medium .form-item .form-item-label{
-    height: 40px;
+    /* height: 40px; */
     line-height: normal;
     font-size: 14px;
+    width: 17%;
 }
 .small .form-item .form-item-label{
     height: 34px;
@@ -451,11 +452,16 @@ form .form-item .form-item-label{
     line-height: 28px;
     font-size: 12px;
 }
+
+.form-item{
+    text-align: right;
+}
+
 .form-item .form-item-div{
     display: inline-block;
     line-height: normal;
     width: 50%;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     position: relative;
 }
 

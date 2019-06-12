@@ -81,7 +81,7 @@
     }
 
     .medium .form-item .form-item-label{
-        height: 40px;
+        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }
@@ -199,4 +199,7 @@
         font-weight: normal;
     }
 
+    .fa-check-circle-o:before {
+        content: '' !important;
+    }
 </style>

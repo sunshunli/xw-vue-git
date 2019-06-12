@@ -585,11 +585,8 @@ export default {
         width: 17%;
     }
 
-
-
-
     .medium .form-item .form-item-label{
-        height: 40px;
+        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }

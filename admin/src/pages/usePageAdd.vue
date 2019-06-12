@@ -19,16 +19,20 @@
             
             <le-date-time-picker label="结束时间" msg="结束时间必填" ref="dt2" on required></le-date-time-picker>
 
+            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
+            
+            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
+
             <le-radio-list label="性别" ref="sex" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
 
             <le-checkbox-list label="爱好" @change='changecks' ref='hobby' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
         
-
             <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
             <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>    
 
             <le-local-select ref="s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
+           
             <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
 
             <le-button value="Form提交" @click="submit('form1')"></le-button>
@@ -42,7 +46,6 @@ export default {
     name:"demoValidate",
     data(){
         return {
-            changecks:true,
             selectNode:{},
             tbListParams:{
                 type:'',
@@ -79,6 +82,9 @@ export default {
         }
     },
     methods:{
+        changecks(data){
+            console.log("11");
+        },
         submit(){
             let res = this.$refs["form1"].validate();
             res.then(d=>{
@@ -92,12 +98,16 @@ export default {
                     beginTimeWapper: that.$refs['dt1'].$children[0].getValue(),
                     endTimeWapper: that.$refs['dt2'].$children[0].getValue(),
 
-                    sex:that.$refs['sex'].$children[0].setValue('1'),
+                    date:that.$refs["d1"].$children[0].getValue(),
+                    time:that.$refs["t1"].$children[0].getValue(),
+                    sex:that.$refs['sex'].$children[0].getValue(),
                     hobby:that.$refs['hobby'].$children[0].getValue(),
                     localSelect:that.$refs['s1'].$children[0].getValue(),
                     curSelectTreeItem : that.selectNode
                 };
-                
+                console.log( '------form参数--------');
+                console.log( param1);
+                console.log( '------form参数--------');
                 Unit.http('/spread/siteSpread/add',"post",param1).then(d=>{
                     console.log(d)
                     var that = this;
@@ -142,11 +152,16 @@ export default {
     },
     mounted(){
         let data = [
-            {name:"aaa",code:"1"},
-            {name:"aaa1",code:"1"},
-            {name:"aaa2",code:"1"},
-            {name:"bbb",code:"2"},
-            {name:"ccc",code:"3"},
+            // {name:"aaa",code:"1"},
+            // {name:"aaa1",code:"1"},
+            // {name:"aaa2",code:"1"},
+            // {name:"bbb",code:"2"},
+            // {name:"ccc",code:"3"},
+            {name:"1001",code:"001"},
+            {name:"1002",code:"002"},
+            {name:"1003",code:"003"},
+            {name:"2000",code:"2002"},
+            {name:"3000",code:"3003"},
         ];
 
         this.ajax.getFetch("/auth/dict/getdictmap?keys=MallType,TreeType").then(d=>{

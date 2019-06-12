@@ -20,12 +20,12 @@
                         </div>
                     </div>
                     <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
-                        <button @click.stop="getDateTimeStr">
+                        <span @click.stop="getDateTimeStr">
                             确定
-                        </button>
-                        <button class = "text" @click.stop="getNow">
+                        </span>
+                        <span class = "text" @click.stop="getNow">
                             此刻
-                        </button>
+                        </span>
                         <div style ="clear:both;"></div>
                     </div>
                 </div>
@@ -219,14 +219,14 @@ export default {
         margin-right: 0;
     }
 
-    .picker-bottom button{
+    .picker-bottom span{
         float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:10px;background:#fff;
         outline: none;
         border:1px solid #dcdfe6;
         border-radius:3px;
-
+        padding: 0 5px;
     }
-    .picker-bottom button.text{
+    .picker-bottom span.text{
         border:0px solid #fff;
         color:#409EFF;
         

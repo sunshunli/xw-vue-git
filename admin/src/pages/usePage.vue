@@ -203,7 +203,6 @@ export default {
             this.isInfo = false;
             this.addOrEdit = 'edit';
             this.getInfo();
-            this.save(this.addOrEdit,this.edititemId);
         },
         deleteItem(row){
             var item = this.$refs[this.tk1].getCheckedItems();

@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="timeBtnGroup">
-                    <button id="cancel" type="button" @click.stop="closePicker">关闭</button>
-                    <button id="confirm" type="button" @click.stop="ok">确定</button>
+                    <span id="cancel" type="button" @click.stop="closePicker">关闭</span>
+                    <span id="confirm" type="button" @click.stop="ok">确定</span>
                 </div>
             </div>
         </div>
@@ -285,6 +285,7 @@ li{
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
     /* max-width: 200px; */
     width:100%;
+    text-align: left;
 }
 
 .timeContent .timePicker{
@@ -377,7 +378,7 @@ li{
     text-align: right;
 }
 
-.timeContent .timePicker .timeBtnGroup button{
+.timeContent .timePicker .timeBtnGroup span{
     width: 46px;
     height: 100%;
     text-align: center;
@@ -385,6 +386,7 @@ li{
     border: none;
     outline: none;
     cursor: pointer;
+    padding: 0 5px;
 }
 
 .timeContent #confirm{

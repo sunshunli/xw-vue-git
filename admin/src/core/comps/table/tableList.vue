@@ -229,8 +229,12 @@
 </script>
 
 <style scoped>
+
+    .tableContainer{
+        overflow-x: scroll;
+    }
     .table{
-        width: 100%;
+        width: auto;
         border-collapse: collapse;
         font-size: 14px;
         border-radius: 6px 6px 0 0;

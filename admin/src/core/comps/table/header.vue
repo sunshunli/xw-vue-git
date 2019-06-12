@@ -3,7 +3,7 @@
         <tr>
             <th v-if="showCk">
                 <div v-if="!singleSelected">
-                    <input type="checkbox" :checked="ck" @click="setAll" />
+                    <input type="checkbox" class="singleSelected" :checked="ck" @click="setAll" />
                 </div>
             </th>
             <th class="opration" v-if="actions && actions.length != 0">
@@ -92,13 +92,14 @@
     .menu{position: absolute;left:10px;top:0;font-size: 20px;}
     thead tr th{border:1px solid rgba(0,0,0,0.09);border-bottom:none;font-weight: 600;text-align: center;
     color:rgba(0,0,0,0.85);font-size: 14px;min-width: 50px; }
-    .table thead tr th:first-child{
+    .table thead tr th.singleSelected{
         width: 50px;
         min-width: auto;
     }
 
      .table thead tr th.thCols{
          width: auto;
+         word-break: keep-all;
      }
 
      .table thead tr th.opration{

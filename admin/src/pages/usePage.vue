@@ -80,6 +80,13 @@ export default {
                     {key:"delete",val:"delete",type:'delete',action:this.deleteItem},
                 ],
                 map:[
+                    {key:'proxyUrl',val:'推广地址推广地址推广地址推广地址推广地址推广地址推广地址'},
+                    {key:'targetUrl',val:'原地址'},
+                    {key:'channel',val:'推广渠道'},
+                    {key:'type',val:'推广类型'},
+                    {key:'id',val:'推广ID'},
+                    {key:'status',val:'状态',convert:this.formateStatus},
+                    {key:'updateTimeStr',val:'有效时间'},
                     {key:'proxyUrl',val:'推广地址'},
                     {key:'targetUrl',val:'原地址'},
                     {key:'channel',val:'推广渠道'},

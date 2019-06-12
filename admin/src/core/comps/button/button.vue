@@ -1,5 +1,5 @@
 <template>
-    <span @click="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span @click.stop="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
 </template>
 <script>
 

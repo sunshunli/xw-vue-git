@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
-            <input type="text" class="form-item-input" v-model="vValue" v-on:input="changeEvent()" />
+            <input type="text" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -10,23 +10,29 @@
 </template>
 
 <script>
-    import Util from "../../../core/tool/commonUtil";
+    import Util from "../../../core/tool/commonUtil.js";
 
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"VInput",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
         // props:["msg","vType","regex","off"],
-        props:[],
+        props:["value"],
         data(){
             return {
                 //所有需要验证的组件必须带上这个validataType属性，这个属性的值可以为input，select，radio等需要验证的组件 
                 validataComponentType:"Input",
-                vValue:"",
                 state:{
                     showError:false,
                     successIcon:""
-                }
+                },
+                currentValue:this.value
+            }
+        },
+        watch:{
+            value(val){
+                this.setValue(val);
+                this.$emit("input",val);
             }
         },
         methods:{
@@ -34,21 +40,24 @@
                 if(this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+                this.$emit("input",e.target.value);
             },
             getValue(){
-                return this.vValue;
+                return this.currentValue;
             },
             setValue(value){
-                this.vValue = value;
+                this.currentValue = value;
             },
             clear(){
+                this.$emit("input","");
                 this.setValue("");
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
             }
         },
-        mounted () {
+        mounted(){
+            
         }
     }
 </script>

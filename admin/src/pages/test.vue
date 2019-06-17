@@ -2,55 +2,33 @@
 
 <template>
     <div>
-        <baby-input ref='b1'></baby-input>
-        <span v-for="(item,index) in data" class='html' :key="index">{{item.name}}</span>
+        <v-input label="年龄12" type="text" msg="正整数11" vType='number' v-model="abc"></v-input>
+        {{abc}}
+        <le-button type="default" value="set" @click="setv"></le-button>
+        <le-button type="default" value="get" @click="getv"></le-button>
     </div>
 </template>
 
 <script>
 
-import BabyInput from "./myInput.vue";
 
 export default {
     name:"TestPage",
-    components:{BabyInput},
     data(){
         return {
-            data:[],
+            abc:"1"
         }
     },
     methods:{
-        replaceHTMLTag(str){
-            return str.replace(/\${2}(【[\u4e00-\u9fa5]+?】)\${2}/g, '<span style="color:red">$1</span>');
+        setv(){
+            this.abc = "wwww"
         },
-        replaceCount(str){
-            return str.replace(/#(\w+?)#/g, '$1');
+        getv(){
+            console.log("-----"+this.abc);
         }
     },
     mounted(){
-        window.setTimeout(()=>{
-            this.$refs['b1'].setName("我是倩倩");
-
-            let data = [
-                {name:'按客户付款方$$【数学启蒙课】$$按时打卡空间但是阿萨德呢'},
-                {name:'按客户付款方#rhymeCount#按时打卡空间但是阿萨德呢'}
-            ]
-            data.forEach(item=>{
-                let str = this.replaceHTMLTag(item.name);
-                str = this.replaceCount(str);
-                item.name = str;
-            })
-            this.data = data;
-        },0)
-
-        window.setTimeout(()=>{
-            let spans = document.getElementsByTagName("span");
-            for(let i = 0;i<spans.length;i++){
-                let str = spans[i].textContent;
-                spans[i].innerHTML = str;
-                console.log(str);
-            }
-        },1000)
+        
     }
 }
 </script>

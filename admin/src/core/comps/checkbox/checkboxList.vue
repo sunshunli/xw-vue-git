@@ -18,7 +18,7 @@ import CommonUtil from "../../tool/commonUtil.js";
 
 export default {
     name:"LeCheckboxList",
-    props:["displayName","displayValue"],
+    props:["displayName","displayValue","value"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -28,6 +28,11 @@ export default {
                 showError:false
             },
             data:[]
+        }
+    },
+    watch:{
+        value(val){
+            this.setValue(val);
         }
     },
     methods:{
@@ -46,10 +51,12 @@ export default {
         changeItem(item){
             item.ck = !item.ck;
             let res = this.getCheckedItems();
-            this.$emit('change',res);
+            this.$emit('input',res.vals.join(','));
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            //抛出change事件
+            this.$emit('change',res);
         },
         /**
          * @method
@@ -65,8 +72,9 @@ export default {
          * @returns 类型:字符串,为兼容validataHOC，必须返回字符串
          */
         getValue(){
-            let res = this.getCheckedItems().vals.join(',');
-            return res;
+            return this.value;
+            // let res = this.getCheckedItems().vals.join(',');
+            // return res;
         },
         /**
          * @description 回写的方法，设置checkbox选中状态
@@ -89,12 +97,13 @@ export default {
                 })
                 if(cked){
                     item.ck = true;
+                }else{
+                    item.ck = false;
                 }
             })
         }
     },
     mounted(){
-
     }
 }
 </script>

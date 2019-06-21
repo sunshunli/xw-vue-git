@@ -24,7 +24,7 @@
             <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>DemoPage</li></ul>
         </div>
 
-        <v-input label="年龄12" type="text" msg="正整数11" vType='number' v-model="noform_age"></v-input>
+        <v-input label="年龄12" type="text" msg="正整数11" vType='number' v-model="models.noform_age"></v-input>
         <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
         <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
         <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
@@ -57,13 +57,13 @@
         <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
             <le-form ref="form2" style="width:600px">
             
-                <v-input label="年龄" type="text" msg="正整数11" vType='number' on v-model="form_age"></v-input>
+                <v-input label="年龄" type="text" msg="正整数11" vType='number' on v-model="models.form_age"></v-input>
 
-                <v-input label="身份证号码" vType="number" msg="正整数22" on required v-model="form_id"></v-input>
+                <v-input label="身份证号码" vType="number" msg="正整数22" on required v-model="models.form_id"></v-input>
 
-                <le-radio-list label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+                <le-radio-list v-model="models.radioValue" label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
 
-                <le-checkbox-list label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
+                <le-checkbox-list v-model="models.checkValue" label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
             
                 <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
 
@@ -92,9 +92,13 @@ export default {
     name:"FormValidate",
     data(){
         return {
-            noform_age:"xxx",
-            form_age:"18",
-            form_id:"421083",
+            models:{
+                noform_age:"xxx",
+                form_age:"18",
+                form_id:"421083",
+                radioValue:"",
+                checkValue:"",
+            },
             showDialogFlag:false,
             uploadOptions:{
                 multiple:true,
@@ -138,7 +142,7 @@ export default {
         },
         setVal(){
             this.$refs["s2"].getCurrentComponent().setValue("1,2,3")
-            this.$refs["s3"].getCurrentComponent().setValue("1,2,3")
+            this.$refs["s3"].getCurrentComponent().setValue("1,2")
         },
         resetForm(){
             this.$refs["form1"].reset();
@@ -161,6 +165,9 @@ export default {
         ]
         this.$refs["r1"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["cl1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+
+        this.models.checkValue = "1,3";
+        this.models.radioValue = "4";
 
         this.$refs["r2"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["cl2"].getCurrentComponent().init(Unit.object.cloneObj(data));

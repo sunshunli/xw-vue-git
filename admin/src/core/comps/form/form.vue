@@ -122,6 +122,12 @@ export default {
         padding: 0; 
     }
 
+    .formStyle .container::-webkit-scrollbar{
+        width: 0px;
+        height: 0;
+        background-color:transparent;
+    }
+
     .formStyle .container .formDiv{
         text-align: center;
         padding:10px 0;

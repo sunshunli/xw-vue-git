@@ -32,7 +32,6 @@
         watch:{
             value(val){
                 this.setValue(val);
-                this.$emit("input",val);
             }
         },
         methods:{
@@ -50,7 +49,6 @@
             },
             clear(){
                 this.$emit("input","");
-                this.setValue("");
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }

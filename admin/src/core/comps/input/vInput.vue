@@ -36,6 +36,7 @@
         },
         methods:{
             changeEvent(e){
+                this.currentValue = e.target.value;
                 if(this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }

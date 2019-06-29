@@ -85,7 +85,7 @@ export default {
                 res.push(el.innerText);
             });
             let result = res.join(':');
-            this.getJQDom(this.KEYS.timeInputDomKey).html(result);
+            // this.getJQDom(this.KEYS.timeInputDomKey).html(result);
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();

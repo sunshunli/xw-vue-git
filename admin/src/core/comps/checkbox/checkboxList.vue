@@ -72,9 +72,8 @@ export default {
          * @returns 类型:字符串,为兼容validataHOC，必须返回字符串
          */
         getValue(){
-            return this.value;
-            // let res = this.getCheckedItems().vals.join(',');
-            // return res;
+            let res = this.getCheckedItems().vals.join(',');
+            return res;
         },
         /**
          * @description 回写的方法，设置checkbox选中状态

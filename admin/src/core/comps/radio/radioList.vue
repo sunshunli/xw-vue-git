@@ -83,7 +83,8 @@ export default {
          * @returns
          */
         getValue(){
-            return this.value;
+            let res = CommonUtil.object.getCheckedItems(this.data,this.displayValue);
+            return res.vals.join(',');
         },
         
     },

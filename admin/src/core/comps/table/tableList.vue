@@ -234,6 +234,7 @@
         overflow-x: scroll;
     }
     .table{
+        min-width: 100%;
         width: auto;
         border-collapse: collapse;
         font-size: 14px;

@@ -37,7 +37,7 @@
 
   export default {
     name: 'LeLocalSelect',
-    props:["multiple","displayName","displayValue"],
+    props:["multiple","displayName","displayValue","value"],
     components: {LeftSection,ButtomSection},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
@@ -67,6 +67,11 @@
         },
         leftArray(){
             return CommonUtil.object.getCheckedItems(this.data).items;
+        }
+    },
+    watch:{
+        value(val){
+            this.setValue(val);
         }
     },
     methods:{
@@ -200,14 +205,17 @@
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input","");
         }
     },
     mounted(){
         /**
-         * @description 添加时间监听
+         * @description 添加事件监听
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
+
+        this.setValue(this.value);
     },
     beforeDestroy(){
         /**

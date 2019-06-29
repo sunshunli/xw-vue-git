@@ -254,7 +254,6 @@ export default {
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
-            this.closePicker();
             this.$emit("input","");
         },
         /**

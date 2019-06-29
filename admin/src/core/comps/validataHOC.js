@@ -122,9 +122,8 @@ function ValidataHOC(Component){
             })
 
             if(!this.checkVerifyEnabled()){
-                console.log("当前组件不需要验证");
+                // console.log("当前组件不需要验证");
             }else{
-                
                 //通过HOC添加验证需要的方法，具体验证的业务逻辑都在HOC里面执行，当前Vue组件只需要调用即可
                 if(Component.data().validataComponentType && Component.data().validataComponentType == "Input"){
                     this.$set(this.$attrs, "verify", this.verifyReg);

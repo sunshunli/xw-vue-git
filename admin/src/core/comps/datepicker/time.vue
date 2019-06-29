@@ -36,7 +36,7 @@ import $ from "jquery";
 
 export default {
     name:"LeTimePicker",
-    props:["msg"],
+    props:["msg","value"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -62,6 +62,11 @@ export default {
             nextSelect:0
         }
     },
+    watch:{
+        value(val){
+            this.setValue(val);
+        }
+    },
     methods:{
         /**
          * @description 设置成功失败的状态
@@ -79,11 +84,13 @@ export default {
             this.getJQDom(this.KEYS.timePanelDomKey).find("li.active").each((idx,el) => {
                 res.push(el.innerText);
             });
-            this.getJQDom(this.KEYS.timeInputDomKey).html(res.join(':'));
+            let result = res.join(':');
+            this.getJQDom(this.KEYS.timeInputDomKey).html(result);
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input",result);
         },
         //关闭
         closePicker(){
@@ -197,10 +204,11 @@ export default {
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input","");
         }
     },
     mounted(){
-        this.setValue();
+        this.setValue(this.value);
         //为3个ul添加滚动事件
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll").on("scroll",e=>{
             this.scrollFun(e.target);

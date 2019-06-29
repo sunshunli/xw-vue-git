@@ -152,7 +152,7 @@ import DEFINE_KEY from "../Define.js";
 
 export default {
     name:"LeDatePicker",
-    props:["selectDayCallback","isDatetimePicker"],
+    props:["selectDayCallback","isDatetimePicker","value"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -167,6 +167,11 @@ export default {
             data:[],
             selectDay:"",
             isShowPicker:false
+        }
+    },
+    watch:{
+        value(val){
+            this.setValue(val);
         }
     },
     computed:{
@@ -250,6 +255,7 @@ export default {
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input","");
         },
         /**
          * @description 点击其他地方，隐藏picker选择层
@@ -304,6 +310,7 @@ export default {
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input",this.selectDayStr);
         },
         /**
          * @description 上一年切换事件
@@ -417,6 +424,8 @@ export default {
     mounted(){
         this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
+
+        this.setValue(this.value);
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);

@@ -43,7 +43,7 @@ import LeTimePicker from "./time.vue";
 
 export default {
     name:"LeDateTimePicker",
-    props:["msg"],
+    props:["msg","value"],
     components: {LeDatePicker,LeTimePicker},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
@@ -59,6 +59,11 @@ export default {
             },
         }
     },
+    watch:{
+        value(val){
+            this.setValue(val);
+        }
+    },
     methods:{
         getDateTimeStr(){
             let dateComp = this.$refs[this.dateKey];
@@ -69,13 +74,14 @@ export default {
                 this.dateTimeStr =  "";
             }else{
                 this.dateTimeStr = dataStr + " " + timeStr;
-                dateComp.closePicker();
-                timeComp.closePicker();
-                this.showDateTimePicker = false;
             }
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            dateComp.closePicker();
+            timeComp.closePicker();
+            this.showDateTimePicker = false;
+            this.$emit("input",this.dateTimeStr);
         },
         showDateTimePickerHandle(){
             this.showDateTimePicker = true;
@@ -84,10 +90,11 @@ export default {
         clear(){
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
-            this.setValue("");
+            // this.setValue("");
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.$emit("input","");
         },
         initDateAndTime(){
             let y = new Date().getFullYear();
@@ -118,7 +125,7 @@ export default {
         }
     },
     mounted(){
-        this.initDateAndTime();
+        this.setValue(this.value);
     }
 }   
 </script>

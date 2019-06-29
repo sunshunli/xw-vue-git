@@ -91,7 +91,6 @@
             if(this.data.length != 0){
                 this.showButtom = true;
             }
-            
         },
         /**
          * @description 搜索框的change事件，并且需要动态改变input框的宽度
@@ -118,7 +117,9 @@
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
-            this.$emit("change",this.getSelectedItems());
+            let selectedItems = this.getSelectedItems();
+            this.$emit("change",selectedItems);
+            this.$emit("input",selectedItems.vals.join(','));
         },
         /**
          * @description buttom组件发来的更新通知,更新数据源
@@ -178,13 +179,11 @@
          * @param {ids} displayValue的集合, 逗号分隔, 如果传入空，则重置所有
          */
         setValue(ids){
-            if(!ids){
-                this.data.forEach(item=>{
-                    item.cls = "";
-                    item.ck = false;
-                })
-                return;
-            }
+            //重置
+            this.data.forEach(item=>{
+                item.cls = "";
+                item.ck = false;
+            })
             ids && ids.split && ids.split(',').forEach(val=>{
                 let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
                 if(tmp){
@@ -198,10 +197,6 @@
          * @returns 
          */
         clear(){
-            this.data.forEach(item=>{
-                item.cls = "";
-                item.ck = false;
-            })
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }

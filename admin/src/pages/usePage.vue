@@ -8,13 +8,13 @@
         </div>
 
         <div class="searchItem">
-            <v-input label="原地址" ref="targetUrl" type="text" msg="正整数11" vType='number'></v-input>
-            <v-input label="推广ID" ref="generalizeId" type="text" msg="正整数11" vType='number'></v-input>
-            <le-local-select label="租户" ref="tanentId" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
-            <le-local-select label="推广渠道" ref="channel" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
-            <le-local-select label="推广类型" ref="type" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
-            <le-date-time-picker label="开始时间" ref="d1"></le-date-time-picker>
-            <le-date-time-picker label="结束时间" ref="d2"></le-date-time-picker>
+            <v-input label="原地址" v-model="searchModel.targetUrl" type="text" msg="正整数11" vType='number'></v-input>
+            <v-input label="推广ID" v-model="searchModel.generalizeId" type="text" msg="正整数11" vType='number'></v-input>
+            <le-local-select label="租户" ref="tanentId" v-model="searchModel.tanentId" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-local-select label="推广渠道" ref="channel" v-model="searchModel.channel" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-local-select label="推广类型" ref="type" v-model="searchModel.type" display-name="name" msg="下拉框必选" display-value="code"></le-local-select> 
+            <le-date-time-picker label="开始时间" v-model="searchModel.startTime"></le-date-time-picker>
+            <le-date-time-picker label="结束时间" v-model="searchModel.endTime" ref="d2"></le-date-time-picker>
         </div>
 
         <div class="rightBox">
@@ -31,14 +31,14 @@
         <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save(addOrEdit,edititemId)">
             <le-form ref="form2" style="width:600px">
             
-                <v-input label="推广地址" :disabled="isInfo" msg="推广地址必填" ref="tgdz" type="text" on required></v-input>
+                <v-input label="推广地址" :disabled="isInfo" msg="推广地址必填" ref="tgdz" v-model="form2.tgdz" type="text" on required></v-input>
 
-                <v-input label="原地址" :disabled="isInfo" ref="ydz" msg="原地址必填" on required></v-input>
+                <v-input label="原地址" :disabled="isInfo" ref="ydz" v-model="form2.ydz" msg="原地址必填" on required></v-input>
 
-                <v-input label="失效默认地址" :disabled="isInfo" ref="sxdz" msg="失效默认地址必填" vtype="text" on required></v-input>
+                <v-input label="失效默认地址" :disabled="isInfo" ref="sxdz" v-model="form2.sxdz" msg="失效默认地址必填" vtype="text" on required></v-input>
 
-                <le-date-time-picker :disabled="isInfo" label="开始时间" msg="开始时间必填" ref="dt1" on required></le-date-time-picker>
-                <le-date-time-picker :disabled="isInfo" label="结束时间" msg="结束时间必填" ref="dt2" on required></le-date-time-picker>
+                <le-date-time-picker :disabled="isInfo" label="开始时间" msg="开始时间必填" v-model="form2.startTime" ref="dt1" on required></le-date-time-picker>
+                <le-date-time-picker :disabled="isInfo" label="结束时间" msg="结束时间必填" v-model="form2.endTime" ref="dt2" on required></le-date-time-picker>
 
             </le-form>
         </le-dialog>
@@ -51,6 +51,22 @@ export default {
     name:"demoValidate",
     data(){
         return {
+            searchModel:{
+                targetUrl:'',
+                generalizeId:'',
+                tanentId:'',
+                channel:'',
+                startTime:'',
+                endTime:'',
+                type:''
+            },
+            form2:{
+                tgdz:'',
+                ydz:'',
+                sxdz:'',
+                startTime:'',
+                endTime:''
+            },
             edititemId :'',
             addOrEdit :'add',
             isInfo:false,
@@ -67,13 +83,13 @@ export default {
                 getUrl:()=>{
                     var that =this;
                     return "/spread/siteSpread/getPage?siteId=9f746cfa-b5e8-49ab-82d6-86cbedce8119&tanentId="
-                    +that.$refs["tanentId"].$children[0].getValue()
-                    +"&beginTimeWapper="+that.$refs["d1"].$children[0].getValue()+"&endTimeWapper="
-                    +that.$refs["d2"].$children[0].getValue()+"&targetUrl="
-                    +that.$refs["targetUrl"].$children[0].vValue+"&channel="
-                    +that.$refs["channel"].$children[0].getValue()+"&type="
-                    +that.$refs["type"].$children[0].getValue()+"&generalizeId="
-                    +that.$refs["generalizeId"].$children[0].vValue;     
+                    +that.searchModel.tanentId
+                    +"&beginTimeWapper="+that.searchModel.startTime+"&endTimeWapper="
+                    +that.searchModel.endTime+"&targetUrl="
+                    +that.searchModel.targetUrl+"&channel="
+                    +that.searchModel.channel+"&type="
+                    +that.searchModel.type+"&generalizeId="
+                    +that.searchModel.generalizeId;     
                 },
                 actions:[
                     {key:"edit",val:"Modify",type:'edit',action:this.editItem},
@@ -138,15 +154,15 @@ export default {
                 this.ajax.getFetch("/spread/siteSpread/detail?id="+item.data[0].id).then(d=>{
                     var that = this;
                     var data = d.data.opt.dataList[0];
-                    that.$refs['tgdz'].getCurrentComponent().setValue(data.spreadUrl);
-                    that.$refs['ydz'].getCurrentComponent().setValue(data.targetUrl);
-                    that.$refs['sxdz'].getCurrentComponent().setValue(data.defaultUrl);
-                    this.$refs["dt1"].getCurrentComponent().setValue(data.beginTimeStr);
-                    this.$refs["dt2"].getCurrentComponent().setValue(data.endTimeStr);
+                    that.form2.tgdz = data.spreadUrl;
+                    that.form2.ydz = data.targetUrl;
+                    that.form2.sxdz = data.defaultUrl;
+                    that.form2.dt1 = data.beginTimeStr;
+                    that.form2.dt2 = data.endTimeStr;
                     this.edititemId = data.id;
                 });
             }  
-            
+
         },
         save(flag,editItemId){
             let res = this.$refs["form2"].validate();
@@ -155,11 +171,11 @@ export default {
                 var param1 = {
                     tanentId: 12,
                     siteId: '9f746cfa-b5e8-49ab-82d6-86cbedce8119',
-                    proxyUri:that.$refs['tgdz'].$children[0].vValue,
-                    targetUrl: that.$refs['ydz'].$children[0].vValue,
-                    defaultUrl: that.$refs['sxdz'].$children[0].vValue,
-                    beginTimeWapper: that.$refs['dt1'].$children[0].getValue(),
-                    endTimeWapper: that.$refs['dt2'].$children[0].getValue(),
+                    proxyUri:that.form2.tgdz,
+                    targetUrl: that.form2.ydz,
+                    defaultUrl: that.form2.sxdz,
+                    beginTimeWapper: that.form2.dt1,
+                    endTimeWapper: that.form2.dt2,
                 };
                 var url = '';
                 if(flag == 'edit'){

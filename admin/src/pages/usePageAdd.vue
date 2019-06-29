@@ -9,29 +9,29 @@
            
         <le-form ref="form1" style="width:600px">
 
-            <v-input label="推广地址"  msg="推广地址必填" ref="tgdz" type="text" on required></v-input>
+            <v-input label="推广地址"  msg="推广地址必填" v-model="form1.tgdz" type="text" on required></v-input>
 
-            <v-input label="原地址" ref="ydz" msg="原地址必填" on required></v-input>
+            <v-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></v-input>
 
-            <v-input label="失效默认地址"  ref="sxdz" msg="失效默认地址必填" vtype="text" on required></v-input>
+            <v-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></v-input>
 
-            <le-date-time-picker label="开始时间" msg="开始时间必填" ref="dt1" on required></le-date-time-picker>
+            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1" on required></le-date-time-picker>
             
-            <le-date-time-picker label="结束时间" msg="结束时间必填" ref="dt2" on required></le-date-time-picker>
+            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2" on required></le-date-time-picker>
 
-            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空"></le-date-picker>
+            <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空"></le-date-picker>
             
-            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"></le-time-picker>
+            <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空"></le-time-picker>
 
-            <le-radio-list label="性别" ref="sex" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+            <le-radio-list label="性别" ref="sex" v-model="form1.sex" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
 
-            <le-checkbox-list label="爱好" @change='changecks' ref='hobby' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
+            <le-checkbox-list label="爱好" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
         
-            <le-local-select label="模糊搜索" multiple ref="s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+            <le-local-select label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
             <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>    
 
-            <le-local-select ref="s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
+            <le-local-select ref="s2" v-model="form1.s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
            
             <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
 
@@ -46,6 +46,19 @@ export default {
     name:"demoValidate",
     data(){
         return {
+            form1:{
+                tgdz:'',
+                ydz:'',
+                sxdz:'',
+                dt1:'',
+                dt2:'',
+                d1:'',
+                t1:'',
+                sex:'',
+                hobby:'',
+                s1:'',
+                s2:''
+            },
             selectNode:{},
             tbListParams:{
                 type:'',
@@ -92,17 +105,17 @@ export default {
                 var param1 = {
                     tanentId: 12,
                     siteId: '9f746cfa-b5e8-49ab-82d6-86cbedce8119',
-                    proxyUri:that.$refs['tgdz'].$children[0].vValue,
-                    targetUrl: that.$refs['ydz'].$children[0].vValue,
-                    defaultUrl: that.$refs['sxdz'].$children[0].vValue,
-                    beginTimeWapper: that.$refs['dt1'].$children[0].getValue(),
-                    endTimeWapper: that.$refs['dt2'].$children[0].getValue(),
+                    proxyUri:that.form1.tgdz,
+                    targetUrl: that.form1.ydz,
+                    defaultUrl: that.form1.sxdz,
+                    beginTimeWapper: that.form1.dt1,
+                    endTimeWapper: that.form1.dt2,
 
-                    date:that.$refs["d1"].$children[0].getValue(),
-                    time:that.$refs["t1"].$children[0].getValue(),
-                    sex:that.$refs['sex'].$children[0].getValue(),
-                    hobby:that.$refs['hobby'].$children[0].getValue(),
-                    localSelect:that.$refs['s1'].$children[0].getValue(),
+                    date:that.form1.d1,
+                    time:that.form1.t1,
+                    sex:that.form1.sex,
+                    hobby:that.form1.hobby,
+                    localSelect:that.form1.s1,
                     curSelectTreeItem : that.selectNode
                 };
                 console.log( '------form参数--------');

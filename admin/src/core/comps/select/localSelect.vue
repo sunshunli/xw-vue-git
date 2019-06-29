@@ -200,6 +200,7 @@
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.searchName = "";
             this.$emit("input","");
         }
     },

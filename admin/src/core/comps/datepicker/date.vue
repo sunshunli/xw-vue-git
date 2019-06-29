@@ -251,10 +251,10 @@ export default {
             this.data = _tool.groupArray(days);
         },
         clear(){
-            this.setValue("");
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
+            this.closePicker();
             this.$emit("input","");
         },
         /**

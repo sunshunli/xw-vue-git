@@ -58,21 +58,6 @@
                 }else{
                     return 100;
                 }
-            },
-            resArr(){
-                let res = [];
-                this.src.forEach(element=>{
-                    let tmp = {src:"",name:""};
-                    if(element.indexOf(',') == -1){
-                        tmp.src = element;
-                        tmp.name = element.substring(element.lastIndexOf('.') - 1)
-                    }else{
-                        tmp.src = element.split(',')[0];
-                        tmp.name = element.split(',')[1];
-                    }
-                    res.push(tmp);
-                })
-                return res;
             }
         },
         watch:{

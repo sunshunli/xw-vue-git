@@ -5,8 +5,8 @@
         <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
         <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
         
-        <div class="fileList" v-show="src.length>0">
-            <span v-for="(item,index) in src" :key="index"><a target="_blank" :href="item.src">{{item.name}}</a><i class="fa fa-times"></i></span>
+        <div class="fileList" v-show="srcs.length>0">
+            <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item">{{names[index]}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
         </div>
 
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
@@ -16,7 +16,7 @@
 <script>
     export default {
         components: {},
-        props:["options"],
+        props:["options","value"],
         name: "LeUpload",
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
@@ -24,7 +24,8 @@
                 validataComponentType:"FileUpload",
                 fkey:_idSeed.newId(),
                 showLoading:false,
-                src:[],
+                srcs:[],
+                names:[],
                 state:{
                     showError:false,
                     successIcon:""
@@ -57,6 +58,26 @@
                 }else{
                     return 100;
                 }
+            },
+            resArr(){
+                let res = [];
+                this.src.forEach(element=>{
+                    let tmp = {src:"",name:""};
+                    if(element.indexOf(',') == -1){
+                        tmp.src = element;
+                        tmp.name = element.substring(element.lastIndexOf('.') - 1)
+                    }else{
+                        tmp.src = element.split(',')[0];
+                        tmp.name = element.split(',')[1];
+                    }
+                    res.push(tmp);
+                })
+                return res;
+            }
+        },
+        watch:{
+            value(val){
+                this.setValue(val);
             }
         },
         methods:{
@@ -108,9 +129,11 @@
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
                     if(!this.multiple){
-                        this.src.length = 0;
+                        this.srcs.length = 0;
                     }
-                    this.src.push({src:src,name:fileName});
+                    this.srcs.push(src);
+                    this.names.push(fileName);
+                    this.$emit('input',this.srcs);
                     this.showLoading = false;
                     this.reloadFileInput();
                     if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -125,32 +148,32 @@
                 });
             },
             getValue(){
-                return this.src.join(',');
+                debugger
+                return this.srcs.join(',');
             },
-            setValue(vals,names){
-                if(!vals){
-                    this.src = [];
+            setValue(srcs){
+                if(!srcs){
+                    this.srcs = [];
                     return;
                 }
-                this.src = [];
-                let path = [];
-                let fileName = [];
-                if(names && names.split && vals && vals.split ){
-                    path = vals.split(',');
-                    fileName = names.split(',');
-                }else{
-                    path = vals.split(',');
-                    for(let i = 0; i< path.length; i++){
-                        fileName.push(path[i].substring(path[i].lastIndexOf('.') - 1));
+                
+                for (let index = 0; index < srcs.length; index++) {
+                    const element = this.names[index];
+                    if(!element){
+                        this.names[index] = srcs[index].substring(srcs[index].lastIndexOf('.') - 1)
                     }
                 }
-                for(let i = 0; i<path.length; i++){
-                    this.src.push({src:path[i],name:fileName[i]});
-                }
+                this.srcs = srcs;
+            },
+            removeItem(item){
+                let res = this.srcs.filter(x=>{
+                    return x.indexOf(item) == -1
+                })
+                this.$emit('input',res);
             }
         },
         mounted(){
-            
+            this.setValue(this.value);
         }
     }
 </script>

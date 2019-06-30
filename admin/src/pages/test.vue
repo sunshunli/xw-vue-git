@@ -13,6 +13,8 @@
 
         <le-local-select v-model="sl" label="模糊搜索" ref='s1' display-name="name" display-value="code"></le-local-select> 
 
+        <le-upload label="图片上传" :options="options" v-model="uploadUrl"></le-upload>
+
         <le-button type="default" value="set" @click="setv"></le-button>
         <le-button type="default" value="get" @click="getv"></le-button>
     </div>
@@ -29,7 +31,20 @@ export default {
             dd:"",
             tt:"",
             dt:"",
-            sl:""
+            sl:"",
+            options:{
+                multiple:true,
+                url:"/api/lanc/his/admin/Upload/RobotModelImage/v1",
+                completedCallback:(d)=>{
+                    console.log(d);
+                },
+                vtype:"jpg,png,gif",
+                fname:"file",
+                analysis:(d)=>{
+                    return d.data;
+                },
+            },
+            uploadUrl:""
         }
     },
     methods:{
@@ -38,9 +53,11 @@ export default {
             this.tt = "12:01:20";
             this.dt = "2019-01-02 11:11:22";
             this.sl = "1,3";
+
+            this.uploadUrl = ["/api/lanc/his.jpg"];
         },
         getv(){
-            console.log(this.dd + "---" + this.tt + "---" + this.dt + "---" + this.sl);
+            console.log(this.dd + "---" + this.tt + "---" + this.dt + "---" + this.sl + "----" + this.uploadUrl);
         },
         changecks(item,data){
             console.log(data.vals);

@@ -500,7 +500,7 @@ export default {
         /* box-sizing: border-box; */
         margin-top: 4px;
         position: absolute;
-        left:-100px;
+        left:0;
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         z-index:999

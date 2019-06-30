@@ -148,7 +148,6 @@
                 });
             },
             getValue(){
-                debugger
                 return this.srcs.join(',');
             },
             setValue(srcs){

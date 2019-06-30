@@ -9,25 +9,6 @@ let CommonUtil = {
         console.log(str);
         //throw new Error(str);
     },
-    http(url,type,data){
-        let defer = q.defer();
-        $.ajax({
-            url:proxy_key + url,
-            type:type?type:"get",
-            data:data? data:null,
-            success:(data)=>{
-                var data =$.parseJSON(data);
-                // if(data.status == 200 ){
-                //     defer.resolve(data);
-                // }else{
-                //     defer.reject(data.msg);
-                // }
-                defer.resolve(data);
-            },
-          
-        })
-        return defer.promise;
-    },
     string:{
         replaceAll:function(value,findText,replaceText){
             let regExp = new RegExp(findText, "g");

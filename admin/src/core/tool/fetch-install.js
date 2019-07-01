@@ -5,8 +5,8 @@ import _this from "../../main";
 const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 
 let param = function(obj) {
-    var query = '';
-    var name, value, fullSubName, subName, subValue, innerObj, i;
+    let query = '';
+    let name, value, fullSubName, subName, subValue, innerObj, i;
 
     for (name in obj) {
         value = obj[name];

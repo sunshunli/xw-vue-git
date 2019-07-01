@@ -96,7 +96,7 @@
                 formData.append(this.fname,fileObj);
                 let fileName = fileObj.name;
                 if(this.vtype){
-                    var suffix = fileName.substring(fileName.lastIndexOf('.')+1);
+                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
                         this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
                         return;

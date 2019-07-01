@@ -299,8 +299,8 @@ let CommonUtil = {
                 return;
             }
             if(!field){
-                var result = [], hash = {};
-                for (var i = 0, elem; (elem = array[i]) != null; i++) {
+                let result = [], hash = {};
+                for (let i = 0, elem; (elem = array[i]) != null; i++) {
                     if (!hash[elem]) {
                         result.push(elem);
                         hash[elem] = true;
@@ -308,7 +308,7 @@ let CommonUtil = {
                 }
                 return result;
             }else{
-                var hash = {};
+                let hash = {};
                 return array.reduce(function (item, next) {
                   hash[next[field]] ? '' : hash[next[field]] = true && item.push(next);
                    return item;

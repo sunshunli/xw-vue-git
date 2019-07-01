@@ -84,7 +84,7 @@ export default {
             },
             asynOptions:{
                 getUrl:d=>{
-                    var that =this;
+                    let that =this;
                         return "/tree/category/querytreenode?type="+that.tbListParams.type + "&parentId="+that.tbListParams.parentId
                          +"&parentCode="+this.tbListParams.parentCode + "&searchkeys=&sortParam=Order_ASC,CreateTime_DESC"
                 },
@@ -101,8 +101,8 @@ export default {
         submit(){
             let res = this.$refs["form1"].validate();
             res.then(d=>{
-                var that = this;
-                var param1 = {
+                let that = this;
+                let param1 = {
                     tanentId: 12,
                     siteId: '9f746cfa-b5e8-49ab-82d6-86cbedce8119',
                     proxyUri:that.form1.tgdz,
@@ -123,7 +123,7 @@ export default {
                 console.log( '------form参数--------');
                 Unit.http('/spread/siteSpread/add',"post",param1).then(d=>{
                     console.log(d)
-                    var that = this;
+                    let that = this;
                     if(d.status == 200){
                         that.alert.showAlert('success',d.msg);
                         that.$router.push({path:'/usePage'})
@@ -153,7 +153,7 @@ export default {
         },
         getTreeData(type){
              this.ajax.getFetch("/tree/category/querytreenode?type="+type).then(d=>{
-                var that = this;
+                let that = this;
                 that.$refs["tree1"].init(d.data);
                 that.selectNode = d.data[0];
                  console.log(that.selectNode)
@@ -178,9 +178,9 @@ export default {
         ];
 
         this.ajax.getFetch("/auth/dict/getdictmap?keys=MallType,TreeType").then(d=>{
-            var that = this;
-            var _TreeType = [];
-            for(var item in d.data.TreeType){
+            let that = this;
+            let _TreeType = [];
+            for(let item in d.data.TreeType){
                 _TreeType.push({code:item,name:d.data.TreeType[item]})
             }
             that.$refs["s2"].getCurrentComponent().init(Unit.object.cloneObj(_TreeType));

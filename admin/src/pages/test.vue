@@ -17,6 +17,14 @@
 
         <le-button type="default" value="set" @click="setv"></le-button>
         <le-button type="default" value="get" @click="getv"></le-button>
+
+        <le-form ref="form2" style="width:600px">
+            
+            <v-input label="年龄" type="text" msg="phone" vType='phone' on v-model="models.form_age"></v-input>
+
+            <le-button value="Form提交" @click="submit('form2')"></le-button>
+
+        </le-form>
     </div>
 </template>
 
@@ -27,6 +35,9 @@ export default {
     name:"TestPage",
     data(){
         return {
+            models:{
+                form_age:0
+            },
             abc:"",
             dd:"",
             tt:"",
@@ -61,6 +72,14 @@ export default {
         },
         changecks(item,data){
             console.log(data.vals);
+        },
+        submit(id){
+            let res = this.$refs[id].validate();
+            res.then(d=>{
+                debugger
+            }).catch((error)=>{
+                debugger
+            })
         }
     },
     mounted(){

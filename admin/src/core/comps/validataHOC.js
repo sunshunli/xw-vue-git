@@ -23,9 +23,10 @@ function ValidataHOC(Component){
                 if(this.$attrs.vType == undefined && this.$attrs.required == undefined){
                     return true;
                 }
+                
                 //如果设置了vType，没有设置required
                 if(this.$attrs.vType != undefined && this.$attrs.required == undefined){
-                    var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
+                    let reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                     reg = new RegExp(reg);
                     if (!reg.test(val)) {
                         return false;
@@ -37,7 +38,7 @@ function ValidataHOC(Component){
                     if(val == ""){
                         return false;
                     }else{
-                        var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
+                        let reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                         reg = new RegExp(reg);
                         if (!reg.test(val)) {
                             return false;

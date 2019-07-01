@@ -105,9 +105,9 @@ export default {
         },
         //3个ul的滚动事件
         scrollFun(dom){
-            var sHeight = $(dom).scrollTop();
-            var curSelectLi =Math.floor(sHeight / 30) ;
-            var yu = sHeight % 30;
+            let sHeight = $(dom).scrollTop();
+            let curSelectLi =Math.floor(sHeight / 30) ;
+            let yu = sHeight % 30;
             if(curSelectLi == 0){
                 if(yu <10){
                    this. nextSelect = 0;
@@ -123,7 +123,7 @@ export default {
             }else{
                 this.nextSelect = 0;
             };
-            var nextDom = $(dom).children('li')[this.nextSelect];
+            let nextDom = $(dom).children('li')[this.nextSelect];
             $(nextDom).addClass('active').siblings().removeClass('active');
         },
         //设置值

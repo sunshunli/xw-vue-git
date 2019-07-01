@@ -20,7 +20,7 @@
 
         <le-form ref="form2" style="width:600px">
             
-            <v-input label="年龄" type="text" msg="phone" vType='phone' on v-model="models.form_age"></v-input>
+            <v-input label="年龄" type="text" msg="decimals" vType='decimals' on v-model="models.form_age"></v-input>
 
             <le-button value="Form提交" @click="submit('form2')"></le-button>
 

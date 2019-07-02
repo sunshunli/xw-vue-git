@@ -29,7 +29,7 @@
         
             <le-local-select label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
 
-            <le-upload msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>    
+            <le-upload msg='图片必须上传' v-model='form1.uploadSrc' :options="uploadOptions" label="文件上传"></le-upload>    
 
             <le-local-select ref="s2" v-model="form1.s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
            
@@ -57,7 +57,8 @@ export default {
                 sex:'',
                 hobby:'',
                 s1:'',
-                s2:''
+                s2:'',
+                uploadSrc:""
             },
             selectNode:{},
             tbListParams:{
@@ -116,7 +117,8 @@ export default {
                     sex:that.form1.sex,
                     hobby:that.form1.hobby,
                     localSelect:that.form1.s1,
-                    curSelectTreeItem : that.selectNode
+                    curSelectTreeItem : that.selectNode,
+                    imgUrl:that.form1.uploadSrc
                 };
                 console.log( '------form参数--------');
                 console.log( param1);

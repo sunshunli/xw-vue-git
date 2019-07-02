@@ -126,9 +126,9 @@ export default {
                     options.body = data;
                 }
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
-                    let code = data.success;
+                    let code = data.success || data.status;
                     let message = data.message;
-                    if(code){
+                    if(code || code == "200"){
                         defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});

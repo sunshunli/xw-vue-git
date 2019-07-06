@@ -35,10 +35,14 @@ export default {
         data(){
             let tmp = {cls:"",iCls:"",value:""};
             tmp = DEFINE_KEY.BUTTON_CONFIG[this._type];
-            if(this.cdisabled){
-                tmp.cls = tmp.cls + " isDisabled";
+            if(!tmp){
+                tmp = {cls:"default",iCls:"",value:""};
             }else{
-                tmp.cls = tmp.cls.replace('isDisabled','');
+                if(this.cdisabled){
+                    tmp.cls = tmp.cls + " isDisabled";
+                }else{
+                    tmp.cls = tmp.cls.replace('isDisabled','');
+                }
             }
             return tmp;
         }

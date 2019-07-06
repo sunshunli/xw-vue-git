@@ -184,6 +184,9 @@
                 item.cls = "";
                 item.ck = false;
             })
+            if(ids){
+                ids = ids.toString();
+            }
             ids && ids.split && ids.split(',').forEach(val=>{
                 let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
                 if(tmp){

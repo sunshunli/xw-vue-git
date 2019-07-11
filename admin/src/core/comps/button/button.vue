@@ -79,7 +79,7 @@ export default {
 
     span .fa{
         position: absolute;
-        top: 10px;
+        top: 8px;
         left: 5px;
     }
 

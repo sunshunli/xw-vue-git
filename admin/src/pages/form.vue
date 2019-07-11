@@ -2,86 +2,49 @@
 
 <template>
     <div style="text-align:left;">
-        <!-- <le-button type="search" value="Search"></le-button>
-        <le-button type="create" value="New"></le-button>
-        <le-button type="edit" value="Modify"></le-button>
-        <le-button type="info" value="info"></le-button>
-        <le-button type="warning" value="warning"></le-button>
-        <le-button type="enable" value="enable"></le-button>
-        <le-button type="disable" value="disable"></le-button>
-        <le-button type="publish" value="publish"></le-button>
-        <le-button type="down" value="down"></le-button>
-        <le-button type="upload" value="upload"></le-button>
-        <le-button type="submit" value="submit"></le-button>
-        <le-button type="back" value="back"></le-button>
-        <le-button type="play" value="play"></le-button>
-        <le-button type="stop" value="stop"></le-button>
-        <le-button type="setting" value="setting"></le-button>
-        <le-button type="default" value="default"></le-button> -->
-
         <div class="navbar clearfix">
-            <h1 class="al-title ng-binding" id="crumbsTitle">DemoPage</h1>
-            <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>DemoPage</li></ul>
+            <h1 class="al-title ng-binding">Black List</h1>
+            <ul class="breadcrumb al-breadcrumb"><li>XW-VUE-GIT</li><li>Module</li></ul>
         </div>
 
-        <v-input label="年龄12" type="text" msg="正整数11" vType='number' v-model="models.noform_age"></v-input>
-        <v-input label="身份证号码" vType="number" msg="正整数22"></v-input>
-        <le-date-picker label="日期组件" msg="日期不允许为空"></le-date-picker>
-        <le-time-picker label="时间组件" msg="时间不允许为空"></le-time-picker>
-        <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空"></le-date-time-picker>           
-        <le-local-select label="选择职业" multiple ref="s1" display-name="name" display-value="code"></le-local-select> 
-        <le-radio-list label="性别" display-name="name" msg="性别必须选择" display-value="code"></le-radio-list>
-        <le-checkbox-list label="爱好" @change='changecks' ref='cl3' display-name="name" msg="爱好必须选择" display-value="code"></le-checkbox-list> 
-        
-        <le-form ref="form1" style="width:600px">
-            <v-input label="年龄" msg="正整数11"></v-input>
+        <div class='searchPanel clearfix'>
+            <v-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></v-input>
+            <v-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></v-input>
+            <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
+            <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+            <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+            <le-local-select label="选择职业" multiple ref="jobRef" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+        </div>
 
-            <v-input label="身份证号码" vType="number" msg="正整数22" on required></v-input>
+        <div style="text-align:right;margin-right:10px">
+            <le-button type="search" value="Search" @click="search"></le-button>
+            <le-button type="create" value="新增" @click="openDialog"></le-button>
+            <le-button type="disable" value="封停" @click="setEnable(false)"></le-button>
+            <le-button type="enable" value="解封" @click="setEnable(true)"></le-button>
+        </div>
 
-            <le-radio-list label="性别" ref="r2" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+        <div class='panel-table text-center'>
+            <div class="table-title">黑名单列表</div>
+            <div class='overflow-table'>    
+                <table-list ref='black_list_table' :options='tableOptions'></table-list>
+            </div>
+        </div>
 
-            <le-checkbox-list label="爱好" @change='changecks' ref='cl2' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
-           
-            <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
-
-            <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"  on required></le-time-picker>
-
-            <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
-
-            <le-local-select label="模糊搜索" multiple ref="s2" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
-
-            <le-button value="Form提交" @click="submit('form1')"></le-button>
-        </le-form>
-
-        <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save">
+        <le-dialog title="弹出层" height="500" v-model="showDialog">
             <le-form ref="form2" style="width:600px">
-            
-                <v-input label="年龄" type="text" msg="正整数11" vType='number' on v-model="models.form_age"></v-input>
-
-                <v-input label="身份证号码" vType="number" msg="正整数22" on required v-model="models.form_id"></v-input>
-
-                <le-radio-list v-model="models.radioValue" label="性别" ref="r1" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
-
-                <le-checkbox-list v-model="models.checkValue" label="爱好" @change='changecks' ref='cl1' display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
-            
-                <le-date-picker label="日期组件" ref="d1" msg="日期不允许为空" on required></le-date-picker>
-
-                <le-time-picker label="时间组件" ref="t1" msg="时间不允许为空"  on required></le-time-picker>
-
-                <le-date-time-picker label="时间日期组件" ref="dt1" msg="日期and时间不允许为空" on required></le-date-time-picker>           
-
-                <le-local-select label="模糊搜索" multiple ref="s3" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
-
-                <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传"></le-upload>                
-
-                <le-button value="Form提交" @click="submit('form2')"></le-button>
+                <v-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></v-input>
+                <v-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></v-input>
+                <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
+                <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
+                <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                <le-local-select on label="选择职业" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
+                <le-radio-list on label="性别" display-name="name" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
+                <le-checkbox-list on label="爱好" ref='dialogFavRef' display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
+                <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
+                <le-button value="保存" @click="submit('form2')"></le-button>
+                <le-button value="关闭" @click="close"></le-button>
             </le-form>
         </le-dialog>
-        <le-button value="open" @click="open"></le-button>
-
-        <le-button value="设置下拉框的值" @click="setVal"></le-button>
-
-        <le-button value="重置" type='back' @click="resetForm"></le-button>
     </div>
 </template>
 
@@ -91,14 +54,17 @@ export default {
     name:"FormValidate",
     data(){
         return {
-            models:{
-                noform_age:"xxx",
-                form_age:"18",
-                form_id:"421083",
-                radioValue:"",
-                checkValue:"",
+            searchModel:{
+                age:"1",
+                id:"",
+                data:"",
+                time:"",
+                datetime:"",
+                job:"",
+                sex:"",
+                fav:""
             },
-            showDialogFlag:false,
+            showDialog:false,
             uploadOptions:{
                 multiple:true,
                 url:"/file/img/upload",
@@ -110,10 +76,64 @@ export default {
                 analysis:(d)=>{
                     return d.data;
                 }
+            },
+            entity:{
+                age:"",
+                id:"",
+                data:"",
+                time:"",
+                datetime:"",
+                job:"",
+                sex:"",
+                fav:"",
+                url:""
+            },
+            tableOptions:{
+                showCk:true,
+                map:[
+                    {key:"shop",val:"商城"},
+                    {key:"accessField",val:"封禁纬度"},
+                    {key:"content",val:"封禁内容"},
+                    {key:"accessDesc",val:"禁用方式"},
+                    {key:"status",val:"状态"},
+                    {key:"operateTime",val:"修改时间"}
+                ],
+                getUrl:()=>{
+                    return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName=&status=-1";
+                },
+                pageOption:{
+                    sizeKey:"pageSize",
+                    indexKey:"pageNum",
+                    index:1,
+                    size:10
+                },
+                analysis:(d)=>{
+                    let data = d.data;
+                    if(data && data.lstAccesses instanceof Array && data.lstAccesses.length >0){
+                        return {
+                            data:data.lstAccesses,
+                            count:data.allCount
+                        };
+                    }else{
+                        return {
+                            data:[],
+                            count:0
+                        }
+                    }
+                }
             }
         }
     },
     methods:{
+        openDialog(){
+            this.showDialog = true;
+        },
+        close(){
+            this.showDialog = false;
+        },
+        search(){
+            this.$refs.black_list_table.searchCurrentIndex();
+        },
         submit(id){
             let res = this.$refs[id].validate();
             res.then(d=>{
@@ -122,29 +142,36 @@ export default {
                 debugger
             })
         },
-        changecks(data){
-            console.log("11");
-        },
-        dialogCb(){
-            console.log(this.$refs['dialog'].showDialog);
-        },
-        open(){
-            this.$refs['dialog'].open();
-        },
-        save(){
-            let res = this.$refs["form2"].validate();
-            res.then(d=>{
+        setEnable(enable){
+            let ids = this.$refs.black_list_table.getCheckedItems("id").vals;
+            if(ids.length ==0){
+                this.alert.showAlert("error","至少选中一个项目进行处理");
+                return;
+            }
+            let params = {};
+            debugger
+            if(enable){
+                params = {
+                    status:'LIVE', 
+                    accessobjids:ids.join(','),
+                    reason:"abcd"
+                }   
+            }else{
+                params = {
+                    status:'DEAD', 
+                    accessobjids:ids.join(','),
+                }
+            }
+            this.ajax.postFetch("/risk/limit/black/user/update",params).then(a=>{
                 debugger
-            }).catch((error)=>{
-                debugger
-            })
-        },
-        setVal(){
-            this.$refs["s2"].getCurrentComponent().setValue("1,2,3")
-            this.$refs["s3"].getCurrentComponent().setValue("1,2")
-        },
-        resetForm(){
-            this.$refs["form1"].reset();
+                let d=a.data;
+                if(d.result){
+                    this.showBanDialog=false;
+                    this.search();
+                }else{
+                    alert(d.desc);
+                }
+            });
         }
     },
     mounted(){
@@ -155,33 +182,11 @@ export default {
             {name:"bbb",code:"4"},
             {name:"ccc",code:"5"},
         ]
-        let data1 = [
-            {name:"qqq",code:"1"},
-            {name:"www",code:"2"},
-            {name:"rrr",code:"3"},
-            {name:"ddd",code:"4"},
-            {name:"ttt",code:"5"},
-        ]
-        this.$refs["r1"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["cl1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
-        this.models.checkValue = "1,3";
-        this.models.radioValue = "4";
-
-        this.$refs["r2"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["cl2"].getCurrentComponent().init(Unit.object.cloneObj(data));
-
-        this.$refs["r3"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["cl3"].getCurrentComponent().init(Unit.object.cloneObj(data));
-
-
-        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data1));
-        this.$refs["s2"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["s3"].getCurrentComponent().init(Unit.object.cloneObj(data1));
-
-        this.$refs["d1"].getCurrentComponent().setValue("2019-04-23");
-        // this.$refs["t1"].getCurrentComponent().setValue("20:40:59");
-        this.$refs["dt1"].getCurrentComponent().setValue("2018-06-21 21:41:51");
+        this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
     }
 }
 </script>

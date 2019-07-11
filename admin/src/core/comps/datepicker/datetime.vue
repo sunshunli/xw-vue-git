@@ -204,7 +204,7 @@ export default {
         width: 330px;
         box-sizing: border-box;
         margin-left: -27px;
-        position: fixed;
+        position: absolute;
         background: #fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         z-index: 10000;

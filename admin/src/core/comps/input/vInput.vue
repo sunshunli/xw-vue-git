@@ -123,7 +123,7 @@
         margin-right: 2px;
     }
     .form-item .form-item-input{
-        width: 88%;
+        width: 100%;
         /* width: 50%; */
         height: 40px;
         font-size: 14px;

@@ -80,8 +80,8 @@ export default {
                 url = url + symbol + "ran="+_idSeed.newId();
                 let defer = Q.defer();
                 let headers = {
-                    // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    'Content-Type': 'application/json; charset=UTF-8'
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    // 'Content-Type': 'application/json; charset=UTF-8'
                 };
                 let options = {
                     method:"post",
@@ -89,8 +89,8 @@ export default {
                     headers:headers
                 };
                 if(data){
-                    // options.body = param(data);
-                    options.body = JSON.stringify(data);
+                    options.body = param(data);
+                    // options.body = JSON.stringify(data);
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
                     let code = data.status;

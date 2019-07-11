@@ -19,8 +19,8 @@
         <div style="text-align:right;margin-right:10px">
             <le-button type="search" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
-            <le-button type="disable" value="封停" @click="setEnable(false)"></le-button>
-            <le-button type="enable" value="解封" @click="setEnable(true)"></le-button>
+            <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
+            <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
         </div>
 
         <div class='panel-table text-center'>
@@ -148,28 +148,17 @@ export default {
                 this.alert.showAlert("error","至少选中一个项目进行处理");
                 return;
             }
-            let params = {};
-            debugger
-            if(enable){
-                params = {
-                    status:'LIVE', 
-                    accessobjids:ids.join(','),
-                    reason:"abcd"
-                }   
-            }else{
-                params = {
-                    status:'DEAD', 
-                    accessobjids:ids.join(','),
-                }
-            }
-            this.ajax.postFetch("/risk/limit/black/user/update",params).then(a=>{
-                debugger
-                let d=a.data;
-                if(d.result){
-                    this.showBanDialog=false;
+            let params = {
+                accessobjids:ids.join(','),
+                reason:"abcd",
+                status:enable?"LIVE":"DEAD"
+            };
+            this.ajax.postFetch("/risk/limit/black/user/update",params).then(data=>{
+                if(data.data.result){
+                    this.alert.showAlert("success","处理成功!");
                     this.search();
                 }else{
-                    alert(d.desc);
+                    this.alert.showAlert("error",data.data.desc);
                 }
             });
         }

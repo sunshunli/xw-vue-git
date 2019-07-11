@@ -1,7 +1,7 @@
 <template>
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div  class="form-item-div fa" :class="state.successIcon">
+        <div class="form-item-div fa" :class="state.successIcon">
             {{$attrs.readonly}}
             <input :readonly="$attrs.readonly==undefined?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
@@ -38,7 +38,7 @@
         methods:{
             changeEvent(e){
                 this.currentValue = e.target.value;
-                if(this.$attrs.checkVerifyEnabled()){
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
                 this.$emit("input",e.target.value);
@@ -48,12 +48,13 @@
             },
             setValue(value){
                 this.currentValue = value;
-            },
-            clear(){
-                this.$emit("input","");
+
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+            },
+            clear(){
+                this.$emit("input","");
             }
         },
         mounted(){

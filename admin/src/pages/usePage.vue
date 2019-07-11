@@ -31,7 +31,7 @@
         <le-dialog v-model='showDialogFlag' title="弹出层" height="500">
             <le-form ref="form2" style="width:600px">
             
-                <v-input label="推广地址" readonly :disabled="isInfo" msg="推广地址必填" v-model="form2.tgdz" on required></v-input>
+                <v-input label="推广地址" :disabled="isInfo" msg="推广地址必填" v-model="form2.tgdz" on required></v-input>
 
                 <v-input label="原地址" :disabled="isInfo" v-model="form2.ydz" msg="原地址必填" on required></v-input>
 

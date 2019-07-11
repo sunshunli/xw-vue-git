@@ -240,7 +240,7 @@
         width: auto;
         border-collapse: collapse;
         font-size: 14px;
-        border-radius: 6px 6px 0 0;
+        /* border-radius: 6px 6px 0 0; */
         overflow: hidden;
         margin-bottom: 0px;
     }

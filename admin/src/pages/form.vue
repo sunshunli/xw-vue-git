@@ -1,5 +1,3 @@
-
-
 <template>
     <div style="text-align:left;">
         <div class="navbar clearfix">
@@ -34,6 +32,7 @@
             <le-form ref="form2" style="width:600px">
                 <v-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></v-input>
                 <v-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></v-input>
+                <v-textarea label="身份证号码" vType="number" msg="正整数22" v-model="entity.content"></v-textarea>
                 <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                 <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                 <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
@@ -80,6 +79,7 @@ export default {
             entity:{
                 age:"",
                 id:"",
+                content:"",
                 data:"",
                 time:"",
                 datetime:"",

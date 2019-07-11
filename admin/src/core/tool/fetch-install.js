@@ -59,10 +59,10 @@ export default {
                     headers:headers
                 };
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
-                    let code = data.success;
-                    let message = data.message;
-                    if(code == true){
-                        defer.resolve({data:data.data,params:data.params,code});
+                    let code = data.status;
+                    let message = data.msg;
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -93,10 +93,10 @@ export default {
                     options.body = JSON.stringify(data);
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
-                    let code = data.success;
-                    let message = data.message;
-                    if(code == true){
-                        defer.resolve({data:data.data,params:data.params,code});
+                    let code = data.status;
+                    let message = data.msg;
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -123,10 +123,10 @@ export default {
                     options.body = data;
                 }
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
-                    let code = data.success;
-                    let message = data.message;
-                    if(code == true){
-                        defer.resolve({data:data.data,params:data.params,code});
+                    let code = data.status;
+                    let message = data.msg;
+                    if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }

@@ -242,6 +242,7 @@
         font-size: 14px;
         border-radius: 6px 6px 0 0;
         overflow: hidden;
+        margin-bottom: 0px;
     }
   
     table thead{

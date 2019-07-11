@@ -250,7 +250,7 @@ export default {
     }
 
     .form-item .form-item-label{
-        width: 47%;
+        width: 20%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;

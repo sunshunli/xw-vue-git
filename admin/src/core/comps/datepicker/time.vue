@@ -429,7 +429,7 @@ li{
 
 
 .form-item .form-item-label{
-    width: 47%;
+    width: 20%;
     height: auto;
     margin-right: 1%;
     text-align: right;
@@ -462,10 +462,6 @@ form .form-item .form-item-label{
     height: 28px;
     line-height: 28px;
     font-size: 12px;
-}
-
-.form-item{
-    text-align: right;
 }
 
 .form-item .form-item-div{
@@ -523,7 +519,9 @@ form .form-item .form-item-div{
     color: #f56c6c;
     line-height: 20px;
     text-align: left;
-    position: absolute;
+    margin: 0;
+    padding: 0;
+    margin-top: -5px;
 }
 
 .fa-check-circle-o .timeInput{

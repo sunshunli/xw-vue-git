@@ -85,6 +85,7 @@ export default {
         padding: 20px 35px;
         border-radius: 3px;
         min-width: 400px;
+        overflow-y: scroll;
     }
 
     /* 上面部分 */

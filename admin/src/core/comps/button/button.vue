@@ -74,6 +74,7 @@ export default {
         padding: 0 13px 0 22px;
         position: relative;
         margin: 3px;
+        vertical-align: text-bottom;
     }
 
     span .fa{
@@ -189,4 +190,8 @@ export default {
         margin-right: 4px;
     }
 
+    .close{
+        background-color: gray;
+        border-color:black;
+    }
 </style>

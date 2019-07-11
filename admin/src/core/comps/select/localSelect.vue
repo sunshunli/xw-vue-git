@@ -1,7 +1,7 @@
 <template>
 
     <div style="position:relative" class="form-item selectContent">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
@@ -106,6 +106,7 @@
          * @returns 
          */
         init(data){
+            
             let tmp = CommonUtil.object.cloneObj(data);
             this.data = CommonUtil.object.addPrimaryAndCk(tmp);
         },
@@ -200,11 +201,14 @@
          * @returns 
          */
         clear(){
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
-            }
             this.searchName = "";
             this.$emit("input","");
+
+            window.setTimeout(()=>{
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
+            },0)
         }
     },
     mounted(){
@@ -241,14 +245,16 @@
     }
     
     .selectContent label{
-        width: 47%;
+        width: 20%;
         text-align: right;
         margin-right: 1%; 
         color: #606266;
+        display: inline-block;
     }
 
     .medium .selectContent label{
         width: 17%;
+        display: inline-block;
     }
 
     .searchMulSelect{
@@ -303,7 +309,7 @@
     .tags .icon-del{
         position: absolute;
         top: 12px;
-        right: 2%;
+        right: 8px;
         color: #c0c4cc;
         font-weight: normal;
 
@@ -324,6 +330,15 @@
 
     form  .form-item .form-item-div{
         width: 80%;
+    }
+
+    .promptMsg{
+        font-size: 12px;
+        color: #f56c6c;
+        line-height: 20px;
+        text-align: left;
+        position: absolute;
+        margin: 0;
     }
 
 </style>

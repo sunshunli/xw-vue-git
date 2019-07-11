@@ -28,18 +28,22 @@
             <table-list :ref="tk1" :options="options"></table-list>
         </div>
 
-        <le-dialog title="弹出层" height="500" confirm-text="Save" cancel-text="Close" ref='dialog' @click="save(addOrEdit,edititemId)">
+        <le-dialog v-model='showDialogFlag' title="弹出层" height="500">
             <le-form ref="form2" style="width:600px">
             
-                <v-input label="推广地址" :disabled="isInfo" msg="推广地址必填" ref="tgdz" v-model="form2.tgdz" type="text" on required></v-input>
+                <v-input label="推广地址" readonly :disabled="isInfo" msg="推广地址必填" v-model="form2.tgdz" on required></v-input>
 
-                <v-input label="原地址" :disabled="isInfo" ref="ydz" v-model="form2.ydz" msg="原地址必填" on required></v-input>
+                <v-input label="原地址" :disabled="isInfo" v-model="form2.ydz" msg="原地址必填" on required></v-input>
 
-                <v-input label="失效默认地址" :disabled="isInfo" ref="sxdz" v-model="form2.sxdz" msg="失效默认地址必填" vtype="text" on required></v-input>
+                <v-input label="失效默认地址" :disabled="isInfo" v-model="form2.sxdz" msg="失效默认地址必填" on required></v-input>
 
                 <le-date-time-picker :disabled="isInfo" label="开始时间" msg="开始时间必填" v-model="form2.startTime" ref="dt1" on required></le-date-time-picker>
                 <le-date-time-picker :disabled="isInfo" label="结束时间" msg="结束时间必填" v-model="form2.endTime" ref="dt2" on required></le-date-time-picker>
 
+                <div class = "le_dialog_bottom">
+                    <le-button class='le_dialog_confirm' type='submit' value="确定" @click="save"></le-button>
+                    <le-button class='le_dialog_confirm' type='close' value="取消" @click="close"></le-button>
+                </div>
             </le-form>
         </le-dialog>
     </div>
@@ -76,7 +80,7 @@ export default {
                 parentCode:''
             },
             selectNode:null,
-            showDialogFlag:false,
+            showDialogFlag:true,
             tk1:'demoTableList',
             options:{
                 showCk:true,
@@ -130,8 +134,11 @@ export default {
     },
     methods:{
         search(){
-            let tk = this.$refs[this.tk1];
-            tk.search(tk.getParams().index);
+            this.showDialogFlag = true;
+            // this.$refs[this.tk1].searchCurrentIndex();
+        },
+        close(){
+            this.showDialogFlag = false;
         },
         submit(){
             // let res = this.$refs["form1"].validate();
@@ -165,6 +172,7 @@ export default {
 
         },
         save(flag,editItemId){
+            this.showDialogFlag = false;
             let res = this.$refs["form2"].validate();
             res.then(d=>{
                 var that = this;
@@ -290,6 +298,12 @@ export default {
 </script>
 
 <style scoped>
+    .le_dialog_bottom{
+        display: flex;
+        padding-top: 20px;
+        width: 100%;
+        justify-content: flex-end;
+    }
     .searchContent{
         min-width: 900px;
         min-height: 600px;

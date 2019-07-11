@@ -156,6 +156,7 @@ button.btn{
 
 .opration{
     /* text-align: left; */
+    white-space: nowrap;
 }
 
 </style>

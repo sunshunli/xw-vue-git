@@ -37,7 +37,7 @@ let _le_alert = {
     showConfirm:(title,cb)=>{
         let parentDiv = $('<div class="le_alert MsgAlertBox"></div>');
         let html ='<div class="Alertcontent">'+
-                  '<p>提示:<i tag="le-show-confirm-close">×</i></p>'+
+                  '<p>提示<i tag="le-show-confirm-close">×</i></p>'+
                   '<div class="msgContent clearfix">'+
                   '<i class="fa fa-exclamation-circle"></i>'+
                   '<p>'+title+'</p>'+

@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "le_dialog_mask" v-show="showDialog">
+    <div class = "le_dialog_mask" v-show="value">
         <!-- width height 为option传入   margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
@@ -13,11 +13,6 @@
             <div class = "le_dialog_contine">
                 <slot></slot>
             </div>
-            <div class = "le_dialog_bottom">
-                <!-- 使用button组件的css 可以改为引入button组件 -->
-                <button class="le_dialog_confirm" @click="$emit('click')">{{confirmText?confirmText:"确定"}}</button>
-                <button class="le_dialog_cancel" @click="close">{{cancelText?cancelText:"取消"}}</button>
-            </div>
         </div>
     </div>
 </template>
@@ -25,10 +20,9 @@
 <script>
 export default {
     name:"LeDialog",
-    props:["title","width","height","cb","confirmText","cancelText"],
+    props:["title","width","height","value"],
     data(){
         return {
-            showDialog:false
         }
     },
     computed:{
@@ -39,16 +33,17 @@ export default {
             }
         }
     },
+    watch:{
+        value(val){
+        }
+    },
     methods:{
-        open(){
-            this.showDialog = true;
-        },
         close(){
-            this.showDialog = false;
+            this.$emit("input",false);
         }
     },
     mounted(){
-
+        
     }
 }
 </script>
@@ -64,7 +59,7 @@ export default {
         position:fixed;
         width:100%;
         height:100%;
-        z-index:10000;
+        z-index:999;
         background:rgba(30,30,30,0.6);
         top:0;
         left:0;

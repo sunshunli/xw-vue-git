@@ -5,8 +5,8 @@ import _this from "../../main";
 const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 
 let param = function(obj) {
-    let query = '';
-    let name, value, fullSubName, subName, subValue, innerObj, i;
+    var query = '';
+    var name, value, fullSubName, subName, subValue, innerObj, i;
 
     for (name in obj) {
         value = obj[name];
@@ -59,12 +59,10 @@ export default {
                     headers:headers
                 };
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
-                    let code = data.status;
-                    let message = data.message?data.message:data.msg;
-                    if(code == "0"){
-                        defer.resolve({data:data.result,params:data.params});
-                    }else if(code == "200"){
-                        defer.resolve(data);
+                    let code = data.success;
+                    let message = data.message;
+                    if(code == true){
+                        defer.resolve({data:data.data,params:data.params,code});
                     }else{
                         defer.reject({data: message});
                     }
@@ -95,11 +93,10 @@ export default {
                     options.body = JSON.stringify(data);
                 }
                 fetch(url,options).then(d =>d.json()).then((data)=> {
-                    let code = data.status;
-                    let message = data.message?data.message:data.msg;
-
-                    if(code == "0" || code == "200"){
-                        defer.resolve({data:data.result,params:data.params});
+                    let code = data.success;
+                    let message = data.message;
+                    if(code == true){
+                        defer.resolve({data:data.data,params:data.params,code});
                     }else{
                         defer.reject({data: message});
                     }
@@ -126,10 +123,10 @@ export default {
                     options.body = data;
                 }
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
-                    let code = data.success || data.status;
+                    let code = data.success;
                     let message = data.message;
-                    if(code || code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    if(code == true){
+                        defer.resolve({data:data.data,params:data.params,code});
                     }else{
                         defer.reject({data: message});
                     }

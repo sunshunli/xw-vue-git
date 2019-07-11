@@ -232,6 +232,8 @@
 
     .tableContainer{
         overflow-x: scroll;
+        display: block;
+        min-width: 100%;
     }
     .table{
         min-width: 100%;

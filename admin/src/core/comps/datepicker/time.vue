@@ -1,7 +1,7 @@
 
 <template>
     <div class="form-item timeContent" :name="KEYS.ROOTDOM">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
@@ -105,9 +105,9 @@ export default {
         },
         //3个ul的滚动事件
         scrollFun(dom){
-            let sHeight = $(dom).scrollTop();
-            let curSelectLi =Math.floor(sHeight / 30) ;
-            let yu = sHeight % 30;
+            var sHeight = $(dom).scrollTop();
+            var curSelectLi =Math.floor(sHeight / 30) ;
+            var yu = sHeight % 30;
             if(curSelectLi == 0){
                 if(yu <10){
                    this. nextSelect = 0;
@@ -123,7 +123,7 @@ export default {
             }else{
                 this.nextSelect = 0;
             };
-            let nextDom = $(dom).children('li')[this.nextSelect];
+            var nextDom = $(dom).children('li')[this.nextSelect];
             $(nextDom).addClass('active').siblings().removeClass('active');
         },
         //设置值
@@ -198,10 +198,12 @@ export default {
             return $("div [name="+key+"]");
         },
         clear(){
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
-            }
             this.$emit("input","");
+            window.setTimeout(()=>{
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
+            },0)
         }
     },
     mounted(){
@@ -340,6 +342,7 @@ li{
     color: #606266;
     font-weight: normal;
     font-size: 14px;
+    width: 32%;
 }
 
 .timeContent .timePicker .timePanel div ul::before{
@@ -372,6 +375,7 @@ li{
     height: 30px;
     line-height: 30px;
     text-align: center;
+    color: #606266 !important;
 }
 
 
@@ -528,14 +532,6 @@ form .form-item .form-item-div{
 
 .fa-times-circle-o .timeInput{
     border: 1px solid #f56c6c;
-}
-
-.fa-times-circle-o:before{
-    content:'';
-}
-
-.fa-check-circle-o:before{
-    content:'';
 }
 
 .picker-header .ipt .form-item .form-item-label{ 

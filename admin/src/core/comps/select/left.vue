@@ -50,7 +50,8 @@
 	    color: #909399;
 	    padding-right: 25px;
 	    position: relative;
-	    max-width: 230px;
+		/* max-width: 230px; */
+		max-width: 80%;
 	    overflow: hidden;
     }
 	

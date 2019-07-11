@@ -2,6 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
+            {{$attrs.readonly}}
             <input :readonly="$attrs.readonly==undefined?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
@@ -71,7 +72,7 @@
     }
 
     .form-item .form-item-label{
-        width: 47%;
+        width: 20%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -107,11 +108,12 @@
         display: inline-block;
         line-height: normal;
         width: 50%;
-        /* vertical-align: text-bottom; */
+        position: relative;
     }
 
-    form  .form-item .form-item-div{
+    form .form-item .form-item-div{
         width: 80%;
+        position: relative;
     }
 
     .requireed::before{
@@ -121,7 +123,7 @@
         margin-right: 2px;
     }
     .form-item .form-item-input{
-        width: 100%;
+        width: 88%;
         /* width: 50%; */
         height: 40px;
         font-size: 14px;
@@ -148,7 +150,7 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 2%;
+        right: 8px;
         cursor: pointer;
     }
 
@@ -157,7 +159,8 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        right: 2%;
+        /* right: 2%; */
+        right:8px;
         cursor: pointer;
     }
 
@@ -182,6 +185,7 @@
         line-height: 20px;
         text-align: left;
         position: absolute;
+        margin: 0;
     }
 
     .fa-check-circle-o .form-item-input{
@@ -207,7 +211,5 @@
         font-weight: normal;
     }
 
-    .fa-check-circle-o:before {
-        content: '' !important;
-    }
+ 
 </style>

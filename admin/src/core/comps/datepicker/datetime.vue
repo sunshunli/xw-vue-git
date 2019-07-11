@@ -1,6 +1,6 @@
 <template>
     <div class = "form-item current">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
@@ -19,7 +19,7 @@
                             <le-time-picker :ref='timeKey'></le-time-picker>
                         </div>
                     </div>
-                    <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px">
+                    <div class = "picker-bottom" style = "border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
                         <span @click.stop="getDateTimeStr">
                             确定
                         </span>
@@ -90,11 +90,12 @@ export default {
         clear(){
             this.dateTimeStr = "";
             this.showDateTimePicker = false;
-            // this.setValue("");
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
-            }
             this.$emit("input","");
+            window.setTimeout(()=>{
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
+            },0)
         },
         initDateAndTime(){
             let y = new Date().getFullYear();
@@ -183,7 +184,7 @@ export default {
     .clearTime{
         position: absolute;
         top: 12px;
-        right: 2%;
+        right: 8px;
         color: #c0c4cc;
         font-weight: normal;
         cursor: pointer;
@@ -202,12 +203,11 @@ export default {
      .picker-box {
         width: 330px;
         box-sizing: border-box;
-        margin-top: 1px;
-        left:-100px;
-        position: absolute;
-        background:#fff;
+        margin-left: -27px;
+        position: fixed;
+        background: #fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-        z-index:10000;
+        z-index: 10000;
         margin-bottom: 30px;
     }
     /* 选择器头部 */
@@ -215,6 +215,7 @@ export default {
         width: 100%;
         line-height: 1.8em;
         display:flex;
+        
     }
     .picker-header .ipt{
         display: inline-block;
@@ -288,8 +289,9 @@ export default {
         vertical-align: middle;
     }
 
-    form  .form-item .form-item-div{
+    form .form-item .form-item-div{
         width:80%;
+        background-color: #fff;
     }
 
     .requireed::before{

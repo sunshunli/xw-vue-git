@@ -55,6 +55,7 @@ let BUTTON_CONFIG = {
     "setting":{cls:"setting",iCls:"fa-cog"},
     "default":{cls:"default",iCls:""},
     "warning":{cls:"warning",iCls:"fa-exclamation-circle"},
+    "close":{cls:"close",iCls:"fa-times"},
 }
 
 let ALERT_CONFIG = {
@@ -109,7 +110,7 @@ let INPUT_VALIDATA_TYPES = {
         //手机号
         phone:'^[1][3,4,5,7,8][0-9]{9}$',
         //密码, 字母开头 长度6-18，只能包含字符 数字 和 下划线
-        password:'^[a-zA-Z]\w{5,17}$'
+        password:''
     }
 }
 

@@ -2,7 +2,7 @@
 
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
@@ -130,7 +130,7 @@ let _tool = {
         let res = [];
         for(let i=0;i<6;i++){
             let tmp = [];
-            for(let k=0;k<7;k++){
+            for(var k=0;k<7;k++){
                 tmp.push(data[i*7 + k]);
             }
             res.push(tmp);
@@ -251,10 +251,13 @@ export default {
             this.data = _tool.groupArray(days);
         },
         clear(){
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
-            }
             this.$emit("input","");
+
+            window.setTimeout(()=>{
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
+            },0)
         },
         /**
          * @description 点击其他地方，隐藏picker选择层
@@ -467,7 +470,7 @@ export default {
         left:10px;
     }
     .div-box .icon-del {
-        right:2%;
+        right:8px;
     }
     /* 
         date选择器
@@ -500,7 +503,7 @@ export default {
         /* box-sizing: border-box; */
         margin-top: 4px;
         position: absolute;
-        left:0;
+        /* left:-100px; */
         background:#fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         z-index:999
@@ -533,7 +536,7 @@ export default {
     /* 选择器部分 */
     .picker-body {
         width: 100%;
-        padding: 6px;
+        /* padding: 6px; */
         display: inline-block;
     }
 
@@ -576,7 +579,7 @@ export default {
     }
 
     .form-item .form-item-label{
-        width: 47%;
+        width: 20%;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;

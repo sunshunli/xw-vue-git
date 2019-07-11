@@ -113,6 +113,7 @@ export default {
 
     .formStyle{
         width: 100%;
+        height: 100%;
     }
 
     .formStyle .container{
@@ -120,6 +121,7 @@ export default {
         width: 100%;
         overflow-y: scroll;
         padding: 0; 
+        height:100%;
     }
 
     .formStyle .container::-webkit-scrollbar{

@@ -1,6 +1,6 @@
 <template>
     <div class="form-item upaload">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <span  class="input-file">请选择
         <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
         <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
@@ -58,7 +58,7 @@
                 }else{
                     return 100;
                 }
-            }
+            },
         },
         watch:{
             value(val){
@@ -96,7 +96,7 @@
                 formData.append(this.fname,fileObj);
                 let fileName = fileObj.name;
                 if(this.vtype){
-                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
+                    var suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
                         this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
                         return;
@@ -252,6 +252,7 @@
     width: 17%;
     text-align: right;
     margin-right: 6px;
+    display: inline-block;
 }
 
 </style>

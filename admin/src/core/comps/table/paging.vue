@@ -98,7 +98,8 @@
         display: block;float: left;margin-left: 8px;height: auto;
     }
     .pagination>li>a, .pagination>li>span{
-        border-radius: 3px;line-height: 20px;color: rgba(0,0,0,0.65);
+        border:none;border-radius: 3px;line-height: 27px;color: #797979;
+
     }
 
     .pagination li .span{
@@ -113,10 +114,10 @@
         padding: 0 5px;border-radius: 6px;outline: none;
     }
 
-    .span{   border:1px #fff solid!important; }
-    .span:hover{
+    /* .span{   border:1px #fff solid!important; } */
+    /* .span:hover{
         background-color:#fff!important;
-    }
+    } */
 
     .button:hover{
         background-color: rgba(0,0,0,0.5);

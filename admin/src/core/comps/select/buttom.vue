@@ -38,7 +38,7 @@
 }
 
   .selectList{
-		min-width: 100%;
+		width: 100%;
 	    transform-origin: center top 0px;
 	    z-index: 2270;
 	    position: absolute;
@@ -52,10 +52,14 @@
 	    margin: 5px 0;
 	}
 
+	.selectList ul{
+		padding: 0;
+	}
+
 .selectList li{
 		width: 100%;
 	font-size: 14px;
-	padding: 0 20px;
+	padding: 0 30px 0 10px;
 	position: relative;
 	white-space: nowrap;
 	overflow: hidden;
@@ -65,6 +69,7 @@
 	line-height: 34px;
 	box-sizing: border-box;
 	cursor: pointer;
+	text-align: left;
 }
 
 .selectList li:hover{

@@ -403,7 +403,7 @@ li{
 }
 
 .timeContent .active{
-    color: #409eff;
+    color: #409eff !important;
     font-size: 16px;
 }
 .timeButtom{

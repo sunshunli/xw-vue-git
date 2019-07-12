@@ -40,9 +40,11 @@
                 <le-radio-list on label="性别" display-name="name" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                 <le-checkbox-list on label="爱好" ref='dialogFavRef' display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                 <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
+            </le-form>
+            <div class="dialogBtnContent">
                 <le-button value="保存" @click="submit('form2')"></le-button>
                 <le-button value="关闭" @click="close"></le-button>
-            </le-form>
+            </div>
         </le-dialog>
     </div>
 </template>
@@ -224,4 +226,12 @@ export default {
         /* content: "/\00a0"; */
         content: "/";
     }
+
+    .dialogBtnContent{
+        text-align: right;
+        border-top:1px solid #ccc;
+    }
+
+
+
 </style>

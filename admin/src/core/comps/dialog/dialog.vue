@@ -149,7 +149,8 @@ export default {
         /* -ms-scroll-snap-type: proximity; */
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
-        overflow: auto;
+        /* overflow: auto; */
+        overflow: hidden;
     }
     /* 底部 */
     .le_dialog_bottom{

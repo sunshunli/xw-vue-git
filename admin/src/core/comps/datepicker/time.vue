@@ -375,7 +375,7 @@ li{
     height: 30px;
     line-height: 30px;
     text-align: center;
-    color: #606266 !important;
+    color: #606266;
 }
 
 

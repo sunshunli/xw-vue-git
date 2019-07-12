@@ -3,7 +3,7 @@
     <div class="formStyle">
         <div class="container">
             <div class="medium formDiv">
-                <form>
+                <form class="clearfix">
                     <slot></slot>
                 </form>
             </div>
@@ -113,18 +113,18 @@ export default {
 
     .formStyle{
         width: 100%;
-        height: 100%;
+        height: 90%;
+        overflow-y: scroll;
     }
 
     .formStyle .container{
-        /* width: 800px; */
         width: 100%;
-        overflow-y: scroll;
         padding: 0; 
-        height:100%;
+        height:auto;
+        padding-bottom: 50px;
     }
 
-    .formStyle .container::-webkit-scrollbar{
+    .formStyle::-webkit-scrollbar{
         width: 0px;
         height: 0;
         background-color:transparent;

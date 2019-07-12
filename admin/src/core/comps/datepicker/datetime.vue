@@ -11,7 +11,7 @@
                 </div>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
-                    <div class="picker-header" style = "height:300px;">
+                    <div class="picker-header" style = "height:272px;">
                         <div class = "ipt" >
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>

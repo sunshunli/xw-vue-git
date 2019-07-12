@@ -133,6 +133,7 @@
         padding: 0 8% 0 4%;
         color: #606266;
         outline: none;
+        resize: none;
     }
     .form-item .form-item-input:focus{
         border: 1px solid #409eff;

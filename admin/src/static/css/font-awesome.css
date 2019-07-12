@@ -453,7 +453,7 @@
 
 }
 .fa-check-circle-o:before {
-  content: "\f05d";
+  /* content: "\f05d"; */
 }
 .fa-ban:before {
   content: "\f05e";

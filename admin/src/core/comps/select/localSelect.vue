@@ -28,7 +28,7 @@
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
         data.forEach(item=>{
-            if(item[displayValue] == value){
+            if(item[displayValue] && item[displayValue].toString() == value.toString()){
                 res = item;
             }
         })

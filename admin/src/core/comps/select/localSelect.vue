@@ -228,6 +228,11 @@
          * @returns
          */
         document.body.removeEventListener("click",this.bodyClick);
+        //在有数据的清空下，直接初始化数据源以及设置值   
+        if(this.dataSource && this.dataSource.length >0){
+            this.init(this.dataSource);
+        }
+        this.setValue(this.value);
     }
   }
 </script>

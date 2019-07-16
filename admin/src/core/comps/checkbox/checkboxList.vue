@@ -113,6 +113,10 @@ export default {
         }
     },
     mounted(){
+        if(this.dataSource && this.dataSource.length >0){
+            this.init(this.dataSource);
+        }
+        this.setValue(this.value);
     }
 }
 </script>

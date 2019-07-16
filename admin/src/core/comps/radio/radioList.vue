@@ -72,7 +72,7 @@ export default {
             this.resetData();
             if(val){
                 this.data.forEach(item=>{
-                    if(item[this.displayValue] == val){
+                    if(item[this.displayValue] && item[this.displayValue].toString() == val.toString()){
                         item.ck = true;
                     }
                 })  

@@ -124,7 +124,13 @@ export default {
                     }
                 }
             },
-            jobArray:[]
+            jobArray:[
+                {name:"aaa",code:"1"},
+                {name:"aaa1",code:"2"},
+                {name:"aaa2",code:"3"},
+                {name:"bbb",code:"4"},
+                {name:"ccc",code:"5"},
+            ]
         }
     },
     methods:{
@@ -176,7 +182,7 @@ export default {
         ]
         this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
-        this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        // this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
     }

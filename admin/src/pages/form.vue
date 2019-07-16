@@ -36,7 +36,7 @@
                 <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                 <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                 <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-                <le-local-select on label="选择职业" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
+                <le-local-select on label="选择职业" msg="职业必填" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                 <le-radio-list on label="性别" display-name="name" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                 <le-checkbox-list on label="爱好" ref='dialogFavRef' display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                 <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
@@ -123,7 +123,8 @@ export default {
                         }
                     }
                 }
-            }
+            },
+            jobArray:[]
         }
     },
     methods:{

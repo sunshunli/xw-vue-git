@@ -37,7 +37,7 @@
 
   export default {
     name: 'LeLocalSelect',
-    props:["multiple","displayName","displayValue","value"],
+    props:["multiple","displayName","displayValue","value","dataSource"],
     components: {LeftSection,ButtomSection},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
@@ -180,14 +180,12 @@
          * @param {ids} displayValue的集合, 逗号分隔, 如果传入空，则重置所有
          */
         setValue(ids){
+            ids?ids = ids.toString():ids="";
             //重置
             this.data.forEach(item=>{
                 item.cls = "";
                 item.ck = false;
             })
-            if(ids){
-                ids = ids.toString();
-            }
             ids && ids.split && ids.split(',').forEach(val=>{
                 let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
                 if(tmp){
@@ -217,7 +215,9 @@
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
-
+        if(this.dataSource && this.dataSource.length >0){
+            this.init(this.dataSource);
+        }
         this.setValue(this.value);
     },
     beforeDestroy(){

@@ -18,7 +18,7 @@ import CommonUtil from "../../tool/commonUtil.js";
 
 export default {
     name:"LeCheckboxList",
-    props:["displayName","displayValue","value"],
+    props:["displayName","displayValue","value","dataSource"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -30,9 +30,24 @@ export default {
             data:[]
         }
     },
+    computed:{
+        // currentValue(){
+        //     this.setValue(this.value);
+        // },
+        // currentDataSource(){
+        //     this.init(this.data);
+        //     this.setValue(this.value);
+        // }
+    },
     watch:{
         value(val){
             this.setValue(val);
+        },
+        dataSource(val){
+            if(val && val.length >0){
+                this.init(val);
+                this.setValue(this.value);
+            }
         }
     },
     methods:{

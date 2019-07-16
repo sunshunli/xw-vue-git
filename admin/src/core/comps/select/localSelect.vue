@@ -28,7 +28,7 @@
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
         data.forEach(item=>{
-            if(item[displayValue] && item[displayValue].toString() == value.toString()){
+            if(item[displayValue] && item[displayValue].toString() == value){
                 res = item;
             }
         })
@@ -72,6 +72,9 @@
     watch:{
         value(val){
             this.setValue(val);
+        },
+        dataSource(items){
+            this.init(items);
         }
     },
     methods:{
@@ -106,7 +109,6 @@
          * @returns 
          */
         init(data){
-            
             let tmp = CommonUtil.object.cloneObj(data);
             this.data = CommonUtil.object.addPrimaryAndCk(tmp);
         },
@@ -115,12 +117,13 @@
          * @returns
          */
         onEmit(){
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
-            }
             let selectedItems = this.getSelectedItems();
             this.$emit("change",selectedItems);
             this.$emit("input",selectedItems.vals.join(','));
+
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
+            }
         },
         /**
          * @description buttom组件发来的更新通知,更新数据源
@@ -215,9 +218,7 @@
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
-        if(this.dataSource && this.dataSource.length >0){
-            this.init(this.dataSource);
-        }
+        
         this.setValue(this.value);
     },
     beforeDestroy(){

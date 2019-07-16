@@ -37,8 +37,8 @@
                 <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                 <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                 <le-local-select on label="选择职业" msg="职业必填" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
-                <le-radio-list on label="性别" display-name="name" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
-                <le-checkbox-list on label="爱好" ref='dialogFavRef' display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
+                <le-radio-list on label="性别" display-name="name" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
+                <le-checkbox-list on label="爱好" ref='dialogFavRef' :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                 <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
             </le-form>
             <div class="dialogBtnContent">
@@ -50,6 +50,15 @@
 </template>
 
 <script>
+
+let _data = [
+                {name:"aaa",code:"1"},
+                {name:"aaa1",code:"2"},
+                {name:"aaa2",code:"3"},
+                {name:"bbb",code:"4"},
+                {name:"ccc",code:"5"},
+            ];
+
 import Unit from "../core/tool/commonUtil.js";
 export default {
     name:"FormValidate",
@@ -85,9 +94,9 @@ export default {
                 data:"",
                 time:"",
                 datetime:"",
-                job:"",
-                sex:"",
-                fav:"",
+                job:"2",
+                sex:"1",
+                fav:"3,4",
                 url:""
             },
             tableOptions:{
@@ -124,18 +133,15 @@ export default {
                     }
                 }
             },
-            jobArray:[
-                {name:"aaa",code:"1"},
-                {name:"aaa1",code:"2"},
-                {name:"aaa2",code:"3"},
-                {name:"bbb",code:"4"},
-                {name:"ccc",code:"5"},
-            ]
+            jobArray:[],
+            sexArray:[],
+            favArray:[]
         }
     },
     methods:{
         openDialog(){
             this.showDialog = true;
+            this.entity.fav = "1,2,3,4";
         },
         close(){
             this.showDialog = false;
@@ -174,18 +180,17 @@ export default {
         }
     },
     mounted(){
-        let data = [
-            {name:"aaa",code:"1"},
-            {name:"aaa1",code:"2"},
-            {name:"aaa2",code:"3"},
-            {name:"bbb",code:"4"},
-            {name:"ccc",code:"5"},
-        ]
-        this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        window.setTimeout(()=>{
+            this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
 
-        // this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+            // this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
+            // this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
+            // this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
+
+            this.jobArray = Unit.object.cloneObj(_data);
+            this.sexArray = Unit.object.cloneObj(_data);
+            this.favArray = Unit.object.cloneObj(_data);
+        },0)
     }
 }
 </script>

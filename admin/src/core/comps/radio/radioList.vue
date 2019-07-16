@@ -17,7 +17,7 @@ import CommonUtil from "../../tool/commonUtil.js";
 
 export default {
     name:"LeRadioList",
-    props:["displayName","displayValue","value"],
+    props:["displayName","displayValue","value","dataSource"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -33,6 +33,10 @@ export default {
     watch:{
         value(val){
             this.setValue(val);
+        },
+        dataSource(items){
+            this.init(items);
+            this.setValue(this.value);
         }
     },
     methods:{
@@ -69,10 +73,11 @@ export default {
          * @returns
          */
         setValue(val){
+            val?val = val.toString():val="";
             this.resetData();
             if(val){
                 this.data.forEach(item=>{
-                    if(item[this.displayValue] && item[this.displayValue].toString() == val.toString()){
+                    if(item[this.displayValue] && item[this.displayValue].toString() == val){
                         item.ck = true;
                     }
                 })  
@@ -89,7 +94,7 @@ export default {
         
     },
     mounted(){
-
+        this.setValue(this.value);
     }
 }
 </script>

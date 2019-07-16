@@ -121,7 +121,7 @@ export default {
         width: 100%;
         padding: 0; 
         height:auto;
-        padding-bottom: 50px;
+        padding-bottom: 0px;
     }
 
     .formStyle::-webkit-scrollbar{

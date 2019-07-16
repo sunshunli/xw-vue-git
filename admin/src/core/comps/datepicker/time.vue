@@ -86,10 +86,11 @@ export default {
             });
             let result = res.join(':');
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
+            this.$emit("input",result);
+            this.getJQDom(this.KEYS.timeInputDomKey).html(result);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
-            this.$emit("input",result);
         },
         //关闭
         closePicker(){

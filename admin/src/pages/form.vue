@@ -32,7 +32,7 @@
             <le-form ref="form2" style="width:600px">
                 <v-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></v-input>
                 <v-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></v-input>
-                <v-textarea label="身份证号码" vType="number" msg="正整数22" v-model="entity.content"></v-textarea>
+                <v-textarea label="详细地址" vType="number" msg="正整数22" v-model="entity.content"></v-textarea>
                 <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                 <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                 <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
@@ -42,8 +42,8 @@
                 <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
             </le-form>
             <div class="dialogBtnContent">
-                <le-button value="保存" @click="submit('form2')"></le-button>
-                <le-button value="关闭" @click="close"></le-button>
+                <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
+                <le-button type='close' value="关闭" @click="close"></le-button>
             </div>
         </le-dialog>
     </div>
@@ -124,7 +124,13 @@ export default {
                     }
                 }
             },
-            jobArray:[]
+            jobArray:[
+                {name:"aaa",code:"1"},
+                {name:"aaa1",code:"2"},
+                {name:"aaa2",code:"3"},
+                {name:"bbb",code:"4"},
+                {name:"ccc",code:"5"},
+            ]
         }
     },
     methods:{
@@ -140,6 +146,7 @@ export default {
         submit(id){
             let res = this.$refs[id].validate();
             res.then(d=>{
+                let eee = this.entity;
                 debugger
             }).catch((error)=>{
                 debugger
@@ -176,7 +183,7 @@ export default {
         ]
         this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
-        this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
+        // this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
         this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(data));
     }

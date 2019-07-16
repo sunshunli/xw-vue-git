@@ -81,6 +81,7 @@ export default {
          * @return
          */
         setValue(vals){
+            vals?vals = vals.toString():vals="";
             if(!vals){
                 this.data.forEach(item=>{
                     item.ck = false;
@@ -90,7 +91,7 @@ export default {
             this.data.forEach(item=>{
                 let cked = false;
                 vals.split && vals.split(',').forEach(x=>{
-                    if(item[this.displayValue] == x){
+                    if(item[this.displayValue].toString() == x.toString()){
                         cked = true;
                     }
                 })

@@ -235,10 +235,7 @@ export default {
         content: "/";
     }
 
-    .dialogBtnContent{
-        text-align: right;
-        border-top:1px solid #ccc;
-    }
+
 
 
 

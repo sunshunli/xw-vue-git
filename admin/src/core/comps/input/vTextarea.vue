@@ -140,9 +140,11 @@
         outline: none;
     }
     .medium .form-item .form-item-input{
-        height: 40px;
-        line-height: 40px;
+        line-height: normal;
         font-size: 14px;
+        height: 80px;
+        vertical-align: middle;
+        padding: 10px 20px;
     }
 
     .form-item i{
@@ -156,12 +158,12 @@
 
     .medium .form-item i{
         position: absolute;
-        top: 12px;
+        top: 50%;
         color: #c0c4cc;
         font-weight: normal;
-        /* right: 2%; */
-        right:8px;
+        right: 8px;
         cursor: pointer;
+        transform: translateY(-50%);
     }
 
     .mini .form-item i{

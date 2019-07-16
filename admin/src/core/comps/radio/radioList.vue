@@ -34,9 +34,11 @@ export default {
         value(val){
             this.setValue(val);
         },
-        dataSource(items){
-            this.init(items);
-            this.setValue(this.value);
+        dataSource(val){
+            if(val && val.length >0){
+                this.init(val);
+                this.setValue(this.value);
+            }
         }
     },
     methods:{
@@ -94,7 +96,6 @@ export default {
         
     },
     mounted(){
-        this.setValue(this.value);
     }
 }
 </script>

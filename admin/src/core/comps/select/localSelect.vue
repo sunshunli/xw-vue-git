@@ -73,8 +73,11 @@
         value(val){
             this.setValue(val);
         },
-        dataSource(items){
-            this.init(items);
+        dataSource(val){
+            if(val && val.length >0){
+                this.init(val);
+                this.setValue(this.value);
+            }
         }
     },
     methods:{
@@ -218,8 +221,6 @@
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
-        
-        this.setValue(this.value);
     },
     beforeDestroy(){
         /**

@@ -31,13 +31,7 @@ export default {
         }
     },
     computed:{
-        // currentValue(){
-        //     this.setValue(this.value);
-        // },
-        // currentDataSource(){
-        //     this.init(this.data);
-        //     this.setValue(this.value);
-        // }
+        
     },
     watch:{
         value(val){

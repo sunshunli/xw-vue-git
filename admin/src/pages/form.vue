@@ -52,12 +52,12 @@
 <script>
 
 let _data = [
-                {name:"aaa",code:"1"},
-                {name:"aaa1",code:"2"},
-                {name:"aaa2",code:"3"},
-                {name:"bbb",code:"4"},
-                {name:"ccc",code:"5"},
-            ];
+    {name:"aaa",code:"1"},
+    {name:"aaa1",code:"2"},
+    {name:"aaa2",code:"3"},
+    {name:"bbb",code:"4"},
+    {name:"ccc",code:"5"},
+];
 
 import Unit from "../core/tool/commonUtil.js";
 export default {
@@ -140,8 +140,12 @@ export default {
     },
     methods:{
         openDialog(){
+            window.setTimeout(()=>{
+                this.entity.fav = "1,2";
+                this.entity.sex = "5";
+                this.entity.job = "3,4,5";
+            },2000)
             this.showDialog = true;
-            this.entity.fav = "1,2,3,4";
         },
         close(){
             this.showDialog = false;
@@ -190,7 +194,7 @@ export default {
             this.jobArray = Unit.object.cloneObj(_data);
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
-        },0)
+        },1000)
     }
 }
 </script>

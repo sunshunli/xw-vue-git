@@ -185,4 +185,9 @@ export default {
         color:#606266;
         margin-left:20px;
     }
+
+    .dialogBtnContent{
+        text-align: right;
+        border-top:1px solid #ccc;
+    }
 </style>

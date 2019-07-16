@@ -144,6 +144,7 @@
         font-size: 14px;
         height: 80px;
         vertical-align: middle;
+        padding: 10px 20px;
     }
 
     .form-item i{

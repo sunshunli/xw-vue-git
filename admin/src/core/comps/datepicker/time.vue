@@ -227,7 +227,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul,li{
     padding:0;
     margin: 0;
@@ -344,15 +344,15 @@ li{
     font-size: 14px;
     width: 32%;
 }
-
-.timeContent .timePicker .timePanel div ul::before{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 80px;
+ .timePicker .timePanel div li{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #606266;
 }
 
-.timeContent .timePicker .timePanel div ul::after{
+.timeContent .timePicker .timePanel div ul::before{
     content: "";
     display: block;
     width: 100%;
@@ -370,7 +370,7 @@ li{
     background-color:transparent;
 } 
 
-.timeContent .timePicker .timePanel div ul li{
+.timeContent .timePicker .timePanel div ul /deep/ li{
     width: 60px;
     height: 30px;
     line-height: 30px;
@@ -378,6 +378,10 @@ li{
     color: #606266;
 }
 
+
+.timeContent .timePicker .timePanel div ul /deep/ li.active{
+    color:#409eff;
+}
 
 .timeContent .timePicker .timeBtnGroup{
     height: 36px;

@@ -196,8 +196,13 @@ export default {
 
     .ipt .form-item /deep/ .form-item-div .form-item-input{
         text-align: center;
+         /* width: 100%; */
     }
-   
+
+.form-item /deep/ .form-item-div.dataPicker{
+    width: 100%;
+}
+    
 
     /* 日期 */
      .picker-box {

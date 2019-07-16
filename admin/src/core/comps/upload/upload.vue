@@ -255,4 +255,13 @@
     display: inline-block;
 }
 
+.formStyle .form-item .promptMsg{
+        width: 81%;
+    float: right;
+    font-size: 12px;
+    color: #f56c6c;
+    line-height: 20px;
+    text-align: left;
+}
+
 </style>

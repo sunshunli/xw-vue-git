@@ -619,6 +619,8 @@ export default {
         /* vertical-align: text-bottom; */
     }
 
+   
+
     form  .form-item .form-item-div{
         width: 80%;
     }

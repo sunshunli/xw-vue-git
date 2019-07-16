@@ -122,6 +122,11 @@ export default {
         font-size:20px;
         line-height: 35px;
     }
+
+    .fa-close{
+        cursor: pointer;
+    }
+
     /* 内容区 */
     .le_dialog_contine{
         flex:1;

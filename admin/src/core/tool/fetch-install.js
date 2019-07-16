@@ -63,6 +63,9 @@ export default {
                     let message = data.msg;
                     if(code == "200"){
                         defer.resolve({data:data.data,params:data.params});
+                    }else if(code == "701"){
+                        _this.$router.push({path:"/"});
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -97,6 +100,9 @@ export default {
                     let message = data.msg;
                     if(code == "200"){
                         defer.resolve({data:data.data,params:data.params});
+                    }else if(code == "701"){
+                        _this.$router.push({path:"/"});
+                        defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -126,6 +132,9 @@ export default {
                     let code = data.status;
                     let message = data.msg;
                     if(code == "200"){
+                        defer.resolve({data:data.data,params:data.params});
+                    }else if(code == "701"){
+                        _this.$router.push({path:"/"});
                         defer.resolve({data:data.data,params:data.params});
                     }else{
                         defer.reject({data: message});

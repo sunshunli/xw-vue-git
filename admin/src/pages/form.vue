@@ -60,6 +60,7 @@ let _data = [
 ];
 
 import Unit from "../core/tool/commonUtil.js";
+import $ from "jquery";
 export default {
     name:"FormValidate",
     data(){
@@ -181,7 +182,7 @@ export default {
                     this.alert.showAlert("error",data.data.desc);
                 }
             });
-        }
+        },
     },
     mounted(){
         window.setTimeout(()=>{

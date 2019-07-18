@@ -88,6 +88,7 @@
 
 .selectList li.active{
 	color: #409eff;
+	display: block;
 }
 
 .selectList li.active i{

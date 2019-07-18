@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :readonly="$attrs.readonly==undefined?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>

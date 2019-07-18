@@ -3,7 +3,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <span class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
+            <span :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
                 <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'"></span>
             </span>

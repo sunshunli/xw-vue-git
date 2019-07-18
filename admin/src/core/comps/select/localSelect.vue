@@ -7,9 +7,9 @@
 			<div class="tags">
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
 
-				<left-section :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
+				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input ref="inputdom" @click.stop="clickInput" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input ref="inputdom" @click.stop="clickInput" :readonly="readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -37,7 +37,7 @@
 
   export default {
     name: 'LeLocalSelect',
-    props:["multiple","displayName","displayValue","value","dataSource"],
+    props:["multiple","displayName","displayValue","value","dataSource","readonly"],
     components: {LeftSection,ButtomSection},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
@@ -67,7 +67,13 @@
         },
         leftArray(){
             return CommonUtil.object.getCheckedItems(this.data).items;
-        }
+        },
+        readonlyFlag(){
+            if(this.readonly==undefined || this.readonly == false){
+                return false;
+            }
+            return true;
+        }   
     },
     watch:{
         value(val){
@@ -94,6 +100,9 @@
          * @returns
          */
         clickInput(){
+            if(this.readonlyFlag){
+                return;
+            }
             if(this.data.length != 0){
                 this.showButtom = true;
             }
@@ -205,6 +214,9 @@
          * @returns 
          */
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.searchName = "";
             this.$emit("input","");
 
@@ -221,6 +233,11 @@
          * @returns
          */
         document.body.addEventListener("click",this.bodyClick,false);
+        //在有数据的清空下，直接初始化数据源以及设置值   
+        if(this.dataSource && this.dataSource.length >0){
+            this.init(this.dataSource);
+        }
+        this.setValue(this.value);
     },
     beforeDestroy(){
         /**
@@ -228,11 +245,6 @@
          * @returns
          */
         document.body.removeEventListener("click",this.bodyClick);
-        //在有数据的清空下，直接初始化数据源以及设置值   
-        if(this.dataSource && this.dataSource.length >0){
-            this.init(this.dataSource);
-        }
-        this.setValue(this.value);
     }
   }
 </script>

@@ -14,7 +14,7 @@
   export default {
     name: 'LeftSection',
     components: {},
-    props:["data","noticeParent","displayName"],
+    props:["data","noticeParent","displayName","readonly"],
     data () {
       return {
 
@@ -22,6 +22,9 @@
     },
     methods:{
       removeItem(item){
+          if(this.readonly){
+              return;
+          }
           this.noticeParent(item);
       }
     }

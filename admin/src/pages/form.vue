@@ -5,7 +5,7 @@
             <ul class="breadcrumb al-breadcrumb"><li>XW-VUE-GIT</li><li>Module</li></ul>
         </div>
 
-        <div class='searchPanel clearfix'>
+        <div class='searchPanel clearfix' label-width="200">
             <v-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></v-input>
             <v-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></v-input>
             <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>

@@ -615,7 +615,8 @@ export default {
         display: inline-block;
         line-height: normal;
         /* width: 35%; */
-        width:50% ;
+        /* width:50% ; */
+        width: 72%;
         /* vertical-align: text-bottom; */
     }
 

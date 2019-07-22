@@ -111,7 +111,7 @@
                         Util.throwError("数据源为空或者检查analysis, getUrl, pageOption参数!");
                     }
                 }).catch(e=>{
-                    this.alert.showAlert("error","列表["+url+"]请求失败!");
+                    this.alert.showAlert("error","列表数据加载失败!");
                 })
             },
             /**

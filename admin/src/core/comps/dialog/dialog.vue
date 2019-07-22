@@ -136,6 +136,7 @@ export default {
         font-size: 14px;
         color: #606266;
         text-align: left;
+        position: relative;
     }
     /* 滚动条整体的样式 */
     .le_dialog_contine::-webkit-scrollbar{
@@ -155,7 +156,8 @@ export default {
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
         /* overflow: auto; */
-        overflow: hidden;
+        overflow: scroll;
+        height: 90%;
     }
     /* 底部 */
     .le_dialog_bottom{
@@ -189,5 +191,20 @@ export default {
     .dialogBtnContent{
         text-align: right;
         border-top:1px solid #ccc;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .le_dialog_box .le_dialog_contine .form-item{
+        width:100%;
+    }
+
+    .le_dialog_box /deep/ .form-item .form-item-label{
+        width: 17%;
+    }
+
+    .le_dialog_box /deep/ .form-item .form-item-div{
+        width: 70%;
     }
 </style>

@@ -41,6 +41,7 @@ export default {
             }
         },
         reset(){
+            debugger;
             this.initSubComponents();
             this.subComps.forEach(comp=>{
                 //先执行自身重写的reset方法，如果没有重写，执行HOC组件传递过来的方法
@@ -135,6 +136,12 @@ export default {
         padding:10px 0;
     }
 
+
+
+    .formStyle .container .formDiv .form-item{
+        width: 100%;
+    }
+
     .formStyle .form-item{
         float: left;
         width: 100%;
@@ -224,6 +231,13 @@ export default {
         height: 28px;
         line-height: 28px;
         font-size: 12px;
+    }
+
+    .dialogBtnContent{
+        text-align: right;
+        border-top:1px solid #ccc;
+        position: absolute;
+        width: 100%;
     }
 
 

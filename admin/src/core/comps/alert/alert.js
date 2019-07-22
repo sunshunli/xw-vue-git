@@ -42,7 +42,7 @@ let _le_alert = {
                   '<i class="fa fa-exclamation-circle"></i>'+
                   '<p>'+title+'</p>'+
                   '</div>'+
-                  '<div class="btnGroup">'+
+                  '<div class="alert_btnGroup">'+
                   '<button class="confirm" tag="le-show-confirm-ok">确定</button>'+
                   '<button class="cancel" tag="le-show-confirm-close">取消</button>'+
                   '</div>'+

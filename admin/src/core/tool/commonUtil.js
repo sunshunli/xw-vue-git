@@ -1,7 +1,8 @@
 /**
  * Created by wupeng5 on 2018/2/1.
  */
-
+import q from "q";
+import $ from "jquery";
 const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 let CommonUtil = {
     throwError:function(str){
@@ -83,20 +84,20 @@ let CommonUtil = {
          * function print(item){console.log(item.name);}
          * taskQueue(data,print,cb);
          * **/
-        taskQueue:function(array,process,completedCallback,context){
-            setTimeout(function(){
-                if(completedCallback && typeof completedCallback == "function"){
-                    if(array.length == 0){
-                        completedCallback({data:"all tasks completed!"});
-                        return;
-                    }
+        taskQueue:function f(array,process,completedCallback,context){
+            if(completedCallback && typeof completedCallback == "function"){
+                if(array.length == 1){
+                    completedCallback({data:"all tasks completed!"});
+                    return;
                 }
-                let item = array.shift();
-                process.call(context,item);
-                if(array.length >0){
-                    setTimeout(arguments.callee,100);
-                }
-            },100)
+            }
+            let item = array.shift();
+            process.call(context,item);
+            if(array.length >0){
+                setTimeout(()=>{
+                    f(array,process,completedCallback,context);
+                },500);
+            }
         },
         /**
          * 节流函数:

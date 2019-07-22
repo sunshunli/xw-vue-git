@@ -64,15 +64,14 @@
 
 <style scoped>
     .form-item{
-        /* width: 55%; */
-        width: 32%;
+        width: 29%;
         float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 20%;
+        width: auto;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -107,7 +106,8 @@
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 50%;
+        /* width: 79%; */
+        width: 72%;
         position: relative;
     }
 
@@ -189,7 +189,7 @@
     }
 
     .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
+        /* border: 1px solid #67c23a; */
     }
 
     .fa-times-circle-o .form-item-input{

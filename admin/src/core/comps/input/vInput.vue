@@ -64,7 +64,7 @@
 
 <style scoped>
     .form-item{
-        width: 29%;
+        width: 32%;
         float: left;
         text-align: left;
         margin:0 0 22px 0;
@@ -107,7 +107,7 @@
         display: inline-block;
         line-height: normal;
         /* width: 79%; */
-        width: 72%;
+        width: 50%;
         position: relative;
     }
 

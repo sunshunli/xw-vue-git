@@ -614,13 +614,8 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        /* width: 35%; */
-        /* width:50% ; */
-        width: 72%;
-        /* vertical-align: text-bottom; */
+        width:50% ;
     }
-
-   
 
     form  .form-item .form-item-div{
         width: 80%;

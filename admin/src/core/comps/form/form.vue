@@ -16,7 +16,8 @@ export default {
     name:"LeForm",
     data(){
         return {
-            subComps:[]
+            subComps:[],
+            allComps:[]
         }
     },
     methods:{
@@ -30,6 +31,7 @@ export default {
                     if(arr[i].$attrs.checkVerifyEnabled && arr[i].$attrs.checkVerifyEnabled() && arr[i].validataComponentType != undefined){
                         this.subComps.push(arr[i]);
                     }
+                    this.allComps.push(arr[i]);
                     
                     let children = arr[i].$children;
                     if(children.length > 0){
@@ -41,9 +43,8 @@ export default {
             }
         },
         reset(){
-            debugger;
             this.initSubComponents();
-            this.subComps.forEach(comp=>{
+            this.allComps.length >0 && this.allComps.forEach(comp=>{
                 //先执行自身重写的reset方法，如果没有重写，执行HOC组件传递过来的方法
                 if(comp.reset){
                     comp.reset();

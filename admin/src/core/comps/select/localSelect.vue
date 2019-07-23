@@ -221,7 +221,7 @@
             }
             this.searchName = "";
             this.$emit("input","");
-
+            this.showButtom = false;
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();

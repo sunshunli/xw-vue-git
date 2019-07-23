@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea v-on:blur="blurEvent($event)" :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -35,11 +35,13 @@
             }
         },
         methods:{
-            changeEvent(e){
-                this.currentValue = e.target.value;
+            blurEvent(e){
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+            },
+            changeEvent(e){
+                this.currentValue = e.target.value;
                 this.$emit("input",e.target.value);
             },
             getValue(){

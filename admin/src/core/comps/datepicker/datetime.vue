@@ -88,7 +88,6 @@ export default {
             this.$refs[this.dateKey].showPicker();
         },
         clear(){
-            this.dateTimeStr = "";
             this.showDateTimePicker = false;
             this.$emit("input","");
             window.setTimeout(()=>{

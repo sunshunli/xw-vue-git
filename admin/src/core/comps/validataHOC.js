@@ -109,7 +109,9 @@ function ValidataHOC(Component){
                 currentComp.$emit("input","");
                 //所以需要延迟执行清空验证的state.showError 和 state.cls 属性 进行重置
                 window.setTimeout(()=>{
-                    currentComp.$attrs.setStateByFlag && currentComp.$attrs.setStateByFlag(0);
+                    if(currentComp.state.showError){
+                        currentComp.$attrs.setStateByFlag && currentComp.$attrs.setStateByFlag(0);
+                    }
                 },0)
             }
         },

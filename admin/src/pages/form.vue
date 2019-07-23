@@ -141,6 +141,7 @@ export default {
     },
     methods:{
         openDialog(){
+            this.$refs["form2"].reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";

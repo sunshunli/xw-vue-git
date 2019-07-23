@@ -1,11 +1,11 @@
 <template>
     <div style="text-align:left;">
-        <div class="navbar clearfix">
+        <div class="le_list_title-pannel navbar clearfix">
             <h1 class="al-title ng-binding">Black List</h1>
             <ul class="breadcrumb al-breadcrumb"><li>XW-VUE-GIT</li><li>Module</li></ul>
         </div>
 
-        <div class='searchPanel clearfix' label-width="200">
+        <div ref='le_list_search_pannel' class='le_list_search_pannel clearfix' label-width="100">
             <v-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></v-input>
             <v-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></v-input>
             <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
@@ -14,14 +14,14 @@
             <le-local-select label="选择职业" multiple ref="jobRef" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
         </div>
 
-        <div style="text-align:right;margin-right:10px">
+        <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
             <le-button type="search" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
         </div>
 
-        <div class='panel-table text-center'>
+        <div class='le_list_table_pannel panel-table text-center'>
             <div class="table-title">黑名单列表</div>
             <div class='overflow-table'>    
                 <table-list ref='black_list_table' :options='tableOptions'></table-list>
@@ -196,6 +196,10 @@ export default {
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
         },1000)
+
+
+        var labelwidth = this.$refs.le_list_search_pannel.attributes["label-width"].value;
+        $(".le_list_search_pannel .form-item label").css("width",labelwidth)
     }
 }
 </script>
@@ -245,6 +249,7 @@ export default {
         content: "/";
     }
 
+    
 
 
 

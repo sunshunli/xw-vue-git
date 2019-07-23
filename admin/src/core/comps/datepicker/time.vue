@@ -446,7 +446,7 @@ li{
     padding: 0;
     box-sizing: border-box;
     margin-bottom: 0;
-    max-width: 120px;
+    /* max-width: 120px; */
 }
 
 form .form-item .form-item-label{

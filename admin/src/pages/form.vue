@@ -141,11 +141,12 @@ export default {
     },
     methods:{
         openDialog(){
+            this.$refs["form2"].reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
-            },2000)
+            },1000)
             this.showDialog = true;
         },
         close(){
@@ -155,7 +156,7 @@ export default {
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){
-            let res = this.$refs[id].validate();
+            let res = this.$refs["form2"].validate();
             res.then(d=>{
                 let eee = this.entity;
                 debugger

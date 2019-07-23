@@ -43,7 +43,7 @@
             </le-form>
             <div class="dialogBtnContent">
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
-                <le-button type='close' value="关闭" @click="close"></le-button>
+                <le-button type='close' value="关闭" @click="showDialog = false"></le-button>
             </div>
         </le-dialog>
     </div>
@@ -141,16 +141,12 @@ export default {
     },
     methods:{
         openDialog(){
-            this.$refs["form2"].reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
             },1000)
             this.showDialog = true;
-        },
-        close(){
-            this.showDialog = false;
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();

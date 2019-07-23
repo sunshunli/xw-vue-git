@@ -158,6 +158,7 @@ export default {
                 let eee = this.entity;
                 debugger
             }).catch((error)=>{
+                let eee = this.entity;
                 debugger
             })
         },

@@ -77,7 +77,7 @@ export default {
             },
             showDialog:false,
             uploadOptions:{
-                multiple:true,
+                // multiple:true,
                 url:"/file/img/upload",
                 completedCallback:(d)=>{
                     console.log(d);
@@ -146,6 +146,8 @@ export default {
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
+
+                this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
             },1000)
             this.showDialog = true;
         },

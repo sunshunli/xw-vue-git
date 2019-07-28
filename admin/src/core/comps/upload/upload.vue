@@ -25,7 +25,6 @@
                 fkey:_idSeed.newId(),
                 showLoading:false,
                 srcs:[],
-                names:[],
                 state:{
                     showError:false,
                     successIcon:""
@@ -59,6 +58,13 @@
                     return 100;
                 }
             },
+            names(){
+                let tmp = [];
+                this.srcs.forEach((x,idx) => {
+                    tmp.push("image_"+(idx+1));
+                });
+                return tmp;
+            }
         },
         watch:{
             value(val){
@@ -113,12 +119,13 @@
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
-                    if(!this.multiple){
-                        this.srcs.length = 0;
+                    //多文件上传
+                    if(this.multiple){
+                        this.srcs.push(src);
+                    }else{
+                        this.srcs = [src];
                     }
-                    this.srcs.push(src);
-                    this.names.push(fileName);
-                    this.$emit('input',this.srcs);
+                    this.$emit('input',this.srcs.join(','));
                     this.showLoading = false;
                     this.reloadFileInput();
                     if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -136,18 +143,7 @@
                 return this.srcs.join(',');
             },
             setValue(srcs){
-                if(!srcs){
-                    this.srcs = [];
-                    return;
-                }
-                
-                for (let index = 0; index < srcs.length; index++) {
-                    const element = this.names[index];
-                    if(!element){
-                        this.names[index] = srcs[index].substring(srcs[index].lastIndexOf('.') - 1)
-                    }
-                }
-                this.srcs = srcs;
+                srcs && srcs.split ?this.srcs = srcs.split(','):this.srcs = [];
             },
             removeItem(item){
                 let res = this.srcs.filter(x=>{

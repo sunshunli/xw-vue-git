@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -17,7 +17,7 @@
         name:"VTextarea",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
         // props:["msg","vType","regex","off"],
-        props:["value"],
+        props:["value","height"],
         data(){
             return {
                 //所有需要验证的组件必须带上这个validataType属性，这个属性的值可以为input，select，radio等需要验证的组件 

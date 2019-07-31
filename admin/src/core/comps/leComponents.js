@@ -2,8 +2,8 @@
 import LeButton from "./button/button.vue";
 import LeCheckboxList from "./checkbox/checkboxList.vue";
 import LeRadioList from "./radio/radioList.vue";
-import VInput from "./input/vInput.vue";
-import VTextarea from "./input/vTextarea.vue";
+import LeInput from "./input/vInput.vue";
+import LeTextarea from "./input/vTextarea.vue";
 import LeLocalSelect from "./select/localSelect.vue";
 import TableList from "./table/tableList.vue";
 import LeUpload from "./upload/upload.vue";
@@ -22,8 +22,8 @@ export default{
         Vue.component('LeButton',LeButton);
         Vue.component('LeCheckboxList',ValidataHOC(LeCheckboxList));
         Vue.component('LeRadioList',ValidataHOC(LeRadioList));
-        Vue.component('VInput',ValidataHOC(VInput));
-        Vue.component('VTextarea',ValidataHOC(VTextarea));
+        Vue.component('LeInput',ValidataHOC(LeInput));
+        Vue.component('LeTextarea',ValidataHOC(LeTextarea));
         Vue.component('LeLocalSelect',ValidataHOC(LeLocalSelect));
         Vue.component('TableList',TableList);
         Vue.component('LeUpload',ValidataHOC(LeUpload));

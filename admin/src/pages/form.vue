@@ -250,6 +250,9 @@ export default {
         content: "/";
     }
 
+    .form-item /deep/ label{
+        width: 120px !important;
+    }
     
 
 

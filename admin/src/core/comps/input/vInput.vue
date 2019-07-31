@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -29,17 +29,27 @@
                 currentValue:this.value
             }
         },
+        computed:{
+            readonlyFlag(){
+                if(this.readonly==undefined || this.readonly == false){
+                    return false;
+                }
+                return true;
+            }
+        },
         watch:{
             value(val){
                 this.setValue(val);
             }
         },
         methods:{
-            changeEvent(e){
-                this.currentValue = e.target.value;
+            blurEvent(e){
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+            },
+            changeEvent(e){
+                this.currentValue = e.target.value;
                 this.$emit("input",e.target.value);
             },
             getValue(){
@@ -53,7 +63,9 @@
                 }
             },
             clear(){
-                this.$emit("input","");
+                if(!this.readonlyFlag){
+                    this.$emit("input","");
+                }
             }
         },
         mounted(){
@@ -64,7 +76,6 @@
 
 <style scoped>
     .form-item{
-        /* width: 55%; */
         width: 32%;
         float: left;
         text-align: left;
@@ -72,7 +83,7 @@
     }
 
     .form-item .form-item-label{
-        width: 20%;
+        width: auto;
         margin-right: 1%;
         text-align: right;
         vertical-align: middle;
@@ -107,6 +118,7 @@
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
+        /* width: 79%; */
         width: 50%;
         position: relative;
     }
@@ -189,7 +201,7 @@
     }
 
     .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
+        /* border: 1px solid #67c23a; */
     }
 
     .fa-times-circle-o .form-item-input{

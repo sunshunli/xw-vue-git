@@ -250,9 +250,12 @@ export default {
             let days = this.getFullData(year,month);
             this.data = _tool.groupArray(days);
         },
+        /**
+         * @description 清空值，并且带验证效果
+         * @returns
+         */
         clear(){
             this.$emit("input","");
-
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
@@ -413,7 +416,6 @@ export default {
                 this.selectDay = str;
                 this.setPickerDateSource(_arr[0],parseInt(_arr[1]),parseInt(_arr[2]));
             }
-            
         },
         /**
          * @description 获取当前组件的值，为validataHOC准备
@@ -614,12 +616,8 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        /* width: 35%; */
         width:50% ;
-        /* vertical-align: text-bottom; */
     }
-
-   
 
     form  .form-item .form-item-div{
         width: 80%;

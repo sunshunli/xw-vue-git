@@ -6,7 +6,7 @@
         <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
         
         <div class="fileList" v-show="srcs.length>0">
-            <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item">{{names[index]}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
+            <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
         </div>
 
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import CommonUtil from '../../tool/commonUtil';
     export default {
         components: {},
         props:["options","value"],
@@ -25,7 +26,6 @@
                 fkey:_idSeed.newId(),
                 showLoading:false,
                 srcs:[],
-                names:[],
                 state:{
                     showError:false,
                     successIcon:""
@@ -54,11 +54,11 @@
                     if (!re.test(this.size)) {
                         return 100;
             　　     }
-                        return parseFloat(this.options.size);
+                    return parseFloat(this.options.size);
                 }else{
                     return 100;
                 }
-            },
+            }
         },
         watch:{
             value(val){
@@ -113,12 +113,13 @@
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
-                    if(!this.multiple){
-                        this.srcs.length = 0;
+                    //多文件上传
+                    if(this.multiple){
+                        this.srcs.push({name:src,idx:this.getMaxIndex()});
+                    }else{
+                        this.srcs = [{name:src,idx:1}];
                     }
-                    this.srcs.push(src);
-                    this.names.push(fileName);
-                    this.$emit('input',this.srcs);
+                    this.$emit('input',this.getNames(this.srcs));
                     this.showLoading = false;
                     this.reloadFileInput();
                     if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -133,27 +134,48 @@
                 });
             },
             getValue(){
-                return this.srcs.join(',');
+                return this.getNames(this.srcs);
+            },
+            getMaxIndex(name){
+                let tmp = [];
+                this.srcs.forEach(x=>{
+                    tmp.push(x.idx);
+                })
+                if(tmp.length != 0){
+                    tmp.sort((a,b)=>{
+                        return b - a;
+                    })
+                    return tmp[0] + 1;
+                }else{
+                    return 1;    
+                }         
             },
             setValue(srcs){
-                if(!srcs){
-                    this.srcs = [];
+                if(srcs == ""){
                     return;
                 }
-                
-                for (let index = 0; index < srcs.length; index++) {
-                    const element = this.names[index];
-                    if(!element){
-                        this.names[index] = srcs[index].substring(srcs[index].lastIndexOf('.') - 1)
-                    }
+                if(this.srcs.length == 0){
+                    srcs.split(',').forEach((x,idx)=>{
+                        this.srcs.push({name:x,idx:(this.srcs.length+1)});
+                    })
                 }
-                this.srcs = srcs;
+            },
+            getNames(data){
+                let res = [];
+                data && data.forEach(x=>{
+                    res.push(x.name);
+                })
+                return res.join(',');
             },
             removeItem(item){
-                let res = this.srcs.filter(x=>{
-                    return x.indexOf(item) == -1
+                let tmp = [];
+                this.srcs.forEach(x=>{
+                    if(x.name != item.name){
+                        tmp.push(x);
+                    }
                 })
-                this.$emit('input',res);
+                this.srcs = tmp;
+                this.$emit('input',this.getNames(this.srcs));
             }
         },
         mounted(){

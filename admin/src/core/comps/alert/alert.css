@@ -124,11 +124,11 @@
     font-size:14px;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .btnGroup{
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup{
 	text-align: right;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .btnGroup button{
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup button{
 	height: 30px;
     line-height: 30px;
     padding: 0 10px;
@@ -142,7 +142,7 @@
     cursor: pointer;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .btnGroup .cancel{
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup .cancel{
 	background-color: #fff;
 	color: #000;
 	border:1px solid  #ddd;

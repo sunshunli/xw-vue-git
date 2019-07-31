@@ -61,11 +61,10 @@ export default {
             item.ck = !item.ck;
             let res = this.getCheckedItems();
             this.$emit('input',res.vals.join(','));
+            this.$emit('change',res);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
-            //抛出change事件
-            this.$emit('change',res);
         },
         /**
          * @method
@@ -95,21 +94,21 @@ export default {
                 this.data.forEach(item=>{
                     item.ck = false;
                 })
-                return;
-            }
-            this.data.forEach(item=>{
-                let cked = false;
-                vals.split && vals.split(',').forEach(x=>{
-                    if(item[this.displayValue].toString() == x.toString()){
-                        cked = true;
+            }else{
+                this.data.forEach(item=>{
+                    let cked = false;
+                    vals.split && vals.split(',').forEach(x=>{
+                        if(item[this.displayValue].toString() == x.toString()){
+                            cked = true;
+                        }
+                    })
+                    if(cked){
+                        item.ck = true;
+                    }else{
+                        item.ck = false;
                     }
                 })
-                if(cked){
-                    item.ck = true;
-                }else{
-                    item.ck = false;
-                }
-            })
+            }
         }
     },
     mounted(){

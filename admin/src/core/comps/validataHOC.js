@@ -88,7 +88,8 @@ function ValidataHOC(Component){
                         currentComp.state.showError = false;
                         break;
                     case 1:
-                        currentComp.state.successIcon = "fa-check-circle-o";
+                        // currentComp.state.successIcon = "fa-check-circle-o";
+                        currentComp.state.successIcon = "";
                         currentComp.state.showError = false;
                         break;
                     case 2:
@@ -105,8 +106,14 @@ function ValidataHOC(Component){
              */
             reset(){
                 let currentComp = this.$children[0];
-                currentComp.setValue("");
-                currentComp.$attrs.setStateByFlag(0);
+                //清空v-model 和  组件内部的显示字段值, 当前过程是异步的
+                currentComp.$emit("input","");
+                //所以需要延迟执行清空验证的state.showError 和 state.cls 属性 进行重置
+                window.setTimeout(()=>{
+                    if(currentComp.state.showError || currentComp.state.cls != ""){
+                        currentComp.$attrs.setStateByFlag && currentComp.$attrs.setStateByFlag(0);
+                    }
+                },0)
             }
         },
         mounted(){

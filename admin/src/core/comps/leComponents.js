@@ -14,6 +14,8 @@ import LeDatePicker from "../comps/datepicker/date.vue";
 import LeTimePicker from "../comps/datepicker/time.vue";
 import LeDateTimePicker from "../comps/datepicker/datetime.vue";
 import LeDialog from "../comps/dialog/dialog.vue";
+import LeLoading from "../comps/loading/loading.vue";
+
 
 import ValidataHOC from "./validataHOC.js";
 
@@ -34,5 +36,6 @@ export default{
         Vue.component('LeDateTimePicker',ValidataHOC(LeDateTimePicker));
         Vue.component('LeDialog',LeDialog);
         Vue.component('LeForm',LeForm);
+        Vue.component("LeLoading",LeLoading);
     }
 }

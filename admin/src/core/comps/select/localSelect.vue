@@ -5,7 +5,7 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
-                <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+                <i v-show="multiple != undefined?true:false" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-  import CommonUtil from '../../tool/commonUtil.js';
-  import LeftSection from "./left.vue";
-  import ButtomSection from "./buttom.vue";
+    import CommonUtil from '../../tool/commonUtil.js';
+    import LeftSection from "./left.vue";
+    import ButtomSection from "./buttom.vue";
 
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
@@ -154,6 +154,8 @@
                 })
                 item.ck = true;
                 item.cls = "active fa fa-check";
+
+                this.showButtom = false;
             }
             this.searchName = "";
             this.onEmit();
@@ -219,7 +221,7 @@
             }
             this.searchName = "";
             this.$emit("input","");
-
+            this.showButtom = false;
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();

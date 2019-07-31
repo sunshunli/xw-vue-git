@@ -1,6 +1,6 @@
 <template>
     <div style="text-align:left;">
-        <div class="navbar clearfix">
+        <div class="le_list_title-pannel navbar clearfix">
             <h1 class="al-title ng-binding">Black List</h1>
             <ul class="breadcrumb al-breadcrumb"><li>XW-VUE-GIT</li><li>Module</li></ul>
         </div>
@@ -14,14 +14,14 @@
             <le-local-select label="选择职业" multiple ref="jobRef" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
         </div>
 
-        <div style="text-align:right;margin-right:10px">
+        <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
             <le-button type="search" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
         </div>
 
-        <div class='panel-table text-center'>
+        <div class='le_list_table_pannel panel-table text-center'>
             <div class="table-title">黑名单列表</div>
             <div class='overflow-table'>    
                 <table-list ref='black_list_table' :options='tableOptions'></table-list>
@@ -43,7 +43,7 @@
             </le-form>
             <div class="dialogBtnContent">
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
-                <le-button type='close' value="关闭" @click="close"></le-button>
+                <le-button type='close' value="关闭" @click="showDialog = false"></le-button>
             </div>
         </le-dialog>
     </div>
@@ -141,25 +141,26 @@ export default {
     },
     methods:{
         openDialog(){
+            this.$refs["form2"].reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
-            },2000)
+
+                this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
+            },1000)
             this.showDialog = true;
-        },
-        close(){
-            this.showDialog = false;
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){
-            let res = this.$refs[id].validate();
+            let res = this.$refs["form2"].validate();
             res.then(d=>{
                 let eee = this.entity;
                 debugger
             }).catch((error)=>{
+                let eee = this.entity;
                 debugger
             })
         },
@@ -196,6 +197,10 @@ export default {
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
         },1000)
+
+
+        var labelwidth = this.$refs.le_list_search_pannel.attributes["label-width"].value;
+        $(".le_list_search_pannel .form-item label").css("width",labelwidth)
     }
 }
 </script>
@@ -245,6 +250,7 @@ export default {
         content: "/";
     }
 
+    
 
 
 

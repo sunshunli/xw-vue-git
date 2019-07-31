@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <le-dialog title="弹出层" height="500" v-model="showDialog">
+        <le-dialog title="弹出层" height="500" v-model="showDialog" :close-callback="closeDialog">
             <le-form ref="form2" style="width:600px">
                 <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></le-input>
@@ -43,7 +43,7 @@
             </le-form>
             <div class="dialogBtnContent">
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
-                <le-button type='close' value="关闭" @click="showDialog = false"></le-button>
+                <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>
         </le-dialog>
     </div>
@@ -141,7 +141,6 @@ export default {
     },
     methods:{
         openDialog(){
-            this.$refs["form2"].reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
@@ -159,10 +158,15 @@ export default {
             res.then(d=>{
                 let eee = this.entity;
                 debugger
+                this.closeDialog();
             }).catch((error)=>{
                 let eee = this.entity;
                 debugger
             })
+        },
+        closeDialog(){
+            this.$refs.form2.reset();
+            this.showDialog = false;
         },
         setEnable(enable){
             let ids = this.$refs.black_list_table.getCheckedItems("id").vals;
@@ -197,10 +201,6 @@ export default {
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
         },1000)
-
-
-        var labelwidth = this.$refs.le_list_search_pannel.attributes["label-width"].value;
-        $(".le_list_search_pannel .form-item label").css("width",labelwidth)
     }
 }
 </script>

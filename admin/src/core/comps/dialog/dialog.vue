@@ -20,7 +20,7 @@
 <script>
 export default {
     name:"LeDialog",
-    props:["title","width","height","value"],
+    props:["title","width","height","value","closeCallback"],
     data(){
         return {
         }
@@ -40,6 +40,7 @@ export default {
     methods:{
         close(){
             this.$emit("input",false);
+            this.closeCallback && this.closeCallback();
         }
     },
     mounted(){

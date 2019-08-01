@@ -10,6 +10,7 @@ import AjaxService from "./core/tool/fetch-install.js";
 // import LeComponents from "@CoreUILib/le-components.min.js";
 
 import LeComponents from "./core/comps/leComponents.js";
+import "./core/comps/leComponents.css";
 
 Vue.use(AjaxService);
 Vue.use(LeComponents);

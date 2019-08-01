@@ -1,9 +1,11 @@
 <template>
     <div class="form-item upaload">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
-        <span  class="input-file">请选择
-        <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
-        <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+        <div>
+            <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+            <span  class="input-file">请选择
+            <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
+            <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+        </div>
         
         <div class="fileList" v-show="srcs.length>0">
             <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
@@ -183,7 +185,6 @@ import CommonUtil from '../../tool/commonUtil';
         }
     }
 </script>
-
 <style scoped>
 .imgFile{
     cursor:pointer;
@@ -193,10 +194,10 @@ import CommonUtil from '../../tool/commonUtil';
     position: relative;
     overflow: hidden;
     text-align: center;
-    width: 100%;
+    width: 50px;
     background-color: #2c7;
     border-radius: 4px;
-    padding: 7px 10px;
+    padding: 5px;
     font-size: 12px;
     font-weight: normal;
     line-height: 18px;
@@ -211,17 +212,18 @@ import CommonUtil from '../../tool/commonUtil';
     right: 0;
     font-size: 14px;
     background-color: #f00;
-    /*transform: translate(-300px, 0px) scale(4);*/
-    /* height: 100%;
-    width: 100%; */
     opacity: 0;
     filter: alpha(opacity=0);
+    width: 100%;
+    height: 100%;
 }
 .loading{width:24px;}
 
 .fileList{
-    width: 82.5%;
-    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 80%;
+    margin-left: 19.5%;
 }
 
 .fileList span{
@@ -268,12 +270,12 @@ import CommonUtil from '../../tool/commonUtil';
 
 .formStyle .form-item{
     text-align: left;
+    flex-direction: column;
+    align-items: initial;
 }
 
 .upaload label{
-    width: 17%;
     text-align: right;
-    margin-right: 6px;
     display: inline-block;
 }
 
@@ -285,5 +287,4 @@ import CommonUtil from '../../tool/commonUtil';
     line-height: 20px;
     text-align: left;
 }
-
 </style>

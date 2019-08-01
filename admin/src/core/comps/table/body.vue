@@ -127,6 +127,7 @@
         }
     }
 </script>
+
 <style scoped>
     .tableList .relative{
         position: relative;
@@ -137,43 +138,36 @@
     .btnCls{
         margin:0 5px;
     }
-
     tbody tr td{color: rgba(0,0,0,0.65);border: 1px solid #ddd;vertical-align: middle;text-align: center; }
-    
     .btn{
         /* margin: 0 5px; */
         border-radius: 4px;
         padding: 2px 10px;
     }
-
     button.edit{
         background-color: #409eff;
     } 
 
-   button.delete{
+    button.delete{
         background-color: #f56c6c;
     } 
     .bg-gray{
         background-color: #fafafa;
     }
+    /* 新Btn样式 */ 
+    button.btn{
+        border:none;
+    }
 
+    .btnContent{
+            width: auto;
+        height: auto;
+        display: inline-block;
+    }
 
-
-/* 新Btn样式 */ 
-
-button.btn{
-    border:none;
-}
-
-.btnContent{
-        width: auto;
-    height: auto;
-    display: inline-block;
-}
-
-.opration{
-    /* text-align: left; */
-    white-space: nowrap;
-}
+    .opration{
+        /* text-align: left; */
+        white-space: nowrap;
+    }
 
 </style>

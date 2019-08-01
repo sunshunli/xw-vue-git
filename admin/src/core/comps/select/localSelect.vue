@@ -250,7 +250,6 @@
     }
   }
 </script>
-
 <style scoped>
     .blueborder{
         border-color:#409eff !important;
@@ -258,23 +257,18 @@
     
     .selectContent{
         position: relative;
-        vertical-align: middle;
-        width: 32%;
-        float: left;
         text-align: left;
         margin-bottom: 22px;
+        display: inline-block;
     }
     
     .selectContent label{
-        width: 20%;
         text-align: right;
-        margin-right: 1%; 
         color: #606266;
         display: inline-block;
     }
 
     .medium .selectContent label{
-        width: 17%;
         display: inline-block;
     }
 
@@ -292,7 +286,7 @@
 	    height: 40px;
 	    line-height: 40px;
 	    padding: 0 5px;
-	    width: 280px;
+	    width:180px;
         cursor: pointer;
         margin: 0;
         vertical-align: middle;
@@ -345,12 +339,7 @@
     }
 
     .form-item .form-item-div{
-        width: 50%;
-        /* vertical-align: text-bottom; */
-    }
-
-    form  .form-item .form-item-div{
-        width: 80%;
+        width: 100%;
     }
 
     .promptMsg{
@@ -361,5 +350,4 @@
         position: absolute;
         margin: 0;
     }
-
 </style>

@@ -6,12 +6,16 @@
         </div>
 
         <div class='searchPanel clearfix'>
-            <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-            <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
-            <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
-            <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
-            <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-            <le-local-select label="选择职业" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+            <div class="col3">
+                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
+                <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
+            </div>
+            <div class="col3">
+                <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+                <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                <le-local-select label="选择职业" :data-source="jobArray" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+            </div>
         </div>
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">

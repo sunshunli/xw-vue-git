@@ -127,23 +127,15 @@ export default {
         margin-left: 0;
         cursor: pointer;
     }
-
     .span .fa{
         vertical-align: middle;
     }
 
     .form-item{
-        width: 32%;
-        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
-
-
-
     .form-item .form-item-label{
-         width: 17%;
-        margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
@@ -154,32 +146,16 @@ export default {
         box-sizing: border-box;
         margin-bottom: 0;
     }
-
     .medium .form-item .form-item-label{
-        height: 40px;
         line-height: normal;
         font-size: 14px;
     }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
 
-    .form-item .form-item-div{
-        width: 80%;
-    }
-   
-    form  .form-item .form-item-div{
+    form .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
         vertical-align: text-bottom;
-        width: 80%;
+        flex: 1;
     }
 
     .requireed::before{
@@ -209,17 +185,7 @@ export default {
         line-height: 40px;
         font-size: 14px;
     }
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-
+  
     .form-item .promptMsg{
         font-size: 12px;
         color: #f56c6c;
@@ -228,4 +194,3 @@ export default {
         position: absolute;
     }
 </style>
-

@@ -75,16 +75,11 @@
 
 <style scoped>
     .form-item{
-        /* width: 55%; */
-        width: 32%;
-        float: left;
         text-align: left;
         margin:0 0 22px 0;
     }
 
     .form-item .form-item-label{
-        width: 20%;
-        margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
@@ -96,12 +91,7 @@
         margin-bottom: 0;
     }
 
-    form .form-item .form-item-label{
-        width: 17%;
-    }
-
     .medium .form-item .form-item-label{
-        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }
@@ -118,13 +108,12 @@
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        width: 50%;
         position: relative;
     }
 
     form .form-item .form-item-div{
-        width: 80%;
         position: relative;
+        width: 100%;
     }
 
     .requireed::before{
@@ -135,7 +124,6 @@
     }
     .form-item .form-item-input{
         width: 100%;
-        /* width: 50%; */
         height: 40px;
         font-size: 14px;
         line-height: 40px;
@@ -156,7 +144,7 @@
         font-size: 14px;
         height: 80px;
         vertical-align: middle;
-        padding: 10px 20px;
+        padding: 10px 20px 10px 10px;
     }
 
     .form-item i{
@@ -224,6 +212,4 @@
         color: #c0c4cc;
         font-weight: normal;
     }
-
- 
 </style>

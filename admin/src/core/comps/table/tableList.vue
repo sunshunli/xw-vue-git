@@ -231,14 +231,25 @@
         }
     }
 </script>
-
 <style scoped>
-
     .tableContainer{
         overflow-x: scroll;
         display: block;
         min-width: 100%;
     }
+
+    .tableContainer .table-title{
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 3px 3px 0 0;
+        height: 38px;
+        line-height: 38px;
+        background-color: #434e5b;
+        font-size: 14px;
+        color: #fff;
+    }
+
     .table{
         min-width: 100%;
         width: auto;

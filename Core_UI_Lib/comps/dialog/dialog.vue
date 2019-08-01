@@ -1,7 +1,7 @@
 
 <template>
     <div class = "le_dialog_mask" v-show="value">
-        <!-- width height margin为计算 width/height的一半 + 10(padding)-->
+        <!-- width height 为option传入   margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
             <div class="le_dialog_top">
@@ -20,7 +20,7 @@
 <script>
 export default {
     name:"LeDialog",
-    props:["title","width","height","value","closeCallback"],
+    props:["title","width","height","value"],
     data(){
         return {
         }
@@ -40,7 +40,6 @@ export default {
     methods:{
         close(){
             this.$emit("input",false);
-            this.closeCallback && this.closeCallback();
         }
     },
     mounted(){

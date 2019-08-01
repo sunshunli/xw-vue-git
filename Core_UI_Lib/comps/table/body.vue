@@ -1,0 +1,162 @@
+<template>
+    <tbody>
+        <tr v-for="(row,index) in data" @click="e=>selectRow(row,e)" :key="index">
+            <td v-if="showCk">
+                <div v-if="singleSelected">
+                    <input :name="radioKey" type="radio" :checked="row.ck"/>
+                </div>
+                <div v-else>
+                    <input type="checkbox" :checked="row.ck" />
+                </div>
+            </td>
+            <td class="opration" v-if="actions && actions.length != 0">
+                <div v-for="(x,i) in actions" class="btnContent" :key="i">
+                     <!-- <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button> -->
+                    <le-button v-if="actionShowFn(x,row)" :type="x.key" @click="e=>{x.action(row)}" :value="x.val"></le-button>
+                </div>
+            </td>
+            
+            <td v-for="(item,idx) in cols" :key="idx">
+                <div v-if="item.etype == 'img'">
+                    <img style="width:50px;height:50px;" v-bind:src="row[item.key]" />
+                </div>
+                <div v-else>
+                    <a v-if="item.convert && item.action" @click.prevent="e=>item.action(row,item)">
+                    {{item.convert(item,row)}}
+                    </a>
+                    <span v-if="item.convert && !item.action">
+                        {{item.convert(item,row)}}
+                    </span>
+                    <a v-if="!item.convert && item.action" @click.prevent="e=>item.action(row,item)">
+                        {{getValByFieldInRow(item,row)}}
+                    </a>
+                    <span v-if="!item.convert && !item.action">
+                        {{getValByFieldInRow(item,row)}}
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</template>
+
+<script>
+    import Util from "../../tool/commonUtil.js";
+    
+    export default {
+        name: "BodySection",
+        props:["actions","data","cols","accpetHBNotice","showCk","singleSelected"],
+        data(){
+            return {
+                radioKey:_idSeed.newId(),
+            }
+        },
+        computed:{
+            
+        },
+        mounted(){
+            
+        },
+        methods:{
+            actionShowFn(action,row){
+                if(action.show){
+                    return action.show(row);
+                }else{
+                    return true;
+                }
+            },
+            selectRow:function(row,e){
+                if(this.singleSelected){
+                    this.data.forEach(el => {
+                        el.ck = false;
+                    });
+                }
+                row.ck = !row.ck;
+                this.accpetHBNotice(null,{data:this.data});
+            },
+            getValByFieldInRow:function(item,row){
+                let key = item.key;
+                let val = "";
+                if(typeof row[key] == "boolean"){
+                    val = row[key].toString();
+                }else{
+                    let v = "row."+item.key;
+                    let tmp = eval("("+v+")");
+                    if(tmp == undefined){
+                        val = "";
+                    }else{
+                        let type = item.type;
+                        if(type){
+                            type = type.toLowerCase();
+                            switch(type){
+                                case "date":
+                                    val = Util.date.date(tmp);
+                                    break;
+                                case "datetime":
+                                    val = Util.date.dateTime(tmp);
+                                    break;
+                                case "time":
+                                    val = Util.date.time(tmp);
+                                    break;
+                                default:
+                                    val = tmp;
+                            }
+                        }else{
+                            val = tmp;
+                        }
+                    }
+                }
+                return val;
+            }
+        }
+    }
+</script>
+<style scoped>
+    .tableList .relative{
+        position: relative;
+    }
+    .tableList .maskLayer{
+        position: absolute;left: 0;top: 0;bottom: 0;right: 0;
+    }
+    .btnCls{
+        margin:0 5px;
+    }
+
+    tbody tr td{color: rgba(0,0,0,0.65);border: 1px solid #ddd;vertical-align: middle;text-align: center; }
+    
+    .btn{
+        /* margin: 0 5px; */
+        border-radius: 4px;
+        padding: 2px 10px;
+    }
+
+    button.edit{
+        background-color: #409eff;
+    } 
+
+   button.delete{
+        background-color: #f56c6c;
+    } 
+    .bg-gray{
+        background-color: #fafafa;
+    }
+
+
+
+/* 新Btn样式 */ 
+
+button.btn{
+    border:none;
+}
+
+.btnContent{
+        width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+.opration{
+    /* text-align: left; */
+    white-space: nowrap;
+}
+
+</style>

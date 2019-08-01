@@ -1,8 +1,8 @@
 {
-  "name": "vue-pro",
+  "name": "vue-ui-build",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "damon05 <string_bao@163.com>",
+  "description": "Core UI Build Project",
+  "author": "Peng Wu <string_bao@163.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open",

@@ -4,12 +4,14 @@ import Vuex from 'vuex';
 import App from './App.vue';
 import router from './router/index.js';
 
-import AjaxService from "./core/tool/fetch-install";
-import Alert from "./core/comps/alert/alert.js";
-import LeComponents from "./core/comps/leComponents.js";
+import AjaxService from "./core/tool/fetch-install.js";
+
+import "@CoreUILib/le-components.min.css";
+import LeComponents from "@CoreUILib/le-components.min.js";
+
+// import LeComponents from "./core/comps/leComponents.js";
 
 Vue.use(AjaxService);
-Vue.use(Alert);
 Vue.use(LeComponents);
 Vue.use(Vuex);
 

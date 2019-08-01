@@ -133,7 +133,7 @@ export default {
     }
 
     .fa-item .fa-caret-load{
-        background: url("../../../static/images/loading.gif") 0 0 no-repeat;
+        background: url("//p4.lefile.cn/product/adminweb/2019/08/01/b98419e5-a8a9-48be-87e0-b66c9ef93d05.gif") 0 0 no-repeat;
         background-size: 100%;
         width: 12px;
         height: 23px;

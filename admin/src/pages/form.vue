@@ -11,7 +11,7 @@
             <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
             <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
             <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-            <le-local-select label="选择职业" multiple ref="jobRef" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+            <le-local-select label="选择职业" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
         </div>
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
@@ -111,7 +111,7 @@ export default {
                     {key:"operateTime",val:"修改时间"}
                 ],
                 getUrl:()=>{
-                    return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName=&status=-1";
+                    return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName="+this.searchModel.age+"&status=-1";
                 },
                 pageOption:{
                     sizeKey:"pageSize",
@@ -119,6 +119,18 @@ export default {
                     index:1,
                     size:10
                 },
+                actions:[
+                    {
+                        key:"edit",
+                        val:"编辑",
+                        action:this.search,
+                    },
+                    {
+                        key:"delete",
+                        val:"注销",
+                        action:this.search,
+                    }
+                ],
                 analysis:(d)=>{
                     let data = d.data;
                     if(data && data.lstAccesses instanceof Array && data.lstAccesses.length >0){
@@ -191,7 +203,7 @@ export default {
     },
     mounted(){
         window.setTimeout(()=>{
-            this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
+            // this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
 
             // this.$refs["dialogJobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
             // this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));

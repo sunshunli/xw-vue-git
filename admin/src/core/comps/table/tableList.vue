@@ -3,7 +3,7 @@
         <table class="table">
             <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
 
-            <body-section :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
+            <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
         </table>
 
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
@@ -31,8 +31,10 @@
                         size:this.options.pageOption.size?this.options.pageOption.size:10,
                         count:0,
                         total:0
-                    }
-                }
+                    },
+                },
+                //body部分没有数据的情况下，显示无数据
+                showNoResult:false
             }
         },
         computed:{
@@ -74,7 +76,6 @@
                         res = this.options.analysis(data);
                     }else{
                         res = data;
-
                     }                    
                     if(res.data && res.data instanceof Array && res.data.length != 0){
                         let arr = Util.object.addPrimaryAndCk(res.data);
@@ -96,6 +97,7 @@
                                 size:size
                             }
                         }
+                        this.showNoResult = false;
                     }else{
                         this.state = {
                             data:[],
@@ -109,9 +111,11 @@
                             }
                         }
                         Util.throwError("数据源为空或者检查analysis, getUrl, pageOption参数!");
+                        this.showNoResult = true;
                     }
                 }).catch(e=>{
                     this.alert.showAlert("error","列表数据加载失败!");
+                    this.showNoResult = true;
                 })
             },
             /**

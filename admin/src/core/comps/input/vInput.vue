@@ -10,11 +10,11 @@
 </template>
 
 <script>
-    import Util from "../../../core/tool/commonUtil.js";
+    import Util from "../../tool/commonUtil.js";
 
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
-        name:"VInput",
+        name:"LeInput",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
         // props:["msg","vType","regex","off"],
         props:["value"],

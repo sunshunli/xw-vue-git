@@ -2,6 +2,21 @@
     box-sizing: border-box;
 }
 
+/* 一行放俩个 */
+.col2{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.col2 .form-item /deep/ .form-item-div{
+    flex: 1;
+}
+
+.middleClass {
+    margin-left: 10px !important;
+}
+
 .col3 {
     width: 90%;
     display: flex;
@@ -41,7 +56,6 @@
 .le_form_row {
     flex: 1;
 }
-
 
 /deep/ .formStyle .container .formDiv .form-item {
     display: flex;

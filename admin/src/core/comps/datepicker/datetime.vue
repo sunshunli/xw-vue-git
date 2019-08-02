@@ -226,7 +226,7 @@ height: 34px; line-height: 34px; font-size: 14px;
 .mini .form-item .form-item-input{
 height: 28px; line-height: 28px; font-size: 12px;
 }
-.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute; top: 42px;
+.form-item .promptMsg{margin: 0 auto; font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute; top: 42px;
 left: -1px; }
 .fa-check-circle-o.dataTimePicker{ border: 1px solid #67c23a;
 }

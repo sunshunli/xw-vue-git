@@ -34,7 +34,20 @@
 
         <le-dialog title="弹出层" height="500" v-model="showDialog" :close-callback="closeDialog">
             <le-form ref="form2" style="width:600px">
-                <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                <div class="col3 col_label">
+                    <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                    <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                    <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                </div>
+                <div class="col2 col_label">
+                    <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                    <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                </div>
+                <div class="col3 col_label">
+                    <le-time-picker label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+                    <div class="middleClass">至</div>
+                    <le-date-time-picker label="结束时间" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                </div>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></le-input>
                 <le-textarea label="详细地址" msg="正整数22" v-model="entity.content" on></le-textarea>
                 <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
@@ -269,9 +282,20 @@ export default {
     .form-item /deep/ label{
         width: 120px !important;
     }
-    
 
+    .le_dialog_box .col3{
+        width: 100%;
+        align-items: baseline;
+    }
 
+    .col_label /deep/ .form-item-label{
+        width: auto !important;
+        flex-wrap: inherit;
+        position: relative;
+        padding-left: 10px !important;
+    }
 
-
+    .col_label /deep/ .requireed::before{
+        left: 4px;
+    }
 </style>

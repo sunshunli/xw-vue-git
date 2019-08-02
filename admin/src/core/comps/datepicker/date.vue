@@ -36,7 +36,7 @@
                             <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
                         </tr>
                         <tr v-for="(item,index) in data" :key="index">
-                            <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x.day}}</td>
+                            <td :class="x?x.cls:''" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x ? x.day:''}}</td>
                         </tr>
                     </table>
                 </div>

@@ -6,10 +6,9 @@
         </div>
 
         <div class='searchPanel clearfix'>
-            <div class="col3">
+            <div class="col2">
                 <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
-                <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
             </div>
             <div class="col3">
                 <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
@@ -247,6 +246,16 @@ export default {
 </script>
 
 <style scoped>
+    .searchPanel .col2{
+        width:60% !important;
+    }
+    .searchPanel .col3{
+        width:60% !important;
+    }
+    .searchPanel .col4{
+        width:60% !important;
+    }
+
     .navbar{
         height: 75px;
         border-bottom: 1px solid #ddd;

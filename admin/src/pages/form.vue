@@ -67,7 +67,10 @@
                 <le-local-select on label="选择职业" msg="职业必填" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                 <le-radio-list on label="性别" display-name="name" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                 <le-checkbox-list on label="爱好" ref='dialogFavRef' :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
-                <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>                
+                <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
+                <le-editor ref = "editor" :option = "option"></le-editor>    
+                <le-editor ref = "editor2" v-model = "text2"  :option = "option"></le-editor>         
+
             </le-form>
             <div class="dialogBtnContent">
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
@@ -176,7 +179,16 @@ export default {
             },
             jobArray:[],
             sexArray:[],
-            favArray:[]
+            favArray:[],
+            text:"",
+            text2:"",
+            option:{
+                url : "/file/img/upload",
+                fname : "file",
+                analysis:(d) => {
+                    return d.data
+                }
+            }
         }
     },
     methods:{
@@ -185,15 +197,17 @@ export default {
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
-
                 this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
             },1000)
             this.showDialog = true;
+            this.$refs.editor.setValue("dsadasdasdasd");
+
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){
+            
             let res = this.$refs["form2"].validate();
             res.then(d=>{
                 let eee = this.entity;

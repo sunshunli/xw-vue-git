@@ -2,6 +2,7 @@
 
 <template>
     <div class="form-item">
+
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
@@ -35,8 +36,9 @@
                         <tr>
                             <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
                         </tr>
+                        
                         <tr v-for="(item,index) in data" :key="index">
-                            <td :class="x?x.cls:''" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x ? x.day:''}}</td>
+                            <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x?x.day:""}}</td>
                         </tr>
                     </table>
                 </div>
@@ -66,7 +68,7 @@ let _tool = {
      * @returns 第一天是周几:int
      */
     getWeek(year,month){
-        let str = year + "," + month + "," + "01";
+        let str = year + "/" + month + "/" + "01";
         let data = new Date(str);
         return data.getDay();
     },
@@ -131,6 +133,8 @@ let _tool = {
         for(let i=0;i<6;i++){
             let tmp = [];
             for(var k=0;k<7;k++){
+                
+                
                 tmp.push(data[i*7 + k]);
             }
             res.push(tmp);
@@ -172,6 +176,9 @@ export default {
     watch:{
         value(val){
             this.setValue(val);
+        },
+        data(val){
+            
         }
     },
     computed:{
@@ -208,6 +215,9 @@ export default {
             let prevDaylen = week - 1;
             //获取上一个月有多少天
             let prevMonthDays = _tool.getPrevMonthDays(year,month);
+            
+
+
             let allData = [];
             //push上个月填充的数据
             for(let i = prevDaylen;i>0;i--){

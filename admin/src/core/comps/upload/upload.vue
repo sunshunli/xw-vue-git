@@ -183,6 +183,11 @@ import CommonUtil from '../../tool/commonUtil';
                 })
                 this.srcs = tmp;
                 this.$emit('input',this.getNames(this.srcs));
+            },
+            //单独重写reset方法,不调用父组件的reset
+            reset(){
+                this.$emit('input',"");
+                this.srcs = [];
             }
         },
         mounted(){

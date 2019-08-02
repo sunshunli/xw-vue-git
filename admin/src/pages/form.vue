@@ -49,9 +49,9 @@
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                 </div>
                 <div class="col3 col_label">
-                    <le-time-picker label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+                    <le-time-picker on required label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                     <div class="middleClass">至</div>
-                    <le-date-time-picker label="结束时间" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                    <le-date-time-picker on required label="结束时间" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
                 </div>
                 <div class="col4 col_label">
                     <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>

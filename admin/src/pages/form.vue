@@ -268,6 +268,7 @@ export default {
     }
     .searchPanel .col4{
         width:60% !important;
+        align-items: center;
     }
 
     .navbar{
@@ -315,7 +316,7 @@ export default {
     }
 
     .form-item /deep/ label{
-        width: 120px !important;
+        width: 94px !important;
         margin-right: 10px;
     }
 

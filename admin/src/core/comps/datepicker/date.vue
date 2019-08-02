@@ -531,7 +531,7 @@ height: 34px; line-height: 34px; font-size: 14px;
 height: 28px; line-height: 28px; font-size: 12px;
 }
 
- .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;
+ .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;min-width: 130px;
 }
 .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
@@ -539,7 +539,7 @@ height: 28px; line-height: 28px; font-size: 12px;
 width: 100%;
 height: 40px;
 font-size: 14px; line-height: 40px;
-display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding: 0 8% 0 12%; color: #606266;
+display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding:0 25px 0 25px; color: #606266;
 outline: none;
 text-align: left; }
 form .form-item .form-item-input{ padding: 0 26px;

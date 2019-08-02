@@ -203,7 +203,7 @@ box-sizing: border-box; margin-bottom: 0;
 .medium .form-item .form-item-label{ line-height: normal;
 font-size: 14px;
 }
-.form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%; vertical-align: middle;
+.form-item .form-item-div{min-width: 130px; display: inline-block; line-height: normal; width: 100%; vertical-align: middle;
 }
 form .form-item .form-item-div{ background-color: #fff;flex: 1;
 }

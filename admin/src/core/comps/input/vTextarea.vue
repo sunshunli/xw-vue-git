@@ -109,6 +109,7 @@
         display: inline-block;
         line-height: normal;
         position: relative;
+            flex: 1;
     }
 
     form .form-item .form-item-div{

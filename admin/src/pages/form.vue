@@ -16,6 +16,12 @@
                 <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
                 <le-local-select label="选择职业" :data-source="jobArray" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
+            <div class="col4">
+                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
+                <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
+            </div>
         </div>
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
@@ -32,8 +38,8 @@
             </div>
         </div>
 
-        <le-dialog title="弹出层" height="500" v-model="showDialog" :close-callback="closeDialog">
-            <le-form ref="form2" style="width:600px">
+        <le-dialog title="弹出层" height="505" width="1000" v-model="showDialog" :close-callback="closeDialog">
+            <le-form ref="form2">
                 <div class="col3 col_label">
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
@@ -47,6 +53,12 @@
                     <le-time-picker label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                     <div class="middleClass">至</div>
                     <le-date-time-picker label="结束时间" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                </div>
+                <div class="col4 col_label">
+                    <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                    <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                    <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
+                    <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
                 </div>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></le-input>
                 <le-textarea label="详细地址" msg="正整数22" v-model="entity.content" on></le-textarea>
@@ -281,6 +293,7 @@ export default {
 
     .form-item /deep/ label{
         width: 120px !important;
+        margin-right: 10px;
     }
 
     .le_dialog_box .col3{

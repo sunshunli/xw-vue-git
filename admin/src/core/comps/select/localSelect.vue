@@ -340,6 +340,7 @@
 
     .form-item .form-item-div{
         width: 100%;
+            flex: 1;
     }
 
     .promptMsg{

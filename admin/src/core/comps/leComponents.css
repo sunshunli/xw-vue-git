@@ -21,6 +21,7 @@
     width: 90%;
     display: flex;
     flex-direction: row;
+    align-items: baseline;
 }
 
 .col3 .form-item {
@@ -31,6 +32,23 @@
 }
 
 .col3 .form-item .form-item-div {
+    flex: 1;
+}
+
+.col4 {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.col4 .form-item {
+    display: flex !important;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+}
+
+.col4 .form-item .form-item-div {
     flex: 1;
 }
 

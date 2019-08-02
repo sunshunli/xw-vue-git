@@ -113,6 +113,7 @@
         line-height: normal;
         width: 100%;
         position: relative;
+            flex: 1;
     }
 
     form .form-item .form-item-div{

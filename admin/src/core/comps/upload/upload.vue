@@ -1,15 +1,20 @@
 <template>
     <div class="form-item upaload">
-        <div>
+        <div style="display: flex;">
             <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
-            <span  class="input-file">请选择
-            <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
-            <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+
+            <div style="flex:1">
+                <span  class="input-file">请选择
+                <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
+                <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+                <div class="fileList" v-show="srcs.length>0">
+                    <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
+                </div>
+            </div>
+
         </div>
         
-        <div class="fileList" v-show="srcs.length>0">
-            <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
-        </div>
+       
 
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
@@ -220,10 +225,8 @@ import CommonUtil from '../../tool/commonUtil';
 .loading{width:24px;}
 
 .fileList{
-    display: inline-block;
-    vertical-align: middle;
-    width: 80%;
-    margin-left: 19.5%;
+    display: block;
+    width: 100%;
 }
 
 .fileList span{
@@ -238,6 +241,7 @@ import CommonUtil from '../../tool/commonUtil';
     box-sizing: border-box;
     border-color: transparent;
     margin: 7px 0 2px 6px;
+    margin-left: 0;
     background-color: #f0f2f5;
     color: #909399;
     padding-right: 25px;

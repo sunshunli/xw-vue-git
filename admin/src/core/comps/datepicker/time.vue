@@ -352,7 +352,7 @@ box-sizing: border-box; margin-bottom: 0;
 .medium .form-item .form-item-label{ line-height: normal;
 font-size: 14px;
 }
-.form-item .form-item-div{ display: inline-block; line-height: normal; width:100%; vertical-align: middle; position: relative;
+.form-item .form-item-div{     flex: 1; display: inline-block; line-height: normal; width:100%; vertical-align: middle; position: relative;
 }
 
  .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;

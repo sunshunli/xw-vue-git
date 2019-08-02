@@ -205,7 +205,7 @@ font-size: 14px;
 }
 .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%; vertical-align: middle;
 }
-form .form-item .form-item-div{ background-color: #fff;
+form .form-item .form-item-div{ background-color: #fff;flex: 1;
 }
 .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }

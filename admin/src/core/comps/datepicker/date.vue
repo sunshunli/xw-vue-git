@@ -521,7 +521,7 @@ height: 34px; line-height: 34px; font-size: 14px;
 height: 28px; line-height: 28px; font-size: 12px;
 }
 
- .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;
+ .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;
 }
 .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }

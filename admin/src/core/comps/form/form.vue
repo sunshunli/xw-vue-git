@@ -190,6 +190,7 @@ export default {
         line-height: normal;
         width: 35%;
         vertical-align: top;
+        flex: 1;
     }
 
     .formStyle .requireed::before{

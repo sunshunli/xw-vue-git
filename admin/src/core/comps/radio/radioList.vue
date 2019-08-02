@@ -150,6 +150,7 @@ export default {
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
+            flex: 1;
     }
     .requireed::before{
         content: "*";

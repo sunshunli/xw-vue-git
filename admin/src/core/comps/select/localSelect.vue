@@ -5,7 +5,7 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags">
-                <i v-show="multiple != undefined?true:false" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+                <i v-show="multiple != undefined?true:false" class="fa fa-angle-down fa-times-circle icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
@@ -351,5 +351,9 @@
         text-align: left;
         position: absolute;
         margin: 0;
+    }
+
+    .tags .fa-angle-down:hover::before{
+            content: "\F057";
     }
 </style>

@@ -4,8 +4,8 @@
         <label class="form-item-label" :class="$attrs.on!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
-			<div class="tags">
-                <i v-show="multiple != undefined?true:false" class="fa fa-angle-down fa-times-circle icon-del" @click.stop="clear"></i>
+			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
+                <i v-show="multiple != undefined?true:false" :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
@@ -49,7 +49,8 @@
             },
             searchName:"",
             data:[],
-            showButtom:false
+            showButtom:false,
+            inputIcon:'',
         }
     },
     computed:{
@@ -227,7 +228,17 @@
                     this.$attrs.setVerifyCompState();
                 }
             },0)
-        }
+        },
+        hideArr(){
+            this.inputIcon = "";
+        },
+        showArr(){
+            if(this.leftArray.length > 0){
+                this.inputIcon = "fa-times-circle";
+            }else{
+                this.inputIcon = "";
+            }
+        },
     },
     mounted(){
         /**
@@ -353,7 +364,13 @@
         margin: 0;
     }
 
-    .tags .fa-angle-down:hover::before{
+    /* .tags .fa-angle-down:hover::before{
             content: "\F057";
+    } */
+
+    .searchMulSelect .fa-chevron-down.fa-times-circle:before{
+        content: "\F057";
     }
+
+
 </style>

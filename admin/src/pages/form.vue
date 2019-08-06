@@ -49,9 +49,9 @@
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                 </div>
                 <div class="col3 col_label">
-                    <le-time-picker on required label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+                    <le-time-picker on label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                     <div class="middleClass">至</div>
-                    <le-date-time-picker on required label="结束时间" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                    <le-date-time-picker on msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
                 </div>
                 <div class="col4 col_label">
                     <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
@@ -68,9 +68,7 @@
                 <le-radio-list on label="性别" display-name="name" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                 <le-checkbox-list on label="爱好" ref='dialogFavRef' :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                 <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
-                <le-editor ref = "editor" :option = "option"></le-editor>    
-                <le-editor ref = "editor2" v-model = "text2"  :option = "option"></le-editor>         
-
+                <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :option = "option"></le-editor>    
             </le-form>
             <div class="dialogBtnContent">
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
@@ -79,7 +77,6 @@
         </le-dialog>
     </div>
 </template>
-
 <script>
 
 let _data = [
@@ -200,8 +197,7 @@ export default {
                 this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
             },1000)
             this.showDialog = true;
-            this.$refs.editor.setValue("dsadasdasdasd");
-
+            this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();

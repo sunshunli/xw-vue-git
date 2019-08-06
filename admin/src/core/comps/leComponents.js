@@ -39,7 +39,7 @@ export default{
         Vue.component('LeDialog',LeDialog);
         Vue.component('LeForm',LeForm);
         Vue.component("LeLoading",LeLoading);
-        Vue.component("LeEditor",LeEditor);
+        Vue.component("LeEditor",ValidataHOC(LeEditor));
 
         Vue.use(LeAlert);
     }

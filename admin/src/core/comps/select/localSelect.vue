@@ -5,7 +5,7 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
-                <i v-show="multiple != undefined?true:false" :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
+                <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				

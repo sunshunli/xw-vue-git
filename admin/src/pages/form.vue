@@ -260,7 +260,7 @@ export default {
         width:60% !important;
     }
     .searchPanel .col3{
-        width:60% !important;
+        width:80% !important;
     }
     .searchPanel .col4{
         width:60% !important;

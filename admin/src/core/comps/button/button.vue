@@ -1,5 +1,5 @@
 <template>
-    <span @click.stop="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span @click.stop="clickHandle" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
 </template>
 <script>
 
@@ -48,6 +48,11 @@ export default {
         }
     },
     methods:{
+        clickHandle(){
+            if(!this.disabled){
+                this.$emit('click')
+            }
+        }
     },
     mounted(){
         // console.log(this.$slots);

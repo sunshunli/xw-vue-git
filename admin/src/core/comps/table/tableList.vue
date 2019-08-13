@@ -7,6 +7,8 @@
         </table>
 
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
+
+        <div v-show='isLoading' class="tableMask"></div>
     </div>
 </template>
 
@@ -34,7 +36,9 @@
                     },
                 },
                 //body部分没有数据的情况下，显示无数据
-                showNoResult:false
+                showNoResult:false,
+                //在上一次请求没有完成之前，不允许发送下一次请求
+                isLoading:false
             }
         },
         computed:{
@@ -60,6 +64,10 @@
              * @returns
              */
             getData:function(index){
+                if(this.isLoading){
+                    return;
+                }
+                this.isLoading = true;
                 if(!index){
                     index = 1;
                 }
@@ -71,6 +79,7 @@
                 let size = this.state.pageOption.size;
                 url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
                 this.ajax.getFetch(url).then(data=>{
+                    this.isLoading = false;
                     let res = {};
                     if(this.options.analysis){
                         res = this.options.analysis(data);
@@ -116,6 +125,7 @@
                 }).catch(e=>{
                     this.alert.showAlert("error","列表数据加载失败!");
                     this.showNoResult = true;
+                    this.isLoading = false;
                 })
             },
             /**
@@ -232,10 +242,22 @@
     }
 </script>
 <style scoped>
+    
     .tableContainer{
         overflow-x: scroll;
         display: block;
         min-width: 100%;
+        position: relative;
+    }
+
+    .tableContainer .tableMask{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left:0;
+        background: rgba(0, 0, 0, 0.8);
+        display: block;
     }
 
     .tableContainer .table-title{

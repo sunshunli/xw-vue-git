@@ -8,7 +8,9 @@
 
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
 
-        <div v-show='isLoading' class="tableMask"></div>
+        <div v-show='isLoading' class="tableMask">
+            <img class="tableLoadingImg" src="../../../static/images/tableLoading1.gif"/>
+        </div>
     </div>
 </template>
 
@@ -270,6 +272,10 @@
         background-color: #434e5b;
         font-size: 14px;
         color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
     }
 
     .table{
@@ -277,7 +283,6 @@
         width: auto;
         border-collapse: collapse;
         font-size: 14px;
-        /* border-radius: 6px 6px 0 0; */
         overflow: hidden;
         margin-bottom: 0px;
     }
@@ -294,5 +299,12 @@
         height: 38px;
         line-height: 38px;
         font-size: 12px;
+    }
+
+    .tableMask .tableLoadingImg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>

@@ -89,7 +89,11 @@ export default {
          * @return
          */
         setValue(vals){
-            vals?vals = vals.toString():vals="";
+            if(!!val){
+                val = "";
+            }else{
+                val = val.toString()
+            }
             if(!vals){
                 this.data.forEach(item=>{
                     item.ck = false;

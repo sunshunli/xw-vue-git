@@ -75,11 +75,7 @@ export default {
          * @returns
          */
         setValue(val){
-            if(!!val){
-                val = "";
-            }else{
-                val = val.toString()
-            }
+            val!=null && val!=undefined?val=val.toString():val="";
             this.resetData();
             if(val){
                 this.data.forEach(item=>{

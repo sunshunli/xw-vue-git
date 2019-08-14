@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "le_dialog_mask" v-show="value" :class="{show_le_dialog_mask:value}">
+    <div class = "le_dialog_mask" v-show="value" :class="valueCls">
         <!-- width height margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
@@ -30,6 +30,13 @@ export default {
             return {
                 width:this.width?this.width + "px" : 700 + "px",
                 height:this.height?this.height + "px" : 300 + "px",
+            }
+        },
+        valueCls(){
+            if(this.value){
+                return "show_le_dialog_mask";
+            }else{
+                return "";
             }
         }
     },

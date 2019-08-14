@@ -252,6 +252,7 @@
     position: relative;
     max-width: 230px;
     overflow: hidden;
+    max-width: 5px;
 }
 
 .fileList span a{

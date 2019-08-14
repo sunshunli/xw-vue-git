@@ -1,9 +1,6 @@
 /**
  * Created by wupeng5 on 2018/2/1.
  */
-import q from "q";
-import $ from "jquery";
-const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
 let CommonUtil = {
     throwError:function(str){
         console.log(str);
@@ -409,4 +406,4 @@ let CommonUtil = {
     }
 }
 
-export default CommonUtil
+export default CommonUtil;

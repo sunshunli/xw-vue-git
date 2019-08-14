@@ -14,7 +14,7 @@
 
 <script>
 
-import CommonUtil from "../../tool/commonUtil.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"LeCheckboxList",
@@ -50,7 +50,7 @@ export default {
          * @returns
          */
         init(data){
-            this.data = CommonUtil.object.addPrimaryAndCk(data);
+            this.data = tool.object.addPrimaryAndCk(data);
         },
         /**
          * @description checkbox的change事件 会触发checkboxList的change回调
@@ -73,7 +73,7 @@ export default {
          * @returns
          */
         getCheckedItems(){
-            return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
+            return tool.object.getCheckedItems(this.data,this.displayValue);
         },
         /**
          * @description 对外暴露getValue方法

@@ -1,40 +1,45 @@
 <template>
     <tbody>
-        <tr v-for="(row,index) in data" @click="e=>selectRow(row,e)" :key="index">
-            <td v-if="showCk">
-                <div v-if="singleSelected">
-                    <input :name="radioKey" type="radio" :checked="row.ck"/>
-                </div>
-                <div v-else>
-                    <input type="checkbox" :checked="row.ck" />
-                </div>
-            </td>
-            <td class="opration" v-if="actions && actions.length != 0">
-                <div v-for="(x,i) in actions" class="btnContent" :key="i">
-                     <!-- <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button> -->
-                    <le-button v-if="actionShowFn(x,row)" :type="x.key" @click="e=>{x.action(row)}" :value="x.val"></le-button>
-                </div>
-            </td>
-            
-            <td v-for="(item,idx) in cols" :key="idx">
-                <div v-if="item.etype == 'img'">
-                    <img style="width:50px;height:50px;" v-bind:src="row[item.key]" />
-                </div>
-                <div v-else>
-                    <a v-if="item.convert && item.action" @click.prevent="e=>item.action(row,item)">
-                    {{item.convert(item,row)}}
-                    </a>
-                    <span v-if="item.convert && !item.action">
+        <template v-if="!showNoResult">
+            <tr v-for="(row,index) in data" @click="e=>selectRow(row,e)" :key="index">
+                <td v-if="showCk">
+                    <div v-if="singleSelected">
+                        <input :name="radioKey" type="radio" :checked="row.ck"/>
+                    </div>
+                    <div v-else>
+                        <input type="checkbox" :checked="row.ck" />
+                    </div>
+                </td>
+                <td class="opration" v-if="actions && actions.length != 0">
+                    <div v-for="(x,i) in actions" class="btnContent" :key="i">
+                        <!-- <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button> -->
+                        <le-button v-if="actionShowFn(x,row)" :type="x.key" @click="e=>{x.action(row)}" :value="x.val"></le-button>
+                    </div>
+                </td>
+                
+                <td v-for="(item,idx) in cols" :key="idx">
+                    <div v-if="item.etype == 'img'">
+                        <img style="width:50px;height:50px;" v-bind:src="row[item.key]" />
+                    </div>
+                    <div v-else>
+                        <a v-if="item.convert && item.action" @click.prevent="e=>item.action(row,item)">
                         {{item.convert(item,row)}}
-                    </span>
-                    <a v-if="!item.convert && item.action" @click.prevent="e=>item.action(row,item)">
-                        {{getValByFieldInRow(item,row)}}
-                    </a>
-                    <span v-if="!item.convert && !item.action">
-                        {{getValByFieldInRow(item,row)}}
-                    </span>
-                </div>
-            </td>
+                        </a>
+                        <span v-if="item.convert && !item.action">
+                            {{item.convert(item,row)}}
+                        </span>
+                        <a v-if="!item.convert && item.action" @click.prevent="e=>item.action(row,item)">
+                            {{getValByFieldInRow(item,row)}}
+                        </a>
+                        <span v-if="!item.convert && !item.action">
+                            {{getValByFieldInRow(item,row)}}
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </template>
+        <tr v-show="showNoResult" style="text-align:center;width:100%;color:#333;">
+            <td :colspan="getAllCols">暂无数据</td>
         </tr>
     </tbody>
 </template>
@@ -44,14 +49,26 @@
     
     export default {
         name: "BodySection",
-        props:["actions","data","cols","accpetHBNotice","showCk","singleSelected"],
+        props:["actions","data","cols","accpetHBNotice","showCk","singleSelected","showNoResult"],
         data(){
             return {
-                radioKey:_idSeed.newId(),
+                radioKey:_idSeed.newId()
             }
         },
         computed:{
-            
+            getAllCols(){
+                let count = 0;
+                if(this.showCk){
+                    count++;
+                }
+                if(this.actions && this.actions.length>0){
+                    count = count + this.actions.length;
+                }
+                if(this.cols && this.cols.length >0){
+                    count = count + this.cols.length;
+                }
+                return count;
+            }
         },
         mounted(){
             
@@ -110,6 +127,7 @@
         }
     }
 </script>
+
 <style scoped>
     .tableList .relative{
         position: relative;
@@ -120,43 +138,36 @@
     .btnCls{
         margin:0 5px;
     }
-
     tbody tr td{color: rgba(0,0,0,0.65);border: 1px solid #ddd;vertical-align: middle;text-align: center; }
-    
     .btn{
         /* margin: 0 5px; */
         border-radius: 4px;
         padding: 2px 10px;
     }
-
     button.edit{
         background-color: #409eff;
     } 
 
-   button.delete{
+    button.delete{
         background-color: #f56c6c;
     } 
     .bg-gray{
         background-color: #fafafa;
     }
+    /* 新Btn样式 */ 
+    button.btn{
+        border:none;
+    }
 
+    .btnContent{
+            width: auto;
+        height: auto;
+        display: inline-block;
+    }
 
-
-/* 新Btn样式 */ 
-
-button.btn{
-    border:none;
-}
-
-.btnContent{
-        width: auto;
-    height: auto;
-    display: inline-block;
-}
-
-.opration{
-    /* text-align: left; */
-    white-space: nowrap;
-}
+    .opration{
+        /* text-align: left; */
+        white-space: nowrap;
+    }
 
 </style>

@@ -18,7 +18,7 @@
     import HeaderSection from "./header.vue";
     import BodySection from "./body.vue";
     import PagingSection from "./paging.vue";
-    import Util from "../../tool/commonUtil.js";
+    import tool from "../leCompsTool.js";
     
     export default {
         components: {HeaderSection,BodySection,PagingSection},
@@ -45,7 +45,7 @@
         },
         computed:{
             originCols:function(){
-                return Util.object.cloneObj(this.options.map);
+                return tool.object.cloneObj(this.options.map);
             },
             showCk:function(){
                 return this.options.showCk;
@@ -89,7 +89,7 @@
                         res = data;
                     }                    
                     if(res.data && res.data instanceof Array && res.data.length != 0){
-                        let arr = Util.object.addPrimaryAndCk(res.data);
+                        let arr = tool.object.addPrimaryAndCk(res.data);
                         let total = -1;
                         if(parseInt(res.count)%size == 0){
                             total = parseInt(res.count)/size;

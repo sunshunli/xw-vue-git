@@ -14,7 +14,7 @@
 
 import TreeItem from "./localTreeItem.vue";
 import CommonUtil from '../../tool/commonUtil.js';
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 import _treeTool from "./treePrivateMethods.js";
 
 export default {

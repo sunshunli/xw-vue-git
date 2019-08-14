@@ -228,330 +228,166 @@ export default {
 }
 </script>
 
-<style scoped>
-ul,li{
-    padding:0;
-    margin: 0;
-    list-style: none;
+ <style scoped> ul,li{
+padding:0; margin: 0; list-style: none;
 }
-
 li{
-    height: 32px;
-    line-height: 32px;
+height: 32px; line-height: 32px;
 }
-
 .timeContent{
-    /* max-width: 200px; */
-    height: auto;
-    width:100%;
-    display: inline-block;
-    margin: 5px 20px;
-    vertical-align: middle;
-    position: relative;
+height: auto; display: inline-block; margin: 5px 20px; position: relative;
 }
-
-.timeContent .searchBar{
-    /* max-width: 200px; */
-    width:100%;
-    height: 40px;
-    position: relative;
-    cursor: pointer;
+.timeContent .searchBar{ width:100%;
+height: 40px;
+position: relative; cursor: pointer;
 }
-
-.timeContent .searchBar i{
-    position: absolute;
-    top: 12px;
-    /* left: 10px; */
-    color: #c0c4cc;
-    font-weight: normal;
+.timeContent .searchBar i{ position: absolute;
+top: 12px;
+color: #c0c4cc; font-weight: normal;
 }
 .timeContent .searchBar .clock{
-    left:10px;
+left:10px; }
+.timeContent .searchBar .clearTime{ right: 8px;
+position: absolute; top: 12px;
+color: #c0c4cc; cursor: pointer;
 }
-.timeContent .searchBar .clearTime{
-    right: 8px;
-    position: absolute;
-    top: 12px;
-    color: #c0c4cc;
-    cursor: pointer;
-}
+.timeContent .timeInput{ -webkit-appearance: none; background-color: #fff; background-image: none; border-radius: 4px;
+border: 1px solid #dcdfe6; box-sizing: border-box; color: #606266;
+display: inline-block; font-size: inherit;
+height: 40px;
+line-height: 40px;
+outline: none;
+padding: 0 26px;
+transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
+text-align: left; }
+.timeContent .timePicker{ display: none;
+width: 199px;
+height: auto;
+margin: 0 auto;
+background-color: #fff;
+box-shadow: 0 2px 12px 0 rgba(0,0,0,.1); border-radius: 2px;
+position: absolute;
+left: 0;
 
-.timeContent .timeInput{
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 26px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    /* max-width: 200px; */
-    width:100%;
-    text-align: left;
+ z-index: 1000; user-select: none; box-sizing: content-box; margin-top:3px;
 }
-
-.timeContent .timePicker{
-    display: none;
-    width: 199px;
-    height: auto;
-    margin: 0 auto;
-    background-color: #fff;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-    border-radius: 2px;
-    position: absolute;
-    left: 0;
-    z-index: 1000;
-    user-select: none;
-    box-sizing: content-box;
-    margin-top:3px;
-    /* margin-left: 8px; */
+.timeContent .timePicker .timePanel{ height: 190px;
+margin: 0 auto;
+overflow: hidden;
+position: relative; }
+.timeContent .timePicker .timePanel::before{ content: "";
+top: 41%;
+position: absolute;
+height: 32px;
+z-index: -1;
+left: 0;
+right: 0;
+box-sizing: border-box; padding-top: 6px;
+text-align: left;
+border-top: 1px solid #e4e7ed; border-bottom: 1px solid #e4e7ed; padding: 0;
 }
-
-.timeContent .timePicker .timePanel{
-    height: 190px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
+.timeContent .timePicker .timePanel div{ height: 100%;
+float: left;
+text-align: center;
+color: #606266; font-weight: normal; font-size: 14px; width: 32%;
 }
-
-.timeContent .timePicker .timePanel::before{
+.timePicker .timePanel div li{
+width: 60px; height: 30px; line-height: 30px; text-align: center; color: #606266;
+}
+.timeContent .timePicker .timePanel div ul::before{ 
     content: "";
-    top: 41%;
-    position: absolute;
-    height: 32px;
-    z-index: -1;
-    left: 0;
-    right: 0;
-    box-sizing: border-box;
-    padding-top: 6px;
-    text-align: left;
-    border-top: 1px solid #e4e7ed;
-    border-bottom: 1px solid #e4e7ed;
-    padding: 0;
+display: block;
+width: 100%;
+height: 80px; }
+.timeContent .timePicker .timePanel div ul{ height: 100%;
+padding-bottom: 90px;
+overflow-y: scroll;
 }
-
-.timeContent .timePicker .timePanel div{
-    height: 100%;
-    float: left;
-    text-align: center;
-    color: #606266;
-    font-weight: normal;
-    font-size: 14px;
-    width: 32%;
+.timeContent .timePicker .timePanel div ul::-webkit-scrollbar{ width: 0px;
+height: 10px;
+background-color:transparent;
 }
- .timePicker .timePanel div li{
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: #606266;
-}
-
-.timeContent .timePicker .timePanel div ul::before{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 80px;
-}
-
-.timeContent .timePicker .timePanel div ul{
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.timeContent .timePicker .timePanel div ul::-webkit-scrollbar{
-    width: 0px;
-    height: 10px; 
-    background-color:transparent;
-} 
-
-.timeContent .timePicker .timePanel div ul /deep/ li{
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: #606266;
-}
-
-
+.timeContent .timePicker .timePanel div ul /deep/ li{ width: 60px;
+height: 30px;
+line-height: 30px;
+text-align: center;
+color: #606266; }
 .timeContent .timePicker .timePanel div ul /deep/ li.active{
-    color:#409eff;
-}
 
-.timeContent .timePicker .timeBtnGroup{
-    height: 36px;
-    line-height: 36px;
-    margin: 0 auto;
-    border-top:1px solid #e4e7ed;
-    text-align: right;
+ color:#409eff; }
+.timeContent .timePicker .timeBtnGroup{ height: 36px;
+line-height: 36px;
+margin: 0 auto;
+border-top:1px solid #e4e7ed;
+text-align: right; }
+.timeContent .timePicker .timeBtnGroup span{ width: 46px;
+height: 100%;
+font-size: 12px;
+text-align: center;
+background-color: transparent; border: none;
+outline: none;
+cursor: pointer;
+padding: 0 5px; }
+.timeContent #confirm{ color:#409eff;
 }
-
-.timeContent .timePicker .timeBtnGroup span{
-    width: 46px;
-    height: 100%;
-    text-align: center;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 0 5px;
-}
-
-.timeContent #confirm{
-    color:#409eff;
-}
-
 .timeContent .active{
-    color: #409eff !important;
-    font-size: 16px;
-}
-.timeButtom{
-    text-align: right;
-    width:100%;
-    height:40px;
-    border-top:1px solid #f2f2f2;
-    margin-top:2px;
+color: #409eff !important; font-size: 16px;
+} .timeButtom{
+text-align: right; width:100%;
+height:40px;
+border-top:1px solid #f2f2f2; margin-top:2px;
 }
 .timeButtom button{
-    float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:8px;background:#fff;
-        outline: none;
-        border:1px solid #dcdfe6;
-        border-radius:3px;
+float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:8px;background:#fff; outline: none;
+border:1px solid #dcdfe6;
+border-radius:3px;
+}
+.form-item{ text-align: left; margin:0 0 22px 0;
+}
+.form-item .form-item-label{ height: auto;
+text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
+color: #606266; line-height: normal; padding: 0;
+box-sizing: border-box; margin-bottom: 0;
+}
+.medium .form-item .form-item-label{ line-height: normal;
+font-size: 14px;
+}
+.form-item .form-item-div{  min-width: 130px;   flex: 1; display: inline-block; line-height: normal; width:100%; vertical-align: middle; position: relative;
 }
 
-.form-item{
-    width:32%;
-    float: left;
-    text-align: left;
-    margin:0 0 22px 0;
-}
-
-
-.form-item .form-item-label{
-    width: 20%;
-    height: auto;
-    margin-right: 1%;
-    text-align: right;
-    vertical-align: middle;
-    display: inline-block;
-    font-size: 14px;
-    color: #606266;
-    line-height: normal;
-    padding: 0;
-    box-sizing: border-box;
-    margin-bottom: 0;
-    /* max-width: 120px; */
-}
-
-form .form-item .form-item-label{
-    width: 17%;
-}
-.medium .form-item .form-item-label{
-    /* height: 40px; */
-    line-height: normal;
-    font-size: 14px;
-    width: 17%;
-}
-.small .form-item .form-item-label{
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-}
-.mini .form-item .form-item-label{
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-}
-
-.form-item .form-item-div{
-    display: inline-block;
-    line-height: normal;
-    width: 50%;
-    vertical-align: middle;
-    position: relative;
-}
-
-form .form-item .form-item-div{
-    width: 80%;
-}
-
-.requireed::before{
-    content: "*";
-    color: #f56c6c;
-    font-size: 12px;
-    margin-right: 2px;
+ .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 .form-item .form-item-input{
-    width: 100%;
-    height: 40px;
-    font-size: 14px;
-    line-height: 40px;
-    display: inline-block;
-    border: 1px solid #dcdfe6;
-    border-radius: 5px;
-    padding: 0 8% 0 4%;
-    color: #606266;
-    outline: none;
-}
-.form-item .form-item-input:focus{
-    border: 1px solid #409eff;
-    outline: none;
+width: 100%;
+height: 40px;
+font-size: 14px; line-height: 40px;
+display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding: 0 8% 0 4%; color: #606266;
+outline: none; }
+.form-item .form-item-input:focus{ border: 1px solid #409eff; outline: none;
 }
 .medium .form-item .form-item-input{
-    height: 40px;
-    line-height: 40px;
-    font-size: 14px;
+height: 40px; line-height: 40px; font-size: 14px;
 }
 .small .form-item .form-item-input{
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
+height: 34px; line-height: 34px; font-size: 14px;
 }
 .mini .form-item .form-item-input{
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
+height: 28px; line-height: 28px; font-size: 12px;
 }
-
-.form-item .promptMsg{
-    font-size: 12px;
-    color: #f56c6c;
-    line-height: 20px;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    margin-top: -5px;
+.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; margin: 0;
+padding: 0;
+margin-top: -5px; }
+.fa-check-circle-o .timeInput{ border: 1px solid #67c23a;
 }
-
-.fa-check-circle-o .timeInput{
-    border: 1px solid #67c23a;
+.fa-times-circle-o .timeInput{ border: 1px solid #f56c6c;
 }
-
-.fa-times-circle-o .timeInput{
-    border: 1px solid #f56c6c;
+.picker-header .ipt .form-item .form-item-label{ display: none;
 }
-
-.picker-header .ipt .form-item .form-item-label{ 
-    display: none;
+.picker-header .medium .ipt .form-item .form-item-label{ display: none;
 }
-
-.picker-header .medium .ipt .form-item .form-item-label{
-        display: none;
+.ipt .form-item .form-item-div{ width:100%;
 }
+.ipt .timeContent .timeInput{ text-align: center;
+} </style>
 
-.ipt .form-item .form-item-div{
-    width:100%;
-}
-
-.ipt .timeContent .timeInput{
-    text-align: center;
-}
-
-
-</style>
+ 

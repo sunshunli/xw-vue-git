@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import CommonUtil from '../../tool/commonUtil.js';
+    import tool from '../leCompsTool.js';
     import LeftSection from "./left.vue";
     import ButtomSection from "./buttom.vue";
 
@@ -67,7 +67,7 @@
             return this.data;
         },
         leftArray(){
-            return CommonUtil.object.getCheckedItems(this.data).items;
+            return tool.object.getCheckedItems(this.data).items;
         },
         readonlyFlag(){
             if(this.readonly == undefined || this.readonly == false){
@@ -135,8 +135,8 @@
          * @returns 
          */
         init(data){
-            let tmp = CommonUtil.object.cloneObj(data);
-            this.data = CommonUtil.object.addPrimaryAndCk(tmp);
+            let tmp = tool.object.cloneObj(data);
+            this.data = tool.object.addPrimaryAndCk(tmp);
         },
         /**
          * @description 组件验证以及分发change事件
@@ -194,7 +194,7 @@
          * @returns items:所选的对象数组，vals:所选的值集合
          */
         getSelectedItems(){
-            return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
+            return tool.object.getCheckedItems(this.data,this.displayValue);
         },
         /**
          * @description 获取选中项的displayValue的集合

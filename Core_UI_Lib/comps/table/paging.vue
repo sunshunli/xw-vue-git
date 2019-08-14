@@ -60,7 +60,6 @@
         }
     }
 </script>
-
 <style scoped>
     .button{
         cursor: pointer;
@@ -114,14 +113,8 @@
         padding: 0 5px;border-radius: 6px;outline: none;
     }
 
-    /* .span{   border:1px #fff solid!important; } */
-    /* .span:hover{
-        background-color:#fff!important;
-    } */
-
     .button:hover{
         background-color: rgba(0,0,0,0.5);
     }
 
 </style>
-

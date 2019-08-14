@@ -1,9 +1,9 @@
 <template>
-    <span @click.stop="$emit('click')" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span @click.stop="clickHandle" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
 </template>
 <script>
 
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 
 export default {
     name:"LeButton",
@@ -48,6 +48,11 @@ export default {
         }
     },
     methods:{
+        clickHandle(){
+            if(!this.disabled){
+                this.$emit('click')
+            }
+        }
     },
     mounted(){
         // console.log(this.$slots);

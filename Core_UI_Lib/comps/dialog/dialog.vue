@@ -86,7 +86,7 @@ export default {
         padding: 20px 35px;
         border-radius: 3px;
         min-width: 400px;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
     }
 
     /* 上面部分 */
@@ -143,7 +143,6 @@ export default {
     .le_dialog_contine::-webkit-scrollbar{
         width: 1px;
         height:10px;
-        /* background-color:transparent; */
     }
     /* ie */
     .le_dialog_contine{
@@ -153,10 +152,8 @@ export default {
         -ms-scroll-rails: none;
         -ms-content-zoom-limit-min: 100%;
         -ms-content-zoom-limit-max: 500%;
-        /* -ms-scroll-snap-type: proximity; */
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
-        /* overflow: auto; */
         overflow: scroll;
         height: 90%;
     }
@@ -201,11 +198,8 @@ export default {
         width:100%;
     }
 
-    .le_dialog_box /deep/ .form-item .form-item-label{
-        width: 17%;
-    }
-
-    .le_dialog_box /deep/ .form-item .form-item-div{
-        width: 70%;
+    .le_form_row /deep/ .form-item .form-item-label{
+        width: 100px;
+        margin-right: 10px;
     }
 </style>

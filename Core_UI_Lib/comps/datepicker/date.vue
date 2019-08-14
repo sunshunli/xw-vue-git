@@ -2,6 +2,7 @@
 
 <template>
     <div class="form-item">
+
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
@@ -35,8 +36,9 @@
                         <tr>
                             <th v-for="(item,index) in Weeks" :key="index">{{item}}</th>
                         </tr>
+                        
                         <tr v-for="(item,index) in data" :key="index">
-                            <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x.day}}</td>
+                            <td :class="x.cls" v-for="(x,idx) in item" :key="idx" @click.stop="selectItem(x)">{{x?x.day:""}}</td>
                         </tr>
                     </table>
                 </div>
@@ -66,7 +68,7 @@ let _tool = {
      * @returns 第一天是周几:int
      */
     getWeek(year,month){
-        let str = year + "," + month + "," + "01";
+        let str = year + "/" + month + "/" + "01";
         let data = new Date(str);
         return data.getDay();
     },
@@ -131,6 +133,8 @@ let _tool = {
         for(let i=0;i<6;i++){
             let tmp = [];
             for(var k=0;k<7;k++){
+                
+                
                 tmp.push(data[i*7 + k]);
             }
             res.push(tmp);
@@ -139,7 +143,7 @@ let _tool = {
     }
 }
 
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
@@ -172,6 +176,9 @@ export default {
     watch:{
         value(val){
             this.setValue(val);
+        },
+        data(val){
+            
         }
     },
     computed:{
@@ -208,6 +215,9 @@ export default {
             let prevDaylen = week - 1;
             //获取上一个月有多少天
             let prevMonthDays = _tool.getPrevMonthDays(year,month);
+            
+
+
             let allData = [];
             //push上个月填充的数据
             for(let i = prevDaylen;i>0;i--){
@@ -437,266 +447,130 @@ export default {
 }
 </script>
 
-<style scoped>
-    * {
-        margin: 0;
-        padding: 0;
+ <style scoped> 
+ *{
+    margin: 0; padding: 0;
+} 
+body {
+height: 10000px; 
+}
+form .form-item .form-item-div .div-box { 
+    width:100%;
+height: 40px;
+position: relative;
+cursor: pointer;
+display: inline-block; }
+.div-box i {
+position: absolute; top: 12px;
+color: #c0c4cc; font-weight: normal; cursor: pointer;
+}
+.div-box .icon-date{ left:10px;
+}
+.div-box .icon-del {
+right:8px; }
+.date {
+-webkit-appearance: none;
+background-color: #fff; background-image: none; border-radius: 4px; border: 1px solid #dcdfe6; box-sizing: border-box; color: #606266;
+display: inline-block;
+font-size: inherit;
+height: 40px;
+line-height: 40px;
+outline: none;
+padding: 0 26px;
+transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
+text-align: center; }
+.picker-box {
+width: 330px;
+margin-top: 4px;
+position: absolute;
+background:#fff;
+box-shadow: 0 2px 12px 0 rgba(0,0,0,.1); z-index:999
+}
+/* 选择器器头部 */ .picker-header {
+display: flex;
+width: 100%;
+border-bottom: 1px solid #aeaeae; line-height: 2em;
+}
+.picker-header .hearderText { flex: 1;
+text-align: center; }
+.picker-header button {
 
-    }
+ padding-left: 5px; padding-right: 5px;
+border: 0;
+background-color: transparent; outline: none;
+}
+/* 选择器器部分 */ .picker-body {
+width: 100%;
+display: inline-block; }
+.picker-body table { text-align: center; width: 100%; line-height: 26px;
+}
+.picker-body table th { text-align: center;
+}
+.picker-body table td { cursor: pointer;
+}
+.picker-body table td.disable { background: #f0f0f0 !important; color: #cbcbcb !important;
+}
+.picker-body table td.current { background: #4fbba0 !important; color: #fff !important;
+}
+.picker-body table td:hover { background: #f55;
+color: #fff;
+} .form-item{
+display: inline-block; text-align: left; margin:0 0 22px 0;
+}
+.form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
+color: #606266; line-height: normal; padding: 0;
+box-sizing: border-box; margin-bottom: 0;
+}
+.medium .form-item .form-item-label{ line-height: normal;
+font-size: 14px;
+}
+.small .form-item .form-item-label{
+height: 34px; line-height: 34px; font-size: 14px;
+}
+.mini .form-item .form-item-label{
+height: 28px; line-height: 28px; font-size: 12px;
+}
 
-    body {
-        height: 10000px;
-    }
+ .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;min-width: 130px;
+}
+.requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+}
+.form-item .form-item-input{
+width: 100%;
+height: 40px;
+font-size: 14px; line-height: 40px;
+display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding:0 25px 0 25px; color: #606266;
+outline: none;
+text-align: left; }
+form .form-item .form-item-input{ padding: 0 26px;
+}
+.form-item .form-item-input:focus{
+border: 1px solid #409eff;
+outline: none; }
+.medium .form-item .form-item-input{ height: 40px;
+line-height: 40px;
+font-size: 14px;
+width: 100%;
+text-align: left; }
+.small .form-item .form-item-input{ height: 34px;
+line-height: 34px;
+font-size: 14px;
+}
+.mini .form-item .form-item-input{
+height: 28px; line-height: 28px; font-size: 12px;
+}
+.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute;
+}
+.fa-check-circle-o .form-item-input{ border: 1px solid #67c23a;
+}
+.fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
+}
+.fa-times-circle-o:before{ content:'';
+}
+.fa-check-circle-o:before{ content:'';
+}
 
-    /* 
-        box 
-    */
-    form .form-item .form-item-div .div-box {
-        /* max-width: 200px; */
-        width:100%;
-        height: 40px;
-        position: relative;
-        cursor: pointer;
-        display: inline-block;
-        /* margin: 5px 20px; */
-    }
-    .div-box i {
-        position: absolute;
-        top: 12px;
-        color: #c0c4cc;
-        font-weight: normal;
-        cursor: pointer;
-    }
-
-    .div-box .icon-date{
-        left:10px;
-    }
-    .div-box .icon-del {
-        right:8px;
-    }
-    /* 
-        date选择器
-    */
-    .date {
-       -webkit-appearance: none;
-        background-color: #fff;
-        background-image: none;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-        box-sizing: border-box;
-        color: #606266;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: none;
-        padding: 0 26px;
-        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        /* max-width: 200px; */
-        width:100%;
-        text-align: center;
-    }
-
-    .picker-box {
-        /* display: inline-block; */
-        /* width: 290px; */
-        width: 330px;
-        /* border: 1px solid #aeaeae; */
-        /* box-sizing: border-box; */
-        margin-top: 4px;
-        position: absolute;
-        /* left:-100px; */
-        background:#fff;
-        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-        z-index:999
-        
-    }
-    /* 选择器头部 */
-    .picker-header {
-        display: flex;
-        /* display: inline-block; */
-        width: 100%;
-        border-bottom: 1px solid #aeaeae;
-        line-height: 2em;
-
-    }
-
-    .picker-header .hearderText {
-        flex: 1;
-        text-align: center;
-    }
-
-    .picker-header button {
-        padding-left: 5px;
-        padding-right: 5px;
-        border: 0;
-        background-color: transparent;
-        outline: none;
-    }
-
-
-    /* 选择器部分 */
-    .picker-body {
-        width: 100%;
-        /* padding: 6px; */
-        display: inline-block;
-    }
-
-    .picker-body table {
-        text-align: center;
-        width: 100%;
-        line-height: 2em;
-    }
-
-    .picker-body table th {
-        text-align: center;
-    }
-
-    .picker-body table td {
-        cursor: pointer;
-    }
-
-    .picker-body table td.disable {
-        background: #f0f0f0 !important;
-        color: #cbcbcb !important;
-    }
-
-    .picker-body table td.current {
-        background: #4fbba0 !important;
-        color: #fff !important;
-    }
-
-    .picker-body table td:hover {
-        background: #f55;
-        color: #fff;
-    }
-
-
-
-    .form-item{
-        width: 32%;
-        float: left;
-        text-align: left;
-        margin:0 0 22px 0;
-    }
-
-    .form-item .form-item-label{
-        width: 20%;
-        margin-right: 1%;
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin-bottom: 0;
-    }
-
-    form .form-item .form-item-label{
-        width: 17%;
-    }
-
-    .medium .form-item .form-item-label{
-        /* height: 40px; */
-        line-height: normal;
-        font-size: 14px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-        width:50% ;
-    }
-
-    form  .form-item .form-item-div{
-        width: 80%;
-    }
-
-    .requireed::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-    }
-    .form-item .form-item-input{
-        width: 100%;
-        height: 40px;
-        font-size: 14px;
-        line-height: 40px;
-        display: inline-block;
-        border: 1px solid #dcdfe6;
-        border-radius: 5px;
-        padding: 0 8% 0 12%;
-        color: #606266;
-        outline: none;
-        text-align: left;
-    }
-    form  .form-item .form-item-input{
-        padding: 0 26px;
-    }
-    .form-item .form-item-input:focus{
-        border: 1px solid #409eff;
-        outline: none;
-    }
-    .medium .form-item .form-item-input{
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-        width: 100%;
-        text-align: left;
-    }
-
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-    }
-
-    .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
-    .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .fa-times-circle-o:before{
-        content:'';
-    }
-
-    .fa-check-circle-o:before{
-        content:'';
-    }
-
-    .picker-header .ipt .form-item .form-item-label{ 
-        display: none;
-    }
-
-    .picker-header .medium .ipt .form-item .form-item-label{
-         display: none;
-    }
-</style>
+ .picker-header .ipt .form-item .form-item-label{ display: none;
+}
+.picker-header .medium .ipt .form-item .form-item-label{ display: none;
+} </style>

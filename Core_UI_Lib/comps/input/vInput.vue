@@ -10,8 +10,6 @@
 </template>
 
 <script>
-    import Util from "../../tool/commonUtil.js";
-
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",
@@ -76,15 +74,13 @@
 
 <style scoped>
     .form-item{
-        width: 32%;
-        float: left;
         text-align: left;
         margin:0 0 22px 0;
+        display: inline-block;
     }
 
     .form-item .form-item-label{
         width: auto;
-        margin-right: 1%;
         text-align: right;
         vertical-align: middle;
         display: inline-block;
@@ -96,12 +92,7 @@
         margin-bottom: 0;
     }
 
-    form .form-item .form-item-label{
-        width: 17%;
-    }
-
     .medium .form-item .form-item-label{
-        /* height: 40px; */
         line-height: normal;
         font-size: 14px;
     }
@@ -118,13 +109,12 @@
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
-        /* width: 79%; */
-        width: 50%;
+        width: 100%;
         position: relative;
+            flex: 1;
     }
 
     form .form-item .form-item-div{
-        width: 80%;
         position: relative;
     }
 
@@ -133,17 +123,18 @@
         color: #f56c6c;
         font-size: 12px;
         margin-right: 2px;
+        position: absolute;
+        left: -8px;
     }
     .form-item .form-item-input{
         width: 100%;
-        /* width: 50%; */
         height: 40px;
         font-size: 14px;
         line-height: 40px;
         display: inline-block;
         border: 1px solid #dcdfe6;
         border-radius: 5px;
-        padding: 0 8% 0 4%;
+        padding: 0 20px 0 10px;
         color: #606266;
         outline: none;
     }
@@ -171,7 +162,6 @@
         top: 12px;
         color: #c0c4cc;
         font-weight: normal;
-        /* right: 2%; */
         right:8px;
         cursor: pointer;
     }
@@ -200,10 +190,6 @@
         margin: 0;
     }
 
-    .fa-check-circle-o .form-item-input{
-        /* border: 1px solid #67c23a; */
-    }
-
     .fa-times-circle-o .form-item-input{
         border: 1px solid #f56c6c;
     }
@@ -222,6 +208,4 @@
         color: #c0c4cc;
         font-weight: normal;
     }
-
- 
 </style>

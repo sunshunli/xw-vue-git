@@ -70,6 +70,7 @@ export default {
                 let errorComps = [];
                 for(let i=0;i<tmp.length;i++){
                     let vInputRes = tmp[i].$attrs.getVerifyResult();
+                    console.log(vInputRes);
                     if(!vInputRes.success){
                         count++;
                         res.info.push(vInputRes.msg);
@@ -99,7 +100,6 @@ export default {
 </script>
 
 <style scoped>
-    
     *{
         margin: 0;
         padding: 0;
@@ -113,8 +113,13 @@ export default {
         height: 100%;
     }
 
+    form{
+        text-align: left;
+    }
+
     .formStyle{
         width: 100%;
+        min-width: 500px;
         height: 90%;
         overflow-y: scroll;
     }
@@ -137,19 +142,16 @@ export default {
         padding:10px 0;
     }
 
-
-
-    .formStyle .container .formDiv .form-item{
-        width: 100%;
-    }
-
     .formStyle .form-item{
-        float: left;
-        width: 100%;
         line-height: normal;
         margin-bottom: 22px;
         position: relative;
         text-align: left;
+        display: inline-block;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
     .formStyle .form-item .form-item-label{
@@ -189,6 +191,7 @@ export default {
         line-height: normal;
         width: 35%;
         vertical-align: top;
+        flex: 1;
     }
 
     .formStyle .requireed::before{
@@ -199,7 +202,6 @@ export default {
     }
     
     .formStyle .form-item .form-item-input{
-        /* width: 88%; */
         height: 40px;
         font-size: 14px;
         line-height: 40px;
@@ -240,10 +242,4 @@ export default {
         position: absolute;
         width: 100%;
     }
-
-
-
-
-
-   
 </style>

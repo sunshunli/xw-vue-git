@@ -3,10 +3,14 @@
         <table class="table">
             <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
 
-            <body-section :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
+            <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
         </table>
 
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
+
+        <div v-show='isLoading' class="tableMask">
+            <img class="tableLoadingImg" src="../../../static/images/tableLoading1.gif"/>
+        </div>
     </div>
 </template>
 
@@ -14,7 +18,7 @@
     import HeaderSection from "./header.vue";
     import BodySection from "./body.vue";
     import PagingSection from "./paging.vue";
-    import Util from "../../tool/commonUtil.js";
+    import tool from "../leCompsTool.js";
     
     export default {
         components: {HeaderSection,BodySection,PagingSection},
@@ -31,13 +35,17 @@
                         size:this.options.pageOption.size?this.options.pageOption.size:10,
                         count:0,
                         total:0
-                    }
-                }
+                    },
+                },
+                //body部分没有数据的情况下，显示无数据
+                showNoResult:false,
+                //在上一次请求没有完成之前，不允许发送下一次请求
+                isLoading:false
             }
         },
         computed:{
             originCols:function(){
-                return Util.object.cloneObj(this.options.map);
+                return tool.object.cloneObj(this.options.map);
             },
             showCk:function(){
                 return this.options.showCk;
@@ -58,6 +66,10 @@
              * @returns
              */
             getData:function(index){
+                if(this.isLoading){
+                    return;
+                }
+                this.isLoading = true;
                 if(!index){
                     index = 1;
                 }
@@ -69,15 +81,15 @@
                 let size = this.state.pageOption.size;
                 url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
                 this.ajax.getFetch(url).then(data=>{
+                    this.isLoading = false;
                     let res = {};
                     if(this.options.analysis){
                         res = this.options.analysis(data);
                     }else{
                         res = data;
-
                     }                    
                     if(res.data && res.data instanceof Array && res.data.length != 0){
-                        let arr = Util.object.addPrimaryAndCk(res.data);
+                        let arr = tool.object.addPrimaryAndCk(res.data);
                         let total = -1;
                         if(parseInt(res.count)%size == 0){
                             total = parseInt(res.count)/size;
@@ -96,6 +108,7 @@
                                 size:size
                             }
                         }
+                        this.showNoResult = false;
                     }else{
                         this.state = {
                             data:[],
@@ -108,10 +121,13 @@
                                 size:size
                             }
                         }
-                        Util.throwError("数据源为空或者检查analysis, getUrl, pageOption参数!");
+                        console.log("数据源为空或者检查analysis, getUrl, pageOption参数!");
+                        this.showNoResult = true;
                     }
                 }).catch(e=>{
                     this.alert.showAlert("error","列表数据加载失败!");
+                    this.showNoResult = true;
+                    this.isLoading = false;
                 })
             },
             /**
@@ -227,20 +243,46 @@
         }
     }
 </script>
-
 <style scoped>
-
+    
     .tableContainer{
         overflow-x: scroll;
         display: block;
         min-width: 100%;
+        position: relative;
     }
+
+    .tableContainer .tableMask{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left:0;
+        background: rgba(0, 0, 0, 0.8);
+        display: block;
+    }
+
+    .tableContainer .table-title{
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 3px 3px 0 0;
+        height: 38px;
+        line-height: 38px;
+        background-color: #434e5b;
+        font-size: 14px;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
     .table{
         min-width: 100%;
         width: auto;
         border-collapse: collapse;
         font-size: 14px;
-        /* border-radius: 6px 6px 0 0; */
         overflow: hidden;
         margin-bottom: 0px;
     }
@@ -257,5 +299,12 @@
         height: 38px;
         line-height: 38px;
         font-size: 12px;
+    }
+
+    .tableMask .tableLoadingImg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>

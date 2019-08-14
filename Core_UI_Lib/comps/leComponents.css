@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+.middleClass {
+    margin-left: 10px !important;
+}
+/* 一行放俩个 */
+.le_comps_core_css .col2{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+/* 一行放3个 */
+.le_comps_core_css .col3 {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+/* 一行放4个 */
+.le_comps_core_css .col4 {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.le_comps_core_css .col2 .form-item,
+.le_comps_core_css .col3 .form-item,
+.le_comps_core_css .col4 .form-item {
+    display: flex !important;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+}
+.le_comps_core_css .col2 .form-item /deep/ .form-item-div,
+.le_comps_core_css .col3 .form-item /deep/ .form-item-div,
+.le_comps_core_css .col4 .form-item /deep/ .form-item-div {
+    flex: 1;
+}
+
+/* 改变弹框中label的宽度 */
+/deep/ .le_dialog_box .form-item .form-item-label {
+    width: 100px;
+    margin-right: 5px;
+}
+
+.le_form_row.el_form_row_label /deep/ .form-item-label {
+    width: auto !important;
+}
+
+/deep/ .le_dialog_box .form-item .form-item-div {
+    width: 200px;
+    vertical-align: middle;
+}
+
+.warning {
+    color: red;
+}
+
+.le_form_row {
+    flex: 1;
+}
+
+/deep/ .formStyle .container .formDiv .form-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/deep/ .le_dialog_box .form-item .form-item-label {
+    width: 100px;
+}
+
+/deep/ .le_dialog_box .form-item .form-item-div {
+    flex: 1;
+}
+
+.el_form_row_item .form-item {
+    width: 300px;
+    /* float: left; */
+}
+
+.el_form_row_item {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.el_form_row_item .label_msg {
+    margin-left: 26px;
+}
+
+.el_form_row_item /deep/ .requireed::before {
+    position: relative;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: auto;
+    clear: both;
+    visibility: hidden
+}
+
+.btnGroup {
+    margin-bottom: 10px;
+}
+
+.second-level h1 {
+    padding: 12px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}

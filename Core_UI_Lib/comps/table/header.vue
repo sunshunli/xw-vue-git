@@ -78,16 +78,12 @@
         }
     }
 </script>
-
 <style scoped>
     .enterIndexCls{width: 50px;display: inline-block;}
     .colsModal{border:1px solid #ddd;padding:10px;border-radius: 3px;position: absolute;left:30px;top:0;background: #fff;color: #000;z-index: 999;}
     .colsModal p {text-align: left;}
     .colsModal p input{float: left;margin-left: 15px;margin-right: 15px;}
     .thCols {position: relative;}
-    .thCols:nth-of-type(2){
-        /* width:250px; */
-    }
     .colsModal .bot input{width: 50px;line-height: 15px;margin: 0 5px;}
     .menu{position: absolute;left:10px;top:0;font-size: 20px;}
     thead tr th{border:1px solid rgba(0,0,0,0.09);border-bottom:none;font-weight: 600;text-align: center;

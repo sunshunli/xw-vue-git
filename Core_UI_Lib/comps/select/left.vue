@@ -30,7 +30,6 @@
     }
   }
 </script>
-
 <style scoped>
     .searchMulSelect .tags .selectedTagBox{
 		min-height: 24px;

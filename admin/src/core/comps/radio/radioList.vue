@@ -13,7 +13,7 @@
 
 <script>
 
-import CommonUtil from "../../tool/commonUtil.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"LeRadioList",
@@ -47,7 +47,7 @@ export default {
          * @returns
          */
         init(data){
-            this.data = CommonUtil.object.addPrimaryAndCk(data);
+            this.data = tool.object.addPrimaryAndCk(data);
         },
         /**
          * @description 重置数据源
@@ -90,7 +90,7 @@ export default {
          * @returns
          */
         getValue(){
-            let res = CommonUtil.object.getCheckedItems(this.data,this.displayValue);
+            let res = tool.object.getCheckedItems(this.data,this.displayValue);
             return res.vals.join(',');
         },
         

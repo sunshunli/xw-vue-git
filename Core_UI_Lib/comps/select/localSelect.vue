@@ -4,16 +4,16 @@
         <label class="form-item-label" :class="$attrs.on!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
-			<div class="tags">
-                <i v-show="multiple != undefined?true:false" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
+                <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input ref="inputdom" @click.stop="clickInput" :readonly="readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input ref="inputdom" @click.stop="clickInput" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
-		
+
             <!--下拉弹出框-->
             <buttom-section :show-buttom="showButtom" :display-name="displayName" :searchKey="searchName" :data="buttomArray" :notice-parent="noticeFromButtom"></buttom-section>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import CommonUtil from '../../tool/commonUtil.js';
+    import tool from '../leCompsTool.js';
     import LeftSection from "./left.vue";
     import ButtomSection from "./buttom.vue";
 
@@ -37,7 +37,7 @@
 
   export default {
     name: 'LeLocalSelect',
-    props:["multiple","displayName","displayValue","value","dataSource","readonly"],
+    props:["multiple","displayName","displayValue","value","dataSource","readonly","enabledInput"],
     components: {LeftSection,ButtomSection},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
@@ -49,7 +49,8 @@
             },
             searchName:"",
             data:[],
-            showButtom:false
+            showButtom:false,
+            inputIcon:'',
         }
     },
     computed:{
@@ -66,14 +67,27 @@
             return this.data;
         },
         leftArray(){
-            return CommonUtil.object.getCheckedItems(this.data).items;
+            return tool.object.getCheckedItems(this.data).items;
         },
         readonlyFlag(){
-            if(this.readonly==undefined || this.readonly == false){
+            if(this.readonly == undefined || this.readonly == false){
                 return false;
             }
             return true;
-        }   
+        },
+        //是否允许模糊查询，默认不开启
+        inputFlag(){
+            if(this.enabledInput == undefined){
+                return false;
+            }
+            if(this.enabledInput == ""){
+                return true;
+            }
+            if(this.enabledInput == false){
+                return false;
+            }
+            return true;
+        }
     },
     watch:{
         value(val){
@@ -121,8 +135,8 @@
          * @returns 
          */
         init(data){
-            let tmp = CommonUtil.object.cloneObj(data);
-            this.data = CommonUtil.object.addPrimaryAndCk(tmp);
+            let tmp = tool.object.cloneObj(data);
+            this.data = tool.object.addPrimaryAndCk(tmp);
         },
         /**
          * @description 组件验证以及分发change事件
@@ -180,7 +194,7 @@
          * @returns items:所选的对象数组，vals:所选的值集合
          */
         getSelectedItems(){
-            return CommonUtil.object.getCheckedItems(this.data,this.displayValue);
+            return tool.object.getCheckedItems(this.data,this.displayValue);
         },
         /**
          * @description 获取选中项的displayValue的集合
@@ -227,7 +241,17 @@
                     this.$attrs.setVerifyCompState();
                 }
             },0)
-        }
+        },
+        hideArr(){
+            this.inputIcon = "";
+        },
+        showArr(){
+            if(this.leftArray.length > 0){
+                this.inputIcon = "fa-times-circle";
+            }else{
+                this.inputIcon = "";
+            }
+        },
     },
     mounted(){
         /**
@@ -250,7 +274,6 @@
     }
   }
 </script>
-
 <style scoped>
     .blueborder{
         border-color:#409eff !important;
@@ -258,23 +281,18 @@
     
     .selectContent{
         position: relative;
-        vertical-align: middle;
-        width: 32%;
-        float: left;
         text-align: left;
         margin-bottom: 22px;
+        display: inline-block;
     }
     
     .selectContent label{
-        width: 20%;
         text-align: right;
-        margin-right: 1%; 
         color: #606266;
         display: inline-block;
     }
 
     .medium .selectContent label{
-        width: 17%;
         display: inline-block;
     }
 
@@ -292,7 +310,7 @@
 	    height: 40px;
 	    line-height: 40px;
 	    padding: 0 5px;
-	    width: 280px;
+	    width:180px;
         cursor: pointer;
         margin: 0;
         vertical-align: middle;
@@ -345,12 +363,9 @@
     }
 
     .form-item .form-item-div{
-        width: 50%;
-        /* vertical-align: text-bottom; */
-    }
-
-    form  .form-item .form-item-div{
-        width: 80%;
+        width: 100%;
+            flex: 1;
+        min-width: 130px;
     }
 
     .promptMsg{
@@ -361,5 +376,14 @@
         position: absolute;
         margin: 0;
     }
+
+    /* .tags .fa-angle-down:hover::before{
+            content: "\F057";
+    } */
+
+    .searchMulSelect .fa-chevron-down.fa-times-circle:before{
+        content: "\F057";
+    }
+
 
 </style>

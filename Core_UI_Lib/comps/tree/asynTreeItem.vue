@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 
 export default {
     name:"TreeItem",

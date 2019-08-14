@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "le_dialog_mask" v-show="value">
+    <div class = "le_dialog_mask" v-show="value" :class="{show_le_dialog_mask:value}">
         <!-- width height margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
@@ -202,4 +202,15 @@ export default {
         width: 100px;
         margin-right: 10px;
     }
+
+    .show_le_dialog_mask{
+        animation: showMask 0.5s;
+    }
+
+    @keyframes showMask{
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+
+
 </style>

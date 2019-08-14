@@ -52,7 +52,6 @@ export default {
      * @description 获取富文本内的html文本
      */
     getValue() {
-        debugger
         let html = this.__editor.txt.html();
         if(html == "<p><br></p>"){
             return "";

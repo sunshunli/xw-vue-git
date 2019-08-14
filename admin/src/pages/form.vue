@@ -13,7 +13,7 @@
             <div class="col3">
                 <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                 <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-                <le-local-select label="选择职业" :data-source="jobArray" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select enabledInput label="选择职业" :dataSource="jobArray" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
                 <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
@@ -38,7 +38,7 @@
         </div>
 
         <le-dialog title="弹出层" height="505" width="1000" v-model="showDialog" :close-callback="closeDialog">
-            <le-form ref="form2 le_comps_core_css">
+            <le-form ref="form2" class="le_comps_core_css">
                 <div class="col3 col_label">
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
@@ -81,10 +81,15 @@
 
 let _data = [
     {name:"aaa",code:"1"},
-    {name:"aaa1",code:"2"},
-    {name:"aaa2",code:"3"},
+    {name:"aa1",code:"2"},
+    {name:"aa2",code:"3"},
     {name:"bbb",code:"4"},
     {name:"ccc",code:"5"},
+    {name:"bb1",code:"6"},
+    {name:"bb2",code:"7"},
+    {name:"bb3",code:"8"},
+    {name:"cc1",code:"9"},
+    {name:"cc2",code:"10"},
 ];
 
 import Unit from "../core/tool/commonUtil.js";

@@ -74,7 +74,7 @@
     width: 100px;
 }
 
-/deep/ .le_dialog_box[data-v-59e012cd] .form-item .form-item-div {
+/deep/ .le_dialog_box .form-item .form-item-div {
     flex: 1;
 }
 
@@ -113,5 +113,4 @@
     padding: 12px 0;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, .12);
-    ;
 }

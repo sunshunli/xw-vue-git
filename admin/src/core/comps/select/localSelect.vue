@@ -9,11 +9,11 @@
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input ref="inputdom" @click.stop="clickInput" :readonly="readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input ref="inputdom" @click.stop="clickInput" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
-		
+
             <!--下拉弹出框-->
             <buttom-section :show-buttom="showButtom" :display-name="displayName" :searchKey="searchName" :data="buttomArray" :notice-parent="noticeFromButtom"></buttom-section>
         </div>
@@ -37,7 +37,7 @@
 
   export default {
     name: 'LeLocalSelect',
-    props:["multiple","displayName","displayValue","value","dataSource","readonly"],
+    props:["multiple","displayName","displayValue","value","dataSource","readonly","enabledInput"],
     components: {LeftSection,ButtomSection},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
@@ -70,11 +70,24 @@
             return CommonUtil.object.getCheckedItems(this.data).items;
         },
         readonlyFlag(){
-            if(this.readonly==undefined || this.readonly == false){
+            if(this.readonly == undefined || this.readonly == false){
                 return false;
             }
             return true;
-        }   
+        },
+        //是否允许模糊查询，默认不开启
+        inputFlag(){
+            if(this.enabledInput == undefined){
+                return false;
+            }
+            if(this.enabledInput == ""){
+                return true;
+            }
+            if(this.enabledInput == false){
+                return false;
+            }
+            return true;
+        }
     },
     watch:{
         value(val){

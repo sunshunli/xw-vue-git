@@ -31,13 +31,13 @@
 </script>
 
 <style scoped>
-.fa-check:before {
-    content: "\F00C";
-    position: absolute;
-    right: 10px;
-}
+	.fa-check:before {
+		content: "\F00C";
+		position: absolute;
+		right: 10px;
+	}
 
-  .selectList{
+  	.selectList{
 		width: 100%;
 	    transform-origin: center top 0px;
 	    z-index: 2270;
@@ -54,44 +54,46 @@
 
 	.selectList ul{
 		padding: 0;
+		max-height: 200px;
+    	overflow: scroll;
 	}
 
-.selectList li{
-		width: 100%;
-	font-size: 14px;
-	padding: 0 30px 0 10px;
-	position: relative;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #606266;
-	height: 34px;
-	line-height: 34px;
-	box-sizing: border-box;
-	cursor: pointer;
-	text-align: left;
-}
+	.selectList li{
+			width: 100%;
+		font-size: 14px;
+		padding: 0 30px 0 10px;
+		position: relative;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: #606266;
+		height: 34px;
+		line-height: 34px;
+		box-sizing: border-box;
+		cursor: pointer;
+		text-align: left;
+	}
 
-.selectList li:hover{
-	background-color: #f5f7fa
-}
+	.selectList li:hover{
+		background-color: #f5f7fa
+	}
 
-.selectList li i{
-	display: inline-block;
-	position: absolute;
-	top: 0;
-	right: 5px;
-	width: 16px;
-	height: 100%;
-	font-size: 12px;
-}
+	.selectList li i{
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		right: 5px;
+		width: 16px;
+		height: 100%;
+		font-size: 12px;
+	}
 
-.selectList li.active{
-	color: #409eff;
-	display: block;
-}
+	.selectList li.active{
+		color: #409eff;
+		display: block;
+	}
 
-.selectList li.active i{
-	color: #409eff;
-}
+	.selectList li.active i{
+		color: #409eff;
+	}
 </style>

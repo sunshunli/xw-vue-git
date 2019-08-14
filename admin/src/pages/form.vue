@@ -5,7 +5,7 @@
             <ul class="breadcrumb al-breadcrumb"><li>XW-VUE-GIT</li><li>Module</li></ul>
         </div>
 
-        <div class='searchPanel clearfix'>
+        <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col2">
                 <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
@@ -38,7 +38,7 @@
         </div>
 
         <le-dialog title="弹出层" height="505" width="1000" v-model="showDialog" :close-callback="closeDialog">
-            <le-form ref="form2">
+            <le-form ref="form2 le_comps_core_css">
                 <div class="col3 col_label">
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>

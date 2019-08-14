@@ -19,16 +19,16 @@ module.exports = (env = {}) =>{
             sourceMap: false,
             parallel: true
         }),
-        new ExtractTextPlugin({
-            filename:"le-components.min.css"
-        }),
-        new OptimizeCSSPlugin({
-            cssProcessorOptions: true
-              ? { safe: true, map: { inline: false } }
-              : { safe: true }
-        }),
-        // new webpack.HashedModuleIdsPlugin(),
-        // new webpack.optimize.ModuleConcatenationPlugin(),
+        // new ExtractTextPlugin({
+        //     filename:"le-components.min.css"
+        // }),
+        // new OptimizeCSSPlugin({
+        //     cssProcessorOptions: true
+        //       ? { safe: true, map: { inline: false } }
+        //       : { safe: true }
+        // }),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
     ])
     return {
         entry: './comps/leComponents.js',//入口
@@ -66,16 +66,16 @@ module.exports = (env = {}) =>{
                 },
                 {
                     test: /\.css$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: "style-loader", // fallback表示如果css文件没有成功导入就使用style-loader导入
-                        use: "css-loader" // 表示使用css-loader从js读取css文件
-                    })
+                    loader: "style-loader!css-loader",
+                    // use: ExtractTextPlugin.extract({
+                    //     fallback: "style-loader", // fallback表示如果css文件没有成功导入就使用style-loader导入
+                    //     use: "css-loader" // 表示使用css-loader从js读取css文件
+                    // })
                 },
                 {
                     test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
                     loader:'url-loader',options:{name:'fonts/[name].[hash:8].[ext]'}//项目设置打包到dist下的fonts文件夹下
-
-                   },
+                },
                 {
                     test: /\.html$/,
                     loader: 'html-loader',

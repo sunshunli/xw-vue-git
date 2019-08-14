@@ -147,7 +147,7 @@
                     }
                 }
                 if(bData){
-                    let items = Util.object.getCheckedItems(bData.data);
+                    let items = tool.object.getCheckedItems(bData.data);
                     let flag = items.items.length == this.state.data.length?true:false;
                     this.state = {
                         data:bData.data,

@@ -1,6 +1,6 @@
 
 
-import DEFINE_KEY from "./Define.js";
+import DEFINE_KEY from "./define.js";
 
 function ValidataHOC(Component){
     return {

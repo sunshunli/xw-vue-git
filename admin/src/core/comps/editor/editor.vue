@@ -11,7 +11,7 @@
 
 <script>
 import E from "wangeditor";
-import Define from "../Define.js";
+import Define from "../define.js";
 export default {
   name: "editor",
   props: ["value", "option"],

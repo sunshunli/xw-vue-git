@@ -1,7 +1,7 @@
 
 import "./alert.css";
 import $ from "jquery";
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 
 let _le_alert = {
     showMessage:(type,msg)=>{
@@ -64,7 +64,6 @@ let _le_alert = {
             $(this).parents("div.MsgAlertBox").remove();
         })
     },
-
     showNotify:(type,msg)=>{
         if(!type){
             type = "default";

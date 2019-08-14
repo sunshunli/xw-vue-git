@@ -78,20 +78,6 @@
     </div>
 </template>
 <script>
-
-let _data = [
-    {name:"aaa",code:"1"},
-    {name:"aa1",code:"2"},
-    {name:"aa2",code:"3"},
-    {name:"bbb",code:"4"},
-    {name:"ccc",code:"5"},
-    {name:"bb1",code:"6"},
-    {name:"bb2",code:"7"},
-    {name:"bb3",code:"8"},
-    {name:"cc1",code:"9"},
-    {name:"cc2",code:"10"},
-];
-
 import Unit from "../core/tool/commonUtil.js";
 import $ from "jquery";
 export default {
@@ -245,6 +231,18 @@ export default {
         },
     },
     mounted(){
+        let _data = [
+            {name:"aaa",code:"1"},
+            {name:"aa1",code:"2"},
+            {name:"aa2",code:"3"},
+            {name:"bbb",code:"4"},
+            {name:"ccc",code:"5"},
+            {name:"bb1",code:"6"},
+            {name:"bb2",code:"7"},
+            {name:"bb3",code:"8"},
+            {name:"cc1",code:"9"},
+            {name:"cc2",code:"10"},
+        ];
         window.setTimeout(()=>{
             // this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
 

@@ -143,7 +143,7 @@ let _tool = {
     }
 }
 
-import DEFINE_KEY from "../Define.js";
+import DEFINE_KEY from "../define.js";
 
 /**
  * @description 日期格式  6(row)*7(col)

@@ -121,7 +121,7 @@
                                 size:size
                             }
                         }
-                        Util.throwError("数据源为空或者检查analysis, getUrl, pageOption参数!");
+                        console.log("数据源为空或者检查analysis, getUrl, pageOption参数!");
                         this.showNoResult = true;
                     }
                 }).catch(e=>{

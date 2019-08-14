@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import CommonUtil from '../../tool/commonUtil';
     export default {
         components: {},
         props:["options","value"],

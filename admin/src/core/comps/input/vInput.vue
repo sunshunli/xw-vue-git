@@ -10,8 +10,6 @@
 </template>
 
 <script>
-    import Util from "../../tool/commonUtil.js";
-
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",

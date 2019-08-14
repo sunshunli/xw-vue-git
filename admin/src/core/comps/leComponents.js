@@ -1,4 +1,6 @@
 
+import "./leComponents.css";
+
 import LeButton from "./button/button.vue";
 import LeCheckboxList from "./checkbox/checkboxList.vue";
 import LeRadioList from "./radio/radioList.vue";

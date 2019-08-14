@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import Util from "../../tool/commonUtil.js";
+    import tool from "../leCompsTool.js";
     export default {
         props:["originCols","accpetHBNotice","noticeChangeCols","ck","actions","cols","showCk","singleSelected"],
         name: "HeaderSection",
@@ -39,7 +39,7 @@
         },
         computed:{
             defaultCols:function(){
-                return Util.object.addPrimaryAndCk(Util.object.cloneObj(this.originCols),true);
+                return tool.object.addPrimaryAndCk(tool.object.cloneObj(this.originCols),true);
             }
         },
         methods:{
@@ -53,7 +53,7 @@
                 this.reSetCols();
             },
             reSetCols:function(){
-                let cols = Util.object.getCheckedItems(this.defaultCols).items;
+                let cols = tool.object.getCheckedItems(this.defaultCols).items;
                 if(cols.length == 0){
                     this.noticeChangeCols(this.defaultCols);
                     this.defaultCols.forEach(item => {

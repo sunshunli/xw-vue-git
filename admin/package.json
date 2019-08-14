@@ -1,8 +1,8 @@
 {
-  "name": "vue-pro",
+  "name": "vue-admin",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "damon05 <string_bao@163.com>",
+  "description": "vue-cli for lenovo",
+  "author": "Wupeng5 <wupeng5@lenovo.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open",

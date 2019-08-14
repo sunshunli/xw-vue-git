@@ -9,7 +9,7 @@
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
 
         <div v-show='isLoading' class="tableMask">
-            <img class="tableLoadingImg" src="../../../static/images/tableLoading1.gif"/>
+            <img class="tableLoadingImg" src="https://p2.lefile.cn/product/adminweb/2019/08/14/86f12d52-24a9-4863-87df-45ca60298472.gif"/>
         </div>
     </div>
 </template>

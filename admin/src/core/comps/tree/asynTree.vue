@@ -14,7 +14,7 @@
 <script>
 
 import TreeItem from "./asynTreeItem.vue";
-import CommonUtil from '../../tool/commonUtil.js';
+import tool from '../leCompsTool.js';
 import DEFINE_KEY from "../define.js";
 import _treeTool from "./treePrivateMethods.js";
 
@@ -75,7 +75,7 @@ export default {
          * @returns node/null
          */
         init(data){
-            this.originData = CommonUtil.object.cloneObj(data);
+            this.originData = tool.object.cloneObj(data);
             let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data,null,true);
             this.state = {
                 data:tmpData
@@ -89,7 +89,7 @@ export default {
          * @description 重置所有
          */
         reset(){
-            let _originData = CommonUtil.object.cloneObj(this.originData);
+            let _originData = tool.object.cloneObj(this.originData);
             this.state = {
                 data:DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(_originData,null,true)
             };
@@ -115,11 +115,11 @@ export default {
             let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
             //非根节点
             if(parentNode){
-                CommonUtil.arrayServer.removeItems(parentNode.__children,[node]);
+                tool.arrayServer.removeItems(parentNode.__children,[node]);
             }
             //根节点
             else{
-                CommonUtil.arrayServer.removeItems(this.state.data,[node]);
+                tool.arrayServer.removeItems(this.state.data,[node]);
             }
         },
         /**

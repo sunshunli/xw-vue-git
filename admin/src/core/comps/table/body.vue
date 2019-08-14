@@ -45,7 +45,7 @@
 </template>
 
 <script>
-    import Util from "../../tool/commonUtil.js";
+    import tool from "../leCompsTool.js";
     
     export default {
         name: "BodySection",
@@ -106,13 +106,13 @@
                             type = type.toLowerCase();
                             switch(type){
                                 case "date":
-                                    val = Util.date.date(tmp);
+                                    val = tool.date.date(tmp);
                                     break;
                                 case "datetime":
-                                    val = Util.date.dateTime(tmp);
+                                    val = tool.date.dateTime(tmp);
                                     break;
                                 case "time":
-                                    val = Util.date.time(tmp);
+                                    val = tool.date.time(tmp);
                                     break;
                                 default:
                                     val = tmp;

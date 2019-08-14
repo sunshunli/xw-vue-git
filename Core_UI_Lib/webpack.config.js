@@ -86,25 +86,10 @@ module.exports = (env = {}) =>{
             ]
         },
         resolve: {
+            extensions: ['.vue', '.js', '.json'],
             alias: {
                 'vue$': 'vue/dist/vue.esm.js'
             }
-        },
-        devServer: {
-            inline: true, //检测文件变化，实时构建并刷新浏览器
-            port: "8007",
-            proxy: {
-                '/api': {
-                    target: 'http://admin.lenovouat.com/',
-                    pathRewrite: {
-                        "^/api": ""
-                    },
-                    secure: false,
-                    changeOrigin: true
-                },
-            },
-            //404 页面返回 index.html
-            historyApiFallback: true,
         },
         performance: {
             hints: false

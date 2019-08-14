@@ -36,7 +36,7 @@ export default {
             if(this.value){
                 return "show_le_dialog_mask";
             }else{
-                return "";
+                return "hide_le_dialog_mask";
             }
         }
     },
@@ -217,6 +217,15 @@ export default {
     @keyframes showMask{
         from {opacity:0;}
         to {opacity:1;}
+    }
+
+    .hide_le_dialog_mask{
+        animation: hideMask 5s;
+    }
+
+    @keyframes hideMask{
+        from {opacity:1;}
+        to {opacity:0;}
     }
 
 

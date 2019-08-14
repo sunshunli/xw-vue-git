@@ -5,7 +5,6 @@
     "author": "Wupeng5 <wupeng5@lenovo.com>",
     "private": true,
     "scripts": {
-      "dev": "webpack-dev-server --open",
       "build": "webpack --progress --env.Generative=true"
     },
     "devDependencies": {

@@ -93,6 +93,7 @@ export default {
         padding: 20px 35px;
         border-radius: 3px;
         min-width: 400px;
+        padding-bottom: 0;
         /* overflow-y: scroll; */
     }
 
@@ -107,7 +108,7 @@ export default {
         display:flex;
         justify-content:space-between;
         border-bottom: 1px solid #dcdfe6;
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
     }
     /* 标题 */
     .le_dialog_title{
@@ -161,7 +162,7 @@ export default {
         -ms-content-zoom-limit-max: 500%;
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
-        overflow: scroll;
+        overflow: hidden;
         height: 90%;
     }
     /* 底部 */
@@ -198,9 +199,12 @@ export default {
         border-top:1px solid #ccc;
         position: absolute;
         width: 100%;
-        bottom: 0;
+        bottom: 6px;
+        height: 60px;
+        line-height: 78px;
+        background-color: #fff;
     }
-
+    
     .le_dialog_box .le_dialog_contine .form-item{
         width:100%;
     }

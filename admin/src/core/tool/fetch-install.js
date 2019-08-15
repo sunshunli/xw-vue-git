@@ -70,7 +70,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch((err)=> {
-                    _this.alert.showAlert("error",url + " request server error!");
+                    defer.reject({data: err});
                 });
                 return defer.promise;
             },
@@ -107,7 +107,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    _this.alert.showAlert("error",url + " request server error!");
+                    defer.reject({data: err});
                 });
                 return defer.promise;
             },
@@ -140,7 +140,7 @@ export default {
                         defer.reject({data: message});
                     }
                 }).catch(function(err) {
-                    throw new Error(url + " request server error!");                    
+                    defer.reject({data: err});
                 });
                 return defer.promise;
             },

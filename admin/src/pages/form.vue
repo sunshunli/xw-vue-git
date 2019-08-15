@@ -42,9 +42,9 @@
             <div slot="body">
                 <le-form ref="form2" class="le_comps_core_css">
                     <div class="col3 col_label">
-                        <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input readonly on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input readonly on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input readonly on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     </div>
                     <div class="col2 col_label">
                         <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
@@ -90,6 +90,7 @@ export default {
     name:"FormValidate",
     data(){
         return {
+            readonly:true,
             searchModel:{
                 age:"1",
                 id:"",

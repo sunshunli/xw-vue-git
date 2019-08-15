@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -29,7 +29,13 @@
         },
         computed:{
             readonlyFlag(){
-                if(this.readonly==undefined || this.readonly == false){
+                if(this.$attrs.readonly == undefined){
+                    return false;
+                }
+                if(this.$attrs.readonly === ""){
+                    return true;
+                }
+                if(this.$attrs.readonly === false){
                     return false;
                 }
                 return true;
@@ -41,7 +47,16 @@
             }
         },
         methods:{
+            enterEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
+                this.$emit("enter",e.target.value);
+            },
             blurEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }

@@ -43,7 +43,7 @@ import LeTimePicker from "./time.vue";
 
 export default {
     name:"LeDateTimePicker",
-    props:["msg","value"],
+    props:["msg","value","readonly"],
     components: {LeDatePicker,LeTimePicker},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
@@ -57,6 +57,20 @@ export default {
                 showError:false,
                 successIcon:''
             },
+        }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     watch:{
@@ -84,6 +98,9 @@ export default {
             this.$emit("input",this.dateTimeStr);
         },
         showDateTimePickerHandle(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.showDateTimePicker = true;
             this.$refs[this.dateKey].showPicker();
         },

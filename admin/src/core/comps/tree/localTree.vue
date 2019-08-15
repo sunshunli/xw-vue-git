@@ -7,6 +7,7 @@
             :displayName="displayName"
             :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
             :checkbox="checkbox"
+            :readonly="readonlyFlag"
         ></tree-item>
     </div>
 </template>
@@ -29,6 +30,20 @@ export default {
             },
             EVENTPUBLISHKEY:_idSeed.newId() + "_TREE_NOTICEKEY",
         }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
+        },
     },
     methods:{
         /**

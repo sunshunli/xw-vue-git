@@ -8,6 +8,7 @@
             :asynOptions="asynOptions"
             :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
             :checkbox="checkbox"
+            :readonly="readonlyFlag"
         ></tree-item>
     </div>
 </template>
@@ -21,7 +22,7 @@ import _treeTool from "./treePrivateMethods.js";
 export default {
     name:"LeAsynTree",
     components:{TreeItem},
-    props:["displayName","asynOptions","itemClick",'checkbox'],
+    props:["displayName","asynOptions","itemClick",'checkbox',"readonly"],
     data(){
         return {
             originData:null,
@@ -30,6 +31,20 @@ export default {
             },
             EVENTPUBLISHKEY:_idSeed.newId() + "_TREE_NOTICEKEY",
         }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
+        },
     },
     methods:{
         /**

@@ -156,7 +156,7 @@ import DEFINE_KEY from "../define.js";
 
 export default {
     name:"LeDatePicker",
-    props:["selectDayCallback","isDatetimePicker","value"],
+    props:["selectDayCallback","isDatetimePicker","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -196,6 +196,18 @@ export default {
             m = m<10?"0"+m:m;
             d = d<10?"0"+d:d;
             return y + "-" + m + "-" + d;
+        },
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     methods:{
@@ -286,6 +298,9 @@ export default {
          * @returns
          */
         showPicker(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.isShowPicker = true;
             this.selectDay?this.setValue(this.selectDayStr):this.setValue();
         },
@@ -493,9 +508,8 @@ border-bottom: 1px solid #aeaeae; line-height: 2em;
 }
 .picker-header .hearderText { flex: 1;
 text-align: center; }
-.picker-header button {
-
- padding-left: 5px; padding-right: 5px;
+.picker-header input[type=button] {
+padding-left: 5px; padding-right: 5px;
 border: 0;
 background-color: transparent; outline: none;
 }

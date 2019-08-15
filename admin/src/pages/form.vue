@@ -36,10 +36,20 @@
                 <table-list ref='black_list_table' :options='tableOptions'></table-list>
             </div>
         </div>
-
-        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
-            
+        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog1" :close-callback="closeDialog">
             <div slot="body">
+                <le-form ref="form2" class="le_comps_core_css">
+                    <div class="col3 col_label">
+                        <le-input readonly on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input readonly on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input readonly on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                    </div>
+                </le-form>
+            </div>
+        </le-dialog> 
+        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
+            <div slot="body">
+                  <le-button type="create" value="新增2" @click="openDialog1"></le-button>
                 <le-form ref="form2" class="le_comps_core_css">
                     <div class="col3 col_label">
                         <le-input readonly on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
@@ -81,6 +91,9 @@
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>
         </le-dialog>
+      
+
+ 
     </div>
 </template>
 <script>
@@ -102,6 +115,7 @@ export default {
                 fav:""
             },
             showDialog:false,
+            showDialog1:false,
             uploadOptions:{
                 multiple:true,
                 url:"/file/img/upload",
@@ -196,6 +210,9 @@ export default {
             },1000)
             this.showDialog = true;
             this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");
+        },
+        openDialog1(){
+            this.showDialog1 = true;
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();

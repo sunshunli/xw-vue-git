@@ -111,6 +111,7 @@ export default {
         display:flex;
         justify-content:space-between;
         border-bottom: 1px solid #dcdfe6;
+        height: 35px;
         /* margin-bottom: 20px; */
     }
     /* 标题 */
@@ -165,58 +166,18 @@ export default {
         -ms-content-zoom-limit-max: 500%;
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
-        overflow: hidden;
-        height: 90%;
-    }
-    /* 底部 */
-    .le_dialog_bottom{
-        display:flex;
-        padding-top:20px;
-        width:100%;
-        justify-content:flex-end;
-    }
-    .le_dialog_bottom button{
-        padding: 6px 16px;
-        border-radius: 3px;
-        border: 1px solid #dcdfe6;
-        color: #fff;
-        font-size: 14px !important;
-        font-weight: 500;
-        cursor: pointer;
-        outline: none;
-    }
-    /* 确认按钮 */
-    .le_dialog_bottom .le_dialog_confirm{
-        background-color: #409EFF;
-        border: none;
-    }
-    /* 取消按钮 */
-    .le_dialog_bottom .le_dialog_cancel{
-        background-color: #fff;
-        color:#606266;
-        margin-left:20px;
     }
 
     .dialogBtnContent{
         text-align: right;
-        border-top:1px solid #ccc;
-        position: absolute;
+        border-top: 1px solid #ccc;
         width: 100%;
         bottom: 6px;
         height: 60px;
-        line-height: 78px;
+        line-height: 60px;
         background-color: #fff;
     }
     
-    .le_dialog_box .le_dialog_contine .form-item{
-        width:100%;
-    }
-
-    .le_form_row /deep/ .form-item .form-item-label{
-        width: 100px;
-        margin-right: 10px;
-    }
-
     .show_le_dialog_mask{
         animation: showMask 0.5s;
     }

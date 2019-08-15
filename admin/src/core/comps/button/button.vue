@@ -79,7 +79,7 @@ export default {
         padding: 0 13px 0 22px;
         position: relative;
         margin: 3px;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
 
     span .fa{

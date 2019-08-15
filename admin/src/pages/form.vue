@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <le-dialog title="弹出层" height="505" width="1000" v-model="showDialog" :close-callback="closeDialog">
+        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             
             <div slot="body">
                 <le-form ref="form2" class="le_comps_core_css">

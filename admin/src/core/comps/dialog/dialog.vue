@@ -11,7 +11,10 @@
                 </div>
             </div>
             <div class = "le_dialog_contine">
-                <slot></slot>
+                <slot name="body"></slot>
+            </div>
+            <div class="dialogBtnContent">
+                <slot name="button"></slot>
             </div>
         </div>
     </div>

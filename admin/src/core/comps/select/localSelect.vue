@@ -5,7 +5,7 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
-                <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
+                <i :class="inputIcon" v-show="readonlyFlag" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
@@ -70,7 +70,13 @@
             return tool.object.getCheckedItems(this.data).items;
         },
         readonlyFlag(){
-            if(this.readonly == undefined || this.readonly == false){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
                 return false;
             }
             return true;
@@ -106,6 +112,9 @@
          * @returns
          */
         focusInput(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.$refs["inputdom"].focus();
             this.clickInput();
         },

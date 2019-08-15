@@ -36,7 +36,7 @@ import $ from "jquery";
 
 export default {
     name:"LeTimePicker",
-    props:["msg","value"],
+    props:["msg","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -60,6 +60,20 @@ export default {
             },
             //计算滚动时候的下个位置的li的索引
             nextSelect:0
+        }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     watch:{
@@ -98,6 +112,9 @@ export default {
         },
         //显示选择层,并且滚动
         open(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.getJQDom(this.KEYS.timePanelDomKey).show();
             let index = this.getCurrentHMSIndex();
             this.getJQDom(this.KEYS.hourDomKey).scrollTop(index[0]*30);

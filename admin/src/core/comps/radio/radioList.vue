@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
-            <span :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
+            <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
                 <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
             </span>
@@ -17,7 +17,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeRadioList",
-    props:["displayName","displayValue","value","dataSource"],
+    props:["displayName","displayValue","value","dataSource","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -28,6 +28,20 @@ export default {
             data:[],
             validataComponentType:"Radio",
             name:_idSeed.newId(),
+        }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     watch:{
@@ -63,6 +77,9 @@ export default {
          * @returns 回传2个参数到父组件的回调，当前item和数据源data
          */
         changeCK(item){
+            if(this.readonlyFlag){
+                return;
+            }
             this.resetData();
             item.ck = true;
             this.state.showError = false;

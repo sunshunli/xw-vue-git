@@ -2,7 +2,7 @@
     <span class="selectedTagBox">
         <span class="selectedTag" v-show="data.length >= 1?true:false">
             <span>{{data.length!=0 && data[0][displayName]}}</span>
-            <i class="fa fa-times" @click.stop="removeItem(data[0])"></i>
+            <i class="fa fa-times" v-show="readonly" @click.stop="removeItem(data[0])"></i>
         </span>
 		<span class="selectedTag" style="width: 23px;padding: 0px;" v-show="data.length > 1?true:false" >
             <span>+{{data.length-1}}</span>
@@ -11,24 +11,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'LeftSection',
-    components: {},
-    props:["data","noticeParent","displayName","readonly"],
-    data () {
-      return {
-
-      }
-    },
-    methods:{
-      removeItem(item){
-          if(this.readonly){
-              return;
-          }
-          this.noticeParent(item);
-      }
+    export default {
+        name: 'LeftSection',
+        components: {},
+        props:["data","noticeParent","displayName","readonly"],
+        data () {
+            return {}
+        },
+        methods:{
+            removeItem(item){
+                this.noticeParent(item);
+            }
+        }
     }
-  }
 </script>
 <style scoped>
     .searchMulSelect .tags .selectedTagBox{

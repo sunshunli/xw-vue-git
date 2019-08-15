@@ -1,7 +1,7 @@
 <template>
     <div class="ML12" >
          <div class = "fa-item" :class="item.__color" :style="'margin-left:'+(item.__level-1)*10+'px'">
-            <button @click="expandNode(item)" class="fa" :class="item.__cls"></button>
+            <input type="button" @click="expandNode(item)" class="fa" :class="item.__cls" />
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
@@ -13,6 +13,7 @@
                 :displayName="displayName"
                 :EVENTPUBLISHKEY="EVENTPUBLISHKEY"
                 :checkbox = "checkbox"
+                :readonly="readonly"
             ></tree-item>
         </div>
     </div>
@@ -23,7 +24,7 @@ import DEFINE_KEY from "../define.js";
 
 export default {
     name:"TreeItem",
-    props:["item","displayName","EVENTPUBLISHKEY","checkbox"],
+    props:["item","displayName","EVENTPUBLISHKEY","checkbox","readonly"],
     data(){
         return {
 
@@ -34,6 +35,9 @@ export default {
          * @description checkbox状态改变的事件
          */
         changeCheckboxStatus(item){
+            if(this.readonly){
+                return;
+            }
             if(this.checkbox != undefined){
                 _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,

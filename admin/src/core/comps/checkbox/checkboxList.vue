@@ -3,7 +3,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <span :readonly="$attrs.readonly==undefined || $attrs.readonly==false ?false:true" class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
+            <span class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
                 <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'"></span>
             </span>
@@ -18,7 +18,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeCheckboxList",
-    props:["displayName","displayValue","value","dataSource"],
+    props:["displayName","displayValue","value","dataSource","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -31,7 +31,18 @@ export default {
         }
     },
     computed:{
-        
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
+        }
     },
     watch:{
         value(val){
@@ -58,6 +69,9 @@ export default {
          * @returns
          */
         changeItem(item){
+            if(this.readonlyFlag){
+                return;
+            }
             item.ck = !item.ck;
             let res = this.getCheckedItems();
             this.$emit('input',res.vals.join(','));

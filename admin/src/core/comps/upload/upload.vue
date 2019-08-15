@@ -11,11 +11,7 @@
                     <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
                 </div>
             </div>
-
         </div>
-        
-       
-
         <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
 </template>
@@ -23,7 +19,7 @@
 <script>
     export default {
         components: {},
-        props:["options","value"],
+        props:["options","value","readonly"],
         name: "LeUpload",
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
@@ -64,7 +60,19 @@
                 }else{
                     return 100;
                 }
-            }
+            },
+            readonlyFlag(){
+                if(this.readonly == undefined){
+                    return false;
+                }
+                if(this.readonly === ""){
+                    return true;
+                }
+                if(this.readonly === false){
+                    return false;
+                }
+                return true;
+            },
         },
         watch:{
             value(val){
@@ -77,6 +85,9 @@
              * @returns
              */
             change(){
+                if(this.readonlyFlag){
+                    return;
+                }
                 let val = this.$refs[this.fkey].value;
                 this.upload();
             },
@@ -174,6 +185,9 @@
                 return res.join(',');
             },
             removeItem(item){
+                if(this.readonlyFlag){
+                    return;
+                }
                 let tmp = [];
                 this.srcs.forEach(x=>{
                     if(x.name != item.name){

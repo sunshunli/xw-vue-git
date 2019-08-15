@@ -3,16 +3,20 @@ var webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = (env = {}) =>{
     console.log(`------------------- ${env.Generative?'生产':'开发'}环境 -------------------`);
     var plugins = (module.exports.plugins || []).concat([
         new CleanWebpackPlugin(['dist']),
-        new webpack.optimize.UglifyJsPlugin({
-            // sourceMap: true,
-            // compress: {
-            //   warnings: false
-            // }
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    warnings: false
+                }
+            },
+            sourceMap: false,
+            parallel: true
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true

@@ -12,7 +12,6 @@
                 </td>
                 <td class="opration" v-if="actions && actions.length != 0">
                     <div v-for="(x,i) in actions" class="btnContent" :key="i">
-                        <!-- <button v-if="actionShowFn(x,row)" :class="x.key" class="btn btn-sm btn-link" @click.prevent="e=>{x.action(row)}" >{{x.val}}</button> -->
                         <le-button v-if="actionShowFn(x,row)" :type="x.key" @click="e=>{x.action(row)}" :value="x.val"></le-button>
                     </div>
                 </td>

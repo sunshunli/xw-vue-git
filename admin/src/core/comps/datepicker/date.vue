@@ -512,6 +512,7 @@ text-align: center; }
 padding-left: 5px; padding-right: 5px;
 border: 0;
 background-color: transparent; outline: none;
+cursor: pointer;
 }
 /* 选择器器部分 */ .picker-body {
 width: 100%;
@@ -552,6 +553,7 @@ height: 28px; line-height: 28px; font-size: 12px;
 .form-item .form-item-input{
 width: 100%;
 height: 40px;
+cursor: pointer;
 font-size: 14px; line-height: 40px;
 display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding:0 25px 0 25px; color: #606266;
 outline: none;

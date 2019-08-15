@@ -181,7 +181,7 @@ color: #c0c4cc; font-weight: normal; cursor: pointer;
 }
 .dataTimePicker /deep/ .dataPicker .picker-box{ left: 0;
 }
-.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;
+.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;cursor: pointer;
 }
 .form-item /deep/ .form-item-div.dataPicker{ width: 100%;
 }

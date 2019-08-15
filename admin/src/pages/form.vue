@@ -28,7 +28,7 @@
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
-            <le-button type="disable" value="删除" @click="deleteItem"></le-button>
+            <le-button type="delete" value="删除" @click="deleteItem"></le-button>
         </div>
 
         <div class='le_list_table_pannel panel-table text-center'>

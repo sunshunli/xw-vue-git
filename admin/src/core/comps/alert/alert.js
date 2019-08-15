@@ -43,8 +43,8 @@ let _le_alert = {
                   '<p>'+title+'</p>'+
                   '</div>'+
                   '<div class="alert_btnGroup">'+
-                  '<span class="btn confirm" tag="le-show-confirm-ok">确定</span>'+
                   '<span class="btn cancel" tag="le-show-confirm-close">取消</span>'+
+                  '<span class="btn confirm" tag="le-show-confirm-ok">确定</span>'+
                   '</div>'+
                   '</div>';
         $(parentDiv).append($(html));

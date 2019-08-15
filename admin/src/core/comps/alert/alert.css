@@ -128,7 +128,7 @@
 	text-align: right;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup button{
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup span.btn{
 	height: 30px;
     line-height: 30px;
     padding: 0 10px;
@@ -142,15 +142,13 @@
     cursor: pointer;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup .cancel{
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup span.cancel{
 	background-color: #fff;
 	color: #000;
 	border:1px solid  #ddd;
 }
 
-
 /*notice*/
-
 .le_alert.notice{
     width: 330px;
     padding: 14px 13px;

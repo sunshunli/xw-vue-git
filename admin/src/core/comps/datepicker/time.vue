@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="timeBtnGroup">
-                    <span id="cancel" type="button" @click.stop="closePicker">关闭</span>
-                    <span id="confirm" type="button" @click.stop="ok">确定</span>
+                    <span id="cancel" @click.stop="closePicker">关闭</span>
+                    <span id="confirm" @click.stop="ok">确定</span>
                 </div>
             </div>
         </div>
@@ -354,11 +354,11 @@ text-align: right; width:100%;
 height:40px;
 border-top:1px solid #f2f2f2; margin-top:2px;
 }
-.timeButtom button{
+/* .timeButtom button{
 float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:8px;background:#fff; outline: none;
 border:1px solid #dcdfe6;
 border-radius:3px;
-}
+} */
 .form-item{ text-align: left; margin:0 0 22px 0;
 }
 .form-item .form-item-label{ height: auto;

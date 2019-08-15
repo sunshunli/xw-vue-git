@@ -196,5 +196,6 @@ export default {
         line-height: 20px;
         text-align: left;
         position: absolute;
+        margin: 0;
     }
 </style>

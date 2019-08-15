@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "le_dialog_mask" v-show="value" :class="valueCls">
+    <div class = "le_dialog_mask" :style="{'z-index':dialogZIndex}" v-show="value" :class="valueCls">
         <!-- width height margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import tool from "../leCompsTool.js";
 export default {
     name:"LeDialog",
     props:["title","width","height","value","closeCallback"],
@@ -29,6 +30,9 @@ export default {
         }
     },
     computed:{
+        dialogZIndex(){
+            return tool._idSeed.newId();
+        },
         dialogStyle(){
             return {
                 width:this.width?this.width + "px" : 700 + "px",

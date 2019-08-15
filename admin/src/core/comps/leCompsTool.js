@@ -187,6 +187,12 @@ let LeCompTool = {
             }
             return res;
         }
+    },
+    _idSeed:{
+        id:90000,
+        newId:()=>{
+            return LeCompTool._idSeed.id++;
+        }
     }
 }
 

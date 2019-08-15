@@ -24,8 +24,8 @@ let EventPublisher = function(){
 let _eventPublisher = new EventPublisher();
 
 let _idSeed = {
-    id:10000,
+    id:89999,
     newId:()=>{
-        return _idSeed.id++;
+        return _idSeed.id--;
     }
 }

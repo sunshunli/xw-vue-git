@@ -27,12 +27,11 @@ export default {
     props:["title","width","height","value","closeCallback"],
     data(){
         return {
+            dialogZIndex:0
         }
     },
     computed:{
-        dialogZIndex(){
-            return tool._idSeed.newId();
-        },
+        
         dialogStyle(){
             return {
                 width:this.width?this.width + "px" : 700 + "px",
@@ -49,6 +48,7 @@ export default {
     },
     watch:{
         value(val){
+            this.dialogZIndex = tool._idSeed.newId();
         }
     },
     methods:{
@@ -58,7 +58,7 @@ export default {
         }
     },
     mounted(){
-        
+        this.dialogZIndex = tool._idSeed.newId();
     }
 }
 </script>

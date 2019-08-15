@@ -15,21 +15,21 @@
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
                 <div class="picker-header">
-                    <button>
+                    <span>
                         <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
-                    </button>
-                    <button>
+                    </span>
+                    <span>
                         <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
-                    </button>
+                    </span>
                     <div class="hearderText">
                         {{state.currentYear}}/{{state.currentMonth}}
                     </div>
-                    <button>
+                    <span>
                         <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
-                    </button>
-                    <button>
+                    </span>
+                    <span>
                         <i class="fa fa-angle-double-right" @click.stop="nextYear"></i>
-                    </button>
+                    </span>
                 </div>
                 <div class="picker-body">
                     <table>
@@ -508,7 +508,7 @@ border-bottom: 1px solid #aeaeae; line-height: 2em;
 }
 .picker-header .hearderText { flex: 1;
 text-align: center; }
-.picker-header input[type=button] {
+.picker-header span {
 padding-left: 5px; padding-right: 5px;
 border: 0;
 background-color: transparent; outline: none;

@@ -72,9 +72,9 @@ export default {
         height:100%;
         z-index:999;
         background:rgba(30,30,30,0.6);
-        top:0;
+        top:100%;
         left:0;
-        
+        transform: translateY(-100%);
     }
     /* dialog  box */
     .le_dialog_box{
@@ -179,22 +179,15 @@ export default {
     }
     
     .show_le_dialog_mask{
-        animation: showMask 0.5s;
+        animation: showMask 5s;
     }
 
     @keyframes showMask{
-        from {opacity:0;}
-        to {opacity:1;}
+        from {transform: translateY(-100%);}
+        to {transform: translateY(0);}
     }
 
-    .hide_le_dialog_mask{
-        animation: hideMask 5s;
-    }
-
-    @keyframes hideMask{
-        from {opacity:1;}
-        to {opacity:0;}
-    }
+  
 
 
 </style>

@@ -153,11 +153,13 @@
          */
         onEmit(){
             let selectedItems = this.getSelectedItems();
-            this.$emit("change",selectedItems);
-            this.$emit("input",selectedItems.vals.join(','));
-
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
+            if(selectedItems.vals.length != 0){
+                let vals = selectedItems.vals.join(',');
+                this.$emit("input",vals);
+                this.$emit("change",vals);
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
             }
         },
         /**

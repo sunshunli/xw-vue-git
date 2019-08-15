@@ -13,7 +13,7 @@
             <div class="col3">
                 <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                 <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-                <le-local-select enabledInput label="选择职业" :dataSource="jobArray" multiple display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select ref="jobSelect" @change="showSelectItem" enabledInput label="选择职业" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
                 <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
@@ -92,9 +92,6 @@
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>
         </le-dialog>
-      
-
- 
     </div>
 </template>
 <script>
@@ -202,6 +199,10 @@ export default {
         }
     },
     methods:{
+        showSelectItem(val){
+            this.searchModel.job;  
+            console.log(this.$refs.jobSelect.getCurrentComponent().getValue());
+        },
         deleteItem(){
             var that = this;
             that.alert.showConfirm("确定删除当前这条数据吗?",function(){

@@ -126,7 +126,7 @@ export default {
             }
             */
         // 配置自定义z_index
-        this.__editor.customConfig.zIndex = 0;
+        this.__editor.customConfig.zIndex = "auto";
         // 自定义上传图片的方法
         this.__editor.customConfig.customUploadImg = (files, insert) => {
             this.uploadImg(files, insert);
@@ -148,5 +148,13 @@ export default {
   height: 90px;
   font-size: 12px;
   line-height: 30px;
+}
+
+.LeEditor /deep/ .w-e-toolbar .w-e-droplist{
+  z-index: 2 !important;
+}
+
+.LeEditor /deep/ .w-e-toolbar .w-e-droplist,.LeEditor /deep/ .w-e-text-container .w-e-panel-container{
+  z-index: 1 !important;
 }
 </style>

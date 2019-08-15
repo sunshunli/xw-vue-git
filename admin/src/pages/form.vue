@@ -70,6 +70,8 @@
                     <le-radio-list on label="性别" display-name="name" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list on label="爱好" ref='dialogFavRef' :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                     <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
+                    <le-editor on label="详情信息22:" msg='详情信息必填' ref="editor" :option = "option"></le-editor>    
+                    
                     <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :option = "option"></le-editor>    
                 </le-form>
             </div>

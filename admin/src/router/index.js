@@ -24,11 +24,6 @@ const routers = [
         component: H
     },
     {
-        path: '/login',
-        name: 'login',
-        component: Login
-    },
-    {
         path: '/tree',
         name: 'tree',
         component: TreeTest

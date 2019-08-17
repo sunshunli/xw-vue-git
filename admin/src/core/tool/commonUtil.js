@@ -402,6 +402,23 @@ let CommonUtil = {
             let nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
             let oneDay=1000*60*60*24;
             return this.date(new Date(nextMonthFirstDay-oneDay));
+        },
+        //比较2个时间
+        compareData(one,two){
+            let res = {success:false,data:false};
+            if(new Date(one) == "Invalid Date" || new Date(two) == "Invalid Date"){
+                res.success = false;
+            }else{
+                res.success = true;
+                let time_one = new Date(one).getTime();
+                let time_two = new Date(two).getTime();
+                if(time_one > time_two){
+                    res.data = true;
+                }else{
+                    res.data = false;
+                }
+            }
+            return res;
         }
     }
 }

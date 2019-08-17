@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
@@ -169,7 +169,7 @@ export default {
         line-height: normal;
             flex: 1;
     }
-    .requireed::before{
+    .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;

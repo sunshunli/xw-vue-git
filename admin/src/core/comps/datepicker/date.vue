@@ -3,7 +3,7 @@
 <template>
     <div class="form-item">
 
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
@@ -551,7 +551,7 @@ height: 28px; line-height: 28px; font-size: 12px;
 
  .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;min-width: 130px;
 }
-.requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 .form-item .form-item-input{
 width: 100%;

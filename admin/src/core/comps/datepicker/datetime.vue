@@ -1,6 +1,6 @@
 <template>
     <div class = "form-item current">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
@@ -227,7 +227,7 @@ font-size: 14px;
 }
 form .form-item .form-item-div{ background-color: #fff;flex: 1;
 }
-.requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 
  .form-item .form-item-input{ width: 100%;

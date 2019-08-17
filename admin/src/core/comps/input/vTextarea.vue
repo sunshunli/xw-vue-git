@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <textarea @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
@@ -131,7 +131,7 @@
         width: 100%;
     }
 
-    .requireed::before{
+    .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;

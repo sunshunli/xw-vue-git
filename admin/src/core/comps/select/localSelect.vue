@@ -4,7 +4,7 @@
         <label class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
-			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
+			<div class="tags" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
                 <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
@@ -344,6 +344,10 @@
         top: 0;
         left: 0;
 	}
+
+    .searchMulSelect .tags.readonlyIcon{
+        background-color: #f1f1f1;
+    }
 	
 	.searchMulSelect .searchMsg{
 		outline: none;

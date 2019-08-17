@@ -6,7 +6,7 @@
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
                 <!-- 展示文字的地方 -->
-                <div class = "dateTimeText" @click="showDateTimePickerHandle">
+                <div class = "dateTimeText" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle">
                     {{dateTimeStr}}
                 </div>
                 <!-- 展开日期下拉 -->
@@ -168,11 +168,16 @@ font-size: inherit;
 height: 40px;
 line-height: 40px;
 outline: none;
-transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 87%;
+transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 100%;
+padding: 0 32px;
 }
+
+.dataTimePicker .date-box .dateTimeText.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .dataTimePicker .date-box{
-width: 87%;
-margin-left:26px; }
+width: 100%;}
 .icon-date{
 position: absolute; top: 12px;
 left: 10px;
@@ -226,6 +231,10 @@ font-size: 14px;
 .form-item .form-item-div{min-width: 130px; display: inline-block; line-height: normal; width: 100%; vertical-align: middle;
 }
 form .form-item .form-item-div{ background-color: #fff;flex: 1;
+}
+
+form .form-item .form-item-div.readonlyIcon{
+       background-color: #f1f1f1;
 }
 .required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }

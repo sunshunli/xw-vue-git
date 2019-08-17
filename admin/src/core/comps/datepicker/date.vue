@@ -4,11 +4,11 @@
     <div class="form-item">
 
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input type="text" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -571,6 +571,11 @@ line-height: 40px;
 font-size: 14px;
 width: 100%;
 text-align: left; }
+
+.medium .form-item .form-item-input.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .small .form-item .form-item-input{ height: 34px;
 line-height: 34px;
 font-size: 14px;
@@ -592,4 +597,8 @@ height: 28px; line-height: 28px; font-size: 12px;
  .picker-header .ipt .form-item .form-item-label{ display: none;
 }
 .picker-header .medium .ipt .form-item .form-item-label{ display: none;
-} </style>
+} 
+.fa-times-circle-o .timeInput .readonlyIcon[data-v-d83e5f2a] {
+    background-color: #f1f1f1;
+}
+</style>

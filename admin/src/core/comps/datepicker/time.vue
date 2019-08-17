@@ -5,7 +5,7 @@
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <div class="timeInput" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
+                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
@@ -280,6 +280,11 @@ outline: none;
 padding: 0 26px;
 transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
 text-align: left; }
+
+.timeContent .timeInput.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .timeContent .timePicker{ display: none;
 width: 199px;
 height: auto;

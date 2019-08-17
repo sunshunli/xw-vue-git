@@ -1,22 +1,25 @@
 <template>
-  <div class="LeEditor">
-    <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-    <div ref="title" style="text-align:left"></div>
-    <div ref="textarea" class="editor__textarea" style="text-align:left">
-      <!--可使用 min-height 实现编辑区域自动增加高度-->
+    <div class="form-item">
+        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <div class="form-item-div fa LeEditor" >
+            <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
+            <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
+        </div>
+        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
     </div>
-    <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-  </div>
 </template>
 
 <script>
 import E from "wangeditor";
 import Define from "../define.js";
+import tool from "../leCompsTool.js";
 export default {
     name: "editor",
     props: ["value", "option"],
     data() {
         return {
+            titleKey:tool._idSeed.newId(),
+            textareaKey:tool._idSeed.newId(),
             inheritAttrs: false, //控制attrs的属性不渲染到根元素上面
             validataComponentType: "EDitor",
             __editor: null,
@@ -100,13 +103,24 @@ export default {
         }
     },
     mounted() {
-        this.__editor = new E(this.$refs.title, this.$refs.textarea);
+        this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);
         // 配置菜单 - 默认可以展示所有菜单 如果需要设置 请修改option.menus 具体参见define.js
         this.__editor.customConfig.menus = this.menusConfig?this.menusConfig:Define.EDITOR_MENUS.DEFAULT_MENU;
         // 配置表情
         this.__editor.customConfig.emotions = Define.EDITOR_MENUS.DEFAULT_EMJOY;
         // onchange 会在无任何操作的 xxx 毫秒之后被触发  如果需要设置 请修改option.onchangeTimeout 默认值：-1 无延迟（设置延迟可能导致setvalue回写有问题）
         // this.__editor.customConfig.onchangeTimeout = this.onchangeTimeout;
+        //监听事件onchange onblur
+        this.__editor.customConfig.onchange = (html) => {
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
+            }
+        }
+        this.__editor.customConfig.onblur = (html)=> {
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
+            }
+        }
         /*
             监听事件onchange onfocus onfocus
             this.__editor.customConfig.onchange = (html) => {
@@ -120,7 +134,7 @@ export default {
             this.editor.customConfig.onblur = function (html) {
                 this.blurEvent(html);
             }
-            */
+        */
         // 配置自定义z_index
         this.__editor.customConfig.zIndex = "auto";
         // 自定义上传图片的方法
@@ -130,25 +144,68 @@ export default {
         this.__editor.create();
     },
     beforeDestroy(){
-
+        
     }
 };
 </script>
 
 <style scoped>
-.LeEditor {
-    border: 1px solid #aeaeae;
-    box-sizing: border-box;
+.LeEditor{
+    border:1px solid #aeaeae;
+    box-sizing:border-box;
 }
-.LeEditor .editor__textarea {
-  height: 90px;
-  font-size: 12px;
-  line-height: 30px;
+.LeEditor .editor__textarea{
+    height:90px;
+    font-size:12px;
+    line-height:30px;
+   
 }
 
-.LeEditor /deep/ .w-e-toolbar .w-e-droplist{
-  z-index: 2 !important;
-}
+	.form-item{
+		text-align: left;
+		margin:0 0 22px 0;
+		display: inline-block;
+	}
+
+    .form-item .form-item-label{
+        width: auto;
+        text-align: right;
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 14px;
+        color: #606266;
+        line-height: normal;
+        padding: 0;
+        box-sizing: border-box;
+        margin-bottom: 0;
+    }
+
+    .medium .form-item .form-item-label{
+        line-height: normal;
+        font-size: 14px;
+    }
+    .small .form-item .form-item-label{
+        height: 34px;
+        line-height: normal;
+        font-size: 14px;
+    }
+    .mini .form-item .form-item-label{
+        height: 28px;
+        line-height: normal;
+        font-size: 12px;
+    }
+    .form-item .form-item-div{
+        display: inline-block;
+        line-height: normal;
+        width: 100%;
+        position: relative;
+        flex: 1;
+    }
+
+    form .form-item .form-item-div{
+        position: relative;
+    }
+
 
 .LeEditor /deep/ .w-e-toolbar .w-e-droplist,.LeEditor /deep/ .w-e-text-container .w-e-panel-container{
   z-index: 1 !important;

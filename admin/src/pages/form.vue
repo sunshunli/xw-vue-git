@@ -53,41 +53,41 @@
                   <le-button type="create" value="新增2" @click="openDialog1"></le-button>
                 <le-form ref="form2" class="le_comps_core_css">
                     <div class="col3 col_label">
-                        <le-input readonly on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input readonly on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input readonly on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input :readonly="readonly" on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input :readonly="readonly" on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input :readonly="readonly" on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     </div>
                     <div class="col2 col_label">
-                        <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input on required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input on :readonly="readonly" required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
+                        <le-input on :readonly="readonly" required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
                     </div>
                     <div class="col3 col_label">
-                        <le-time-picker on label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
+                        <le-time-picker :readonly="readonly" on label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                         <div class="middleClass">至</div>
-                        <le-date-time-picker on msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                        <le-date-time-picker :readonly="readonly" on msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
                     </div>
                     <div class="col4 col_label">
-                        <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-                        <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-                        <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
-                        <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
+                        <le-input label="年龄" :readonly="readonly" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                        <le-input label="身份证号码" :readonly="readonly" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
+                        <le-date-picker label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
                     </div>
-                    <le-input label="身份证号码" vType="number" msg="正整数22" v-model="entity.id"></le-input>
-                    <le-textarea label="详细地址" msg="正整数22" v-model="entity.content" on></le-textarea>
-                    <le-date-picker on label="日期组件" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
-                    <le-time-picker on label="时间组件" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
-                    <le-date-time-picker on label="时间日期组件" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-                    <le-local-select on label="选择职业" msg="职业必填" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
-                    <le-radio-list on label="性别" display-name="name" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
-                    <le-checkbox-list on label="爱好" ref='dialogFavRef' :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
-                    <le-upload on required msg='图片必须上传' :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
-                    <le-editor on label="详情信息22:" msg='详情信息必填' ref="editor" :option = "option"></le-editor>    
+                    <le-input label="身份证号码" :readonly="readonly" vType="number" msg="身份证号码必填" v-model="entity.id"></le-input>
+                    <le-textarea label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+                    <le-date-picker on label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
+                    <le-time-picker on label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
+                    <le-date-time-picker on label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <le-local-select on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
+                    <le-radio-list on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
+                    <le-checkbox-list on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
+                    <le-upload on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
+                    <le-editor on label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
                     
-                    <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :option = "option"></le-editor>    
+                    <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>    
                 </le-form>
             </div>
         
             <div slot="button">
+                <le-button type='submit' value="禁用" @click="disabledForm"></le-button>
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>
@@ -199,6 +199,9 @@ export default {
         }
     },
     methods:{
+        disabledForm(){
+            this.readonly = !this.readonly;
+        },
         showSelectItem(val){
             this.searchModel.job;  
             console.log(this.$refs.jobSelect.getCurrentComponent().getValue());

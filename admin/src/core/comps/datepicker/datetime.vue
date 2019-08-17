@@ -105,6 +105,9 @@ export default {
             this.$refs[this.dateKey].showPicker();
         },
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.showDateTimePicker = false;
             this.$emit("input","");
             window.setTimeout(()=>{

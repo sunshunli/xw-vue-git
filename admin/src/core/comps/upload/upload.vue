@@ -5,10 +5,10 @@
 
             <div style="flex:1">
                 <span  class="input-file">请选择
-                <input @change="change" type="file" :ref="fkey" class="imgFile"></span>
+                <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <div class="fileList" v-show="srcs.length>0">
-                    <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"image_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
+                    <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
                 </div>
             </div>
         </div>
@@ -85,9 +85,6 @@
              * @returns
              */
             change(){
-                if(this.readonlyFlag){
-                    return;
-                }
                 let val = this.$refs[this.fkey].value;
                 this.upload();
             },

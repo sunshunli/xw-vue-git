@@ -14,7 +14,7 @@
     export default {
         name: 'LeftSection',
         components: {},
-        props:["data","noticeParent","displayName","readonly"],
+        props:["data","noticeParent","displayName"],
         data () {
             return {}
         },

@@ -277,6 +277,9 @@ export default {
          * @returns
          */
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.$emit("input","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){

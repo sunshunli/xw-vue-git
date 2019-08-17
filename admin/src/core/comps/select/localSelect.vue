@@ -190,6 +190,9 @@
          * @returns
          */
         noticeFromLeft(item){
+            if(this.readonlyFlag){
+                return;
+            }
             item.cls = "";
             item.ck = false;
             this.onEmit();

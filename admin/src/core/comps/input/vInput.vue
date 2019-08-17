@@ -147,9 +147,9 @@
         color: #f56c6c;
         font-size: 12px;
         margin-right: 2px;
-        position: absolute;
+        /* position: absolute;
         left: 0;
-        top: 3px;
+        top: 3px; */
     }
     .form-item .form-item-input{
         width: 100%;

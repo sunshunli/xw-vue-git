@@ -1,12 +1,14 @@
 <template>
-    <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class="form-item-div fa LeEditor" >
-            <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
-            <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
-        </div>
-        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-    </div>
+   <div class="editor">
+        <div class="form-item">
+            <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+            <div class="form-item-div fa LeEditor" >
+                <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
+                <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
+                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            </div>
+        </div> 
+   </div>
 </template>
 
 <script>
@@ -153,18 +155,20 @@ export default {
 .LeEditor{
     border:1px solid #aeaeae;
     box-sizing:border-box;
+    border-bottom: none;
 }
 .LeEditor .editor__textarea{
     height:90px;
     font-size:12px;
     line-height:30px;
-   
+    border: 1px solid #aeaeae;
+    border-top: none;
 }
-
 	.form-item{
 		text-align: left;
 		margin:0 0 22px 0;
 		display: inline-block;
+        width: 100%;
 	}
 
     .form-item .form-item-label{
@@ -204,10 +208,24 @@ export default {
 
     form .form-item .form-item-div{
         position: relative;
+        border:none;
     }
 
 
 .LeEditor /deep/ .w-e-toolbar .w-e-droplist,.LeEditor /deep/ .w-e-text-container .w-e-panel-container{
   z-index: 1 !important;
+}
+
+.editor .w-e-toolbar{
+    border: 1px solid #aeaeae;
+    border-bottom: none;
+}
+
+.editor .promptMsg {
+    margin: 0 auto;
+    font-size: 12px;
+    color: #f56c6c;
+    line-height: 20px;
+    text-align: left;
 }
 </style>

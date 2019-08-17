@@ -1,7 +1,7 @@
 <template>
     <div class="form-item upaload">
         <div style="display: flex;">
-            <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+            <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
 
             <div style="flex:1">
                 <span  class="input-file">请选择

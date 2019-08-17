@@ -1,8 +1,8 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -130,18 +130,18 @@
     }
 
     .form-item .form-item-div .readonlyIcon{
-        border-color:#f1f1f1;
+        background-color: #f1f1f1;
     }
 
     .form-item .form-item-div .readonlyIcon:focus{
-        border-color:#f1f1f1;
+        background-color: #f1f1f1;
     }
 
     form .form-item .form-item-div{
         position: relative;
     }
 
-    .requireed::before{
+    .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;

@@ -1,7 +1,7 @@
 
 <template>
     <div class="form-item timeContent" :name="KEYS.ROOTDOM">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
@@ -375,7 +375,7 @@ font-size: 14px;
 .form-item .form-item-div{  min-width: 130px;   flex: 1; display: inline-block; line-height: normal; width:100%; vertical-align: middle; position: relative;
 }
 
- .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+ .required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 .form-item .form-item-input{
 width: 100%;

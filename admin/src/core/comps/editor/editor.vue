@@ -1,14 +1,12 @@
 <template>
-   <div class="editor">
-        <div class="form-item">
-            <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
-            <div class="form-item-div fa LeEditor" >
-                <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
-                <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
-                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-            </div>
-        </div> 
-   </div>
+    <div class="form-item">
+        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
+        <div class="form-item-div fa LeEditor" >
+            <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
+            <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
+        </div>
+        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+    </div>
 </template>
 
 <script>

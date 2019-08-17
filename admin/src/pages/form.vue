@@ -367,7 +367,7 @@ export default {
         width: auto !important;
         flex-wrap: inherit;
         position: relative;
-        padding-left: 10px !important;
+        /* padding-left: 10px !important; */
     }
 
     .col_label /deep/ .requireed::before{

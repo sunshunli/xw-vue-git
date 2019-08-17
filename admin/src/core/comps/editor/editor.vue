@@ -4,8 +4,9 @@
         <div class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
+            <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
-        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+       
     </div>
 </template>
 
@@ -159,8 +160,6 @@ export default {
     height:90px;
     font-size:12px;
     line-height:30px;
-    border: 1px solid #aeaeae;
-    border-top: none;
 }
 	.form-item{
 		text-align: left;
@@ -185,6 +184,7 @@ export default {
     .medium .form-item .form-item-label{
         line-height: normal;
         font-size: 14px;
+        vertical-align: top;
     }
     .small .form-item .form-item-label{
         height: 34px;
@@ -214,16 +214,17 @@ export default {
   z-index: 1 !important;
 }
 
-.editor .w-e-toolbar{
-    border: 1px solid #aeaeae;
-    border-bottom: none;
+form .form-item .form-item-div{
+    border: 1px solid #aeaeae !important;
 }
 
-.editor .promptMsg {
-    margin: 0 auto;
+.form-item .promptMsg{
+  margin: 0 auto;
     font-size: 12px;
     color: #f56c6c;
     line-height: 20px;
     text-align: left;
+    position: absolute;
+    bottom: -20px;
 }
 </style>

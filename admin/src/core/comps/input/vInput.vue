@@ -110,6 +110,7 @@
     .medium .form-item .form-item-label{
         line-height: normal;
         font-size: 14px;
+        padding-left: 8px;
     }
     .small .form-item .form-item-label{
         height: 34px;
@@ -147,7 +148,8 @@
         font-size: 12px;
         margin-right: 2px;
         position: absolute;
-        left: -8px;
+        left: 0;
+        top: 3px;
     }
     .form-item .form-item-input{
         width: 100%;

@@ -11,24 +11,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'LeftSection',
-    components: {},
-    props:["data","noticeParent","displayName","readonly"],
-    data () {
-      return {
-
-      }
-    },
-    methods:{
-      removeItem(item){
-          if(this.readonly){
-              return;
-          }
-          this.noticeParent(item);
-      }
+    export default {
+        name: 'LeftSection',
+        components: {},
+        props:["data","noticeParent","displayName"],
+        data () {
+            return {}
+        },
+        methods:{
+            removeItem(item){
+                this.noticeParent(item);
+            }
+        }
     }
-  }
 </script>
 <style scoped>
     .searchMulSelect .tags .selectedTagBox{

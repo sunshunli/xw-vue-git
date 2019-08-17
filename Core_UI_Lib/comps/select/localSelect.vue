@@ -1,10 +1,10 @@
 <template>
 
     <div style="position:relative" class="form-item selectContent">
-        <label class="form-item-label" :class="$attrs.on!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
-			<div class="tags" @mouseenter="showArr" @mouseleave="hideArr">
+			<div class="tags" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
                 <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
@@ -28,7 +28,7 @@
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
         data.forEach(item=>{
-            if(item[displayValue] && item[displayValue].toString() == value){
+            if(item[displayValue] != null && item[displayValue] != undefined && item[displayValue].toString() == value){
                 res = item;
             }
         })
@@ -70,7 +70,13 @@
             return tool.object.getCheckedItems(this.data).items;
         },
         readonlyFlag(){
-            if(this.readonly == undefined || this.readonly == false){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
                 return false;
             }
             return true;
@@ -106,6 +112,9 @@
          * @returns
          */
         focusInput(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.$refs["inputdom"].focus();
             this.clickInput();
         },
@@ -144,11 +153,13 @@
          */
         onEmit(){
             let selectedItems = this.getSelectedItems();
-            this.$emit("change",selectedItems);
-            this.$emit("input",selectedItems.vals.join(','));
-
-            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                this.$attrs.setVerifyCompState();
+            if(selectedItems.vals.length != 0){
+                let vals = selectedItems.vals.join(',');
+                this.$emit("input",vals);
+                this.$emit("change",vals);
+                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                    this.$attrs.setVerifyCompState();
+                }
             }
         },
         /**
@@ -179,6 +190,9 @@
          * @returns
          */
         noticeFromLeft(item){
+            if(this.readonlyFlag){
+                return;
+            }
             item.cls = "";
             item.ck = false;
             this.onEmit();
@@ -330,6 +344,10 @@
         top: 0;
         left: 0;
 	}
+
+    .searchMulSelect .tags.readonlyIcon{
+        background-color: #f1f1f1;
+    }
 	
 	.searchMulSelect .searchMsg{
 		outline: none;

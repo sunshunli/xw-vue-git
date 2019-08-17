@@ -1,5 +1,5 @@
 <template>
-    <span @click.stop="clickHandle" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span class="asBtn" @click.stop="clickHandle" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
 </template>
 <script>
 
@@ -79,7 +79,7 @@ export default {
         padding: 0 13px 0 22px;
         position: relative;
         margin: 3px;
-        vertical-align: text-bottom;
+        /* vertical-align: text-bottom; */
     }
 
     span .fa{
@@ -198,5 +198,14 @@ export default {
     .close{
         background-color: gray;
         border-color:black;
+    }
+
+    .asBtn:hover{
+        opacity: 0.8;
+    }
+
+    .asBtnHover{
+        opacity: 0.8;
+        color: red;
     }
 </style>

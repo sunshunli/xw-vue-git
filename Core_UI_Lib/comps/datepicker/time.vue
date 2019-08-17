@@ -1,11 +1,11 @@
 
 <template>
     <div class="form-item timeContent" :name="KEYS.ROOTDOM">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <div class="timeInput" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
+                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="timeBtnGroup">
-                    <span id="cancel" type="button" @click.stop="closePicker">关闭</span>
-                    <span id="confirm" type="button" @click.stop="ok">确定</span>
+                    <span id="cancel" @click.stop="closePicker">关闭</span>
+                    <span id="confirm" @click.stop="ok">确定</span>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@ import $ from "jquery";
 
 export default {
     name:"LeTimePicker",
-    props:["msg","value"],
+    props:["msg","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -60,6 +60,20 @@ export default {
             },
             //计算滚动时候的下个位置的li的索引
             nextSelect:0
+        }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     watch:{
@@ -98,6 +112,9 @@ export default {
         },
         //显示选择层,并且滚动
         open(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.getJQDom(this.KEYS.timePanelDomKey).show();
             let index = this.getCurrentHMSIndex();
             this.getJQDom(this.KEYS.hourDomKey).scrollTop(index[0]*30);
@@ -199,6 +216,9 @@ export default {
             return $("div [name="+key+"]");
         },
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.$emit("input","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -260,6 +280,11 @@ outline: none;
 padding: 0 26px;
 transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
 text-align: left; }
+
+.timeContent .timeInput.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .timeContent .timePicker{ display: none;
 width: 199px;
 height: auto;
@@ -337,11 +362,11 @@ text-align: right; width:100%;
 height:40px;
 border-top:1px solid #f2f2f2; margin-top:2px;
 }
-.timeButtom button{
+/* .timeButtom button{
 float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:8px;background:#fff; outline: none;
 border:1px solid #dcdfe6;
 border-radius:3px;
-}
+} */
 .form-item{ text-align: left; margin:0 0 22px 0;
 }
 .form-item .form-item-label{ height: auto;
@@ -355,7 +380,7 @@ font-size: 14px;
 .form-item .form-item-div{  min-width: 130px;   flex: 1; display: inline-block; line-height: normal; width:100%; vertical-align: middle; position: relative;
 }
 
- .requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+ .required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 .form-item .form-item-input{
 width: 100%;

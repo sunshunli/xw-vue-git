@@ -122,24 +122,32 @@
     margin: 0;
     margin-left:10px;
     font-size:14px;
+    vertical-align: middle;
 }
 
 .le_alert.MsgAlertBox .Alertcontent .alert_btnGroup{
 	text-align: right;
 }
 
-.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup button{
-	height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: red;
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup .btn{
+    height: 32px;
+    line-height: 32px;
+    display: inline-block;
+    width: 56px;
+    text-align: center;
+    background-color: #409eff;
     color: #fff;
     font-size: 14px;
     border: none;
     border-radius: 3px;
     outline: none;
     margin: 0 5px;
+    vertical-align: bottom;
     cursor: pointer;
+}
+
+.le_alert.MsgAlertBox .Alertcontent .alert_btnGroup .btn:hover{
+    opacity: 0.7;
 }
 
 .le_alert.MsgAlertBox .Alertcontent .alert_btnGroup .cancel{
@@ -148,9 +156,7 @@
 	border:1px solid  #ddd;
 }
 
-
 /*notice*/
-
 .le_alert.notice{
     width: 330px;
     padding: 14px 13px;

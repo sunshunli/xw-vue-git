@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "le_dialog_mask" v-show="value">
+    <div class = "le_dialog_mask" :style="{'z-index':dialogZIndex}" v-show="value" :class="valueCls">
         <!-- width height margin为计算 width/height的一半 + 10(padding)-->
         <div class = "le_dialog_box" v-bind:style="dialogStyle">
             <!-- 顶部 -->
@@ -11,30 +11,44 @@
                 </div>
             </div>
             <div class = "le_dialog_contine">
-                <slot></slot>
+                <slot name="body"></slot>
+            </div>
+            <div class="dialogBtnContent">
+                <slot name="button"></slot>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import tool from "../leCompsTool.js";
 export default {
     name:"LeDialog",
     props:["title","width","height","value","closeCallback"],
     data(){
         return {
+            dialogZIndex:0
         }
     },
     computed:{
+        
         dialogStyle(){
             return {
                 width:this.width?this.width + "px" : 700 + "px",
                 height:this.height?this.height + "px" : 300 + "px",
             }
+        },
+        valueCls(){
+            if(this.value){
+                return "show_le_dialog_mask";
+            }else{
+                return "hide_le_dialog_mask";
+            }
         }
     },
     watch:{
         value(val){
+            this.dialogZIndex = tool._idSeed.newId();
         }
     },
     methods:{
@@ -44,7 +58,7 @@ export default {
         }
     },
     mounted(){
-        
+        this.dialogZIndex = tool._idSeed.newId();
     }
 }
 </script>
@@ -62,13 +76,12 @@ export default {
         height:100%;
         z-index:999;
         background:rgba(30,30,30,0.6);
-        top:0;
-        left:0;
-        
+        top: 0;
+        left: 0;
     }
     /* dialog  box */
     .le_dialog_box{
-        position:fixed;
+        position: absolute;;
         left:50%;
         top:50%;
         transform: translate(-50%,-50%);
@@ -86,7 +99,7 @@ export default {
         padding: 20px 35px;
         border-radius: 3px;
         min-width: 400px;
-        /* overflow-y: scroll; */
+        padding-bottom: 0;
     }
 
     /* 上面部分 */
@@ -100,7 +113,8 @@ export default {
         display:flex;
         justify-content:space-between;
         border-bottom: 1px solid #dcdfe6;
-        margin-bottom: 20px;
+        height: 35px;
+        /* margin-bottom: 20px; */
     }
     /* 标题 */
     .le_dialog_title{
@@ -154,52 +168,26 @@ export default {
         -ms-content-zoom-limit-max: 500%;
         -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
         -ms-overflow-style: none;
-        overflow: scroll;
-        height: 90%;
-    }
-    /* 底部 */
-    .le_dialog_bottom{
-        display:flex;
-        padding-top:20px;
-        width:100%;
-        justify-content:flex-end;
-    }
-    .le_dialog_bottom button{
-        padding: 6px 16px;
-        border-radius: 3px;
-        border: 1px solid #dcdfe6;
-        color: #fff;
-        font-size: 14px !important;
-        font-weight: 500;
-        cursor: pointer;
-        outline: none;
-    }
-    /* 确认按钮 */
-    .le_dialog_bottom .le_dialog_confirm{
-        background-color: #409EFF;
-        border: none;
-    }
-    /* 取消按钮 */
-    .le_dialog_bottom .le_dialog_cancel{
-        background-color: #fff;
-        color:#606266;
-        margin-left:20px;
     }
 
     .dialogBtnContent{
         text-align: right;
-        border-top:1px solid #ccc;
-        position: absolute;
+        border-top: 1px solid #ccc;
         width: 100%;
-        bottom: 0;
+        bottom: 6px;
+        height: 60px;
+        line-height: 60px;
+        background-color: #fff;
+    }
+    
+    .show_le_dialog_mask{
+        animation: showMask 0.5s;
+        animation-fill-mode: forwards;
     }
 
-    .le_dialog_box .le_dialog_contine .form-item{
-        width:100%;
+    @keyframes showMask{
+        from {opacity:0}
+        to {opacity: 1}
     }
 
-    .le_form_row /deep/ .form-item .form-item-label{
-        width: 100px;
-        margin-right: 10px;
-    }
 </style>

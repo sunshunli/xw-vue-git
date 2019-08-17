@@ -194,7 +194,7 @@ export default {
         flex: 1;
     }
 
-    .formStyle .requireed::before{
+    .formStyle .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;

@@ -1,8 +1,8 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -16,7 +16,7 @@
         name:"LeTextarea",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
         // props:["msg","vType","regex","off"],
-        props:["value","height"],
+        props:["value","height","readonly"],
         data(){
             return {
                 //所有需要验证的组件必须带上这个validataType属性，这个属性的值可以为input，select，radio等需要验证的组件 
@@ -30,7 +30,13 @@
         },
         computed:{
             readonlyFlag(){
-                if(this.readonly==undefined || this.readonly == false){
+                if(this.readonly == undefined){
+                    return false;
+                }
+                if(this.readonly === ""){
+                    return true;
+                }
+                if(this.readonly === false){
                     return false;
                 }
                 return true;
@@ -42,7 +48,16 @@
             }
         },
         methods:{
+            enterEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
+                this.$emit("enter",e.target.value);
+            },
             blurEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
@@ -116,7 +131,7 @@
         width: 100%;
     }
 
-    .requireed::before{
+    .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;
@@ -145,6 +160,10 @@
         height: 80px;
         vertical-align: middle;
         padding: 10px 20px 10px 10px;
+    }
+
+    .medium .form-item .form-item-input.readonlyIcon{
+        background-color: #f1f1f1;
     }
 
     .form-item i{

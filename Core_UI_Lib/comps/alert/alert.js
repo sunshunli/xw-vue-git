@@ -43,8 +43,8 @@ let _le_alert = {
                   '<p>'+title+'</p>'+
                   '</div>'+
                   '<div class="alert_btnGroup">'+
-                  '<button class="confirm" tag="le-show-confirm-ok">确定</button>'+
-                  '<button class="cancel" tag="le-show-confirm-close">取消</button>'+
+                  '<span class="btn cancel" tag="le-show-confirm-close">取消</span>'+
+                  '<span class="btn confirm" tag="le-show-confirm-ok">确定</span>'+
                   '</div>'+
                   '</div>';
         $(parentDiv).append($(html));
@@ -54,10 +54,10 @@ let _le_alert = {
         $("body").off("click","i[tag=le-show-confirm-close]").on("click","i[tag=le-show-confirm-close]",function(){
             $(this).parents("div.MsgAlertBox").remove();
         })
-        $("body").off("click",'button[tag=le-show-confirm-close]').on("click","button[tag=le-show-confirm-close]",function(){
+        $("body").off("click",'span[tag=le-show-confirm-close]').on("click","span[tag=le-show-confirm-close]",function(){
             $(this).parents("div.MsgAlertBox").remove();
         })
-        $("body").off("click",'button[tag=le-show-confirm-ok]').on("click","button[tag=le-show-confirm-ok]",function(){
+        $("body").off("click",'span[tag=le-show-confirm-ok]').on("click","span[tag=le-show-confirm-ok]",function(){
             if(cb){
                 cb();
             }

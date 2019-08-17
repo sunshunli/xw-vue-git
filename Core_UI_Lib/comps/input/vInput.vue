@@ -1,8 +1,8 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -29,7 +29,13 @@
         },
         computed:{
             readonlyFlag(){
-                if(this.readonly==undefined || this.readonly == false){
+                if(this.$attrs.readonly == undefined){
+                    return false;
+                }
+                if(this.$attrs.readonly === ""){
+                    return true;
+                }
+                if(this.$attrs.readonly === false){
                     return false;
                 }
                 return true;
@@ -41,7 +47,16 @@
             }
         },
         methods:{
+            enterEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
+                this.$emit("enter",e.target.value);
+            },
             blurEvent(e){
+                if(this.readonlyFlag){
+                    return;
+                }
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
@@ -95,6 +110,7 @@
     .medium .form-item .form-item-label{
         line-height: normal;
         font-size: 14px;
+        padding-left: 8px;
     }
     .small .form-item .form-item-label{
         height: 34px;
@@ -114,17 +130,26 @@
             flex: 1;
     }
 
+    .form-item .form-item-div .readonlyIcon{
+        background-color: #f1f1f1;
+    }
+
+    .form-item .form-item-div .readonlyIcon:focus{
+        background-color: #f1f1f1;
+    }
+
     form .form-item .form-item-div{
         position: relative;
     }
 
-    .requireed::before{
+    .required::before{
         content: "*";
         color: #f56c6c;
         font-size: 12px;
         margin-right: 2px;
-        position: absolute;
-        left: -8px;
+        /* position: absolute;
+        left: 0;
+        top: 3px; */
     }
     .form-item .form-item-input{
         width: 100%;

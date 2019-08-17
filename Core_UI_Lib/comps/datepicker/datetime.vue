@@ -1,12 +1,12 @@
 <template>
     <div class = "form-item current">
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
                 <!-- 展示文字的地方 -->
-                <div class = "dateTimeText" @click="showDateTimePickerHandle">
+                <div class = "dateTimeText" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle">
                     {{dateTimeStr}}
                 </div>
                 <!-- 展开日期下拉 -->
@@ -43,7 +43,7 @@ import LeTimePicker from "./time.vue";
 
 export default {
     name:"LeDateTimePicker",
-    props:["msg","value"],
+    props:["msg","value","readonly"],
     components: {LeDatePicker,LeTimePicker},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
@@ -57,6 +57,20 @@ export default {
                 showError:false,
                 successIcon:''
             },
+        }
+    },
+    computed:{
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     watch:{
@@ -84,10 +98,16 @@ export default {
             this.$emit("input",this.dateTimeStr);
         },
         showDateTimePickerHandle(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.showDateTimePicker = true;
             this.$refs[this.dateKey].showPicker();
         },
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.showDateTimePicker = false;
             this.$emit("input","");
             window.setTimeout(()=>{
@@ -148,11 +168,16 @@ font-size: inherit;
 height: 40px;
 line-height: 40px;
 outline: none;
-transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 87%;
+transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 100%;
+padding: 0 32px;
 }
+
+.dataTimePicker .date-box .dateTimeText.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .dataTimePicker .date-box{
-width: 87%;
-margin-left:26px; }
+width: 100%;}
 .icon-date{
 position: absolute; top: 12px;
 left: 10px;
@@ -164,7 +189,7 @@ color: #c0c4cc; font-weight: normal; cursor: pointer;
 }
 .dataTimePicker /deep/ .dataPicker .picker-box{ left: 0;
 }
-.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;
+.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;cursor: pointer;
 }
 .form-item /deep/ .form-item-div.dataPicker{ width: 100%;
 }
@@ -207,7 +232,11 @@ font-size: 14px;
 }
 form .form-item .form-item-div{ background-color: #fff;flex: 1;
 }
-.requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+
+form .form-item .form-item-div.readonlyIcon{
+       background-color: #f1f1f1;
+}
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 
  .form-item .form-item-input{ width: 100%;

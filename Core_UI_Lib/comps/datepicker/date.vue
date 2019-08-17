@@ -3,33 +3,33 @@
 <template>
     <div class="form-item">
 
-        <label class="form-item-label" :class="$attrs.on != undefined?'requireed':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <div class="form-item-div dataPicker" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input type="text" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
                 <div class="picker-header">
-                    <button>
+                    <span>
                         <i class="fa fa-angle-double-left" @click.stop="prevYear"></i>
-                    </button>
-                    <button>
+                    </span>
+                    <span>
                         <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
-                    </button>
+                    </span>
                     <div class="hearderText">
                         {{state.currentYear}}/{{state.currentMonth}}
                     </div>
-                    <button>
+                    <span>
                         <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
-                    </button>
-                    <button>
+                    </span>
+                    <span>
                         <i class="fa fa-angle-double-right" @click.stop="nextYear"></i>
-                    </button>
+                    </span>
                 </div>
                 <div class="picker-body">
                     <table>
@@ -156,7 +156,7 @@ import DEFINE_KEY from "../define.js";
 
 export default {
     name:"LeDatePicker",
-    props:["selectDayCallback","isDatetimePicker","value"],
+    props:["selectDayCallback","isDatetimePicker","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -196,6 +196,18 @@ export default {
             m = m<10?"0"+m:m;
             d = d<10?"0"+d:d;
             return y + "-" + m + "-" + d;
+        },
+        readonlyFlag(){
+            if(this.readonly == undefined){
+                return false;
+            }
+            if(this.readonly === ""){
+                return true;
+            }
+            if(this.readonly === false){
+                return false;
+            }
+            return true;
         }
     },
     methods:{
@@ -265,6 +277,9 @@ export default {
          * @returns
          */
         clear(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.$emit("input","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -286,6 +301,9 @@ export default {
          * @returns
          */
         showPicker(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.isShowPicker = true;
             this.selectDay?this.setValue(this.selectDayStr):this.setValue();
         },
@@ -493,11 +511,11 @@ border-bottom: 1px solid #aeaeae; line-height: 2em;
 }
 .picker-header .hearderText { flex: 1;
 text-align: center; }
-.picker-header button {
-
- padding-left: 5px; padding-right: 5px;
+.picker-header span {
+padding-left: 5px; padding-right: 5px;
 border: 0;
 background-color: transparent; outline: none;
+cursor: pointer;
 }
 /* 选择器器部分 */ .picker-body {
 width: 100%;
@@ -533,11 +551,12 @@ height: 28px; line-height: 28px; font-size: 12px;
 
  .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;min-width: 130px;
 }
-.requireed::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
 }
 .form-item .form-item-input{
 width: 100%;
 height: 40px;
+cursor: pointer;
 font-size: 14px; line-height: 40px;
 display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding:0 25px 0 25px; color: #606266;
 outline: none;
@@ -552,6 +571,11 @@ line-height: 40px;
 font-size: 14px;
 width: 100%;
 text-align: left; }
+
+.medium .form-item .form-item-input.readonlyIcon{
+    background-color: #f1f1f1;
+}
+
 .small .form-item .form-item-input{ height: 34px;
 line-height: 34px;
 font-size: 14px;
@@ -573,4 +597,8 @@ height: 28px; line-height: 28px; font-size: 12px;
  .picker-header .ipt .form-item .form-item-label{ display: none;
 }
 .picker-header .medium .ipt .form-item .form-item-label{ display: none;
-} </style>
+} 
+.fa-times-circle-o .timeInput .readonlyIcon[data-v-d83e5f2a] {
+    background-color: #f1f1f1;
+}
+</style>

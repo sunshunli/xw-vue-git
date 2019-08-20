@@ -7,7 +7,7 @@
                 <span  class="input-file">请选择
                 <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
-                <span class="rules">规格</span>
+                <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
                 </div>
@@ -21,7 +21,7 @@
 <script>
     export default {
         components: {},
-        props:["options","value","readonly"],
+        props:["options","value","readonly","tip"],
         name: "LeUpload",
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
@@ -37,6 +37,12 @@
             }
         },
         computed:{
+            tipStr(){
+                if(!this.tip){
+                    return "";
+                }
+                return this.tip;
+            },
             multiple(){
                 return this.options.multiple?true:false;
             },

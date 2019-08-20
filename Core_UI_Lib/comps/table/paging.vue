@@ -7,10 +7,10 @@
                 <li class="page-item" @click="this.next"><a class="page-link button" >下一页</a></li>                
                 <li class="page-item"><a class="page-link span">当前页:</a></li>
                 <li class="page-item"><a class="page-link span">{{index}}/{{total}}</a></li>
-                <!-- <li class="page-item"><span class="page-link span">跳至</span></li>                        
+                <li class="page-item"><span class="page-link span">跳至</span></li>                        
                 <li class="page-item"><input type="text" :ref="this.goIndexKey" class="enter-number" placeholder=''/></li>
                 <li class="page-item"><span class="page-link span">页</span></li>                        
-                <li class="page-item" @click="this.goToIndex"><a class="page-link button">确定</a></li>                -->
+                <li class="page-item" @click="this.goToIndex"><a class="page-link button">确定</a></li>               
             </ul>
         </nav>
     </div>
@@ -109,7 +109,9 @@
         height:18px;
         line-height:18px;
         text-align:center;
-        border: 1px solid rgba(217,217,217,1);vertical-align:sub;line-height: 20px;width: 30px;
+        border: 1px solid rgba(217,217,217,1);
+        line-height: 20px;
+        width: 30px;
         padding: 0 5px;border-radius: 6px;outline: none;
     }
 

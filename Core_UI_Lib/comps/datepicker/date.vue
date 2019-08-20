@@ -598,7 +598,7 @@ height: 28px; line-height: 28px; font-size: 12px;
 }
 .picker-header .medium .ipt .form-item .form-item-label{ display: none;
 } 
-.fa-times-circle-o .timeInput .readonlyIcon[data-v-d83e5f2a] {
+.fa-times-circle-o .timeInput .readonlyIcon {
     background-color: #f1f1f1;
 }
 </style>

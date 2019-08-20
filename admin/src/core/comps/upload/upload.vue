@@ -38,10 +38,7 @@
         },
         computed:{
             tipStr(){
-                if(!this.tip){
-                    return "";
-                }
-                return this.tip;
+                return this.options.tip?this.options.tip:"";
             },
             multiple(){
                 return this.options.multiple?true:false;
@@ -57,6 +54,12 @@
             },
             vtype(){
                 return this.options.vtype?this.options.vtype:"";
+            },
+            width(){
+                return this.options.width?this.options.width:"";
+            },
+            height(){
+                return this.options.height?this.options.height:"";
             },
             size(){
                 if(this.options.size){
@@ -103,6 +106,28 @@
             reloadFileInput(){
                 this.$refs[this.fkey].value = "";
             },
+            checkIsImage(){
+                let count = 0;
+                if(this.vtype){
+                    if(this.vtype.indexOf('jpg') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('png') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('gif') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('icon') != -1){
+                        count++;
+                    }
+                    if(count == 0){
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            },
             /**
              * @description 上传的主体方法
              * @returns
@@ -117,13 +142,15 @@
                 let formData = new FormData();
                 formData.append(this.fname,fileObj);
                 let fileName = fileObj.name;
+                //控制格式
                 if(this.vtype){
-                    var suffix = fileName.substring(fileName.lastIndexOf('.')+1);
+                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
                         this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
                         return;
                     }
                 }
+                //控制大小
                 if(this.size){
                     let fileSize = fileObj.size;
                     if(fileSize > this.size * 1024 *1024){
@@ -131,6 +158,36 @@
                         return;
                     }
                 }
+                //控制规格
+                if(this.checkIsImage()){
+                    if(!this.width && !this.height){
+                        this.doUploadAjax(formData);
+                        return;
+                    }
+                    let that = this;
+                    let reader = new FileReader();
+                    reader.onload = (e)=> {
+                        let data = e.target.result;
+                        let image = new Image();
+                        image.onload = ()=>{
+                            if(that.width && that.width != image.width){
+                                that.alert.showAlert("info","图片宽度必须等于:"+ that.width);
+                                return;
+                            }
+                            if(that.height && that.height != image.height){
+                                that.alert.showAlert("info","图片高度必须等于:"+ that.height);
+                                return;
+                            }
+                            that.doUploadAjax(formData);
+                        };
+                        image.src= data;
+                    };
+                    reader.readAsDataURL(fileObj);
+                }else{  
+                    this.doUploadAjax(formData);
+                }
+            },
+            doUploadAjax(formData){
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
                     let src = this.options.analysis?this.options.analysis(result):result;

@@ -115,12 +115,15 @@ export default {
             showDialog:false,
             showDialog1:false,
             uploadOptions:{
+                tip:"图片大小必须小于100kb,大小100*200",
                 multiple:true,
                 url:"/file/img/upload",
                 completedCallback:(d)=>{
                     console.log(d);
                 },
                 vtype:"jpg,png,gif",
+                // width:"1280",
+                // height:"634",
                 fname:"file",
                 analysis:(d)=>{
                     return d.data;

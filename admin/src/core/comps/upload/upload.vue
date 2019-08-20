@@ -208,10 +208,10 @@
     }
 </script>
 <style scoped>
-.imgFile{
+.upaload .imgFile{
     cursor:pointer;
 }
-.input-file {
+.upaload .input-file {
     cursor:pointer;
     position: relative;
     overflow: hidden;
@@ -227,7 +227,7 @@
     color: #fff;
     text-decoration: none;
 }
-.input-file input[type="file"] {
+.upaload .input-file input[type="file"] {
     cursor:pointer;
     position: absolute;
     display: block;
@@ -240,14 +240,14 @@
     width: 100%;
     height: 100%;
 }
-.loading{width:24px;vertical-align: middle;}
+.upaload .loading{width:24px;vertical-align: middle;}
 
-.fileList{
+.upaload .fileList{
     display: block;
     width: 100%;
 }
 
-.fileList span{
+.upaload .fileList span{
     display: inline-block;
     padding: 0 10px;
     height: 24px;
@@ -269,11 +269,11 @@
     margin-right: 5px;
 }
 
-.fileList span a{
+.upaload .fileList span a{
     color: #606266;
 }
 
-.fileList .fa-times{
+.upaload .fileList .fa-times{
     width: 12px;
     height: 12px;
     line-height: 12px;

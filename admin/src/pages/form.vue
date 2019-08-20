@@ -87,7 +87,7 @@
             </div>
         
             <div slot="button">
-                <le-button type='submit' value="禁用" @click="disabledForm"></le-button>
+                <le-button disabled type='submit' value="禁用" @click="disabledForm"></le-button>
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>

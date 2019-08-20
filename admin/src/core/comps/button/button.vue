@@ -1,5 +1,5 @@
 <template>
-    <span class="asBtn" @click.stop="clickHandle" :disabled="cdisabled" :class="data.cls"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span class="asBtn" @click.stop="clickHandle" :disabled="cdisabled" :class="[data.cls,disabledClass]"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
 </template>
 <script>
 
@@ -25,6 +25,15 @@ export default {
                 return new Boolean(this.disabled);
             }
         },
+
+        disabledClass(){
+            if(!this.disabled){
+                return '';
+            }else{
+                return 'disabledIcon'
+            }
+        },
+
         _type(){
             let _type = "default";
             if(this.type){

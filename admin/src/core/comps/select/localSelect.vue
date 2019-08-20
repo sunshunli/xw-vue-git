@@ -403,5 +403,12 @@
         content: "\F057";
     }
 
+    .required::before{
+        content: "*";
+        color: #f56c6c;
+        font-size: 12px;
+        margin-right: 2px;
+    }
+
 
 </style>

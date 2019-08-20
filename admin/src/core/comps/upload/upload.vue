@@ -317,4 +317,11 @@
     font-size: 12px;
     margin-left: 5px;
 }
+
+.upaload .form-item-label.required::before {
+    content: "*";
+    color: #f56c6c;
+    font-size: 12px;
+    margin-right: 2px;
+}
 </style>

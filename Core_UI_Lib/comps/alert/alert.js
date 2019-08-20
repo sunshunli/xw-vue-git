@@ -2,9 +2,11 @@
 import "./alert.css";
 import $ from "jquery";
 import DEFINE_KEY from "../define.js";
+import tool from "../leCompsTool.js";
 
 let _le_alert = {
     showMessage:(type,msg)=>{
+        let zIndex = tool._idSeed.newId();
         if(!type){
             type = "default";
         }
@@ -25,7 +27,7 @@ let _le_alert = {
         $(parentDiv).append($(html));
         $("body").append($(parentDiv));
 
-        $(parentDiv).css({'top':'-50px','opacity':0,'z-index':2018});
+        $(parentDiv).css({'top':'-50px','opacity':0,'z-index':zIndex});
         $(parentDiv).animate({top:'16px',opacity:1},500,()=>{
             setTimeout(()=>{
                 $(parentDiv).animate({top:'-50px',opacity:0,'z-index':0},500,()=>{

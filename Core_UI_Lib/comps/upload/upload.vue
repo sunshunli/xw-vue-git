@@ -7,19 +7,21 @@
                 <span  class="input-file">请选择
                 <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+                <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
                 </div>
+                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
         </div>
-        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+        
     </div>
 </template>
 
 <script>
     export default {
         components: {},
-        props:["options","value","readonly"],
+        props:["options","value","readonly","tip"],
         name: "LeUpload",
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
@@ -35,6 +37,9 @@
             }
         },
         computed:{
+            tipStr(){
+                return this.options.tip?this.options.tip:"";
+            },
             multiple(){
                 return this.options.multiple?true:false;
             },
@@ -49,6 +54,12 @@
             },
             vtype(){
                 return this.options.vtype?this.options.vtype:"";
+            },
+            width(){
+                return this.options.width?this.options.width:"";
+            },
+            height(){
+                return this.options.height?this.options.height:"";
             },
             size(){
                 if(this.options.size){
@@ -95,6 +106,28 @@
             reloadFileInput(){
                 this.$refs[this.fkey].value = "";
             },
+            checkIsImage(){
+                let count = 0;
+                if(this.vtype){
+                    if(this.vtype.indexOf('jpg') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('png') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('gif') != -1){
+                        count++;
+                    }
+                    if(this.vtype.indexOf('icon') != -1){
+                        count++;
+                    }
+                    if(count == 0){
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            },
             /**
              * @description 上传的主体方法
              * @returns
@@ -109,13 +142,15 @@
                 let formData = new FormData();
                 formData.append(this.fname,fileObj);
                 let fileName = fileObj.name;
+                //控制格式
                 if(this.vtype){
-                    var suffix = fileName.substring(fileName.lastIndexOf('.')+1);
+                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
                         this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
                         return;
                     }
                 }
+                //控制大小
                 if(this.size){
                     let fileSize = fileObj.size;
                     if(fileSize > this.size * 1024 *1024){
@@ -123,6 +158,36 @@
                         return;
                     }
                 }
+                //控制规格
+                if(this.checkIsImage()){
+                    if(!this.width && !this.height){
+                        this.doUploadAjax(formData);
+                        return;
+                    }
+                    let that = this;
+                    let reader = new FileReader();
+                    reader.onload = (e)=> {
+                        let data = e.target.result;
+                        let image = new Image();
+                        image.onload = ()=>{
+                            if(that.width && that.width != image.width){
+                                that.alert.showAlert("info","图片宽度必须等于:"+ that.width);
+                                return;
+                            }
+                            if(that.height && that.height != image.height){
+                                that.alert.showAlert("info","图片高度必须等于:"+ that.height);
+                                return;
+                            }
+                            that.doUploadAjax(formData);
+                        };
+                        image.src= data;
+                    };
+                    reader.readAsDataURL(fileObj);
+                }else{  
+                    this.doUploadAjax(formData);
+                }
+            },
+            doUploadAjax(formData){
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
                     let src = this.options.analysis?this.options.analysis(result):result;
@@ -206,25 +271,26 @@
     }
 </script>
 <style scoped>
-.imgFile{
+.upaload .imgFile{
     cursor:pointer;
 }
-.input-file {
+.upaload .input-file {
     cursor:pointer;
     position: relative;
     overflow: hidden;
     text-align: center;
     width: 50px;
+    height: 26px;
     background-color: #2c7;
     border-radius: 4px;
     padding: 5px;
     font-size: 12px;
     font-weight: normal;
-    line-height: 18px;
+    line-height: 26px;
     color: #fff;
     text-decoration: none;
 }
-.input-file input[type="file"] {
+.upaload .input-file input[type="file"] {
     cursor:pointer;
     position: absolute;
     display: block;
@@ -237,14 +303,14 @@
     width: 100%;
     height: 100%;
 }
-.loading{width:24px;}
+.upaload .loading{width:24px;vertical-align: middle;}
 
-.fileList{
+.upaload .fileList{
     display: block;
     width: 100%;
 }
 
-.fileList span{
+.upaload .fileList span{
     display: inline-block;
     padding: 0 10px;
     height: 24px;
@@ -266,11 +332,11 @@
     margin-right: 5px;
 }
 
-.fileList span a{
+.upaload .fileList span a{
     color: #606266;
 }
 
-.fileList .fa-times{
+.upaload .fileList .fa-times{
     width: 12px;
     height: 12px;
     line-height: 12px;
@@ -300,11 +366,18 @@
 }
 
 .formStyle .form-item .promptMsg{
-        width: 81%;
+    width: 100%;
+    display: block;
     float: right;
     font-size: 12px;
     color: #f56c6c;
     line-height: 20px;
     text-align: left;
+    margin: 0;
+}
+
+.upaload .rules{
+    font-size: 12px;
+    margin-left: 5px;
 }
 </style>

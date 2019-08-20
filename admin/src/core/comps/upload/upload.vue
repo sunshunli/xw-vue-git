@@ -363,6 +363,8 @@
 .upaload label{
     text-align: right;
     display: inline-block;
+    font-size: 14px;
+    color: #606266;
 }
 
 .formStyle .form-item .promptMsg{

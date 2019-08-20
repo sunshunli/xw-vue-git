@@ -17,6 +17,7 @@ import tool from "../leCompsTool.js";
 export default {
     name: "editor",
     props: ["value", "option"],
+    inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data() {
         return {
             titleKey:tool._idSeed.newId(),

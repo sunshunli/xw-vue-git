@@ -7,12 +7,14 @@
                 <span  class="input-file">请选择
                 <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
+                <span class="rules">规格</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
                 </div>
+                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
         </div>
-        <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+        
     </div>
 </template>
 
@@ -215,12 +217,13 @@
     overflow: hidden;
     text-align: center;
     width: 50px;
+    height: 26px;
     background-color: #2c7;
     border-radius: 4px;
     padding: 5px;
     font-size: 12px;
     font-weight: normal;
-    line-height: 18px;
+    line-height: 26px;
     color: #fff;
     text-decoration: none;
 }
@@ -237,7 +240,7 @@
     width: 100%;
     height: 100%;
 }
-.loading{width:24px;}
+.loading{width:24px;vertical-align: middle;}
 
 .fileList{
     display: block;
@@ -300,11 +303,18 @@
 }
 
 .formStyle .form-item .promptMsg{
-        width: 81%;
+    width: 100%;
+    display: block;
     float: right;
     font-size: 12px;
     color: #f56c6c;
     line-height: 20px;
     text-align: left;
+    margin: 0;
+}
+
+.upaload .rules{
+    font-size: 12px;
+    margin-left: 5px;
 }
 </style>

@@ -279,7 +279,7 @@ export default {
             {name:"bbb",code:"4"},
             {name:"ccc",code:"5"},
             {name:"bb1",code:"6"},
-            {name:"bb2",code:"7"},
+            {name:"bb2啊啊啊啊啊啊啊",code:"7"},
             {name:"bb3",code:"8"},
             {name:"cc1",code:"9"},
             {name:"cc2",code:"10"},

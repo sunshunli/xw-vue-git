@@ -53,7 +53,7 @@
             data:[],
             showButtom:false,
             showArrow:true,
-            placeholder:"请选择"
+            placeholder:""
         }
     },
     computed:{
@@ -245,6 +245,7 @@
                     tmp.ck = true;
                 }
             })
+            this.checkPlaceholder();
         },
         resetDataCkStatus(){
             this.data.forEach(item=>{

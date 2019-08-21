@@ -146,7 +146,7 @@
                 if(this.vtype){
                     let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
                     if(this.vtype.indexOf(suffix) == -1){
-                        this.alert.showAlert("info","后缀名必须为:"+ this.vtype);
+                        this.alert.showAlert("error","后缀名必须为:"+ this.vtype);
                         return;
                     }
                 }
@@ -154,7 +154,7 @@
                 if(this.size){
                     let fileSize = fileObj.size;
                     if(fileSize > this.size * 1024 *1024){
-                        this.alert.showAlert("info","文件大小必须小于:"+ this.size + "MB");
+                        this.alert.showAlert("error","文件大小必须小于:"+ this.size + "MB");
                         return;
                     }
                 }
@@ -171,11 +171,11 @@
                         let image = new Image();
                         image.onload = ()=>{
                             if(that.width && that.width != image.width){
-                                that.alert.showAlert("info","图片宽度必须等于:"+ that.width);
+                                that.alert.showAlert("error","图片宽度必须等于:"+ that.width);
                                 return;
                             }
                             if(that.height && that.height != image.height){
-                                that.alert.showAlert("info","图片高度必须等于:"+ that.height);
+                                that.alert.showAlert("error","图片高度必须等于:"+ that.height);
                                 return;
                             }
                             that.doUploadAjax(formData);

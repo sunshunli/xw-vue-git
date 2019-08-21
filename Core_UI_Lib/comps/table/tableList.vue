@@ -125,7 +125,7 @@
                         this.showNoResult = true;
                     }
                 }).catch(e=>{
-                    this.alert.showAlert("error","列表数据加载失败!");
+                    this.alert.showAlert("error",e.data);
                     this.showNoResult = true;
                     this.isLoading = false;
                 })

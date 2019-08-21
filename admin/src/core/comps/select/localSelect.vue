@@ -10,7 +10,7 @@
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input ref="inputdom" @click.stop="clickInput" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholder" :ref="inputdomKey" @click.stop="clickInput" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -44,6 +44,7 @@
     data () {
         return {
             validataComponentType:"Radio",
+            inputdomKey:tool._idSeed.newId(),
             state:{
                 successIcon:"",
                 showError:false,
@@ -51,7 +52,8 @@
             searchName:"",
             data:[],
             showButtom:false,
-            showArrow:true
+            showArrow:true,
+            placeholder:"请选择"
         }
     },
     computed:{
@@ -116,7 +118,7 @@
             if(this.readonlyFlag){
                 return;
             }
-            this.$refs["inputdom"].focus();
+            this.$refs[this.inputdomKey].focus();
             this.clickInput();
         },
         /**
@@ -136,8 +138,8 @@
          * @returns
          */
         inputChange(){
-            let offsetWidth = parseInt(this.$refs["inputdom"].offsetWidth);
-            this.$refs["inputdom"].style.width = (offsetWidth + 5) + "px";
+            let offsetWidth = parseInt(this.$refs[this.inputdomKey].offsetWidth);
+            this.$refs[this.inputdomKey].style.width = (offsetWidth + 5) + "px";
         },
         /**
          * @description 设置数据源
@@ -155,10 +157,20 @@
         onEmit(){
             let selectedItems = this.getSelectedItems();
             let vals = selectedItems.vals.join(',');
+            this.checkPlaceholder();
             this.$emit("input",vals);
             this.$emit("change",vals);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
+            }
+        },
+        checkPlaceholder(){
+            let selectedItems = this.getSelectedItems();
+            let vals = selectedItems.vals.join(',');
+            if(vals != ""){
+                this.placeholder = "";
+            }else{
+                this.placeholder = "请选择";
             }
         },
         /**
@@ -172,10 +184,7 @@
                 item.cls = !item.ck?"":"active fa fa-check"
             }else{
                 //单选
-                this.data.forEach(el=>{
-                    el.ck = false;
-                    el.cls = "";
-                })
+                this.resetDataCkStatus();
                 item.ck = true;
                 item.cls = "active fa fa-check";
 
@@ -195,6 +204,7 @@
             item.cls = "";
             item.ck = false;
             this.onEmit();
+            
         },
         /**
          * @description 点击其他地方的时候,隐藏buttom组件并重置边框样式
@@ -226,16 +236,20 @@
         setValue(ids){
             ids?ids = ids.toString():ids="";
             //重置
-            this.data.forEach(item=>{
-                item.cls = "";
-                item.ck = false;
-            })
-            ids && ids.split && ids.split(',').forEach(val=>{
+            this.resetDataCkStatus();
+            //选中
+            ids.split && ids.split(',').forEach(val=>{
                 let tmp = getItemByDisplayValue(this.data,this.displayValue,val);
                 if(tmp){
                     tmp.cls = "active fa fa-check";
                     tmp.ck = true;
                 }
+            })
+        },
+        resetDataCkStatus(){
+            this.data.forEach(item=>{
+                item.cls = "";
+                item.ck = false;
             })
         },
         /**
@@ -246,6 +260,8 @@
             if(this.readonlyFlag){
                 return;
             }
+            this.resetDataCkStatus();
+            this.checkPlaceholder();
             this.searchName = "";
             this.$emit("input","");
             this.showButtom = false;
@@ -287,6 +303,18 @@
   }
 </script>
 <style scoped>
+    input.searchMsg::-webkit-input-placeholder { /* WebKit browsers */
+        color: #ded6d6;
+    }
+    input.searchMsg:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #ded6d6;
+    }
+    input.searchMsg::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #ded6d6;
+    }
+    input.searchMsg:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #ded6d6;
+    }
     .blueborder{
         border-color:#409eff !important;
     }
@@ -357,7 +385,7 @@
 	    height: 100%;
         line-height: 100%;
 	    background-color: transparent;
-	    width: 40px;
+	    width: 60px;
 	    vertical-align: top;
     }
     

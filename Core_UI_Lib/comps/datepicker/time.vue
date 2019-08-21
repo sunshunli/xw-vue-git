@@ -225,6 +225,14 @@ export default {
                     this.$attrs.setVerifyCompState();
                 }
             },0)
+        },
+        //时间点击选中
+        clickSelectTiem(dom){
+            $(dom).on("click","li",function(){
+                var houtTop = $(this)[0].offsetTop;
+                var scrollTop = (houtTop - 80) / 30 * 30;
+                $(dom).scrollTop(scrollTop)
+            });
         }
     },
     mounted(){
@@ -239,11 +247,22 @@ export default {
         $(this.getJQDom(this.KEYS.secDomKey)).off("scroll").on("scroll",e=>{
             this.scrollFun(e.target);
         })
+
+        let hourDom = $("div [name="+this.KEYS.hourDomKey+"]");
+        let minDom = $("div [name="+this.KEYS.minDomKey+"]");
+        let secDom = $("div [name="+this.KEYS.secDomKey+"]");
+        this.clickSelectTiem(hourDom);
+        this.clickSelectTiem(minDom);
+        this.clickSelectTiem(secDom);
     },
     beforeDestroy(){
-        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll")
-        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll")
-        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll")
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");
+        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll");
+        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll");
+
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("click");
+        $(this.getJQDom(this.KEYS.minDomKey)).off("click");
+        $(this.getJQDom(this.KEYS.secDomKey)).off("click");
     }
 }
 </script>

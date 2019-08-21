@@ -256,9 +256,13 @@ export default {
         this.clickSelectTiem(secDom);
     },
     beforeDestroy(){
-        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll")
-        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll")
-        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll")
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");
+        $(this.getJQDom(this.KEYS.minDomKey)).off("scroll");
+        $(this.getJQDom(this.KEYS.secDomKey)).off("scroll");
+
+        $(this.getJQDom(this.KEYS.hourDomKey)).off("click");
+        $(this.getJQDom(this.KEYS.minDomKey)).off("click");
+        $(this.getJQDom(this.KEYS.secDomKey)).off("click");
     }
 }
 </script>

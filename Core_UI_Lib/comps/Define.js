@@ -113,6 +113,7 @@ let INPUT_VALIDATA_TYPES = {
         password:''
     }
 }
+
 let EDITOR_MENUS = {
     DEFAULT_MENU : [
         'head',  // 标题
@@ -138,6 +139,10 @@ let EDITOR_MENUS = {
     ]
 }
 
+let SELECT = {
+    PLACEHOLDER:"请选择"
+}
+
 let DEFINE_KEY = {
     TREE_CONFIG:TREE_CONFIG,
     BUTTON_CONFIG:BUTTON_CONFIG,
@@ -145,6 +150,7 @@ let DEFINE_KEY = {
     DATE_TIME_PICKER_CONFIG:DATE_TIME_PICKER_CONFIG,
     INPUT_VALIDATA_TYPES:INPUT_VALIDATA_TYPES,
     EDITOR_MENUS:EDITOR_MENUS,
+    SELECT:SELECT
 }
 
 export default DEFINE_KEY;

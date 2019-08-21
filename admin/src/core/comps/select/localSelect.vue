@@ -25,6 +25,7 @@
     import tool from '../leCompsTool.js';
     import LeftSection from "./left.vue";
     import ButtomSection from "./buttom.vue";
+    import define from "../define.js";
 
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
@@ -170,7 +171,7 @@
             if(vals != ""){
                 this.placeholder = "";
             }else{
-                this.placeholder = "请选择";
+                this.placeholder = define.SELECT.PLACEHOLDER;
             }
         },
         /**

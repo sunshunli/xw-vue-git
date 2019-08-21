@@ -135,16 +135,6 @@ let EDITOR_MENUS = {
         'code',  // 插入代码
         'undo',  // 撤销
         'redo'  // 重复
-    ],
-    DEFAULT_EMJOY:[
-        {
-            // tab 的标题
-            title: 'emoji',
-            // type -> 'emoji' / 'image'
-            type: 'emoji',
-            // content -> 数组
-            content: ['😀', '😃', '😄', '😁', '😆']
-        }
     ]
 }
 

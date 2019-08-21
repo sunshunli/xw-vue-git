@@ -24,7 +24,7 @@
         </div>
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
-            <le-button type="search" disabled="true" value="Search" @click="search"></le-button>
+            <le-button type="search" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
@@ -101,7 +101,7 @@ export default {
     name:"FormValidate",
     data(){
         return {
-            readonly:true,
+            readonly:false,
             searchModel:{
                 age:"1",
                 id:"",

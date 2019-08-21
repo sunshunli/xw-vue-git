@@ -5,7 +5,8 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
 			<!--选中的标签-->
 			<div class="tags" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
-                <i :class="inputIcon" class="fa fa-chevron-down icon-del" @click.stop="clear"></i>
+                <i v-show="showArrow" class="fa fa-chevron-down icon-del" @click.stop="clickInput"></i>
+                <i v-show="!showArrow" class="fa fa-chevron-down icon-del fa-times-circle" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
@@ -50,7 +51,7 @@
             searchName:"",
             data:[],
             showButtom:false,
-            inputIcon:'',
+            showArrow:true
         }
     },
     computed:{
@@ -153,13 +154,11 @@
          */
         onEmit(){
             let selectedItems = this.getSelectedItems();
-            if(selectedItems.vals.length != 0){
-                let vals = selectedItems.vals.join(',');
-                this.$emit("input",vals);
-                this.$emit("change",vals);
-                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                    this.$attrs.setVerifyCompState();
-                }
+            let vals = selectedItems.vals.join(',');
+            this.$emit("input",vals);
+            this.$emit("change",vals);
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         /**
@@ -257,14 +256,13 @@
             },0)
         },
         hideArr(){
-            this.inputIcon = "";
+            this.showArrow = true;
         },
         showArr(){
-            if(this.leftArray.length > 0){
-                this.inputIcon = "fa-times-circle";
-            }else{
-                this.inputIcon = "";
+            if(this.leftArray.length == 0){
+                return;
             }
+            this.showArrow = false;
         },
     },
     mounted(){

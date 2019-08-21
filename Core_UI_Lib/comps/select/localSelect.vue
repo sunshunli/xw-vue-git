@@ -152,14 +152,13 @@
          * @returns
          */
         onEmit(){
+            debugger
             let selectedItems = this.getSelectedItems();
-            if(selectedItems.vals.length != 0){
-                let vals = selectedItems.vals.join(',');
-                this.$emit("input",vals);
-                this.$emit("change",vals);
-                if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                    this.$attrs.setVerifyCompState();
-                }
+            let vals = selectedItems.vals.join(',');
+            this.$emit("input",vals);
+            this.$emit("change",vals);
+            if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                this.$attrs.setVerifyCompState();
             }
         },
         /**

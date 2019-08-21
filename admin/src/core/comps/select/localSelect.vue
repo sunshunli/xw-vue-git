@@ -1,16 +1,15 @@
 <template>
-
-    <div style="position:relative" class="form-item selectContent">
+    <div style="position:relative" class="form-item selectContent" >
         <label class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div searchMulSelect" :class="state.successIcon" @click.stop="focusInput">
+        <div class="form-item-div searchMulSelect" :class="state.successIcon" @click="focusInput" v-bodyClick="hideButtom" :_body_tag="inputdomKey">
 			<!--选中的标签-->
-			<div class="tags" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
+			<div class="tags" :_body_tag="inputdomKey" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
                 <i v-show="showArrow" class="fa fa-chevron-down icon-del" @click.stop="clickInput"></i>
                 <i v-show="!showArrow" class="fa fa-chevron-down icon-del fa-times-circle" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input :placeholder="placeholder" :ref="inputdomKey" @click.stop="clickInput" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholder" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -26,6 +25,7 @@
     import LeftSection from "./left.vue";
     import ButtomSection from "./buttom.vue";
     import define from "../define.js";
+    // import bodyClick from "../leDirective.js";
 
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
@@ -41,6 +41,7 @@
     name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue","value","dataSource","readonly","enabledInput"],
     components: {LeftSection,ButtomSection},
+    // directives: {bodyClick},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
         return {
@@ -121,6 +122,9 @@
             }
             this.$refs[this.inputdomKey].focus();
             this.clickInput();
+        },
+        hideButtom(){
+            this.showButtom = false;
         },
         /**
          * @description 输入框的点击事件
@@ -208,12 +212,6 @@
             
         },
         /**
-         * @description 点击其他地方的时候,隐藏buttom组件并重置边框样式
-         */
-        bodyClick(){
-            this.showButtom = false;
-        },
-        /**
          * @description 获取所选项
          * @returns items:所选的对象数组，vals:所选的值集合
          */
@@ -288,7 +286,7 @@
          * @description 添加事件监听
          * @returns
          */
-        document.body.addEventListener("click",this.bodyClick,false);
+        // document.body.addEventListener("click",this.bodyClick,false);
         //在有数据的清空下，直接初始化数据源以及设置值   
         if(this.dataSource && this.dataSource.length >0){
             this.init(this.dataSource);
@@ -300,7 +298,7 @@
          * @description 在组件销毁之前，取消事件监听
          * @returns
          */
-        document.body.removeEventListener("click",this.bodyClick);
+        // document.body.removeEventListener("click",this.bodyClick);
     }
   }
 </script>

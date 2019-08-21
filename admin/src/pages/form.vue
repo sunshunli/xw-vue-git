@@ -37,20 +37,8 @@
                 <table-list ref='black_list_table' :options='tableOptions'></table-list>
             </div>
         </div>
-        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog1" :close-callback="closeDialog1">
+        <le-dialog v-if="false" title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
-                <le-form ref="form3" class="le_comps_core_css">
-                    <div class="col3 col_label">
-                        <le-input readonly on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input readonly on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input readonly on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                    </div>
-                </le-form>
-            </div>
-        </le-dialog> 
-        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
-            <div slot="body">
-                  <le-button type="create" value="新增2" @click="openDialog1"></le-button>
                 <le-form ref="form2" class="le_comps_core_css">
                     <div class="col3 col_label">
                         <le-input :readonly="readonly" on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
@@ -113,7 +101,6 @@ export default {
                 fav:""
             },
             showDialog:false,
-            showDialog1:false,
             uploadOptions:{
                 tip:"图片大小必须小于100kb,大小100*200",
                 multiple:true,
@@ -224,9 +211,6 @@ export default {
             this.showDialog = true;
             this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");
         },
-        openDialog1(){
-            this.showDialog1 = true;
-        },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();
         },
@@ -245,10 +229,6 @@ export default {
         closeDialog(){
             this.$refs.form2.reset();
             this.showDialog = false;
-        },
-        closeDialog1(){
-            this.$refs.form3.reset();
-            this.showDialog1 = false;
         },
         setEnable(enable){
             let ids = this.$refs.black_list_table.getCheckedItems("id").vals;

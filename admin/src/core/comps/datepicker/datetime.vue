@@ -1,12 +1,12 @@
 <template>
     <div class = "form-item current">
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class = "form-item-div dataTimePicker" :class="state.successIcon">
+        <div class = "form-item-div dataTimePicker" :class="state.successIcon" v-bodyClick="bodyClick" :_body_tag="dateKey">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
                 <!-- 展示文字的地方 -->
-                <div class = "dateTimeText" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle">
+                <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
                     {{dateTimeStr}}
                 </div>
                 <!-- 展开日期下拉 -->
@@ -20,12 +20,9 @@
                         </div>
                     </div>
                     <div class = "picker-bottom" style="border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
-                        <span @click.stop="getDateTimeStr">
-                            确定
-                        </span>
-                        <span class = "text" @click.stop="getNow">
-                            此刻
-                        </span>
+                        <span @click.stop="getDateTimeStr">确定</span>
+                        <span class = "text" @click.stop="getNow">此刻</span>
+                        <span class = "text" @click.stop="clear">清空</span>
                         <div style ="clear:both;"></div>
                     </div>
                 </div>
@@ -142,10 +139,15 @@ export default {
                 this.$refs[this.dateKey].setValue(str.split(' ')[0]);
                 this.$refs[this.timeKey].setValue(str.split(' ')[1]);
             }
+        },
+        bodyClick(){
+            this.showDateTimePicker = false;
         }
     },
     mounted(){
         this.setValue(this.value);
+    },
+    beforeDestroy(){
     }
 }   
 </script>

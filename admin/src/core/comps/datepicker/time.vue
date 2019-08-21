@@ -1,11 +1,11 @@
 
 <template>
-    <div class="form-item timeContent" :name="KEYS.ROOTDOM">
+    <div class="form-item timeContent" :name="KEYS.ROOTDOM" >
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click.stop="open"></div>
+                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" v-bodyClick="bodyClick" :_body_tag="KEYS.ROOTDOM" :name="KEYS.timeInputDomKey" @click="open"></div>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
@@ -123,9 +123,9 @@ export default {
         },
         //3个ul的滚动事件
         scrollFun(dom){
-            var sHeight = $(dom).scrollTop();
-            var curSelectLi =Math.floor(sHeight / 30) ;
-            var yu = sHeight % 30;
+            let sHeight = $(dom).scrollTop();
+            let curSelectLi =Math.floor(sHeight / 30) ;
+            let yu = sHeight % 30;
             if(curSelectLi == 0){
                 if(yu <10){
                    this. nextSelect = 0;
@@ -141,7 +141,7 @@ export default {
             }else{
                 this.nextSelect = 0;
             };
-            var nextDom = $(dom).children('li')[this.nextSelect];
+            let nextDom = $(dom).children('li')[this.nextSelect];
             $(nextDom).addClass('active').siblings().removeClass('active');
         },
         //设置值
@@ -228,11 +228,15 @@ export default {
         },
         //时间点击选中
         clickSelectTiem(dom){
-            $(dom).on("click","li",function(){
-                var houtTop = $(this)[0].offsetTop;
-                var scrollTop = (houtTop - 80) / 30 * 30;
-                $(dom).scrollTop(scrollTop)
+            $(dom).on("click","li",function(e){
+                let houtTop = $(this)[0].offsetTop;
+                let scrollTop = (houtTop - 80) / 30 * 30;
+                $(dom).scrollTop(scrollTop);
+                e.stopPropagation();
             });
+        },
+        bodyClick(){
+            this.getJQDom(this.KEYS.timePanelDomKey).hide();
         }
     },
     mounted(){
@@ -254,6 +258,8 @@ export default {
         this.clickSelectTiem(hourDom);
         this.clickSelectTiem(minDom);
         this.clickSelectTiem(secDom);
+
+        // document.body.addEventListener("click",this.bodyClick,false);
     },
     beforeDestroy(){
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");
@@ -263,6 +269,8 @@ export default {
         $(this.getJQDom(this.KEYS.hourDomKey)).off("click");
         $(this.getJQDom(this.KEYS.minDomKey)).off("click");
         $(this.getJQDom(this.KEYS.secDomKey)).off("click");
+
+        // document.body.removeEventListener("click",this.bodyClick);
     }
 }
 </script>

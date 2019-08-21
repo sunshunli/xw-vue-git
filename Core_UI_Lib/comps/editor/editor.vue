@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
+        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
@@ -227,5 +227,25 @@ form .form-item .form-item-div{
     text-align: left;
     position: absolute;
     bottom: -20px;
+}
+
+.form-item .form-item-label{
+    height: auto;
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    color: #606266;
+    line-height: normal;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+
+.form-item .form-item-label.required::before {
+    content: "*";
+    color: #f56c6c;
+    font-size: 12px;
+    margin-right: 2px;
 }
 </style>

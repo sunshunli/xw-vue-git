@@ -24,7 +24,7 @@
         </div>
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
-            <le-button type="search" value="Search" @click="search"></le-button>
+            <le-button type="search" disabled="true" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
@@ -87,7 +87,7 @@
             </div>
         
             <div slot="button">
-                <le-button disabled type='submit' value="禁用" @click="disabledForm"></le-button>
+                <le-button type='submit' value="禁用" @click="disabledForm"></le-button>
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
             </div>

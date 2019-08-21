@@ -291,10 +291,11 @@ export default {
             // this.$refs["dialogSexRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
             // this.$refs["dialogFavRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
 
-            this.jobArray = Unit.object.cloneObj(_data);
+            // this.jobArray = Unit.object.cloneObj(_data);
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
         },1000)
+        this.jobArray = Unit.object.cloneObj(_data);
     }
 }
 </script>

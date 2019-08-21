@@ -142,6 +142,7 @@
                 let formData = new FormData();
                 formData.append(this.fname,fileObj);
                 let fileName = fileObj.name;
+                this.reloadFileInput();
                 //控制格式
                 if(this.vtype){
                     let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
@@ -200,7 +201,6 @@
                     }
                     this.$emit('input',this.getNames(this.srcs));
                     this.showLoading = false;
-                    this.reloadFileInput();
                     if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                         this.$attrs.setVerifyCompState();
                     }
@@ -208,7 +208,6 @@
                 }).catch((err) => {
                     this.showLoading = false;
                     this.alert.showAlert("error","上传异常");
-                    this.reloadFileInput();
                     this.completedCallback&&this.completedCallback({success:false,data:err});
                 });
             },

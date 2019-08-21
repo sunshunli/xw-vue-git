@@ -122,8 +122,8 @@ export default {
                     console.log(d);
                 },
                 vtype:"jpg,png,gif",
-                // width:"1280",
-                // height:"634",
+                width:"750",
+                height:"350",
                 fname:"file",
                 analysis:(d)=>{
                     return d.data;

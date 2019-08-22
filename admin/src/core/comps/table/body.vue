@@ -21,7 +21,7 @@
                         <img style="width:50px;height:50px;" v-bind:src="row[item.key]" />
                     </div>
                     <div v-else>
-                        <div v-html="item.convert?item.convert(item,row):getValByFieldInRow(item,row)" @click.prevent="item.action && item.action(row,item)"></div>
+                        <div v-html="item.convert?item.convert(item,row):getValByFieldInRow(item,row)" @click="item.action && item.action(row,item)"></div>
                     </div>
                 </td>
             </tr>

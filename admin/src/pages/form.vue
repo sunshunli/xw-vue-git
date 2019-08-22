@@ -136,6 +136,18 @@ export default {
                     {key:"content",val:"封禁内容"},
                     {key:"accessDesc",val:"禁用方式"},
                     {key:"status",val:"状态"},
+                    {key:"operateTime",val:"修改时间"},
+                    {key:"shop",val:"商城"},
+                    {key:"accessField",val:"封禁纬度"},
+                    {key:"content",val:"封禁内容"},
+                    {key:"accessDesc",val:"禁用方式"},
+                    {key:"status",val:"状态"},
+                    {key:"operateTime",val:"修改时间"},
+                    {key:"shop",val:"商城"},
+                    {key:"accessField",val:"封禁纬度"},
+                    {key:"content",val:"封禁内容"},
+                    {key:"accessDesc",val:"禁用方式"},
+                    {key:"status",val:"状态"},
                     {key:"operateTime",val:"修改时间"}
                 ],
                 getUrl:()=>{

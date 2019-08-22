@@ -153,8 +153,7 @@ export default {
 </script>
  <style scoped> .dataTimePicker{
 display:inline-block; width: 180px;
-height: auto;
-border: 1px solid #dcdfe6; border-radius: 4px; box-sizing: border-box; position:relative;
+height: auto; box-sizing: border-box; position:relative;
 }
 .current .dataTimePicker{
 box-sizing: content-box;
@@ -163,15 +162,18 @@ display: inline-block; }
 height: 40px;
 cursor: pointer;
 float: left; }
-.dataTimePicker .date-box .dateTimeText{ background-color: #fff; background-image: none;
-color: #606266;
-display: inline-block;
-font-size: inherit;
-height: 40px;
-line-height: 40px;
-outline: none;
-transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 100%;
-padding: 0 32px;
+.dataTimePicker .date-box .dateTimeText{ 
+    background-color: #fff; background-image: none;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 100%;
+    padding: 0 32px;
+    border:1px solid #dcdfe6;
+     border-radius: 4px;
 }
 
 .dataTimePicker .date-box .dateTimeText.readonlyIcon{
@@ -199,7 +201,7 @@ color: #c0c4cc; font-weight: normal; cursor: pointer;
 .picker-box {
 width: 330px;
 box-sizing: border-box;
-margin-left: -27px;
+/* margin-left: -27px; */
 position: absolute;
 background: #fff;
 box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);

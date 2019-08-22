@@ -37,7 +37,7 @@
                 <table-list ref='black_list_table' :options='tableOptions'></table-list>
             </div>
         </div>
-        <le-dialog v-if="false" title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
+        <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
                 <le-form ref="form2" class="le_comps_core_css">
                     <div class="col3 col_label">
@@ -70,7 +70,7 @@
                     <le-upload on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
                     <le-editor on label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
                     
-                    <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>    
+                    <!-- <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>     -->
                 </le-form>
             </div>
         

@@ -176,6 +176,10 @@ float: left; }
      border-radius: 4px;
 }
 
+.fa-times-circle-o.dataTimePicker .date-box .dateTimeText{
+    border:1px solid #f56c6c;
+}
+
 .dataTimePicker .date-box .dateTimeText.readonlyIcon{
     background-color: #f1f1f1;
 }
@@ -263,8 +267,13 @@ height: 28px; line-height: 28px; font-size: 12px;
 left: -1px; }
 .fa-check-circle-o.dataTimePicker{ border: 1px solid #67c23a;
 }
-.fa-times-circle-o.dataTimePicker{ border: 1px solid #f56c6c;
+/* .fa-times-circle-o.dataTimePicker{ border: 1px solid #f56c6c;
+} */
+
+.dataTimePicker .ipt /deep/  .timeContent .timeInput{
+    border-color: #dcdfe6 !important;
 }
+
 .fa-times-circle-o:before{ content:'';
 }
 .fa-check-circle-o:before{ content:'';

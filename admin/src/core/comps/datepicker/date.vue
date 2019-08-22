@@ -587,8 +587,8 @@ height: 28px; line-height: 28px; font-size: 12px;
 }
 .fa-check-circle-o .form-item-input{ border: 1px solid #67c23a;
 }
-/* .fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
-} */
+.fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
+}
 .fa-times-circle-o:before{ content:'';
 }
 .fa-check-circle-o:before{ content:'';

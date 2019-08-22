@@ -1,10 +1,12 @@
 <template>
     <div class="tableContainer">
-        <table class="table">
-            <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
+        <div class="tableBox">
+            <table class="table">
+                <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
 
-            <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
-        </table>
+                <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
+            </table>
+        </div>
 
         <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
 
@@ -246,7 +248,6 @@
 <style scoped>
     
     .tableContainer{
-        overflow-x: scroll;
         display: block;
         min-width: 100%;
         position: relative;
@@ -260,6 +261,10 @@
         left:0;
         background: rgba(0, 0, 0, 0.8);
         display: block;
+    }
+
+    .tableContainer .tableBox{
+        overflow:scroll; 
     }
 
     .tableContainer .table-title{

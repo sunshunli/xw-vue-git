@@ -13,7 +13,9 @@
             <div class="col3">
                 <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
                 <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-                <le-local-select @change="showSelectItem" enabledInput label="选择职业" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+
+                <le-local-select @change="showSelectItem" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
                 <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>

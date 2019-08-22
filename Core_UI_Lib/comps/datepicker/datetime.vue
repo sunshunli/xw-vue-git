@@ -1,7 +1,7 @@
 <template>
     <div class = "form-item current">
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class = "form-item-div dataTimePicker" :class="state.successIcon" v-bodyClick="bodyClick" :_body_tag="dateKey">
+        <div class = "form-item-div dataTimePicker" :class="state.successIcon">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">

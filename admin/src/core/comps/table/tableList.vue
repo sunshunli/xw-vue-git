@@ -1,19 +1,23 @@
 <template>
-    <div class="tableContainer">
-        <div class="tableBox">
-            <table class="table">
-                <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
+    <div>
+        <div class="table-title">{{title}}</div>
+        <div class="tableContainer">
+            <div class="tableBox">
+                <table class="table">
+                    <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
 
-                <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
-            </table>
-        </div>
+                    <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
+                </table>
+            </div>
 
-        <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
+            <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
 
-        <div v-show='isLoading' class="tableMask">
-            <img class="tableLoadingImg" src="https://p2.lefile.cn/product/adminweb/2019/08/14/86f12d52-24a9-4863-87df-45ca60298472.gif"/>
+            <div v-show='isLoading' class="tableMask">
+                <img class="tableLoadingImg" src="https://p2.lefile.cn/product/adminweb/2019/08/14/86f12d52-24a9-4863-87df-45ca60298472.gif"/>
+            </div>
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -24,7 +28,7 @@
     
     export default {
         components: {HeaderSection,BodySection,PagingSection},
-        props:["options"],
+        props:["options","title"],
         name: "TableList",
         data(){
             return {
@@ -246,6 +250,17 @@
     }
 </script>
 <style scoped>
+    .table-title{
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 3px 3px 0 0;
+        height: 38px;
+        line-height: 38px;
+        background-color: #434e5b;
+        font-size: 14px;
+        color: #fff;
+    }
     
     .tableContainer{
         display: block;

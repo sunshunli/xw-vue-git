@@ -7,7 +7,7 @@
 
         <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col2">
-                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
+                <le-input label="年龄" msg="正整数" vType='positiveDecimals' on required v-model="searchModel.age"></le-input>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
             </div>
             <div class="col3">

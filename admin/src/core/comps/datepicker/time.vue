@@ -5,7 +5,7 @@
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" v-bodyClick="bodyClick" :_body_tag="KEYS.ROOTDOM" :name="KEYS.timeInputDomKey" @click="open"></div>
+                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>

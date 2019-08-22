@@ -55,7 +55,7 @@
 	.selectList ul{
 		padding: 0;
 		max-height: 186px;
-    	overflow: scroll;
+    	overflow-y: scroll;
 	}
 
 	.selectList li{

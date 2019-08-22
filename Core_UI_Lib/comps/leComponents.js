@@ -22,6 +22,7 @@ import LeEditor from "../comps/editor/editor.vue"
 
 
 import ValidataHOC from "./validataHOC.js";
+import bodyClickDirective from "./leDirective.js";
 
 export default{
     install:function(Vue){
@@ -44,5 +45,7 @@ export default{
         Vue.component("LeEditor",ValidataHOC(LeEditor));
 
         Vue.use(LeAlert);
+
+        Vue.directive('bodyClick', bodyClickDirective);
     }
 }

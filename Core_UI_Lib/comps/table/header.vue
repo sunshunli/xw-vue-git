@@ -96,9 +96,6 @@
      .table thead tr th.thCols{
          width: auto;
          word-break: keep-all;
-     }
-
-     .table thead tr th.opration{
-         width: 300px;
+         white-space: nowrap;
      }
 </style>

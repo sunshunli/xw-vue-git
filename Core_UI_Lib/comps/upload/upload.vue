@@ -229,7 +229,7 @@
                 }         
             },
             setValue(srcs){
-                if(srcs == ""){
+                if(!srcs){
                     return;
                 }
                 if(this.srcs.length == 0){

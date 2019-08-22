@@ -21,18 +21,7 @@
                         <img style="width:50px;height:50px;" v-bind:src="row[item.key]" />
                     </div>
                     <div v-else>
-                        <a v-if="item.convert && item.action" @click.prevent="e=>item.action(row,item)">
-                        {{item.convert(item,row)}}
-                        </a>
-                        <span v-if="item.convert && !item.action">
-                            {{item.convert(item,row)}}
-                        </span>
-                        <a v-if="!item.convert && item.action" @click.prevent="e=>item.action(row,item)">
-                            {{getValByFieldInRow(item,row)}}
-                        </a>
-                        <span v-if="!item.convert && !item.action">
-                            {{getValByFieldInRow(item,row)}}
-                        </span>
+                        <div v-html="item.convert?item.convert(item,row):getValByFieldInRow(item,row)" @click.prevent="item.action && item.action(row,item)"></div>
                     </div>
                 </td>
             </tr>

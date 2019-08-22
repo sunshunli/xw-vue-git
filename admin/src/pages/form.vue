@@ -133,7 +133,7 @@ export default {
             tableOptions:{
                 showCk:true,
                 map:[
-                    {key:"shop",val:"商城"},
+                    {key:"shop",val:"商城",convert:this.convertShop},
                     {key:"accessField",val:"封禁纬度"},
                     {key:"content",val:"封禁内容"},
                     {key:"accessDesc",val:"禁用方式"},
@@ -203,6 +203,13 @@ export default {
         }
     },
     methods:{
+        convertShop(key,row){
+            if(row[key.key] == "聚享汇"){
+                return "<span style='color:red'>聚享汇</span>";
+            }else{
+                return "<span style='color:blue'>"+row[key.key]+"</span>";
+            }
+        },
         disabledForm(){
             this.readonly = !this.readonly;
         },
@@ -220,7 +227,8 @@ export default {
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
                 this.entity.job = "3,4,5";
-                this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
+                // this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
+                this.entity.url = null;
             },1000)
             this.showDialog = true;
             this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");

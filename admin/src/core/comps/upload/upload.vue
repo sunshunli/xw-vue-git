@@ -382,6 +382,10 @@
     margin-left: 5px;
 }
 
+.upaload .form-item-label{
+    margin: 0 5px 0 10px;
+}
+
 .upaload .form-item-label.required::before {
     content: "*";
     color: #f56c6c;

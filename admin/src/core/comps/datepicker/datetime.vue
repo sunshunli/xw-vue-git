@@ -295,4 +295,9 @@ border: 1px solid yellowgreen;
     border:1px solid #dcdfe6 !important;
 }
 
+.dataTimePicker /deep/ .timeContent .timePicker{
+    right: 2px !important;
+    left: auto;
+}
+
 </style>

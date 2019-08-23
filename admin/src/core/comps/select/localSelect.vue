@@ -339,6 +339,7 @@
         text-align: right;
         color: #606266;
         display: inline-block;
+        font-size: 14px;
     }
 
     .medium .selectContent label{

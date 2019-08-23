@@ -34,9 +34,9 @@
         </div>
 
         <div class='le_list_table_pannel panel-table text-center'>
-            <div class="table-title">黑名单列表</div>
+            <!-- <div class="table-title">黑名单列表</div> -->
             <div class='overflow-table'>    
-                <table-list ref='black_list_table' :options='tableOptions'></table-list>
+                <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>
             </div>
         </div>
         <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">

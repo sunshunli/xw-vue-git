@@ -4,7 +4,7 @@
     <div class="form-item">
 
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" style = "display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>

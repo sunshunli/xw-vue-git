@@ -282,4 +282,9 @@ left: -1px; }
 }
 .dataTimePicker .medium .form-item .form-item-input{ width: 100%;
 border: 1px solid yellowgreen;
-} </style>
+} 
+.fa-times-circle-o .ipt .form-item /deep/ .form-item-input{
+    border:1px solid #dcdfe6 !important;
+}
+
+</style>

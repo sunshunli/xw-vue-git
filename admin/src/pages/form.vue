@@ -42,25 +42,6 @@
         <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
                 <le-form ref="form2" class="le_comps_core_css">
-                    <div class="col3 col_label">
-                        <le-input :readonly="readonly" on required label="年龄1" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input :readonly="readonly" on required label="年龄2" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input :readonly="readonly" on required label="年龄3" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                    </div>
-                    <div class="col2 col_label">
-                        <le-input on :readonly="readonly" required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                        <le-input on :readonly="readonly" required label="年龄" msg="正整数" vType='number' v-model="entity.age"></le-input>
-                    </div>
-                    <div class="col3 col_label">
-                        <le-time-picker :readonly="readonly" on label="开始时间" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
-                        <div class="middleClass">至</div>
-                        <le-date-time-picker :readonly="readonly" on msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
-                    </div>
-                    <div class="col4 col_label">
-                        <le-input label="年龄" :readonly="readonly" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-                        <le-input label="身份证号码" :readonly="readonly" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
-                        <le-date-picker label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
-                    </div>
                     <le-input label="身份证号码" :readonly="readonly" vType="number" msg="身份证号码必填" v-model="entity.id"></le-input>
                     <le-textarea label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <le-date-picker on label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>

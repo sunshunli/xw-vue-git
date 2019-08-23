@@ -4,7 +4,7 @@
     <div class="form-item">
 
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" style = "display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
@@ -587,8 +587,8 @@ height: 28px; line-height: 28px; font-size: 12px;
 }
 .fa-check-circle-o .form-item-input{ border: 1px solid #67c23a;
 }
-/* .fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
-} */
+.fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
+}
 .fa-times-circle-o:before{ content:'';
 }
 .fa-check-circle-o:before{ content:'';

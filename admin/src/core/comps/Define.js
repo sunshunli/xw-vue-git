@@ -148,7 +148,10 @@ let EDITOR_MENUS = {
 
 let PLACEHOLDER = {
     SELECT:"请选择",
-    INPUT:"请输入"
+    INPUT:"请输入",
+    DATE:"请选择日期",
+    TIME:"请选择时间",
+    DATETIME:"请选择日期时间"
 }
 
 let DEFINE_KEY = {

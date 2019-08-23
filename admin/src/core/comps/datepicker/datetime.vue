@@ -9,7 +9,7 @@
                 <!-- <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
                     {{dateTimeStr}}
                 </div> -->
-                <input class = "dateTimeText" readonly :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" v-model='dateTimeStr'/>
+                <input :placeholder="placeholderStr" class = "dateTimeText" readonly :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" v-model='dateTimeStr'/>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header" style = "height:272px;">
@@ -38,6 +38,7 @@
 
 import LeDatePicker from "./date.vue";
 import LeTimePicker from "./time.vue";
+import define from "../define.js";
 
 export default {
     name:"LeDateTimePicker",
@@ -58,6 +59,12 @@ export default {
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder;
+            }
+            return define.PLACEHOLDER.DATETIME;
+        },
         readonlyFlag(){
             if(this.readonly == undefined){
                 return false;

@@ -6,7 +6,7 @@
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
                 <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
-                <input class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
+                <input :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
@@ -34,6 +34,7 @@
 <script>
 
 import $ from "jquery";
+import define from "../define.js";
 
 export default {
     name:"LeTimePicker",
@@ -64,6 +65,12 @@ export default {
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder;
+            }
+            return define.PLACEHOLDER.TIME;
+        },
         readonlyFlag(){
             if(this.readonly == undefined){
                 return false;

@@ -382,7 +382,7 @@
 	    height: 100%;
         line-height: 100%;
 	    background-color: transparent;
-	    width: 60px;
+	    width: 100px;
 	    vertical-align: top;
     }
     

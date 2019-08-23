@@ -6,9 +6,10 @@
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
                 <!-- 展示文字的地方 -->
-                <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
+                <!-- <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
                     {{dateTimeStr}}
-                </div>
+                </div> -->
+                <input class = "dateTimeText" readonly :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" v-model='dateTimeStr'/>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header" style = "height:272px;">

@@ -543,7 +543,7 @@ display: inline-block; text-align: left; margin:0 0 22px 0;
 }
 .form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
 color: #606266; line-height: normal; padding: 0;
-box-sizing: border-box; margin-bottom: 0;
+box-sizing: border-box; margin: 0 5px 0 10px;
 }
 .medium .form-item .form-item-label{ line-height: normal;
 font-size: 14px;
@@ -572,6 +572,11 @@ form .form-item .form-item-input{ padding: 0 26px;
 .form-item .form-item-input:focus{
 border: 1px solid #409eff;
 outline: none; }
+
+.form-item .form-item-input.readonlyIcon:focus{
+    border-color: #dcdfe6;
+}
+
 .medium .form-item .form-item-input{ height: 40px;
 line-height: 40px;
 font-size: 14px;
@@ -580,6 +585,7 @@ text-align: left; }
 
 .medium .form-item .form-item-input.readonlyIcon{
     background-color: #f1f1f1;
+    cursor: text;
 }
 
 .small .form-item .form-item-input{ height: 34px;

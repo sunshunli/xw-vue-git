@@ -108,7 +108,7 @@
         line-height: normal;
         padding: 0;
         box-sizing: border-box;
-        margin-bottom: 0;
+        margin: 0 5px 0 10px;
     }
 
     .medium .form-item .form-item-label{
@@ -160,6 +160,11 @@
         border: 1px solid #409eff;
         outline: none;
     }
+
+    .form-item .form-item-input.readonlyIcon:focus{
+        border-color: #dcdfe6;
+    }
+
     .medium .form-item .form-item-input{
         line-height: normal;
         font-size: 14px;

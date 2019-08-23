@@ -360,7 +360,7 @@ display: block;
 width: 100%;
 height: 80px; }
 .timeContent .timePicker .timePanel div ul{ height: 100%;
-padding-bottom: 90px;
+padding-bottom: 80px;
 overflow-y: scroll;
 }
 .timeContent .timePicker .timePanel div ul::-webkit-scrollbar{ width: 0px;
@@ -413,7 +413,7 @@ border-radius:3px;
 .form-item .form-item-label{ height: auto;
 text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
 color: #606266; line-height: normal; padding: 0;
-box-sizing: border-box; margin-bottom: 0;
+box-sizing: border-box; margin: 0 5px 0 10px;
 }
 .medium .form-item .form-item-label{ line-height: normal;
 font-size: 14px;
@@ -429,8 +429,9 @@ height: 40px;
 font-size: 14px; line-height: 40px;
 display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding: 0 8% 0 4%; color: #606266;
 outline: none; }
-.form-item .form-item-input:focus{ border: 1px solid #409eff; outline: none;
-}
+.form-item .form-item-input:focus{
+border: 1px solid #409eff;
+outline: none; }
 .medium .form-item .form-item-input{
 height: 40px; line-height: 40px; font-size: 14px;
 }
@@ -441,8 +442,7 @@ height: 34px; line-height: 34px; font-size: 14px;
 height: 28px; line-height: 28px; font-size: 12px;
 }
 .form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; margin: 0;
-padding: 0;
-margin-top: -5px; }
+padding: 0; }
 .fa-check-circle-o .timeInput{ border: 1px solid #67c23a;
 }
 .fa-times-circle-o .timeInput{ border: 1px solid #f56c6c;
@@ -454,6 +454,11 @@ margin-top: -5px; }
 .ipt .form-item .form-item-div{ width:100%;
 }
 .ipt .timeContent .timeInput{ text-align: center;
-} </style>
+} 
+.timeContent .timeInput:focus{
+    border: 1px solid #409eff;
+}
+
+</style>
 
  

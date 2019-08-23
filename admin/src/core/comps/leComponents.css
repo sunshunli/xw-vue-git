@@ -124,6 +124,10 @@
     color: #f56c6c;
 }
 
+.readonlyIcon{
+    cursor: not-allowed !important;
+}
+
 input::-webkit-input-placeholder { /* WebKit browsers */
     color: #b7b8bb;
     font-size: 14px;

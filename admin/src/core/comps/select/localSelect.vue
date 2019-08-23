@@ -434,5 +434,9 @@
         margin-right: 2px;
     }
 
+    .selectContent .form-item-label{
+        margin: 0 5px 0 10px;
+    }
+
 
 </style>

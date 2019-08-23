@@ -5,7 +5,8 @@
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div>
+                <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
+                <input :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
             </div>
@@ -33,6 +34,7 @@
 <script>
 
 import $ from "jquery";
+import define from "../define.js";
 
 export default {
     name:"LeTimePicker",
@@ -63,6 +65,12 @@ export default {
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder;
+            }
+            return define.PLACEHOLDER.TIME;
+        },
         readonlyFlag(){
             if(this.readonly == undefined){
                 return false;
@@ -101,7 +109,7 @@ export default {
             let result = res.join(':');
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             this.$emit("input",result);
-            this.getJQDom(this.KEYS.timeInputDomKey).html(result);
+            this.getJQDom(this.KEYS.timeInputDomKey).val(result);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
@@ -147,7 +155,7 @@ export default {
         //设置值
         setValue(str){
             //给dom赋值
-            str?this.getJQDom(this.KEYS.timeInputDomKey).html(str):this.getJQDom(this.KEYS.timeInputDomKey).html("");
+            str?this.getJQDom(this.KEYS.timeInputDomKey).val(str):this.getJQDom(this.KEYS.timeInputDomKey).val("");
 
             let hourDom = $("div [name="+this.KEYS.hourDomKey+"]");
             let minDom = $("div [name="+this.KEYS.minDomKey+"]");
@@ -198,7 +206,7 @@ export default {
         },
         //获取值
         getValue(){
-            return this.getJQDom(this.KEYS.timeInputDomKey).html();
+            return this.getJQDom(this.KEYS.timeInputDomKey).val();
         },
         //获取当前的时分秒索引
         getCurrentHMSIndex(){
@@ -367,6 +375,12 @@ color: #606266; }
 .timeContent .timePicker .timePanel div ul /deep/ li.active{
 
  color:#409eff; }
+
+.timeContent .timePicker .timePanel div ul /deep/ li:hover{
+    background-color:#f0efef;
+}
+
+
 .timeContent .timePicker .timeBtnGroup{ height: 36px;
 line-height: 36px;
 margin: 0 auto;

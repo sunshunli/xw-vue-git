@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import define from "../define.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",
@@ -28,6 +29,12 @@
             }
         },
         computed:{
+            placeholderStr(){
+                if(this.$attrs.placeholder){
+                    return this.$attrs.placeholder;
+                }
+                return define.PLACEHOLDER.INPUT;
+            },
             readonlyFlag(){
                 if(this.$attrs.readonly == undefined){
                     return false;

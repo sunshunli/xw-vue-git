@@ -8,7 +8,7 @@
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -143,7 +143,7 @@ let _tool = {
     }
 }
 
-import DEFINE_KEY from "../define.js";
+import define from "../define.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
@@ -182,8 +182,14 @@ export default {
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder;
+            }
+            return define.PLACEHOLDER.DATE;
+        },
         Weeks(){
-            return DEFINE_KEY.DATE_TIME_PICKER_CONFIG.WEEK;
+            return define.DATE_TIME_PICKER_CONFIG.WEEK;
         },
         selectDayStr(){
             if(this.selectDay == ""){

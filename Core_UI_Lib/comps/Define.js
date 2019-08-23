@@ -146,8 +146,12 @@ let EDITOR_MENUS = {
     ]
 }
 
-let SELECT = {
-    PLACEHOLDER:"请选择"
+let PLACEHOLDER = {
+    SELECT:"请选择",
+    INPUT:"请输入",
+    DATE:"请选择日期",
+    TIME:"请选择时间",
+    DATETIME:"请选择日期时间"
 }
 
 let DEFINE_KEY = {
@@ -157,7 +161,7 @@ let DEFINE_KEY = {
     DATE_TIME_PICKER_CONFIG:DATE_TIME_PICKER_CONFIG,
     INPUT_VALIDATA_TYPES:INPUT_VALIDATA_TYPES,
     EDITOR_MENUS:EDITOR_MENUS,
-    SELECT:SELECT
+    PLACEHOLDER:PLACEHOLDER
 }
 
 export default DEFINE_KEY;

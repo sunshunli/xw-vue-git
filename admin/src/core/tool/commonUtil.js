@@ -4,7 +4,6 @@
 let CommonUtil = {
     throwError:function(str){
         console.log(str);
-        //throw new Error(str);
     },
     string:{
         replaceAll:function(value,findText,replaceText){

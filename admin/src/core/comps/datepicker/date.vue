@@ -8,7 +8,7 @@
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input :placeholder="$attrs.placeholder?$attrs.placeholder:''" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>

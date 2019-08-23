@@ -9,7 +9,7 @@
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input :placeholder="placeholder" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -59,6 +59,12 @@
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder;
+            }
+            return define.PLACEHOLDER.SELECT;
+        },
         /**
          * @description 根据输入关键字来搜索
          * @returns 查询后的Array
@@ -162,20 +168,10 @@
         onEmit(){
             let selectedItems = this.getSelectedItems();
             let vals = selectedItems.vals.join(',');
-            this.checkPlaceholder();
             this.$emit("input",vals);
             this.$emit("change",vals);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
-            }
-        },
-        checkPlaceholder(){
-            let selectedItems = this.getSelectedItems();
-            let vals = selectedItems.vals.join(',');
-            if(vals != ""){
-                this.placeholder = "";
-            }else{
-                this.placeholder = define.SELECT.PLACEHOLDER;
             }
         },
         /**
@@ -244,7 +240,6 @@
                     tmp.ck = true;
                 }
             })
-            this.checkPlaceholder();
         },
         resetDataCkStatus(){
             this.data.forEach(item=>{
@@ -261,7 +256,6 @@
                 return;
             }
             this.resetDataCkStatus();
-            this.checkPlaceholder();
             this.searchName = "";
             this.$emit("input","");
             this.showButtom = false;

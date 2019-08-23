@@ -60,8 +60,11 @@
     },
     computed:{
         placeholderStr(){
+            if(this.placeholder == ""){
+                return "";
+            }
             if(this.$attrs.placeholder){
-                return this.$attrs.placeholder;
+                return this.$attrs.placeholder
             }
             return define.PLACEHOLDER.SELECT;
         },
@@ -168,10 +171,20 @@
         onEmit(){
             let selectedItems = this.getSelectedItems();
             let vals = selectedItems.vals.join(',');
+            this.checkPlaceholder();
             this.$emit("input",vals);
             this.$emit("change",vals);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
+            }
+        },
+        checkPlaceholder(){
+            let selectedItems = this.getSelectedItems();
+            let vals = selectedItems.vals.join(',');
+            if(vals != ""){
+                this.placeholder = "";
+            }else{
+                this.placeholder = define.PLACEHOLDER.SELECT;
             }
         },
         /**
@@ -240,6 +253,7 @@
                     tmp.ck = true;
                 }
             })
+            this.checkPlaceholder();
         },
         resetDataCkStatus(){
             this.data.forEach(item=>{
@@ -256,6 +270,7 @@
                 return;
             }
             this.resetDataCkStatus();
+            this.checkPlaceholder();
             this.searchName = "";
             this.$emit("input","");
             this.showButtom = false;

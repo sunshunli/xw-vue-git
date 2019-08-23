@@ -375,6 +375,12 @@ color: #606266; }
 .timeContent .timePicker .timePanel div ul /deep/ li.active{
 
  color:#409eff; }
+
+.timeContent .timePicker .timePanel div ul /deep/ li:hover{
+    background-color:#f0efef;
+}
+
+
 .timeContent .timePicker .timeBtnGroup{ height: 36px;
 line-height: 36px;
 margin: 0 auto;

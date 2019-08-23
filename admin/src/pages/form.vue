@@ -43,10 +43,10 @@
             <div slot="body">
                 <le-form ref="form2" class="le_comps_core_css">
                     <le-input label="身份证号码" :readonly="readonly" vType="number" msg="身份证号码必填" v-model="entity.id"></le-input>
-                    <le-textarea label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
-                    <le-date-picker on label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
-                    <le-time-picker on label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
-                    <le-date-time-picker on label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <le-textarea placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+                    <le-date-picker on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
+                    <le-time-picker on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
+                    <le-date-time-picker placeholder="请选择日期时间" on label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                     <le-local-select on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                     <le-radio-list on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 

@@ -312,18 +312,6 @@
   }
 </script>
 <style scoped>
-    input.searchMsg::-webkit-input-placeholder { /* WebKit browsers */
-        color: #b7b8bb;
-    }
-    input.searchMsg:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: #b7b8bb;
-    }
-    input.searchMsg::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: #b7b8bb;
-    }
-    input.searchMsg:-ms-input-placeholder { /* Internet Explorer 10+ */
-        color: #b7b8bb;
-    }
     .blueborder{
         border-color:#409eff !important;
     }
@@ -395,7 +383,7 @@
 	    height: 100%;
         line-height: 100%;
 	    background-color: transparent;
-	    width: 60px;
+	    width: 100px;
 	    vertical-align: top;
     }
     

@@ -2,7 +2,7 @@
     <div class="form-item">
         <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
         </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-
+    import define from "../define.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeTextarea",
@@ -29,6 +29,12 @@
             }
         },
         computed:{
+            placeholderStr(){
+                if(this.$attrs.placeholder){
+                    return this.$attrs.placeholder;
+                }
+                return define.PLACEHOLDER.INPUT;
+            },
             readonlyFlag(){
                 if(this.readonly == undefined){
                     return false;

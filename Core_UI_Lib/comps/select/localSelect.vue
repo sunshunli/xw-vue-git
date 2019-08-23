@@ -9,7 +9,7 @@
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input :placeholder="placeholder" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -59,6 +59,15 @@
         }
     },
     computed:{
+        placeholderStr(){
+            if(this.placeholder == ""){
+                return "";
+            }
+            if(this.$attrs.placeholder){
+                return this.$attrs.placeholder
+            }
+            return define.PLACEHOLDER.SELECT;
+        },
         /**
          * @description 根据输入关键字来搜索
          * @returns 查询后的Array
@@ -175,7 +184,7 @@
             if(vals != ""){
                 this.placeholder = "";
             }else{
-                this.placeholder = define.SELECT.PLACEHOLDER;
+                this.placeholder = define.PLACEHOLDER.SELECT;
             }
         },
         /**
@@ -303,18 +312,6 @@
   }
 </script>
 <style scoped>
-    input.searchMsg::-webkit-input-placeholder { /* WebKit browsers */
-        color: #ded6d6;
-    }
-    input.searchMsg:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: #ded6d6;
-    }
-    input.searchMsg::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: #ded6d6;
-    }
-    input.searchMsg:-ms-input-placeholder { /* Internet Explorer 10+ */
-        color: #ded6d6;
-    }
     .blueborder{
         border-color:#409eff !important;
     }
@@ -385,7 +382,7 @@
 	    height: 100%;
         line-height: 100%;
 	    background-color: transparent;
-	    width: 60px;
+	    width: 100px;
 	    vertical-align: top;
     }
     

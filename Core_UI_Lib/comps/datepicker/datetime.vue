@@ -184,6 +184,10 @@ float: left; }
      border-radius: 4px;
 }
 
+.dataTimePicker .date-box .dateTimeText:focus{
+    border:1px solid #409EFF;
+}
+
 .fa-times-circle-o.dataTimePicker .date-box .dateTimeText{
     border:1px solid #f56c6c;
 }
@@ -239,7 +243,7 @@ text-align: left; margin:0 0 22px 0; margin-top: -2px; display: inline-block;
 }
 .form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
 color: #606266; line-height: normal; padding: 0;
-box-sizing: border-box; margin-bottom: 0;
+box-sizing: border-box; margin: 0 5px 0 10px;
 }
 .medium .form-item .form-item-label{ line-height: normal;
 font-size: 14px;
@@ -293,6 +297,11 @@ border: 1px solid yellowgreen;
 } 
 .fa-times-circle-o .ipt .form-item /deep/ .form-item-input{
     border:1px solid #dcdfe6 !important;
+}
+
+.dataTimePicker /deep/ .timeContent .timePicker{
+    right: 2px !important;
+    left: auto;
 }
 
 </style>

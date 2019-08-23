@@ -70,7 +70,6 @@ export default {
                 let errorComps = [];
                 for(let i=0;i<tmp.length;i++){
                     let vInputRes = tmp[i].$attrs.getVerifyResult();
-                    console.log(vInputRes);
                     if(!vInputRes.success){
                         count++;
                         res.info.push(vInputRes.msg);

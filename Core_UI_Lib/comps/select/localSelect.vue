@@ -327,6 +327,7 @@
         text-align: right;
         color: #606266;
         display: inline-block;
+        font-size: 14px;
     }
 
     .medium .selectContent label{
@@ -431,6 +432,10 @@
         color: #f56c6c;
         font-size: 12px;
         margin-right: 2px;
+    }
+
+    .selectContent .form-item-label{
+        margin: 0 5px 0 10px;
     }
 
 

@@ -133,6 +133,10 @@
         flex: 1;
     }    
 
+    .form-item .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
+    }
+
     form .form-item .form-item-div{
         position: relative;
     }

@@ -359,9 +359,14 @@ width: 60px; height: 30px; line-height: 30px; text-align: center; color: #606266
 display: block;
 width: 100%;
 height: 80px; }
-.timeContent .timePicker .timePanel div ul{ height: 100%;
-padding-bottom: 80px;
-overflow-y: scroll;
+.timeContent .timePicker .timePanel div ul::after{ 
+    content: "";
+display: block;
+width: 100%;
+height: 80px; }
+.timeContent .timePicker .timePanel div ul{ 
+    height: 100%;
+    overflow-y: scroll;
 }
 .timeContent .timePicker .timePanel div ul::-webkit-scrollbar{ width: 0px;
 height: 10px;

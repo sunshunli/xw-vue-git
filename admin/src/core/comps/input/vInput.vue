@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <input :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
@@ -29,6 +29,12 @@
             }
         },
         computed:{
+            labelWidthVal(){
+                if(!this.$attrs.labelWidth){
+                    return 100;
+                }
+                return this.$attrs.labelWidth;
+            },
             placeholderStr(){
                 if(this.$attrs.placeholder){
                     return this.$attrs.placeholder;
@@ -111,7 +117,7 @@
         line-height: normal;
         padding: 0;
         box-sizing: border-box;
-        margin: 0 5px 0 10px;
+        margin: 0 10px 0 10px;
     }
 
     .medium .form-item .form-item-label{

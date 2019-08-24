@@ -1,6 +1,6 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
@@ -32,6 +32,12 @@ export default {
         };
     },
     computed: {
+        labelWidthVal(){
+            if(!this.$attrs.labelWidth){
+                return 100;
+            }
+            return this.$attrs.labelWidth;
+        },
         // onchangeTimeout(){
         //     return this.option && this.option.onchangeTimeout ? this.option.onchangeTimeout : "-1";
         // },

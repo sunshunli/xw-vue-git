@@ -2,8 +2,7 @@
 
 <template>
     <div class="form-item">
-
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
@@ -182,6 +181,12 @@ export default {
         }
     },
     computed:{
+        labelWidthVal(){
+            if(!this.$attrs.labelWidth){
+                return 100;
+            }
+            return this.$attrs.labelWidth;
+        },
         placeholderStr(){
             if(this.$attrs.placeholder){
                 return this.$attrs.placeholder;

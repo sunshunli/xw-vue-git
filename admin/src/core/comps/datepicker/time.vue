@@ -1,7 +1,7 @@
 
 <template>
     <div class="form-item timeContent" :name="KEYS.ROOTDOM" >
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
@@ -65,6 +65,12 @@ export default {
         }
     },
     computed:{
+        labelWidthVal(){
+            if(!this.$attrs.labelWidth){
+                return 100;
+            }
+            return this.$attrs.labelWidth;
+        },
         placeholderStr(){
             if(this.$attrs.placeholder){
                 return this.$attrs.placeholder;

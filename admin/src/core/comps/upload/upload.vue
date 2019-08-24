@@ -1,7 +1,7 @@
 <template>
     <div class="form-item upaload">
         <div style="display: flex;">
-            <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+            <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
 
             <div style="flex:1">
                 <span  class="input-file">请选择
@@ -37,6 +37,12 @@
             }
         },
         computed:{
+            labelWidthVal(){
+                if(!this.$attrs.labelWidth){
+                    return 100;
+                }
+                return this.$attrs.labelWidth;
+            },
             tipStr(){
                 return this.options.tip?this.options.tip:"";
             },

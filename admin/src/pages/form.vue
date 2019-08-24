@@ -7,7 +7,7 @@
 
         <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col2">
-                <le-input placeholder="请输入年龄" label="年龄" msg="正整数" vType='positiveDecimals' v-model="searchModel.age"></le-input>
+                <le-input labelWidth="200" placeholder="请输入年龄" label="年龄" msg="正整数" vType='positiveDecimals' v-model="searchModel.age"></le-input>
                 <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
             </div>
             <div class="col3">
@@ -337,11 +337,6 @@ export default {
         color: #ccc;
         /* content: "/\00a0"; */
         content: "/";
-    }
-
-    .form-item /deep/ label{
-        width: 94px !important;
-        margin-right: 10px;
     }
 
     .le_dialog_box .col3{

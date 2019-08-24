@@ -1,6 +1,6 @@
 <template>
     <div style="position:relative" class="form-item selectContent" >
-        <label class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click="focusInput" v-bodyClick="hideButtom" :_body_tag="inputdomKey">
 			<!--选中的标签-->
 			<div class="tags" :_body_tag="inputdomKey" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
@@ -59,6 +59,12 @@
         }
     },
     computed:{
+        labelWidthVal(){
+            if(!this.$attrs.labelWidth){
+                return 100;
+            }
+            return this.$attrs.labelWidth;
+        },
         placeholderStr(){
             if(this.placeholder == ""){
                 return "";

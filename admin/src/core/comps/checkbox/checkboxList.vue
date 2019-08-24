@@ -1,7 +1,7 @@
 
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <span class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
@@ -31,6 +31,12 @@ export default {
         }
     },
     computed:{
+        labelWidthVal(){
+            if(!this.$attrs.labelWidth){
+                return 100;
+            }
+            return this.$attrs.labelWidth;
+        },
         readonlyFlag(){
             if(this.readonly == undefined){
                 return false;

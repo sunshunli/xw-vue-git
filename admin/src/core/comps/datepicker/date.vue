@@ -575,4 +575,10 @@ form .form-item .form-item-input{ padding: 0 26px;}
 .picker-header .ipt .form-item .form-item-label{ display: none;}
 .picker-header .medium .ipt .form-item .form-item-label{ display: none;} 
 .fa-times-circle-o .timeInput .readonlyIcon {background-color: #f1f1f1;}
+.fa-times-circle-o .form-item-input{
+    border: 1px solid #f56c6c;
+}
+.fa-check-circle-o .form-item-input{ 
+    border: 1px solid #67c23a;
+}
 </style>

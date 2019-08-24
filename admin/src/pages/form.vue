@@ -7,17 +7,17 @@
 
         <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col2">
-                <le-input labelWidth="200" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
-                <le-input label="身份证号码" v-model="searchModel.id"></le-input>
+                <le-input labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
+                <le-input labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
             </div>
             <div class="col3">
-                <le-time-picker label="时间组件" v-model="searchModel.time"></le-time-picker>
-                <le-date-time-picker label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
-                <le-local-select @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
-                <le-local-select multiple placeholder="job" @change="showSelectItem" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
+                <le-date-time-picker labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
+                <le-local-select labelWidth="90" @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select labelWidth="100" multiple placeholder="job" @change="showSelectItem" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
-                <le-date-picker label="日期组件" v-model="searchModel.date"></le-date-picker>
+                <le-date-picker labelWidth="250" label="日期组件" v-model="searchModel.date"></le-date-picker>
             </div>
         </div>
 
@@ -37,18 +37,18 @@
         </div>
         <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
-                <le-form labelWidth='200' ref="form2" class="le_comps_core_css">
+                <le-form labelWidth='180' ref="form2" class="le_comps_core_css">
                     <le-input label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
-                    <le-input label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
-                    <le-textarea placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
-                    <le-date-picker on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
-                    <le-time-picker on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
-                    <le-date-time-picker on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-                    <le-local-select on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
-                    <le-radio-list on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
-                    <le-checkbox-list on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
-                    <le-upload on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
-                    <le-editor on label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
+                    <le-input labelWidth='150' label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
+                    <le-textarea labelWidth='150'  placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+                    <le-date-picker labelWidth='150'  on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
+                    <le-time-picker labelWidth='150'  on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
+                    <le-date-time-picker labelWidth='150'  on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <le-local-select labelWidth='150'  on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
+                    <le-radio-list labelWidth='150'  on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
+                    <le-checkbox-list labelWidth='150'  on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
+                    <le-upload labelWidth='150'  on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
+                    <le-editor labelWidth='150'  on label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
                     
                     <!-- <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>     -->
                 </le-form>

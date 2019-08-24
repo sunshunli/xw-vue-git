@@ -39,7 +39,7 @@ module.exports = (env = {}) =>{
 
     const ver = new Date().getTime();
     return {
-        entry: './src/main.js',//入口
+        entry: ['babel-polyfill','./src/main.js'],//入口
         output: {
             path: path.resolve(__dirname, './dist'),//输出结果
             publicPath: env.production ? './' : '/', //文件路径
@@ -70,6 +70,7 @@ module.exports = (env = {}) =>{
                     exclude: /node_modules/,
                     include: [
                         path.join(__dirname,"../Core_UI_Lib/*"),
+                        path.join(__dirname,"./src")
                     ]
                 },
                 // 加载图标

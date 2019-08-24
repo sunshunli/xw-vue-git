@@ -18,7 +18,10 @@
     </div>
 </template>
 
+    
 <script>
+    import define from "../define.js";
+    import tool from "../leCompsTool.js";
     export default {
         components: {},
         props:["options","value","readonly","tip"],
@@ -38,10 +41,13 @@
         },
         computed:{
             labelWidthVal(){
-                if(!this.$attrs.labelWidth){
-                    return 100;
+                if(this.$attrs.labelWidth){
+                    return this.$attrs.labelWidth;
                 }
-                return this.$attrs.labelWidth;
+                if(this.formLabelWidth != 0){
+                    return this.formLabelWidth;
+                }
+                return define.LABELWIDTH;
             },
             tipStr(){
                 return this.options.tip?this.options.tip:"";
@@ -272,6 +278,11 @@
         },
         mounted(){
             this.setValue(this.value);
+
+            let that = this;
+            tool._form_event_publisher.on(that._uid,(data)=>{
+                this.formLabelWidth = data;
+            });
         }
     }
 </script>

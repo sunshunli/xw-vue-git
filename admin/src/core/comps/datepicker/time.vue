@@ -35,6 +35,7 @@
 
 import $ from "jquery";
 import define from "../define.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"LeTimePicker",
@@ -66,10 +67,13 @@ export default {
     },
     computed:{
         labelWidthVal(){
-            if(!this.$attrs.labelWidth){
-                return 100;
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
             }
-            return this.$attrs.labelWidth;
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
         },
         placeholderStr(){
             if(this.$attrs.placeholder){
@@ -274,6 +278,11 @@ export default {
         this.clickSelectTiem(secDom);
 
         // document.body.addEventListener("click",this.bodyClick,false);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy(){
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");

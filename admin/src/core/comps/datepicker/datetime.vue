@@ -17,14 +17,14 @@
                             <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
-                            <le-time-picker :ref='timeKey'></le-time-picker>
+                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
                         </div>
                     </div>
                     <div class = "picker-bottom" style="border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
                         <span @click.stop="getDateTimeStr">确定</span>
-                        <span class = "text" @click.stop="getNow">此刻</span>
-                        <span class = "text" @click.stop="clear">清空</span>
-                        <div style ="clear:both;"></div>
+                        <span class="text" @click.stop="getNow">此刻</span>
+                        <span class="text" @click.stop="clear">清空</span>
+                        <div style="clear:both;"></div>
                     </div>
                 </div>
             </div>
@@ -39,6 +39,7 @@
 import LeDatePicker from "./date.vue";
 import LeTimePicker from "./time.vue";
 import define from "../define.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"LeDateTimePicker",
@@ -60,10 +61,13 @@ export default {
     },
     computed:{
         labelWidthVal(){
-            if(!this.$attrs.labelWidth){
-                return 100;
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
             }
-            return this.$attrs.labelWidth;
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
         },
         placeholderStr(){
             if(this.$attrs.placeholder){
@@ -160,6 +164,10 @@ export default {
     },
     mounted(){
         this.setValue(this.value);
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy(){
     }

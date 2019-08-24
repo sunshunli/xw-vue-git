@@ -12,8 +12,10 @@
 </template>
 
 <script>
+import tool from "../leCompsTool.js";
 export default {
     name:"LeForm",
+    props:["labelWidth"],
     data(){
         return {
             subComps:[],
@@ -28,22 +30,22 @@ export default {
         getAllSubComponents(arr){
             if(arr && arr instanceof Array && arr.length >=1){
                 for(let i =0;i< arr.length;i++){
-                    if(arr[i].$attrs.checkVerifyEnabled && arr[i].$attrs.checkVerifyEnabled() && arr[i].validataComponentType != undefined){
-                        this.subComps.push(arr[i]);
+                    let comp = null;
+                    if(arr[i].validataComponentType == "HOC"){
+                        comp = arr[i].getCurrentComponent();
+                    }else{
+                        comp = arr[i];
                     }
-                    this.allComps.push(arr[i]);
-                    
-                    let children = arr[i].$children;
-                    if(children.length > 0){
-                        this.getAllSubComponents(children);
+                    if(comp.$attrs.checkVerifyEnabled && comp.$attrs.checkVerifyEnabled() && comp.validataComponentType != undefined){
+                        this.subComps.push(comp);
                     }
+                    this.allComps.push(comp);
                 }
             }else{
                 return;
             }
         },
         reset(){
-            this.initSubComponents();
             this.allComps.length >0 && this.allComps.forEach(comp=>{
                 //先执行自身重写的reset方法，如果没有重写，执行HOC组件传递过来的方法
                 if(comp.reset){
@@ -94,6 +96,13 @@ export default {
     },
     mounted(){
         this.initSubComponents();
+        if(this.labelWidth){
+            this.allComps.forEach(x=>{
+                x.$set(x.$attrs, "labelWidth", this.labelWidth);
+                //推送消息给所有的子组件，现在需要变化labelWidth, 需要匹配组件的uid
+                tool._form_event_publisher.broadcast(x._uid,this.labelWidth);
+            })            
+        }
     }
 }
 </script>
@@ -233,12 +242,5 @@ export default {
         height: 28px;
         line-height: 28px;
         font-size: 12px;
-    }
-
-    .dialogBtnContent{
-        text-align: right;
-        border-top:1px solid #ccc;
-        position: absolute;
-        width: 100%;
     }
 </style>

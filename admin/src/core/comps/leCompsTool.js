@@ -1,6 +1,25 @@
 /**
  * Created by wupeng5 on 2018/2/1.
  */
+
+let FORMEventPublisher = function(){
+
+    this.eventCallbackDictionary = {};
+
+    this.on = function(eventName,callback){
+        this.eventCallbackDictionary[eventName] = callback;
+    }
+
+    this.broadcast = function(eventName,data){
+        for(let i in this.eventCallbackDictionary){
+            if(i == eventName && this.eventCallbackDictionary[eventName]){
+                this.eventCallbackDictionary[eventName](data);
+                //this.eventCallbackDictionary[eventName] = null;
+            }
+        }
+    }
+}
+
 let LeCompTool = {
     object:{
         equalsObject(source,target){
@@ -193,7 +212,8 @@ let LeCompTool = {
         newId:()=>{
             return LeCompTool._idSeed.id++;
         }
-    }
+    },
+    _form_event_publisher:new FORMEventPublisher()
 }
 
 export default LeCompTool;

@@ -21,7 +21,7 @@
                         <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
                     </span>
                     <div class="hearderText">
-                        {{state.currentYear}}/{{state.currentMonth}}
+                        {{current.currentYear}}/{{current.currentMonth}}
                     </div>
                     <span>
                         <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
@@ -143,10 +143,11 @@ let _tool = {
 }
 
 import define from "../define.js";
+import tool from "../leCompsTool.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
- * @param state.currentYear, state.currentMonth, state.currentDay控制picker弹出层的年和月的选择
+ * @param current.currentYear, current.currentMonth, current.currentDay控制picker弹出层的年和月的选择
  * @param selectDay控制所选择的值，也就是文本框里面的值
  * @param 这2者不可以统一用state里面的值来标识
  * @param isShowPicker控制是否显示弹出层
@@ -162,10 +163,12 @@ export default {
             validataComponentType:"DatePicker",
             state:{
                 showError:false,
+                successIcon:""
+            },
+            current:{
                 currentYear:new Date().getFullYear(),
                 currentMonth:new Date().getMonth() + 1,
                 currentDay:new Date().getDate(),
-                successIcon:""
             },
             data:[],
             selectDay:"",
@@ -182,10 +185,13 @@ export default {
     },
     computed:{
         labelWidthVal(){
-            if(!this.$attrs.labelWidth){
-                return 100;
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
             }
-            return this.$attrs.labelWidth;
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
         },
         placeholderStr(){
             if(this.$attrs.placeholder){
@@ -239,8 +245,6 @@ export default {
             //获取上一个月有多少天
             let prevMonthDays = _tool.getPrevMonthDays(year,month);
             
-
-
             let allData = [];
             //push上个月填充的数据
             for(let i = prevDaylen;i>0;i--){
@@ -334,7 +338,7 @@ export default {
             this.data.forEach(arr => {
                 arr.forEach(element=>{
                     if(element.cls == "current"){
-                        if(element.month == this.state.currentMonth){
+                        if(element.month == this.current.currentMonth){
                             element.cls = "";
                         }else{
                             element.cls = "disable";
@@ -343,7 +347,7 @@ export default {
                 })
             });
             x.cls = "current";
-            this.state.currentDay = x.day;
+            this.current.currentDay = x.day;
             this.selectDay = x.year + "-" + x.month + "-" + x.day;
             if(this.isDatetimePicker == undefined){
                 this.isShowPicker = false;
@@ -361,14 +365,11 @@ export default {
          * @returns
          */
         prevYear(){
-            let year = parseInt(this.state.currentYear) - 1;
-            let month = parseInt(this.state.currentMonth);
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            let year = parseInt(this.current.currentYear) - 1;
+            let month = parseInt(this.current.currentMonth);
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
+            
             this.setPickerDateSource(year,month);
         },
         /**
@@ -376,20 +377,16 @@ export default {
          * @returns
          */
         prevMonth(){
-            let year = parseInt(this.state.currentYear);
-            let month = parseInt(this.state.currentMonth);
+            let year = parseInt(this.current.currentYear);
+            let month = parseInt(this.current.currentMonth);
             if(month == 1){
                 month = 12;
                 year = year - 1;
             }else{
                 month = month - 1;
             }
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -397,20 +394,16 @@ export default {
          * @returns
          */
         nextMonth(){
-            let year = parseInt(this.state.currentYear);
-            let month = parseInt(this.state.currentMonth);
+            let year = parseInt(this.current.currentYear);
+            let month = parseInt(this.current.currentMonth);
             if(month == 12){
                 month = 1;
                 year = year + 1;
             }else{
                 month = month + 1;
             }
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -418,15 +411,10 @@ export default {
          * @returns
          */
         nextYear(){
-            let year = parseInt(this.state.currentYear) + 1;
-            let month = parseInt(this.state.currentMonth);
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
-
+            let year = parseInt(this.current.currentYear) + 1;
+            let month = parseInt(this.current.currentMonth);
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -436,22 +424,17 @@ export default {
          */
         setValue(str){
             if(!str){
-                this.state = {
-                    currentYear:new Date().getFullYear(),
-                    currentMonth:parseInt(new Date().getMonth() + 1),
-                    currentDay:parseInt(new Date().getDate()),
-                    showError:this.state.showError
-                }
+                this.current.currentYear = new Date().getFullYear();
+                this.current.currentMonth = parseInt(new Date().getMonth() + 1);
+                this.current.currentDay = parseInt(new Date().getDate());
+                
                 this.selectDay = "";
-                this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
+                this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
             }else{
                 let _arr = str && str.split('-');
-                this.state = {
-                    currentYear:_arr[0],
-                    currentMonth:parseInt(_arr[1]),
-                    currentDay:parseInt(_arr[2]),
-                    showError:this.state.showError
-                }
+                this.current.currentYear = _arr[0];
+                this.current.currentMonth = parseInt(_arr[1]);
+                this.current.currentDay = parseInt(_arr[2]);
                 this.selectDay = str;
                 this.setPickerDateSource(_arr[0],parseInt(_arr[1]),parseInt(_arr[2]));
             }
@@ -465,10 +448,15 @@ export default {
         }
     },
     mounted(){
-        this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
+        this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
 
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);

@@ -11,6 +11,7 @@
 
 <script>
     import define from "../define.js";
+    import tool from "../leCompsTool.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeTextarea",
@@ -30,10 +31,13 @@
         },
         computed:{
             labelWidthVal(){
-                if(!this.$attrs.labelWidth){
-                    return 100;
+                if(this.$attrs.labelWidth){
+                    return this.$attrs.labelWidth;
                 }
-                return this.$attrs.labelWidth;
+                if(this.formLabelWidth != 0){
+                    return this.formLabelWidth;
+                }
+                return define.LABELWIDTH;
             },
             placeholderStr(){
                 if(this.$attrs.placeholder){
@@ -94,7 +98,10 @@
             }
         },
         mounted(){
-            
+            let that = this;
+            tool._form_event_publisher.on(that._uid,(data)=>{
+                this.formLabelWidth = data;
+            });
         }
     }
 </script>

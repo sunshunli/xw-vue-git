@@ -99,19 +99,6 @@ export default {
 </script>
 
 <style scoped>
-    *{
-        margin: 0;
-        padding: 0;
-        outline: none;
-        text-decoration: none;
-        list-style: none;
-    }
-
-    html,body{
-        width: 100%;
-        height: 100%;
-    }
-
     form{
         text-align: left;
     }

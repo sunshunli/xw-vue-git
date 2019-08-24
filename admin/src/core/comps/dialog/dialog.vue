@@ -178,7 +178,7 @@ export default {
         height: 60px;
         line-height: 60px;
         background-color: #fff;
-        text-align: center;
+        text-align: right;
     }
     
     .show_le_dialog_mask{

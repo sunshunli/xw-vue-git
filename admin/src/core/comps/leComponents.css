@@ -161,3 +161,94 @@ textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */
     color: #b7b8bb;
     font-size: 14px;
 }
+
+
+
+
+/* 组件公共样式 */
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+.form-item{
+    text-align: left;
+    margin:0 0 22px 0;
+    display: inline-block;
+}
+.form-item .form-item-label{
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    color: #606266;
+    line-height: normal;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 5px 0 10px;
+}
+
+.form-item .form-item-div{
+    display: inline-block;
+    line-height: normal;
+    vertical-align: text-bottom;
+    position: relative;
+    flex: 1;
+}
+
+.required::before{
+    content: "*";
+    color: #f56c6c;
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.form-item .promptMsg{
+    font-size: 12px;
+    color: #f56c6c;
+    line-height: 20px;
+    text-align: left;
+    position: absolute;
+    margin: 0;
+}
+
+.form-item .form-item-div .readonlyIcon{
+    background-color: #f1f1f1;
+}
+
+.form-item .form-item-div .readonlyIcon:focus{
+    background-color: #f1f1f1;
+    border-color: #dcdfe6;
+}
+
+.fa-times-circle-o .form-item-input{
+    border: 1px solid #f56c6c;
+}
+.fa-check-circle-o .form-item-input{ 
+    border: 1px solid #67c23a;
+}
+
+.fa.fa-times-circle-o{
+    position: relative;
+}
+
+.fa.fa-check-circle-o{
+    position: relative;
+}
+
+
+
+
+
+
+
+

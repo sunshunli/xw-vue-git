@@ -424,33 +424,11 @@
         min-width: 130px;
     }
 
-    .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
-    }
-
-    /* .tags .fa-angle-down:hover::before{
-            content: "\F057";
-    } */
-
     .searchMulSelect .fa-chevron-down.fa-times-circle:before{
         content: "\F057";
-    }
-
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
     }
 
     .selectContent .form-item-label{
         margin: 0 5px 0 10px;
     }
-
-
 </style>

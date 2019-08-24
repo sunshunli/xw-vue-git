@@ -176,90 +176,14 @@ export default {
     font-size:12px;
     line-height:30px;
 }
-	.form-item{
-		text-align: left;
-		margin:0 0 22px 0;
-		display: inline-block;
-        width: 100%;
-	}
 
-    .form-item .form-item-label{
-        width: auto;
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin: 0 5px 0 10px;
-    }
-
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-        vertical-align: top;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-        width: 100%;
-        position: relative;
-        flex: 1;
-    }
-
-    form .form-item .form-item-div{
-        position: relative;
-        border:none;
-    }
-
+form .form-item .form-item-div{
+    position: relative;
+    border: 1px solid #aeaeae !important;
+}
 
 .LeEditor /deep/ .w-e-toolbar .w-e-droplist,.LeEditor /deep/ .w-e-text-container .w-e-panel-container{
   z-index: 1 !important;
 }
 
-form .form-item .form-item-div{
-    border: 1px solid #aeaeae !important;
-}
-
-.form-item .promptMsg{
-  margin: 0 auto;
-    font-size: 12px;
-    color: #f56c6c;
-    line-height: 20px;
-    text-align: left;
-    position: absolute;
-    bottom: -20px;
-}
-
-.form-item .form-item-label{
-    height: auto;
-    text-align: right;
-    vertical-align: middle;
-    display: inline-block;
-    font-size: 14px;
-    color: #606266;
-    line-height: normal;
-    padding: 0;
-    box-sizing: border-box;
-    margin-bottom: 0;
-}
-
-.form-item .form-item-label.required::before {
-    content: "*";
-    color: #f56c6c;
-    font-size: 12px;
-    margin-right: 2px;
-}
 </style>

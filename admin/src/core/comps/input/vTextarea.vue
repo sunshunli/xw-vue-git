@@ -107,55 +107,7 @@
 </script>
 
 <style scoped>
-    .form-item{
-        text-align: left;
-        margin:0 0 22px 0;
-    }
-
-    .form-item .form-item-label{
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin: 0 5px 0 10px;
-    }
-
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-        position: relative;
-            flex: 1;
-    }
-
-    form .form-item .form-item-div{
-        position: relative;
-        width: 100%;
-    }
-
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-    }
+   
     .form-item .form-item-input{
         width: 100%;
         height: 40px;
@@ -233,12 +185,12 @@
         margin: 0;
     }
 
-    .fa-check-circle-o .form-item-input{
-        border: 1px solid #67c23a;
-    }
-
     .fa-times-circle-o .form-item-input{
         border: 1px solid #f56c6c;
+    }
+
+    .fa-check-circle-o .form-item-input{
+        border: 1px solid #67c23a;
     }
 
     .fa.fa-times-circle-o{

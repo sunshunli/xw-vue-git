@@ -17,11 +17,6 @@ export default {
 </script>
 
 <style scoped>
- *{
-        margin:0;
-        padding:0;
-    }
-
     /* 遮罩 */
     .le_loading_mask{
         position:fixed;
@@ -49,6 +44,5 @@ export default {
         margin-left:-25px;
         margin-top:-45px;   
         text-align: center;
-
     }
 </style>

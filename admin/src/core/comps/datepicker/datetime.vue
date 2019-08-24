@@ -173,17 +173,25 @@ export default {
     }
 }   
 </script>
- <style scoped> .dataTimePicker{
-display:inline-block; width: 180px;
-height: auto; box-sizing: border-box; position:relative;
+<style scoped> 
+
+.dataTimePicker{
+    display:inline-block; 
+    width: 180px;
+    height: auto; 
+    box-sizing: border-box; 
+    position:relative;
 }
 .current .dataTimePicker{
-box-sizing: content-box;
-display: inline-block; }
-.dataTimePicker .date-box,.dataTimePicker .time-box{ width: 120px;
-height: 40px;
-cursor: pointer;
-float: left; }
+    box-sizing: content-box;
+    display: inline-block; 
+}
+.dataTimePicker .date-box,.dataTimePicker .time-box{ 
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    float: left; 
+}
 .dataTimePicker .date-box .dateTimeText{ 
     background-color: #fff; background-image: none;
     color: #606266;
@@ -195,7 +203,7 @@ float: left; }
     transition: border-color .2s cubic-bezier(.645,.045,.355,1); width: 100%;
     padding: 0 32px;
     border:1px solid #dcdfe6;
-     border-radius: 4px;
+    border-radius: 4px;
 }
 
 .dataTimePicker .date-box .dateTimeText:focus{
@@ -210,112 +218,80 @@ float: left; }
     background-color: #f1f1f1;
 }
 
-.dataTimePicker .date-box{
-width: 100%;}
-.icon-date{
-position: absolute; top: 12px;
-left: 10px;
-color: #c0c4cc; font-weight: normal;
-} .clearTime{
-position: absolute; top: 12px;
-right: 8px;
-color: #c0c4cc; font-weight: normal; cursor: pointer;
-}
-.dataTimePicker /deep/ .dataPicker .picker-box{ left: 0;
-}
-.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;cursor: pointer;
-}
-.form-item /deep/ .form-item-div.dataPicker{ width: 100%;
-}
+.dataTimePicker .date-box{width: 100%;}
+.icon-date{position: absolute; top: 12px;left: 10px;color: #c0c4cc; font-weight: normal;} 
+.clearTime{position: absolute; top: 12px;right: 8px;color: #c0c4cc; font-weight: normal; cursor: pointer;}
+.dataTimePicker /deep/ .dataPicker .picker-box{ left: 0;}
+.ipt .form-item /deep/ .form-item-div .form-item-input{ text-align: center;cursor: pointer;}
+.form-item /deep/ .form-item-div.dataPicker{ width: 100%;}
 /* ⽇日期 */
 .picker-box {
-width: 330px;
-box-sizing: border-box;
-/* margin-left: -27px; */
-position: absolute;
-background: #fff;
-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-z-index: 10000;
-margin-bottom: 30px; }
-/* 选择器器头部 */ .picker-header { width: 100%;
-line-height: 1.8em; display:flex;
+    width: 330px;
+    box-sizing: border-box;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    z-index: 10000;
+    margin-bottom: 30px; 
 }
-.picker-header .ipt{
-display: inline-block; width: 50%;
-margin: 10px; margin-left: 0px; position: relative; margin-right: 0;
+/* 选择器器头部 */ 
+.picker-header { width: 100%;line-height: 1.8em; display:flex;}
+.picker-header .ipt{display: inline-block; width: 50%;margin: 10px; margin-left: 0px; position: relative; margin-right: 0;}
+.picker-bottom span{ 
+    float:right;
+    margin-right:10px;
+    font-size:12px;
+    line-height:20px;
+    margin-top:10px;
+    background:#fff; 
+    outline: none;
+    border:1px solid #dcdfe6;
+    border-radius:3px;
+    padding: 0 5px;
 }
-.picker-bottom span{ float:right;margin-right:10px;font-size:12px;line-height:20px;margin-top:10px;background:#fff; outline: none;
-border:1px solid #dcdfe6;
-border-radius:3px;
-padding: 0 5px;
+.picker-bottom span.text{border:0px solid #fff; color:#409EFF;}
+.form-item{text-align: left; margin:0 0 22px 0; display: inline-block;}
+.form-item .form-item-label{ 
+    text-align: right; 
+    vertical-align: middle; 
+    display: inline-block; 
+    font-size: 14px;
+    color: #606266; 
+    line-height: normal; 
+    padding: 0;
+    box-sizing: border-box; 
+    margin: 0 5px 0 10px;
 }
-.picker-bottom span.text{
-border:0px solid #fff; color:#409EFF;
+.form-item .form-item-div{min-width: 130px; display: inline-block; line-height: normal; width: 100%; vertical-align: middle;}
+form .form-item .form-item-div{ background-color: #fff;flex: 1;}
+form .form-item .form-item-div.readonlyIcon{background-color: #f1f1f1;}
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;}
+.form-item .form-item-input{ 
+    width: 100%;
+    height: 40px;
+    font-size: 14px; line-height: 40px;
+    display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding: 0 8% 0 4%; color: #606266;
+    outline: none; 
 }
-.form-item{
-text-align: left; margin:0 0 22px 0; margin-top: -2px; display: inline-block;
+.form-item .form-item-input:focus{ border: 1px solid #409eff; outline: none;}
+.medium .form-item .form-item-input{height: 40px; line-height: 40px; font-size: 14px;}
+.form-item .promptMsg{
+    margin: 0 auto; 
+    font-size: 12px; 
+    color: #f56c6c; 
+    line-height: 20px; 
+    text-align: left; 
+    position: absolute; 
+    top: 42px;
+    left: -1px; 
 }
-.form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
-color: #606266; line-height: normal; padding: 0;
-box-sizing: border-box; margin: 0 5px 0 10px;
-}
-.medium .form-item .form-item-label{ line-height: normal;
-font-size: 14px;
-}
-.form-item .form-item-div{min-width: 130px; display: inline-block; line-height: normal; width: 100%; vertical-align: middle;
-}
-form .form-item .form-item-div{ background-color: #fff;flex: 1;
-}
-
-form .form-item .form-item-div.readonlyIcon{
-       background-color: #f1f1f1;
-}
-.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
-}
-
- .form-item .form-item-input{ width: 100%;
-height: 40px;
-font-size: 14px; line-height: 40px;
-display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding: 0 8% 0 4%; color: #606266;
-outline: none; }
-.form-item .form-item-input:focus{ border: 1px solid #409eff; outline: none;
-}
-.medium .form-item .form-item-input{
-height: 40px; line-height: 40px; font-size: 14px;
-}
-.small .form-item .form-item-input{
-height: 34px; line-height: 34px; font-size: 14px;
-}
-.mini .form-item .form-item-input{
-height: 28px; line-height: 28px; font-size: 12px;
-}
-.form-item .promptMsg{margin: 0 auto; font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute; top: 42px;
-left: -1px; }
-.fa-check-circle-o.dataTimePicker{ border: 1px solid #67c23a;
-}
-/* .fa-times-circle-o.dataTimePicker{ border: 1px solid #f56c6c;
-} */
-
-.dataTimePicker .ipt /deep/  .timeContent .timeInput{
-    border-color: #dcdfe6 !important;
-}
-
-.fa-times-circle-o:before{ content:'';
-}
-.fa-check-circle-o:before{ content:'';
-}
-.picker-header .ipt .form-item{ width: 100%;
-}
-.dataTimePicker .medium .form-item .form-item-input{ width: 100%;
-border: 1px solid yellowgreen;
-} 
-.fa-times-circle-o .ipt .form-item /deep/ .form-item-input{
-    border:1px solid #dcdfe6 !important;
-}
-
-.dataTimePicker /deep/ .timeContent .timePicker{
-    right: 2px !important;
-    left: auto;
-}
+.fa-check-circle-o.dataTimePicker{ border: 1px solid #67c23a;}
+.dataTimePicker .ipt /deep/  .timeContent .timeInput{border-color: #dcdfe6 !important;}
+.fa-times-circle-o:before{ content:'';}
+.fa-check-circle-o:before{ content:'';}
+.picker-header .ipt .form-item{ width: 100%;}
+.dataTimePicker .medium .form-item .form-item-input{ width: 100%;border: 1px solid yellowgreen;} 
+.fa-times-circle-o .ipt .form-item /deep/ .form-item-input{border:1px solid #dcdfe6 !important;}
+.dataTimePicker /deep/ .timeContent .timePicker{right: 2px !important;left: auto;}
 
 </style>

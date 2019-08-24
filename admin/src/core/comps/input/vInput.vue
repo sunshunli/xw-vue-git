@@ -109,8 +109,6 @@
 
 <style scoped>
     .form-item{
-        text-align: left;
-        margin:0 0 22px 0;
         display: inline-block;
     }
 
@@ -124,53 +122,21 @@
         line-height: normal;
         padding: 0;
         box-sizing: border-box;
-        margin: 0 10px 0 10px;
+        margin: 0 5px 0 10px;
     }
 
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-        padding-left: 8px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
         width: 100%;
         position: relative;
-            flex: 1;
-    }
-
-    .form-item .form-item-div .readonlyIcon{
-        background-color: #f1f1f1;
-    }
-
-    .form-item .form-item-div .readonlyIcon:focus{
-        background-color: #f1f1f1;
-    }
+        flex: 1;
+    }    
 
     form .form-item .form-item-div{
         position: relative;
     }
 
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-        /* position: absolute;
-        left: 0;
-        top: 3px; */
-    }
     .form-item .form-item-input{
         width: 100%;
         height: 40px;
@@ -193,10 +159,7 @@
         font-size: 14px;
     }
 
-    .form-item .form-item-input.readonlyIcon:focus{
-        border-color: #dcdfe6;
-    }
-
+  
     .form-item i{
         position: absolute;
         top: 12px;
@@ -204,51 +167,6 @@
         font-weight: normal;
         right: 8px;
         cursor: pointer;
-    }
-
-    .medium .form-item i{
-        position: absolute;
-        top: 12px;
-        color: #c0c4cc;
-        font-weight: normal;
-        right:8px;
-        cursor: pointer;
-    }
-
-    .mini .form-item i{
-        top: 7px;
-    }
-
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
-    }
-
-    .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .fa.fa-times-circle-o{
-        position: relative;
-    }
-
-    .fa.fa-check-circle-o{
-        position: relative;
     }
 
     .searchMulSelect .icon-del{

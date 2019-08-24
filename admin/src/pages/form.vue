@@ -7,21 +7,17 @@
 
         <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col2">
-                <le-input labelWidth="200" placeholder="请输入年龄" label="年龄" msg="正整数" vType='positiveDecimals' v-model="searchModel.age"></le-input>
-                <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
+                <le-input labelWidth="200" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
+                <le-input label="身份证号码" v-model="searchModel.id"></le-input>
             </div>
             <div class="col3">
-                <le-time-picker label="时间组件" msg="时间不允许为空" v-model="searchModel.time"></le-time-picker>
-                <le-date-time-picker label="时间日期组件" msg="日期and时间不允许为空" v-model="searchModel.datetime"></le-date-time-picker>           
+                <le-time-picker label="时间组件" v-model="searchModel.time"></le-time-picker>
+                <le-date-time-picker label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
                 <le-local-select @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
-
                 <le-local-select multiple placeholder="job" @change="showSelectItem" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
-                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-                <le-input label="年龄" msg="正整数" vType='number' v-model="searchModel.age"></le-input>
-                <le-input label="身份证号码" vType="number" msg="正整数22" v-model="searchModel.id"></le-input>
-                <le-date-picker label="日期组件" msg="日期不允许为空" v-model="searchModel.date"></le-date-picker>
+                <le-date-picker label="日期组件" v-model="searchModel.date"></le-date-picker>
             </div>
         </div>
 
@@ -41,12 +37,13 @@
         </div>
         <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
-                <le-form ref="form2" class="le_comps_core_css">
-                    <le-input label="身份证号码" :readonly="readonly" vType="number" msg="身份证号码必填" v-model="entity.id"></le-input>
+                <le-form labelWidth='200' ref="form2" class="le_comps_core_css">
+                    <le-input label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
+                    <le-input label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
                     <le-textarea placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <le-date-picker on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                     <le-time-picker on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
-                    <le-date-time-picker placeholder="请选择日期时间" on label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <le-date-time-picker on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                     <le-local-select on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                     <le-radio-list on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
@@ -109,7 +106,8 @@ export default {
                 job:"2",
                 sex:"1",
                 fav:"3,4",
-                url:""
+                url:"",
+                address:""
             },
             tableOptions:{
                 showCk:true,
@@ -204,6 +202,7 @@ export default {
             })
         },
         openDialog(){
+            this.$refs.form2.reset();
             window.setTimeout(()=>{
                 this.entity.fav = "1,2";
                 this.entity.sex = "5";
@@ -218,7 +217,6 @@ export default {
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){
-            
             let res = this.$refs["form2"].validate();
             res.then(d=>{
                 let eee = this.entity;
@@ -230,7 +228,6 @@ export default {
             })
         },
         closeDialog(){
-            this.$refs.form2.reset();
             this.showDialog = false;
         },
         setEnable(enable){

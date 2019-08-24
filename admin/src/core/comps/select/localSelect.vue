@@ -60,10 +60,13 @@
     },
     computed:{
         labelWidthVal(){
-            if(!this.$attrs.labelWidth){
-                return 100;
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
             }
-            return this.$attrs.labelWidth;
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
         },
         placeholderStr(){
             if(this.placeholder == ""){
@@ -307,6 +310,11 @@
             this.init(this.dataSource);
         }
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy(){
         /**

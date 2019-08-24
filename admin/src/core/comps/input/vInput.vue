@@ -11,6 +11,7 @@
 
 <script>
     import define from "../define.js";
+    import tool from "../leCompsTool.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",
@@ -25,15 +26,19 @@
                     showError:false,
                     successIcon:""
                 },
-                currentValue:this.value
+                currentValue:this.value,
+                formLabelWidth:0
             }
         },
         computed:{
             labelWidthVal(){
-                if(!this.$attrs.labelWidth){
-                    return 100;
+                if(this.$attrs.labelWidth){
+                    return this.$attrs.labelWidth;
                 }
-                return this.$attrs.labelWidth;
+                if(this.formLabelWidth != 0){
+                    return this.formLabelWidth;
+                }
+                return define.LABELWIDTH;
             },
             placeholderStr(){
                 if(this.$attrs.placeholder){
@@ -83,7 +88,6 @@
             },
             setValue(value){
                 this.currentValue = value;
-
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
@@ -95,7 +99,10 @@
             }
         },
         mounted(){
-            
+            let that = this;
+            tool._form_event_publisher.on(that._uid,(data)=>{
+                this.formLabelWidth = data;
+            });
         }
     }
 </script>

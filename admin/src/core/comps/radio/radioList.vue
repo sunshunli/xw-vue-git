@@ -14,6 +14,7 @@
 <script>
 
 import tool from "../leCompsTool.js";
+import define from "../define.js";
 
 export default {
     name:"LeRadioList",
@@ -32,10 +33,13 @@ export default {
     },
     computed:{
         labelWidthVal(){
-            if(!this.$attrs.labelWidth){
-                return 100;
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
             }
-            return this.$attrs.labelWidth;
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
         },
         readonlyFlag(){
             if(this.readonly == undefined){
@@ -123,6 +127,11 @@ export default {
             this.init(this.dataSource);
         }
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     }
 }
 </script>

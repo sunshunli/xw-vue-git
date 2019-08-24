@@ -162,7 +162,7 @@ export default {
         /**
          * @description 处理所有订阅事件
          */
-        _eventPublisher.on(this.EVENTPUBLISHKEY,d=>{
+        tool._form_event_publisher.on(this.EVENTPUBLISHKEY,d=>{
             let item = _treeTool.getNodeById(that.state.data,d.__tmpId);
             //如果数据错误，没有找到当前节点，直接return
             if(!item){

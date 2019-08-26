@@ -289,7 +289,7 @@ form .form-item .form-item-div.readonlyIcon{background-color: #f1f1f1;}
 .form-item .tip{
     margin: 0 auto;
     font-size: 12px;
-    color: #f56c6c;
+    color: #3ea5d2;
     line-height: 20px;
     text-align: left; 
     position: absolute; 

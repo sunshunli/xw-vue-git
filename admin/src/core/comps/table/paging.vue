@@ -89,7 +89,7 @@
         border-radius: 5px;}
     .paging input[type=text]{width: 30px; height: 20px; border: 1px solid #797979; text-align: center;}
     .paging span{padding: 0 5px;}
-    .pageNumCls{margin-right: 20px;float:right;font-size:14px;text-align:center;}
+    .pageNumCls{margin-right: 20px;margin-top:10px;float:right;font-size:14px;text-align:center;}
     .pagination{
         list-style: none;overflow: hidden;font-weight: 600;
     }

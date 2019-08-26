@@ -177,15 +177,6 @@
         font-size: 12px;
     }
 
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
-    }
-
     .fa-times-circle-o .form-item-input{
         border: 1px solid #f56c6c;
     }

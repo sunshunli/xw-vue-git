@@ -414,7 +414,6 @@ li{height: 32px; line-height: 32px}
     outline: none; 
 }
 .form-item .form-item-input:focus{border: 1px solid #409eff;outline: none; }
-.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; margin: 0;padding: 0; }
 .fa-check-circle-o .timeInput{ border: 1px solid #67c23a;}
 .fa-times-circle-o .timeInput{ border: 1px solid #f56c6c;}
 .picker-header .ipt .form-item .form-item-label{ display: none;}

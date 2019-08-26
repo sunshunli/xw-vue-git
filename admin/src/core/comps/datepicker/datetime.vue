@@ -286,6 +286,16 @@ form .form-item .form-item-div.readonlyIcon{background-color: #f1f1f1;}
     top: 42px;
     left: -1px; 
 }
+.form-item .tip{
+    margin: 0 auto;
+    font-size: 12px;
+    color: #f56c6c;
+    line-height: 20px;
+    text-align: left; 
+    position: absolute; 
+    top: 42px;
+    left: -1px; 
+}
 .fa-check-circle-o.dataTimePicker{ border: 1px solid #67c23a;}
 .dataTimePicker .ipt /deep/  .timeContent .timeInput{border-color: #dcdfe6 !important;}
 .fa-times-circle-o:before{ content:'';}

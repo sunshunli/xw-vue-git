@@ -14,7 +14,6 @@
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
         </div>
-        
     </div>
 </template>
 

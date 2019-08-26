@@ -570,7 +570,6 @@ form .form-item .form-item-input{ padding: 0 26px;}
 .form-item .form-item-input:focus{border: 1px solid #409eff;outline: none; }
 .form-item .form-item-input.readonlyIcon:focus{border-color: #dcdfe6;}
 .form-item .form-item-input.readonlyIcon{background-color: #f1f1f1;cursor: text;}
-.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute;}
 .fa-times-circle-o:before{ content:'';}
 .fa-check-circle-o:before{ content:'';}
 .picker-header .ipt .form-item .form-item-label{ display: none;}

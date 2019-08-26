@@ -4,6 +4,11 @@ import DEFINE_KEY from "./define.js";
 
 function ValidataHOC(Component){
     return {
+        data(){
+            return {
+                validataComponentType:"HOC"
+            }
+        },
         inheritAttrs:false,
         methods:{
             //因为HOC没有直接return 当前的Component，所以在界面上面引用的时候，组件返回的是HOC组件, 要拿到具体的子组件必须调用这个方法
@@ -110,7 +115,7 @@ function ValidataHOC(Component){
                 currentComp.$emit("input","");
                 //所以需要延迟执行清空验证的state.showError 和 state.cls 属性 进行重置
                 window.setTimeout(()=>{
-                    if(currentComp.state.showError || currentComp.state.cls != ""){
+                    if(currentComp.state.showError || currentComp.state.successIcon != ""){
                         currentComp.$attrs.setStateByFlag && currentComp.$attrs.setStateByFlag(0);
                     }
                 },0)
@@ -135,9 +140,7 @@ function ValidataHOC(Component){
                 if(Component.data().validataComponentType && Component.data().validataComponentType == "Input"){
                     this.$set(this.$attrs, "verify", this.verifyReg);
                 }
-                //传递是否显示错误信息的方法
-                // this.$set(this.$attrs, "getIsSuccess", this.getIsSuccess);
-                // this.$set(this.$attrs, "setIsSuccess", this.setIsSuccess);
+                //透传方法
                 this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
                 this.$set(this.$attrs, "setStateByFlag", this.setStateByFlag);
                 this.$set(this.$attrs, "setVerifyCompState", this.setVerifyCompState);

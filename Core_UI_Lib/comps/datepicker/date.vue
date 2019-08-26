@@ -2,8 +2,7 @@
 
 <template>
     <div class="form-item">
-
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
@@ -11,6 +10,7 @@
                 <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
@@ -22,7 +22,7 @@
                         <i class="fa fa-angle-left" @click.stop="prevMonth"></i>
                     </span>
                     <div class="hearderText">
-                        {{state.currentYear}}/{{state.currentMonth}}
+                        {{current.currentYear}}/{{current.currentMonth}}
                     </div>
                     <span>
                         <i class="fa fa-angle-right" @click.stop="nextMonth"></i>
@@ -144,10 +144,11 @@ let _tool = {
 }
 
 import define from "../define.js";
+import tool from "../leCompsTool.js";
 
 /**
  * @description 日期格式  6(row)*7(col)
- * @param state.currentYear, state.currentMonth, state.currentDay控制picker弹出层的年和月的选择
+ * @param current.currentYear, current.currentMonth, current.currentDay控制picker弹出层的年和月的选择
  * @param selectDay控制所选择的值，也就是文本框里面的值
  * @param 这2者不可以统一用state里面的值来标识
  * @param isShowPicker控制是否显示弹出层
@@ -163,10 +164,12 @@ export default {
             validataComponentType:"DatePicker",
             state:{
                 showError:false,
+                successIcon:""
+            },
+            current:{
                 currentYear:new Date().getFullYear(),
                 currentMonth:new Date().getMonth() + 1,
                 currentDay:new Date().getDate(),
-                successIcon:""
             },
             data:[],
             selectDay:"",
@@ -182,6 +185,15 @@ export default {
         }
     },
     computed:{
+        labelWidthVal(){
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
+            }
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
+        },
         placeholderStr(){
             if(this.$attrs.placeholder){
                 return this.$attrs.placeholder;
@@ -234,8 +246,6 @@ export default {
             //获取上一个月有多少天
             let prevMonthDays = _tool.getPrevMonthDays(year,month);
             
-
-
             let allData = [];
             //push上个月填充的数据
             for(let i = prevDaylen;i>0;i--){
@@ -329,7 +339,7 @@ export default {
             this.data.forEach(arr => {
                 arr.forEach(element=>{
                     if(element.cls == "current"){
-                        if(element.month == this.state.currentMonth){
+                        if(element.month == this.current.currentMonth){
                             element.cls = "";
                         }else{
                             element.cls = "disable";
@@ -338,7 +348,7 @@ export default {
                 })
             });
             x.cls = "current";
-            this.state.currentDay = x.day;
+            this.current.currentDay = x.day;
             this.selectDay = x.year + "-" + x.month + "-" + x.day;
             if(this.isDatetimePicker == undefined){
                 this.isShowPicker = false;
@@ -356,14 +366,11 @@ export default {
          * @returns
          */
         prevYear(){
-            let year = parseInt(this.state.currentYear) - 1;
-            let month = parseInt(this.state.currentMonth);
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            let year = parseInt(this.current.currentYear) - 1;
+            let month = parseInt(this.current.currentMonth);
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
+            
             this.setPickerDateSource(year,month);
         },
         /**
@@ -371,20 +378,16 @@ export default {
          * @returns
          */
         prevMonth(){
-            let year = parseInt(this.state.currentYear);
-            let month = parseInt(this.state.currentMonth);
+            let year = parseInt(this.current.currentYear);
+            let month = parseInt(this.current.currentMonth);
             if(month == 1){
                 month = 12;
                 year = year - 1;
             }else{
                 month = month - 1;
             }
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -392,20 +395,16 @@ export default {
          * @returns
          */
         nextMonth(){
-            let year = parseInt(this.state.currentYear);
-            let month = parseInt(this.state.currentMonth);
+            let year = parseInt(this.current.currentYear);
+            let month = parseInt(this.current.currentMonth);
             if(month == 12){
                 month = 1;
                 year = year + 1;
             }else{
                 month = month + 1;
             }
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -413,15 +412,10 @@ export default {
          * @returns
          */
         nextYear(){
-            let year = parseInt(this.state.currentYear) + 1;
-            let month = parseInt(this.state.currentMonth);
-            this.state = {
-                currentYear:year,
-                currentMonth:month,
-                currentDay:this.state.currentDay,
-                showError:this.state.showError
-            }
-
+            let year = parseInt(this.current.currentYear) + 1;
+            let month = parseInt(this.current.currentMonth);
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
         },
         /**
@@ -431,22 +425,17 @@ export default {
          */
         setValue(str){
             if(!str){
-                this.state = {
-                    currentYear:new Date().getFullYear(),
-                    currentMonth:parseInt(new Date().getMonth() + 1),
-                    currentDay:parseInt(new Date().getDate()),
-                    showError:this.state.showError
-                }
+                this.current.currentYear = new Date().getFullYear();
+                this.current.currentMonth = parseInt(new Date().getMonth() + 1);
+                this.current.currentDay = parseInt(new Date().getDate());
+                
                 this.selectDay = "";
-                this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
+                this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
             }else{
                 let _arr = str && str.split('-');
-                this.state = {
-                    currentYear:_arr[0],
-                    currentMonth:parseInt(_arr[1]),
-                    currentDay:parseInt(_arr[2]),
-                    showError:this.state.showError
-                }
+                this.current.currentYear = _arr[0];
+                this.current.currentMonth = parseInt(_arr[1]);
+                this.current.currentDay = parseInt(_arr[2]);
                 this.selectDay = str;
                 this.setPickerDateSource(_arr[0],parseInt(_arr[1]),parseInt(_arr[2]));
             }
@@ -460,10 +449,15 @@ export default {
         }
     },
     mounted(){
-        this.setPickerDateSource(this.state.currentYear,this.state.currentMonth);
+        this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
 
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);
@@ -476,141 +470,115 @@ export default {
     margin: 0; padding: 0;
 } 
 body {
-height: 10000px; 
+    height: 10000px; 
 }
 form .form-item .form-item-div .div-box { 
     width:100%;
-height: 40px;
-position: relative;
-cursor: pointer;
-display: inline-block; }
-.div-box i {
-position: absolute; top: 12px;
-color: #c0c4cc; font-weight: normal; cursor: pointer;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block; 
 }
-.div-box .icon-date{ left:10px;
+.div-box i {
+    position: absolute; 
+    top: 12px;
+    color: #c0c4cc; 
+    font-weight: normal; 
+    cursor: pointer;
+}
+.div-box .icon-date{ 
+    left:10px;
 }
 .div-box .icon-del {
-right:8px; }
+    right:8px; 
+}
 .date {
--webkit-appearance: none;
-background-color: #fff; background-image: none; border-radius: 4px; border: 1px solid #dcdfe6; box-sizing: border-box; color: #606266;
-display: inline-block;
-font-size: inherit;
-height: 40px;
-line-height: 40px;
-outline: none;
-padding: 0 26px;
-transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
-text-align: center; }
+    -webkit-appearance: none;
+    background-color: #fff; 
+    background-image: none; 
+    border-radius: 4px; 
+    border: 1px solid #dcdfe6; 
+    box-sizing: border-box; 
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 26px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1); width:100%;
+    text-align: center; 
+}
 .picker-box {
-width: 330px;
-margin-top: 4px;
-position: absolute;
-background:#fff;
-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1); z-index:999
+    width: 330px;
+    margin-top: 4px;
+    position: absolute;
+    background:#fff;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1); 
+    z-index:999
 }
-/* 选择器器头部 */ .picker-header {
-display: flex;
-width: 100%;
-border-bottom: 1px solid #aeaeae; line-height: 2em;
+/* 选择器器头部 */ 
+.picker-header {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #aeaeae; 
+    line-height: 2em;
 }
-.picker-header .hearderText { flex: 1;
-text-align: center; }
+.picker-header .hearderText { 
+    flex: 1;
+    text-align: center; 
+}
 .picker-header span {
-padding-left: 5px; padding-right: 5px;
-border: 0;
-background-color: transparent; outline: none;
-cursor: pointer;
+    padding-left: 5px; padding-right: 5px;
+    border: 0;
+    background-color: transparent; outline: none;
+    cursor: pointer;
 }
-/* 选择器器部分 */ .picker-body {
-width: 100%;
-display: inline-block; }
-.picker-body table { text-align: center; width: 100%; line-height: 26px;
-}
-.picker-body table th { text-align: center;
-}
-.picker-body table td { cursor: pointer;
-}
-.picker-body table td.disable { background: #f0f0f0 !important; color: #cbcbcb !important;
-}
-.picker-body table td.current { background: #4fbba0 !important; color: #fff !important;
-}
-.picker-body table td:hover { background: #f55;
-color: #fff;
-} .form-item{
-display: inline-block; text-align: left; margin:0 0 22px 0;
-}
+/* 选择器器部分 */ 
+.picker-body {width: 100%;display: inline-block; }
+.picker-body table { text-align: center; width: 100%; line-height: 26px}
+.picker-body table th { text-align: center}
+.picker-body table td { cursor: pointer}
+.picker-body table td.disable { background: #f0f0f0 !important; color: #cbcbcb !important;}
+.picker-body table td.current { background: #4fbba0 !important; color: #fff !important;}
+.picker-body table td:hover { background: #f55;color: #fff;} 
+.form-item{display: inline-block; text-align: left; margin:0 0 22px 0}
 .form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
-color: #606266; line-height: normal; padding: 0;
-box-sizing: border-box; margin: 0 5px 0 10px;
+    color: #606266; line-height: normal; padding: 0;
+    box-sizing: border-box; margin: 0 5px 0 10px;
 }
-.medium .form-item .form-item-label{ line-height: normal;
-font-size: 14px;
-}
-.small .form-item .form-item-label{
-height: 34px; line-height: 34px; font-size: 14px;
-}
-.mini .form-item .form-item-label{
-height: 28px; line-height: 28px; font-size: 12px;
-}
-
- .form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;    flex: 1;min-width: 130px;
-}
-.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px;
-}
+.medium .form-item .form-item-label{ line-height: normal;font-size: 14px;}
+.small .form-item .form-item-label{height: 34px; line-height: 34px; font-size: 14px;}
+.mini .form-item .form-item-label{height: 28px; line-height: 28px; font-size: 12p}
+.form-item .form-item-div{ display: inline-block; line-height: normal; width: 100%;flex: 1;min-width: 130px;}
+.required::before{ content: "*"; color: #f56c6c; font-size: 12px; margin-right: 2px}
 .form-item .form-item-input{
-width: 100%;
-height: 40px;
-cursor: pointer;
-font-size: 14px; line-height: 40px;
-display: inline-block; border: 1px solid #dcdfe6; border-radius: 5px; padding:0 25px 0 25px; color: #606266;
-outline: none;
-text-align: left; }
-form .form-item .form-item-input{ padding: 0 26px;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    font-size: 14px; 
+    line-height: 40px;
+    display: inline-block; 
+    border: 1px solid #dcdfe6; 
+    border-radius: 5px; 
+    padding:0 25px 0 25px; 
+    color: #606266;
+    outline: none;
+    text-align: left; 
 }
-.form-item .form-item-input:focus{
-border: 1px solid #409eff;
-outline: none; }
-
-.form-item .form-item-input.readonlyIcon:focus{
-    border-color: #dcdfe6;
+form .form-item .form-item-input{ padding: 0 26px;}
+.form-item .form-item-input:focus{border: 1px solid #409eff;outline: none; }
+.form-item .form-item-input.readonlyIcon:focus{border-color: #dcdfe6;}
+.form-item .form-item-input.readonlyIcon{background-color: #f1f1f1;cursor: text;}
+.fa-times-circle-o:before{ content:'';}
+.fa-check-circle-o:before{ content:'';}
+.picker-header .ipt .form-item .form-item-label{ display: none;}
+.picker-header .medium .ipt .form-item .form-item-label{ display: none;} 
+.fa-times-circle-o .timeInput .readonlyIcon {background-color: #f1f1f1;}
+.fa-times-circle-o .form-item-input{
+    border: 1px solid #f56c6c;
 }
-
-.medium .form-item .form-item-input{ height: 40px;
-line-height: 40px;
-font-size: 14px;
-width: 100%;
-text-align: left; }
-
-.medium .form-item .form-item-input.readonlyIcon{
-    background-color: #f1f1f1;
-    cursor: text;
-}
-
-.small .form-item .form-item-input{ height: 34px;
-line-height: 34px;
-font-size: 14px;
-}
-.mini .form-item .form-item-input{
-height: 28px; line-height: 28px; font-size: 12px;
-}
-.form-item .promptMsg{ font-size: 12px; color: #f56c6c; line-height: 20px; text-align: left; position: absolute;
-}
-.fa-check-circle-o .form-item-input{ border: 1px solid #67c23a;
-}
-.fa-times-circle-o .form-item-input{ border: 1px solid #f56c6c;
-}
-.fa-times-circle-o:before{ content:'';
-}
-.fa-check-circle-o:before{ content:'';
-}
-
- .picker-header .ipt .form-item .form-item-label{ display: none;
-}
-.picker-header .medium .ipt .form-item .form-item-label{ display: none;
-} 
-.fa-times-circle-o .timeInput .readonlyIcon {
-    background-color: #f1f1f1;
+.fa-check-circle-o .form-item-input{ 
+    border: 1px solid #67c23a;
 }
 </style>

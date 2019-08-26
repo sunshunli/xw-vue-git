@@ -1,7 +1,8 @@
 <template>
     <div class="ML12" >
          <div class = "fa-item" :class="item.__color" :style="'margin-left:'+(item.__level-1)*10+'px'">
-            <input type="button" @click="expandNode(item)" class="fa" :class="item.__cls" />
+            <!-- <input type="button" @click="expandNode(item)" class="fa" :class="item.__cls" /> -->
+            <span type="button" @click="expandNode(item)" class="fa arrIcon" :class="item.__cls"></span>
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
@@ -21,6 +22,7 @@
 
 <script>
 import DEFINE_KEY from "../define.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"TreeItem",
@@ -39,7 +41,7 @@ export default {
                 return;
             }
             if(this.checkbox != undefined){
-                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,
                     __tmpId:item.__tmpId,
                     checkboxStatus:!item.__checkboxStatus
@@ -62,7 +64,7 @@ export default {
                 cls = "fa-caret-left";
             }
 
-            _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+            tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN,
                 __tmpId:item.__tmpId,
                 data:{
@@ -76,7 +78,7 @@ export default {
          * @param item:当前选中项
          */
         selectItem(item){
-            _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+            tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item
@@ -154,14 +156,23 @@ export default {
         display: inline-block;
         border-radius: 2px;
         margin-right: 2px;
-        vertical-align: sub;
+        margin-bottom: 3px;
+        vertical-align: middle;
     }
 
     .fa-check-square:before{
         color: #337ab7;
         position: absolute;
-        top: 10px;
-        left: 18px;
+        top: 6px;
+    }
+
+    .fa-item .arrIcon{
+        width: 10px;
+        height: 12px;
+    }
+
+    .fa-caret-right:before{
+        position: absolute;
     }
 
 </style>

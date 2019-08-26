@@ -1,21 +1,23 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <input :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>
 </template>
 
 <script>
     import define from "../define.js";
+    import tool from "../leCompsTool.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
-        // props:["msg","vType","regex","off"],
+        //props:["msg","vType","regex","off"],
         props:["value"],
         data(){
             return {
@@ -25,10 +27,20 @@
                     showError:false,
                     successIcon:""
                 },
-                currentValue:this.value
+                currentValue:this.value,
+                formLabelWidth:0
             }
         },
         computed:{
+            labelWidthVal(){
+                if(this.$attrs.labelWidth){
+                    return this.$attrs.labelWidth;
+                }
+                if(this.formLabelWidth != 0){
+                    return this.formLabelWidth;
+                }
+                return define.LABELWIDTH;
+            },
             placeholderStr(){
                 if(this.$attrs.placeholder){
                     return this.$attrs.placeholder;
@@ -77,7 +89,6 @@
             },
             setValue(value){
                 this.currentValue = value;
-
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
@@ -89,15 +100,16 @@
             }
         },
         mounted(){
-            
+            let that = this;
+            tool._form_event_publisher.on(that._uid,(data)=>{
+                this.formLabelWidth = data;
+            });
         }
     }
 </script>
 
 <style scoped>
     .form-item{
-        text-align: left;
-        margin:0 0 22px 0;
         display: inline-block;
     }
 
@@ -114,50 +126,22 @@
         margin: 0 5px 0 10px;
     }
 
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-        padding-left: 8px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
     .form-item .form-item-div{
         display: inline-block;
         line-height: normal;
         width: 100%;
         position: relative;
-            flex: 1;
-    }
+        flex: 1;
+    }    
 
-    .form-item .form-item-div .readonlyIcon{
-        background-color: #f1f1f1;
-    }
-
-    .form-item .form-item-div .readonlyIcon:focus{
-        background-color: #f1f1f1;
+    .form-item .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
     }
 
     form .form-item .form-item-div{
         position: relative;
     }
 
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-        /* position: absolute;
-        left: 0;
-        top: 3px; */
-    }
     .form-item .form-item-input{
         width: 100%;
         height: 40px;
@@ -180,10 +164,7 @@
         font-size: 14px;
     }
 
-    .form-item .form-item-input.readonlyIcon:focus{
-        border-color: #dcdfe6;
-    }
-
+  
     .form-item i{
         position: absolute;
         top: 12px;
@@ -191,51 +172,6 @@
         font-weight: normal;
         right: 8px;
         cursor: pointer;
-    }
-
-    .medium .form-item i{
-        position: absolute;
-        top: 12px;
-        color: #c0c4cc;
-        font-weight: normal;
-        right:8px;
-        cursor: pointer;
-    }
-
-    .mini .form-item i{
-        top: 7px;
-    }
-
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
-    }
-
-    .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
-    }
-
-    .fa.fa-times-circle-o{
-        position: relative;
-    }
-
-    .fa.fa-check-circle-o{
-        position: relative;
     }
 
     .searchMulSelect .icon-del{

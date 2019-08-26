@@ -1,16 +1,18 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>
 </template>
 
 <script>
     import define from "../define.js";
+    import tool from "../leCompsTool.js";
     export default{
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeTextarea",
@@ -29,6 +31,15 @@
             }
         },
         computed:{
+            labelWidthVal(){
+                if(this.$attrs.labelWidth){
+                    return this.$attrs.labelWidth;
+                }
+                if(this.formLabelWidth != 0){
+                    return this.formLabelWidth;
+                }
+                return define.LABELWIDTH;
+            },
             placeholderStr(){
                 if(this.$attrs.placeholder){
                     return this.$attrs.placeholder;
@@ -88,61 +99,16 @@
             }
         },
         mounted(){
-            
+            let that = this;
+            tool._form_event_publisher.on(that._uid,(data)=>{
+                this.formLabelWidth = data;
+            });
         }
     }
 </script>
 
 <style scoped>
-    .form-item{
-        text-align: left;
-        margin:0 0 22px 0;
-    }
-
-    .form-item .form-item-label{
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin: 0 5px 0 10px;
-    }
-
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-        position: relative;
-            flex: 1;
-    }
-
-    form .form-item .form-item-div{
-        position: relative;
-        width: 100%;
-    }
-
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-    }
+   
     .form-item .form-item-input{
         width: 100%;
         height: 40px;
@@ -211,21 +177,12 @@
         font-size: 12px;
     }
 
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
+    .fa-times-circle-o .form-item-input{
+        border: 1px solid #f56c6c;
     }
 
     .fa-check-circle-o .form-item-input{
         border: 1px solid #67c23a;
-    }
-
-    .fa-times-circle-o .form-item-input{
-        border: 1px solid #f56c6c;
     }
 
     .fa.fa-times-circle-o{

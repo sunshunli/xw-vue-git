@@ -1,12 +1,13 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
                 <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
             </span>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>
 </template>
@@ -14,6 +15,7 @@
 <script>
 
 import tool from "../leCompsTool.js";
+import define from "../define.js";
 
 export default {
     name:"LeRadioList",
@@ -31,6 +33,15 @@ export default {
         }
     },
     computed:{
+        labelWidthVal(){
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
+            }
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
+        },
         readonlyFlag(){
             if(this.readonly == undefined){
                 return false;
@@ -117,6 +128,11 @@ export default {
             this.init(this.dataSource);
         }
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     }
 }
 </script>
@@ -132,87 +148,5 @@ export default {
         position:absolute;
         left:49px;
         z-index:-100
-    }
-
-    .form-item{
-        text-align: left;
-        margin:0 0 22px 0;
-    }
-
-    .form-item .form-item-label{
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin: 0 5px 0 10px;
-    }
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-            flex: 1;
-    }
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
-    }
-    .form-item .form-item-input{
-        width: 100%;
-        height: 40px;
-        font-size: 14px;
-        line-height: 40px;
-        display: inline-block;
-        border: 1px solid #dcdfe6;
-        border-radius: 5px;
-        padding: 0 8% 0 4%;
-        color: #606266;
-        outline: none;
-    }
-    .form-item .form-item-input:focus{
-        border: 1px solid #409eff;
-        outline: none;
-    }
-    .medium .form-item .form-item-input{
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-    }
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
-
-    .form-item .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
     }
 </style>

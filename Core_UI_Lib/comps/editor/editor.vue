@@ -1,10 +1,11 @@
 <template>
     <div class="form-item">
-        <label class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
        
     </div>
@@ -12,7 +13,7 @@
 
 <script>
 import E from "wangeditor";
-import Define from "../define.js";
+import define from "../define.js";
 import tool from "../leCompsTool.js";
 export default {
     name: "editor",
@@ -32,6 +33,15 @@ export default {
         };
     },
     computed: {
+        labelWidthVal(){
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
+            }
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
+        },
         // onchangeTimeout(){
         //     return this.option && this.option.onchangeTimeout ? this.option.onchangeTimeout : "-1";
         // },
@@ -107,9 +117,9 @@ export default {
     mounted() {
         this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);
         // 配置菜单 - 默认可以展示所有菜单 如果需要设置 请修改option.menus 具体参见define.js
-        this.__editor.customConfig.menus = this.menusConfig?this.menusConfig:Define.EDITOR_MENUS.DEFAULT_MENU;
+        this.__editor.customConfig.menus = this.menusConfig?this.menusConfig:define.EDITOR_MENUS.DEFAULT_MENU;
         // 配置表情
-        // this.__editor.customConfig.emotions = Define.EDITOR_MENUS.DEFAULT_EMJOY;
+        // this.__editor.customConfig.emotions = define.EDITOR_MENUS.DEFAULT_EMJOY;
         // onchange 会在无任何操作的 xxx 毫秒之后被触发  如果需要设置 请修改option.onchangeTimeout 默认值：-1 无延迟（设置延迟可能导致setvalue回写有问题）
         // this.__editor.customConfig.onchangeTimeout = this.onchangeTimeout;
         //监听事件onchange onblur
@@ -144,6 +154,11 @@ export default {
             this.uploadImg(files, insert);
         };
         this.__editor.create();
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy(){
         
@@ -162,90 +177,14 @@ export default {
     font-size:12px;
     line-height:30px;
 }
-	.form-item{
-		text-align: left;
-		margin:0 0 22px 0;
-		display: inline-block;
-        width: 100%;
-	}
 
-    .form-item .form-item-label{
-        width: auto;
-        text-align: right;
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 14px;
-        color: #606266;
-        line-height: normal;
-        padding: 0;
-        box-sizing: border-box;
-        margin: 0 5px 0 10px;
-    }
-
-    .medium .form-item .form-item-label{
-        line-height: normal;
-        font-size: 14px;
-        vertical-align: top;
-    }
-    .small .form-item .form-item-label{
-        height: 34px;
-        line-height: normal;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-label{
-        height: 28px;
-        line-height: normal;
-        font-size: 12px;
-    }
-    .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
-        width: 100%;
-        position: relative;
-        flex: 1;
-    }
-
-    form .form-item .form-item-div{
-        position: relative;
-        border:none;
-    }
-
+form .form-item .form-item-div{
+    position: relative;
+    border: 1px solid #aeaeae !important;
+}
 
 .LeEditor /deep/ .w-e-toolbar .w-e-droplist,.LeEditor /deep/ .w-e-text-container .w-e-panel-container{
   z-index: 1 !important;
 }
 
-form .form-item .form-item-div{
-    border: 1px solid #aeaeae !important;
-}
-
-.form-item .promptMsg{
-  margin: 0 auto;
-    font-size: 12px;
-    color: #f56c6c;
-    line-height: 20px;
-    text-align: left;
-    position: absolute;
-    bottom: -20px;
-}
-
-.form-item .form-item-label{
-    height: auto;
-    text-align: right;
-    vertical-align: middle;
-    display: inline-block;
-    font-size: 14px;
-    color: #606266;
-    line-height: normal;
-    padding: 0;
-    box-sizing: border-box;
-    margin-bottom: 0;
-}
-
-.form-item .form-item-label.required::before {
-    content: "*";
-    color: #f56c6c;
-    font-size: 12px;
-    margin-right: 2px;
-}
 </style>

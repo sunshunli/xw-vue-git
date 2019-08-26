@@ -22,6 +22,7 @@
 
 <script>
 import DEFINE_KEY from "../define.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"TreeItem",
@@ -40,7 +41,7 @@ export default {
                 return;
             }
             if(this.checkbox != undefined){
-                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,
                     __tmpId:item.__tmpId,
                     checkboxStatus:!item.__checkboxStatus
@@ -75,7 +76,7 @@ export default {
                         tmpObject.data.expand = false;
                         tmpObject.data.cls = "fa-caret-left";
                     }
-                    _eventPublisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
+                    tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
                 })
             }else{
                 console.log("展开折叠操作");
@@ -90,7 +91,7 @@ export default {
                     cls = "fa-caret-left";
                 }
 
-                _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+                tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN,
                     __tmpId:item.__tmpId,
                     data:{
@@ -105,7 +106,7 @@ export default {
          * @param item:当前选中项
          */
         selectItem(item){
-            _eventPublisher.broadcast(this.EVENTPUBLISHKEY,{
+            tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
                 selectedItem:item

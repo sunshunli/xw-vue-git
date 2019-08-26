@@ -55,8 +55,35 @@
 	.selectList ul{
 		padding: 0;
 		max-height: 186px;
-    	overflow-y: scroll;
+		overflow-y: scroll;
+		scrollbar-arrow-color: transparent; 
+		scrollbar-face-color: transparent; 
+		scrollbar-3dlight-color: transparent; 
+		scrollbar-highlight-color: transparent; 
+		scrollbar-shadow-color: transparent; 
+		scrollbar-darkshadow-color: transparent; 
+		scrollbar-track-color: transparent; 
 	}
+
+.selectList ul::-webkit-scrollbar{
+	width:0px;
+	height:0px;
+}
+.selectList ul::-webkit-scrollbar-track{
+	background: transparent;
+	border-radius:2px;
+}
+.selectList ul::-webkit-scrollbar-thumb{
+	background: transparent;
+	border-radius:2px;
+}
+.selectList ul::-webkit-scrollbar-thumb:hover{
+	background: transparent;
+}
+.selectList ul::-webkit-scrollbar-corner{
+	background: transparent;
+}
+
 
 	.selectList li{
 			width: 100%;

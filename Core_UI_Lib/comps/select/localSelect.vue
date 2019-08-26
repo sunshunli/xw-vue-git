@@ -1,6 +1,6 @@
 <template>
     <div style="position:relative" class="form-item selectContent" >
-        <label class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
+        <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click="focusInput" v-bodyClick="hideButtom" :_body_tag="inputdomKey">
 			<!--选中的标签-->
 			<div class="tags" :_body_tag="inputdomKey" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
@@ -12,6 +12,7 @@
 				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
 
             <!--下拉弹出框-->
@@ -59,6 +60,15 @@
         }
     },
     computed:{
+        labelWidthVal(){
+            if(this.$attrs.labelWidth){
+                return this.$attrs.labelWidth;
+            }
+            if(this.formLabelWidth != 0){
+                return this.formLabelWidth;
+            }
+            return define.LABELWIDTH;
+        },
         placeholderStr(){
             if(this.placeholder == ""){
                 return "";
@@ -301,6 +311,11 @@
             this.init(this.dataSource);
         }
         this.setValue(this.value);
+
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     beforeDestroy(){
         /**
@@ -410,33 +425,11 @@
         min-width: 130px;
     }
 
-    .promptMsg{
-        font-size: 12px;
-        color: #f56c6c;
-        line-height: 20px;
-        text-align: left;
-        position: absolute;
-        margin: 0;
-    }
-
-    /* .tags .fa-angle-down:hover::before{
-            content: "\F057";
-    } */
-
     .searchMulSelect .fa-chevron-down.fa-times-circle:before{
         content: "\F057";
-    }
-
-    .required::before{
-        content: "*";
-        color: #f56c6c;
-        font-size: 12px;
-        margin-right: 2px;
     }
 
     .selectContent .form-item-label{
         margin: 0 5px 0 10px;
     }
-
-
 </style>

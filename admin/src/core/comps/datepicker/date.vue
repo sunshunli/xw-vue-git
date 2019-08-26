@@ -10,6 +10,7 @@
                 <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
                 <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>

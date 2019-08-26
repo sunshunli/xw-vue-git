@@ -12,6 +12,7 @@
 				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
 
             <!--下拉弹出框-->

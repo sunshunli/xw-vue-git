@@ -38,9 +38,9 @@
         <le-dialog title="弹出层" height="605" width="1000" v-model="showDialog" :close-callback="closeDialog">
             <div slot="body">
                 <le-form labelWidth='180' ref="form2" class="le_comps_core_css">
-                    <le-input label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
-                    <le-input labelWidth='150' label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
-                    <le-textarea labelWidth='150'  placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+                    <le-input labelWidth='150' tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
+                    <le-input labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
+                    <le-textarea tip="详细信息描述文案不能瞎写" labelWidth='150'  placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <le-date-picker labelWidth='150'  on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                     <le-time-picker labelWidth='150'  on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                     <le-date-time-picker labelWidth='150'  on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           

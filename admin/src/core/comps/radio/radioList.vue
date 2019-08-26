@@ -7,6 +7,7 @@
                 <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
             </span>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>
 </template>

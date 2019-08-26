@@ -5,6 +5,7 @@
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
        
     </div>

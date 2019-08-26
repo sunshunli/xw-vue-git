@@ -9,6 +9,7 @@
                 <input :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
+                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
             <div class="timePicker" :name="KEYS.timePanelDomKey">
                 <div class="timePanel">

@@ -5,6 +5,7 @@
             <input :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
+            <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>
 </template>
@@ -16,7 +17,7 @@
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeInput",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
-        // props:["msg","vType","regex","off"],
+        //props:["msg","vType","regex","off"],
         props:["value"],
         data(){
             return {

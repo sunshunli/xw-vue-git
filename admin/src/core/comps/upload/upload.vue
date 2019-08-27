@@ -17,7 +17,7 @@
                     </div>
                     <div v-else>
                         <span v-for="(item,index) in srcs" :key="index" style="height:auto">
-                            <a target="_blank" :href="item.name" style="display:block">
+                            <a target="_blank" :href="item.name" style="display:block;height:100px;">
                                 <img :src="item.name" style="width:100px;height:100px">
                             </a>
                             <i @click="removeItem(item)" class="fa fa-times"></i>
@@ -336,7 +336,7 @@
 
 .upaload .fileList span{
     display: inline-block;
-    padding: 0 10px;
+    padding: 5px;
     height: 24px;
     line-height: 22px;
     font-size: 12px;
@@ -349,7 +349,6 @@
     margin-left: 0;
     background-color: #f0f2f5;
     color: #909399;
-    padding-right: 25px;
     position: relative;
     max-width: 230px;
     overflow: hidden;
@@ -366,8 +365,8 @@
     line-height: 12px;
     display: inline-block;
     position: absolute;
-    top: 5px;
-    right: 4px;
+    top: 2px;
+    right: 2px;
     font-size: 12px;
     font-size: 12px;
     font-style: normal;

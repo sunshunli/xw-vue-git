@@ -14,7 +14,7 @@
                 <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
                 <le-date-time-picker labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
                 <le-local-select labelWidth="90" @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
-                <le-local-select labelWidth="100" multiple placeholder="job" @change="showSelectItem" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select labelWidth="100" multiple placeholder="job" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
                 <le-date-picker labelWidth="250" label="日期组件" v-model="searchModel.date"></le-date-picker>
@@ -194,6 +194,7 @@ export default {
             this.readonly = !this.readonly;
         },
         showSelectItem(val){
+            debugger
             this.searchModel.job;  
         },
         deleteItem(){

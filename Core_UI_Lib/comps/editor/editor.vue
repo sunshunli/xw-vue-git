@@ -209,4 +209,11 @@ form .form-item .form-item-div{
   z-index: 1 !important;
 }
 
+.LeEditor /deep/ ._wangEditor_btn_viewsource{
+    font-size: 12px;
+    color: #606266;
+    float: left;
+    margin-top: -1px;
+}
+
 </style>

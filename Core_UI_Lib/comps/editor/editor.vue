@@ -216,4 +216,23 @@ form .form-item .form-item-div{
     margin-top: -1px;
 }
 
+.LeEditor /deep/ .w-e-toolbar .w-e-menu{
+    padding: 5px 8px;
+    cursor: pointer;
+    float: left;
+}
+
+.LeEditor /deep/ .w-e-toolbar{
+        display: block !important;
+}
+
+.LeEditor /deep/ .w-e-toolbar::after{
+    content:".";display:block;height:0;clear:both;visibility:hidden
+}
+
+.LeEditor /deep/ .w-e-toolbar .w-e-menu{
+    float: left;
+    padding: 5px 7px;
+}
+
 </style>

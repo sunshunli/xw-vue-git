@@ -8,7 +8,7 @@
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
                 <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
-                <i class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+                <i v-show="!readonlyFlag" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>

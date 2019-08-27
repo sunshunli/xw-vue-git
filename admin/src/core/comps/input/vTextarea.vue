@@ -136,7 +136,7 @@
         font-size: 14px;
         height: 80px;
         vertical-align: middle;
-        padding: 10px 20px 10px 10px;
+        padding: 10px 30px 10px 10px;
     }
 
     .medium .form-item .form-item-input.readonlyIcon{
@@ -157,7 +157,7 @@
         top: 50%;
         color: #c0c4cc;
         font-weight: normal;
-        right: 8px;
+        right: 18px;
         cursor: pointer;
         transform: translateY(-50%);
     }

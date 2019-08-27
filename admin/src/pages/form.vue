@@ -89,6 +89,7 @@ export default {
                     console.log(d);
                 },
                 vtype:"jpg,png,gif",
+                // vtype:"zip",
                 width:"750",
                 height:"350",
                 fname:"file",

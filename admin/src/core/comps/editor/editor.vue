@@ -216,4 +216,9 @@ form .form-item .form-item-div{
     margin-top: -1px;
 }
 
+.LeEditor /deep/ .w-e-toolbar .w-e-menu{
+        word-break: break-all;
+    white-space: nowrap;
+}
+
 </style>

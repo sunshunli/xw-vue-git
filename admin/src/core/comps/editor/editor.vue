@@ -1,7 +1,7 @@
 <template>
     <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div fa LeEditor" >
+        <div :id = "'_editor-'+titleKey" class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
             <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
@@ -15,6 +15,7 @@
 import E from "wangeditor";
 import define from "../define.js";
 import tool from "../leCompsTool.js";
+import $ from "jquery";
 export default {
     name: "editor",
     props: ["value", "option"],
@@ -112,7 +113,21 @@ export default {
          */
         getEditorDom() {
             return this.editor;
-        }
+        },
+        toggleViewsource(editorSelector){
+            let editorHtml = this.getValue();
+            let t = $(editorSelector + ' ._wangEditor_btn_viewsource').text()
+            if($(editorSelector + ' ._wangEditor_btn_viewsource').text() == '源码'){
+                editorHtml = editorHtml.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;");
+                $(editorSelector + ' ._wangEditor_btn_viewsource').text('返回');
+            }else{
+                editorHtml = this.getText().replace(/&lt;/ig, "<").replace(/&gt;/ig, ">").replace(/&nbsp;/ig, " ");
+                $(editorSelector + ' ._wangEditor_btn_viewsource').text('源码');
+            }
+            this.__editor.txt.html(editorHtml);
+            this.__editor.change && this.__editor.change();	//更新编辑器的内容
+        },
+        
     },
     mounted() {
         this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);
@@ -154,6 +169,12 @@ export default {
             this.uploadImg(files, insert);
         };
         this.__editor.create();
+        // 增加富文本功能
+        let editorSelector = '#_editor-'+this.titleKey;
+        $(editorSelector + " .w-e-toolbar").prepend('<div class="w-e-menu"><a class="_wangEditor_btn_viewsource" href="###" >源码</a></div>');
+        $(editorSelector + " .w-e-toolbar").find("._wangEditor_btn_viewsource").on("click",() =>{
+            this.toggleViewsource(editorSelector);
+        })
 
         let that = this;
         tool._form_event_publisher.on(that._uid,(data)=>{
@@ -161,7 +182,8 @@ export default {
         });
     },
     beforeDestroy(){
-        
+        let editorSelector = '#_editor-'+this.titleKey;
+        $(editorSelector + " .w-e-toolbar").find("._wangEditor_btn_viewsource").off("click");
     }
 };
 </script>

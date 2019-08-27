@@ -9,7 +9,20 @@
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
-                    <span v-for="(item,index) in srcs" :key="index"><a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a><i @click="removeItem(item)" class="fa fa-times"></i></span>
+                    <div v-if="fileType != 'image'">
+                        <span v-for="(item,index) in srcs" :key="index">
+                            <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
+                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                        </span>
+                    </div>
+                    <div v-else>
+                        <span v-for="(item,index) in srcs" :key="index" style="height:auto">
+                            <a target="_blank" :href="item.name" style="display:block">
+                                <img :src="item.name" style="width:100px;height:100px">
+                            </a>
+                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                        </span>
+                    </div>
                 </div>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -95,6 +108,24 @@
                 }
                 return true;
             },
+            fileType(){
+                let _fileType = "";
+                if(this.vtype){
+                    if(this.vtype.indexOf('jpg') != -1 || this.vtype.indexOf('png') != -1 || this.vtype.indexOf('gif') != -1 || this.vtype.indexOf('icon') != -1){
+                        _fileType = define.UPLOADFILETYPE.IMAGE;
+                    }
+                    if(this.vtype.indexOf('pdf') != -1){
+                        _fileType = define.UPLOADFILETYPE.PDF;
+                    }
+                    if(this.vtype.indexOf('doc') != -1 || this.vtype.indexOf('docx') != -1){
+                        _fileType = define.UPLOADFILETYPE.WORD;
+                    }
+                    if(this.vtype.indexOf('xls') != -1 || this.vtype.indexOf('xlsx') != -1){
+                        _fileType = define.UPLOADFILETYPE.EXCEL;
+                    }
+                }
+                return _fileType;
+            }
         },
         watch:{
             value(val){
@@ -116,28 +147,6 @@
              */
             reloadFileInput(){
                 this.$refs[this.fkey].value = "";
-            },
-            checkIsImage(){
-                let count = 0;
-                if(this.vtype){
-                    if(this.vtype.indexOf('jpg') != -1){
-                        count++;
-                    }
-                    if(this.vtype.indexOf('png') != -1){
-                        count++;
-                    }
-                    if(this.vtype.indexOf('gif') != -1){
-                        count++;
-                    }
-                    if(this.vtype.indexOf('icon') != -1){
-                        count++;
-                    }
-                    if(count == 0){
-                        return false;
-                    }
-                    return true;
-                }
-                return false;
             },
             /**
              * @description 上传的主体方法
@@ -171,7 +180,7 @@
                     }
                 }
                 //控制规格
-                if(this.checkIsImage()){
+                if(this.fileType == define.UPLOADFILETYPE.IMAGE){
                     if(!this.width && !this.height){
                         this.doUploadAjax(formData);
                         return;

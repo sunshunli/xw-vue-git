@@ -59,8 +59,8 @@ const routers = [
         name:'scrollPage',
         component:scrollPage
     },{
-        path:'/buttonPage',
-        name:'buttonPage',
+        path:'/button',
+        name:'button',
         component:buttonPage
     }
 ];

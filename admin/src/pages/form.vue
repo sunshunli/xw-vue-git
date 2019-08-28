@@ -48,7 +48,7 @@
                     <le-radio-list labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
                     <le-upload labelWidth='150' on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
-                    <le-editor labelWidth='180' tip="请输入富文本信息" on label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
+                    <le-editor labelWidth='180' tip="请输入富文本信息" label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
                     
                     <!-- <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>     -->
                 </le-form>

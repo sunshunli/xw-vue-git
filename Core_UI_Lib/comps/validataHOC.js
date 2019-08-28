@@ -140,14 +140,13 @@ function ValidataHOC(Component){
                 if(Component.data().validataComponentType && Component.data().validataComponentType == "Input"){
                     this.$set(this.$attrs, "verify", this.verifyReg);
                 }
-                //透传方法
-                this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
-                this.$set(this.$attrs, "setStateByFlag", this.setStateByFlag);
-                this.$set(this.$attrs, "setVerifyCompState", this.setVerifyCompState);
             }
-            //检测reset方法、验证开关，通过attrs传递下去
+            //透传方法
             this.$set(this.$attrs, "reset", this.reset);
             this.$set(this.$attrs, "checkVerifyEnabled", this.checkVerifyEnabled);
+            this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
+            this.$set(this.$attrs, "setStateByFlag", this.setStateByFlag);
+            this.$set(this.$attrs, "setVerifyCompState", this.setVerifyCompState);
 
             return h(Component,{
                 on: this.$listeners,

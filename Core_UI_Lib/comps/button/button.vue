@@ -112,6 +112,11 @@ export default {
         border-color: #49cfad;
     }
 
+    .download{
+        background-color: #35bb9c;
+        border-color: #35bb9c;
+    }
+
     .update{
         background-color: #a2d469;
         border-color: #a2d469;
@@ -176,6 +181,11 @@ export default {
     .import{
         background-color:#a2d469;
         border-color: #a2d469;
+    }
+
+    .export{
+        background-color:#4fc1e9;
+        border-color: #4fc1e9;
     }
 
     .review{
@@ -256,6 +266,11 @@ export default {
         background-color: #4fc1e9;
         border-color: #4fc1e9;
         padding-left: 13px;
+    }
+
+    .warning{
+        background-color: #bec121;
+        border-color: #bec121;
     }
 
     button i{

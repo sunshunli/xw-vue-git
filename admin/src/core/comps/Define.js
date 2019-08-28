@@ -38,24 +38,55 @@ let TREE_CONFIG = {
 }
 
 let BUTTON_CONFIG = {
-    "down":{cls:"down",iCls:"fa-cloud-download"},
-    "upload":{cls:"upload",iCls:"fa-cloud-upload"},
-    "create":{cls:"add",iCls:"fa-file"},
-    "delete":{cls:"delete",iCls:"fa-trash-o fa-lg"},
-    "submit":{cls:"submit",iCls:"fa-check"},
-    "back":{cls:"back",iCls:"fa-rotate-left"},
-    "search":{cls:"search",iCls:"fa-search"},
-    "edit":{cls:"edit",iCls:"fa-edit"},
-    "play":{cls:"play",iCls:"fa-play"},
-    "enable":{cls:"enable",iCls:"fa-play-circle"},
-    "disable":{cls:"disable",iCls:"fa-ban"},
-    "publish":{cls:"publish",iCls:"fa-bolt"},
-    "stop":{cls:"stop",iCls:"fa-stop"},
-    "info":{cls:"info",iCls:"fa-info-circle"},
-    "setting":{cls:"setting",iCls:"fa-cog"},
-    "default":{cls:"default",iCls:""},
-    "warning":{cls:"warning",iCls:"fa-exclamation-circle"},
-    "close":{cls:"close",iCls:"fa-times"},
+
+    "search":{cls:"search",iCls:"fa-search-plus"}, //搜索
+    "create":{cls:"create",iCls:"fa-plus-square"}, //新增
+    "update":{cls:"update",iCls:"fa-pencil"},  //更新
+    "remove":{cls:"remove",iCls:"fa-trash"},   //删除
+    "approve":{cls:"approve",iCls:"fa-pencil"},//审核
+    "reject":{cls:"reject",iCls:"fa-times-circle"}, //决绝 
+    "start":{cls:"start",iCls:"fa-check-square"},//启用
+    "stop":{cls:"stop",iCls:"fa-minus-circle"},//停用
+    "info":{cls:"info",iCls:"fa-file-text"},//详情
+    "reset":{cls:"reset",iCls:"fa-repeat"},//重置
+    "up":{cls:"up",iCls:"fa-arrow-circle-down"},//上架
+    "down":{cls:"down",iCls:"fa-arrow-circle-up"},//下架
+    "publish":{cls:"publish",iCls:"fa-paper-plane"},//发布
+    "cancelPublish":{cls:"cancelPublish",iCls:"fa-window-close"},//取消发布
+    "import":{cls:"import",iCls:"fa-level-down"},//导入
+    "export":{cls:"export",iCls:"fa-level-up"},//导出
+    "review":{cls:"review",iCls:"fa-eye"},//预览
+    "batch":{cls:"batch",iCls:"fa-th-large"},//批量操作
+    "setting":{cls:"setting",iCls:"fa-cog"},//设置
+    "decorate":{cls:"decorate",iCls:"fa-wrench"},//装修页面
+    "prevPage":{cls:"prevPage",iCls:""},//上一页
+    "nextPage":{cls:"nextPage",iCls:""},//下一页 
+    "confirm":{cls:"confirm",iCls:""},//确定
+    "save":{cls:"save",iCls:""},//保存
+    "back":{cls:"back",iCls:""},//返回
+    "cancel":{cls:"cancel",iCls:""},//取消
+    "choose":{cls:"choose",iCls:""},//请选择XXXX
+    "holdSave":{cls:"holdSave",iCls:""},//暂存
+    "prev":{cls:"prev",iCls:""},//上一步
+    "next":{cls:"next",iCls:""},//下一步
+    // "down":{cls:"down",iCls:"fa-cloud-download"},
+    // "upload":{cls:"upload",iCls:"fa-cloud-upload"},
+    // "create":{cls:"add",iCls:"fa-file"},
+    // "delete":{cls:"delete",iCls:"fa-trash-o fa-lg"},
+    // "submit":{cls:"submit",iCls:"fa-check"},
+    // "back":{cls:"back",iCls:"fa-rotate-left"},
+    // "search":{cls:"search",iCls:"fa-search"},
+    // "edit":{cls:"edit",iCls:"fa-edit"},
+    // "play":{cls:"play",iCls:"fa-play"},
+    // "enable":{cls:"enable",iCls:"fa-play-circle"},
+    // "disable":{cls:"disable",iCls:"fa-ban"},
+    // "publish":{cls:"publish",iCls:"fa-bolt"},
+    // "stop":{cls:"stop",iCls:"fa-stop"},
+    // "info":{cls:"info",iCls:"fa-info-circle"},
+    // "setting":{cls:"setting",iCls:"fa-cog"},
+    // "default":{cls:"default",iCls:""},
+    // "warning":{cls:"warning",iCls:"fa-exclamation-circle"},
+    // "close":{cls:"close",iCls:"fa-times"},
 }
 
 let ALERT_CONFIG = {

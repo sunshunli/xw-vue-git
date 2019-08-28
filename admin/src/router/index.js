@@ -11,7 +11,9 @@ const DemoPage = r=>require.ensure([],()=>r(require("../pages/demoPage.vue")),"D
 const UsePage = r=> require.ensure([],()=>(require("../pages/usePage.vue")),"UsePage");
 const UsePageAdd = r=> require.ensure([],()=>(require("../pages/usePageAdd.vue")),"UsePageAdd");
 
-const scrollPage = r=>require.ensure([],()=>r(require("../pages/scrollPage.vue")),"scrollPage");
+const scrollPage = r=>require.ensure([],()=>r(require("../pages/scrollPage.vue")),"ScrollPage");
+const buttonPage = r=>require.ensure([],()=>r(require("../pages/buttonPage.vue")),"ButtonPage");
+
 
 Vue.use(Router);
 
@@ -56,6 +58,10 @@ const routers = [
         path:'/scrollPage',
         name:'scrollPage',
         component:scrollPage
+    },{
+        path:'/buttonPage',
+        name:'buttonPage',
+        component:buttonPage
     }
 ];
 

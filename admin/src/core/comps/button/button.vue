@@ -201,51 +201,61 @@ export default {
     .prevPage{
         background-color: #4fc1e9;
         border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     .nextPage{
         background-color: #4fc1e9;
         border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     .confirm{
         background-color: #4fc1e9;
         border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     .save{
         background-color: #a2d469;
-         border-color: #a2d469;
+        border-color: #a2d469;
+        padding-left: 13px;
     }
 
     .back{
         background-color: #4fc1e9;
-         border-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     .cancel{
         background-color: #bababa;
-         border-color: #bababa;
+        border-color: #bababa;
+        padding-left: 13px;
     }
 
     .choose{
         background-color: #5e9bec;
-         border-color: #5e9bec;
+        border-color: #5e9bec;
+        padding-left: 13px;
     }
 
     .holdSave{
         background-color: #8dc051;
-         border-color: #8dc051;
+        border-color: #8dc051;
+        padding-left: 13px;
     }
 
     .prev{
         background-color: #4fc1e9;
-         border-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     .next{
         background-color: #4fc1e9;
-         border-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     button i{

@@ -178,6 +178,11 @@ export default {
         border-color: #a2d469;
     }
 
+    .export{
+        background-color:#4fc1e9;
+        border-color: #4fc1e9;
+    }
+
     .review{
         background-color: #35bb9c;
         border-color: #35bb9c;

@@ -69,6 +69,7 @@ let BUTTON_CONFIG = {
     "holdSave":{cls:"holdSave",iCls:""},//暂存
     "prev":{cls:"prev",iCls:""},//上一步
     "next":{cls:"next",iCls:""},//下一步
+    "default":{cls:"default",iCls:""},//默认
     // "down":{cls:"down",iCls:"fa-cloud-download"},
     // "upload":{cls:"upload",iCls:"fa-cloud-upload"},
     // "create":{cls:"add",iCls:"fa-file"},

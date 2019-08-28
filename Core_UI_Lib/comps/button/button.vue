@@ -103,99 +103,159 @@ export default {
         border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
     }
 
-    .back{
-        background-color: #fff;
-        color:#fff;
-    }
-    .add{
-        background-color: #42b1ff;
-        border-color: #42b1ff;
-    }
-
-    .delete{
-        background-color: #f56c6c;
-        border-color: #f56c6c;
-    }
-
-    .edit{
-        background-color: #6c81ff;
-        border-color: #6c81ff;
-    }
-
-    .submit{
-        background-color: #ea4cf0;
-        border-color: #ea4cf0;
-    }
-
-    .back{
-        background-color: #3699ff;
-        border-color: #3699ff;
-    }
-
-    .setting{
-        background-color:#9d72ff;
-        border-color: #9d72ff; 
-        color: #fff;
-    }
-
     .search{
-        background-color: #00ded1;
-        border-color: #00ded1;
+        background-color: #5e9bec;
+        border-color:#5e9bec;
+    }
+    .create{
+        background-color: #49cfad;
+        border-color: #49cfad;
     }
 
-    .enable{
-        background-color: #42d5ff;
-        border-color: #42d5ff;
+    .update{
+        background-color: #a2d469;
+        border-color: #a2d469;
     }
 
-    .disable{
-        background-color: #c24cee;
-        border-color: #c24cee;
+    .remove{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
     }
 
-    .publish{
-        background-color: #62e082;
-        border-color: #62e082;
+    .approve{
+        background-color: #4b89dc;
+        border-color: #4b89dc;
     }
 
-    .down{
-        background-color: #f3bf34;
-        border-color: #f3bf34;
-    }
-
-    .upload{
-        background-color: #46f0c6;
-        border-color: #46f0c6;
-    }
-
-    .play{
-        background-color: #6c81ff;
-        border-color:#6c81ff;
+    .reject{
+        background-color: #f6bb43;
+        border-color: #f6bb43;
     }
 
     .start{
-        background-color: #7cc341;
-        border-color: #7cc341;
+        background-color:#35bb9c;
+        border-color: #35bb9c; 
+        color: #fff;
     }
 
     .stop{
-        background-color: #62e082;
-        border-color: #62e082;
+        background-color: #4b89dc;
+        border-color: #4b89dc;
     }
 
     .info{
-        background-color: #9d72ff;
-        border-color: #9d72ff;
+        background-color: #3bafda;
+        border-color: #3bafda;
     }
 
-    .danger{
-        background-color: #e85656;
-        border-color:#e85656;
+    .reset{
+        background-color: #5e9bec;
+        border-color: #5e9bec;
     }
 
-    .warning{
-        background-color: #ff33a6;
-        border-color: #ff33a6;
+    .up{
+        background-color: #a2d469;
+        border-color: #a2d469;
+    }
+
+    .down{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+    }
+
+    .publish{
+        background-color: #49cfad;
+        border-color: #49cfad;
+    }
+
+    .cancelPublish{
+        background-color: #5e9bec;
+        border-color:#5e9bec;
+    }
+
+    .import{
+        background-color:#a2d469;
+        border-color: #a2d469;
+    }
+
+    .review{
+        background-color: #35bb9c;
+        border-color: #35bb9c;
+    }
+
+    .batch{
+        background-color: #4b89dc;
+        border-color: #4b89dc;
+    }
+
+    .setting{
+        background-color: #4fc1e9;
+        border-color:#4fc1e9;
+    }
+
+    .decorate{
+        background-color: #ad92ed;
+        border-color: #ad92ed;
+    }
+
+    .prevPage{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
+    }
+
+    .nextPage{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
+    }
+
+    .confirm{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
+    }
+
+    .save{
+        background-color: #a2d469;
+        border-color: #a2d469;
+        padding-left: 13px;
+    }
+
+    .back{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
+    }
+
+    .cancel{
+        background-color: #bababa;
+        border-color: #bababa;
+        padding-left: 13px;
+    }
+
+    .choose{
+        background-color: #5e9bec;
+        border-color: #5e9bec;
+        padding-left: 13px;
+    }
+
+    .holdSave{
+        background-color: #8dc051;
+        border-color: #8dc051;
+        padding-left: 13px;
+    }
+
+    .prev{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
+    }
+
+    .next{
+        background-color: #4fc1e9;
+        border-color: #4fc1e9;
+        padding-left: 13px;
     }
 
     button i{

@@ -30,6 +30,7 @@
         <le-button type="holdSave" value="暂存"></le-button>
         <le-button type="prev" value="上一步"></le-button>
         <le-button type="next" value="下一步"></le-button>
+        <le-button type="warning" value="警告"></le-button>
     </div>
 </template>
 

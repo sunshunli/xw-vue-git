@@ -143,6 +143,8 @@ export default {
         cursor: pointer;
         display: inline-block;
         margin: 10px 20px 10px 0;
+        color: #606266;
+        font-size: 14px;
     }
     .ck{
         position:absolute;

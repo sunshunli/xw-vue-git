@@ -39,7 +39,7 @@
             <div slot="body">
                 <le-form labelWidth='180' ref="form2" class="le_comps_core_css">
                     <le-input labelWidth='150' tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
-                    <le-input labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" vType="number" on required msg="地址必填" v-model="entity.address"></le-input>
+                    <le-input labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" on required msg="地址必填" v-model="entity.address"></le-input>
                     <le-textarea tip="详细信息描述文案不能瞎写" labelWidth='150' placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <le-date-picker labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                     <le-time-picker labelWidth='150' tip="输入当前之后的时间" on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
@@ -55,6 +55,7 @@
             </div>
         
             <div slot="button">
+                <le-button type='submit' value="清空" @click="clearAll"></le-button>
                 <le-button type='submit' value="禁用" @click="disabledForm"></le-button>
                 <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
                 <le-button type='close' value="关闭" @click="closeDialog"></le-button>
@@ -193,8 +194,10 @@ export default {
         disabledForm(){
             this.readonly = !this.readonly;
         },
+        clearAll(){
+            this.$refs.form2.reset();
+        },
         showSelectItem(val){
-            debugger
             this.searchModel.job;  
         },
         deleteItem(){
@@ -206,14 +209,20 @@ export default {
         openDialog(){
             this.$refs.form2.reset();
             window.setTimeout(()=>{
-                this.entity.fav = "1,2";
+                this.entity.age = "3";
+                this.entity.id = "1";
+                this.entity.content = "我是信息";
+                this.entity.date = "2019-08-29";
+                this.entity.time = "14:48:10";
+                this.entity.datetime = "2019-08-29 14:48:10";
                 this.entity.sex = "5";
+                this.entity.fav = "1,2";
                 this.entity.job = "3,4,5";
-                // this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
-                this.entity.url = null;
-            },1000)
+                this.entity.address = "和谐家园";
+                this.entity.url = "//p1.lefile.cn/fes/cms/2019/07/28/2zhionbdnffudj5y0w7metrs3pds6k051235.jpg,//p4.lefile.cn/fes/cms/2019/07/28/ra04vay1l7hgmu0lh5kxdjlgnt9pza102201.png"
+                this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");
+            },0)
             this.showDialog = true;
-            this.$refs.editor.getCurrentComponent().setValue("dsadasdasdasd");
         },
         search(){
             this.$refs.black_list_table.searchCurrentIndex();

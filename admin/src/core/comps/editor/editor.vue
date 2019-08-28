@@ -127,7 +127,10 @@ export default {
             this.__editor.txt.html(editorHtml);
             this.__editor.change && this.__editor.change();	//更新编辑器的内容
         },
-        
+        reset(){
+            this.setValue("");
+            this.$attrs.setStateByFlag(0);
+        }
     },
     mounted() {
         this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);

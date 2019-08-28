@@ -6,8 +6,8 @@
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
                 <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
-                <input :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
-                <div v-show="!readonlyFlag" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
+                <input v-model="timeStr" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
+                <div v-show="!readonlyFlag && timeStr != ''" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
@@ -46,7 +46,6 @@ export default {
         return {
             //validataHOC组件属性
             validataComponentType:"TimePicker",
-            
             //验证组件需要的错误信息提示
             state:{
                 showError:false,
@@ -63,7 +62,8 @@ export default {
                 clearTimeDomKey:_idSeed.newId()
             },
             //计算滚动时候的下个位置的li的索引
-            nextSelect:0
+            nextSelect:0,
+            timeStr:""
         }
     },
     computed:{
@@ -120,7 +120,8 @@ export default {
             let result = res.join(':');
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             this.$emit("input",result);
-            this.getJQDom(this.KEYS.timeInputDomKey).val(result);
+            this.timeStr = result;
+            // this.getJQDom(this.KEYS.timeInputDomKey).val(result);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
@@ -166,7 +167,8 @@ export default {
         //设置值
         setValue(str){
             //给dom赋值
-            str?this.getJQDom(this.KEYS.timeInputDomKey).val(str):this.getJQDom(this.KEYS.timeInputDomKey).val("");
+            // str?this.getJQDom(this.KEYS.timeInputDomKey).val(str):this.getJQDom(this.KEYS.timeInputDomKey).val("");
+            str?this.timeStr = str:this.timeStr="";
 
             let hourDom = $("div [name="+this.KEYS.hourDomKey+"]");
             let minDom = $("div [name="+this.KEYS.minDomKey+"]");
@@ -217,7 +219,8 @@ export default {
         },
         //获取值
         getValue(){
-            return this.getJQDom(this.KEYS.timeInputDomKey).val();
+            return this.timeStr;
+            // return this.getJQDom(this.KEYS.timeInputDomKey).val();
         },
         //获取当前的时分秒索引
         getCurrentHMSIndex(){

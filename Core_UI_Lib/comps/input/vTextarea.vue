@@ -3,7 +3,7 @@
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
-            <i v-show="!readonlyFlag" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
+            <i v-show="!readonlyFlag && currentValue != ''" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
@@ -136,7 +136,7 @@
         font-size: 14px;
         height: 80px;
         vertical-align: middle;
-        padding: 10px 20px 10px 10px;
+        padding: 10px 30px 10px 10px;
     }
 
     .medium .form-item .form-item-input.readonlyIcon{
@@ -157,7 +157,7 @@
         top: 50%;
         color: #c0c4cc;
         font-weight: normal;
-        right: 8px;
+        right: 18px;
         cursor: pointer;
         transform: translateY(-50%);
     }

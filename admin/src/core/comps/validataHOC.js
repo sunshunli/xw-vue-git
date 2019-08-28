@@ -144,9 +144,9 @@ function ValidataHOC(Component){
                 this.$set(this.$attrs, "getVerifyResult", this.getVerifyResult);
                 this.$set(this.$attrs, "setStateByFlag", this.setStateByFlag);
                 this.$set(this.$attrs, "setVerifyCompState", this.setVerifyCompState);
-                this.$set(this.$attrs, "reset", this.reset);
             }
-            //检测验证开关，通过attrs传递下去
+            //检测reset方法、验证开关，通过attrs传递下去
+            this.$set(this.$attrs, "reset", this.reset);
             this.$set(this.$attrs, "checkVerifyEnabled", this.checkVerifyEnabled);
 
             return h(Component,{

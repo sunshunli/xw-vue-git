@@ -7,11 +7,11 @@
             <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>UsePage</li><li>Add</li></ul>
         </div>
            
-        <le-form labelWidth="200" ref="form1" style="width:600px">
+        <le-form labelWidth="150" ref="form1" style="width:600px">
 
-            <le-input label="推广地址"  msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
+            <le-input label="推广地址" labelWidth="100" msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
 
-            <le-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></le-input>
+            <le-input label="原地址" labelWidth="180" msg="原地址必填" v-model="form1.ydz" on required></le-input>
 
             <le-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></le-input>
 
@@ -187,7 +187,7 @@ export default {
 
             this.$refs['sex'].$children[0].setValue('1');
             this.getTreeData(17)
-        },1000)
+        },0)
     }
 }
 </script>

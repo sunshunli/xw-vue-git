@@ -16,6 +16,7 @@
 <script>
 
 import tool from "../leCompsTool.js";
+import define from "../define.js";
 
 export default {
     name:"LeCheckboxList",
@@ -28,7 +29,8 @@ export default {
                 successIcon:"",
                 showError:false
             },
-            data:[]
+            data:[],
+            formLabelWidth:""
         }
     },
     computed:{
@@ -135,16 +137,17 @@ export default {
             }
         }
     },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
+    },
     mounted(){
         if(this.dataSource && this.dataSource.length >0){
             this.init(this.dataSource);
         }
         this.setValue(this.value);
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     }
 }
 </script>

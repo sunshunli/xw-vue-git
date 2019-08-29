@@ -51,8 +51,8 @@ const routers = [
         name:'UsePage',
         component:UsePage
     },{
-        path:'/usePageAdd',
-        name:'UsePageAdd',
+        path:'/add',
+        name:'add',
         component:UsePageAdd
     },{
         path:'/scrollPage',

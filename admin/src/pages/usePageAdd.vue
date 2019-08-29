@@ -7,35 +7,34 @@
             <ul class="breadcrumb al-breadcrumb" id="crumbs"><li>XW-VUE-GIT</li><li>UsePage</li><li>Add</li></ul>
         </div>
            
-        <le-form ref="form1" style="width:600px">
+        <le-form labelWidth="200" ref="form1" style="width:600px">
 
-            <v-input label="推广地址"  msg="推广地址必填" v-model="form1.tgdz" type="text" on required></v-input>
+            <le-input label="推广地址"  msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
 
-            <v-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></v-input>
+            <le-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></le-input>
 
-            <v-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></v-input>
+            <le-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></le-input>
 
-            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1" on required></le-date-time-picker>
+            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1"></le-date-time-picker>
             
-            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2" on required></le-date-time-picker>
+            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2"></le-date-time-picker>
 
-            <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空"></le-date-picker>
+            <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空" on></le-date-picker>
             
-            <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空"></le-time-picker>
+            <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空" on></le-time-picker>
 
-            <le-radio-list label="性别" ref="sex" v-model="form1.sex" display-name="name" msg="单选框必填" display-value="code" on required></le-radio-list>
+            <le-radio-list label="性别" ref="sex" v-model="form1.sex" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
-            <le-checkbox-list label="爱好" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on required></le-checkbox-list>
+            <le-checkbox-list label="爱好" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
         
-            <le-local-select label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on required></le-local-select> 
+            <le-local-select label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
 
             <le-upload msg='图片必须上传' v-model='form1.uploadSrc' :options="uploadOptions" label="文件上传"></le-upload>    
 
-            <le-local-select ref="s2" v-model="form1.s2" display-name="name" msg="下拉框必填" display-value="code" @change="reloadTree"></le-local-select>  
-           
             <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree1" :itemClick="itemClick" checkbox></le-asyn-tree>
 
             <le-button value="Form提交" @click="submit('form1')"></le-button>
+            <le-button value="返回" @click="back"></le-button>
         </le-form>
     </div>
 </template>
@@ -97,7 +96,10 @@ export default {
     },
     methods:{
         changecks(data){
-            console.log("11");
+            console.log(data);
+        },
+        back(){
+            this.$router.push({path:"/form"});
         },
         submit(){
             let res = this.$refs["form1"].validate();
@@ -141,7 +143,6 @@ export default {
         },
         //树的方法
         itemClick(item){
-            console.log(item)
             this.selectNode = item;
             this.tbListParams = {
                 parentId : item.iD,
@@ -179,26 +180,14 @@ export default {
             {name:"3000",code:"3003"},
         ];
 
-        this.ajax.getFetch("/auth/dict/getdictmap?keys=MallType,TreeType").then(d=>{
-            let that = this;
-            let _TreeType = [];
-            for(let item in d.data.TreeType){
-                _TreeType.push({code:item,name:d.data.TreeType[item]})
-            }
-            that.$refs["s2"].getCurrentComponent().init(Unit.object.cloneObj(_TreeType));
-            that.$refs["s2"].setValue(_TreeType[0]);
-            that.$refs["tree1"].init(d.data);
-            that.selectNode = d.data[0];
-        }).catch(e=>{
-            this.alert.showAlert("error",e.data);
-        })
+        window.setTimeout(()=>{
+            this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
+            this.$refs["sex"].getCurrentComponent().init(Unit.object.cloneObj(data));
+            this.$refs["hobby"].getCurrentComponent().init(Unit.object.cloneObj(data));
 
-        this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["sex"].getCurrentComponent().init(Unit.object.cloneObj(data));
-        this.$refs["hobby"].getCurrentComponent().init(Unit.object.cloneObj(data));
-
-        this.$refs['sex'].$children[0].setValue('1');
-        this.getTreeData(17)
+            this.$refs['sex'].$children[0].setValue('1');
+            this.getTreeData(17)
+        },1000)
     }
 }
 </script>

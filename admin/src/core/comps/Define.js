@@ -1,3 +1,6 @@
+
+import tool from "./leCompsTool.js";
+
 let TREE_CONFIG = {
     /**
      * @description 初始化数据源，添加自定义属性，根节点__parentId:-1，初始化__level:1
@@ -8,7 +11,7 @@ let TREE_CONFIG = {
     ASYNINITATTRIBUTE(data,currentNode,isRoot){
         if(data && data instanceof Array && data.length != 0){
             data.forEach(element=>{
-                element.__tmpId = _idSeed.newId();
+                element.__tmpId = tool._idSeed.newId();
                 element.__hasChildren = false;
                 element.__children = [];
                 element.__cls = "fa-caret-right";

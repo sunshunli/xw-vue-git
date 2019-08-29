@@ -30,7 +30,8 @@ export default {
             state: {
                 showError: false,
                 successIcon: ""
-            }
+            },
+            formLabelWidth:""
         };
     },
     computed: {
@@ -132,6 +133,12 @@ export default {
             this.$attrs.setStateByFlag(0);
         }
     },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
+    },
     mounted() {
         this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);
         // 配置菜单 - 默认可以展示所有菜单 如果需要设置 请修改option.menus 具体参见define.js
@@ -178,11 +185,6 @@ export default {
         $(editorSelector + " .w-e-toolbar").find("._wangEditor_btn_viewsource").on("click",() =>{
             this.toggleViewsource(editorSelector);
         })
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     },
     beforeDestroy(){
         let editorSelector = '#_editor-'+this.titleKey;

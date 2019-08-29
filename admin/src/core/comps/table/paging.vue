@@ -17,12 +17,13 @@
 </template>
 
 <script>
+    import tool from "../leCompsTool.js";
     export default {
         props:["options","goNext","goPrev","goIndex"],
         name: "PagingSection",
         data(){
             return {
-                goIndexKey:_idSeed.newId(),
+                goIndexKey:tool._idSeed.newId(),
             }
         },
         computed:{

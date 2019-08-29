@@ -29,7 +29,8 @@ export default {
             },
             data:[],
             validataComponentType:"Radio",
-            name:_idSeed.newId(),
+            name:tool._idSeed.newId(),
+            formLabelWidth:""
         }
     },
     computed:{
@@ -121,18 +122,18 @@ export default {
             let res = tool.object.getCheckedItems(this.data,this.displayValue);
             return res.vals.join(',');
         },
-        
+    },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
     },
     mounted(){
         if(this.dataSource && this.dataSource.length >0){
             this.init(this.dataSource);
         }
         this.setValue(this.value);
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     }
 }
 </script>

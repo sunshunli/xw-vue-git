@@ -40,7 +40,7 @@
         props:["actions","data","cols","accpetHBNotice","showCk","singleSelected","showNoResult"],
         data(){
             return {
-                radioKey:_idSeed.newId()
+                radioKey:tool._idSeed.newId()
             }
         },
         computed:{

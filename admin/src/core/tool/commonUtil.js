@@ -126,7 +126,7 @@ let CommonUtil = {
                     item.ck = false;
                 }
                 item.cls = "";
-                item.__tmpId = _idSeed.newId();
+                item.__tmpId = tool._idSeed.newId();
             });
             return data;
         },

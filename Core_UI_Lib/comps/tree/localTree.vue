@@ -28,7 +28,7 @@ export default {
             state:{
                 data:[]
             },
-            EVENTPUBLISHKEY:_idSeed.newId() + "_TREE_NOTICEKEY",
+            EVENTPUBLISHKEY:tool._idSeed.newId() + "_TREE_NOTICEKEY",
         }
     },
     computed:{
@@ -98,7 +98,7 @@ export default {
                     }else{
                         data[i].__level = parentNode.__level + 1;
                     }
-                    data[i].__tmpId = _idSeed.newId();
+                    data[i].__tmpId = tool._idSeed.newId();
                     data[i].__children = data[i][this.childrenKey]&&data[i][this.childrenKey] != 0?data[i][this.childrenKey]:[];
                     data[i].__hasChildren = data[i].__children.length > 0 ?true:false;
                     data[i].__cls = "fa-caret-right";

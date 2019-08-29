@@ -23,6 +23,7 @@
 
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
             <le-button type="search" value="Search" @click="search"></le-button>
+            <le-button type="create" value="Add" @click="add"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="start" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="stop" value="禁封" @click="setEnable(true)"></le-button>
@@ -144,12 +145,12 @@ export default {
                 },
                 actions:[
                     {
-                        key:"edit",
+                        key:"update",
                         val:"编辑",
                         action:this.search,
                     },
                     {
-                        key:"delete",
+                        key:"remove",
                         val:"注销",
                         action:this.search,
                     }
@@ -184,6 +185,9 @@ export default {
         }
     },
     methods:{
+        add(){
+            this.$router.push({path:"/add"});
+        },
         convertShop(key,row){
             if(row[key.key] == "聚享汇"){
                 return "<span style='color:red'>聚享汇</span>";

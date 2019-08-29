@@ -42,13 +42,14 @@
         data(){
             return {
                 validataComponentType:"FileUpload",
-                fkey:_idSeed.newId(),
+                fkey:tool._idSeed.newId(),
                 showLoading:false,
                 srcs:[],
                 state:{
                     showError:false,
                     successIcon:""
-                }
+                },
+                formLabelWidth:""
             }
         },
         computed:{
@@ -284,13 +285,14 @@
                 this.srcs = [];
             }
         },
-        mounted(){
-            this.setValue(this.value);
-
+        created(){
             let that = this;
             tool._form_event_publisher.on(that._uid,(data)=>{
                 this.formLabelWidth = data;
             });
+        },
+        mounted(){
+            this.setValue(this.value);
         }
     }
 </script>

@@ -173,7 +173,8 @@ export default {
             },
             data:[],
             selectDay:"",
-            isShowPicker:false
+            isShowPicker:false,
+            formLabelWidth:""
         }
     },
     watch:{
@@ -460,16 +461,17 @@ export default {
             return this.selectDayStr;
         }
     },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
+    },
     mounted(){
         this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
         document.body.addEventListener("click",this.pickerBodyClick,false);
 
         this.setValue(this.value);
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     },
     beforeDestroy () {
         document.body.removeEventListener("click",this.pickerBodyClick);

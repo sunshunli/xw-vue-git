@@ -50,14 +50,15 @@ export default {
     data(){
         return {
             validataComponentType:"DateTimePicker",
-            dateKey:_idSeed.newId(),
-            timeKey:_idSeed.newId(),
+            dateKey:tool._idSeed.newId(),
+            timeKey:tool._idSeed.newId(),
             dateTimeStr:"",
             showDateTimePicker:false,
             state:{
                 showError:false,
                 successIcon:''
             },
+            formLabelWidth:""
         }
     },
     computed:{
@@ -175,12 +176,14 @@ export default {
             this.showDateTimePicker = false;
         }
     },
-    mounted(){
-        this.setValue(this.value);
+    created(){
         let that = this;
         tool._form_event_publisher.on(that._uid,(data)=>{
             this.formLabelWidth = data;
         });
+    },
+    mounted(){
+        this.setValue(this.value);
     },
     beforeDestroy(){
     }

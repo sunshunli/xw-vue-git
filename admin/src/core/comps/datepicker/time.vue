@@ -53,17 +53,18 @@ export default {
             },
             //每次组件初始化都会赋上唯一的key
             KEYS:{
-                ROOTDOM:_idSeed.newId(),
-                hourDomKey:_idSeed.newId(),
-                minDomKey:_idSeed.newId(),
-                secDomKey:_idSeed.newId(),
-                timeInputDomKey:_idSeed.newId(),
-                timePanelDomKey:_idSeed.newId(),
-                clearTimeDomKey:_idSeed.newId()
+                ROOTDOM:tool._idSeed.newId(),
+                hourDomKey:tool._idSeed.newId(),
+                minDomKey:tool._idSeed.newId(),
+                secDomKey:tool._idSeed.newId(),
+                timeInputDomKey:tool._idSeed.newId(),
+                timePanelDomKey:tool._idSeed.newId(),
+                clearTimeDomKey:tool._idSeed.newId()
             },
             //计算滚动时候的下个位置的li的索引
             nextSelect:0,
-            timeStr:""
+            timeStr:"",
+            formLabelWidth:""
         }
     },
     computed:{
@@ -273,6 +274,12 @@ export default {
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
         }
     },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
+    },
     mounted(){
         this.setValue(this.value);
         //为3个ul添加滚动事件
@@ -294,11 +301,6 @@ export default {
         this.clickSelectTiem(secDom);
 
         // document.body.addEventListener("click",this.bodyClick,false);
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     },
     beforeDestroy(){
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");

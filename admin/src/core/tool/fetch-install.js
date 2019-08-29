@@ -48,7 +48,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+_idSeed.newId();
+                url = url + symbol + "ran="+Math.random();
                 let defer = Q.defer();
                 let headers = {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -80,7 +80,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+_idSeed.newId();
+                url = url + symbol + "ran="+Math.random();
                 let defer = Q.defer();
                 let headers = {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -117,7 +117,7 @@ export default {
                 }
                 url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
-                url = url + symbol + "ran="+_idSeed.newId();
+                url = url + symbol + "ran="+Math.random();
                 
                 let defer = Q.defer();
                 

@@ -107,11 +107,14 @@
                 }
             }
         },
-        mounted(){
+        created(){
             let that = this;
             tool._form_event_publisher.on(that._uid,(data)=>{
                 this.formLabelWidth = data;
             });
+        },
+        mounted(){
+            
         }
     }
 </script>

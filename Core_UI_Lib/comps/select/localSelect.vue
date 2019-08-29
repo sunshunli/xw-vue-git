@@ -56,7 +56,8 @@
             data:[],
             showButtom:false,
             showArrow:true,
-            placeholder:""
+            placeholder:"",
+            formLabelWidth:""
         }
     },
     computed:{
@@ -306,6 +307,12 @@
             this.showArrow = false;
         },
     },
+    created(){
+        let that = this;
+        tool._form_event_publisher.on(that._uid,(data)=>{
+            this.formLabelWidth = data;
+        });
+    },
     mounted(){
         /**
          * @description 添加事件监听
@@ -317,11 +324,6 @@
             this.init(this.dataSource);
         }
         this.setValue(this.value);
-
-        let that = this;
-        tool._form_event_publisher.on(that._uid,(data)=>{
-            this.formLabelWidth = data;
-        });
     },
     beforeDestroy(){
         /**

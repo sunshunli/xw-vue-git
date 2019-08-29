@@ -164,11 +164,13 @@
             width: auto;
         height: auto;
         display: inline-block;
+        transform: translateY(25%);
     }
 
     .opration{
         /* text-align: left; */
         white-space: nowrap;
+         max-width: 1000px;
     }
 
 </style>

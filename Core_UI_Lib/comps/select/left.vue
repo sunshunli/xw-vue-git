@@ -2,7 +2,7 @@
     <span class="selectedTagBox">
         <span class="selectedTag" v-show="data.length >= 1?true:false">
             <span>{{data.length!=0 && data[0][displayName]}}</span>
-            <i class="fa fa-times" @click.stop="removeItem(data[0])"></i>
+            <!-- <i class="fa fa-times" @click.stop="removeItem(data[0])"></i> -->
         </span>
 		<span class="selectedTag" style="width: 23px;padding: 0px;" v-show="data.length > 1?true:false" >
             <span>+{{data.length-1}}</span>
@@ -45,7 +45,7 @@
 	    margin: 7px 0 2px 6px;
 	    background-color: #f0f2f5;
 	    color: #909399;
-	    padding-right: 25px;
+	    /* padding-right: 25px; */
 	    position: relative;
 		/* max-width: 230px; */
 		max-width: 80%;

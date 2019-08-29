@@ -12,7 +12,7 @@
                     <div v-if="fileType != 'image'">
                         <span v-for="(item,index) in srcs" :key="index">
                             <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
-                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
                     </div>
                     <div v-else>
@@ -20,7 +20,7 @@
                             <a target="_blank" :href="item.name" style="display:block;height:100px;">
                                 <img :src="item.name" style="width:100px;height:100px">
                             </a>
-                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
                     </div>
                 </div>

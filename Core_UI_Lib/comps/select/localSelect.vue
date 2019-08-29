@@ -291,9 +291,15 @@
             },0)
         },
         hideArr(){
+            if(this.readonlyFlag){
+                return;
+            }
             this.showArrow = true;
         },
         showArr(){
+            if(this.readonlyFlag){
+                return;
+            }
             if(this.leftArray.length == 0){
                 return;
             }
@@ -306,7 +312,7 @@
          * @returns
          */
         // document.body.addEventListener("click",this.bodyClick,false);
-        //在有数据的清空下，直接初始化数据源以及设置值   
+        //在有数据的清空下，直接初始化数据源以及设置值
         if(this.dataSource && this.dataSource.length >0){
             this.init(this.dataSource);
         }

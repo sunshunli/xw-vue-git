@@ -31,6 +31,18 @@
         <le-button type="prev" value="上一步"></le-button>
         <le-button type="next" value="下一步"></le-button>
         <le-button type="warning" value="警告"></le-button>
+
+
+        <!-- <le-input :readonly="readonly" v-model="search.name"></le-input> -->
+
+        <!-- <le-textarea :readonly="readonly" width="300" v-model="search.name"></le-textarea> -->
+        <!-- <le-date-picker :readonly="readonly" v-model="search.date"></le-date-picker> -->
+        <!-- <le-time-picker :readonly="readonly" v-model="search.time"></le-time-picker> -->
+        <!-- <le-date-time-picker :readonly="readonly" v-model="search.datetime"></le-date-time-picker> -->
+        <le-local-select :readonly="readonly" :dataSource="dataScource" multiple v-model="search.ids" display-name="name" display-value="code"></le-local-select>
+        
+        <!-- <le-upload :options="options" :readonly="readonly" v-model="search.url"></le-upload> -->
+        <le-button type="disabled" value="禁用" @click="disabled"></le-button>
     </div>
 </template>
 
@@ -38,8 +50,42 @@
 export default {
     data(){
         return{
-
+            search:{
+                name:"",
+                date:"",
+                time:"",
+                datetime:"",
+                url:""
+            },
+            dataScource:[],
+            readonly:false,
+            options:{
+                tip:"图片大小必须小于100kb,大小100*200",
+                multiple:true,
+                url:"/file/img/upload",
+                vtype:"jpg,png,gif",
+                fname:"file",
+                analysis:(d)=>{
+                    return d.data;
+                }
+            }
         }
+    },
+    computed:{
+
+    },
+    methods:{
+        disabled(){
+            this.readonly = !this.readonly;
+        }
+    },
+    mounted(){
+        this.dataScource = [
+            {name:1,code:"1"},
+            {name:2,code:"2"},
+            {name:3,code:"3"},
+            {name:4,code:"4"},
+        ]
     }
 }
 </script>

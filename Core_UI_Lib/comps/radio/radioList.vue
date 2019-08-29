@@ -2,7 +2,7 @@
     <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
-            <span class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
+            <span :class="{'readonlyIcon':readonlyFlag}" class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
                 <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
                 <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
             </span>
@@ -150,5 +150,10 @@ export default {
         position:absolute;
         left:49px;
         z-index:-100
+    }
+
+    .form-item .form-item-div .readonlyIcon{
+        color:#d3cfcf;
+        background-color: #fff;
     }
 </style>

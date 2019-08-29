@@ -4,7 +4,7 @@
             <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
 
             <div style="flex:1">
-                <span  class="input-file">请选择
+                <span :class="{'readonlyIcon':readonlyFlag}" class="input-file">请选择
                 <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <span class="rules">{{tipStr}}</span>
@@ -12,7 +12,7 @@
                     <div v-if="fileType != 'image'">
                         <span v-for="(item,index) in srcs" :key="index">
                             <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
-                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
                     </div>
                     <div v-else>
@@ -20,7 +20,7 @@
                             <a target="_blank" :href="item.name" style="display:block;height:100px;">
                                 <img :src="item.name" style="width:100px;height:100px">
                             </a>
-                            <i @click="removeItem(item)" class="fa fa-times"></i>
+                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
                     </div>
                 </div>
@@ -415,5 +415,9 @@
     color: #f56c6c;
     font-size: 12px;
     margin-right: 2px;
+}
+
+.upaload .input-file.readonlyIcon{
+    opacity: 0.5;
 }
 </style>

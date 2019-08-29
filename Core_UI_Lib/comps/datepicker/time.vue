@@ -7,7 +7,7 @@
                 <i class="fa fa-clock-o clock"></i>
                 <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
                 <input v-model="timeStr" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
-                <div v-show="!readonlyFlag && timeStr != ''" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
+                <div v-show="showClear" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
@@ -40,7 +40,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeTimePicker",
-    props:["msg","value","readonly"],
+    props:["msg","value","readonly","isDatetimePicker"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -93,7 +93,19 @@ export default {
                 return false;
             }
             return true;
-        }
+        },
+        showClear(){
+            if(this.isDatetimePicker != undefined){
+                return false;
+            }
+            if(this.readonlyFlag){
+                return false;
+            }
+            if(this.timeStr.length >0){
+                return true;
+            }
+            return false;
+        },
     },
     watch:{
         value(val){

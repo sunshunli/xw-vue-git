@@ -24,9 +24,9 @@
         <div class="le_list_button_pannel" style="text-align:right;margin-right:10px">
             <le-button type="search" value="Search" @click="search"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
-            <le-button type="enable" value="解封" @click="setEnable(false)"></le-button>
-            <le-button type="disable" value="禁封" @click="setEnable(true)"></le-button>
-            <le-button type="delete" value="删除" @click="deleteItem"></le-button>
+            <le-button type="start" value="解封" @click="setEnable(false)"></le-button>
+            <le-button type="stop" value="禁封" @click="setEnable(true)"></le-button>
+            <le-button type="remove" value="删除" @click="deleteItem"></le-button>
         </div>
 
         <div class='le_list_table_pannel panel-table text-center'>
@@ -55,10 +55,10 @@
             </div>
         
             <div slot="button">
-                <le-button type='submit' value="清空" @click="clearAll"></le-button>
-                <le-button type='submit' value="禁用" @click="disabledForm"></le-button>
-                <le-button type='submit' value="保存" @click="submit('form2')"></le-button>
-                <le-button type='close' value="关闭" @click="closeDialog"></le-button>
+                <le-button type='remove' value="清空" @click="clearAll"></le-button>
+                <le-button type='stop' value="禁用" @click="disabledForm"></le-button>
+                <le-button type='save' value="保存" @click="submit('form2')"></le-button>
+                <le-button type='cancel' value="关闭" @click="closeDialog"></le-button>
             </div>
         </le-dialog>
     </div>

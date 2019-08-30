@@ -28,7 +28,7 @@
                     successIcon:""
                 },
                 currentValue:this.value,
-                formLabelWidth:0
+                formLabelWidth:"0"
             }
         },
         computed:{

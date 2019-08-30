@@ -30,7 +30,7 @@ export default {
             data:[],
             validataComponentType:"Radio",
             name:tool._idSeed.newId(),
-            formLabelWidth:""
+            formLabelWidth:"0"
         }
     },
     computed:{

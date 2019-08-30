@@ -64,7 +64,7 @@ export default {
             //计算滚动时候的下个位置的li的索引
             nextSelect:0,
             timeStr:"",
-            formLabelWidth:""
+            formLabelWidth:"0"
         }
     },
     computed:{

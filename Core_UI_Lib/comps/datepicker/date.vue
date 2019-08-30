@@ -174,7 +174,7 @@ export default {
             data:[],
             selectDay:"",
             isShowPicker:false,
-            formLabelWidth:""
+            formLabelWidth:"0"
         }
     },
     watch:{

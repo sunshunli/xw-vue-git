@@ -30,7 +30,7 @@ export default {
                 showError:false
             },
             data:[],
-            formLabelWidth:""
+            formLabelWidth:"0"
         }
     },
     computed:{

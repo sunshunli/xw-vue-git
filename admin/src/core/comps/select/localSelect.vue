@@ -57,7 +57,7 @@
             showButtom:false,
             showArrow:true,
             placeholder:"",
-            formLabelWidth:""
+            formLabelWidth:"0"
         }
     },
     computed:{

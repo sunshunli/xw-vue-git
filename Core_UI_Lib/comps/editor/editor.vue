@@ -31,7 +31,7 @@ export default {
                 showError: false,
                 successIcon: ""
             },
-            formLabelWidth:""
+            formLabelWidth:"0"
         };
     },
     computed: {

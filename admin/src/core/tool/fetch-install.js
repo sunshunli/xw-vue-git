@@ -61,11 +61,12 @@ export default {
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
                     let message = data.msg;
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    let d = data.data?data.data:data.result;
+                    if(code == "200" || code == "0"){
+                        defer.resolve({data:d,params:data.params});
                     }else if(code == "701"){
                         _this.$router.push({path:"/"});
-                        defer.resolve({data:data.data,params:data.params});
+                        defer.resolve({data:d,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -98,11 +99,12 @@ export default {
                 fetch(url,options).then(d =>d.json()).then((data)=> {
                     let code = data.status;
                     let message = data.msg;
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    let d = data.data?data.data:data.result;
+                    if(code == "200" || code == "0"){
+                        defer.resolve({data:d,params:data.params});
                     }else if(code == "701"){
                         _this.$router.push({path:"/"});
-                        defer.resolve({data:data.data,params:data.params});
+                        defer.resolve({data:d,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }
@@ -131,11 +133,12 @@ export default {
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
                     let message = data.msg;
-                    if(code == "200"){
-                        defer.resolve({data:data.data,params:data.params});
+                    let d = data.data?data.data:data.result;
+                    if(code == "200" || code == "0"){
+                        defer.resolve({data:d,params:data.params});
                     }else if(code == "701"){
                         _this.$router.push({path:"/"});
-                        defer.resolve({data:data.data,params:data.params});
+                        defer.resolve({data:d,params:data.params});
                     }else{
                         defer.reject({data: message});
                     }

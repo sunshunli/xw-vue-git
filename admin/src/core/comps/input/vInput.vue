@@ -88,6 +88,7 @@
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+                this.$emit("blur",e.target.value);
             },
             changeEvent(e){
                 this.currentValue = e.target.value;

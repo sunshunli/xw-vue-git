@@ -27,7 +27,7 @@
 
             <le-checkbox-list label="爱好" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
         
-            <le-local-select label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
+            <le-local-select labelWidth="200" label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
 
             <le-upload msg='图片必须上传' v-model='form1.uploadSrc' :options="uploadOptions" label="文件上传"></le-upload>    
 

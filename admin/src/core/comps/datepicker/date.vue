@@ -3,11 +3,11 @@
 <template>
     <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" :_body_tag="dateKey" v-bodyClick="closePicker" :class="state.successIcon" style="display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" :isDatetimePicker="isDatetimePicker" :_body_tag="__DatetimePickerKey" v-bodyClick="closePicker" :class="state.successIcon" style="display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" :_body_tag="dateKey" @click="showPicker"/>
+                <input :placeholder="placeholderStr" :isDatetimePicker="isDatetimePicker" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" :_body_tag="__DatetimePickerKey" @click="showPicker"/>
                 <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" @click.stop v-show="state.showError">{{$attrs.msg}}</p>
                 <p class="tip" @click.stop v-show="!state.showError">{{$attrs.tip}}</p>
@@ -157,7 +157,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeDatePicker",
-    props:["selectDayCallback","isDatetimePicker","value","readonly"],
+    props:["selectDayCallback","isDatetimePicker","DatetimePickerKey","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -187,6 +187,12 @@ export default {
         }
     },
     computed:{
+        __DatetimePickerKey(){
+            if(this.DatetimePickerKey){
+                return this.DatetimePickerKey;
+            }
+            return this.dateKey;
+        },
         labelWidthVal(){
             if(this.$attrs.labelWidth){
                 return this.$attrs.labelWidth;
@@ -316,15 +322,6 @@ export default {
                     this.$attrs.setVerifyCompState();
                 }
             },0)
-        },
-        /**
-         * @description 点击其他地方，隐藏picker选择层
-         * @returns
-         */
-        pickerBodyClick(){
-            if(this.isDatetimePicker == undefined){
-                this.isShowPicker = false;
-            }
         },
         /**
          * @description 点击文本框显示picker选择层, 每次点击根据选中的日期来复位
@@ -470,12 +467,10 @@ export default {
     },
     mounted(){
         this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
-        // document.body.addEventListener("click",this.pickerBodyClick,false);
 
         this.setValue(this.value);
     },
     beforeDestroy () {
-        // document.body.removeEventListener("click",this.pickerBodyClick);
     }
 }
 </script>

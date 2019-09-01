@@ -8,7 +8,10 @@ const bodyClick = {
             }
             
             if(binding.expression){
-                binding.value(e);
+                //针对datetimepicker组件嵌套单独处理
+                if(el.getAttribute('isdatetimepicker') !== ""){
+                    binding.value(e);
+                }
             }
             el.vueClickOutside = documentHandler;
         }

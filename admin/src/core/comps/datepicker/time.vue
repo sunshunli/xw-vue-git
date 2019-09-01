@@ -1,17 +1,16 @@
 
 <template>
-    <div class="form-item timeContent" :name="KEYS.ROOTDOM" >
+    <div class="form-item timeContent" :name="KEYS.ROOTDOM" v-bodyClick="closePicker" :_body_tag="KEYS.ROOTDOM">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
-                <input v-model="timeStr" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
+                <input :_body_tag="KEYS.ROOTDOM" v-model="timeStr" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div v-show="showClear" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
-            <div class="timePicker" :name="KEYS.timePanelDomKey">
+            <div class="timePicker" @click.stop :name="KEYS.timePanelDomKey">
                 <div class="timePanel">
                     <div class="hour">
                         <ul :name="KEYS.hourDomKey"></ul>
@@ -114,16 +113,6 @@ export default {
         }
     },
     methods:{
-        /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
         //确定
         ok(){
             let res = [];

@@ -4,15 +4,15 @@
         <div class="form-item-div searchMulSelect" :class="state.successIcon" @click="focusInput" v-bodyClick="hideButtom" :_body_tag="inputdomKey">
 			<!--选中的标签-->
 			<div class="tags" :_body_tag="inputdomKey" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
-                <i v-show="showArrow" class="fa fa-chevron-down icon-del" @click.stop="clickInput"></i>
+                <i v-show="showArrow" :_body_tag="inputdomKey" class="fa fa-chevron-down icon-del" @click="clickInput"></i>
                 <i v-show="!showArrow" class="fa fa-chevron-down icon-del fa-times-circle" @click.stop="clear"></i>
 
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" @click="clickInput" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
 			
-                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
+                <p class="promptMsg" @click.stop v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" @click.stop v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
 
             <!--下拉弹出框-->
@@ -26,7 +26,6 @@
     import LeftSection from "./left.vue";
     import ButtomSection from "./buttom.vue";
     import define from "../define.js";
-    // import bodyClick from "../leDirective.js";
 
     const getItemByDisplayValue = (data,displayValue,value)=>{
         let res = null;
@@ -42,7 +41,6 @@
     name: 'LeLocalSelect',
     props:["multiple","displayName","displayValue","value","dataSource","readonly","enabledInput"],
     components: {LeftSection,ButtomSection},
-    // directives: {bodyClick},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data () {
         return {

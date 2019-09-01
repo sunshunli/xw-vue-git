@@ -9,25 +9,25 @@
            
         <le-form labelWidth="150" ref="form1" style="width:600px">
 
-            <le-input label="推广地址" labelWidth="100" msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
-
-            <le-input label="原地址" labelWidth="180" msg="原地址必填" v-model="form1.ydz" on required></le-input>
-
-            <le-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></le-input>
-
-            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1"></le-date-time-picker>
+            <!-- <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1"></le-date-time-picker> -->
             
-            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2"></le-date-time-picker>
+            <!-- <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2"></le-date-time-picker> -->
 
             <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空" on></le-date-picker>
             
             <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空" on></le-time-picker>
 
-            <le-radio-list label="性别" ref="sex" v-model="form1.sex" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
+            <le-local-select label="模糊搜索" :dataSource="dataSource" multiple v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
+
+            <le-radio-list label="性别" v-model="form1.sex" display-name="name" msg="单选框必填" display-value="code" on></le-radio-list>
 
             <le-checkbox-list label="爱好" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
         
-            <le-local-select labelWidth="200" label="模糊搜索" multiple ref="s1" v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
+            <le-input label="推广地址" msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
+
+            <le-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></le-input>
+
+            <le-input label="失效默认地址" msg="失效默认地址必填" v-model="form1.sxdz" vtype="text" on required></le-input>
 
             <le-upload msg='图片必须上传' v-model='form1.uploadSrc' :options="uploadOptions" label="文件上传"></le-upload>    
 
@@ -45,6 +45,7 @@ export default {
     name:"demoValidate",
     data(){
         return {
+            dataSource:[],
             form1:{
                 tgdz:'',
                 ydz:'',
@@ -181,11 +182,7 @@ export default {
         ];
 
         window.setTimeout(()=>{
-            this.$refs["s1"].getCurrentComponent().init(Unit.object.cloneObj(data));
-            this.$refs["sex"].getCurrentComponent().init(Unit.object.cloneObj(data));
-            this.$refs["hobby"].getCurrentComponent().init(Unit.object.cloneObj(data));
-
-            this.$refs['sex'].$children[0].setValue('1');
+            this.dataSource = Unit.object.cloneObj(data);
             this.getTreeData(17)
         },0)
     }

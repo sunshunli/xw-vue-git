@@ -3,14 +3,14 @@
 <template>
     <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class="form-item-div dataPicker" :class="state.successIcon" style = "display:inline-block;position:relative;">
+        <div class="form-item-div dataPicker" :_body_tag="dateKey" v-bodyClick="closePicker" :class="state.successIcon" style="display:inline-block;position:relative;">
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" @click.stop="showPicker"/>
+                <input :placeholder="placeholderStr" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" :_body_tag="dateKey" @click="showPicker"/>
                 <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
-                <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
-                <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
+                <p class="promptMsg" @click.stop v-show="state.showError">{{$attrs.msg}}</p>
+                <p class="tip" @click.stop v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
             <!-- 展开下拉 -->
             <div class="picker-box" v-show="isShowPicker" @click.stop>
@@ -162,6 +162,7 @@ export default {
     data(){
         return {
             validataComponentType:"DatePicker",
+            dateKey:tool._idSeed.newId(),
             state:{
                 showError:false,
                 successIcon:""
@@ -469,12 +470,12 @@ export default {
     },
     mounted(){
         this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
-        document.body.addEventListener("click",this.pickerBodyClick,false);
+        // document.body.addEventListener("click",this.pickerBodyClick,false);
 
         this.setValue(this.value);
     },
     beforeDestroy () {
-        document.body.removeEventListener("click",this.pickerBodyClick);
+        // document.body.removeEventListener("click",this.pickerBodyClick);
     }
 }
 </script>

@@ -6,7 +6,7 @@ const bodyClick = {
             if(el.contains(e.target) && e.target.getAttribute("_body_tag") == el.getAttribute("_body_tag")){
                 return false;
             }
-
+            
             if(binding.expression){
                 binding.value(e);
             }

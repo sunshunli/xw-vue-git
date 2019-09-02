@@ -1,7 +1,8 @@
 <template>
     <div class="ML12" >
          <div class = "fa-item" :class="item.__color" :style="'margin-left:'+(item.__level-1)*10+'px'">
-            <input type="button" @click="expandNode(item)" class="fa" :class="item.__cls" />
+            <!-- <input type="button"  class="fa" :class="item.__cls" /> -->
+            <span @click="expandNode(item)" type="button" class="fa arrIcon" :class="item.__cls"></span>
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
@@ -69,7 +70,7 @@ export default {
                         tmpObject.data.children = tmpData;
                         tmpObject.data.hasChildren = true;
                         tmpObject.data.expand = true;
-                        tmpObject.data.cls = "fa-angle-down";
+                        tmpObject.data.cls = "fa-caret-down";
                     }else{
                         tmpObject.data.children = [];
                         tmpObject.data.hasChildren = false;
@@ -83,7 +84,7 @@ export default {
                 let cls = "";
                 if(item.__children && item.__children instanceof Array && item.__children.length != 0){
                     if(item.__cls == "fa-caret-right"){
-                        cls = "fa-angle-down";
+                        cls = "fa-caret-down";
                     }else{
                         cls = "fa-caret-right";
                     }
@@ -190,8 +191,19 @@ export default {
     .fa-check-square:before{
         color: #337ab7;
         position: absolute;
-        top: 10px;
+        top: 8px;
         /* left: 18px; */
+    }
+
+    .fa-item .arrIcon{
+        width: 10px;
+        height: 12px;
+    }
+
+    .fa-caret-right:before {
+        position: absolute;
+        top: 8px;
+        left: 6px;
     }
 
 </style>

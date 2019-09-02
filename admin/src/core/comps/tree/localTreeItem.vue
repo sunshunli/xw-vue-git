@@ -56,7 +56,7 @@ export default {
             let cls = "";
             if(item.__children && item.__children instanceof Array && item.__children.length != 0){
                 if(item.__cls == "fa-caret-right"){
-                    cls = "fa-angle-down";
+                    cls = "fa-caret-down";
                 }else{
                     cls = "fa-caret-right";
                 }
@@ -173,6 +173,7 @@ export default {
 
     .fa-caret-right:before{
         position: absolute;
+        left:6px;
     }
 
 </style>

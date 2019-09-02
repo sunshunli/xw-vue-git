@@ -73,7 +73,7 @@ export default {
         return {
             readonly:false,
             searchModel:{
-                age:"1",
+                age:"",
                 id:"",
                 data:"",
                 time:"",
@@ -135,6 +135,9 @@ export default {
                     {key:"operateTime",val:"修改时间"}
                 ],
                 getUrl:()=>{
+                    if(this.searchModel.age == ""){
+                        return "";
+                    }
                     return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName="+this.searchModel.age+"&status=-1";
                 },
                 pageOption:{
@@ -229,6 +232,8 @@ export default {
             this.showDialog = true;
         },
         search(){
+            this.searchModel.age = 1;
+            debugger
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){

@@ -81,6 +81,7 @@
                 }
                 let url = this.options.getUrl();
                 if( url === ""){
+                    this.isLoading = false;
                     return;
                 }
                 let suffix = url.indexOf('?') === -1?"?":"&";

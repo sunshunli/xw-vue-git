@@ -18,6 +18,7 @@
         <le-button type="export" value="导出"></le-button>
         <le-button type="review" value="预览"></le-button>
         <le-button type="batch" value="批量操作"></le-button>
+        <le-button type="copy" value="复制"></le-button>
         <le-button type="setting" value="设置"></le-button>
         <le-button type="decorate" value="装修页面"></le-button>
         <le-button type="prevPage" value="上一页"></le-button>

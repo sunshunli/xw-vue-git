@@ -61,6 +61,7 @@ let BUTTON_CONFIG = {
     "export":{cls:"export",iCls:"fa-cloud-upload"},//导出
     "review":{cls:"review",iCls:"fa-eye"},//预览
     "batch":{cls:"batch",iCls:"fa-th-large"},//批量操作
+    "copy":{cls:"copy",iCls:"fa-clone"},//复制
     "setting":{cls:"setting",iCls:"fa-cog"},//设置
     "decorate":{cls:"decorate",iCls:"fa-wrench"},//装修页面
     "prevPage":{cls:"prevPage",iCls:""},//上一页

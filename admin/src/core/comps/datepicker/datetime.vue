@@ -97,7 +97,7 @@ export default {
             if(this.readonlyFlag){
                 return false;
             }
-            if(this.dateTimeStr.length >0){
+            if(this.dateTimeStr && this.dateTimeStr.length >0){
                 return true;
             }
             return false;

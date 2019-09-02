@@ -51,7 +51,7 @@
                 if(this.readonlyFlag){
                     return false;
                 }
-                if(this.currentValue.length >0){
+                if(this.currentValue && this.currentValue.length >0){
                     return true;
                 }
                 return false;

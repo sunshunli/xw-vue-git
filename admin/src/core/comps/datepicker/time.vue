@@ -108,7 +108,7 @@ export default {
             if(this.readonlyFlag){
                 return false;
             }
-            if(this.timeStr.length >0){
+            if(this.timeStr && this.timeStr.length >0){
                 return true;
             }
             return false;

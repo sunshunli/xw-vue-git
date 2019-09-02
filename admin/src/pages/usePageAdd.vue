@@ -197,6 +197,8 @@ export default {
             this.dataSource = Unit.object.cloneObj(data);
             this.sexDataSource = Unit.object.cloneObj(data);
             this.favDataSource = Unit.object.cloneObj(data);
+            this.form1.hobby = "001";
+            this.form1.sex = "002";
             this.getTreeData(17)
         },0)
     }

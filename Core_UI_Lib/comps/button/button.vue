@@ -198,6 +198,11 @@ export default {
         border-color: #4b89dc;
     }
 
+    .copy{
+        background-color: #4b99dc;
+        border-color: #4b99dc;
+    }
+
     .setting{
         background-color: #4fc1e9;
         border-color:#4fc1e9;

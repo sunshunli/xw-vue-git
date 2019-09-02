@@ -20,7 +20,7 @@
                             <le-time-picker :ref='timeKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-time-picker>
                         </div>
                     </div>
-                    <div class = "picker-bottom" style="border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
+                    <div @click.stop class="picker-bottom" style="border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
                         <span @click.stop="getDateTimeStr">确定</span>
                         <span class="text" @click.stop="getNow">此刻</span>
                         <span class="text" @click.stop="clear">清空</span>

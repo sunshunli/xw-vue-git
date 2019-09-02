@@ -1,17 +1,16 @@
 
 <template>
-    <div class="form-item timeContent" :name="KEYS.ROOTDOM" >
+    <div class="form-item timeContent" :name="KEYS.ROOTDOM" :isDatetimePicker="isDatetimePicker" v-bodyClick="closePicker" :_body_tag="__DatetimePickerKey">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div" :class="state.successIcon">
             <div class="searchBar">
                 <i class="fa fa-clock-o clock"></i>
-                <!-- <div class="timeInput" :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"></div> -->
-                <input v-model="timeStr" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
+                <input :_body_tag="__DatetimePickerKey" v-model="timeStr" :isDatetimePicker="isDatetimePicker" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div v-show="showClear" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
                 <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
-            <div class="timePicker" :name="KEYS.timePanelDomKey">
+            <div class="timePicker" @click.stop :name="KEYS.timePanelDomKey">
                 <div class="timePanel">
                     <div class="hour">
                         <ul :name="KEYS.hourDomKey"></ul>
@@ -40,7 +39,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeTimePicker",
-    props:["msg","value","readonly","isDatetimePicker"],
+    props:["msg","value","readonly","isDatetimePicker","DatetimePickerKey"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -57,6 +56,7 @@ export default {
                 hourDomKey:tool._idSeed.newId(),
                 minDomKey:tool._idSeed.newId(),
                 secDomKey:tool._idSeed.newId(),
+                timeKey:tool._idSeed.newId(),
                 timeInputDomKey:tool._idSeed.newId(),
                 timePanelDomKey:tool._idSeed.newId(),
                 clearTimeDomKey:tool._idSeed.newId()
@@ -68,6 +68,12 @@ export default {
         }
     },
     computed:{
+        __DatetimePickerKey(){
+            if(this.DatetimePickerKey){
+                return this.DatetimePickerKey;
+            }
+            return this.timeKey;
+        },
         labelWidthVal(){
             if(this.$attrs.labelWidth){
                 return this.$attrs.labelWidth;
@@ -114,16 +120,6 @@ export default {
         }
     },
     methods:{
-        /**
-         * @description 设置成功失败的状态
-         * @param {bool} flag为 true or false
-         */
-        setStateByFlag(flag){
-            this.state = {
-                successIcon:flag?"fa-check-circle-o":"fa-times-circle-o",
-                showError:!flag?true:false
-            }
-        },
         //确定
         ok(){
             let res = [];
@@ -269,9 +265,6 @@ export default {
                 $(dom).scrollTop(scrollTop);
                 e.stopPropagation();
             });
-        },
-        bodyClick(){
-            this.getJQDom(this.KEYS.timePanelDomKey).hide();
         }
     },
     created(){
@@ -299,8 +292,6 @@ export default {
         this.clickSelectTiem(hourDom);
         this.clickSelectTiem(minDom);
         this.clickSelectTiem(secDom);
-
-        // document.body.addEventListener("click",this.bodyClick,false);
     },
     beforeDestroy(){
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll");
@@ -310,8 +301,6 @@ export default {
         $(this.getJQDom(this.KEYS.hourDomKey)).off("click");
         $(this.getJQDom(this.KEYS.minDomKey)).off("click");
         $(this.getJQDom(this.KEYS.secDomKey)).off("click");
-
-        // document.body.removeEventListener("click",this.bodyClick);
     }
 }
 </script>

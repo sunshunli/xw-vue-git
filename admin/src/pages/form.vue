@@ -232,8 +232,6 @@ export default {
             this.showDialog = true;
         },
         search(){
-            this.searchModel.age = 1;
-            debugger
             this.$refs.black_list_table.searchCurrentIndex();
         },
         submit(id){

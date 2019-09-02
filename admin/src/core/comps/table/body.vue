@@ -1,6 +1,6 @@
 <template>
     <tbody>
-        <template v-if="!showNoResult">
+        <template v-if="data.length > 0">
             <tr v-for="(row,index) in data" @click="e=>selectRow(row,e)" :key="index">
                 <td v-if="showCk">
                     <div v-if="singleSelected">
@@ -26,7 +26,7 @@
                 </td>
             </tr>
         </template>
-        <tr v-show="showNoResult" style="text-align:center;width:100%;color:#333;">
+        <tr v-show="data.length == 0" style="text-align:center;width:100%;color:#333;">
             <td :colspan="getAllCols">暂无数据</td>
         </tr>
     </tbody>
@@ -37,7 +37,7 @@
     
     export default {
         name: "BodySection",
-        props:["actions","data","cols","accpetHBNotice","showCk","singleSelected","showNoResult"],
+        props:["actions","data","cols","accpetHBNotice","showCk","singleSelected"],
         data(){
             return {
                 radioKey:tool._idSeed.newId()

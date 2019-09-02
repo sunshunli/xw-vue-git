@@ -1,7 +1,7 @@
 <template>
     <div class = "form-item current">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div class = "form-item-div dataTimePicker" :class="state.successIcon">
+        <div class = "form-item-div dataTimePicker" :class="state.successIcon" :_body_tag="dateTimeKey" v-bodyClick="closeDateTimePicker">
             <!-- 日期 -->
             <i class="icon-date fa fa-calendar"></i>
             <div class = "date-box">
@@ -9,15 +9,15 @@
                 <!-- <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
                     {{dateTimeStr}}
                 </div> -->
-                <input :placeholder="placeholderStr" class = "dateTimeText" readonly :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" v-model='dateTimeStr'/>
+                <input :placeholder="placeholderStr" class = "dateTimeText" readonly :_body_tag="dateTimeKey" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle" v-model='dateTimeStr'/>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header" style = "height:272px;">
                         <div class = "ipt" >
-                            <le-date-picker :ref='dateKey' is-datetime-picker></le-date-picker>
+                            <le-date-picker :ref='dateKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
-                            <le-time-picker :ref='timeKey' is-datetime-picker></le-time-picker>
+                            <le-time-picker :ref='timeKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-time-picker>
                         </div>
                     </div>
                     <div class = "picker-bottom" style="border-top:1px solid #f2f2f2;background:#fff;height:40px;margin-top:10px">
@@ -50,6 +50,7 @@ export default {
     data(){
         return {
             validataComponentType:"DateTimePicker",
+            dateTimeKey:tool._idSeed.newId(),
             dateKey:tool._idSeed.newId(),
             timeKey:tool._idSeed.newId(),
             dateTimeStr:"",
@@ -172,7 +173,7 @@ export default {
                 this.$refs[this.timeKey].setValue(str.split(' ')[1]);
             }
         },
-        bodyClick(){
+        closeDateTimePicker(){
             this.showDateTimePicker = false;
         }
     },

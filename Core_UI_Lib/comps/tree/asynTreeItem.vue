@@ -69,7 +69,7 @@ export default {
                         tmpObject.data.children = tmpData;
                         tmpObject.data.hasChildren = true;
                         tmpObject.data.expand = true;
-                        tmpObject.data.cls = "fa-caret-down";
+                        tmpObject.data.cls = "fa-angle-down";
                     }else{
                         tmpObject.data.children = [];
                         tmpObject.data.hasChildren = false;
@@ -83,7 +83,7 @@ export default {
                 let cls = "";
                 if(item.__children && item.__children instanceof Array && item.__children.length != 0){
                     if(item.__cls == "fa-caret-right"){
-                        cls = "fa-caret-down";
+                        cls = "fa-angle-down";
                     }else{
                         cls = "fa-caret-right";
                     }
@@ -191,7 +191,7 @@ export default {
         color: #337ab7;
         position: absolute;
         top: 10px;
-        left: 18px;
+        /* left: 18px; */
     }
 
 </style>

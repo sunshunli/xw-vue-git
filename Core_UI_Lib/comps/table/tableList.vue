@@ -6,7 +6,7 @@
                 <table class="table">
                     <header-section :singleSelected="singleSelected" :show-ck="showCk" :origin-cols="originCols" :accpet-h-b-notice="accpetHBNotice" :notice-change-cols="noticeChangeCols" :ck="state.ck" :actions="actions" :cols="state.cols"></header-section>        
 
-                    <body-section :show-no-result="showNoResult" :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
+                    <body-section :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
                 </table>
             </div>
 
@@ -17,7 +17,6 @@
             </div>
         </div>
     </div>
-    
 </template>
 
 <script>
@@ -43,8 +42,6 @@
                         total:0
                     },
                 },
-                //body部分没有数据的情况下，显示无数据
-                showNoResult:false,
                 //在上一次请求没有完成之前，不允许发送下一次请求
                 isLoading:false
             }
@@ -80,11 +77,13 @@
                     index = 1;
                 }
                 let url = this.options.getUrl();
+                let size = this.state.pageOption.size;
                 if( url === ""){
+                    this.noResultCb();
+                    console.log("无有效的url!");
                     return;
                 }
                 let suffix = url.indexOf('?') === -1?"?":"&";
-                let size = this.state.pageOption.size;
                 url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
                 this.ajax.getFetch(url).then(data=>{
                     this.isLoading = false;
@@ -114,27 +113,33 @@
                                 size:size
                             }
                         }
-                        this.showNoResult = false;
                     }else{
-                        this.state = {
-                            data:[],
-                            cols:this.state.cols,
-                            ck:false,
-                            pageOption:{
-                                index:1,
-                                count:0,
-                                total:0,
-                                size:size
-                            }
-                        }
+                        this.noResultCb();
                         console.log("数据源为空或者检查analysis, getUrl, pageOption参数!");
-                        this.showNoResult = true;
                     }
                 }).catch(e=>{
                     this.alert.showAlert("error",e.data);
-                    this.showNoResult = true;
-                    this.isLoading = false;
+                    this.noResultCb();
                 })
+            },
+            /**
+             * @description 没有请求或者请求异常的情况下，显示无结果的数据处理
+             * @returns
+             */
+            noResultCb(){
+                let size = this.state.pageOption.size;
+                this.isLoading = false;
+                this.state = {
+                    data:[],
+                    cols:this.state.cols,
+                    ck:false,
+                    pageOption:{
+                        index:1,
+                        count:0,
+                        total:0,
+                        size:size
+                    }
+                }
             },
             /**
              * @description 从head和body接收到通知，需要更新数据源，然后下发所有子组件

@@ -56,7 +56,7 @@ export default {
             let cls = "";
             if(item.__children && item.__children instanceof Array && item.__children.length != 0){
                 if(item.__cls == "fa-caret-right"){
-                    cls = "fa-caret-down";
+                    cls = "fa-angle-down";
                 }else{
                     cls = "fa-caret-right";
                 }

@@ -207,10 +207,15 @@
                 item.cls = !item.ck?"":"active fa fa-check"
             }else{
                 //单选
-                this.resetDataCkStatus();
-                item.ck = true;
-                item.cls = "active fa fa-check";
-
+                this.data.forEach(x=>{
+                    if(x.__tmpId == item.__tmpId){
+                        item.ck = !item.ck;
+                        item.cls = item.ck?"active fa fa-check":"";
+                    }else{
+                        x.cls = "";
+                        x.ck = false;
+                    }
+                })
                 this.showButtom = false;
             }
             this.searchName = "";

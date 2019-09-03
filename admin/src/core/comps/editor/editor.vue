@@ -181,7 +181,7 @@ export default {
         this.__editor.create();
         // 增加富文本功能
         let editorSelector = '#_editor-'+this.titleKey;
-        $(editorSelector + " .w-e-toolbar").prepend('<div class="w-e-menu"><a class="_wangEditor_btn_viewsource" href="###" >源码</a></div>');
+        $(editorSelector + " .w-e-toolbar").prepend('<div class="w-e-menu"><span class="_wangEditor_btn_viewsource" href="###" >源码</span></div>');
         $(editorSelector + " .w-e-toolbar").find("._wangEditor_btn_viewsource").on("click",() =>{
             this.toggleViewsource(editorSelector);
         })

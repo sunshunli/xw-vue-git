@@ -9,17 +9,7 @@
            
         <le-form labelWidth="150" ref="form1" style="width:600px">
 
-            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1" on></le-date-time-picker>
-            
-            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2" on></le-date-time-picker>
-
-            <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空" on></le-date-picker>
-            
-            <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空" on></le-time-picker>
-
-            <le-local-select label="模糊搜索" :dataSource="dataSource" multiple v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
-
-            <le-date-time-picker label="开始时间" msg="开始时间必填" v-model="form1.dt1" on></le-date-time-picker>
+            <le-date-time-picker @change="update" label="开始时间" msg="开始时间必填" v-model="form1.dt1" on></le-date-time-picker>
             
             <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2" on></le-date-time-picker>
 
@@ -33,7 +23,7 @@
 
             <le-checkbox-list label="爱好" :data-source="favDataSource" @change='changecks' ref='hobby' v-model="form1.hobby" display-name="name" msg="复选框必填1" display-value="code" on></le-checkbox-list>
         
-            <le-input label="推广地址" msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
+            <le-input @enter="update" label="推广地址" msg="推广地址必填" v-model="form1.tgdz" type="text" on required></le-input>
 
             <le-input label="原地址" msg="原地址必填" v-model="form1.ydz" on required></le-input>
 
@@ -108,6 +98,9 @@ export default {
         }
     },
     methods:{
+        update(val){
+            debugger
+        },
         changecks(data){
             console.log(data);
         },

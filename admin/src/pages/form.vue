@@ -12,7 +12,7 @@
             </div>
             <div class="col3">
                 <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
-                <le-date-time-picker labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
+                <le-date-time-picker @changeDateTime="update" labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
                 <le-local-select labelWidth="90" @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
                 <le-local-select labelWidth="100" multiple placeholder="job" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
@@ -44,7 +44,7 @@
                     <le-textarea tip="详细信息描述文案不能瞎写" labelWidth='150' placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <le-date-picker labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                     <le-time-picker labelWidth='150' tip="输入当前之后的时间" on placeholder="请选择时间" label="时间组件" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
-                    <le-date-time-picker labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <le-date-time-picker @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                     <le-local-select labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                     <le-radio-list labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
@@ -188,6 +188,12 @@ export default {
         }
     },
     methods:{
+        update(str){
+            debugger
+        },
+        update1(str1){
+            debugger
+        },
         add(){
             this.$router.push({path:"/add"});
         },

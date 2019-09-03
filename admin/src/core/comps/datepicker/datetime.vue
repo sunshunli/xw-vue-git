@@ -126,6 +126,7 @@ export default {
             timeComp.closePicker();
             this.showDateTimePicker = false;
             this.$emit("input",this.dateTimeStr);
+            
             this.$emit("change",this.dateTimeStr);
         },
         showDateTimePickerHandle(){

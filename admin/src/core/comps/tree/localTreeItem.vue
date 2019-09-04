@@ -158,12 +158,14 @@ export default {
         margin-right: 2px;
         margin-bottom: 3px;
         vertical-align: middle;
+        position: relative;
     }
 
     .fa-check-square:before{
         color: #337ab7;
         position: absolute;
-        top: 6px;
+        top: -2px;
+        left: -1px;
     }
 
     .fa-item .arrIcon{

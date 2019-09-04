@@ -5,8 +5,18 @@
 .middleClass {
     margin-left: 10px !important;
 }
+
+/* 一行放俩个 */
+.le_comps_core_css .col1{
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
 /* 一行放俩个 */
 .le_comps_core_css .col2{
+    width: 50%;
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -14,7 +24,7 @@
 
 /* 一行放3个 */
 .le_comps_core_css .col3 {
-    width: 90%;
+    width: 75%;
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -22,11 +32,12 @@
 
 /* 一行放4个 */
 .le_comps_core_css .col4 {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: baseline;
 }
-
+.le_comps_core_css .col1 .form-item,
 .le_comps_core_css .col2 .form-item,
 .le_comps_core_css .col3 .form-item,
 .le_comps_core_css .col4 .form-item {
@@ -35,6 +46,7 @@
     flex-direction: row;
     align-items: center;
 }
+.le_comps_core_css .col1 .form-item /deep/ .form-item-div,
 .le_comps_core_css .col2 .form-item /deep/ .form-item-div,
 .le_comps_core_css .col3 .form-item /deep/ .form-item-div,
 .le_comps_core_css .col4 .form-item /deep/ .form-item-div {
@@ -256,6 +268,34 @@ html,body{
 
 
 
+.form-item{
+    line-height: normal;
+    margin-bottom: 22px;
+    position: relative;
+    text-align: left;
+    display: inline-block;
+    flex: 1;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-item .form-item-div{
+    background-color: #fff;
+    flex: 1;
+}
+
+.form-item .form-item-label{
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    color: #606266;
+    line-height: normal;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 5px 0 10px;
+}
 
 
 

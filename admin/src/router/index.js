@@ -8,6 +8,8 @@ const Login = r=>require.ensure([],()=>r(require("../pages/login/login.vue")),"L
 const TestPage = r=>require.ensure([],()=>r(require("../pages/test.vue")),"TestPage");
 
 const DemoPage = r=>require.ensure([],()=>r(require("../pages/demoPage.vue")),"DemoPage");
+const DemoPage1 = r=>require.ensure([],()=>r(require("../pages/demoPage1.vue")),"DemoPage1");
+
 const UsePage = r=> require.ensure([],()=>(require("../pages/usePage.vue")),"UsePage");
 const UsePageAdd = r=> require.ensure([],()=>(require("../pages/usePageAdd.vue")),"UsePageAdd");
 
@@ -46,6 +48,10 @@ const routers = [
         path:'/demopage',
         name:'demopage',
         component:DemoPage
+    },{
+        path:'/DemoPage1',
+        name:'DemoPage1',
+        component:DemoPage1
     },{
         path:'/usePage',
         name:'UsePage',

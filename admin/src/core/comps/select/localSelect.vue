@@ -128,6 +128,7 @@
                 this.setValue(this.value);
             }else{
                 this.init([]);
+                this.$emit("input","");
             }
         }
     },
@@ -289,6 +290,7 @@
             this.checkPlaceholder();
             this.searchName = "";
             this.$emit("input","");
+            this.$emit("change","");
             this.showButtom = false;
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){

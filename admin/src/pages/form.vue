@@ -26,7 +26,7 @@
             <le-button type="create" value="Add" @click="add"></le-button>
             <le-button type="create" value="新增" @click="openDialog"></le-button>
             <le-button type="start" value="解封" @click="setEnable(false)"></le-button>
-            <le-button type="stop" value="禁封" @click="setEnable(true)"></le-button>
+            <le-button type="stop" value="禁封" @click="notDeleteItem(true)"></le-button>
             <le-button type="remove" value="删除" @click="deleteItem"></le-button>
         </div>
 
@@ -67,6 +67,21 @@
 <script>
 import Unit from "../core/tool/commonUtil.js";
 import $ from "jquery";
+
+let _data = [
+    {name:"aaa",code:"1"},
+    {name:"aa1",code:"2"},
+    {name:"aa2",code:"3"},
+    {name:"bbb",code:"4"},
+    {name:"ccc",code:"5"},
+    {name:"bb1",code:"6"},
+    {name:"bb2啊啊啊啊啊啊啊",code:"7"},
+    {name:"bb3",code:"8"},
+    {name:"cc1",code:"9"},
+    {name:"cc2",code:"10"},
+];
+
+
 export default {
     name:"FormValidate",
     data(){
@@ -135,9 +150,9 @@ export default {
                     {key:"operateTime",val:"修改时间"}
                 ],
                 getUrl:()=>{
-                    if(this.searchModel.age == ""){
-                        return "";
-                    }
+                    // if(this.searchModel.age == ""){
+                    //     return "";
+                    // }
                     return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName="+this.searchModel.age+"&status=-1";
                 },
                 pageOption:{
@@ -214,10 +229,10 @@ export default {
             this.searchModel.job;  
         },
         deleteItem(){
-            var that = this;
-            that.alert.showConfirm("确定删除当前这条数据吗?",function(){
-                that.alert.showAlert("success","删除成功")
-            })
+            this.jobArray = [];
+        },
+        notDeleteItem(){
+            this.jobArray = Unit.object.cloneObj(_data);
         },
         openDialog(){
             this.$refs.form2.reset();
@@ -276,18 +291,7 @@ export default {
         },
     },
     mounted(){
-        let _data = [
-            {name:"aaa",code:"1"},
-            {name:"aa1",code:"2"},
-            {name:"aa2",code:"3"},
-            {name:"bbb",code:"4"},
-            {name:"ccc",code:"5"},
-            {name:"bb1",code:"6"},
-            {name:"bb2啊啊啊啊啊啊啊",code:"7"},
-            {name:"bb3",code:"8"},
-            {name:"cc1",code:"9"},
-            {name:"cc2",code:"10"},
-        ];
+        
         window.setTimeout(()=>{
             // this.$refs["jobRef"].getCurrentComponent().init(Unit.object.cloneObj(_data));
 

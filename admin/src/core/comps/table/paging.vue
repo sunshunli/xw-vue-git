@@ -52,7 +52,7 @@
             },
             goToIndex:function () {
                 let eIndex = this.$refs[this.goIndexKey].value;
-                if( eIndex > this.total || eIndex<= 1 || isNaN(eIndex)){
+                if( eIndex > this.total || eIndex< 1 || isNaN(eIndex)){
                     this.$refs[this.goIndexKey].value = "";
                     return;
                 }

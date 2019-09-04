@@ -172,10 +172,10 @@ export default {
         background-size: 100%;
         width: 12px;
         height: 23px;
-        padding: 6px 0;
+        /* padding: 6px 0; */
         background-position: center;
-        vertical-align: baseline;
-        background-position-y: 5px;
+        vertical-align: middle;
+        background-position-y: 2px;
      }
     
     .fa-checkBox{
@@ -186,13 +186,14 @@ export default {
         border-radius: 2px;
         margin-right: 2px;
         vertical-align: sub;
+        position: relative;
     }
 
     .fa-check-square:before{
         color: #337ab7;
         position: absolute;
-        top: 8px;
-        /* left: 18px; */
+        top: -2px;
+        left: -1px;
     }
 
     .fa-item .arrIcon{

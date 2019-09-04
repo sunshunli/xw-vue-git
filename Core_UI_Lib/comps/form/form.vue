@@ -143,7 +143,7 @@ export default {
         text-align: left;
         display: inline-block;
         flex: 1;
-        display: flex;
+        display: flex !important;
         flex-direction: row;
         align-items: center;
     }

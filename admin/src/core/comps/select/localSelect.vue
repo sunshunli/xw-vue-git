@@ -126,6 +126,8 @@
             if(val && val.length >0){
                 this.init(val);
                 this.setValue(this.value);
+            }else{
+                this.init([]);
             }
         }
     },

@@ -41,7 +41,7 @@
 .le_comps_core_css .col2 .form-item,
 .le_comps_core_css .col3 .form-item,
 .le_comps_core_css .col4 .form-item {
-    display: flex !important;
+    display: flex;
     flex: 1;
     flex-direction: row;
     align-items: center;
@@ -275,7 +275,7 @@ html,body{
     text-align: left;
     display: inline-block;
     flex: 1;
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     align-items: center;
 }

@@ -6,17 +6,17 @@
         </div>
 
         <div class='searchPanel le_comps_core_css clearfix'>
-            <div class="col3">
-                <le-input labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
-                <le-input labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
-                <le-upload labelWidth='150' multiple :options="uploadOptions1" label="图片上传" v-model="url"></le-upload>    
-                <le-upload labelWidth='150' multiple :options="uploadOptions2" label="文件上传" v-model="files"></le-upload>    
+            <div class="col3 w80">
+                <le-input v-show="true" labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
+                <le-input v-show="true" labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
+                <le-upload v-show="true" labelWidth='150' multiple :options="uploadOptions1" label="图片上传" v-model="url"></le-upload>    
+                <le-upload v-show="true" labelWidth='150' multiple :options="uploadOptions2" label="文件上传" v-model="files"></le-upload>    
             </div>
             <div class="col3">
-                <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
-                <le-date-time-picker @changeDateTime="update" labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
-                <le-local-select labelWidth="90" @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
-                <le-local-select labelWidth="100" placeholder="job" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-time-picker v-show="true" labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
+                <le-date-time-picker v-show="true" @changeDateTime="update" labelWidth="90" label="时间日期组件" v-model="searchModel.datetime"></le-date-time-picker>           
+                <le-local-select v-show="true" labelWidth="90" @change="showSelectItem" enabledInput label="选择职业1" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
+                <le-local-select v-show="true" labelWidth="100" placeholder="job" enabledInput label="选择职业2" :dataSource="jobArray" display-name="name" display-value="code" v-model='searchModel.job'></le-local-select> 
             </div>
             <div class="col4">
                 <le-date-picker labelWidth="250" label="日期组件" v-model="searchModel.date"></le-date-picker>
@@ -328,7 +328,7 @@ export default {
     .searchPanel .col2{
         width:60% !important;
     }
-    .searchPanel .col3{
+    .searchPanel .w80{
         width:80% !important;
     }
     .searchPanel .col4{
@@ -383,16 +383,5 @@ export default {
     .le_dialog_box .col3{
         width: 100%;
         align-items: baseline;
-    }
-
-    .col_label /deep/ .form-item-label{
-        width: auto !important;
-        flex-wrap: inherit;
-        position: relative;
-        /* padding-left: 10px !important; */
-    }
-
-    .col_label /deep/ .requireed::before{
-        left: 4px;
     }
 </style>

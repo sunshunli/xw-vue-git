@@ -10,7 +10,7 @@
                 <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <div v-if="fileType != 'image'">
-                        <span v-for="(item,index) in srcs" :key="index">
+                        <span class="fileContent" v-for="(item,index) in srcs" :key="index">
                             <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
                             <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
@@ -433,6 +433,16 @@
 
 .upaload .fileList span a{
     color: #606266;
+}
+
+.upaload .fileList span.fileContent{
+    padding-right: 20px;
+    padding-top: 1px;
+}
+
+.upaload .fileList span.fileContent .fa-times{
+    top: 5px;
+    right: 3px;
 }
 
 .upaload .fileList .fa-times{

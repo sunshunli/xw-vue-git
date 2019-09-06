@@ -6,9 +6,10 @@
         </div>
 
         <div class='searchPanel le_comps_core_css clearfix'>
-            <div class="col2">
+            <div class="col3">
                 <le-input labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
                 <le-input labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
+                <le-upload labelWidth='150' multiple :options="uploadOptions" label="文件上传" v-model="url"></le-upload>    
             </div>
             <div class="col3">
                 <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
@@ -48,7 +49,7 @@
                     <le-local-select labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="jobArray" multiple ref="dialogJobRef" display-name="name" display-value="code" v-model='entity.job'></le-local-select> 
                     <le-radio-list labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sexArray" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="favArray" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list> 
-                    <le-upload labelWidth='150' on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>     
+                    <!-- <le-upload labelWidth='150' on required msg='图片必须上传' :readonly="readonly" :options="uploadOptions" label="文件上传" v-model="entity.url"></le-upload>      -->
                     <le-editor labelWidth='180' tip="请输入富文本信息" label="详情信息22:" msg='详情信息必填' :readonly="readonly"  ref="editor" :option = "option"></le-editor>    
                     
                     <!-- <le-editor on label="详情信息:" msg='详情信息必填' ref="editor" :readonly="readonly" :option = "option"></le-editor>     -->
@@ -86,6 +87,7 @@ export default {
     name:"FormValidate",
     data(){
         return {
+            url:"",
             readonly:false,
             searchModel:{
                 age:"",
@@ -105,7 +107,8 @@ export default {
                 completedCallback:(d)=>{
                     console.log(d);
                 },
-                vtype:"jpg,png,gif",
+                // vtype:"jpg,png,gif",
+                size:"0.1",
                 // vtype:"zip",
                 width:"750",
                 height:"350",

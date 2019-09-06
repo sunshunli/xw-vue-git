@@ -5,12 +5,12 @@
 
             <div style="flex:1">
                 <span :class="{'readonlyIcon':readonlyFlag}" class="input-file">请选择
-                <input :disabled="readonlyFlag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
+                <input :disabled="readonlyFlag" :multiple="multipleTag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <div v-if="fileType != 'image'">
-                        <span v-for="(item,index) in srcs" :key="index">
+                        <span class="fileContent" v-for="(item,index) in srcs" :key="index">
                             <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
                             <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                         </span>
@@ -65,8 +65,14 @@
             tipStr(){
                 return this.options.tip?this.options.tip:"";
             },
-            multiple(){
-                return this.options.multiple?true:false;
+            multipleTag(){
+                if(this.options.multiple!=undefined){
+                    if(this.options.multiple === false){
+                        return false
+                    }
+                    return true;
+                }
+                return false;
             },
             fname(){
                 return this.options.fname;
@@ -89,12 +95,12 @@
             size(){
                 if(this.options.size){
                     let re = /^[0-9]+.?[0-9]*$/;
-                    if (!re.test(this.size)) {
-                        return 100;
+                    if (!re.test(this.options.size)) {
+                        return 0;
             　　     }
                     return parseFloat(this.options.size);
                 }else{
-                    return 100;
+                    return 0;
                 }
             },
             readonlyFlag(){
@@ -149,6 +155,92 @@
             reloadFileInput(){
                 this.$refs[this.fkey].value = "";
             },
+            checkSuffix(fileList){
+                if(!this.vtype){
+                    return true;
+                }
+                let count = 0;
+                for(let i=0;i<fileList.length;i++){
+                    let fileName = fileList[i].name;
+                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
+                    if(this.vtype.indexOf(suffix) == -1){
+                        count++;
+                    }
+                }
+                if(count != 0){
+                    return false;
+                }
+                return true;
+            },
+            checkSize(fileList){
+                if(this.size == 0){
+                    return true;
+                }
+                let count = 0;
+                for(let i=0;i<fileList.length;i++){
+                    let fileSize = fileList[i].size;
+                    if(fileSize > this.size * 1024 *1024){
+                        count++;
+                    }
+                }
+                if(count != 0){
+                    return false;
+                }
+                return true;
+            },
+            checkSpecification(fileList){
+                let that = this;
+                let readerPromises = [];
+                for(let i=0;i<fileList.length;i++){
+                    let fileObj = fileList[i];
+                    ((fileObj)=>{
+                        let reader = new FileReader();
+                        reader.readAsDataURL(fileObj);
+                        let _reader_promsie = new Promise((resolve,reject)=>{
+                            reader.onload = (e)=> {
+                                let data = e.target.result;
+                                let image = new Image();
+                                image.src= data;
+                                image.onload = ()=>{
+                                    let flag = true;
+                                    if(that.width && that.width != image.width){
+                                        flag = false;
+                                    }
+                                    if(that.height && that.height != image.height){
+                                        flag = false;
+                                    }
+                                    resolve(flag);
+                                };
+                                image.onerror = (e)=>{
+                                    reject(e);
+                                }
+                            }
+                            reader.onerror = (e=>{
+                                reject(e);
+                            })
+                        })
+                        readerPromises.push(_reader_promsie);
+                    })(fileObj);
+                }
+                let resultPromise = new Promise((resResolt,resReject)=>{
+                    Promise.all(readerPromises).then(xx=>{
+                        let count = 0;
+                        xx.forEach(f=>{
+                            if(!f){
+                                count++;
+                            }
+                        })
+                        if(count == 0){
+                            resResolt(true);
+                        }else{
+                            resResolt(false);
+                        }
+                    }).catch(x=>{
+                        resResolt(xx);
+                    })
+                });
+                return resultPromise;
+            },
             /**
              * @description 上传的主体方法
              * @returns
@@ -158,56 +250,36 @@
                     this.alert.showAlert("error","上传url和fname必须配置!");
                     return;
                 }
+                
                 let dom = this.$refs[this.fkey];
-                let fileObj = dom.files[0];
+                let fileList = dom.files;
                 let formData = new FormData();
-                formData.append(this.fname,fileObj);
-                let fileName = fileObj.name;
-                this.reloadFileInput();
+                for(let i=0;i<fileList.length;i++){
+                    formData.append(this.fname,fileList[i]);
+                }
                 //控制格式
-                if(this.vtype){
-                    let suffix = fileName.substring(fileName.lastIndexOf('.')+1);
-                    if(this.vtype.indexOf(suffix) == -1){
-                        this.alert.showAlert("error","后缀名必须为:"+ this.vtype);
-                        return;
-                    }
+                if(!this.checkSuffix(fileList)){
+                    this.alert.showAlert("error","后缀名必须为:"+ this.vtype);
+                    return;
                 }
                 //控制大小
-                if(this.size){
-                    let fileSize = fileObj.size;
-                    if(fileSize > this.size * 1024 *1024){
-                        this.alert.showAlert("error","文件大小必须小于:"+ this.size + "MB");
-                        return;
-                    }
+                if(!this.checkSize(fileList)){
+                    this.alert.showAlert("error","文件大小必须小于:"+ this.size + "MB");
+                    return;
                 }
-                //控制规格
-                if(this.fileType == define.UPLOADFILETYPE.IMAGE){
-                    if(!this.width && !this.height){
-                        this.doUploadAjax(formData);
-                        return;
-                    }
-                    let that = this;
-                    let reader = new FileReader();
-                    reader.onload = (e)=> {
-                        let data = e.target.result;
-                        let image = new Image();
-                        image.onload = ()=>{
-                            if(that.width && that.width != image.width){
-                                that.alert.showAlert("error","图片宽度必须等于:"+ that.width);
-                                return;
-                            }
-                            if(that.height && that.height != image.height){
-                                that.alert.showAlert("error","图片高度必须等于:"+ that.height);
-                                return;
-                            }
-                            that.doUploadAjax(formData);
-                        };
-                        image.src= data;
-                    };
-                    reader.readAsDataURL(fileObj);
-                }else{  
+                //控制规格,仅支持图片规格
+                if(this.fileType == define.UPLOADFILETYPE.IMAGE && this.width && this.height){
+                    this.checkSpecification(fileList).then(x=>{
+                        if(x){
+                            this.doUploadAjax(formData);
+                        }else{
+                            this.alert.showAlert("error","图片规格必须为:"+ this.width + "*" + this.height);
+                        }
+                    }).catch(e=>{})
+                }else{
                     this.doUploadAjax(formData);
                 }
+                this.reloadFileInput();
             },
             doUploadAjax(formData){
                 this.showLoading = true;
@@ -215,8 +287,10 @@
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
                     //多文件上传
-                    if(this.multiple){
-                        this.srcs.push({name:src,idx:this.getMaxIndex()});
+                    if(this.multipleTag){
+                        src && src.split(',').forEach(x=>{
+                            this.srcs.push({name:x,idx:this.getMaxIndex()});
+                        })
                     }else{
                         this.srcs = [{name:src,idx:1}];
                     }
@@ -359,6 +433,16 @@
 
 .upaload .fileList span a{
     color: #606266;
+}
+
+.upaload .fileList span.fileContent{
+    padding-right: 20px;
+    padding-top: 1px;
+}
+
+.upaload .fileList span.fileContent .fa-times{
+    top: 5px;
+    right: 3px;
 }
 
 .upaload .fileList .fa-times{

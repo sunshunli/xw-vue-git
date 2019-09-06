@@ -9,7 +9,8 @@
             <div class="col3">
                 <le-input labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
                 <le-input labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
-                <le-upload labelWidth='150' multiple :options="uploadOptions" label="文件上传" v-model="url"></le-upload>    
+                <le-upload labelWidth='150' multiple :options="uploadOptions1" label="图片上传" v-model="url"></le-upload>    
+                <le-upload labelWidth='150' multiple :options="uploadOptions2" label="文件上传" v-model="files"></le-upload>    
             </div>
             <div class="col3">
                 <le-time-picker labelWidth="90" label="时间组件" v-model="searchModel.time"></le-time-picker>
@@ -88,6 +89,7 @@ export default {
     data(){
         return {
             url:"",
+            files:"",
             readonly:false,
             searchModel:{
                 age:"",
@@ -100,18 +102,29 @@ export default {
                 fav:""
             },
             showDialog:false,
-            uploadOptions:{
+            uploadOptions1:{
                 tip:"图片大小必须小于100kb,大小100*200",
                 multiple:true,
                 url:"/file/img/upload",
                 completedCallback:(d)=>{
                     console.log(d);
                 },
-                // vtype:"jpg,png,gif",
+                vtype:"jpg,png,gif",
                 size:"0.1",
-                // vtype:"zip",
                 width:"750",
                 height:"350",
+                fname:"file",
+                analysis:(d)=>{
+                    return d.data;
+                }
+            },
+            uploadOptions2:{
+                tip:"文件大小必须小于100kb",
+                multiple:true,
+                url:"/file/img/upload",
+                completedCallback:(d)=>{
+                    console.log(d);
+                },
                 fname:"file",
                 analysis:(d)=>{
                     return d.data;

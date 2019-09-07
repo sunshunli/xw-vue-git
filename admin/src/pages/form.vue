@@ -7,7 +7,7 @@
 
         <div class='searchPanel le_comps_core_css clearfix'>
             <div class="col3 w80">
-                <le-input v-show="true" labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
+                <le-input ref='ageInput' @change='changeInput' @click='clickInput' v-show="true" labelWidth="150" placeholder="请输入年龄" label="年龄" v-model="searchModel.age"></le-input>
                 <le-input v-show="true" labelWidth="200" label="身份证号码" v-model="searchModel.id"></le-input>
                 <le-upload v-show="true" labelWidth='150' multiple :options="uploadOptions1" label="图片上传" v-model="url"></le-upload>    
                 <le-upload v-show="true" labelWidth='150' multiple :options="uploadOptions2" label="文件上传" v-model="files"></le-upload>    
@@ -220,6 +220,12 @@ export default {
         }
     },
     methods:{
+        clickInput(val){
+            debugger
+        },
+        changeInput(val){
+            debugger
+        },
         update(str){
             debugger
         },
@@ -328,8 +334,12 @@ export default {
             // this.jobArray = Unit.object.cloneObj(_data);
             this.sexArray = Unit.object.cloneObj(_data);
             this.favArray = Unit.object.cloneObj(_data);
+
+            this.$refs['ageInput'].getCurrentComponent().focus();
         },1000)
         this.jobArray = Unit.object.cloneObj(_data);
+
+        
     }
 }
 </script>

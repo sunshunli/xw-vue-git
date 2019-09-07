@@ -68,7 +68,7 @@
     margin-left: 26px;
 }
 
-.el_form_row_item /deep/ .required::before {
+.el_form_row_item >>> .required::before {
     position: relative;
 }
 

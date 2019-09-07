@@ -30,6 +30,7 @@
             <le-button type="start" value="解封" @click="setEnable(false)"></le-button>
             <le-button type="stop" value="禁封" @click="notDeleteItem(true)"></le-button>
             <le-button type="remove" value="删除" @click="deleteItem"></le-button>
+            <le-button type="remove" value="alert" @click="alertMsg"></le-button>
         </div>
 
         <div class='le_list_table_pannel panel-table text-center'>
@@ -239,6 +240,12 @@ export default {
             this.readonly = !this.readonly;
         },
         clearAll(){
+            // this.alert.showAlert("success","aaaaaaaaa");
+            this.alert.showConfirm("确定删除吗？",()=>{
+                this.alert.showAlert("success","nnnnnnnnnn")
+                this.alert.showNotify("success","bbbbbbbbbb")
+            })
+            
             this.$refs.form2.reset();
         },
         showSelectItem(val){
@@ -305,6 +312,9 @@ export default {
                 }
             });
         },
+        alertMsg(){
+            this.alert.showAlert("error",'信息')
+        }
     },
     mounted(){
         

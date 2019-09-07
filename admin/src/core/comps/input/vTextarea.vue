@@ -92,6 +92,7 @@
             changeEvent(e){
                 this.currentValue = e.target.value;
                 this.$emit("input",e.target.value);
+                this.$emit("change",e.target.value);
             },
             getValue(){
                 return this.currentValue;

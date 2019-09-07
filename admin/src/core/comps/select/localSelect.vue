@@ -350,7 +350,7 @@
         position: relative;
         text-align: left;
         margin-bottom: 22px;
-        display: inline-block;
+        display: flex;
     }
     
     .selectContent label{

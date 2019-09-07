@@ -16,6 +16,8 @@ const UsePageAdd = r=> require.ensure([],()=>(require("../pages/usePageAdd.vue")
 const scrollPage = r=>require.ensure([],()=>r(require("../pages/scrollPage.vue")),"ScrollPage");
 const buttonPage = r=>require.ensure([],()=>r(require("../pages/buttonPage.vue")),"ButtonPage");
 
+const newTestPage = r=>require.ensure([],()=>r(require("../pages/newTestPage.vue")),"newTestPage");
+const newTestPageAdd = r=>require.ensure([],()=>r(require("../pages/newTestPageAdd.vue")),"newTestPageAdd");
 
 Vue.use(Router);
 
@@ -68,6 +70,15 @@ const routers = [
         path:'/button',
         name:'button',
         component:buttonPage
+    },
+    {
+        path:'/newTestPage',
+        name:'newTestPage',
+        component:newTestPage
+    },{
+        path:'/newTestPageAdd',
+        name:'newTestPageAdd',
+        component:newTestPageAdd
     }
 ];
 

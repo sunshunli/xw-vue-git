@@ -9,13 +9,17 @@
            
         <le-form labelWidth="150" ref="form1" style="width:600px">
 
-            <le-date-time-picker @change="update" label="开始时间" msg="开始时间必填" v-model="form1.dt1" on></le-date-time-picker>
+            <le-date-time-picker v-if="true" @change="update" label="开始时间" msg="开始时间必填" v-model="form1.dt1" on></le-date-time-picker>
             
-            <le-date-time-picker label="结束时间" msg="结束时间必填" v-model="form1.dt2" on></le-date-time-picker>
+            <le-date-time-picker tip="结束时间必须大于创建时间" label="结束时间" msg="结束时间必填" v-model="form1.dt2" on></le-date-time-picker>
 
-            <le-date-picker label="日期组件"  v-model="form1.d1" msg="日期不允许为空" on></le-date-picker>
-            
-            <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空" on></le-time-picker>
+            <le-date-picker tip="结束时间必须大于创建时间" label="日期组件"  v-model="form1.d1" msg="日期不允许为空" on></le-date-picker>
+           
+            <div class="le_form_row el_form_row_item">
+                <le-time-picker label="时间组件" v-model="form1.t1" msg="时间不允许为空" on></le-time-picker>
+                <le-button value="测试" type="create"></le-button>
+            </div>
+
 
             <le-local-select label="模糊搜索" :dataSource="dataSource" multiple v-model="form1.s1" display-name="name" msg="下拉框必填" display-value="code" on></le-local-select> 
 

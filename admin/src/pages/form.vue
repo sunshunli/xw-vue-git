@@ -33,7 +33,7 @@
             <le-button type="remove" value="alert" @click="alertMsg"></le-button>
         </div>
 
-        <div class='le_list_table_pannel panel-table text-center'>
+        <div class='text-center'>
             <!-- <div class="table-title">黑名单列表</div> -->
             <div class='overflow-table'>    
                 <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>

@@ -6,6 +6,12 @@
     margin-left: 10px !important;
 }
 
+
+/* 想让dialog中的组件能按照form中样式，但是有不需要form组件的时候，就写上这个样式就行 */
+.le_comps_core_css .form-item{
+    margin: 10px 0 22px 0;
+}
+
 /* 一行放俩个 */
 .le_comps_core_css .col1{
     width: 25%;
@@ -37,62 +43,19 @@
     flex-direction: row;
     align-items: baseline;
 }
-.le_comps_core_css .col1 .form-item,
-.le_comps_core_css .col2 .form-item,
-.le_comps_core_css .col3 .form-item,
-.le_comps_core_css .col4 .form-item {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: center;
-}
-.le_comps_core_css .col1 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col2 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col3 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col4 .form-item /deep/ .form-item-div {
-    flex: 1;
-}
-
-/* 改变弹框中label的宽度 */
-/deep/ .le_dialog_box .form-item .form-item-label {
-    width: 100px;
-    margin-right: 5px;
-}
-
-.le_form_row.el_form_row_label /deep/ .form-item-label {
-    width: auto !important;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-div {
-    width: 200px;
-    vertical-align: middle;
-}
 
 .warning {
     color: red;
 }
 
+
+/* .le_form_row  .el_form_row_item 是为了把单加的button和前面的组件放到一行上*/
 .le_form_row {
-    flex: 1;
-}
-
-/deep/ .formStyle .container .formDiv .form-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-label {
-    width: 100px;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-div {
     flex: 1;
 }
 
 .el_form_row_item .form-item {
     width: 300px;
-    /* float: left; */
 }
 
 .el_form_row_item {
@@ -119,6 +82,8 @@
 
 .btnGroup {
     margin-bottom: 10px;
+    text-align: right;
+    padding: 0 20px;
 }
 
 .second-level h1 {
@@ -178,7 +143,6 @@ textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 
 
 /* 组件公共样式 */
-
 *{
     margin: 0;
     padding: 0;
@@ -195,7 +159,10 @@ html,body{
 .form-item{
     text-align: left;
     margin:0 0 22px 0;
-    display: inline-block;
+    /* display: inline-block; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .form-item .form-item-label{
     text-align: right;
@@ -231,6 +198,7 @@ html,body{
     text-align: left;
     position: absolute;
     margin: 0;
+    bottom: -20px;
 }
 
 .form-item .tip{
@@ -240,6 +208,7 @@ html,body{
     text-align: left;
     position: absolute;
     margin: 0;
+    bottom: -20px;
 }
 
 .form-item .form-item-div .readonlyIcon{
@@ -297,6 +266,14 @@ html,body{
     margin: 0 5px 0 10px;
 }
 
+/* table太长可以左右滑动 */
+.overflow-table{
+    overflow-x:scroll; 
+}
 
+.overflow-table table td{
+    word-break: break-all;
+    white-space: nowrap;
+}
 
 

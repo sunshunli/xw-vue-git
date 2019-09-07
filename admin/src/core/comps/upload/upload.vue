@@ -404,7 +404,7 @@
     width: 100%;
     height: 100%;
 }
-.upaload .loading{width:24px;vertical-align: middle;}
+.upaload .loading{width:24px;vertical-align: middle;vertical-align: baseline;}
 
 .upaload .fileList{
     display: block;

@@ -123,7 +123,9 @@
 
 <style scoped>
     .form-item{
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
     .form-item .form-item-label{
@@ -140,11 +142,13 @@
     }
 
     .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
         width: 100%;
-        position: relative;
+        line-height: normal;
+        display: flex;
         flex: 1;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
     }    
 
     .form-item .fa-times-circle-o .form-item-input{

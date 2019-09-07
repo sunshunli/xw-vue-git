@@ -552,7 +552,7 @@ form .form-item .form-item-div .div-box {
 .picker-body table td.disable { background: #f0f0f0 !important; color: #cbcbcb !important;}
 .picker-body table td.current { background: #4fbba0 !important; color: #fff !important;}
 .picker-body table td:hover { background: #f55;color: #fff;} 
-.form-item{display: inline-block; text-align: left; margin:0 0 22px 0}
+.form-item{display: flex; text-align: left; margin:0 0 22px 0}
 .form-item .form-item-label{ text-align: right; vertical-align: middle; display: inline-block; font-size: 14px;
     color: #606266; line-height: normal; padding: 0;
     box-sizing: border-box; margin: 0 5px 0 10px;

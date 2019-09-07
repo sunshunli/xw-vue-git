@@ -308,7 +308,7 @@ export default {
 <style scoped> 
 ul,li{padding:0; margin: 0; list-style: none}
 li{height: 32px; line-height: 32px}
-.timeContent{height: auto; display: inline-block; margin: 5px 20px; position: relative;}
+.timeContent{height: auto; display: flex; margin: 5px 20px; position: relative;}
 .timeContent .searchBar{ width:100%;height: 40px;position: relative; cursor: pointer;}
 .timeContent .searchBar i{ position: absolute;top: 12px;color: #c0c4cc; font-weight: normal;}
 .timeContent .searchBar .clock{left:10px; }

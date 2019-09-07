@@ -21,7 +21,7 @@
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
             </div>
         </div>
-        <div class="btnGroup cleatfix">
+        <div class="le_search_btn_group cleatfix">
             <le-button type="create" value="新建" @click="add"></le-button>
             <le-button type="info" value="详情" @click="detailInfo"></le-button>
             <le-button type="create" value="添加商城" @click="showDialogContent"></le-button>
@@ -30,7 +30,7 @@
         </div>
 
         <!--如果要求table中的td不能折行显示，或者是列太多，显示拥挤的时候，就加上overflow-table这个div，让table可以左右滑动查看 -->
-        <div class='overflow-table'>    
+        <div class='le_table_container'>    
             <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>
         </div>
 
@@ -62,7 +62,6 @@
                 <le-button type="cancel" value="禁用" @click="disabledAll"></le-button>
             </div>
         </le-dialog>
-
         
     </div>
 </template>

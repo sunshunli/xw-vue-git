@@ -80,10 +80,16 @@
     visibility: hidden
 }
 
-.btnGroup {
+.le_search_btn_group {
     margin-bottom: 10px;
     text-align: right;
     padding: 0 20px;
+    margin-top: -30px;
+}
+
+.le_new_page_btn_group{
+    text-align: center;
+    padding-top: 20px;
 }
 
 .second-level h1 {
@@ -264,16 +270,6 @@ html,body{
     padding: 0;
     box-sizing: border-box;
     margin: 0 5px 0 10px;
-}
-
-/* table太长可以左右滑动 */
-.overflow-table{
-    overflow-x:scroll; 
-}
-
-.overflow-table table td{
-    word-break: break-all;
-    white-space: nowrap;
 }
 
 

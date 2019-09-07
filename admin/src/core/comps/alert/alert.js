@@ -18,7 +18,7 @@ let _le_alert = {
             res = DEFINE_KEY.ALERT_CONFIG.SHOW_ALERT_CLS_TYPE["default"];
         }
 
-        let parentDiv = $("<div class='le_alert content'></div>");
+        let parentDiv = $("<div style='z-index:"+zIndex+";top:50px;opacity:0;' class='le_alert content'></div>");
         let html = "<div class='msgBox "+res.cls+"' style='opacity:1'>";
         html += "<i class='"+res.iCls+"'></i>";
         html += "<p>"+msg+"</p>";
@@ -27,7 +27,7 @@ let _le_alert = {
         $(parentDiv).append($(html));
         $("body").append($(parentDiv));
 
-        $(parentDiv).css({'top':'-50px','opacity':0,'z-index':zIndex});
+        // $(parentDiv).css({'top':'-50px','opacity':0,'z-index':zIndex});
         $(parentDiv).animate({top:'16px',opacity:1},500,()=>{
             setTimeout(()=>{
                 $(parentDiv).animate({top:'-50px',opacity:0,'z-index':0},500,()=>{
@@ -37,7 +37,8 @@ let _le_alert = {
         })
     },
     showConfirm:(title,cb)=>{
-        let parentDiv = $('<div class="le_alert MsgAlertBox"></div>');
+        let zIndex = tool._idSeed.newId();
+        let parentDiv = $('<div style="z-index:'+zIndex+'" class="le_alert MsgAlertBox"></div>');
         let html ='<div class="Alertcontent">'+
                   '<p>提示<i tag="le-show-confirm-close">×</i></p>'+
                   '<div class="msgContent clearfix">'+
@@ -67,6 +68,7 @@ let _le_alert = {
         })
     },
     showNotify:(type,msg)=>{
+        let zIndex = tool._idSeed.newId();
         if(!type){
             type = "default";
         }
@@ -77,7 +79,7 @@ let _le_alert = {
         if(!res){
             res = DEFINE_KEY.ALERT_CONFIG.SHOW_NOTICE_CLS_TYPE["default"];
         }
-        let parentDiv = $('<div class="le_alert notice '+res.cls+'"></div>');
+        let parentDiv = $('<div style="z-index:'+zIndex+'" class="le_alert notice '+res.cls+'"></div>');
         let html ='<div class="noticeTs"><i class="'+res.iCls+'"></i>提示</div>'+
                   '<p>'+msg+'</p>'+
                   '<span class="closeBtn" tag="le-show-notify-close">×</span>';

@@ -377,13 +377,14 @@
 .upaload .input-file {
     cursor:pointer;
     position: relative;
+    display: inline-block;
     overflow: hidden;
     text-align: center;
     width: 50px;
     height: 26px;
     background-color: #2c7;
     border-radius: 4px;
-    padding: 5px;
+    /* padding: 5px; */
     font-size: 12px;
     font-weight: normal;
     line-height: 26px;

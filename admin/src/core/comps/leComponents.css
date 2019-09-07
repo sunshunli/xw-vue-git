@@ -49,27 +49,31 @@
 }
 
 
-/* .le_form_row  .el_form_row_item 是为了把单加的button和前面的组件放到一行上*/
+/* .le_form_row  .le_form_row_item 是为了把单加的button和前面的组件放到一行上*/
 .le_form_row {
     flex: 1;
 }
 
-.el_form_row_item .form-item {
+.le_form_row_item .form-item {
     width: 300px;
 }
 
-.el_form_row_item {
+.le_form_row_item {
     display: flex;
     flex-direction: row;
     align-items: baseline;
 }
 
-.el_form_row_item .label_msg {
+.le_form_row_item .label_msg {
     margin-left: 26px;
 }
 
-.el_form_row_item >>> .required::before {
+.le_form_row_item >>> .required::before {
     position: relative;
+}
+
+.le_comps_core_css .le_full_width{
+    width:100%
 }
 
 .clearfix:after {
@@ -95,11 +99,11 @@
 .second-level h1 {
     padding: 12px 0;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
+ le_form_row_item: 1px solid rgba(0, 0, 0, .12);
 }
 
 /* 组件后面显示的提示信息 */
-.el_form_row_item .warning{
+.le_form_row_item .warning{
     height: 18px;
     line-height: 18px;
     margin: 0;

@@ -36,8 +36,8 @@
 
         <le-dialog title="新建弹层" height="605" width="1000" v-model="showDialog">
             <div slot="body">
-                <le-form  labelWidth='180' ref="saveForm" class="le_comps_core_css">
-                    <div class="el_form_row_item">
+                <le-form labelWidth='180' ref="saveForm">
+                    <div class="le_form_row_item">
                         <le-input labelWidth='150' tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
                         <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                     </div>
@@ -62,7 +62,6 @@
                 <le-button type="cancel" value="禁用" @click="disabledAll"></le-button>
             </div>
         </le-dialog>
-        
     </div>
 </template>
 

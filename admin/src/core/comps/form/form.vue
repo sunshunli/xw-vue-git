@@ -1,6 +1,6 @@
 
 <template>
-    <div class="formStyle">
+    <div class="le_comps_core_css formStyle">
         <div class="container">
             <div class="medium formDiv">
                 <form class="clearfix">

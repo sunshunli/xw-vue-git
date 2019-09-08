@@ -14,8 +14,7 @@
                     <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                 </div>
             </div> -->
-            <le-input v-show="hideAllTag" labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" on required msg="地址必填" v-model="entity.address"></le-input>
-            <le-textarea  v-show="hideAllTag" labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+            <le-textarea ref='textarea' @blur="changeTextarea($event)" @change='changeTextarea($event)' height="150" width="90%" labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
             <div class="col4">
                 <le-date-picker v-show="hideAllTag" labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="开始日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                 <le-button v-show="hideAllTag" type="create" value="测试按钮"></le-button>
@@ -130,7 +129,9 @@ export default {
         }
     },
     methods:{
-       update1(){
+        changeTextarea(val){
+        },
+        update1(){
             this.alert.showAlert("success","修改日期")
         },
         close(){
@@ -171,6 +172,10 @@ export default {
         }else{
             that.readonly = false
         }
+
+        window.setTimeout(()=>{
+            this.$refs['textarea'].getCurrentComponent().clear();
+        },2000)
     }
 }
 </script>

@@ -129,8 +129,8 @@ export default {
             let result = res.join(':');
             this.getJQDom(this.KEYS.timePanelDomKey).hide();
             this.$emit("input",result);
+            this.$emit("change",result);
             this.timeStr = result;
-            // this.getJQDom(this.KEYS.timeInputDomKey).val(result);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
@@ -251,6 +251,7 @@ export default {
                 return;
             }
             this.$emit("input","");
+            this.$emit("change","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();

@@ -142,6 +142,7 @@ export default {
             }
             this.showDateTimePicker = false;
             this.$emit("input","");
+            this.$emit("change","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();

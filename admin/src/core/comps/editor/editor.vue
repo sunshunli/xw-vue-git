@@ -149,11 +149,13 @@ export default {
         // this.__editor.customConfig.onchangeTimeout = this.onchangeTimeout;
         //监听事件onchange onblur
         this.__editor.customConfig.onchange = (html) => {
+            this.$emit("change",html);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
         }
         this.__editor.customConfig.onblur = (html)=> {
+            this.$emit("blur",html);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }

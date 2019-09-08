@@ -357,6 +357,7 @@
             reset(){
                 this.$emit('input',"");
                 this.srcs = [];
+                this.$attrs.setStateByFlag(0);
             }
         },
         created(){

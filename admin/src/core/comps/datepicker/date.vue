@@ -157,7 +157,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeDatePicker",
-    props:["selectDayCallback","isDatetimePicker","DatetimePickerKey","value","readonly"],
+    props:["isDatetimePicker","DatetimePickerKey","value","readonly"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -317,6 +317,7 @@ export default {
                 return;
             }
             this.$emit("input","");
+            this.$emit("change","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
@@ -365,12 +366,12 @@ export default {
                 this.isShowPicker = false;
             }
             this.state.showError = false;
-            this.selectDayCallback && this.selectDayCallback();
 
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                 this.$attrs.setVerifyCompState();
             }
             this.$emit("input",this.selectDayStr);
+            this.$emit("change",this.selectDayStr);
         },
         /**
          * @description 上一年切换事件
@@ -383,6 +384,19 @@ export default {
             this.current.currentMonth = month;
             
             this.setPickerDateSource(year,month);
+            this.$emit("prevYearChange",year,month,this.selectDayStr);
+        },
+        /**
+         * @description 下一年切换事件
+         * @returns
+         */
+        nextYear(){
+            let year = parseInt(this.current.currentYear) + 1;
+            let month = parseInt(this.current.currentMonth);
+            this.current.currentYear = year;
+            this.current.currentMonth = month;
+            this.setPickerDateSource(year,month);
+            this.$emit("nextYearChange",year,month,this.selectDayStr);
         },
         /**
          * @description 上一月切换事件
@@ -400,6 +414,7 @@ export default {
             this.current.currentYear = year;
             this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
+            this.$emit("prevMonthChange",year,month,this.selectDayStr);
         },
         /**
          * @description 下一月切换事件
@@ -417,17 +432,7 @@ export default {
             this.current.currentYear = year;
             this.current.currentMonth = month;
             this.setPickerDateSource(year,month);
-        },
-        /**
-         * @description 下一年切换事件
-         * @returns
-         */
-        nextYear(){
-            let year = parseInt(this.current.currentYear) + 1;
-            let month = parseInt(this.current.currentMonth);
-            this.current.currentYear = year;
-            this.current.currentMonth = month;
-            this.setPickerDateSource(year,month);
+            this.$emit("nextMonthChange",year,month,this.selectDayStr);
         },
         /**
          * @description 设置当前值

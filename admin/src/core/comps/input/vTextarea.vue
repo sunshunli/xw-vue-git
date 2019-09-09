@@ -1,5 +1,5 @@
 <template>
-    <div class="form-item"  :style="{height:_height,width:_width}">
+    <div class="form-item" :style="{height:_height,width:_width}">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>

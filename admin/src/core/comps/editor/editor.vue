@@ -1,5 +1,5 @@
 <template>
-    <div class="form-item">
+    <div class="form-item" :style="{height:_height,width:_width}">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div :id = "'_editor-'+titleKey" class="form-item-div fa LeEditor" >
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
@@ -7,7 +7,6 @@
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
-       
     </div>
 </template>
 
@@ -35,6 +34,21 @@ export default {
         };
     },
     computed: {
+        _height(){
+            if(this.height){
+                return this.height + "px";
+            }
+            return "260px";
+        },
+        _width(){
+            if(this.width){
+                if(this.width.toString().indexOf('%') != -1){
+                    return this.width;
+                }
+                return this.width + "px";
+            }
+            return "100%"
+        },
         labelWidthVal(){
             if(this.$attrs.labelWidth){
                 return this.$attrs.labelWidth;
@@ -208,6 +222,7 @@ export default {
 }
 
 form .form-item .form-item-div{
+    height: 100%;
     position: relative;
     border: 1px solid #aeaeae !important;
 }

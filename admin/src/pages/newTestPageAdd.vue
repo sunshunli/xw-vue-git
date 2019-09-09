@@ -1,5 +1,7 @@
 <template>
+    <!-- 新页面必须包含在 le_comps_core_css里面内，如果新页面里面使用了form组件，则form组件的所有父节点中必须设置宽度和高度，否则form组件撑满页面-->
     <div class="le_comps_core_css le_new_page">
+        <!-- 页面名称 le_page_name -->
         <h4 class="le_page_name">新的样式测试页面</h4>
         <le-form labelWidth='180' ref="saveForm">
             <div class="le_form_row_item">
@@ -42,7 +44,8 @@
             
             <div class="le_new_page_btn_group">
                 <le-button value="返回" type="back" @click="back"></le-button>
-                <le-button value="确定" type="save" @click="save"></le-button>
+                <le-button value="确定1" :disabled='disabledFlag' type="create" @click="save"></le-button>
+                <le-button value="确定2" :disabled='disabledFlag' type="create" @click="save"></le-button>
             </div>
         </le-form>
        
@@ -53,7 +56,7 @@
 export default {
     data(){
         return {
-        
+            disabledFlag:true,
             entity:{
                 age:"",
                 id:"",
@@ -197,7 +200,7 @@ export default {
 
         window.setTimeout(()=>{
             this.$refs['textarea'].getCurrentComponent().clear();
-        },2000)
+        },1000)
     }
 }
 </script>

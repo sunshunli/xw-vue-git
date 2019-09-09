@@ -41,7 +41,6 @@ let TREE_CONFIG = {
 }
 
 let BUTTON_CONFIG = {
-
     "search":{cls:"search",iCls:"fa-search-plus"}, //搜索
     "create":{cls:"create",iCls:"fa-plus-square"}, //新增
     "download":{cls:"download",iCls:"fa-download"}, //下载

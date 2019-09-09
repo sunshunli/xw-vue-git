@@ -28,7 +28,7 @@
         <div class="le_search_btn_group cleatfix">
             <le-button type="create" value="新建" @click="add"></le-button>
             <le-button type="info" value="详情" @click="detailInfo"></le-button>
-            <le-button type="create" value="添加商城" @click="showDialogContent"></le-button>
+            <le-button type="save" value="添加商城" @click="showDialogContent"></le-button>
             <le-button type="update" value="修改"></le-button>
             <le-button type="remove" value="删除"></le-button>
         </div>

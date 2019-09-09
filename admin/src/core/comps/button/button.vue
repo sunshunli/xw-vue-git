@@ -123,8 +123,8 @@ export default {
     }
 
     .remove{
-        background-color: #4fc1e9;
-        border-color: #4fc1e9;
+        background-color: #f4364c;
+        border-color: #f4364c;
     }
 
     .approve{

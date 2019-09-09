@@ -59,6 +59,9 @@ export default {
     },
     mounted(){
         this.dialogZIndex = tool._idSeed.newId();
+        if(!this.closeCallback){
+            console.log("dialog最好设置关闭回调函数!");
+        }
     }
 }
 </script>

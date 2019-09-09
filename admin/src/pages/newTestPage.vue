@@ -1,7 +1,10 @@
 <template>
+    <!-- 总的容器 le_comps_core_css -->
     <div class="le_comps_core_css">
-        <h4 class="pageName">新的样式测试页面</h4>
-        <div class='le_list_search_pannel le_comps_core_css clearfix'>
+        <!-- 页面标题 le_page_name -->
+        <h4 class="le_page_name">新的样式测试页面</h4>
+        <!-- 查询条件容器 le_list_search_pannel -->
+        <div class='le_list_search_pannel clearfix'>
             <div class="col1">
                 <le-input labelWidth="120" label="订单编号:" v-model="searchModel.orderCode"></le-input>
             </div>
@@ -9,7 +12,7 @@
                 <le-local-select labelWidth="120" label="商城" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="code"></le-local-select>
                 <le-date-time-picker labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker>
             </div>
-             <div class="col3">
+            <div class="col3">
                 <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
@@ -21,6 +24,7 @@
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
             </div>
         </div>
+        <!-- 查询条件按钮组 le_search_btn_group-->
         <div class="le_search_btn_group cleatfix">
             <le-button type="create" value="新建" @click="add"></le-button>
             <le-button type="info" value="详情" @click="detailInfo"></le-button>
@@ -29,7 +33,7 @@
             <le-button type="remove" value="删除"></le-button>
         </div>
 
-        <!--如果要求table中的td不能折行显示，或者是列太多，显示拥挤的时候，就加上overflow-table这个div，让table可以左右滑动查看 -->
+        <!-- tableList容器 le_table_container -->
         <div class='le_table_container'>    
             <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>
         </div>
@@ -201,10 +205,4 @@ export default {
 </script>
 
 <style scoped>
-.pageName{
-    font-size: 16px;
-    text-align: left;
-    padding: 10px 22px;
-    border-bottom: 1px solid #eae4e4;
-}
 </style>

@@ -18,7 +18,7 @@ let _le_alert = {
             res = DEFINE_KEY.ALERT_CONFIG.SHOW_ALERT_CLS_TYPE["default"];
         }
 
-        let parentDiv = $("<div style='z-index:"+zIndex+";top:50px;opacity:0;' class='le_alert content'></div>");
+        let parentDiv = $("<div style='z-index:"+zIndex+";top:-50px;opacity:0;' class='le_alert content'></div>");
         let html = "<div class='msgBox "+res.cls+"' style='opacity:1'>";
         html += "<i class='"+res.iCls+"'></i>";
         html += "<p>"+msg+"</p>";

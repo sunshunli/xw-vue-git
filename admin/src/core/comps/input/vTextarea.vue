@@ -135,7 +135,7 @@
    
     .form-item .form-item-input{
         width: 100%;
-        height: 40px;
+        height: 100%;
         font-size: 14px;
         line-height: 40px;
         display: inline-block;

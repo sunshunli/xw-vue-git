@@ -1,7 +1,7 @@
 <template>
-    <div class="le_new_page">
-        <h4 class="title">新的样式测试页面</h4>
-         <le-form labelWidth='180' style="width:800px;margin:0 auto" ref="saveForm">
+    <div class="le_comps_core_css le_new_page">
+        <h4 class="le_page_name">新的样式测试页面</h4>
+        <le-form labelWidth='180' ref="saveForm">
             <div class="le_form_row_item">
                 <le-input v-show="hideAllTag" labelWidth='150' tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
                 <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
@@ -14,7 +14,7 @@
                     <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                 </div>
             </div> -->
-            <le-textarea ref='textarea' @blur="changeTextarea($event)" @change='changeTextarea($event)' height="50" width="40%" labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
+            <le-textarea ref='textarea' @blur="changeTextarea($event)" @change='changeTextarea($event)' height="50" width="100%" labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
             <div class="col4">
                 <le-date-picker @nextMonthChange="nextMonthChangeEvent" @prevMonthChange="prevMonthChangeEvent" @nextYearChange="nextYearChangeEvent" @change="changeDate" @prevYearChange="prevYearChangeEvent" v-show="hideAllTag" labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="开始日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
                 <le-button v-show="hideAllTag" type="create" value="测试按钮"></le-button>
@@ -25,6 +25,10 @@
             <le-radio-list v-show="hideAllTag" labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
             <le-checkbox-list v-show="hideAllTag" labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
             
+            <div class="col1">
+                <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='130' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件123" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+            </div>
+
             <div class="col2 le_full_width">
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='100' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                 <le-local-select v-show="hideAllTag" labelWidth='100' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select> 
@@ -37,8 +41,8 @@
             </div>
             
             <div class="le_new_page_btn_group">
-                <le-button value="确定" type="save" @click="save"></le-button>
                 <le-button value="返回" type="back" @click="back"></le-button>
+                <le-button value="确定" type="save" @click="save"></le-button>
             </div>
         </le-form>
        
@@ -199,6 +203,10 @@ export default {
 </script>
 
 <style scoped>
+.le_new_page{
+    width:1000px;
+    margin:0 auto;
+}
 .title{
     font-size: 16px;
     text-align: left;

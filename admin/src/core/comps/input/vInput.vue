@@ -186,12 +186,6 @@
         border: 1px solid #409eff;
         outline: none;
     }
-    .medium .form-item .form-item-input{
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-    }
-
   
     .form-item i{
         position: absolute;

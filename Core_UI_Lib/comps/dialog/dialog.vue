@@ -59,6 +59,9 @@ export default {
     },
     mounted(){
         this.dialogZIndex = tool._idSeed.newId();
+        if(!this.closeCallback){
+            console.log("dialog最好设置关闭回调函数!");
+        }
     }
 }
 </script>
@@ -152,6 +155,7 @@ export default {
         color: #606266;
         text-align: left;
         position: relative;
+        padding-top: 10px;
     }
     /* 滚动条整体的样式 */
     .le_dialog_contine::-webkit-scrollbar{

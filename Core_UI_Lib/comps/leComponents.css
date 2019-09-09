@@ -1,9 +1,15 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
 }
 
-.middleClass {
-    margin-left: 10px !important;
+html,body{
+    width: 100%;
+    height: 100%;
 }
 
 /* 一行放俩个 */
@@ -37,98 +43,81 @@
     flex-direction: row;
     align-items: baseline;
 }
-.le_comps_core_css .col1 .form-item,
-.le_comps_core_css .col2 .form-item,
-.le_comps_core_css .col3 .form-item,
-.le_comps_core_css .col4 .form-item {
-    display: flex !important;
-    flex: 1;
-    flex-direction: row;
-    align-items: center;
-}
-.le_comps_core_css .col1 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col2 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col3 .form-item /deep/ .form-item-div,
-.le_comps_core_css .col4 .form-item /deep/ .form-item-div {
-    flex: 1;
+
+/* 页面名称 */
+.le_comps_core_css .pageName{
+    font-size: 16px;
+    text-align: left;
+    padding: 10px 22px;
+    border-bottom: 1px solid #eae4e4;
 }
 
-/* 改变弹框中label的宽度 */
-/deep/ .le_dialog_box .form-item .form-item-label {
-    width: 100px;
-    margin-right: 5px;
+.le_comps_core_css .le_page_name{
+    font-size: 16px;
+    text-align: left;
+    padding: 10px 22px;
+    border-bottom: 1px solid #eae4e4;
 }
 
-.le_form_row.el_form_row_label /deep/ .form-item-label {
-    width: auto !important;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-div {
-    width: 200px;
-    vertical-align: middle;
-}
-
-.warning {
-    color: red;
-}
-
-.le_form_row {
-    flex: 1;
-}
-
-/deep/ .formStyle .container .formDiv .form-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-label {
-    width: 100px;
-}
-
-/deep/ .le_dialog_box .form-item .form-item-div {
-    flex: 1;
-}
-
-.el_form_row_item .form-item {
+/* .le_form_row  .le_form_row_item 是为了把单加的button和前面的组件放到一行上*/
+.le_comps_core_css .le_form_row_item .form-item {
     width: 300px;
-    /* float: left; */
 }
 
-.el_form_row_item {
+.le_comps_core_css .le_form_row_item {
     display: flex;
     flex-direction: row;
     align-items: baseline;
 }
 
-.el_form_row_item .label_msg {
+.le_comps_core_css .le_form_row {
+    flex: 1;
+}
+
+.le_comps_core_css .le_form_row_item .label_msg {
     margin-left: 26px;
 }
 
-.el_form_row_item /deep/ .required::before {
+.le_comps_core_css .le_form_row_item >>> .required::before {
     position: relative;
 }
 
-.clearfix:after {
+.le_comps_core_css .le_full_width{
+    width:100%
+}
+
+.le_comps_core_css .clearfix:after {
     content: ".";
     display: block;
     height: auto;
     clear: both;
     visibility: hidden
 }
-
-.btnGroup {
+/* 新建页面的按钮和所有搜索处按钮 */
+.le_comps_core_css .le_search_btn_group {
     margin-bottom: 10px;
+    text-align: right;
+    padding: 0 20px;
+    margin-top: -30px;
 }
 
-.second-level h1 {
+.le_comps_core_css .le_new_page_btn_group{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.le_comps_core_css .le_list_search_pannel{
+    padding-top: 10px;
+}
+
+.le_comps_core_css .second-level h1 {
     padding: 12px 0;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    border: 1px solid rgba(0, 0, 0, .12);
 }
 
 /* 组件后面显示的提示信息 */
-.el_form_row_item .warning{
+.le_comps_core_css .le_form_row_item .warning{
     height: 18px;
     line-height: 18px;
     margin: 0;
@@ -136,68 +125,57 @@
     color: #f56c6c;
 }
 
-.readonlyIcon{
+.le_comps_core_css .readonlyIcon{
     cursor: not-allowed !important;
 }
 
-input::-webkit-input-placeholder { /* WebKit browsers */
+.le_comps_core_css input::-webkit-input-placeholder { /* WebKit browsers */
     color: #b7b8bb;
     font-size: 14px;
 }
-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+.le_comps_core_css input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #b7b8bb;
     font-size: 14px;
 }
-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+.le_comps_core_css input::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #b7b8bb;
     font-size: 14px;
 }
-input:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #b7b8bb;
-    font-size: 14px;
-}
-
-textarea::-webkit-input-placeholder{
-    color: #b7b8bb;
-    font-size: 14px;
-}
-textarea::-moz-placeholder{   /* Mozilla Firefox 19+ */
-    color: #b7b8bb;
-    font-size: 14px;
-}
-textarea:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-    color: #b7b8bb;
-    font-size: 14px;
-}
-textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+.le_comps_core_css input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #b7b8bb;
     font-size: 14px;
 }
 
-
-
-
-/* 组件公共样式 */
-
-*{
-    margin: 0;
-    padding: 0;
-    outline: none;
-    text-decoration: none;
-    list-style: none;
+.le_comps_core_css textarea::-webkit-input-placeholder{
+    color: #b7b8bb;
+    font-size: 14px;
+}
+.le_comps_core_css textarea::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color: #b7b8bb;
+    font-size: 14px;
+}
+.le_comps_core_css textarea:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color: #b7b8bb;
+    font-size: 14px;
+}
+.le_comps_core_css textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color: #b7b8bb;
+    font-size: 14px;
 }
 
-html,body{
-    width: 100%;
-    height: 100%;
-}
-
-.form-item{
+/* 想让dialog中的组件能按照form中样式，但是有不需要form组件的时候，就写上这个样式就行 */
+.le_comps_core_css .form-item{
     text-align: left;
     margin:0 0 22px 0;
+    line-height: normal;
+    position: relative;
     display: inline-block;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
-.form-item .form-item-label{
+.le_comps_core_css .form-item .form-item-label{
     text-align: right;
     vertical-align: middle;
     display: inline-block;
@@ -209,94 +187,70 @@ html,body{
     margin: 0 5px 0 10px;
 }
 
-.form-item .form-item-div{
+.le_comps_core_css .form-item .form-item-div{
     display: inline-block;
     line-height: normal;
     vertical-align: text-bottom;
     position: relative;
     flex: 1;
+    background-color: #fff;
 }
 
-.required::before{
+.le_comps_core_css .required::before{
     content: "*";
     color: #f56c6c;
     font-size: 12px;
     margin-right: 2px;
 }
 
-.form-item .promptMsg{
+.le_comps_core_css .form-item .promptMsg{
     font-size: 12px;
     color: #f56c6c;
     line-height: 20px;
     text-align: left;
     position: absolute;
     margin: 0;
+    bottom: -20px;
 }
 
-.form-item .tip{
+.le_comps_core_css .form-item .tip{
     font-size: 12px;
     color: #3ea5d2;
     line-height: 20px;
     text-align: left;
     position: absolute;
     margin: 0;
+    bottom: -20px;
 }
 
-.form-item .form-item-div .readonlyIcon{
+.le_comps_core_css .form-item .form-item-div .readonlyIcon{
     background-color: #f1f1f1;
 }
 
-.form-item .form-item-div .readonlyIcon:focus{
+.le_comps_core_css .form-item .form-item-div .readonlyIcon:focus{
     background-color: #f1f1f1;
     border-color: #dcdfe6;
 }
 
-.fa-times-circle-o .form-item-input{
+.le_comps_core_css .fa-times-circle-o .form-item-input{
     border: 1px solid #f56c6c;
 }
-.fa-check-circle-o .form-item-input{ 
+.le_comps_core_css .fa-check-circle-o .form-item-input{ 
     border: 1px solid #67c23a;
 }
 
-.fa.fa-times-circle-o{
+.le_comps_core_css .fa.fa-times-circle-o{
     position: relative;
 }
 
-.fa.fa-check-circle-o{
+.le_comps_core_css .fa.fa-check-circle-o{
     position: relative;
 }
 
-
-
-.form-item{
-    line-height: normal;
-    margin-bottom: 22px;
-    position: relative;
-    text-align: left;
-    display: inline-block;
-    flex: 1;
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
+.le_comps_core_css .middleClass {
+    margin-left: 10px !important;
 }
 
-.form-item .form-item-div{
-    background-color: #fff;
-    flex: 1;
+.le_comps_core_css .warning {
+    color: red;
 }
-
-.form-item .form-item-label{
-    text-align: right;
-    vertical-align: middle;
-    display: inline-block;
-    font-size: 14px;
-    color: #606266;
-    line-height: normal;
-    padding: 0;
-    box-sizing: border-box;
-    margin: 0 5px 0 10px;
-}
-
-
-
-

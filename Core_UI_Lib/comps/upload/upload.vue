@@ -357,6 +357,7 @@
             reset(){
                 this.$emit('input',"");
                 this.srcs = [];
+                this.$attrs.setStateByFlag(0);
             }
         },
         created(){
@@ -377,13 +378,14 @@
 .upaload .input-file {
     cursor:pointer;
     position: relative;
+    display: inline-block;
     overflow: hidden;
     text-align: center;
     width: 50px;
     height: 26px;
     background-color: #2c7;
     border-radius: 4px;
-    padding: 5px;
+    /* padding: 5px; */
     font-size: 12px;
     font-weight: normal;
     line-height: 26px;
@@ -403,7 +405,7 @@
     width: 100%;
     height: 100%;
 }
-.upaload .loading{width:24px;vertical-align: middle;}
+.upaload .loading{width:24px;vertical-align: middle;vertical-align: baseline;}
 
 .upaload .fileList{
     display: block;

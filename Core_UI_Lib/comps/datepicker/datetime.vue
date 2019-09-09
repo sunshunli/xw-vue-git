@@ -142,6 +142,7 @@ export default {
             }
             this.showDateTimePicker = false;
             this.$emit("input","");
+            this.$emit("change","");
             window.setTimeout(()=>{
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
@@ -269,7 +270,7 @@ export default {
     padding: 0 5px;
 }
 .picker-bottom span.text{border:0px solid #fff; color:#409EFF;}
-.form-item{text-align: left; margin:0 0 22px 0; display: inline-block;}
+.form-item{text-align: left; margin:0 0 22px 0; display:flex;}
 .form-item .form-item-label{ 
     text-align: right; 
     vertical-align: middle; 

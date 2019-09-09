@@ -1,6 +1,6 @@
 
 <template>
-    <div class="formStyle">
+    <div class="le_comps_core_css formStyle">
         <div class="container">
             <div class="medium formDiv">
                 <form class="clearfix">
@@ -143,7 +143,7 @@ export default {
         text-align: left;
         display: inline-block;
         flex: 1;
-        display: flex !important;
+        display: flex;
         flex-direction: row;
         align-items: center;
     }

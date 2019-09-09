@@ -41,10 +41,9 @@ let TREE_CONFIG = {
 }
 
 let BUTTON_CONFIG = {
-
     "search":{cls:"search",iCls:"fa-search-plus"}, //搜索
     "create":{cls:"create",iCls:"fa-plus-square"}, //新增
-    "download":{cls:"download",iCls:"fa-download"}, //新增
+    "download":{cls:"download",iCls:"fa-download"}, //下载
     "update":{cls:"update",iCls:"fa-pencil"},  //更新
     "remove":{cls:"remove",iCls:"fa-trash"},   //删除
     "approve":{cls:"approve",iCls:"fa-check-square-o"},//审核
@@ -185,11 +184,11 @@ let EDITOR_MENUS = {
 }
 
 let PLACEHOLDER = {
-    SELECT:"请选择",
-    INPUT:"请输入",
-    DATE:"请选择日期",
-    TIME:"请选择时间",
-    DATETIME:"请选择日期时间"
+    SELECT:"",
+    INPUT:"",
+    DATE:"",
+    TIME:"",
+    DATETIME:""
 }
 
 let LABELWIDTH = 100;

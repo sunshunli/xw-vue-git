@@ -4,6 +4,7 @@
 <script>
 
 import DEFINE_KEY from "../define.js";
+import tool from "../leCompsTool.js";
 
 export default {
     name:"LeButton",
@@ -25,7 +26,6 @@ export default {
                 return new Boolean(this.disabled);
             }
         },
-
         disabledClass(){
             if(!this.disabled){
                 return '';
@@ -33,7 +33,6 @@ export default {
                 return 'disabledIcon'
             }
         },
-
         _type(){
             let _type = "default";
             if(this.type){
@@ -43,7 +42,8 @@ export default {
         },
         data(){
             let tmp = {cls:"",iCls:"",value:""};
-            tmp = DEFINE_KEY.BUTTON_CONFIG[this._type];
+            let _tmpObj = tool.object.cloneObj(DEFINE_KEY.BUTTON_CONFIG);
+            tmp = _tmpObj[this._type];
             if(!tmp){
                 tmp = {cls:"default",iCls:"",value:""};
             }else{
@@ -123,8 +123,8 @@ export default {
     }
 
     .remove{
-        background-color: #4fc1e9;
-        border-color: #4fc1e9;
+        background-color: #f4364c;
+        border-color: #f4364c;
     }
 
     .approve{

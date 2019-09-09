@@ -2,7 +2,7 @@
     <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined && $attrs.required!=undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <input :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
+            <input :ref="inputKey" @click="inputClick($event)" :placeholder="placeholderStr" class="form-item-input" :class="{'readonlyIcon':readonlyFlag}" @keyup.enter="enterEvent($event)" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" :type="$attrs.vType=='password'?'password':'text'" :value="currentValue" v-on:input="changeEvent($event)" />
             <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
@@ -28,7 +28,8 @@
                     successIcon:""
                 },
                 currentValue:this.value,
-                formLabelWidth:"0"
+                formLabelWidth:"0",
+                inputKey:tool._idSeed.newId()
             }
         },
         computed:{
@@ -75,6 +76,12 @@
             }
         },
         methods:{
+            inputClick(e){
+                if(this.readonlyFlag){
+                    return;
+                }
+                this.$emit("click",e.target.value);
+            },
             enterEvent(e){
                 if(this.readonlyFlag){
                     return;
@@ -93,6 +100,7 @@
             changeEvent(e){
                 this.currentValue = e.target.value;
                 this.$emit("input",e.target.value);
+                this.$emit("change",e.target.value);
             },
             getValue(){
                 return this.currentValue;
@@ -107,6 +115,9 @@
                 if(!this.readonlyFlag){
                     this.$emit("input","");
                 }
+            },
+            focus(){
+                this.$refs[this.inputKey].focus();
             }
         },
         created(){
@@ -123,7 +134,9 @@
 
 <style scoped>
     .form-item{
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
     .form-item .form-item-label{
@@ -140,11 +153,13 @@
     }
 
     .form-item .form-item-div{
-        display: inline-block;
-        line-height: normal;
         width: 100%;
-        position: relative;
+        line-height: normal;
+        display: flex;
         flex: 1;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
     }    
 
     .form-item .fa-times-circle-o .form-item-input{
@@ -171,12 +186,6 @@
         border: 1px solid #409eff;
         outline: none;
     }
-    .medium .form-item .form-item-input{
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-    }
-
   
     .form-item i{
         position: absolute;

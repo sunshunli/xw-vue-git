@@ -1,8 +1,8 @@
 <template>
-    <div class="form-item">
+    <div class="form-item" :style="{height:_height,width:_width}">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" @keyup.enter="enterEvent($event)" :style="{height:(height?height:80)+'px'}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
@@ -17,10 +17,10 @@
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         name:"LeTextarea",
         //不能显示声明props，必须从HOC里面传递下来，然后通过$attrs获取，因为props不让修改
-        // props:["msg","vType","regex","off"],
-        props:["value","height","readonly"],
+        props:["value","width","height","readonly"],
         data(){
             return {
+                textareaKey:tool._idSeed.newId(),
                 //所有需要验证的组件必须带上这个validataType属性，这个属性的值可以为input，select，radio等需要验证的组件 
                 validataComponentType:"TextArea",
                 state:{
@@ -32,6 +32,21 @@
             }
         },
         computed:{
+            _height(){
+                if(this.height){
+                    return this.height + "px";
+                }
+                return "100px";
+            },
+            _width(){
+                if(this.width){
+                    if(this.width.toString().indexOf('%') != -1){
+                        return this.width;
+                    }
+                    return this.width + "px";
+                }
+                return "100%"
+            },
             labelWidthVal(){
                 if(this.$attrs.labelWidth){
                     return this.$attrs.labelWidth;
@@ -75,12 +90,6 @@
             }
         },
         methods:{
-            enterEvent(e){
-                if(this.readonlyFlag){
-                    return;
-                }
-                this.$emit("enter",e.target.value);
-            },
             blurEvent(e){
                 if(this.readonlyFlag){
                     return;
@@ -88,10 +97,12 @@
                 if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
                     this.$attrs.setVerifyCompState();
                 }
+                this.$emit("blur",e.target.value);
             },
             changeEvent(e){
                 this.currentValue = e.target.value;
                 this.$emit("input",e.target.value);
+                this.$emit("change",e.target.value);
             },
             getValue(){
                 return this.currentValue;
@@ -124,7 +135,7 @@
    
     .form-item .form-item-input{
         width: 100%;
-        height: 40px;
+        height: 100%;
         font-size: 14px;
         line-height: 40px;
         display: inline-block;
@@ -144,28 +155,33 @@
         border-color: #dcdfe6;
     }
 
-    .medium .form-item .form-item-input{
-        line-height: normal;
-        font-size: 14px;
-        height: 80px;
-        vertical-align: middle;
-        padding: 10px 30px 10px 10px;
+    .form-item .form-item-div{
+        height: 100%;
     }
 
-    .medium .form-item .form-item-input.readonlyIcon{
+    .form-item .form-item-input{
+        line-height: normal;
+        font-size: 14px;
+        height: 100%;
+        vertical-align: middle;
+        padding: 7px 30px 7px 10px;
+    }
+
+    .form-item .form-item-input.readonlyIcon{
         background-color: #f1f1f1;
     }
 
     .form-item i{
         position: absolute;
-        top: 12px;
+        top: 50%;
         color: #c0c4cc;
         font-weight: normal;
+        transform: translateY(-50%);
         right: 8px;
         cursor: pointer;
     }
 
-    .medium .form-item i{
+     .form-item i{
         position: absolute;
         top: 50%;
         color: #c0c4cc;
@@ -173,21 +189,6 @@
         right: 18px;
         cursor: pointer;
         transform: translateY(-50%);
-    }
-
-    .mini .form-item i{
-        top: 7px;
-    }
-
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
     }
 
     .fa-times-circle-o .form-item-input{

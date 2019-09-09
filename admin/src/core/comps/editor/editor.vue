@@ -216,9 +216,11 @@ export default {
     border-bottom: none;
 }
 .LeEditor .editor__textarea{
-    height:90px;
+    height:90%;
     font-size:12px;
     line-height:30px;
+    word-break: break-all;
+    white-space: normal;
 }
 
 form .form-item .form-item-div{

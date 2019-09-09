@@ -173,9 +173,10 @@
 
     .form-item i{
         position: absolute;
-        top: 12px;
+        top: 50%;
         color: #c0c4cc;
         font-weight: normal;
+        transform: translateY(-50%);
         right: 8px;
         cursor: pointer;
     }

@@ -44,7 +44,7 @@ let BUTTON_CONFIG = {
 
     "search":{cls:"search",iCls:"fa-search-plus"}, //搜索
     "create":{cls:"create",iCls:"fa-plus-square"}, //新增
-    "download":{cls:"download",iCls:"fa-download"}, //新增
+    "download":{cls:"download",iCls:"fa-download"}, //下载
     "update":{cls:"update",iCls:"fa-pencil"},  //更新
     "remove":{cls:"remove",iCls:"fa-trash"},   //删除
     "approve":{cls:"approve",iCls:"fa-check-square-o"},//审核

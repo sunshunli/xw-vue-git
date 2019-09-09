@@ -159,7 +159,7 @@
         height: 100%;
     }
 
-    .medium .form-item .form-item-input{
+    .form-item .form-item-input{
         line-height: normal;
         font-size: 14px;
         height: 100%;
@@ -167,7 +167,7 @@
         padding: 7px 30px 7px 10px;
     }
 
-    .medium .form-item .form-item-input.readonlyIcon{
+    .form-item .form-item-input.readonlyIcon{
         background-color: #f1f1f1;
     }
 
@@ -181,7 +181,7 @@
         cursor: pointer;
     }
 
-    .medium .form-item i{
+     .form-item i{
         position: absolute;
         top: 50%;
         color: #c0c4cc;

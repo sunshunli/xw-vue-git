@@ -1,8 +1,8 @@
 <template>
-    <div class="form-item">
+    <div class="form-item"  :style="{height:_height,width:_width}">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
-            <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" :style="{height:_height,width:_width}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
+            <textarea :placeholder="placeholderStr" :class="{readonlyIcon:readonlyFlag}" v-on:blur="blurEvent($event)" :readonly="readonlyFlag" class="form-item-input" :value="currentValue" v-on:input="changeEvent($event)"></textarea>
             <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
@@ -155,12 +155,16 @@
         border-color: #dcdfe6;
     }
 
+    .form-item .form-item-div{
+        height: 100%;
+    }
+
     .medium .form-item .form-item-input{
         line-height: normal;
         font-size: 14px;
-        height: 80px;
+        height: 100%;
         vertical-align: middle;
-        padding: 10px 30px 10px 10px;
+        padding: 7px 30px 7px 10px;
     }
 
     .medium .form-item .form-item-input.readonlyIcon{
@@ -184,21 +188,6 @@
         right: 18px;
         cursor: pointer;
         transform: translateY(-50%);
-    }
-
-    .mini .form-item i{
-        top: 7px;
-    }
-
-    .small .form-item .form-item-input{
-        height: 34px;
-        line-height: 34px;
-        font-size: 14px;
-    }
-    .mini .form-item .form-item-input{
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
     }
 
     .fa-times-circle-o .form-item-input{

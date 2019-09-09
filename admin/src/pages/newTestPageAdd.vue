@@ -31,7 +31,7 @@
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='130' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件123" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
             </div>
 
-            <le-editor labelWidth="130" on required msg = "pc端必填" label = " pc端:" :option = "editPcOption" ref = "pcEditor"></le-editor>
+            <le-editor labelWidth="130" height="300" on required msg = "pc端必填" label = " pc端:" :option = "editPcOption" ref = "pcEditor"></le-editor>
 
             <div class="col2 le_full_width">
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='100' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           

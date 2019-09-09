@@ -17,7 +17,7 @@ import tool from "../leCompsTool.js";
 import $ from "jquery";
 export default {
     name: "editor",
-    props: ["value", "option"],
+    props: ["value", "option","width","height"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data() {
         return {

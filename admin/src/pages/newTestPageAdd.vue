@@ -27,7 +27,7 @@
             <le-radio-list v-show="hideAllTag" labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
             <le-checkbox-list v-show="hideAllTag" labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
             
-            <div class="col1">
+            <div class="col2">
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='130' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件123" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
             </div>
 

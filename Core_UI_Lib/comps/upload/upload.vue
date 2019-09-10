@@ -9,20 +9,28 @@
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
-                    <div v-if="fileType != 'image'">
-                        <span class="fileContent" v-for="(item,index) in srcs" :key="index">
-                            <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
-                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
+                    <div v-if="noResultTag">
+                        <span class="noResult">
+                            <a>上传成功</a>
                         </span>
                     </div>
                     <div v-else>
-                        <span v-for="(item,index) in srcs" :key="index" style="height:auto">
-                            <a target="_blank" :href="item.name" style="display:block;height:100px;">
-                                <img :src="item.name" style="width:100px;height:100px">
-                            </a>
-                            <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
-                        </span>
+                        <div v-if="fileType != 'image'">
+                            <span class="fileContent" v-for="(item,index) in srcs" :key="index">
+                                <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
+                                <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
+                            </span>
+                        </div>
+                        <div v-else>
+                            <span v-for="(item,index) in srcs" :key="index" style="height:auto">
+                                <a target="_blank" :href="item.name" style="display:block;height:100px;">
+                                    <img :src="item.name" style="width:100px;height:100px">
+                                </a>
+                                <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
+                            </span>
+                        </div>
                     </div>
+                    
                 </div>
                 <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             </div>
@@ -68,7 +76,16 @@
             multipleTag(){
                 if(this.options.multiple!=undefined){
                     if(this.options.multiple === false){
-                        return false
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            },
+            noResultTag(){
+                if(this.options.noResult != undefined){
+                    if(this.options.noResult === false){
+                        return false;
                     }
                     return true;
                 }
@@ -284,6 +301,7 @@
             doUploadAjax(formData){
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
+                    this.srcs = [];
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
                     //多文件上传
@@ -439,6 +457,10 @@
 
 .upaload .fileList span.fileContent{
     padding-right: 20px;
+    padding-top: 1px;
+}
+
+.upaload .fileList span.noResult{
     padding-top: 1px;
 }
 

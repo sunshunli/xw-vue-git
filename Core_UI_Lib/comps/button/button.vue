@@ -70,10 +70,17 @@ export default {
 <style scoped>
     .isDisabled{
         color: #fff;
-        background-color: #a0cfff !important;
-        border-color: #a0cfff;
+        /* background-color: #a0cfff !important;
+        border-color: #a0cfff !important; */
+        opacity:0.6; 
         cursor: not-allowed;
     }
+
+    .isDisabled:hover{
+        opacity:0.6 !important; 
+        cursor: not-allowed;
+    }
+
     span{
         height: 30px;
         line-height: 30px;

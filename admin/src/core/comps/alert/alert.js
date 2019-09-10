@@ -36,18 +36,19 @@ let _le_alert = {
             },DEFINE_KEY.ALERT_CONFIG.ALERT_CLOSE_TIME)
         })
     },
-    showConfirm:(title,cb)=>{
+    showConfirm:(title,cb,Vue)=>{
         let zIndex = tool._idSeed.newId();
+        
         let parentDiv = $('<div style="z-index:'+zIndex+'" class="le_alert MsgAlertBox"></div>');
         let html ='<div class="Alertcontent">'+
-                  '<p>提示<i tag="le-show-confirm-close">×</i></p>'+
+                  '<p>'+Vue.prototype.lang18n('提示')+'<i tag="le-show-confirm-close">×</i></p>'+
                   '<div class="msgContent clearfix">'+
                   '<i class="fa fa-exclamation-circle"></i>'+
                   '<p>'+title+'</p>'+
                   '</div>'+
                   '<div class="alert_btnGroup">'+
-                  '<span class="btn cancel" tag="le-show-confirm-close">取消</span>'+
-                  '<span class="btn confirm" tag="le-show-confirm-ok">确定</span>'+
+                  '<span class="btn cancel" tag="le-show-confirm-close">'+Vue.prototype.lang18n('取消')+'</span>'+
+                  '<span class="btn confirm" tag="le-show-confirm-ok">'+Vue.prototype.lang18n('确定')+'</span>'+
                   '</div>'+
                   '</div>';
         $(parentDiv).append($(html));
@@ -99,16 +100,16 @@ let _le_alert = {
 
 
 export default {
-    install:function(Vue){
+    install:(Vue)=>{
         Vue.prototype.alert = {
             showAlert:(type,msg)=>{
-                _le_alert.showMessage(type,msg);
+                _le_alert.showMessage(type,msg,Vue);
             },
             showConfirm:(title,cb)=>{
-                _le_alert.showConfirm(title,cb);
+                _le_alert.showConfirm(title,cb,Vue);
             },
             showNotify:(type,msg)=>{
-                _le_alert.showNotify(type,msg);
+                _le_alert.showNotify(type,msg,Vue);
             }
         }
     }

@@ -207,6 +207,34 @@ let LeCompTool = {
             return res;
         }
     },
+    cookie:{
+        removeCookie(name){
+            LeCompTool.cookie.setCookie(name,"",new Date(0));
+        },
+        getCookie(name){
+            let cookie = document.cookie;
+            let cookieName = encodeURIComponent(name) + "=",
+                cookieStart = cookie.indexOf(cookieName),
+                cookieValue = null;
+            if(cookieStart > -1){
+                let cookieEnd = cookie.indexOf(';',cookieStart);
+                if(cookieEnd == -1){
+                    cookieEnd = cookie.length;
+                }
+                cookieValue = decodeURIComponent(cookie.substring(cookieStart + cookieName.length,cookieEnd));
+            }
+            return cookieValue;
+        },
+        setCookie(name,value,expires){
+            let cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+            if(expires instanceof Date){
+                cookieText += "; expires=" + expires.toGMTString();
+            }else{
+                cookieText += "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+            }
+            document.cookie = cookieText+";path=/;domain="+document.domain;
+        },
+    },
     _idSeed:{
         id:90000,
         newId:()=>{

@@ -54,8 +54,8 @@
             data:[],
             showButtom:false,
             showArrow:true,
-            placeholder:"",
-            formLabelWidth:"0"
+            formLabelWidth:"0",
+            placeholderStr:""
         }
     },
     computed:{
@@ -67,15 +67,6 @@
                 return this.formLabelWidth;
             }
             return define.LABELWIDTH;
-        },
-        placeholderStr(){
-            if(this.placeholder == ""){
-                return "";
-            }
-            if(this.$attrs.placeholder){
-                return this.$attrs.placeholder
-            }
-            return define.PLACEHOLDER.SELECT;
         },
         /**
          * @description 根据输入关键字来搜索
@@ -183,7 +174,6 @@
         onEmit(){
             let selectedItems = this.getSelectedItems();
             let vals = selectedItems.vals.join(',');
-            this.checkPlaceholder();
             this.$emit("input",vals);
             this.$emit("change",vals);
             if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
@@ -194,9 +184,9 @@
             let selectedItems = this.getSelectedItems();
             let vals = selectedItems.vals.join(',');
             if(vals != ""){
-                this.placeholder = "";
+                this.placeholderStr = "";
             }else{
-                this.placeholder = define.PLACEHOLDER.SELECT;
+                this.placeholderStr = this.$attrs.placeholder;
             }
         },
         /**
@@ -235,7 +225,6 @@
             item.cls = "";
             item.ck = false;
             this.onEmit();
-            
         },
         /**
          * @description 获取所选项
@@ -287,7 +276,6 @@
                 return;
             }
             this.resetDataCkStatus();
-            this.checkPlaceholder();
             this.searchName = "";
             this.$emit("input","");
             this.$emit("change","");
@@ -331,6 +319,8 @@
             this.init(this.dataSource);
         }
         this.setValue(this.value);
+
+        this.placeholderStr = this.$attrs.placeholder;
     },
     beforeDestroy(){
         /**

@@ -20,9 +20,9 @@ import LeLoading from "../comps/loading/loading.vue";
 import LeAlert from "./alert/alert.js";
 import LeEditor from "../comps/editor/editor.vue"
 
-
 import ValidataHOC from "./validataHOC.js";
 import bodyClickDirective from "./leDirective.js";
+import lang18n from "./i18n.js";
 
 export default{
     install:function(Vue){
@@ -43,9 +43,13 @@ export default{
         Vue.component('LeForm',LeForm);
         Vue.component("LeLoading",LeLoading);
         Vue.component("LeEditor",ValidataHOC(LeEditor));
+        
+        Vue.prototype.lang18n = lang18n;
 
         Vue.use(LeAlert);
 
         Vue.directive('bodyClick', bodyClickDirective);
+
+        
     }
 }

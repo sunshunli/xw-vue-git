@@ -6,15 +6,15 @@
         <!-- 查询条件容器 le_list_search_pannel -->
         <div class='le_list_search_pannel clearfix'>
             <div class="col1">
-                <le-input labelWidth="120" label="订单编号:" v-model="searchModel.orderCode"></le-input>
+                <le-input placeholder="Order Number" labelWidth="120" label="订单编号:" v-model="searchModel.orderCode"></le-input>
             </div>
             <div class="col2">
-                <le-local-select labelWidth="120" label="商城" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="code"></le-local-select>
-                <le-date-time-picker labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker>
+                <le-local-select placeholder="请选择" labelWidth="120" label="商城" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
+                <le-date-time-picker placeholder="Order DateTime" labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker>
             </div>
             <div class="col3">
-                <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
-                <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
+                <le-date-picker placeholder="Order Date" labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
+                <le-time-picker placeholder="Order Time" labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
             </div>
             <div class="col4">
@@ -29,7 +29,7 @@
             <le-button type="create" value="新建" @click="add"></le-button>
             <le-button type="info" value="详情" @click="detailInfo"></le-button>
             <le-button type="save" value="添加商城" @click="showDialogContent"></le-button>
-            <le-button type="update" value="修改"></le-button>
+            <le-button type="update" value="修改" @click="update"></le-button>
             <le-button type="remove" value="删除"></le-button>
         </div>
 
@@ -53,7 +53,7 @@
                         <le-time-picker labelWidth='30' label="至" tip="输入当前之后的时间" on placeholder="请选择时间" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                     </div>
                     <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-                    <le-local-select labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple ref="dialogJobRef" display-name="val" display-value="key" v-model='entity.job'></le-local-select> 
+                    <!-- <le-local-select labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select>  -->
                     <le-radio-list labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
                 </le-form>
@@ -161,6 +161,11 @@ export default {
         }
     },
     methods:{
+        update(){
+            this.alert.showConfirm("标题",()=>{
+                this.alert.showAlert("success","成功");
+            });
+        },
         update1(){
             this.alert.showAlert("success","修改日期")
         },

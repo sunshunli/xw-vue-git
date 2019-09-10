@@ -46,8 +46,8 @@
             
             <div class="le_new_page_btn_group">
                 <le-button value="返回" type="back" @click="back"></le-button>
-                <le-button value="确定1" :disabled='disabledFlag' type="create" @click="save"></le-button>
-                <le-button value="确定2" :disabled='disabledFlag' type="create" @click="save"></le-button>
+                <le-button value="确定1" :disabled='disabledFlag' type="save" @click="save"></le-button>
+                <le-button value="确定2" :disabled='disabledFlag' type="save" @click="save"></le-button>
             </div>
         </le-form>
        

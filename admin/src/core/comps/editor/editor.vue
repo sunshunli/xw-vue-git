@@ -1,9 +1,9 @@
 <template>
-    <div class="form-item" :style="{height:_height,width:_width}">
+    <div class="form-item">
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
-        <div :id = "'_editor-'+titleKey" class="form-item-div fa LeEditor" >
+        <div :id = "'_editor-'+titleKey" class="form-item-div fa LeEditor">
             <div :ref="titleKey" style="text-align:left;border-bottom:1px solid #aeaeae"></div>
-            <div :ref="textareaKey" class="editor__textarea" style="text-align:left"></div>
+            <div :ref="textareaKey" class="editor__textarea" :style="{height:_height,width:_width}" style="text-align:left"></div>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
@@ -221,6 +221,7 @@ export default {
     line-height:30px;
     word-break: break-all;
     white-space: normal;
+    overflow: scroll;
 }
 
 form .form-item .form-item-div{

@@ -16,12 +16,14 @@
                     <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                 </div>
             </div> -->
-            <le-upload label="上传文件" :options="imgUploadOpt" v-model="files"></le-upload>
-            <le-button type="create" value="获取文件路径" @click="getUrls"></le-button>
+            <div class="col4">
+                <le-upload label="上传文件" :options="imgUploadOpt" v-model="files"></le-upload>
+                <le-button type="create" value="获取文件路径" @click="getUrls"></le-button>
+            </div>
             <le-textarea ref='textarea' @blur="changeTextarea($event)" @change='changeTextarea($event)' height="50" width="100%" labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
             <div class="col4">
                 <le-date-picker @nextMonthChange="nextMonthChangeEvent" @prevMonthChange="prevMonthChangeEvent" @nextYearChange="nextYearChangeEvent" @change="changeDate" @prevYearChange="prevYearChangeEvent" v-show="hideAllTag" labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="开始日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
-                <le-button v-show="hideAllTag" type="create" value="测试按钮"></le-button>
+                <le-button v-show="hideAllTag" @click="showConfirm" type="create" value="测试按钮"></le-button>
                 <le-time-picker @change="timeChangeEvent" v-show="hideAllTag" labelWidth='30' label="至" tip="输入当前之后的时间" on placeholder="请选择时间" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
             </div>
             <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
@@ -212,6 +214,9 @@ export default {
         },
         back(){
             this.$router.push({path:'/newTestPage'})
+        },
+        showConfirm(){
+            this.alert.showConfirm("quedi",function(){})
         }
     },
     mounted(){

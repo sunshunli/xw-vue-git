@@ -301,7 +301,7 @@
             doUploadAjax(formData){
                 this.showLoading = true;
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
-                    this.srcs = [];
+                    // this.srcs = [];
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","上传成功");
                     //多文件上传

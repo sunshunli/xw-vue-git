@@ -63,9 +63,10 @@ export default {
             files:"",
             imgUploadOpt:{
                 multiple:true,
+                vtype:"png",
                 url:"/file/img/upload",
                 fname:"file",
-                noResult:true,
+                noResult:false,
                 analysis:(d)=>{
                     return d.data;
                 },

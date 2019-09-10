@@ -24,7 +24,7 @@
 import tool from "../leCompsTool.js";
 export default {
     name:"LeDialog",
-    props:["title","width","height","value","closeCallback"],
+    props:["title","width","height","value"],
     data(){
         return {
             dialogZIndex:0
@@ -54,7 +54,7 @@ export default {
     methods:{
         close(){
             this.$emit("input",false);
-            this.closeCallback && this.closeCallback();
+            this.$emit("closeCallback",false);
         }
     },
     mounted(){

@@ -38,7 +38,7 @@
             <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>
         </div>
 
-        <le-dialog title="新建弹层" height="605" width="1000" v-model="showDialog">
+        <le-dialog title="新建弹层" height="605" width="1000" v-model="showDialog" @closeCallback="closeDialog">
             <div slot="body">
                 <le-form labelWidth='180' ref="saveForm">
                     <div class="le_form_row_item">
@@ -59,7 +59,7 @@
                 </le-form>
             </div>
             <div slot="button">
-                <le-button type="cancel" value="取消" @click="close"></le-button>
+                <le-button type="cancel" value="取消" @click="closeDialog"></le-button>
                 <le-button type="save" value="保存" @click="save"></le-button>
                 <le-button type="remove" value="删除" @click="removeItem"></le-button>
                 <le-button type="approve" value="隐藏所有组件" @click="hideAll"></le-button>
@@ -169,7 +169,8 @@ export default {
         update1(){
             this.alert.showAlert("success","修改日期")
         },
-        close(){
+        closeDialog(){
+            debugger
             this.showDialog = false;
         },
         showDialogContent(){

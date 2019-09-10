@@ -76,10 +76,10 @@ export default {
         cursor: not-allowed;
     }
 
-     .isDisabled:hover{
+    .isDisabled:hover{
         opacity:0.6 !important; 
         cursor: not-allowed;
-     }
+    }
 
     span{
         height: 30px;

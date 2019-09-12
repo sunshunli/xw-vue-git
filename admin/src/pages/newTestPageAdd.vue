@@ -27,7 +27,7 @@
                 <le-time-picker @change="timeChangeEvent" v-show="hideAllTag" labelWidth='30' label="至" tip="输入当前之后的时间" on placeholder="请选择时间" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
             </div>
             <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-            <le-local-select v-show="hideAllTag" labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select> 
+            <!-- <le-local-select v-show="hideAllTag" labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select>  -->
             <le-radio-list v-show="hideAllTag" labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
             <le-checkbox-list v-show="hideAllTag" labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
             
@@ -39,13 +39,15 @@
 
             <div class="col2 le_full_width">
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='100' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
-                <le-local-select v-show="hideAllTag" labelWidth='100' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select> 
+                <!-- <le-local-select v-show="hideAllTag" labelWidth='100' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select>  -->
             </div>
+            
+            <le-local-select placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="选择职业Ful" :data-source="shopsFull" display-name="val" display-value="key" v-model='eshopFull'></le-local-select> 
 
             <div class="col3 le_full_width">
-                <le-local-select v-show="hideAllTag" labelWidth='100' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select> 
-                <le-radio-list v-show="hideAllTag" labelWidth='100' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
-                <le-checkbox-list v-show="hideAllTag" labelWidth='40' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
+                <le-local-select placeholder='请选择' v-show="hide0" @change='changeShops0' label="选择职业0" :data-source="shops0" display-name="val" display-value="key" v-model='eshop1'></le-local-select> 
+                <le-local-select placeholder='请选择' v-show="hide1" @change='changeShops1' label="选择职业1" :data-source="shops1" display-name="val" display-value="key" v-model='eshop2'></le-local-select> 
+                <le-local-select placeholder='请选择' v-show="hide2" label="选择职业2" :data-source="shops2"  display-name="val" display-value="key" v-model='eshop3'></le-local-select> 
             </div>
             
             <div class="le_new_page_btn_group">
@@ -59,9 +61,30 @@
 </template>
 
 <script>
+let _shops = [
+    {val:'lenovo',key:"1"},
+    {val:'lecoo',key:"2"},
+    {val:'epp',key:"3"},
+    {val:'17',key:"4"},
+    {val:'moto',key:"5"},
+]
+
+import tools from "../core/tool/commonUtil.js";
+
 export default {
     data(){
         return {
+            hide0:false,
+            hide1:false,
+            hide2:false,
+            eshopFull:"",
+            eshop1:"",
+            eshop2:"",
+            eshop3:"",
+            shopsFull:[],
+            shops0:[],
+            shops1:[],
+            shops2:[],
             files:"",
             imgUploadOpt:{
                 multiple:true,
@@ -160,6 +183,31 @@ export default {
         }
     },
     methods:{
+        changeShopsFull(){
+            this.hide0 = true;
+            this.hide1 = true;
+            this.hide2 = true;
+
+            this.shops0 = [];
+            this.shops1 = [];
+            this.shops2 = [];
+            window.setTimeout(()=>{
+                this.shops0 = tools.object.cloneObj(_shops);
+            },0)
+        },
+        changeShops0(){
+            this.shops1 = [];
+            this.shops2 = [];
+            window.setTimeout(()=>{
+                this.shops1 = tools.object.cloneObj(_shops);
+            },0)
+        },
+        changeShops1(){
+            this.shops2 = [];
+            window.setTimeout(()=>{
+                this.shops2 = tools.object.cloneObj(_shops);
+            },0)
+        },
         getUrls(){
             console.log(this.files);
         },
@@ -230,7 +278,9 @@ export default {
 
         window.setTimeout(()=>{
             this.$refs['textarea'].getCurrentComponent().clear();
-        },1000)
+
+            this.shopsFull = tools.object.cloneObj(_shops);
+        },0)
     }
 }
 </script>

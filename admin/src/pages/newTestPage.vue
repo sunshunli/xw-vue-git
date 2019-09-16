@@ -10,7 +10,7 @@
             </div>
             <div class="col2">
                 <le-local-select placeholder="请选择" labelWidth="120" label="商城" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
-                <le-date-time-picker placeholder="Order DateTime" labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker>
+                <!-- <le-date-time-picker placeholder="Order DateTime" labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker> -->
             </div>
             <div class="col3">
                 <le-date-picker placeholder="Order Date" labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
@@ -18,9 +18,9 @@
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
             </div>
             <div class="col4">
-                <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
+                <!-- <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker> -->
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
-                <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
+                <!-- <le-date-picker labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker> -->
                 <le-time-picker labelWidth="120" label="时间组件" v-model="searchModel.tiem" v-show="true"></le-time-picker>
             </div>
         </div>
@@ -48,11 +48,11 @@
                     <le-input labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" on required msg="地址必填" v-model="entity.address"></le-input>
                     <le-textarea  labelWidth='150' tip="详细信息描述文案不能瞎写" placeholder="请输入详细地址" label="详细地址" :readonly="readonly" msg="详细地址必填" v-model="entity.content" on></le-textarea>
                     <div class="col4" v-show="hideAllTag">
-                        <le-date-picker labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="开始日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker>
+                        <!-- <le-date-picker labelWidth='150' tip="输入当前之后的日期" on placeholder="请选择日期" label="开始日期组件" :readonly="readonly" msg="日期不允许为空" v-model="entity.date"></le-date-picker> -->
                         <le-button type="create" value="测试按钮"></le-button>
                         <le-time-picker labelWidth='30' label="至" tip="输入当前之后的时间" on placeholder="请选择时间" :readonly="readonly" msg="时间不允许为空" v-model="entity.time"></le-time-picker>
                     </div>
-                    <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
+                    <!-- <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='150' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>            -->
                     <!-- <le-local-select labelWidth='150' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select>  -->
                     <le-radio-list labelWidth='150' tip="性别男或女" on label="性别" display-name="name" :readonly="readonly" :data-source="sex" ref='dialogSexRef' msg="性别必须选择" display-value="code" v-model="entity.sex"></le-radio-list>
                     <le-checkbox-list labelWidth='150' tip="请选择一个或多个爱好" on label="爱好" :readonly="readonly" :data-source="fav" display-name="name" msg="爱好必须选择" display-value="code" v-model="entity.fav"></le-checkbox-list>     
@@ -76,6 +76,7 @@ export default {
             searchModel:{
                 orderCode:'',
                 shop:'',
+                date:"",
                 dateTime:'',
                 data:'',
                 time:'',

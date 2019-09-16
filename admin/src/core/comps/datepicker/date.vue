@@ -133,8 +133,6 @@ let _tool = {
         for(let i=0;i<6;i++){
             let tmp = [];
             for(var k=0;k<7;k++){
-                
-                
                 tmp.push(data[i*7 + k]);
             }
             res.push(tmp);
@@ -262,7 +260,7 @@ export default {
             //获取当前月一起多少天
             let currentDays = _tool.getDays(year,month);
             //上个月的数据条数
-            let prevDaylen = week - 1;
+            let prevDaylen = week;
             //获取上一个月有多少天
             let prevMonthDays = _tool.getPrevMonthDays(year,month);
             
@@ -471,8 +469,6 @@ export default {
         });
     },
     mounted(){
-        this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
-
         this.setValue(this.value);
     },
     beforeDestroy () {

@@ -409,6 +409,7 @@
     line-height: 26px;
     color: #fff;
     text-decoration: none;
+    vertical-align: middle;
 }
 .upaload .input-file input[type="file"] {
     cursor:pointer;
@@ -423,7 +424,10 @@
     width: 100%;
     height: 100%;
 }
-.upaload .loading{width:24px;vertical-align: middle;vertical-align: baseline;}
+.upaload .loading{
+    width:24px;vertical-align: middle;vertical-align: baseline;
+    vertical-align: middle;
+}
 
 .upaload .fileList{
     display: block;

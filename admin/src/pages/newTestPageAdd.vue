@@ -88,9 +88,10 @@ export default {
             files:"",
             imgUploadOpt:{
                 multiple:true,
-                vtype:"png",
+                vtype:"png,jpg",
                 url:"/file/img/upload",
                 fname:"file",
+                tip:"提示：图片格式为png",
                 noResult:false,
                 analysis:(d)=>{
                     return d.data;

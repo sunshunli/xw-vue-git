@@ -1,8 +1,13 @@
 
 
 export default  {
+    isSearchDataSource:[
+        {name:"",value:"yes"}
+    ],
+    isRequiredDataSource:[
+        {name:"",value:"yes"}
+    ],
     fieldTypes:[
-        {name:"请选择",value:""},
         {name:"text",value:"text"},
         {name:"select",value:"select"},
         {name:"radioList",value:"radioList"},
@@ -15,7 +20,6 @@ export default  {
         {name:"dateTimepicker",value:"dateTimepicker"}
     ],
     valiTypes:[
-        {name:"请选择",value:""},
         {name:"数字或小数",value:"decimals"},
         {name:"数字",value:"number"},
         {name:"email",value:"email"},
@@ -48,6 +52,10 @@ export default  {
         displayName:"",
         displayValue:"",
         errorMsg:"",
+        fieldTypes:[],
+        valiTypes:[],
+        isRequiredDataSource:[],
+        isSearchDataSource:[],
         isSearch:false,
         isRequired:false
     }]

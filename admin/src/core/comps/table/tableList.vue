@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="table-title">{{title?title:"未设置Table名称"}}</div>
+        <div class="table-title">{{title}}</div>
         <div class="tableContainer">
             <div class="tableBox">
                 <table class="table">

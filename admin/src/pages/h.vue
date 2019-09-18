@@ -1,112 +1,64 @@
 
 <template>
-    <div>
-        <div class="row">
-            <div class="rowTitle">
-                选择项目:
-            </div>
-            <div class="rowContent">
-                <div class="le-select">
-                    <select  v-model="project.selectProject">
-                        
 
-                        <option v-for="(item,index) in project.projects" :key="index" :value="item.value">{{item.name}}</option>    
-                    </select>
-                    <i class='fa fa-angle-down' ></i>
+    <div>
+        <div class="le_comps_core_css">
+            <div class='le_list_search_pannel clearfix'>
+                <div class="col1">
+                    <le-local-select placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value" v-model="project.selectProject"></le-local-select>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="rowTitle">
-                配置模块:
+            <!-- 查询条件按钮组 le_search_btn_group-->
+            <div class="le_search_btn_group cleatfix">
+                <le-button type="create" value="添加Col" @click="add"></le-button>
+                <le-button type="save" value="保存配置" @click="save"></le-button>
             </div>
-            <div class="rowContent">
-                <input class="le-input" type="text" v-model="path" placeholder="自动创建view，api，store" />
-            </div>
-            
-        </div>
-        <div class="row">
-            <div class="rowTitle">
-                cols:
-            </div>
-            <div class="rowContent">
-               <button class="le-btn btn-config" @click="add">
-                   <i class="fa fa-plus-square-o" aria-hidden="true"></i>添加一条
-               </button>
-            </div>
-        </div>
-        <div class="row" style="margin-left:30px;">
-            <table class="le-table">
-                <thead>
-                    <tr class="title">
-                        <td>字段名</td>
-                        <td>显示文本</td>
-                        <td>字段类型</td>
-                        <td>验证类型</td>
-                        <td>displayName</td>
-                        <td>displayValue</td>
-                        <td>错误提示信息</td>
-                        <td>isSearch</td>
-                        <td>isRequired</td>
+            <!-- tableList容器 le_table_container -->
+            <div class='le_table_container'>
+                <table class="le-table">
+                    <thead>
+                        <tr class="title">
+                            <td>字段类型</td>
+                            <td>字段名</td>
+                            <td>显示文本</td>
+                            <td>验证类型</td>
+                            <td>displayName</td>
+                            <td>displayValue</td>
+                            <td>错误提示信息</td>
+                            <td>isSearch</td>
+                            <td>isRequired</td>
+                        </tr>
+                    </thead>
+                    <tr v-for="item in config.cols" :key="item.key">
+                        <td>
+                            <le-local-select labelWidth="0" placeholder="请选择" :data-source="item.fieldTypes" display-name="name" display-value="value" v-model="item.fieldType"></le-local-select>
+                        </td>
+                        <td>
+                            <le-input labelWidth="0" v-model="item.fieldname" placeholder="接口字段名称"></le-input>
+                        </td>
+                        <td>
+                            <le-input labelWidth="0" v-model="item.fieldKey" placeholder="页面显示字段名称"></le-input>
+                        </td>
+                        <td>
+                            <le-local-select labelWidth="0" v-show="showValidata(item)" placeholder="请选择input验证类型" :data-source="item.valiTypes" display-name="name" display-value="value" v-model="item.valiType"></le-local-select>
+                        </td>
+                        <td>
+                            <input labelWidth="0" class="le-input" type="text" v-model="item.displayName" placeholder="显示名称" v-show="showDisplay(item)"/>
+                        </td>
+                        <td>
+                            <le-input labelWidth="0" v-model="item.displayValue" placeholder="服务端传值Key" v-show="showDisplay(item)"></le-input>
+                        </td>
+                        <td>
+                            <le-input labelWidth="0" v-model="item.errorMsg" placeholder="错误提示信息"></le-input>
+                        </td>
+                        <td>
+                            <le-checkbox-list :data-source="item.isSearchDataSource" display-name="name" display-value="value" v-model="item.isSearch"></le-checkbox-list>
+                        </td>
+                        <td>
+                            <le-checkbox-list :data-source="item.isRequiredDataSource" display-name="name" display-value="value" v-model="item.isRequired"></le-checkbox-list>
+                        </td>
                     </tr>
-                </thead>
-                <tr v-for="item in config.cols" :key="item.key">
-                    <td>
-                        <input class="le-input" type="text" v-model="item.fieldname" placeholder="接口字段名称"/>
-                    </td>
-                    <td>
-                        <input class="le-input" type="text" v-model="item.fieldKey" placeholder="页面显示字段名称"/>
-                    </td>
-                    <td>
-                        <div class="le-select">
-                            <select v-model="item.fieldType">
-                                <option v-for="item in config.fieldTypes" 
-                                        :key="item.value" 
-                                        :value="item.value">{{item.name}}</option>
-                            </select>
-                            <i class='fa fa-angle-down'></i>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="le-select" >
-                            <select v-model="item.valiType" v-show="showValidata(item)">
-                                <option v-for="item in config.valiTypes" 
-                                        :key="item.value"
-                                        :value="item.value">{{item.name}}</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="le-select" >
-                            <input class="le-input" type="text" v-model="item.displayName" placeholder="显示名称" v-show="showDisplay(item)"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="le-select" >
-                            <input class="le-input" type="text" v-model="item.displayValue" placeholder="服务端传值Key" v-show="showDisplay(item)"/>
-                        </div>
-                    </td>
-                    <td>
-                        <input class="le-input" type="text" v-model="item.errorMsg" placeholder="错误提示信息" />
-                    </td>
-                    <td>
-                        <label for="isSearch">
-                            <input class="le-check" type="checkbox" v-model="item.isSearch">
-                        </label>
-                    </td>
-                    <td>
-                        <label for="isRequired">
-                            <input class="le-check" type="checkbox" v-model="item.isRequired">
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="row">
-            <div class="rowContent rowRight">
-                <button class="le-btn btn-submit">
-                    <i class="fa fa-check" aria-hidden="true"></i>保存
-                </button>
+                </table>
             </div>
         </div>
     </div>
@@ -130,8 +82,12 @@ export default {
         }
     },
     computed:{
+
     },
     methods:{
+        save(){
+
+        },
         showValidata(item){
             if(item.fieldType == "text"){
                 return true;
@@ -146,7 +102,7 @@ export default {
         },
         getProjects(){
             this.ajax.getFetch("/comp/getProjects").then(d=>{
-                let result=[{name:"请选择",value:""}];
+                let result=[];
                 d.data && d.data.split('\r\n').forEach(item => {
                     result.push({name:item.substring(item.lastIndexOf('/')+1),value:item});
                 });
@@ -155,7 +111,12 @@ export default {
             })
         },
         add(){
-            this.config.cols.push(Unit.object.cloneObj(this.config.defaultCol));
+            let tmpCol = Unit.object.cloneObj(this.config.defaultCol);
+            tmpCol.fieldTypes = Unit.object.cloneObj(this.config.fieldTypes);
+            tmpCol.valiTypes = Unit.object.cloneObj(this.config.valiTypes);
+            tmpCol.isSearchDataSource = Unit.object.cloneObj(this.config.isSearchDataSource);
+            tmpCol.valiTypes = Unit.object.cloneObj(this.config.valiTypes);
+            this.config.cols.push(tmpCol);
         },
         create(){
             if(!this.path || !this.project.selectProject){

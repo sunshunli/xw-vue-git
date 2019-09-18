@@ -118,7 +118,7 @@ export default {
                     {key:"status",val:"状态"},
                     {key:"operateTime",val:"修改时间"}
                 ],
-                 getUrl:()=>{
+                getUrl:()=>{
                     // if(this.searchModel.age == ""){
                     //     return "";
                     // }

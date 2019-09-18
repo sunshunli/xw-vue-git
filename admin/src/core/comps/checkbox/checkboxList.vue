@@ -4,7 +4,7 @@
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div class="form-item-div fa" :class="state.successIcon">
             <span :class="{'readonlyIcon':readonlyFlag}" class="span" v-for="(item,index) in data" :key="index" @click="changeItem(item)">
-                <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
+                <span>{{item[displayName]}}</span>
                 <span class="fa" :class="item.ck?'fa-check-square':'fa-square-o'"></span>
             </span>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>

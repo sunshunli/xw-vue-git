@@ -7,7 +7,7 @@
                 <i class="fa fa-clock-o clock"></i>
                 <input :_body_tag="__DatetimePickerKey" v-model="timeStr" :isDatetimePicker="isDatetimePicker" :placeholder="placeholderStr" class="timeInput" readonly :class="{readonlyIcon:readonlyFlag}" :name="KEYS.timeInputDomKey" @click="open"/>
                 <div v-show="showClear" class="fa fa-times-circle clearTime" :name="KEYS.clearTimeDomKey" @click.stop="clear"></div>
-                <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置时间控件的错误提示信息"}}</p>
+                <p class="promptMsg" v-show="state.showError">{{msg}}</p>
                 <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
             </div>
             <div class="timePicker" @click.stop :name="KEYS.timePanelDomKey">

@@ -19,7 +19,6 @@ import LeDialog from "../comps/dialog/dialog.vue";
 import LeLoading from "../comps/loading/loading.vue";
 import LeAlert from "./alert/alert.js";
 import LeEditor from "../comps/editor/editor.vue"
-import LeClip from "../comps/imgClip/imgClip.vue";
 
 import ValidataHOC from "./validataHOC.js";
 import bodyClickDirective from "./leDirective.js";
@@ -44,7 +43,6 @@ export default{
         Vue.component('LeForm',LeForm);
         Vue.component("LeLoading",LeLoading);
         Vue.component("LeEditor",ValidataHOC(LeEditor));
-        Vue.component('LeClip',LeClip);
         
         Vue.prototype.lang18n = lang18n;
 

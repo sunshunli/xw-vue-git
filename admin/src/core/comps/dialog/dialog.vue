@@ -155,10 +155,10 @@ export default {
         padding-top: 10px;
     }
     /* 滚动条整体的样式 */
-    /* .le_dialog_contine::-webkit-scrollbar{
+    .le_dialog_contine::-webkit-scrollbar{
         width: 1px;
         height:10px;
-    } */
+    }
     /* ie */
     .le_dialog_contine{
         -ms-scroll-chaining: chained;

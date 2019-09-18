@@ -1,5 +1,5 @@
 <template>
-    <span class="asBtn" @click.stop="clickHandle" :disabled="cdisabled" :class="[data.cls,disabledClass]"><i class="fa" :class="data.iCls"></i>{{value?value:"未设置"}}</span>	
+    <span class="asBtn" @click.stop="clickHandle" :disabled="cdisabled" :class="[data.cls,disabledClass]"><i class="fa" :class="data.iCls"></i>{{value}}</span>	
 </template>
 <script>
 

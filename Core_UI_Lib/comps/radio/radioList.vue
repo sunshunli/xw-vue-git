@@ -3,7 +3,7 @@
         <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
         <div  class="form-item-div fa" :class="state.successIcon">
             <span :class="{'readonlyIcon':readonlyFlag}" class="span" @click="changeCK(item)" v-for="(item,index) in data" :key="index">
-                <span>{{item[displayName]?item[displayName]:'未设置'}}</span>
+                <span>{{item[displayName]}}</span>
                 <span class="fa" :class="item.ck?'fa-dot-circle-o':'fa-circle-o'"></span>
             </span>
             <p class="promptMsg" v-show="state.showError">{{$attrs.msg}}</p>

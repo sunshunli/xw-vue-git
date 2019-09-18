@@ -30,7 +30,7 @@
             </div>
             <!-- 时间 -->
             <i v-show="showClear" class="fa fa-times-circle clearTime" @click="clear"></i>
-            <p class="promptMsg" v-show="state.showError">{{msg?msg:"未设置日期时间控件的错误提示信息"}}</p>
+            <p class="promptMsg" v-show="state.showError">{{msg}}</p>
             <p class="tip" v-show="!state.showError">{{$attrs.tip}}</p>
         </div>
     </div>

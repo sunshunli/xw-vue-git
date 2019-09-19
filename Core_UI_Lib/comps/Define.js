@@ -182,7 +182,22 @@ let EDITOR_MENUS = {
         'code',  // 插入代码
         'undo',  // 撤销
         'redo'  // 重复
+    ],
+
+    DEFAULT_COLOR: [
+        '#000000',
+        '#eeece0',
+        '#1c487f',
+        '#4d80bf',
+        '#c24f4a',
+        '#8baa4a',
+        '#7b5ba1',
+        '#46acc8',
+        '#f9963b',
+        '#ffffff',
+        '#e1140a',
     ]
+
 }
 
 let PLACEHOLDER = {

@@ -297,4 +297,5 @@ export default {
     padding: 10px 22px;
     border-bottom: 1px solid #eae4e4;
 }
+
 </style>

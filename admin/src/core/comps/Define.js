@@ -195,7 +195,7 @@ let EDITOR_MENUS = {
         '#46acc8',
         '#f9963b',
         '#ffffff',
-        '#ff140a',
+        '#e1140a',
     ]
 
 }

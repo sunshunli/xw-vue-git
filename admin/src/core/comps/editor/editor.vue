@@ -157,6 +157,7 @@ export default {
         this.__editor = new E(this.$refs[this.titleKey], this.$refs[this.textareaKey]);
         // 配置菜单 - 默认可以展示所有菜单 如果需要设置 请修改option.menus 具体参见define.js
         this.__editor.customConfig.menus = this.menusConfig?this.menusConfig:define.EDITOR_MENUS.DEFAULT_MENU;
+        this.__editor.customConfig.colors = define.EDITOR_MENUS.DEFAULT_COLOR;
         // 配置表情
         // this.__editor.customConfig.emotions = define.EDITOR_MENUS.DEFAULT_EMJOY;
         // onchange 会在无任何操作的 xxx 毫秒之后被触发  如果需要设置 请修改option.onchangeTimeout 默认值：-1 无延迟（设置延迟可能导致setvalue回写有问题）

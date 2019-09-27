@@ -30,6 +30,10 @@ function ValidataHOC(Component){
                 }
                 //如果设置了vType，没有设置required
                 if(this.$attrs.vType != undefined && this.$attrs.required == undefined){
+                    //如果是空，则不验证，直接验证通过
+                    if(!val){
+                        return true;
+                    }
                     var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                     reg = new RegExp(reg);
                     if (!reg.test(val)) {

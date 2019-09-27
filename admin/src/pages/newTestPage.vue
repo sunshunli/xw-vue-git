@@ -42,7 +42,7 @@
             <div slot="body">
                 <le-form labelWidth='180' ref="saveForm">
                     <div class="le_form_row_item">
-                        <le-input labelWidth='150' tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
+                        <le-input labelWidth='150' vType="decimals" on msg="只允许输入数字" tip="请输入身份证号码" label="身份证号码" :readonly="readonly" v-model="entity.id"></le-input>
                         <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                     </div>
                     <le-input labelWidth='150' tip="输入省市区的详细信息" label="地址" :readonly="readonly" on required msg="地址必填" v-model="entity.address"></le-input>

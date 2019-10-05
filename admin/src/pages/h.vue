@@ -5,8 +5,9 @@
         <div class="le_comps_core_css">
             <div class='le_list_search_pannel clearfix'>
                 <div class="col2">
-                    <le-local-select placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value" v-model="project.selectProject"></le-local-select>
-                    <le-input v-model="project.path" label="模块名称" placeholder="输入模块名称"></le-input>
+                    <le-local-select v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
+                    <le-input v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
+                    <le-button value="添加模块" @click="saveModule"></le-button>
                 </div>
             </div>
             <!-- 查询条件按钮组 le_search_btn_group-->
@@ -117,9 +118,9 @@ export default {
     data(){
         return {
             project:{
-                selectProject:"",
                 projects:[],
-                path:"",
+                projectPath:"",
+                moduleName:"",
             },
             config:Config
         }
@@ -128,8 +129,23 @@ export default {
 
     },
     methods:{
+        saveModule(){
+            if(!this.project.projectPath || !this.project.moduleName){
+                this.alert.showAlert("warning","必须输入项目和模块名称!");
+                return;
+            }
+            this.ajax.postFetch("/comp/createModuleFolder",{moduleName:this.project.moduleName,projectPath:this.project.projectPath}).then(d=>{
+                this.alert.showAlert("success","新增成功Module文件夹!");
+            }).catch(e=>{
+                this.alert.showAlert("error",e);
+            })
+        },
         save(){
-
+            this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath}).then(d=>{
+                this.alert.showAlert("success","新增成功!");
+            }).catch(e=>{
+                this.alert.showAlert("error",e.data);
+            })
         },
         delRow(row,items){
             this.alert.showConfirm('是否删除?',d=>{
@@ -166,17 +182,6 @@ export default {
             tmpCol.isRequiredDataSource = Unit.object.cloneObj(this.config.selectDataSource.isRequiredDataSource);
             tmpCol.isOnDataSource = Unit.object.cloneObj(this.config.selectDataSource.isOnDataSource);
             this.config.cols.push(tmpCol);
-        },
-        create(){
-            if(!this.path || !this.project.selectProject){
-                this.alert.showAlert("warning","必须输入项目和模块名称!");
-                return;
-            }
-            this.ajax.postFetch("/comp/createModule",{moduleName:this.path,projectPath:this.project.selectProject}).then(d=>{
-                this.alert.showAlert("success","新增成功!");
-            }).catch(e=>{
-                this.alert.showAlert("error",e);
-            })
         }
     },
     mounted(){

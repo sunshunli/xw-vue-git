@@ -19,19 +19,11 @@ module.exports = (env = {}) =>{
             sourceMap: false,
             parallel: true
         }),
-        // new ExtractTextPlugin({
-        //     filename:"le-components.min.css"
-        // }),
-        // new OptimizeCSSPlugin({
-        //     cssProcessorOptions: true
-        //       ? { safe: true, map: { inline: false } }
-        //       : { safe: true }
-        // }),
         new webpack.HashedModuleIdsPlugin(),
         new webpack.optimize.ModuleConcatenationPlugin(),
     ])
     return {
-        entry: './comps/leComponents.js',//入口
+        entry: './leComponents.js',//入口
         output: {
             path: path.resolve(__dirname, './dist'),//输出结果
             filename: "le-components.min.js",
@@ -88,7 +80,8 @@ module.exports = (env = {}) =>{
         resolve: {
             extensions: ['.vue', '.js', '.json'],
             alias: {
-                'vue$': 'vue/dist/vue.esm.js'
+                'vue$': 'vue/dist/vue.esm.js',
+                "@CoreUILib":path.resolve(__dirname,"../admin/src/core/comps")
             }
         },
         performance: {

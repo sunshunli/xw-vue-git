@@ -7,7 +7,7 @@ import router from './router/index.js';
 
 import AjaxService from "./core/tool/fetch-install.js";
 
-// import LeComponents from "@CoreUILib/le-components.min.js?v1=1";
+// import LeComponents from "@CoreUILib/le-components.min.js";
 import LeComponents from "./core/comps/leComponents.js";
 
 Vue.use(AjaxService);

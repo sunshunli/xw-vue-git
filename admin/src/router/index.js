@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-const H = r=>require.ensure([],()=>r(require("../pages/h.vue")),"H");
+const H = r=>require.ensure([],()=>r(require("../configModules/h.vue")),"H");
 const TreeTest = r=>require.ensure([],()=>r(require("../pages/tree.vue")),"TreeTest");
 const Login = r=>require.ensure([],()=>r(require("../pages/login/login.vue")),"Login");
 

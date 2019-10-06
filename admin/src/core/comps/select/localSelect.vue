@@ -319,8 +319,6 @@
             this.init(this.dataSource);
         }
         this.setValue(this.value);
-
-        this.placeholderStr = this.$attrs.placeholder;
     },
     beforeDestroy(){
         /**

@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+let path = require('path');
+let webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -8,7 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = (env = {}) =>{
     console.log(`------------------- ${env.Generative?'生产':'开发'}环境 -------------------`);
-    var plugins = (module.exports.plugins || []).concat([
+    let plugins = (module.exports.plugins || []).concat([
         new CleanWebpackPlugin(['dist']),
         new UglifyJsPlugin({
             uglifyOptions: {

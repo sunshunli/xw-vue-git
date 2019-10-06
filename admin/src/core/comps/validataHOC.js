@@ -34,7 +34,7 @@ function ValidataHOC(Component){
                     if(!val){
                         return true;
                     }
-                    var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
+                    let reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                     reg = new RegExp(reg);
                     if (!reg.test(val)) {
                         return false;
@@ -46,7 +46,7 @@ function ValidataHOC(Component){
                     if(val == ""){
                         return false;
                     }else{
-                        var reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
+                        let reg = DEFINE_KEY.INPUT_VALIDATA_TYPES.TYPES[this.$attrs.vType];
                         reg = new RegExp(reg);
                         if (!reg.test(val)) {
                             return false;

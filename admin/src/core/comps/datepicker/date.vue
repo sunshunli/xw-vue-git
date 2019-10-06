@@ -132,7 +132,7 @@ let _tool = {
         let res = [];
         for(let i=0;i<6;i++){
             let tmp = [];
-            for(var k=0;k<7;k++){
+            for(let k=0;k<7;k++){
                 tmp.push(data[i*7 + k]);
             }
             res.push(tmp);

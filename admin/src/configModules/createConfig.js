@@ -62,6 +62,7 @@ export default  {
                 label:"",
                 labelWidth:"",
                 url:"",
+                dataSource:"",
                 displayName:"",
                 displayValue:"",
             }

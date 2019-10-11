@@ -70,6 +70,7 @@
                             <td>LabelWidth</td>
                             <td>placeholder</td>
                             <td>Url</td>
+                            <td>dataSource</td>
                             <td>displayName</td>
                             <td>displayValue</td>
                         </tr>
@@ -103,6 +104,11 @@
                         <td>
                             <div class="w200">
                                 <le-input labelWidth="0" v-model="item.placeholder" placeholder="输入placeholder"></le-input>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="w200">
+                                <le-input labelWidth="0" v-model="item.dataSource" placeholder="dataSource" v-show="showDisplay(item)"></le-input>
                             </div>
                         </td>
                         <td>

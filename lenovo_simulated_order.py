@@ -35,7 +35,7 @@ class Process:
         res = Soj_session.post(loginUrl, data=data, headers=headers,timeout=2)
         print (res.text) #打印返回的文本信息 
 
-        goodsAddrss = "1004805"
+        goodsAddrss = "1005726"
         #打开一个商品的详情页
         url_sp = "https://item.lenovo.com.cn/product/%s.html" % goodsAddrss
         print (url_sp)

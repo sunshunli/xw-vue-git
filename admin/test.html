@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>delivername</td>
+                <td>delivermobile</td>
+                <td>deliverprovice</td>
+                <td>provinceNo</td>
+                <td>delivercity</td>
+                <td>cityNo</td>
+                <td>delivercounty</td>
+                <td>countyNo</td>
+                <td>towerShip</td>
+                <td>townshipNo</td>
+                <td>deliverStreet</td>
+                <td>isDefault</td>
+                <td>zip</td>
+                <td>delivertele</td>
+                <td>type</td>
+            </tr>
+        </thead>
+        <tbody id="tbody1"></tbody>
+    </table>
+</body>
+
+</html>
+<script>
+    function getPhone(){
+        let str = "186";
+        let ran = Math.ceil(Math.random()*9);
+        str  = str + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9) + Math.ceil(Math.random()*9);
+        return str;
+    }
+
+    function createData(addressStr){
+        let res = [];
+    
+        let provices1 = { name: "北京市", code: "010" };
+        let citys1 = {"name":"北京市","code":"1185"};
+        let counties = [
+            {"name":"昌平区","code":"10393"},
+            {"name":"朝阳区","code":"10997"},
+            {"name":"大兴区","code":"12944"},
+            {"name":"东城区","code":"11900"},
+            {"name":"房山区","code":"10492"},
+            {"name":"丰台区","code":"12012"},
+            {"name":"海淀区","code":"11408"},
+            {"name":"怀柔区","code":"10242"},
+            {"name":"门头沟区","code":"12163"},
+            {"name":"密云区","code":"11972"},
+            {"name":"平谷区","code":"12297"},
+            {"name":"石景山区","code":"10293"},
+            {"name":"顺义区","code":"12414"},
+            {"name":"通州区","code":"11207"},{"name":"西城区","code":"11275"},{"name":"延庆区","code":"12770"}]
+        let _10393 = [{"name":"百善镇","code":"117909"},{"name":"北七家镇","code":"118022"},{"name":"城北街道","code":"116240"},{"name":"城南街道","code":"116662"},{"name":"崔村镇","code":"117804"},{"name":"东小口地区","code":"116767"},{"name":"回龙观街道","code":"117183"},{"name":"霍营街道","code":"117078"},{"name":"流村镇","code":"118233"},{"name":"龙泽园街道","code":"117289"},{"name":"马池口地区","code":"116452"},{"name":"南口地区","code":"116345"},{"name":"南邵镇","code":"117703"},{"name":"其它","code":"160322"},{"name":"沙河地区","code":"116556"},{"name":"十三陵镇","code":"118337"},{"name":"史各庄街道","code":"117376"},{"name":"天通苑北街道","code":"116873"},{"name":"天通苑南街道","code":"116979"},{"name":"小汤山镇","code":"117599"},{"name":"兴寿镇","code":"118129"},{"name":"延寿镇","code":"118441"},{"name":"阳坊镇","code":"117489"}];
+        let _10997 = [{"name":"安贞街道","code":"139747"},{"name":"奥运村街道","code":"142629"},{"name":"八里庄街道","code":"140766"},{"name":"常营地区","code":"142863"},{"name":"朝外街道","code":"133686"},{"name":"崔各庄地区","code":"143472"},{"name":"大屯街道","code":"141989"},{"name":"东坝地区","code":"143581"},{"name":"东风地区","code":"142513"},{"name":"东湖街道","code":"144003"},{"name":"豆各庄地区","code":"143777"},{"name":"高碑店地区","code":"141605"},{"name":"管庄地区","code":"143104"},{"name":"和平街街道","code":"138656"},{"name":"黑庄户地区","code":"143686"},{"name":"呼家楼街道","code":"134630"},{"name":"建外街道","code":"132711"},{"name":"将台地区","code":"141733"},{"name":"金盏地区","code":"143220"},{"name":"劲松街道","code":"141002"},{"name":"酒仙桥街道","code":"140174"},{"name":"来广营地区","code":"142756"},{"name":"六里屯街道","code":"140632"},{"name":"麦子店街道","code":"140277"},{"name":"南磨房地区","code":"141465"},{"name":"潘家园街道","code":"141129"},{"name":"平房地区","code":"142400"},{"name":"其它","code":"160825"},{"name":"三间房地区","code":"142964"},{"name":"三里屯街道","code":"135639"},{"name":"十八里店地区","code":"142290"},{"name":"首都机场街道","code":"144100"},{"name":"双井街道","code":"140879"},{"name":"孙河地区","code":"143342"},{"name":"太阳宫地区","code":"141883"},{"name":"团结湖街道","code":"140406"},{"name":"王四营地区","code":"143887"},{"name":"望京街道","code":"142094"},{"name":"香河园街道","code":"137701"},{"name":"小关街道","code":"140085"},{"name":"小红门地区","code":"142188"},{"name":"亚运村街道","code":"139985"},{"name":"左家庄街道","code":"136681"},{"name":"垡头街道","code":"141302"}];
+        let _12944 = [{"name":"安定镇","code":"120371"},{"name":"北京经济技术开发区","code":"121099"},{"name":"北臧村镇","code":"120790"},{"name":"博兴街道","code":"120083"},{"name":"采育镇","code":"120269"},{"name":"长子营镇","code":"120997"},{"name":"高米店街道","code":"119874"},{"name":"观音寺街道","code":"119587"},{"name":"国家新媒体产业基地","code":"121303"},{"name":"黄村地区","code":"119120"},{"name":"旧宫地区","code":"119248"},{"name":"礼贤镇","code":"120476"},{"name":"林校路街道","code":"118750"},{"name":"庞各庄镇","code":"120685"},{"name":"其它","code":"162496"},{"name":"青云店镇","code":"120166"},{"name":"清源街道","code":"118876"},{"name":"荣华街道","code":"119980"},{"name":"天宫院街道","code":"119769"},{"name":"魏善庄镇","code":"120892"},{"name":"西红门地区","code":"119354"},{"name":"兴丰街道","code":"118647"},{"name":"亦庄地区","code":"118995"},{"name":"榆垡镇","code":"120580"},{"name":"中关村国家自主创新示范区大兴生物医药产业基地","code":"121203"},{"name":"瀛海地区","code":"119483"}];
+        let _11900 = [{"name":"安定门街道","code":"144002"},{"name":"北新桥街道","code":"144993"},{"name":"朝阳门街道","code":"104061"},{"name":"崇文门外街道","code":"108976"},{"name":"东花市街道","code":"110009"},{"name":"东华门街道","code":"140276"},{"name":"东四街道","code":"103166"},{"name":"东直门街道","code":"105966"},{"name":"和平里街道","code":"106990"},{"name":"建国门街道","code":"104936"},{"name":"交道口街道","code":"142862"},{"name":"景山街道","code":"141732"},{"name":"龙潭街道","code":"111057"},{"name":"其它","code":"161594"},{"name":"前门街道","code":"107995"},{"name":"体育馆路街道","code":"112139"},{"name":"天坛街道","code":"113155"},{"name":"永定门外街道","code":"114154"}];
+        let _10492 = [{"name":"长沟镇","code":"110546"},{"name":"长阳镇","code":"110318"},{"name":"城关街道","code":"108871"},{"name":"大安山乡","code":"111487"},{"name":"大石窝镇","code":"110653"},{"name":"东风街道","code":"109194"},{"name":"佛子庄乡","code":"111380"},{"name":"拱辰街道","code":"109802"},{"name":"韩村河镇","code":"111058"},{"name":"河北镇","code":"110443"},{"name":"良乡地区","code":"109498"},{"name":"琉璃河地区","code":"109699"},{"name":"南窖乡","code":"111252"},{"name":"蒲洼乡","code":"111697"},{"name":"其它","code":"160406"},{"name":"青龙湖镇","code":"110962"},{"name":"十渡镇","code":"110861"},{"name":"石楼镇","code":"110217"},{"name":"史家营乡","code":"111592"},{"name":"西潞街道","code":"109905"},{"name":"霞云岭乡","code":"111154"},{"name":"向阳街道","code":"109093"},{"name":"新镇街道","code":"108977"},{"name":"星城街道","code":"109397"},{"name":"阎村镇","code":"110010"},{"name":"迎风街道","code":"109293"},{"name":"张坊镇","code":"110760"},{"name":"周口店地区","code":"109600"},{"name":"窦店镇","code":"110114"}];
+        let _12012 = [{"name":"长辛店街道","code":"145308"},{"name":"长辛店镇","code":"103372"},{"name":"大红门街道","code":"144590"},{"name":"东高地街道","code":"144765"},{"name":"东铁匠营街道","code":"144877"},{"name":"方庄地区","code":"145513"},{"name":"丰台街道","code":"145103"},{"name":"和义街道","code":"145818"},{"name":"花乡地区","code":"103167"},{"name":"卢沟桥地区","code":"145925"},{"name":"卢沟桥街道","code":"144994"},{"name":"马家堡街道","code":"145715"},{"name":"南苑地区","code":"103269"},{"name":"南苑街道","code":"144681"},{"name":"其它","code":"161689"},{"name":"太平桥街道","code":"144382"},{"name":"宛平城地区","code":"145613"},{"name":"王佐镇","code":"103475"},{"name":"西罗园街道","code":"144486"},{"name":"新村街道","code":"145207"},{"name":"右安门街道","code":"144278"},{"name":"云岗街道","code":"145412"}];
+        let _11408 = [{"name":"八里庄街道","code":"104812"},{"name":"北太平庄街道","code":"105138"},{"name":"北下关街道","code":"105033"},{"name":"东升地区","code":"106681"},{"name":"甘家口街道","code":"104696"},{"name":"海淀街道","code":"105445"},{"name":"花园路街道","code":"106070"},{"name":"马连洼街道","code":"106278"},{"name":"其它","code":"161171"},{"name":"青龙桥街道","code":"105550"},{"name":"清河街道","code":"105967"},{"name":"清华园街道","code":"105657"},{"name":"上地街道","code":"106466"},{"name":"上庄地区","code":"107303"},{"name":"曙光街道","code":"106786"},{"name":"四季青地区","code":"106991"},{"name":"苏家坨地区","code":"107201"},{"name":"田村路街道","code":"106378"},{"name":"万柳地区","code":"106571"},{"name":"万寿路街道","code":"104405"},{"name":"温泉地区","code":"106886"},{"name":"西北旺地区","code":"107096"},{"name":"西三旗街道","code":"106174"},{"name":"香山街道","code":"105864"},{"name":"学院路街道","code":"105241"},{"name":"燕园街道","code":"105758"},{"name":"羊坊店街道","code":"104611"},{"name":"永定路街道","code":"104507"},{"name":"中关村街道","code":"105346"},{"name":"紫竹院街道","code":"104937"}];
+        let _10242 = [{"name":"宝山镇","code":"122845"},{"name":"北房镇","code":"122019"},{"name":"北京雁栖经济开发区","code":"123166"},{"name":"渤海镇","code":"122535"},{"name":"长哨营满族乡","code":"122964"},{"name":"怀北镇","code":"122328"},{"name":"怀柔地区","code":"121705"},{"name":"九渡河镇","code":"122638"},{"name":"喇叭沟门满族乡","code":"123064"},{"name":"琉璃庙镇","code":"122741"},{"name":"龙山街道","code":"121604"},{"name":"庙城地区","code":"121916"},{"name":"其它","code":"160196"},{"name":"桥梓镇","code":"122226"},{"name":"泉河街道","code":"121505"},{"name":"汤河口镇","code":"122432"},{"name":"雁栖地区","code":"121812"},{"name":"杨宋镇","code":"122123"}];
+        let _12163 = [{"name":"城子街道","code":"107606"},{"name":"大台街道","code":"107790"},{"name":"大峪街道","code":"107511"},{"name":"东辛房街道","code":"107707"},{"name":"军庄镇","code":"108284"},{"name":"龙泉地区","code":"108100"},{"name":"妙峰山镇","code":"108665"},{"name":"其它","code":"161817"},{"name":"清水镇","code":"108559"},{"name":"潭柘寺镇","code":"108204"},{"name":"王平地区","code":"107894"},{"name":"雁翅镇","code":"108352"},{"name":"永定地区","code":"107996"},{"name":"斋堂镇","code":"108458"}];
+        let _11972 = [{"name":"北京密云经济开发区","code":"127000"},{"name":"北庄镇","code":"126680"},{"name":"不老屯镇","code":"126166"},{"name":"大城子镇","code":"126464"},{"name":"东邵渠镇","code":"126573"},{"name":"冯家峪镇","code":"126262"},{"name":"高岭镇","code":"126071"},{"name":"鼓楼街道","code":"125032"},{"name":"古北口镇","code":"126360"},{"name":"果园街道","code":"125099"},{"name":"河南寨镇","code":"125734"},{"name":"巨各庄镇","code":"125840"},{"name":"密云镇","code":"125314"},{"name":"穆家峪镇","code":"125917"},{"name":"其它","code":"161655"},{"name":"十里堡镇","code":"125631"},{"name":"石城镇","code":"126893"},{"name":"太师屯镇","code":"125977"},{"name":"檀营地区","code":"125206"},{"name":"西田各庄镇","code":"125527"},{"name":"溪翁庄镇","code":"125420"},{"name":"新城子镇","code":"126785"}];
+        let _12297 = [{"name":"滨河街道","code":"123366"},{"name":"大华山镇","code":"124268"},{"name":"大兴庄镇","code":"124490"},{"name":"东高村镇","code":"123970"},{"name":"黄松峪乡","code":"124714"},{"name":"金海湖地区","code":"123869"},{"name":"刘家店镇","code":"124520"},{"name":"马昌营镇","code":"124471"},{"name":"马坊地区","code":"123771"},{"name":"南独乐河镇","code":"124165"},{"name":"其它","code":"161930"},{"name":"山东庄镇","code":"124064"},{"name":"王辛庄镇","code":"124488"},{"name":"夏各庄镇","code":"124370"},{"name":"兴谷街道","code":"123466"},{"name":"熊儿寨乡","code":"124821"},{"name":"渔阳地区","code":"123560"},{"name":"峪口地区","code":"123679"},{"name":"镇罗营镇","code":"124616"}];
+        let _10293 = [{"name":"八宝山街道","code":"103679"},{"name":"八角街道","code":"103891"},{"name":"古城街道","code":"103998"},{"name":"广宁街道","code":"104072"},{"name":"金顶街街道","code":"104062"},{"name":"老山街道","code":"103786"},{"name":"鲁谷街道","code":"104223"},{"name":"苹果园街道","code":"104050"},{"name":"其它","code":"160238"},{"name":"五里坨街道","code":"104137"}];
+        let _12414 = [{"name":"北石槽镇","code":"115925"},{"name":"北务镇","code":"115283"},{"name":"北小营镇","code":"115818"},{"name":"大孙各庄镇","code":"115385"},{"name":"高丽营镇","code":"114852"},{"name":"光明街道","code":"113652"},{"name":"后沙峪地区","code":"113843"},{"name":"空港街道","code":"114542"},{"name":"李桥镇","code":"114953"},{"name":"李遂镇","code":"115077"},{"name":"龙湾屯镇","code":"115628"},{"name":"马坡地区","code":"114361"},{"name":"木林镇","code":"115729"},{"name":"南彩镇","code":"115179"},{"name":"南法信地区","code":"114257"},{"name":"牛栏山地区","code":"114155"},{"name":"其它","code":"162028"},{"name":"仁和地区","code":"113740"},{"name":"胜利街道","code":"113566"},{"name":"石园街道","code":"114456"},{"name":"双丰街道","code":"114644"},{"name":"天竺地区","code":"113946"},{"name":"旺泉街道","code":"114749"},{"name":"杨镇地区","code":"114048"},{"name":"张镇","code":"115487"},{"name":"赵全营镇","code":"116029"}];
+        let _11207 = [{"name":"北苑街道","code":"112140"},{"name":"梨园地区","code":"112452"},{"name":"潞城镇","code":"113261"},{"name":"马驹桥镇","code":"112866"},{"name":"其它","code":"161009"},{"name":"宋庄镇","code":"112555"},{"name":"台湖镇","code":"113054"},{"name":"西集镇","code":"112954"},{"name":"新华街道","code":"112010"},{"name":"永乐店镇","code":"113156"},{"name":"永顺地区","code":"112349"},{"name":"于家务回族乡","code":"113363"},{"name":"玉桥街道","code":"112247"},{"name":"张家湾镇","code":"112655"},{"name":"中仓街道","code":"111908"},{"name":"漷县镇","code":"112765"}];
+        let _11275 = [{"name":"白纸坊街道","code":"129648"},{"name":"椿树街道","code":"125419"},{"name":"大栅栏街道","code":"123678"},{"name":"德胜街道","code":"120579"},{"name":"广安门内街道","code":"127456"},{"name":"广安门外街道","code":"130701"},{"name":"金融街街道","code":"121603"},{"name":"牛街街道","code":"128586"},{"name":"其它","code":"161064"},{"name":"什刹海街道","code":"122637"},{"name":"陶然亭街道","code":"126359"},{"name":"天桥街道","code":"124489"},{"name":"西长安街街道","code":"116239"},{"name":"新街口街道","code":"117288"},{"name":"月坛街道","code":"118336"},{"name":"展览路街道","code":"119482"}];
+        let _12770 = [{"name":"八达岭镇","code":"127760"},{"name":"百泉街道","code":"127211"},{"name":"大榆树镇","code":"128587"},{"name":"大庄科乡","code":"128800"},{"name":"井庄镇","code":"128693"},{"name":"旧县镇","code":"127977"},{"name":"康庄镇","code":"127656"},{"name":"刘斌堡乡","code":"128908"},{"name":"其它","code":"162341"},{"name":"千家店镇","code":"128319"},{"name":"儒林街道","code":"127457"},{"name":"沈家营镇","code":"128477"},{"name":"四海镇","code":"128183"},{"name":"香水园街道","code":"127309"},{"name":"香营乡","code":"129014"},{"name":"延庆镇","code":"127558"},{"name":"永宁镇","code":"127868"},{"name":"张山营镇","code":"128075"},{"name":"珍珠泉乡","code":"129120"}];
+
+
+        counties.forEach(x=>{
+            x.chiildren = eval("_"+x.code);
+        })
+        
+        counties.forEach(x=>{
+            x.chiildren.forEach((item,index)=>{
+                let tmp = {isDefault:"1",zip:"100000",delivertele:"",type:"SH",delivername:"",delivermobile:"",deliverprovice:"北京市",provinceNo:"010",delivercity:"北京市",cityNo:"1185",delivercounty:"",countyNo:"",towerShip:"",townshipNo:"",deliverStreet:""};
+                tmp.delivercounty = x.name;
+                tmp.countyNo = x.code;
+                tmp.towerShip = item.name;
+                tmp.townshipNo = item.code;
+                tmp.deliverStreet = item.name + addressStr + (1+index) + "号";
+                let phone = getPhone();
+                tmp.delivermobile = phone;
+                tmp.delivername = phone;
+
+                res.push(tmp);
+            })
+        })
+
+        return res;
+    }
+
+    function render(data){
+        let html = "";
+        data.forEach(x=>{
+            html += "<tr>";
+            html += "<td>"+x.delivername+"</td>";
+            html += "<td>"+x.delivermobile+"</td>";
+            html += "<td>"+x.deliverprovice+"</td>";
+            html += "<td>"+x.provinceNo+"</td>";
+            html += "<td>"+x.delivercity+"</td>";
+            html += "<td>"+x.cityNo+"</td>";
+            html += "<td>"+x.delivercounty+"</td>";
+            html += "<td>"+x.countyNo+"</td>";
+            html += "<td>"+x.towerShip+"</td>";
+            html += "<td>"+x.townshipNo+"</td>";
+            html += "<td>"+x.deliverStreet+"</td>";
+            html += "<td>"+x.isDefault+"</td>";
+            html += "<td>"+x.zip+"</td>";
+            html += "<td>"+x.delivertele+"</td>";
+            html += "<td>"+x.type+"</td>";
+            html += "</tr>";
+        })
+
+        $("#tbody1").append($(html));
+    }
+    
+    let res1 = createData("市中心街道");
+    let res2 = createData("北广场");
+    let res3 = createData("胡同口");
+
+    Array.prototype.push.apply(res1,res2);
+    Array.prototype.push.apply(res1,res3);
+    debugger
+    render(res1);
+    
+    
+</script>

@@ -58,6 +58,7 @@ let BUTTON_CONFIG = {
     "cancelPublish":{cls:"cancelPublish",iCls:"fa-window-close"},//取消发布
     "import":{cls:"import",iCls:"fa-cloud-download"},//导入
     "export":{cls:"export",iCls:"fa-cloud-upload"},//导出
+    "upload":{cls:"upload",iCls:"fa-cloud-upload"},//上传
     "review":{cls:"review",iCls:"fa-eye"},//预览
     "batch":{cls:"batch",iCls:"fa-th-large"},//批量操作
     "copy":{cls:"copy",iCls:"fa-clone"},//复制

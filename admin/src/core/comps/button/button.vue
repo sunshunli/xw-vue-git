@@ -174,6 +174,12 @@ export default {
         background-color: #4fc1e9;
         border-color: #4fc1e9;
     }
+    
+    .upload{
+        background-color: #72d77b;
+        border-color: #72d77b;
+        color: #fff;
+    }
 
     .publish{
         background-color: #49cfad;
@@ -247,7 +253,6 @@ export default {
     .back{
         background-color: #4fc1e9;
         border-color: #4fc1e9;
-        padding-left: 13px;
     }
 
     .cancel{

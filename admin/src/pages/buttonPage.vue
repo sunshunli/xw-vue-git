@@ -32,6 +32,7 @@
         <le-button type="prev" value="上一步"></le-button>
         <le-button type="next" value="下一步"></le-button>
         <le-button type="warning" value="警告"></le-button>
+        <le-button type="upload" value="上传"></le-button>
 
 
         <!-- <le-input :readonly="readonly" v-model="search.name"></le-input> -->

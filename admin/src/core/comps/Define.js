@@ -58,7 +58,7 @@ let BUTTON_CONFIG = {
     "cancelPublish":{cls:"cancelPublish",iCls:"fa-window-close"},//取消发布
     "import":{cls:"import",iCls:"fa-cloud-download"},//导入
     "export":{cls:"export",iCls:"fa-cloud-upload"},//导出
-    "upload":{cls:"upload",iCls:"fa-cloud-upload"},//上传
+    "upload":{cls:"upload",iCls:"fa-upload"},//上传
     "review":{cls:"review",iCls:"fa-eye"},//预览
     "batch":{cls:"batch",iCls:"fa-th-large"},//批量操作
     "copy":{cls:"copy",iCls:"fa-clone"},//复制
@@ -68,7 +68,7 @@ let BUTTON_CONFIG = {
     "nextPage":{cls:"nextPage",iCls:""},//下一页 
     "confirm":{cls:"confirm",iCls:""},//确定
     "save":{cls:"save",iCls:""},//保存
-    "back":{cls:"back",iCls:""},//返回
+    "back":{cls:"back",iCls:"fa-long-arrow-left"},//返回
     "cancel":{cls:"cancel",iCls:""},//取消
     "choose":{cls:"choose",iCls:""},//请选择XXXX
     "holdSave":{cls:"holdSave",iCls:""},//暂存

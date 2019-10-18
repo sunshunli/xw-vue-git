@@ -36,7 +36,7 @@
 	    padding: 0 10px;
 	    height: 24px;
 	    line-height: 22px;
-	    font-size: 12px;
+	    font-size: 14px;
 	    border-radius: 4px;
 	    border: 1px solid rgba(64,158,255,.2);
 	    white-space: nowrap;
@@ -44,7 +44,7 @@
 	    border-color: transparent;
 	    margin: 7px 0 2px 6px;
 	    background-color: #f0f2f5;
-	    color: #909399;
+	    color: #606266;
 	    /* padding-right: 25px; */
 	    position: relative;
 		/* max-width: 230px; */

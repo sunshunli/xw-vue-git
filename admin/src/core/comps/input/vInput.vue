@@ -160,6 +160,7 @@
         flex-direction: row;
         align-items: center;
         position: relative;
+        min-width: 130px;
     }    
 
     .form-item .fa-times-circle-o .form-item-input{

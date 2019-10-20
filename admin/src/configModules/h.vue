@@ -18,8 +18,10 @@
             <!-- tableList容器 le_table_container -->
             <div class='le_table_container'>
                 <h1>列表页基础配置</h1>
-                <div class="col3">
-                    <le-input v-model="listBtnConfig.pageName" label="页面名称" placeholder="输入页面名称"></le-input>
+                <div class="col4">
+                    <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块名称" placeholder="输入子模块名称"></le-input>
+                    <le-input v-model="listBtnConfig.pageName" tip="如person.vue" label="文件名称" placeholder="输入文件名称"></le-input>
+                    <le-input v-model="listBtnConfig.tableTitle" label="列表名称" placeholder="输入列表名称"></le-input>
                     <le-input v-model="listBtnConfig.colsCount" label="一行展示多少列" placeholder="输入列数"></le-input>
                     <le-button type="create" value="添加按钮" @click="addListPageButton"></le-button>
                     <le-button type="create" value="添加列" @click="addSearchCols"></le-button>
@@ -195,6 +197,34 @@
                         </td>
                     </tr> -->
                 </table>
+                <h1>Table参数配置</h1>
+                <div class="col4">
+                    <pre contenteditable id="table_options">
+                        {
+                            showCk:true,
+                            map:[
+                                {key:"shop",val:"商城"},
+                                {key:"accessField",val:"封禁纬度"}
+                            ],
+                            getUrl:()=>{
+                                return "/risk/limit/black/user/query/lst";
+                            },
+                            pageOption:{
+                                sizeKey:"pageSize",
+                                indexKey:"pageNum",
+                                index:1,
+                                size:10
+                            },
+                            actions:[
+                                {
+                                    key:"update",
+                                    val:"编辑",
+                                    action:this.edit
+                                }
+                            ]
+                        }
+                    </pre>
+                </div>
             </div>
         </div>
     </div>
@@ -236,6 +266,8 @@ export default {
             },
             config:Config,
             listBtnConfig:{
+                subModulePath:"",
+                tableTitle:"",
                 pageName:"",
                 colsCount:"",
                 btns:[]
@@ -277,7 +309,8 @@ export default {
             }
             let data = {
                 btn:this.listBtnConfig,
-                cols:this.listSearchColsConfig
+                cols:this.listSearchColsConfig,
+                tableOptions:eval("("+document.getElementById("table_options").innerText.trim()+")")
             }
             data = Unit.object.cloneObj(data);
             data.btn.btns.forEach(x=>{

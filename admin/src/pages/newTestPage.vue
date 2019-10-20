@@ -119,9 +119,6 @@ export default {
                     {key:"operateTime",val:"修改时间"}
                 ],
                 getUrl:()=>{
-                    // if(this.searchModel.age == ""){
-                    //     return "";
-                    // }
                     return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName="+this.searchModel.age+"&status=-1";
                 },
                 pageOption:{

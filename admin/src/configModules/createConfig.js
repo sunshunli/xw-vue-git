@@ -4,39 +4,39 @@ export default  {
     searchPage:{
         btn:{
             buttonTypes:[
-                {val:"search",name:"搜索"},
-                {val:"create",name:"新增"},
-                {val:"download",name:"下载"},
-                {val:"update",name:"更新"},
-                {val:"remove",name:"删除"},
-                {val:"approve",name:"审核"},
-                {val:"reject",name:"拒绝"},
-                {val:"start",name:"启用"},
-                {val:"stop",name:"停用"},
-                {val:"info",name:"详情"},
-                {val:"reset",name:"重置"},
-                {val:"up",name:"上架"},
-                {val:"down",name:"下架"},
-                {val:"publish",name:"发布"},
-                {val:"cancelPublish",name:"取消发布"},
-                {val:"import",name:"导入"},
-                {val:"export",name:"导出"},
-                {val:"review",name:"批量操作"},
-                {val:"copy",name:"复制"},
-                {val:"setting",name:"设置"},
-                {val:"decorate",name:"装修"},
-                {val:"prevPage",name:"上一页"},
-                {val:"nextPage",name:"下一页"},
-                {val:"confirm",name:"确定"},
-                {val:"save",name:"保存"},
-                {val:"back",name:"返回"},
-                {val:"cancel",name:"取消"},
-                {val:"choose",name:"请选择XXXX"},
-                {val:"holdSave",name:"暂存"},
-                {val:"prev",name:"上一步"},
-                {val:"next",name:"下一步"},
-                {val:"default",name:"默认"},
-                {val:"warning",name:"警告"},
+                {code:"search",name:"搜索"},
+                {code:"create",name:"新增"},
+                {code:"download",name:"下载"},
+                {code:"update",name:"更新"},
+                {code:"remove",name:"删除"},
+                {code:"approve",name:"审核"},
+                {code:"reject",name:"拒绝"},
+                {code:"start",name:"启用"},
+                {code:"stop",name:"停用"},
+                {code:"info",name:"详情"},
+                {code:"reset",name:"重置"},
+                {code:"up",name:"上架"},
+                {code:"down",name:"下架"},
+                {code:"publish",name:"发布"},
+                {code:"cancelPublish",name:"取消发布"},
+                {code:"import",name:"导入"},
+                {code:"export",name:"导出"},
+                {code:"review",name:"批量操作"},
+                {code:"copy",name:"复制"},
+                {code:"setting",name:"设置"},
+                {code:"decorate",name:"装修"},
+                {code:"prevPage",name:"上一页"},
+                {code:"nextPage",name:"下一页"},
+                {code:"confirm",name:"确定"},
+                {code:"save",name:"保存"},
+                {code:"back",name:"返回"},
+                {code:"cancel",name:"取消"},
+                {code:"choose",name:"请选择XXXX"},
+                {code:"holdSave",name:"暂存"},
+                {code:"prev",name:"上一步"},
+                {code:"next",name:"下一步"},
+                {code:"default",name:"默认"},
+                {code:"warning",name:"警告"},
             ],
             defaultBtnPropertys:{
                 btnName:"",
@@ -47,17 +47,17 @@ export default  {
         },
         col:{
             fieldTypes:[
-                {name:"text",value:"text"},
-                {name:"select",value:"select"},
-                {name:"radioList",value:"radioList"},
-                {name:"checkboxList",value:"checkboxList"},
-                {name:"datepicker",value:"datepicker"},
-                {name:"timepicker",value:"timepicker"},
-                {name:"dateTimepicker",value:"dateTimepicker"}
+                {name:"text",code:"text"},
+                {name:"select",code:"select"},
+                {name:"radioList",code:"radioList"},
+                {name:"checkboxList",code:"checkboxList"},
+                {name:"datepicker",code:"datepicker"},
+                {name:"timepicker",code:"timepicker"},
+                {name:"dateTimepicker",code:"dateTimepicker"}
             ],
             defaultColPropertys:{
                 fieldTypes:[],
-                fieldType:"text",
+                type:"text",
                 key:"",
                 label:"",
                 labelWidth:"",
@@ -68,61 +68,67 @@ export default  {
             }
         }
     },
-    selectDataSource:{
-        isSearchDataSource:[
-            {name:"",value:"yes"}
-        ],
-        isRequiredDataSource:[
-            {name:"",value:"yes"}
-        ],
-        isOnDataSource:[
-            {name:"",value:"yes"}
-        ],
-        fieldTypes:[
-            {name:"text",value:"text"},
-            {name:"select",value:"select"},
-            {name:"radioList",value:"radioList"},
-            {name:"checkboxList",value:"checkboxList"},
-            {name:"asynTree",value:"asynTree"},
-            {name:"textarea",value:"textarea"},
-            {name:"upload",value:"upload"},
-            {name:"datepicker",value:"datepicker"},
-            {name:"timepicker",value:"timepicker"},
-            {name:"dateTimepicker",value:"dateTimepicker"}
-        ],
-        valiTypes:[
-            {name:"数字或小数",value:"decimals"},
-            {name:"数字",value:"number"},
-            {name:"email",value:"email"},
-            {name:"url",value:"url"},
-            {name:"id",value:"身份证"},
-            {name:"phone",value:"手机号"},
-            {name:"password",value:"密码"},
-            {name:"正整数",value:"positive"},
-            {name:"正小数",value:"positiveDecimals"},
-            {name:"负小数",value:"negativeDecimals"},
-            {name:"负数",value:"negative"},
-            {name:"汉字",value:"characters"}
-        ],
+    dialog:{
+        dataSource:[{name:'',code:"1"}]
     },
-    defaultCol:{
-        key:"",
-        label:"",
-        labelWidth:"",
-        tip:"",
-        placeholder:"",
-        type:"",
-        valiType:"",
-        displayName:"",
-        displayValue:"",
-        errorMsg:"",
-        isSearch:false,
-        isRequired:false,
-        isOn:false,
-        fieldTypes:[],
-        valiTypes:[],
-        isRequiredDataSource:[],
-        isSearchDataSource:[]
+    form:{
+        defaultCol:{
+            type:"text",
+            key:"",
+            label:"",
+            labelWidth:"",
+            placeholder:"",
+            url:"",
+            dataSource:"",
+            displayName:"",
+            displayValue:"",            
+            tip:"",
+            on:"",
+            required:"",
+            valifyType:"",
+            msg:"",
+            selectDataSource:{
+                typeDatsSource:[],
+                requiredDatsSource:[],
+                onDataSource:[],
+                valifyDataSource:[]
+            }
+        }
     },
-    cols:[],
+    enum:{
+        typeDatsSource:[
+            {name:"text",code:"text"},
+            {name:"select",code:"select"},
+            {name:"radioList",code:"radioList"},
+            {name:"checkboxList",code:"checkboxList"},
+            {name:"asynTree",code:"asynTree"},
+            {name:"textarea",code:"textarea"},
+            {name:"upload",code:"upload"},
+            {name:"datepicker",code:"datepicker"},
+            {name:"timepicker",code:"timepicker"},
+            {name:"dateTimepicker",code:"dateTimepicker"}
+        ],
+        valifyDataSource:[
+            {name:"数字或小数",code:"decimals"},
+            {name:"数字",code:"number"},
+            {name:"email",code:"email"},
+            {name:"url",code:"url"},
+            {name:"id",code:"身份证"},
+            {name:"phone",code:"手机号"},
+            {name:"password",code:"密码"},
+            {name:"正整数",code:"positive"},
+            {name:"正小数",code:"positiveDecimals"},
+            {name:"负小数",code:"negativeDecimals"},
+            {name:"负数",code:"negative"},
+            {name:"汉字",code:"characters"}
+        ],
+        requiredDatsSource:[
+            {name:'是',code:"1"},
+            {name:'否',code:"0"}
+        ],
+        onDataSource:[
+            {name:'是',code:"1"},
+            {name:'否',code:"0"}
+        ]
+    }
 }

@@ -307,7 +307,12 @@ export default {
             if(!this.listBtnConfig.colsCount){
                 this.listBtnConfig.colsCount = 3;
             }
+            if(!this.listBtnConfig.tableTitle){
+                this.listBtnConfig.tableTitle = this.listBtnConfig.pageName.split('.')[0] + "_List";
+            }
+
             let data = {
+                tableOptionsName:this.listBtnConfig.pageName.split('.')[0] + "_table_options",
                 btn:this.listBtnConfig,
                 cols:this.listSearchColsConfig,
                 tableOptions:eval("("+document.getElementById("table_options").innerText.trim()+")")

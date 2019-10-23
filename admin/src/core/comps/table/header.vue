@@ -97,5 +97,6 @@
          width: auto;
          word-break: keep-all;
          white-space: nowrap;
+         padding: 0 5px;
      }
 </style>

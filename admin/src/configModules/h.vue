@@ -12,7 +12,7 @@
                 </div>
                 <h1>页面配置</h1>
                 <div class="col2">
-                    <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块名称" placeholder="输入子模块名称"></le-input>
+                    <le-input v-model="listBtnConfig.subModulePath" tip="页面路径:sub1/sub2" label="页面路径" placeholder="输入页面路径"></le-input>
                     <le-input v-model="listBtnConfig.pageName" tip="如person.vue" label="文件名称" placeholder="输入文件名称"></le-input>
                     <le-button value="添加列表页" @click="show2 = false;show1 = true"></le-button>
                     <le-button value="添加新页面" @click="show2 = true;show1 = false"></le-button>
@@ -394,6 +394,29 @@ export default {
                     delete x.selectDataSource;
                 })
             }
+
+            let res = {
+                projectName:"",
+                moduleName:"",
+                page:{
+                    fileName:"",
+                    path:"",
+                    type:""
+                },
+                listOptions:{
+                    search:{
+                        btn:[],
+                        cols:[],
+                    },
+                    tableOptions:{}
+                },
+                dialog:{
+                    hasDialog:"",
+                    form:[]
+                },
+
+            }
+
             debugger
             this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath,data:data}).then(d=>{
                 this.alert.showAlert("success","新增成功!");

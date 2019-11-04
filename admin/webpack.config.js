@@ -109,7 +109,8 @@ module.exports = (env = {}) =>{
             extensions: ['.vue', '.js', '.json'],
             alias: {
                 'vue$': 'vue/dist/vue.esm.js',
-                "@CoreUILib":path.resolve(__dirname,"../Core_UI_Lib/dist")
+                "@CoreUILib":path.resolve(__dirname,"../Core_UI_Lib/dist"),
+                "@":path.resolve(__dirname,"./src")
             }
         },
         externals: {

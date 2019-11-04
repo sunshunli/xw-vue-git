@@ -1,36 +1,34 @@
 
 <template>
-
     <div>
         <div class="le_comps_core_css">
             <div class='le_list_search_pannel clearfix'>
+                <h1>项目配置</h1>
                 <div class="col2">
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-button value="添加模块" @click="saveModule"></le-button>
                     <le-button value="重置" @click="resetBaseConfig"></le-button>
                 </div>
-            </div>
-            <!-- 查询条件按钮组 le_search_btn_group-->
-            <!-- <div class="le_search_btn_group cleatfix">
-                <le-button type="create" value="配置列表页"></le-button>
-            </div> -->
-            <!-- tableList容器 le_table_container -->
-            <div class='le_table_container'>
-                <h1>列表页基础配置</h1>
-                <div class="col4">
+                <h1>页面配置</h1>
+                <div class="col2">
                     <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块名称" placeholder="输入子模块名称"></le-input>
                     <le-input v-model="listBtnConfig.pageName" tip="如person.vue" label="文件名称" placeholder="输入文件名称"></le-input>
+                    <le-button value="添加列表页" @click="show2 = false;show1 = true"></le-button>
+                    <le-button value="添加新页面" @click="show2 = true;show1 = false"></le-button>
+                </div>
+            </div>
+            
+            <div class='le_table_container' v-show="show1">
+                <h1>列表页基础配置</h1>
+                <div class="col2">
                     <le-input v-model="listBtnConfig.tableTitle" label="列表名称" placeholder="输入列表名称"></le-input>
                     <le-input v-model="listBtnConfig.colsCount" label="一行展示多少列" placeholder="输入列数"></le-input>
-                </div>
-                <div class="col4">
                     <le-checkbox-list label="是否有dialog" :data-source="config.dialog.dataSource" display-name="name" display-value="code" v-model="hasDialog"></le-checkbox-list>
-                    <le-button type="create" value="添加按钮" @click="addListPageButton"></le-button>
-                    <le-button type="create" value="添加列" @click="addSearchCols"></le-button>
                     <le-button type="save" value="保存配置" @click="createModuleFile"></le-button>
                 </div>
                 <div class="col4">
+                    <le-button type="create" value="添加按钮" @click="addListPageButton"></le-button>
                     <table class="le-table">
                         <thead>
                             <tr class="title">
@@ -68,6 +66,7 @@
                 </div>
                 <h1>列表页搜索字段配置</h1>
                 <div class='col4'>
+                    <le-button type="create" value="添加列" @click="addSearchCols"></le-button>
                     <table class="le-table">
                         <thead>
                             <tr class="title">
@@ -136,34 +135,6 @@
                             </td>
                         </tr>
                     </table>
-                </div>
-                <h1>Table参数配置</h1>
-                <div class="col4">
-                    <pre contenteditable id="table_options">
-                        {
-                            showCk:true,
-                            map:[
-                                {key:"shop",val:"商城"},
-                                {key:"accessField",val:"封禁纬度"}
-                            ],
-                            getUrl:()=>{
-                                return "/risk/limit/black/user/query/lst";
-                            },
-                            pageOption:{
-                                sizeKey:"pageSize",
-                                indexKey:"pageNum",
-                                index:1,
-                                size:10
-                            },
-                            actions:[
-                                {
-                                    key:"update",
-                                    val:"编辑",
-                                    action:this.edit
-                                }
-                            ]
-                        }
-                    </pre>
                 </div>
                 <div v-show="hasDialog=='1'">
                     <h1>Dialog表单配置</h1>
@@ -269,6 +240,38 @@
                         </table>
                     </div>
                 </div>
+                <h1>Table参数配置</h1>
+                <div class="col4">
+                    <pre contenteditable id="table_options">
+                        {
+                            showCk:true,
+                            map:[
+                                {key:"shop",val:"商城"},
+                                {key:"accessField",val:"封禁纬度"}
+                            ],
+                            getUrl:()=>{
+                                return "/risk/limit/black/user/query/lst";
+                            },
+                            pageOption:{
+                                sizeKey:"pageSize",
+                                indexKey:"pageNum",
+                                index:1,
+                                size:10
+                            },
+                            actions:[
+                                {
+                                    key:"update",
+                                    val:"编辑",
+                                    action:this.edit
+                                }
+                            ]
+                        }
+                    </pre>
+                </div>
+            </div>
+
+            <div class="le_table_container" v-show="show2">
+
             </div>
         </div>
     </div>
@@ -302,6 +305,8 @@ export default {
     name:"H",
     data(){
         return {
+            show1:false,
+            show2:false,
             baseReadOnly:false,
             project:{
                 projects:[],

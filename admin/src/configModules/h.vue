@@ -8,24 +8,26 @@
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-button value="添加模块" @click="saveModule"></le-button>
-                    <le-button value="重置" @click="resetBaseConfig"></le-button>
+                    <le-button type="create" value="添加子模块" @click="addSubModules"></le-button>
+                    <le-button type="save" value="保存子模块" @click="createModuleFile"></le-button>
                 </div>
                 <h1>页面配置</h1>
                 <div class="col2">
-                    <le-input v-model="listBtnConfig.subModulePath" tip="页面路径:sub1/sub2" label="页面路径" placeholder="输入页面路径"></le-input>
-                    <le-input v-model="listBtnConfig.pageName" tip="如person.vue" label="文件名称" placeholder="输入文件名称"></le-input>
-                    <le-button value="添加列表页" @click="show2 = false;show1 = true"></le-button>
-                    <le-button value="添加新页面" @click="show2 = true;show1 = false"></le-button>
+                    <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块路径"></le-input>
+                    <le-button value="添加页面" @click="show2 = false;show1 = true"></le-button>
+                </div>
+                <div class="col2">
+                    <le-input v-model="listBtnConfig.pageName" tip="如person" label="文件名称"></le-input>
+                    <le-radio-list on label="文件类型" :data-source="config.fileTypes.dataSource" display-name="name" display-value="code" v-model="fileType"></le-radio-list>
                 </div>
             </div>
-            
+
             <div class='le_table_container' v-show="show1">
                 <h1>列表页基础配置</h1>
                 <div class="col2">
                     <le-input v-model="listBtnConfig.tableTitle" label="列表名称" placeholder="输入列表名称"></le-input>
                     <le-input v-model="listBtnConfig.colsCount" label="一行展示多少列" placeholder="输入列数"></le-input>
                     <le-checkbox-list label="是否有dialog" :data-source="config.dialog.dataSource" display-name="name" display-value="code" v-model="hasDialog"></le-checkbox-list>
-                    <le-button type="save" value="保存配置" @click="createModuleFile"></le-button>
                 </div>
                 <div class="col4">
                     <le-button type="create" value="添加按钮" @click="addListPageButton"></le-button>
@@ -242,7 +244,7 @@
                 </div>
                 <h1>Table参数配置</h1>
                 <div class="col4">
-                    <pre contenteditable id="table_options">
+                    <pre contenteditable id="table_options" style="height:100px;overflow:scroll">
                         {
                             showCk:true,
                             map:[
@@ -307,6 +309,7 @@ export default {
         return {
             show1:false,
             show2:false,
+            fileType:"1",
             baseReadOnly:false,
             project:{
                 projects:[],
@@ -344,9 +347,6 @@ export default {
         },
         addListPageButton(){
             list_tool.searchList.btn.addListPageButton(this);
-        },
-        resetBaseConfig(){
-            this.baseReadOnly = false;
         },
         saveModule(){
             if(!this.project.projectPath || !this.project.moduleName){
@@ -414,9 +414,7 @@ export default {
                     hasDialog:"",
                     form:[]
                 },
-
             }
-
             debugger
             this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath,data:data}).then(d=>{
                 this.alert.showAlert("success","新增成功!");

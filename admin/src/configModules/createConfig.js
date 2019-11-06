@@ -71,6 +71,9 @@ export default  {
     dialog:{
         dataSource:[{name:'',code:"1"}]
     },
+    fileTypes:{
+        dataSource:[{name:"列表页",code:"1"},{name:"save页",code:"2"}],
+    },
     form:{
         defaultCol:{
             type:"text",

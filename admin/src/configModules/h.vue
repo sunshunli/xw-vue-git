@@ -8,21 +8,26 @@
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-button value="添加模块" @click="saveModule"></le-button>
-                    <le-button type="create" value="添加子模块" @click="addSubModules"></le-button>
+                    <le-button type="create" value="添加子模块" @click="pageOption=true"></le-button>
                     <le-button type="save" value="保存子模块" @click="createModuleFile"></le-button>
                 </div>
-                <h1>页面配置</h1>
-                <div class="col2">
-                    <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块路径"></le-input>
-                    <le-button value="添加页面" @click="show2 = false;show1 = true"></le-button>
-                </div>
-                <div class="col2">
-                    <le-input v-model="listBtnConfig.pageName" tip="如person" label="文件名称"></le-input>
-                    <le-radio-list on label="文件类型" :data-source="config.fileTypes.dataSource" display-name="name" display-value="code" v-model="fileType"></le-radio-list>
+                <div v-show = "pageOption">
+                    <h1>页面配置</h1>
+                    <div class="col2">
+                        <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块路径"></le-input>
+                        <le-button value="添加页面" @click="show2 = false;show1 = true"></le-button>
+                        <le-button value="保存页面" @click="savePage"></le-button>
+
+                    </div>
+                    <div class="col2">
+                        <le-input v-model="listBtnConfig.pageName" tip="如person" label="文件名称"></le-input>
+                        <le-radio-list on label="文件类型" :data-source="config.fileTypes.dataSource" display-name="name" display-value="code" v-model="fileType"></le-radio-list>
+                    </div>
                 </div>
             </div>
 
             <div class='le_table_container' v-show="show1">
+                 
                 <h1>列表页基础配置</h1>
                 <div class="col2">
                     <le-input v-model="listBtnConfig.tableTitle" label="列表名称" placeholder="输入列表名称"></le-input>
@@ -245,29 +250,7 @@
                 <h1>Table参数配置</h1>
                 <div class="col4">
                     <pre contenteditable id="table_options" style="height:100px;overflow:scroll">
-                        {
-                            showCk:true,
-                            map:[
-                                {key:"shop",val:"商城"},
-                                {key:"accessField",val:"封禁纬度"}
-                            ],
-                            getUrl:()=>{
-                                return "/risk/limit/black/user/query/lst";
-                            },
-                            pageOption:{
-                                sizeKey:"pageSize",
-                                indexKey:"pageNum",
-                                index:1,
-                                size:10
-                            },
-                            actions:[
-                                {
-                                    key:"update",
-                                    val:"编辑",
-                                    action:this.edit
-                                }
-                            ]
-                        }
+                        {{tableOption}}
                     </pre>
                 </div>
             </div>
@@ -307,6 +290,7 @@ export default {
     name:"H",
     data(){
         return {
+            pageOption:false,
             show1:false,
             show2:false,
             fileType:"1",
@@ -327,6 +311,29 @@ export default {
             },
             listSearchColsConfig:{
                 cols:[]
+            },
+            tableOption:{
+                showCk:true,
+                map:[
+                    {key:"shop",val:"商城"},
+                    {key:"accessField",val:"封禁纬度"}
+                ],
+                getUrl:()=>{
+                    return "/risk/limit/black/user/query/lst";
+                },
+                pageOption:{
+                    sizeKey:"pageSize",
+                    indexKey:"pageNum",
+                    index:1,
+                    size:10
+                },
+                actions:[
+                    {
+                        key:"update",
+                        val:"编辑",
+                        action:this.edit
+                    }
+                ]
             },
             form:{
                 cols:[]
@@ -394,28 +401,7 @@ export default {
                     delete x.selectDataSource;
                 })
             }
-
-            let res = {
-                projectName:"",
-                moduleName:"",
-                page:{
-                    fileName:"",
-                    path:"",
-                    type:""
-                },
-                listOptions:{
-                    search:{
-                        btn:[],
-                        cols:[],
-                    },
-                    tableOptions:{}
-                },
-                dialog:{
-                    hasDialog:"",
-                    form:[]
-                },
-            }
-            debugger
+            debugger;
             this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath,data:data}).then(d=>{
                 this.alert.showAlert("success","新增成功!");
                 this.baseReadOnly = false;
@@ -441,6 +427,32 @@ export default {
                 this.$refs['ss'].init(result);
             })
         },
+        // 保存页面
+        savePage(){
+
+            let res = {
+                projectName:this.project.projectPath,
+                moduleName:this.project.moduleName,
+                page:{
+                    fileName:this.listBtnConfig.pageName,
+                    path:this.listBtnConfig.subModulePath,
+                    type:this.fileType,
+                    searchOpts:{
+                        search:{
+                            btn:this.listBtnConfig.btns,
+                            cols:this.listSearchColsConfig.cols,
+                        },
+                        tableOptions:this.tableOption
+                    },
+                    dialog:{
+                        hasDialog:this.hasDialog,
+                        form:this.form,
+                    },
+                },
+                
+            }
+            debugger
+        }
     },
     mounted(){
         this.getProjects();

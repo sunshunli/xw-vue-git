@@ -429,7 +429,11 @@ export default {
         },
         // 保存页面
         savePage(){
-
+            let cols = this.form.cols ? Unit.object.cloneObj(this.form.cols) : [];
+            cols.forEach(item => {
+                delete item.selectDataSource
+            })
+            debugger;
             let res = {
                 projectName:this.project.projectPath,
                 moduleName:this.project.moduleName,
@@ -446,7 +450,9 @@ export default {
                     },
                     dialog:{
                         hasDialog:this.hasDialog,
-                        form:this.form,
+                        form:{
+                            cols,
+                        },
                     },
                 },
                 

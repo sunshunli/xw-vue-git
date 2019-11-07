@@ -12,7 +12,7 @@
         "serverData":{
             "store":{},
             "API":{
-                "url":[]
+                "url":[] 
             },
             "services":{}
         }

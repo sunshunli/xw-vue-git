@@ -452,6 +452,14 @@ export default {
                 
             }
             debugger
+            this.ajax.postFetch("/comp/savePage",res)
+                .then(res => {
+                    this.alert.showAlert("success","保存页面成功");
+                })
+                .catch(rej => {
+                    this.alert.showAlert("error","保存页面失败");
+
+                })
         }
     },
     mounted(){

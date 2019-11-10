@@ -24,8 +24,8 @@ import ValidataHOC from "@CoreUILib/validataHOC.js";
 import bodyClickDirective from "@CoreUILib/leDirective.js";
 import lang18n from "@CoreUILib/i18n.js";
 
-export default{
-    install:function(Vue){
+export default {
+    install(Vue){
         Vue.component('LeButton',LeButton);
         Vue.component('LeCheckboxList',ValidataHOC(LeCheckboxList));
         Vue.component('LeRadioList',ValidataHOC(LeRadioList));

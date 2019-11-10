@@ -554,7 +554,12 @@ export default {
         },
         // 保存页面
         savePage(){
-            let _data = {
+            let cols = this.form.cols ? Unit.object.cloneObj(this.form.cols) : [];
+            cols.forEach(item => {
+                delete item.selectDataSource
+            })
+            debugger;
+            let res = {
                 projectName:this.project.projectPath,
                 moduleName:this.project.moduleName,
                 page:{

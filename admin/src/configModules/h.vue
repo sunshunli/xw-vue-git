@@ -4,18 +4,20 @@
         <div class="le_comps_core_css">
             <div class='le_list_search_pannel clearfix'>
                 <h1>项目配置</h1>
-                <div class="col2">
+                <div class="col3">
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-button value="添加模块" @click="saveModule"></le-button>
                     <le-button type="create" value="添加子模块" @click="pageOption=true"></le-button>
                     <le-button type="save" value="保存子模块" @click="createModuleFile"></le-button>
+                    <le-button type="save" value="保存整个模块" @click="createModule"></le-button>
+
                 </div>
                 <div v-show = "pageOption">
                     <h1>页面配置</h1>
                     <div class="col2">
                         <le-input v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块路径"></le-input>
-                        <le-button value="添加页面" @click="show2 = false;show1 = true"></le-button>
+                        <le-button value="添加页面" @click="addPage"></le-button>
                         <le-button value="保存页面" @click="savePage"></le-button>
 
                     </div>
@@ -256,7 +258,115 @@
             </div>
 
             <div class="le_table_container" v-show="show2">
-
+                <div>
+                    <h1>save表单配置</h1>
+                    <div class="col4">
+                        <le-button type="create" value="添加列" @click="addFormCols"></le-button>
+                        <table class="le-table">
+                            <thead>
+                                <tr class="title">
+                                    <td>操作</td>
+                                    <td>字段类型</td>
+                                    <td>字段名</td>
+                                    <td>Label</td>
+                                    <td>LabelWidth</td>
+                                    <td>placeholder</td>
+                                    <td>Url</td>
+                                    <td>dataSource</td>
+                                    <td>displayName</td>
+                                    <td>displayValue</td>
+                                    <td>tip</td>
+                                    <td>开启验证</td>
+                                    <td>是否必填</td>
+                                    <td>验证类型</td>
+                                    <td>msg</td>
+                                </tr>
+                            </thead>
+                            <tr v-for="(item,idx) in saveForm.cols" :key="idx">
+                                <td>
+                                    <div style="width:100px">
+                                        <le-button type="remove" value="删除" @click="delRow(item,saveForm.cols)"></le-button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class='w200'>
+                                        <le-local-select labelWidth="0" placeholder="请选择" :data-source="item.selectDataSource.typeDatsSource" display-name="name" display-value="code" v-model="item.type"></le-local-select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.key" placeholder="接口字段名称(key)"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.label" placeholder="字段名称(label)"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.labelWidth" placeholder="labelWidth"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.placeholder" placeholder="输入placeholder"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.url" placeholder="Ajax请求url" v-show="item.type=='select' || item.type=='checkboxList' || item.type=='radioList'"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.dataSource" placeholder="绑定数据源字段" v-show="item.type=='select' || item.type=='checkboxList' || item.type=='radioList'"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.displayName" placeholder="displayName" v-show="item.type=='select' || item.type=='checkboxList' || item.type=='radioList'"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.displayValue" placeholder="displayValue" v-show="item.type=='select' || item.type=='checkboxList' || item.type=='radioList'"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-model="item.tip" placeholder="tip"></le-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-local-select labelWidth="0" placeholder="is on" :data-source="item.selectDataSource.onDataSource" display-name="name" display-value="code" v-model="item.on"></le-local-select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-local-select labelWidth="0" v-show='item.on == "1"' placeholder="is required" :data-source="item.selectDataSource.requiredDatsSource" display-name="name" display-value="code" v-model="item.required"></le-local-select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-local-select labelWidth="0" v-show="item.type == 'text' && item.on == '1'" placeholder="input验证类型" :data-source="item.selectDataSource.valifyDataSource" display-name="name" display-value="code" v-model="item.valifyType"></le-local-select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="w200">
+                                        <le-input labelWidth="0" v-show="item.on == '1'" v-model="item.msg" placeholder="错误提示信息"></le-input>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class = "col4">
+                        <le-input v-model="saveInterface.save" label="save接口"></le-input>
+                        <le-input v-model="saveInterface.detail" label="detail接口"></le-input>
+                        <le-input v-model="saveInterface.update" label="update接口"></le-input>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -337,6 +447,14 @@ export default {
             },
             form:{
                 cols:[]
+            },
+            saveForm:{
+                cols:[]
+            },
+            saveInterface:{
+                save:"",
+                detail:"",
+                update:"",
             }
         }
     },
@@ -351,6 +469,15 @@ export default {
             defaultCol.selectDataSource.onDataSource = Unit.object.cloneObj(this.config.enum.onDataSource);
             defaultCol.selectDataSource.valifyDataSource = Unit.object.cloneObj(this.config.enum.valifyDataSource);
             this.form.cols.push(defaultCol);
+        },
+        addFormCols(){
+            debugger;
+            let defaultCol = Unit.object.cloneObj(this.config.form.defaultCol);
+            defaultCol.selectDataSource.typeDatsSource = Unit.object.cloneObj(this.config.enum.typeDatsSource);
+            defaultCol.selectDataSource.requiredDatsSource = Unit.object.cloneObj(this.config.enum.requiredDatsSource);
+            defaultCol.selectDataSource.onDataSource = Unit.object.cloneObj(this.config.enum.onDataSource);
+            defaultCol.selectDataSource.valifyDataSource = Unit.object.cloneObj(this.config.enum.valifyDataSource);
+            this.saveForm.cols.push(defaultCol);
         },
         addListPageButton(){
             list_tool.searchList.btn.addListPageButton(this);
@@ -367,6 +494,17 @@ export default {
                 this.alert.showAlert("error",e);
             })
         },
+        createModule(){
+            if(!this.project.projectPath){
+                this.alert.showAlert("warning","项目不能为空!");
+                return;
+            }
+            this.ajax.postFetch("/comp/createGlobalFile",{projectPath:this.project.projectPath}).then(d=>{
+                this.alert.showAlert("success","保存整个项目成功!");
+            }).catch(e=>{
+                this.alert.showAlert("error",e);
+            })
+        },
         createModuleFile(){
             if(!this.project.projectPath || !this.project.moduleName || !this.listBtnConfig.pageName){
                 this.alert.showAlert("warning","项目名称, 模块名称, 页面名称必填!");
@@ -378,31 +516,8 @@ export default {
             if(!this.listBtnConfig.tableTitle){
                 this.listBtnConfig.tableTitle = this.listBtnConfig.pageName.split('.')[0] + "_List";
             }
-
-            let data = {
-                tableOptionsName:this.listBtnConfig.pageName.split('.')[0] + "_table_options",
-                btn:this.listBtnConfig,
-                cols:this.listSearchColsConfig,
-                tableOptions:eval("("+document.getElementById("table_options").innerText.trim()+")"),
-                form:Unit.object.cloneObj(this.form.cols),
-                hasDialog:this.hasDialog
-            }
-            data = Unit.object.cloneObj(data);
-            data.btn.btns.forEach(x=>{
-                delete x.buttonTypes
-            })
-            data.cols.cols.forEach(x=>{
-                delete x.fieldTypes
-            })
-
-            //dialog
-            if(this.hasDialog == "1"){
-                data.form.forEach(x=>{
-                    delete x.selectDataSource;
-                })
-            }
             debugger;
-            this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath,data:data}).then(d=>{
+            this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath}).then(d=>{
                 this.alert.showAlert("success","新增成功!");
                 this.baseReadOnly = false;
             }).catch(e=>{
@@ -427,6 +542,16 @@ export default {
                 this.$refs['ss'].init(result);
             })
         },
+        addPage(){
+            if(this.fileType == 1){
+                this.show2 = false;
+                this.show1 = true
+            }else{
+                this.show2 =true;
+                this.show1 = false;
+            }
+            
+        },
         // 保存页面
         savePage(){
             let cols = this.form.cols ? Unit.object.cloneObj(this.form.cols) : [];
@@ -441,32 +566,74 @@ export default {
                     fileName:this.listBtnConfig.pageName,
                     path:this.listBtnConfig.subModulePath,
                     type:this.fileType,
-                    searchOpts:{
+                }
+            };
+            if(this.fileType == "1"){
+                _data.page.searchOpts = {
                         search:{
                             btn:this.listBtnConfig.btns,
                             cols:this.listSearchColsConfig.cols,
                         },
                         tableOptions:this.tableOption
-                    },
-                    dialog:{
-                        hasDialog:this.hasDialog,
-                        form:{
-                            cols,
-                        },
-                    },
-                },
-                
+                };
+                _data.page.dialog = {
+                    hasDialog:this.hasDialog,
+                    form:this.form,
+                }
+                _data = Unit.object.cloneObj(_data);
+                _data.page.searchOpts.search.btn.forEach(x=>{
+                    delete x.buttonTypes
+                })
+                _data.page.searchOpts.search.cols.forEach(x=>{
+                    delete x.fieldTypes
+                })
+                _data.page.dialog.hasDialog == 1 && _data.page.dialog.form.cols.forEach(item => {
+                    delete item.selectDataSource
+                })
             }
-            debugger
-            this.ajax.postFetch("/comp/savePage",res)
+            if(this.fileType == "2"){
+                _data.page.form = this.saveForm;
+                _data.page.savePageInterface = this.saveInterface;
+                _data = Unit.object.cloneObj(_data);
+                _data.page.form.cols.forEach(item => {
+                    delete item.selectDataSource;
+                })
+            }
+            this.ajax.postFetch("/comp/savePage",_data)
                 .then(res => {
+                   this.resetPageOptpion();
                     this.alert.showAlert("success","保存页面成功");
+                    
                 })
                 .catch(rej => {
                     this.alert.showAlert("error","保存页面失败");
 
                 })
-        }
+        },
+        resetPageOptpion(){
+             this.hasDialog = "1",
+            this.listBtnConfig = {
+                subModulePath:"",
+                tableTitle:"",
+                pageName:"",
+                colsCount:"",
+                btns:[]
+            }
+            this.listSearchColsConfig = {
+                cols:[]
+            }
+            this.form = {
+                cols:[]
+            }
+            this.saveForm ={
+                cols:[]
+            }
+            this.saveInterface = {
+                save:"",
+                detail:"",
+                update:"",
+            }
+        },
     },
     mounted(){
         this.getProjects();

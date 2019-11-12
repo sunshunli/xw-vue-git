@@ -5,7 +5,7 @@
             <div class='le_list_search_pannel clearfix'>
                 <h1>项目配置</h1>
                 <div class="col3">
-                    <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="name" display-value="value"></le-local-select>
+                    <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="projectName" display-value="projectPath"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-button value="添加模块" @click="saveModule"></le-button>
                     <le-button type="create" value="添加子模块" @click="pageOption=true"></le-button>
@@ -491,7 +491,7 @@ export default {
                 this.baseReadOnly = true;
                 this.alert.showAlert("success","新增成功Module文件夹!");
             }).catch(e=>{
-                this.alert.showAlert("error",e);
+                this.alert.showAlert("error",e.data);
             })
         },
         createModule(){
@@ -534,12 +534,8 @@ export default {
         },
         getProjects(){
             this.ajax.getFetch("/comp/getProjects").then(d=>{
-                let result=[];
-                d.data && d.data.split('\r\n').forEach(item => {
-                    result.push({name:item.substring(item.lastIndexOf('/')+1),value:item});
-                });
+                let result=JSON.parse(d.data);
                 this.project.projects=result;
-                this.$refs['ss'].init(result);
             })
         },
         addPage(){
@@ -559,7 +555,7 @@ export default {
                 delete item.selectDataSource
             })
             debugger;
-            let res = {
+            let _data = {
                 projectName:this.project.projectPath,
                 moduleName:this.project.moduleName,
                 page:{
@@ -602,17 +598,15 @@ export default {
             }
             this.ajax.postFetch("/comp/savePage",_data)
                 .then(res => {
-                   this.resetPageOptpion();
+                    this.resetPageOptpion();
                     this.alert.showAlert("success","保存页面成功");
-                    
                 })
-                .catch(rej => {
-                    this.alert.showAlert("error","保存页面失败");
-
+                .catch(error => {
+                    this.alert.showAlert("error",error.data);
                 })
         },
         resetPageOptpion(){
-             this.hasDialog = "1",
+            this.hasDialog = "1",
             this.listBtnConfig = {
                 subModulePath:"",
                 tableTitle:"",

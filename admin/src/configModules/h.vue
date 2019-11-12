@@ -574,7 +574,8 @@ export default {
                             btn:this.listBtnConfig.btns,
                             cols:this.listSearchColsConfig.cols,
                         },
-                        tableOptions:this.tableOption
+                        tableOptions:this.tableOption,
+                        tableTitle:this.listBtnConfig.tableTitle,
                 };
                 _data.page.dialog = {
                     hasDialog:this.hasDialog,

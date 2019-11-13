@@ -506,18 +506,16 @@ export default {
             })
         },
         createModuleFile(){
-            if(!this.project.projectPath || !this.project.moduleName || !this.listBtnConfig.pageName){
+            if(!this.project.projectPath || !this.project.moduleName ){
                 this.alert.showAlert("warning","项目名称, 模块名称, 页面名称必填!");
                 return;
             }
-            if(!this.listBtnConfig.colsCount){
-                this.listBtnConfig.colsCount = 3;
-            }
-            if(!this.listBtnConfig.tableTitle){
-                this.listBtnConfig.tableTitle = this.listBtnConfig.pageName.split('.')[0] + "_List";
-            }
+            
             debugger;
-            this.ajax.postFetch("/comp/createModuleFile",{moduleName:this.project.moduleName,projectPath:this.project.projectPath}).then(d=>{
+            this.ajax.postFetch("/comp/createModuleFile",{
+                moduleName:this.project.moduleName,
+                projectPath:this.project.projectPath
+            }).then(d=>{
                 this.alert.showAlert("success","新增成功!");
                 this.baseReadOnly = false;
             }).catch(e=>{

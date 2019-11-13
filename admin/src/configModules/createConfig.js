@@ -132,6 +132,9 @@ export default  {
         onDataSource:[
             {name:'是',code:"1"},
             {name:'否',code:"0"}
+        ],
+        layoutList:[
+            {name:"是",code:"1"}
         ]
     }
 }

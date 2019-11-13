@@ -7,9 +7,11 @@
                 <div class="col3">
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="projectName" display-value="projectPath"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
+                    <le-checkbox-list v-model = "project.isLayoutModule" label="是否layout" :data-source="project.layoutList" display-name="name" display-value="code"></le-checkbox-list>
                     <le-button value="添加模块" @click="saveModule"></le-button>
                     <le-button type="create" value="添加子模块" @click="pageOption=true"></le-button>
                     <le-button type="save" value="保存子模块" @click="createModuleFile"></le-button>
+                    <le-button type="save" value="保存整个模块" @click="createModule"></le-button>
                     <le-button type="save" value="保存整个模块" @click="createModule"></le-button>
 
                 </div>
@@ -407,8 +409,10 @@ export default {
             baseReadOnly:false,
             project:{
                 projects:[],
+                layoutList:[],
                 projectPath:"",
                 moduleName:"",
+                isLayoutModule:false,
             },
             hasDialog:"1",
             config:Config,
@@ -499,7 +503,7 @@ export default {
                 this.alert.showAlert("warning","项目不能为空!");
                 return;
             }
-            this.ajax.postFetch("/comp/createGlobalFile",{projectPath:this.project.projectPath}).then(d=>{
+            this.ajax.postFetch("/comp/createGlobalFile",{projectPath:this.project.projectPath,isLayout : this.project.isLayoutModule}).then(d=>{
                 this.alert.showAlert("success","保存整个项目成功!");
             }).catch(e=>{
                 this.alert.showAlert("error",e);
@@ -507,7 +511,7 @@ export default {
         },
         createModuleFile(){
             if(!this.project.projectPath || !this.project.moduleName ){
-                this.alert.showAlert("warning","项目名称, 模块名称, 页面名称必填!");
+                this.alert.showAlert("warning","项目名称, 模块名称必填!");
                 return;
             }
             
@@ -537,6 +541,7 @@ export default {
             })
         },
         addPage(){
+            this.resetPageOptpion(false);
             if(this.fileType == 1){
                 this.show2 = false;
                 this.show1 = true
@@ -603,12 +608,15 @@ export default {
                     this.alert.showAlert("error",error.data);
                 })
         },
-        resetPageOptpion(){
+        resetPageOptpion(tag = true){
             this.hasDialog = "1",
+            this.show2 = false;
+            this.show1 = false;
+            
             this.listBtnConfig = {
-                subModulePath:"",
+                subModulePath:this.listBtnConfig.subModulePath,
                 tableTitle:"",
-                pageName:"",
+                pageName:tag ? "" : this.listBtnConfig.pageName,
                 colsCount:"",
                 btns:[]
             }
@@ -626,10 +634,14 @@ export default {
                 detail:"",
                 update:"",
             }
+            this.listBtnConfig.btns.push(
+                {btnName:"搜索",buttonTypes:Unit.object.cloneObj(this.config.searchPage.btn.buttonTypes),btnType:"search",btnHandle:"search"}
+            )
         },
     },
     mounted(){
         this.getProjects();
+        this.project.layoutList = Unit.object.cloneObj(this.config.enum.layoutList);
         this.listBtnConfig.btns.push(
             {btnName:"搜索",buttonTypes:Unit.object.cloneObj(this.config.searchPage.btn.buttonTypes),btnType:"search",btnHandle:"search"}
         )

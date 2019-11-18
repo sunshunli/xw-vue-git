@@ -518,6 +518,13 @@ export default {
                 }
             })
         },
+        findProjectName(){
+           let result =  this.project.projects.find(item => {
+                return item.projectPath == this.project.projectPath
+            })
+            console.log(result);
+            return result.projectName;
+        },
         // 添加模块
         saveModule(){
             if(!this.project.projectPath || !this.project.moduleName){
@@ -527,7 +534,8 @@ export default {
             Service.saveModule({
                 params:{
                     moduleName:this.project.moduleName,
-                    projectPath:this.project.projectPath
+                    projectPath:this.project.projectPath,
+                    projectName : this.findProjectName(),
                 },
                 cb:(d)=>{
                     this.baseReadOnly = true;
@@ -544,7 +552,9 @@ export default {
             Service.createModule({
                 params:{
                     projectPath:this.project.projectPath,
-                    isLayout : this.project.isLayoutModule
+                    isLayout : this.project.isLayoutModule,
+                    moduleName : this.project.moduleName,
+                    projectName : this.findProjectName()
                 },
                 cb:()=>{
                     this.addSubModuleTag = false;
@@ -565,7 +575,8 @@ export default {
             Service.createModuleFile({
                 params:{
                     moduleName:this.project.moduleName,
-                    projectPath:this.project.projectPath
+                    projectPath:this.project.projectPath,
+                    projectName:this.findProjectName(),
                 },
                 cb:()=>{
                     this.addSubModuleTag = false;

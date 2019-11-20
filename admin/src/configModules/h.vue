@@ -9,7 +9,6 @@
                     <le-local-select :readonly="baseReadOnly" v-model="project.projectPath" placeholder='选择项目' label="选择项目" :data-source="project.projects" display-name="projectName" display-value="projectPath"></le-local-select>
                     <le-input :readonly="baseReadOnly" v-model="project.moduleName" label="模块名称" placeholder="输入模块名称"></le-input>
                     <le-checkbox-list :readonly = "baseReadOnly" v-model = "project.isLayoutModule" label="是否layout" :data-source="project.layoutList" display-name="name" display-value="code"></le-checkbox-list>
-                    
                 </div>
                 <div class = "col3" style = "flex-direction: row-reverse;">
                     <le-button type="reset" value="清空模块配置文件" @click="resetConfig"></le-button>
@@ -533,7 +532,7 @@ export default {
             }
             Service.saveModule({
                 params:{
-                    moduleName:this.project.moduleName,
+                    moduleName:this.project.moduleName.trim(),
                     projectPath:this.project.projectPath,
                     projectName : this.findProjectName(),
                 },
@@ -574,9 +573,9 @@ export default {
             }
             Service.createModuleFile({
                 params:{
-                    moduleName:this.project.moduleName,
-                    projectPath:this.project.projectPath,
-                    projectName:this.findProjectName(),
+                    moduleName:this.project.moduleName.trim(),
+                    projectPath:this.project.projectPath.trim(),
+                    projectName:this.findProjectName().trim(),
                 },
                 cb:()=>{
                     this.addSubModuleTag = false;
@@ -638,11 +637,11 @@ export default {
             })
             debugger;
             let _data = {
-                projectName:this.project.projectPath,
-                moduleName:this.project.moduleName,
+                projectName:this.project.projectPath.trim(),
+                moduleName:this.project.moduleName.trim(),
                 page:{
-                    fileName:this.listBtnConfig.pageName,
-                    path:this.listBtnConfig.subModulePath,
+                    fileName:this.listBtnConfig.pageName.trim(),
+                    path:this.listBtnConfig.subModulePath.trim(),
                     type:this.fileType,
                 }
             };

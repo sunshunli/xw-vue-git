@@ -2,12 +2,14 @@ let path = require('path');
 let webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let plugins = (module.exports.plugins || []).concat([
     new CleanWebpackPlugin(['dist']),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new BundleAnalyzerPlugin()
 ])
 
 module.exports =  {
@@ -18,6 +20,7 @@ module.exports =  {
         filename: "le-components.min.js",
         library:"leComponents",
         libraryTarget : "umd",
+        libraryExport:"default"
     },
     module: {
         rules: [
@@ -59,7 +62,8 @@ module.exports =  {
         extensions: ['.vue', '.js', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            "@CoreUILib":path.resolve(__dirname,"../admin/src/core/comps")
+            "@CoreUILib":path.resolve(__dirname,"../admin/src/core/comps"),
+            "@CoreSrc":path.resolve(__dirname,"../admin/src")
         }
     },
     performance: {

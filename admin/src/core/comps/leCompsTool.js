@@ -80,7 +80,7 @@ let LeCompTool = {
                     item.ck = false;
                 }
                 item.cls = "";
-                item.__tmpId = _idSeed.newId();
+                item.__tmpId = LeCompTool._idSeed.newId();
             });
             return data;
         },

@@ -18,7 +18,6 @@ import LeDateTimePicker from "../comps/datepicker/datetime.vue";
 import LeDialog from "../comps/dialog/dialog.vue";
 import LeLoading from "../comps/loading/loading.vue";
 import LeAlert from "./alert/alert.js";
-import LeEditor from "../comps/editor/editor.vue"
 
 import ValidataHOC from "./validataHOC.js";
 import bodyClickDirective from "./leDirective.js";
@@ -42,7 +41,6 @@ export default{
         Vue.component('LeDialog',LeDialog);
         Vue.component('LeForm',LeForm);
         Vue.component("LeLoading",LeLoading);
-        Vue.component("LeEditor",ValidataHOC(LeEditor));
         
         Vue.prototype.lang18n = lang18n;
 

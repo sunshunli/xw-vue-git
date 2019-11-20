@@ -1,5 +1,6 @@
 
 import "@CoreUILib/leComponents.css";
+import "@CoreSrc/static/css/font-awesome.css";
 
 import LeButton from "@CoreUILib/button/button.vue";
 import LeCheckboxList from "@CoreUILib/checkbox/checkboxList.vue";
@@ -18,7 +19,6 @@ import LeDateTimePicker from "@CoreUILib/datepicker/datetime.vue";
 import LeDialog from "@CoreUILib/dialog/dialog.vue";
 import LeLoading from "@CoreUILib/loading/loading.vue";
 import LeAlert from "@CoreUILib/alert/alert.js";
-import LeEditor from "@CoreUILib/editor/editor.vue"
 
 import ValidataHOC from "@CoreUILib/validataHOC.js";
 import bodyClickDirective from "@CoreUILib/leDirective.js";
@@ -42,7 +42,6 @@ export default {
         Vue.component('LeDialog',LeDialog);
         Vue.component('LeForm',LeForm);
         Vue.component("LeLoading",LeLoading);
-        Vue.component("LeEditor",ValidataHOC(LeEditor));
         
         Vue.prototype.lang18n = lang18n;
         Vue.use(LeAlert);

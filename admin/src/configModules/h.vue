@@ -304,7 +304,10 @@
             val:"编辑",
             action:this.edit
         }
-    ]
+    ],
+    analysis:(data)=>{
+        
+    })
 }
                         </pre>
                     </div>

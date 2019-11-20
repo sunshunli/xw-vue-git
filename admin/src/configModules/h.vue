@@ -306,7 +306,17 @@
         }
     ],
     analysis:(data)=>{
-        
+        if(data && data.data && data.data.data && data.data.data.dataList){
+            return {
+                data:data.data.data.dataList,
+                count:data.data.data.count
+            }
+        }else{
+            return {
+                data:[],
+                count:0
+            }
+        }
     })
 }
                         </pre>

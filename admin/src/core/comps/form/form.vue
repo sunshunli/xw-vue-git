@@ -114,8 +114,8 @@ export default {
     .formStyle{
         width: 100%;
         min-width: 500px;
-        height: 90%;
-        overflow-y: scroll;
+        /* height: 90%;
+        overflow-y: scroll;  */
     }
 
     .formStyle .container{

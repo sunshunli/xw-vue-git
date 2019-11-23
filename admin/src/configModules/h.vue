@@ -15,19 +15,35 @@
                     <le-button type="publish" value="保存整个模块" @click="createModule"></le-button>
                     <le-button type="save" :disabled = "!baseReadOnly" value="保存子模块" @click="createModuleFile"></le-button>
                     <le-button type="create" :disabled = "!baseReadOnly" value="添加子模块" @click="showAddSubMoudle"></le-button>
-                    <le-button value="添加模块" :disabled = "baseReadOnly" type = "update"  @click="saveModule"></le-button>
+                    <le-button value="添加模块" :disabled = "baseReadOnly || !proxySaveTag" type = "update"  @click="saveModule"></le-button>
+                    <le-button value="保存代理" :disabled = "proxySaveTag" type = "save"  @click="saveProxy"></le-button>
+                    <le-button value="添加代理" :disabled = "proxySaveTag" type = "create"  @click="addProxy"></le-button>
+
                 </div>
                 <div>
-                    <div class = "col4" style = "margin-top:10px">
+                    <div v-for = "(item,key) in proxyArr" :key = "key">
+                            <div style = "text-align:left;font-size:14px;margin-top:15px;margin-bottom:10px;margin-left:1em;">
+                                第{{key + 1}}组代理配置
+                            </div>
+                            <div class = "col2">
+                                <le-input :readonly = "proxySaveTag" v-model = "item.key" label = "key:"></le-input>
+                                <le-input :readonly = "proxySaveTag" v-model = "item.url" label = "url:"></le-input>
+                                <le-button :disabled = "proxySaveTag" @click = "delRow(item,proxyArr)" type = "remove" value = "删除"></le-button>
+                            </div>
+                    </div>
+                    <div>
 
-                        <le-input v-for = "item in interfaceArr" :key = "item.name" v-model="item.url" :label="item.name"></le-input>
-                       
                     </div>
                 </div>
+                
             </div>
             <!-- 页面配置 -->
             <transition name="toggleBox">
                 <div v-show = "addSubModuleTag">
+                    <h1 style = "text-align:left;margin-left:10px;font-size:22px;"><i class = "fa fa-envira" style = "color:#28a509;"/>模块接口配置</h1>
+                    <div class = "col4"  style = "margin-top:10px">
+                        <le-input v-for = "item in interfaceArr" :key = "item.name" v-model="item.url" :label="item.name"></le-input>
+                    </div>
                     <h1 style = "text-align:left;margin-left:10px;font-size:22px;"><i class = "fa fa-envira" style = "color:#28a509;"/>页面配置</h1>
                     <div class="col3">
                         <le-input :readonly = "addingTag" v-model="listBtnConfig.subModulePath" tip="子模块路径:sub1/sub2" label="子模块路径"></le-input>
@@ -455,6 +471,7 @@
 import Unit from "../core/tool/commonUtil.js";
 import Config from "./createConfig.js";
 import Service from "./service.js";
+import CommonUtil from '../core/tool/commonUtil.js';
 export default {
     components: {
           
@@ -467,6 +484,7 @@ export default {
             saveConfigTag:false,
             baseReadOnly:false,
             addingTag:false,
+            proxySaveTag:false,
             fileType:"1",
             project:{
                 projects:[],
@@ -494,6 +512,7 @@ export default {
             saveForm:{
                 cols:[]
             },
+
             interfaceArr:[
                 {
                     name:"save接口",
@@ -520,7 +539,8 @@ export default {
                     key:"doGetList",
                     url:""
                 }
-            ]
+            ],
+            proxyArr:[],
         }
     },
     computed:{
@@ -560,6 +580,9 @@ export default {
                 }
             })
         },
+        addProxy(){
+            this.proxyArr.push(CommonUtil.object.cloneObj(this.config.webpackProxyConfig))
+        },
         findProjectName(){
            let result =  this.project.projects.find(item => {
                 return item.projectPath == this.project.projectPath
@@ -567,12 +590,40 @@ export default {
             console.log(result);
             return result.projectName;
         },
+        // 保存proxy配置
+        saveProxy(){
+            if(this.proxyArr.length <= 0){
+                this.alert.showAlert("warning","至少添加一组代理配置");
+                return ;
+            }else{
+                let __tag = false;
+                this.proxyArr.forEach(item => {
+                    if(item.key == "" || item.url == "")__tag = true;
+                })
+                if(__tag){
+                    this.alert.showAlert("warning","代理中key或者url为空，请检查");
+                    return;
+                }
+            }
+            Service.saveProxy({
+                params:{
+                    projectPath:this.project.projectPath,
+                    projectName : this.findProjectName(),
+                    proxy:this.proxyArr,
+                },
+                cb:(d)=>{
+                    this.proxySaveTag = true;
+                    this.alert.showAlert("success","新增proxy成功!");
+                }
+            })
+        },
         // 添加模块
         saveModule(){
             if(!this.project.projectPath || !this.project.moduleName){
                 this.alert.showAlert("warning","必须输入项目和模块名称!");
                 return;
             }
+            
             Service.saveModule({
                 params:{
                     moduleName:this.project.moduleName.trim(),
@@ -580,6 +631,7 @@ export default {
                     projectName : this.findProjectName(),
                 },
                 cb:(d)=>{
+                    debugger;
                     this.baseReadOnly = true;
                     this.alert.showAlert("success","新增成功Module文件夹!");
                 }
@@ -591,12 +643,13 @@ export default {
                 this.alert.showAlert("warning","项目不能为空!");
                 return;
             }
+           
             Service.createModule({
                 params:{
                     projectPath:this.project.projectPath,
                     isLayout : this.project.isLayoutModule,
                     moduleName : this.project.moduleName,
-                    projectName : this.findProjectName()
+                    projectName : this.findProjectName(),
                 },
                 cb:()=>{
                     this.addSubModuleTag = false;
@@ -604,6 +657,8 @@ export default {
                     this.saveConfigTag = false;
                     this.baseReadOnly = false,
                     this.addingTag = false;
+                    this.proxyArr = [];
+                    this.proxySaveTag = false;
                     this.alert.showAlert("success","保存整个项目成功!");
                 }
             })
@@ -628,6 +683,7 @@ export default {
                     this.baseReadOnly = false,
                     this.addingTag = false;
                     this.alert.showAlert("success","新增成功!");
+                    this.resetInterfaceArr();
                 }
             })
         },
@@ -637,6 +693,7 @@ export default {
                 Unit.arrayServer.removeItems(items,[row]);
             })
         },
+        
         // 添加一条搜索条件
         addSearchCols(){
             let tmp = Unit.object.cloneObj(this.config.searchPage.col.defaultColPropertys);
@@ -729,28 +786,7 @@ export default {
                 }
             })
         },
-        // 清空页面配置
-        resetPageOptpion(tag = true){
-            this.hasDialog = "1",
-            this.saveConfigTag = false;
-            this.listConfigTag = false;
-            
-            this.listBtnConfig = {
-                subModulePath:this.listBtnConfig.subModulePath,
-                tableTitle:"",
-                pageName:tag ? "" : this.listBtnConfig.pageName,
-                colsCount:"",
-                btns:[]
-            }
-            this.listSearchColsConfig = {
-                cols:[]
-            }
-            this.form = {
-                cols:[]
-            }
-            this.saveForm ={
-                cols:[]
-            }
+        resetInterfaceArr(){
             this.interfaceArr = [
                 {
                     name:"save接口",
@@ -778,6 +814,30 @@ export default {
                     url:""
                 }
             ]
+        },
+        // 清空页面配置
+        resetPageOptpion(tag = true){
+            this.hasDialog = "1",
+            this.saveConfigTag = false;
+            this.listConfigTag = false;
+            
+            this.listBtnConfig = {
+                subModulePath:this.listBtnConfig.subModulePath,
+                tableTitle:"",
+                pageName:tag ? "" : this.listBtnConfig.pageName,
+                colsCount:"",
+                btns:[]
+            }
+            this.listSearchColsConfig = {
+                cols:[]
+            }
+            this.form = {
+                cols:[]
+            }
+            this.saveForm ={
+                cols:[]
+            }
+            
             this.listBtnConfig.btns.push(
                 {btnName:"搜索",buttonTypes:Unit.object.cloneObj(this.config.searchPage.btn.buttonTypes),btnType:"search",btnHandle:"search"}
             )

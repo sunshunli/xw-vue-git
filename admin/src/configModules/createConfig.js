@@ -136,5 +136,9 @@ export default  {
         layoutList:[
             {name:"是",code:"1"}
         ]
+    },
+    webpackProxyConfig:{
+        key:"",
+        url:"",
     }
 }

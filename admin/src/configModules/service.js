@@ -7,6 +7,7 @@ let _map = {
     createModuleFile:"/comp/createModuleFile",
     getProjects:"/comp/getProjects",
     savePage:"/comp/savePage",
+    saveProxy:"/comp/saveProxy"
 }
 export default {
     resetConfig(t){
@@ -62,5 +63,14 @@ export default {
             .catch(e => {
                 vueContext.alert.showAlert("error",e.data);
             })
-    }
+    },
+    saveProxy(t){
+        vueContext.ajax.postFetch(_map.saveProxy,t.params)
+            .then((d)=>{
+                t.cb(d);
+            })
+            .catch(e => {
+                vueContext.alert.showAlert("error",e.data);
+            })
+    },
 }

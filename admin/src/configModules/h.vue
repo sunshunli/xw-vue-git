@@ -17,6 +17,13 @@
                     <le-button type="create" :disabled = "!baseReadOnly" value="添加子模块" @click="showAddSubMoudle"></le-button>
                     <le-button value="添加模块" :disabled = "baseReadOnly" type = "update"  @click="saveModule"></le-button>
                 </div>
+                <div>
+                    <div class = "col4" style = "margin-top:10px">
+
+                        <le-input v-for = "item in interfaceArr" :key = "item.name" v-model="item.url" :label="item.name"></le-input>
+                       
+                    </div>
+                </div>
             </div>
             <!-- 页面配置 -->
             <transition name="toggleBox">
@@ -303,6 +310,11 @@
             key:"update",
             val:"编辑",
             action:this.edit
+        },
+        {
+            key:"remove",
+            val:"删除",
+            action:this.doRemove
         }
     ],
     analysis:(data)=>{
@@ -431,11 +443,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class = "col4" style = "margin-top:10px">
-                            <le-input v-model="saveInterface.save" label="save接口"></le-input>
-                            <le-input v-model="saveInterface.detail" label="detail接口"></le-input>
-                            <le-input v-model="saveInterface.update" label="update接口"></le-input>
-                        </div>
+                        
                 </div>
             </transition>
         </div>
@@ -486,11 +494,33 @@ export default {
             saveForm:{
                 cols:[]
             },
-            saveInterface:{
-                save:"",
-                detail:"",
-                update:"",
-            }
+            interfaceArr:[
+                {
+                    name:"save接口",
+                    key:"doSave",
+                    url:""
+                },
+                {
+                    name:"detail接口",
+                    key:"getDetail",
+                    url:""
+                },
+                {
+                    name:"remove接口",
+                    key:"doRemove",
+                    url:""
+                },
+                {
+                    name:"update接口",
+                    key:"doUpdate",
+                    url:""
+                },
+                {
+                    name:"getList接口",
+                    key:"doGetList",
+                    url:""
+                }
+            ]
         }
     },
     computed:{
@@ -589,6 +619,7 @@ export default {
                     moduleName:this.project.moduleName.trim(),
                     projectPath:this.project.projectPath.trim(),
                     projectName:this.findProjectName().trim(),
+                    interface:this.interfaceArr,
                 },
                 cb:()=>{
                     this.addSubModuleTag = false;
@@ -684,8 +715,6 @@ export default {
             }
             if(this.fileType == "2"){
                 _data.page.form = this.saveForm;
-                
-                _data.page.savePageInterface = this.saveInterface;
                 _data = Unit.object.cloneObj(_data);
                 _data.page.form.cols.forEach(item => {
                     delete item.selectDataSource;
@@ -722,11 +751,33 @@ export default {
             this.saveForm ={
                 cols:[]
             }
-            this.saveInterface = {
-                save:"",
-                detail:"",
-                update:"",
-            }
+            this.interfaceArr = [
+                {
+                    name:"save接口",
+                    key:"doSave",
+                    url:""
+                },
+                {
+                    name:"detail接口",
+                    key:"getDetail",
+                    url:""
+                },
+                {
+                    name:"remove接口",
+                    key:"doRemove",
+                    url:""
+                },
+                {
+                    name:"update接口",
+                    key:"doUpdate",
+                    url:""
+                },
+                {
+                    name:"getList接口",
+                    key:"doGetList",
+                    url:""
+                }
+            ]
             this.listBtnConfig.btns.push(
                 {btnName:"搜索",buttonTypes:Unit.object.cloneObj(this.config.searchPage.btn.buttonTypes),btnType:"search",btnHandle:"search"}
             )

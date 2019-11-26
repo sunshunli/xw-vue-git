@@ -9,7 +9,7 @@
         <button @click="expandAll(false)">unExpand</button>
         <button @click="checkall(true)">checkAll</button>
         <button @click="checkall(false)">unCheckAll</button>
-        <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
+        <le-asyn-tree displayName="language" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
 
         <le-local-tree displayName="name" ref="tree1" :itemClick="itemClick" childrenKey="children" checkbox></le-local-tree>
     </div>
@@ -53,6 +53,7 @@ export default {
         },
         getTreeData(id){
             this.ajax.getFetch("/goods/index/queryList/115?parentUnit="+id).then(d=>{
+                this.data = d.data.data;
                 this.$refs["tree"].init(d.data.data);
             }).catch(e=>{
                 this.alert.showAlert("error",e.data);

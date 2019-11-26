@@ -91,7 +91,7 @@ export default {
          */
         init(data){
             this.originData = tool.object.cloneObj(data);
-            let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data,null,true);
+            let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(tool.object.cloneObj(data),null,true);
             this.state = {
                 data:tmpData
             };

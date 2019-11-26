@@ -2,17 +2,13 @@
     <div class="bg">
         <div class="login">
             <h1>欢迎登陆后台管理系统</h1>
-            <div class="login-item">
-                <input type="text" v-model="username"/>
-            </div>
-            <div class="login-item">
-                <input type="password" v-model="password" />
-            </div>
-
-            <input  class="login-btn" type="button" value="登 录" @click="login('loginForm')" />
+            <le-form ref="form1">
+                <le-input v-model="username" on required msg="账号必填" label="账号"></le-input>
+                <le-input v-model="password" vType="password" on required msg="密码必填" label="密码"></le-input>
+                <input  class="login-btn" type="button" value="登 录" @click="login('loginForm')" />
+            </le-form>
         </div>
     </div>
-    
 </template>
 
 <script>
@@ -28,12 +24,15 @@
         },
         methods:{
             login() {
-                this.ajax.postFetch("/login",{userid:this.username,password:this.password}).then(d=>{
-                    // commonUtil.cookie.setCookie("userName",d.data.uname);
-                    this.$router.push({path:"/newTestPage"});
-                    commonUtil.cookie.setCookie("jid",d.data.jid);
-                    commonUtil.cookie.setCookie("tid",d.data.tid);
+                this.$refs["form1"].validate().then(x=>{
+                    this.ajax.postFetch("/login",{userid:this.username,password:this.password}).then(d=>{
+                    commonUtil.cookie.setCookie("userName",d.data.uname);
+                    // this.$router.push({path:"/newTestPage"});
                 })
+                }).catch(error=>{
+                    debugger
+                })
+                
             }
         }
     }

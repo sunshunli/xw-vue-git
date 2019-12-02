@@ -116,9 +116,10 @@ export default {
          */
         init(data){
             this.originData = tool.object.cloneObj(data);
-            this.initAttributeData(tool.object.cloneObj(data));
+            let tmpData = tool.object.cloneObj(data);
+            this.initAttributeData(tmpData);
             this.state = {
-                data:data
+                data:tmpData
             };
             if(this.state.data.length > 0){
                 return this.state.data[0];

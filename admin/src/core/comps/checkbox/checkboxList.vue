@@ -114,8 +114,8 @@ export default {
          * @param vals 必须为数组, 必须设置displayValue为需要传递的value字段，如果传入空，则重置所有
          * @return
          */
-        setValue(vals){
-            vals!=null && vals!=undefined?vals=vals.toString():vals="";
+        setValue(val = ""){
+            val = val.toString();
             if(!vals){
                 this.data.forEach(item=>{
                     item.ck = false;

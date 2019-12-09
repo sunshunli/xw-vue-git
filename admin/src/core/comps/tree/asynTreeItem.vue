@@ -80,7 +80,7 @@ export default {
                     tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,tmpObject);
                 })
             }else{
-                console.log("展开折叠操作");
+                console.log("<#展开折叠操作#>");
                 let cls = "";
                 if(item.__children && item.__children instanceof Array && item.__children.length != 0){
                     if(item.__cls == "fa-caret-right"){

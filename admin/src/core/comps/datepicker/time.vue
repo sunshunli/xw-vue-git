@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div class="timeBtnGroup">
-                    <span id="cancel" @click.stop="closePicker">关闭</span>
-                    <span id="confirm" @click.stop="ok">确定</span>
+                    <span id="cancel" @click.stop="closePicker"><#关闭#></span>
+                    <span id="confirm" @click.stop="ok"><#确定#></span>
                 </div>
             </div>
         </div>

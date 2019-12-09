@@ -29,7 +29,9 @@
 }
 
 .le_alert.content .msgBox p{
-	display: inline-block;
+    display: inline-block;
+    word-break: break-all;
+    white-space: normal;
 }
 
 .le_alert.content .msgSucces{

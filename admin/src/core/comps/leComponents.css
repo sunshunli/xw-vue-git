@@ -98,7 +98,7 @@ html,body{
     margin-bottom: 10px;
     text-align: right;
     padding: 0 20px;
-    margin-top: -30px;
+    /* margin-top: -30px; */
 }
 
 .le_comps_core_css .le_new_page_btn_group{
@@ -108,6 +108,10 @@ html,body{
 
 .le_comps_core_css .le_list_search_pannel{
     padding-top: 10px;
+}
+
+.le_comps_core_css .le_list_search_pannel::after{
+    height:1px;
 }
 
 .le_comps_core_css .second-level h1 {

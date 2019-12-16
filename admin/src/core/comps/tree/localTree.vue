@@ -105,8 +105,7 @@ export default {
                     data[i].__expand = false;
                     data[i].__color = "";
                     data[i].__checkboxStatus = false;
-                    let tmp = data[i].children;
-                    this.initAttributeData(tmp,data[i]);
+                    this.initAttributeData(data[i].__children,data[i]);
                 }
             }
         },

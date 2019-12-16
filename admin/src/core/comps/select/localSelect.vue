@@ -248,7 +248,7 @@
          * @param {ids} displayValue的集合, 逗号分隔, 如果传入空，则重置所有
          */
         setValue(ids = ""){
-            ids = ids.toString()
+            ids = ids.toString();
             //重置
             this.resetDataCkStatus();
             //选中

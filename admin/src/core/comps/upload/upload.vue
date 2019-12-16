@@ -4,20 +4,20 @@
             <label :style="{width:labelWidthVal + 'px'}" class="form-item-label" :class="$attrs.on != undefined?'required':''">{{$attrs.label}}</label>
 
             <div style="flex:1">
-                <span :class="{'readonlyIcon':readonlyFlag}" class="input-file">请选择
+                <span :class="{'readonlyIcon':readonlyFlag}" class="input-file"><#请选择#>
                 <input :disabled="readonlyFlag" :multiple="multipleTag" @change="change" type="file" :ref="fkey" class="imgFile" /></span>
                 <img v-show="showLoading" src="https://p2.lefile.cn/product/adminweb/2018/05/28/6f7b5572-8693-4f6c-a041-cf6f32b367ac.gif" class="loading">
                 <span class="rules">{{tipStr}}</span>
                 <div class="fileList" v-show="srcs.length>0">
                     <div v-if="noResultTag">
                         <span class="noResult">
-                            <a>上传成功</a>
+                            <a><#上传成功#></a>
                         </span>
                     </div>
                     <div v-else>
                         <div v-if="fileType != 'image'">
                             <span class="fileContent" v-for="(item,index) in srcs" :key="index">
-                                <a target="_blank" :href="item.name">{{"附件_" + item.idx}}</a>
+                                <a target="_blank" :href="item.name">{{"<#附件#>_" + item.idx}}</a>
                                 <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
                             </span>
                         </div>
@@ -264,7 +264,7 @@
              */
             upload(){
                 if(!this.url || !this.fname){
-                    this.alert.showAlert("error","上传url和fname必须配置!");
+                    this.alert.showAlert("error","<#上传url和fname必须配置#>!");
                     return;
                 }
                 
@@ -276,12 +276,12 @@
                 }
                 //控制格式
                 if(!this.checkSuffix(fileList)){
-                    this.alert.showAlert("error","后缀名必须为:"+ this.vtype);
+                    this.alert.showAlert("error","<#后缀名必须为#>:"+ this.vtype);
                     return;
                 }
                 //控制大小
                 if(!this.checkSize(fileList)){
-                    this.alert.showAlert("error","文件大小必须小于:"+ this.size + "MB");
+                    this.alert.showAlert("error","<#文件大小必须小于#>:"+ this.size + "MB");
                     return;
                 }
                 //控制规格,仅支持图片规格
@@ -290,7 +290,7 @@
                         if(x){
                             this.doUploadAjax(formData);
                         }else{
-                            this.alert.showAlert("error","图片规格必须为:"+ this.width + "*" + this.height);
+                            this.alert.showAlert("error","<#图片规格必须为#>:"+ this.width + "*" + this.height);
                         }
                     }).catch(e=>{})
                 }else{
@@ -303,7 +303,7 @@
                 this.ajax.uploadFetch(this.url,formData).then((result) => {
                     // this.srcs = [];
                     let src = this.options.analysis?this.options.analysis(result):result;
-                    this.alert.showAlert("success","上传成功");
+                    this.alert.showAlert("success","<#上传成功#>");
                     //多文件上传
                     if(this.multipleTag){
                         src && src.split(',').forEach(x=>{
@@ -320,7 +320,7 @@
                     this.completedCallback&&this.completedCallback({success:true,data:result});
                 }).catch((err) => {
                     this.showLoading = false;
-                    this.alert.showAlert("error","上传异常");
+                    this.alert.showAlert("error","<#上传异常#>");
                     this.completedCallback&&this.completedCallback({success:false,data:err});
                 });
             },

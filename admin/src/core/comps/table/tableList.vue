@@ -80,7 +80,7 @@
                 let size = this.state.pageOption.size;
                 if( url === ""){
                     this.noResultCb();
-                    console.log("无有效的url!");
+                    console.log("<#无有效的url#>!");
                     return;
                 }
                 let suffix = url.indexOf('?') === -1?"?":"&";
@@ -115,7 +115,7 @@
                         }
                     }else{
                         this.noResultCb();
-                        console.log("数据源为空或者检查analysis, getUrl, pageOption参数!");
+                        console.log("<#数据源为空或者检查analysis, getUrl, pageOption参数!#>");
                     }
                 }).catch(e=>{
                     this.alert.showAlert("error",e.data);

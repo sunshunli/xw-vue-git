@@ -62,7 +62,7 @@ export default {
                     resolve({
                         success:true,
                         errorInfo:[],
-                        msg:"没有找到需要验证的组件"
+                        msg:"<#没有找到需要验证的组件#>"
                     })
                 })
             }else{

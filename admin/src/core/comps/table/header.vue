@@ -7,7 +7,7 @@
                 </div>
             </th>
             <th class="opration" v-if="actions && actions.length != 0">
-                操作
+                <#操作#>
             </th>
             
             <th v-for="(item,index) in cols" :key="index" class="thCols">

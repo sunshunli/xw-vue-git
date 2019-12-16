@@ -41,14 +41,14 @@ let _le_alert = {
         
         let parentDiv = $('<div style="z-index:'+zIndex+'" class="le_alert MsgAlertBox"></div>');
         let html ='<div class="Alertcontent">'+
-                  '<p>'+Vue.prototype.lang18n('提示')+'<i tag="le-show-confirm-close">×</i></p>'+
+                  '<p><#提示#><i tag="le-show-confirm-close">×</i></p>'+
                   '<div class="msgContent clearfix">'+
                   '<i class="fa fa-exclamation-circle"></i>'+
                   '<p>'+title+'</p>'+
                   '</div>'+
                   '<div class="alert_btnGroup">'+
-                  '<span class="btn cancel" tag="le-show-confirm-close">'+Vue.prototype.lang18n('取消')+'</span>'+
-                  '<span class="btn confirm" tag="le-show-confirm-ok">'+Vue.prototype.lang18n('确定')+'</span>'+
+                  '<span class="btn cancel" tag="le-show-confirm-close"><#取消#></span>'+
+                  '<span class="btn confirm" tag="le-show-confirm-ok"><#确定#></span>'+
                   '</div>'+
                   '</div>';
         $(parentDiv).append($(html));
@@ -81,7 +81,7 @@ let _le_alert = {
             res = DEFINE_KEY.ALERT_CONFIG.SHOW_NOTICE_CLS_TYPE["default"];
         }
         let parentDiv = $('<div style="z-index:'+zIndex+'" class="le_alert notice '+res.cls+'"></div>');
-        let html ='<div class="noticeTs"><i class="'+res.iCls+'"></i>提示</div>'+
+        let html ='<div class="noticeTs"><i class="'+res.iCls+'"></i><#提示#></div>'+
                   '<p>'+msg+'</p>'+
                   '<span class="closeBtn" tag="le-show-notify-close">×</span>';
         $(parentDiv).append($(html));

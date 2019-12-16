@@ -103,8 +103,8 @@ export default {
          * @param val 单个值
          * @returns
          */
-        setValue(val){
-            val!=null && val!=undefined?val=val.toString():val="";
+        setValue(val = ""){
+            val = val.toString();
             this.resetData();
             if(val){
                 this.data.forEach(item=>{

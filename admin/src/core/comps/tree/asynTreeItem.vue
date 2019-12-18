@@ -185,7 +185,8 @@ export default {
         display: inline-block;
         border-radius: 2px;
         margin-right: 2px;
-        vertical-align: sub;
+        /* vertical-align: sub; */
+        vertical-align: middle;
         position: relative;
     }
 
@@ -203,7 +204,8 @@ export default {
 
     .fa-caret-right:before {
         position: absolute;
-        top: 8px;
+        /* top: 8px; */
+        top: 6px;
         left: 6px;
     }
 

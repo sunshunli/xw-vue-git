@@ -126,7 +126,7 @@ let DATE_TIME_PICKER_CONFIG = {
 let INPUT_VALIDATA_TYPES = {
     TYPES:{
         //自然数，包含0和正整数
-        "natureNum":/^[\+\-]?(([1-9]\d*)|\d)$/,
+        "natureNum":/^[\+]?(([1-9]\d*)|\d)$/,
         // 数字 ---- 正负 小数整数都可以
         "decimals":/^[+-]?(?!\.)(\d*)(\.)*(\d+)$/,
         // 数字  ---- 正负 整数

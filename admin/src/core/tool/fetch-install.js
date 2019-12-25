@@ -2,8 +2,6 @@
 import Q from "q";
 import _this from "../../main";
 
-const proxy_key = window.location.href.indexOf('localhost') != -1?"/api/":"";
-
 let param = function(obj) {
     let query = '';
     let name, value, fullSubName, subName, subValue, innerObj, i;
@@ -46,18 +44,21 @@ export default {
                 if(!url){
                     return;
                 }
-                url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
                 url = url + symbol + "ran="+Math.random();
                 let defer = Q.defer();
                 let headers = {
                     'Content-Type': 'application/json; charset=UTF-8'
                 };
+                const controller = new AbortController()
+                const signal = controller.signal;
                 let options = {
                     method:"get",
                     credentials:'include',
-                    headers:headers
+                    headers:headers,
+                    signal
                 };
+                
                 fetch(url,options).then(d =>d.json()).then( (data)=> {
                     let code = data.status;
                     let message = data.msg;
@@ -73,13 +74,12 @@ export default {
                 }).catch((err)=> {
                     defer.reject({data: err});
                 });
-                return defer.promise;
+                return {controller:controller,promise:defer.promise};
             },
             postFetch:function(url,data){
                 if(!url){
                     return;
                 }
-                url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
                 url = url + symbol + "ran="+Math.random();
                 let defer = Q.defer();
@@ -117,7 +117,6 @@ export default {
                 if(!url){
                     return;
                 }
-                url = proxy_key + url;
                 let symbol = url.indexOf('?') == -1?"?":"&";
                 url = url + symbol + "ran="+Math.random();
                 

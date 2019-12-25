@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 const H = r=>require.ensure([],()=>r(require("../configModules/h.vue")),"H");
+const TEST = r=>require.ensure([],()=>r(require("../pages/test/test.vue")),"TEST");
 const TreeTest = r=>require.ensure([],()=>r(require("../pages/tree.vue")),"TreeTest");
 const Login = r=>require.ensure([],()=>r(require("../pages/login/login.vue")),"Login");
 
@@ -17,6 +18,11 @@ const routers = [
         path: '/',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: TEST
     },
     {
         path: '/main',

@@ -120,13 +120,13 @@ module.exports = (env = {}) =>{
             inline: true, //检测文件变化，实时构建并刷新浏览器
             port: "9999",
             proxy: {
-                '/api': {
-                    target:"http://localhost:9998/",
-                    // target: 'http://admin.lenovouat.com/',
+                '/': {
+                    // target:"http://localhost:9998/",
+                    target: 'http://nec.lenovouat.com/',
                     // target: 'http://his.coolvis.com:21920/',
-                    pathRewrite: {
-                        "^/api": ""
-                    },
+                    // pathRewrite: {
+                    //     "^/api": ""
+                    // },
                     secure: false,
                     changeOrigin: true
                 },

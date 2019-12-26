@@ -370,6 +370,9 @@ let CommonUtil = {
     date:{
         date:function(val){
             if(!val){return "";}
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
             let d = new Date(val);
             let m = d.getMonth()+1;
             m = m>=10?m:"0"+m;
@@ -377,16 +380,25 @@ let CommonUtil = {
             day = d.getDate()>=10?d.getDate():"0"+d.getDate();
             return d.getFullYear() + "-" + m + "-" + day;
         },
-        dateTime:function(val){
-            return this.date(val) + " " + this.time(val);
-        },
         time:function(val){
             if(!val){return "";}
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
             let d = new Date(val);
             let h = d.getHours() >=10?d.getHours():"0"+d.getHours();
             let m = d.getMinutes() >=10?d.getMinutes():"0"+d.getMinutes();
             let s = d.getSeconds() >=10?d.getSeconds():"0"+d.getSeconds();
             return h + ":" + m + ":" +s;
+        },
+        dateTime:function(val){
+            if(!val){
+                return "";
+            }
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
+            return this.date(val) + " " + this.time(val);
         },
         //当前月的第一天
         getCurrentMonthFirst(){

@@ -108,6 +108,12 @@ let LeCompTool = {
             return res;
         }
     },
+    string:{
+        replaceAll:function(value,findText,replaceText){
+            let regExp = new RegExp(findText, "g");
+            return value.replace(regExp, replaceText);
+        }
+    },
     arrayServer:{
         _private:{
             getIndexByString: function (array, str) {
@@ -234,6 +240,72 @@ let LeCompTool = {
             }
             document.cookie = cookieText+";path=/;domain="+document.domain;
         },
+    },
+    date:{
+        date:function(val){
+            if(!val){return "";}
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
+            let d = new Date(val);
+            let m = d.getMonth()+1;
+            m = m>=10?m:"0"+m;
+            let day = d.getDate();
+            day = d.getDate()>=10?d.getDate():"0"+d.getDate();
+            return d.getFullYear() + "-" + m + "-" + day;
+        },
+        time:function(val){
+            if(!val){return "";}
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
+            let d = new Date(val);
+            let h = d.getHours() >=10?d.getHours():"0"+d.getHours();
+            let m = d.getMinutes() >=10?d.getMinutes():"0"+d.getMinutes();
+            let s = d.getSeconds() >=10?d.getSeconds():"0"+d.getSeconds();
+            return h + ":" + m + ":" +s;
+        },
+        dateTime:function(val){
+            if(!val){
+                return "";
+            }
+            if(new Date(val) == "Invalid Date"){
+                return "<#非法的时间格式#>";
+            }
+            return this.date(val) + " " + this.time(val);
+        },
+        //当前月的第一天
+        getCurrentMonthFirst(){
+            let date=new Date();
+            date.setDate(1);
+            return this.date(date);
+        },
+        //当前月的最后一天
+        getCurrentMonthLast(){
+            let date=new Date();
+            let currentMonth=date.getMonth();
+            let nextMonth=++currentMonth;
+            let nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
+            let oneDay=1000*60*60*24;
+            return this.date(new Date(nextMonthFirstDay-oneDay));
+        },
+        //比较2个时间
+        compareData(one,two){
+            let res = {success:false,data:false};
+            if(new Date(one) == "Invalid Date" || new Date(two) == "Invalid Date"){
+                res.success = false;
+            }else{
+                res.success = true;
+                let time_one = new Date(one).getTime();
+                let time_two = new Date(two).getTime();
+                if(time_one > time_two){
+                    res.data = true;
+                }else{
+                    res.data = false;
+                }
+            }
+            return res;
+        }
     },
     _idSeed:{
         id:90000,

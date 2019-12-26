@@ -122,7 +122,7 @@ module.exports = (env = {}) =>{
             proxy: {
                 '/': {
                     // target:"http://localhost:9998/",
-                    target: 'http://nec.lenovouat.com/',
+                    target: 'http://admin.nec.lenovouat.cn/',
                     // target: 'http://his.coolvis.com:21920/',
                     // pathRewrite: {
                     //     "^/api": ""

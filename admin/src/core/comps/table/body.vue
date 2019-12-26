@@ -86,6 +86,7 @@
                 }else{
                     let v = "row."+item.key;
                     let tmp = eval("("+v+")");
+                    
                     if(tmp == undefined){
                         val = "";
                     }else{

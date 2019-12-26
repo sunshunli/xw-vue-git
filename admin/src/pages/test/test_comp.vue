@@ -11,29 +11,30 @@
         name: "TestComp",
         data(){
             return {
+                oldId:"",
                 msg:"",
                 //0, 准备发送
                 //1, 发送中
                 //2, 发送完毕
-                status:"0"
+                status:"0",
+                ctl:null
             }
         },
         methods:{
             doHttp(id){
-                let ctl = null;
-                debugger
                 if(this.status == 1){
-                    ctl && ctl.abort();
-                    this.msg = id + "取消请求成功";
+                    console.log(this.oldId + "取消请求成功");
+                    this.ctl && this.ctl.abort();
                 }
-                this.msg = id + "正在发送请求";
+                console.log(id + "正在发送请求");
                 this.status = 1;
-                let promise = this.ajax.getFetch("/tpl/component/myfragments?id="+id);
-                ctl = promise.controller;
-                promise.promise.then(x=>{
+                let res = this.ajax.getFetch("/tpl/component/myfragments?id="+id);
+                this.ctl = res.controller;
+                res.promise.then(x=>{
                     this.msg = id + "发送请求完毕";
                     this.status == 2;
                 })
+                this.oldId = id;
             }   
         },
         mounted(){

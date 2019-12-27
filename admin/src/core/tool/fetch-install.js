@@ -74,7 +74,8 @@ export default {
                 }).catch((err)=> {
                     defer.reject({data: err});
                 });
-                return {controller:controller,promise:defer.promise};
+                // return {controller:controller,promise:defer.promise};
+                return defer.promise;
             },
             postFetch:function(url,data){
                 if(!url){

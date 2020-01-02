@@ -518,6 +518,7 @@
 .upaload .rules{
     font-size: 12px;
     margin-left: 5px;
+    color: #3ea5d2;
 }
 
 .upaload .form-item-label{

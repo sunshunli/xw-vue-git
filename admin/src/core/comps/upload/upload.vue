@@ -320,6 +320,7 @@
                     this.completedCallback&&this.completedCallback({success:true,data:result});
                 }).catch((err) => {
                     this.showLoading = false;
+                    this.showError = true;
                     this.alert.showAlert("error","<#上传异常#>");
                     this.completedCallback&&this.completedCallback({success:false,data:err});
                 });

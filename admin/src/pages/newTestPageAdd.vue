@@ -213,22 +213,22 @@ export default {
             console.log(this.files);
         },
         timeChangeEvent(val){
-            debugger
+            
         },
         changeDate(val){
-            debugger
+            
         },
         prevMonthChangeEvent(year,month,str){
-            debugger
+            
         },
         nextMonthChangeEvent(year,month,str){
-            debugger
+            
         },
         prevYearChangeEvent(year,month,str){
-            debugger
+            
         },
         nextYearChangeEvent(year,month,str){
-            debugger
+            
         },
         changeTextarea(val){
         },

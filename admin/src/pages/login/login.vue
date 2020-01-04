@@ -30,7 +30,7 @@
                     // this.$router.push({path:"/newTestPage"});
                 })
                 }).catch(error=>{
-                    debugger
+                    
                 })
                 
             }

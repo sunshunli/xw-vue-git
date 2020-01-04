@@ -558,7 +558,7 @@ export default {
         },
         // 添加form行
         addFormCols(){
-            debugger;
+            ;
             let defaultCol = Unit.object.cloneObj(this.config.form.defaultCol);
             defaultCol.selectDataSource.typeDatsSource = Unit.object.cloneObj(this.config.enum.typeDatsSource);
             defaultCol.selectDataSource.requiredDatsSource = Unit.object.cloneObj(this.config.enum.requiredDatsSource);
@@ -631,7 +631,7 @@ export default {
                     projectName : this.findProjectName(),
                 },
                 cb:(d)=>{
-                    debugger;
+                    ;
                     this.baseReadOnly = true;
                     this.alert.showAlert("success","新增成功Module文件夹!");
                 }
@@ -736,7 +736,7 @@ export default {
             cols.forEach(item => {
                 delete item.selectDataSource
             })
-            debugger;
+            ;
             let _data = {
                 projectName:this.project.projectPath.trim(),
                 moduleName:this.project.moduleName.trim(),

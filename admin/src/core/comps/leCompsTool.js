@@ -180,7 +180,6 @@ let LeCompTool = {
         },
         removeItems:function(array, items){
             if(array instanceof Array == false){
-                LeCompTool.throwError("params[array] must be Array in removeItems method");
                 return;
             }
             items.map(function (item) {
@@ -195,7 +194,6 @@ let LeCompTool = {
         },
         sortByField:function(array,field,desc){
             if(array instanceof Array == false){
-                LeCompTool.throwError("params[array] must be Array in sortByField method");
                 return;
             }
             if(array.length == 0){

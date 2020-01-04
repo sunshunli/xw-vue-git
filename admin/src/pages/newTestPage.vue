@@ -168,7 +168,7 @@ export default {
             this.alert.showAlert("success","修改日期")
         },
         closeDialog(){
-            debugger
+            
             this.showDialog = false;
         },
         showDialogContent(){

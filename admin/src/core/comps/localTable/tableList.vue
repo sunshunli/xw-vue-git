@@ -9,12 +9,6 @@
                     <body-section :singleSelected="singleSelected" :show-ck="showCk" :actions="actions" :cols="state.cols" :accpet-h-b-notice="accpetHBNotice" :data="state.data"></body-section>
                 </table>
             </div>
-
-            <paging-section :options="state.pageOption" :go-index="gIndex" :go-prev="prev" :go-next="next"></paging-section>
-
-            <div v-show='isLoading' class="tableMask">
-                <img class="tableLoadingImg" src="https://p2.lefile.cn/product/adminweb/2019/08/14/86f12d52-24a9-4863-87df-45ca60298472.gif"/>
-            </div>
         </div>
     </div>
 </template>
@@ -22,44 +16,32 @@
 <script>
     import HeaderSection from "./header.vue";
     import BodySection from "./body.vue";
-    import PagingSection from "./paging.vue";
     import tool from "../leCompsTool.js";
     
     export default {
-        components: {HeaderSection,BodySection,PagingSection},
+        components: {HeaderSection,BodySection},
         props:["options","title"],
-        name: "TableList",
+        name: "LocalTableList",
         data(){
             return {
                 state:{
                     data:[],
                     cols:this.options.map,
-                    ck:false,
-                    pageOption:{
-                        index:this.options.pageOption.index?this.options.pageOption.index:1,
-                        size:this.options.pageOption.size?this.options.pageOption.size:10,
-                        count:0,
-                        total:0
-                    },
-                },
-                //在上一次请求没有完成之前，不允许发送下一次请求
-                isLoading:false
+                    ck:false
+                }
             }
         },
         computed:{
-            originCols:function(){
+            originCols(){
                 return tool.object.cloneObj(this.options.map);
             },
-            showCk:function(){
+            showCk(){
                 return this.options.showCk;
             },
-            actions:function(){
+            actions(){
                 return this.options.actions;
             },
-            getUrl:function(){
-                return this.options.getUrl;
-            },
-            singleSelected:function(){
+            singleSelected(){
                 return this.options.singleSelected;
             }
         },
@@ -68,83 +50,33 @@
              * @description 根据参数获取数据源
              * @returns
              */
-            getData:function(index){
-                if(this.isLoading){
-                    return;
-                }
-                this.isLoading = true;
-                if(!index){
-                    index = 1;
-                }
-                let url = this.options.getUrl();
-                let size = this.state.pageOption.size;
-                if( url === ""){
-                    this.noResultCb();
-                    console.log("<#无有效的url#>!");
-                    return;
-                }
-                let suffix = url.indexOf('?') === -1?"?":"&";
-                url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
-                this.ajax.getFetch(url).then(data=>{
-                    this.isLoading = false;
-                    let res = {};
-                    if(this.options.analysis){
-                        res = this.options.analysis(data);
-                    }else{
-                        res = data;
-                    }                    
-                    if(res.data && res.data instanceof Array && res.data.length != 0){
-                        let arr = tool.object.addPrimaryAndCk(res.data);
-                        let total = -1;
-                        if(parseInt(res.count)%size == 0){
-                            total = parseInt(res.count)/size;
-                        }else{
-                            total = parseInt(parseInt(res.count)/size) + 1;
-                        }
-
-                        this.state = {
-                            data:arr,
-                            cols:this.state.cols,
-                            ck:false,
-                            pageOption:{
-                                index:index,
-                                count:res.count,
-                                total:total,
-                                size:size
-                            }
-                        }
-                    }else{
-                        this.noResultCb();
-                        console.log("<#数据源为空或者检查analysis, getUrl, pageOption参数!#>");
+            init(data){
+                if(data && data instanceof Array && data.length !=0){
+                    let tmp = tool.object.cloneObj(data);
+                    this.state = {
+                        data:tool.object.addPrimaryAndCk(tmp),
+                        cols:this.state.cols,
+                        ck:false
                     }
-                }).catch(e=>{
-                    this.alert.showAlert("error",e.data);
+                }else{
                     this.noResultCb();
-                })
+                }
             },
             /**
              * @description 没有请求或者请求异常的情况下，显示无结果的数据处理
              * @returns
              */
             noResultCb(){
-                let size = this.state.pageOption.size;
-                this.isLoading = false;
                 this.state = {
                     data:[],
                     cols:this.state.cols,
-                    ck:false,
-                    pageOption:{
-                        index:1,
-                        count:0,
-                        total:0,
-                        size:size
-                    }
+                    ck:false
                 }
             },
             /**
              * @description 从head和body接收到通知，需要更新数据源，然后下发所有子组件
              */
-            accpetHBNotice:function(hData,bData){
+            accpetHBNotice(hData,bData){
                 //如果data有参数，说明是从head过来的通知，如果没有就说明是body过来的通知
                 if(hData){
                     this.state.data.map(item=>{
@@ -153,8 +85,7 @@
                     this.state = {
                         data:this.state.data,
                         ck:hData.ck,
-                        cols:this.state.cols,
-                        pageOption:this.state.pageOption
+                        cols:this.state.cols
                     }
                 }
                 if(bData){
@@ -163,8 +94,7 @@
                     this.state = {
                         data:bData.data,
                         ck:flag,
-                        cols:this.state.cols,
-                        pageOption:this.state.pageOption
+                        cols:this.state.cols
                     }
                 }
             },
@@ -172,33 +102,8 @@
              * @description 从head里面收到通知，表头的cols变化
              * @returns
              */
-            noticeChangeCols:function(map){
+            noticeChangeCols(map){
                 this.state.cols = map;
-            },
-            /**
-             * @description 分页的上一页事件
-             * @returns
-             */
-            prev:function(){
-                let index = this.state.pageOption.index;
-                index--;
-                this.getData(index);
-            },
-            /**
-             * @description 分页的下一页事件
-             * @returns
-             */
-            next:function(){
-                let index = this.state.pageOption.index;
-                index++;
-                this.getData(index);
-            },
-            /**
-             * @description 分页组件，到某一页的事件
-             * @returns
-             */
-            gIndex:function(index){
-                this.getData(index);
             },
             /**
              * @description 获取tbody里面选中了哪些项
@@ -226,28 +131,12 @@
             getParams(){
                 return {index:this.state.pageOption.index,data:this.state.data};
             },
-            /**
-             * @description 搜索方法
-             * @param index 搜索索引，非必填
-             * @returns
-             */
-            search(index){
-                if(!index){
-                    this.getData();
-                }else{
-                    this.getData(this.state.pageOption.index);
-                }
-            },
-            /**
-             * @description 在当前index下搜索
-             * @returns
-             */
-            searchCurrentIndex(){
-                this.search(this.getParams().index);
+            removeItem(item){
+                this.state.data = tool.arrayServer.removeItems(this.state.data, [item]);
             }
         },
         mounted () {
-            this.getData(this.state.pageOption.index);
+
         },
         destroyed(){
             

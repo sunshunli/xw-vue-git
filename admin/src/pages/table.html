@@ -5,53 +5,49 @@
 <title>无分页table</title>
 </head>
 <body>
-	<div class="tabelContent">
-		<div class="tableContainer">
-			<div class="tableBox">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>
-								<div>
-									<input type="checkbox" class="singleSelected">
-								</div>
-							</th>
-							<th>
-								姓名
-							</th>
-							<th>年龄</th>
-							<th>介绍</th>
-							<th>职务</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- 有数据 -->
-						<tr>
-							<td>
-								<div>
-									<input type="checkbox" class="singleSelected">
-								</div>
-							</td>
+	<div class="tableBox">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						<div>
+							<input type="checkbox" class="singleSelected">
+						</div>
+					</th>
+					<th>
+						姓名
+					</th>
+					<th>年龄</th>
+					<th>介绍</th>
+					<th>职务</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- 有数据 -->
+				<tr>
+					<td>
+						<div>
+							<input type="checkbox" class="singleSelected">
+						</div>
+					</td>
 
-							<td><input type="text"/></td>
-							<td>
-								<select>
-									<option>20</option>
-									<option>30</option>
-									<option>40</option>
-									<option>50</option>
-								</select></td>
-							<td>没有介绍</td>
-							<td>开发</td>
-						</tr>
-						<!-- 没有数据 -->
-						<tr style="">
-							<td colspan="5"><#暂无数据#></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+					<td><input type="text"/></td>
+					<td>
+						<select>
+							<option>20</option>
+							<option>30</option>
+							<option>40</option>
+							<option>50</option>
+						</select></td>
+					<td>没有介绍</td>
+					<td>开发</td>
+				</tr>
+				<!-- 没有数据 -->
+				<tr style="">
+					<td colspan="5"><#暂无数据#></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
@@ -80,13 +76,8 @@
 
 	.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 
-	.tableContainer{
-		display: block;
-		min-width: 100%;
-		position: relative;
-	}
-
-	.tableContainer .tableBox {
+	.tableBox {
+		width: 100%;
 		overflow: scroll;
 	}
 

@@ -136,8 +136,19 @@
             getParams(){
                 return {index:this.state.pageOption.index,data:this.state.data};
             },
-            removeItem(item){
-                this.state.data = tool.arrayServer.removeItems(this.state.data, [item]);
+            /**
+             * @description 删除指定项或者当前选中项
+             * @param {json} row:非必填
+             */
+            removeItems(row){
+                if(row){
+                    this.state.data = tool.arrayServer.removeItems(this.state.data, [row]);
+                }else{
+                    let items = this.getCheckedItems();
+                    if(items.data.length > 0){
+                        this.state.data = tool.arrayServer.removeItems(this.state.data, items.data);
+                    }
+                }
             }
         },
         mounted () {

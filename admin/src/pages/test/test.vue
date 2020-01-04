@@ -119,7 +119,12 @@
                 this.$refs['comref'].doHttp(id);
             },
             removeItem(row,num){
-                this.$refs["localtable"+num].removeItem(row);
+                if(num == 1){
+                    this.$refs["localtable"+num].removeItems(row);
+                }else{
+                    this.$refs["localtable"+num].removeItems();
+                }
+                
             },
             getItems(){
                 console.log(this.$refs["localtable1"].getCheckedItems("id"));

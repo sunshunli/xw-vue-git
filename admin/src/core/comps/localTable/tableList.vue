@@ -24,6 +24,7 @@
         name: "LocalTableList",
         data(){
             return {
+                originData:[],
                 state:{
                     data:[],
                     cols:this.options.map,
@@ -53,6 +54,7 @@
             init(data){
                 if(data && data instanceof Array && data.length !=0){
                     let tmp = tool.object.cloneObj(data);
+                    this.originData = tool.object.cloneObj(data);
                     this.state = {
                         data:tool.object.addPrimaryAndCk(tmp),
                         cols:this.state.cols,
@@ -61,6 +63,9 @@
                 }else{
                     this.noResultCb();
                 }
+            },
+            resetTable(){
+                this.init(this.originData);
             },
             /**
              * @description 没有请求或者请求异常的情况下，显示无结果的数据处理

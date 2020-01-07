@@ -6,6 +6,9 @@
             <input type="button" value="C" @click="requestHttp('CCC')" />
         </div>
 
+
+        LeDateTimePicker
+        <le-date-time-picker label="LeDateTimePicker" v-model="entity.datetime"></le-date-time-picker>
         <test-comp ref='comref'></test-comp>
 
         <!-- <table-list title="<#批量导入列表#>" ref='batchImport_list_ref' :options='list_table_options'></table-list> -->
@@ -29,6 +32,9 @@
         components: {TestComp},
         data(){
             return {
+                entity:{
+                    datetime:""
+                },
                 id:"",
                 options1:{
                     showCk:true,

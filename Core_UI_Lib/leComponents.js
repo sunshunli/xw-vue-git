@@ -9,6 +9,7 @@ import LeInput from "@CoreUILib/input/vInput.vue";
 import LeTextarea from "@CoreUILib/input/vTextarea.vue";
 import LeLocalSelect from "@CoreUILib/select/localSelect.vue";
 import TableList from "@CoreUILib/table/tableList.vue";
+import LocalTableList from "@CoreUILib/localTable/tableList.vue";
 import LeUpload from "@CoreUILib/upload/upload.vue";
 import LeAsynTree from "@CoreUILib/tree/asynTree.vue";
 import LeLocalTree from "@CoreUILib/tree/localTree.vue";
@@ -33,6 +34,7 @@ export default {
         Vue.component('LeTextarea',ValidataHOC(LeTextarea));
         Vue.component('LeLocalSelect',ValidataHOC(LeLocalSelect));
         Vue.component('TableList',TableList);
+        Vue.component('LocalTableList',LocalTableList);
         Vue.component('LeUpload',ValidataHOC(LeUpload));
         Vue.component('LeAsynTree',LeAsynTree);
         Vue.component('LeLocalTree',LeLocalTree);

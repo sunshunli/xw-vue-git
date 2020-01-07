@@ -93,12 +93,12 @@ let _tool = {
     getPrevMonthDays(year,month){
         let res = {year:0,month:0,days:0};
         if(month == 1){
-            res.year = year - 1;
+            res.year = parseInt(year) - 1;
             res.month = 12;
             res.days = this.getDays(res.year,res.month);
         }else{
             res.year = year;
-            res.month = month - 1;
+            res.month = parseInt(month) - 1;
             res.days = this.getDays(res.year,res.month);
         }
         return res;
@@ -112,12 +112,12 @@ let _tool = {
     getNextMonthDays(year,month){
         let res = {year:0,month:0,days:0};
         if(month == 12){
-            res.year = year + 1;
+            res.year = parseInt(year) + 1;
             res.month = 1;
             res.days = this.getDays(res.year,res.month);
         }else{
             res.year = year;
-            res.month = month + 1;
+            res.month = parseInt(month) + 1;
             res.days = this.getDays(res.year,res.month);
         }
         return res;

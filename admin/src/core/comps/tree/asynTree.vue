@@ -62,8 +62,8 @@ export default {
                 })
                 node.__checkboxStatus = count == node.__children.length?true:false;
 
-                let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
-                this.setParentCheckBoxStatus(parentNode);
+                // let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
+                this.setParentCheckBoxStatus(node.__parentNode);
             }
         },
         /**
@@ -110,24 +110,22 @@ export default {
             };
             this._originData = _originData;
         },
+        // updateSingleNode(node,data){
+        //     node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
+        //     if(data.__children && data.__children instanceof Array && data.__children.length != 0){
+        //         let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data.__children,node,false);
+        //         node.__children = tmpData;
+        //     }
+        // },
         /**
-         * @description 更新单个节点
+         * @description 更新当前节点
          * @param node 当前节点
-         * @param data 传输的数据,格式{__displayName:"a",__children:[]}
          */
-        updateSingleNode(node,data){
-            node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
-            if(data.__children && data.__children instanceof Array && data.__children.length != 0){
-                let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data.__children,node,false);
-                node.__children = tmpData;
-            }
-        },
         reloadNode(node){
             let _url  = this.asynOptions.getUrl(node);
             node.__cls = "fa-caret-load";
             this.ajax.getFetch(_url).then(d=>{
                 let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
-                
                 if(tmp && tmp instanceof Array && tmp.length != 0){
                     let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(tmp, node, false);
                     node.__children = tmpData;
@@ -143,7 +141,8 @@ export default {
          * @param node 需要删除的节点
          */
         deleteSingleNode(node){
-            let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
+            // let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
+            let parentNode = node.__parentNode;
             //非根节点
             if(parentNode){
                 tool.arrayServer.removeItems(parentNode.__children,[node]);
@@ -206,7 +205,8 @@ export default {
                 //改变所有子节点的checkbox状态
                 this.setChildrenCheckboxStatus(item,d.checkboxStatus);
                 //改变所有父节点的checkbox状态
-                this.setParentCheckBoxStatus(_treeTool.getNodeById(that.state.data,item.__parentId));
+                // this.setParentCheckBoxStatus(_treeTool.getNodeById(that.state.data,item.__parentId));
+                this.setParentCheckBoxStatus(item.__parentNode);
             }
         })
     }

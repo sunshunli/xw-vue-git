@@ -123,7 +123,7 @@ module.exports = (env = {}) =>{
                 '/': {
                     // target:"http://localhost:9998/",
                     target: 'http://admin.nec.lenovouat.cn/',
-                    // target: 'http://his.coolvis.com:21920/',
+                    // target: 'http://admin.lenovouat.com/',
                     // pathRewrite: {
                     //     "^/api": ""
                     // },

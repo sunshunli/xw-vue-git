@@ -27,7 +27,7 @@
                 this.$refs["form1"].validate().then(x=>{
                     this.ajax.postFetch("/login",{userid:this.username,password:this.password}).then(d=>{
                     commonUtil.cookie.setCookie("userName",d.data.uname);
-                    // this.$router.push({path:"/newTestPage"});
+                    this.$router.push({path:"/tree"});
                 })
                 }).catch(error=>{
                     

@@ -114,6 +114,43 @@ export default {
                 });
                 return defer.promise;
             },
+            postFormData:function(url,data){
+                if(!url){
+                    return;
+                }
+                let symbol = url.indexOf('?') == -1?"?":"&";
+                url = url + symbol + "ran="+Math.random();
+                let defer = Q.defer();
+                let headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    // 'Content-Type': 'application/json; charset=UTF-8'
+                };
+                let options = {
+                    method:"post",
+                    credentials:'include',
+                    headers:headers
+                };
+                if(data){
+                    options.body = param(data);
+                    // options.body = JSON.stringify(data);
+                }
+                fetch(url,options).then(d =>d.json()).then((data)=> {
+                    let code = data.status;
+                    let message = data.msg;
+                    let d = data.data?data.data:data.result;
+                    if(code == "200" || code == "0"){
+                        defer.resolve({data:d,params:data.params});
+                    }else if(code == "701"){
+                        window.top.window.location.href = "//" +  window.top.document.domain + "/login.html";
+                        defer.resolve({data:d,params:data.params});
+                    }else{
+                        defer.reject({data: message});
+                    }
+                }).catch(function(err) {
+                    defer.reject({data: err});
+                });
+                return defer.promise;
+            },
             uploadFetch:function(url,data){
                 if(!url){
                     return;

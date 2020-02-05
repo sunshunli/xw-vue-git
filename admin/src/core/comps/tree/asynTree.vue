@@ -122,6 +122,22 @@ export default {
                 node.__children = tmpData;
             }
         },
+        reloadNode(node){
+            let _url  = this.asynOptions.getUrl(node);
+            node.__cls = "fa-caret-load";
+            this.ajax.getFetch(_url).then(d=>{
+                let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
+                
+                if(tmp && tmp instanceof Array && tmp.length != 0){
+                    let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(tmp, node, false);
+                    node.__children = tmpData;
+                    node.__cls = "fa-caret-down";
+                }else{
+                    node.__children = [];
+                    node.__cls = "fa-caret-left";
+                }
+            })
+        },
         /**
          * @description 删除节点
          * @param node 需要删除的节点

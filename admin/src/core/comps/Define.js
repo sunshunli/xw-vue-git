@@ -17,6 +17,7 @@ let TREE_CONFIG = {
                 element.__cls = "fa-caret-right";
                 element.__level = isRoot?1:currentNode.__level + 1;
                 element.__expand = false;
+                element.__parentNode = isRoot?'root':currentNode;
                 element.__parentId = isRoot?-1:currentNode.__tmpId;//根节点的__parentId:-1
                 element.__color = "";
                 element.__checkboxStatus = false;

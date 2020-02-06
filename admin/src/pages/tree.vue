@@ -11,7 +11,7 @@
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
             <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
-            <!-- <le-local-tree displayName="name" ref="tree1" :itemClick="itemClick" childrenKey="children" checkbox></le-local-tree> -->
+            <le-local-tree displayName="name" ref="tree1" :itemClick="itemClick" childrenKey="children" checkbox></le-local-tree>
 
         </div>
         <div style="float:left">
@@ -129,7 +129,7 @@ export default {
                 {name:"C1_1",age:8,id:5},
             ]},
         ];
-        // this.$refs["tree1"].init(localTreeData);
+        this.$refs["tree1"].init(localTreeData);
     }
 }
 </script>

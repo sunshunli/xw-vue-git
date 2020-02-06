@@ -44,6 +44,7 @@ export default {
             if(this.checkbox != undefined){
                 tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,
+                    item:item,
                     __tmpId:item.__tmpId,
                     checkboxStatus:!item.__checkboxStatus
                 });
@@ -64,7 +65,7 @@ export default {
                     let tmp = this.asynOptions.analysis && this.asynOptions.analysis(d);
                     
                     //通知root节点，有数据变化，自己本身节点不做任何改变(不能改变自身对象)
-                    let tmpObject = {actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,data:{}};
+                    let tmpObject = {actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.UPDATECHILDREN,__tmpId:item.__tmpId,item:item,data:{}};
                     if(tmp && tmp instanceof Array && tmp.length != 0){
                         let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(tmp,item,false);
                         tmpObject.data.children = tmpData;
@@ -94,6 +95,7 @@ export default {
 
                 tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN,
+                    item:item,
                     __tmpId:item.__tmpId,
                     data:{
                         expand:!item.__expand,
@@ -110,6 +112,7 @@ export default {
             tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
+                item:item,
                 selectedItem:item
             });
         }

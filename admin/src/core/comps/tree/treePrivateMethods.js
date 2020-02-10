@@ -76,7 +76,7 @@ let _treeTool = {
      */
     getAllCheckboxNodesExcludeParent(arr){
         for(let i =0;i<arr.length;i++){
-            if(arr[i].__checkboxStatus && arr[i].__hasChildren == false){
+            if(arr[i].__checkboxStatus && arr[i].__children.length == 0){
                 _treeTool.checkedNodes.push(arr[i]);
             }
             let _children = arr[i].__children;

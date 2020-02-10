@@ -53,7 +53,7 @@ export default {
          * @returns
          */
         setParentCheckBoxStatus(node){
-            if(node && node.__hasChildren && node.__children.length != 0){
+            if(node && node.__children.length != 0){
                 let count = 0;
                 node.__children.forEach(x=>{
                     if(x.__checkboxStatus){
@@ -78,7 +78,7 @@ export default {
             }
             node.__checkboxStatus = status;
             //如果存在children，则改变所有子元素
-            if(node.__hasChildren && node.__children.length != 0){
+            if(node.__children.length != 0){
                 node.__children.forEach(x => {
                     x.__checkboxStatus = status;
                     this.setChildrenCheckboxStatus(x,status);
@@ -186,7 +186,6 @@ export default {
             }
             //无children情况下，展开事件（ajax请求）
             if(d.actionKey == DEFINE_KEY.TREE_CONFIG.ACTIONKEY.UPDATECHILDREN){
-                item.__hasChildren = d.data.hasChildren;
                 item.__children = d.data.children;
                 item.__expand = d.data.expand;
                 item.__cls = d.data.cls;

@@ -6,7 +6,7 @@
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
-        <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
+        <div v-if="item.__children instanceof Array && item.__children.length != 0" v-show="item.__expand">
             <tree-item
                 v-for="(x,index) in item.__children"
                 :item="x"
@@ -55,10 +55,11 @@ export default {
          * @param item: 当前选中节点
          */
         expandNode(item){
-            if(!item.__hasChildren){
+            if(item.__children.length == 0){
                 console.log("ajax请求");
                 let _url  = this.asynOptions.getUrl(item);
                 //发送ajax请求, 改变loading状态
+                
                 item.__cls = "fa-caret-load";
                 this.ajax.getFetch(_url).then(d=>{
                     //asynOptions 函数必须返回数组
@@ -69,12 +70,10 @@ export default {
                     if(tmp && tmp instanceof Array && tmp.length != 0){
                         let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(tmp,item,false);
                         tmpObject.data.children = tmpData;
-                        tmpObject.data.hasChildren = true;
                         tmpObject.data.expand = true;
                         tmpObject.data.cls = "fa-caret-down";
                     }else{
                         tmpObject.data.children = [];
-                        tmpObject.data.hasChildren = false;
                         tmpObject.data.expand = false;
                         tmpObject.data.cls = "fa-caret-left";
                     }

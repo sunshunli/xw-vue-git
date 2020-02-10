@@ -6,7 +6,7 @@
             <span v-if="checkbox!=undefined?true:false" class="fa fa-checkBox" :class="item.__checkboxStatus?'fa-check-square':''" @click="changeCheckboxStatus(item)"></span>
             <span class="tree-item-name" @click="selectItem(item)">{{item[displayName]}}</span>     
         </div>
-        <div v-if="item.__hasChildren && item.__children instanceof Array && item.__hasChildren.length != 0" v-show="item.__expand">
+        <div v-if="item.__children instanceof Array && item.__children.length != 0" v-show="item.__expand">
             <tree-item
                 v-for="(x,index) in item.__children"
                 :item="x"
@@ -44,6 +44,7 @@ export default {
                 tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                     actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.CHECKBOX,
                     __tmpId:item.__tmpId,
+                    item:item,
                     checkboxStatus:!item.__checkboxStatus
                 });
             }
@@ -67,6 +68,7 @@ export default {
             tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.OPEN,
                 __tmpId:item.__tmpId,
+                item:item,
                 data:{
                     expand:!item.__expand,
                     cls:cls
@@ -81,6 +83,7 @@ export default {
             tool._form_event_publisher.broadcast(this.EVENTPUBLISHKEY,{
                 actionKey:DEFINE_KEY.TREE_CONFIG.ACTIONKEY.SELECTEDITEM,
                 __tmpId:item.__tmpId,
+                item:item,
                 selectedItem:item
             });
         }

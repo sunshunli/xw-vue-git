@@ -10,13 +10,16 @@
             <button @click="expandAll(false)">unExpand</button>
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
-            <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
+            <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
             <le-local-tree displayName="name" ref="tree1" :itemClick="itemClick" childrenKey="children" checkbox></le-local-tree>
 
         </div>
         <div style="float:left">
             <le-button value="新增菜单" @click="save"></le-button>
             <le-button value="删除节点" @click="remove"></le-button>
+
+            <le-button value="Local更新节点" @click="updateLocal"></le-button>
+            <le-button value="Local删除节点" @click="removeLocal"></le-button>
         </div>
     </div>
     
@@ -45,10 +48,6 @@ export default {
         itemClick(item){
             console.log(item);
             this.selectNode = item;
-            //异步操作，更新当前节点
-            window.setTimeout(d=>{
-                // this.$refs["tree"].updateSingleNode(item,{__displayName:"xxx",__children:[{name:"new",id:"123"}]});
-            },1000)
         },
         deleteNode(){
             this.$refs["tree"].deleteSingleNode(this.selectNode);
@@ -111,10 +110,21 @@ export default {
             }).catch(e=>{
                 this.alert.showAlert("error",e.data);
             })
+        },
+        updateLocal(){
+            let data = {__displayName:"a",__children:[
+                {name:"B2_1",age:5,id:3},
+                {name:"B2_1",age:6,id:4}
+            ]};
+            this.$refs["tree1"].reloadNode(this.selectNode, data);
+        },
+        removeLocal(){
+            let data = {__children:[]};
+            this.$refs["tree1"].reloadNode(this.selectNode, data);
         }
     },
     mounted(){
-        this.getTreeData(0);
+        // this.getTreeData(0);
 
         let localTreeData = [
             {name:"A",age:1,id:1},

@@ -227,7 +227,6 @@ export default {
          * @param data 传输的数据,格式{__displayName:"a",__children:[]}
          */
         reloadNode(node,data){
-            debugger
             node[this.displayName] = data.__displayName?data.__displayName:node[this.displayName];
             if(data.__children && data.__children instanceof Array && data.__children.length != 0){
                 let tmpData = DEFINE_KEY.TREE_CONFIG.ASYNINITATTRIBUTE(data.__children,node,false);

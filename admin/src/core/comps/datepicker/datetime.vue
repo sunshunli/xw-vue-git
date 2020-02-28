@@ -14,7 +14,7 @@
                 <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header" style = "height:272px;">
                         <div class = "ipt" >
-                            <le-date-picker :ref='dateKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-date-picker>
+                            <le-date-picker :splitKey="splitStr" :ref='dateKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-date-picker>
                         </div>
                         <div class = "ipt" style = "margin-left:10px;">
                             <le-time-picker :ref='timeKey' is-datetime-picker :datetime-picker-key="dateTimeKey"></le-time-picker>
@@ -44,7 +44,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeDateTimePicker",
-    props:["msg","value","readonly"],
+    props:["msg","value","readonly","splitKey"],
     components: {LeDatePicker,LeTimePicker},
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
@@ -71,6 +71,12 @@ export default {
                 return this.formLabelWidth;
             }
             return define.LABELWIDTH;
+        },
+        splitStr(){
+            if(!this.splitKey){
+                return "/";
+            }
+            return this.splitKey;
         },
         placeholderStr(){
             if(this.$attrs.placeholder){
@@ -156,7 +162,7 @@ export default {
             let hh = new Date().getHours()>=10?new Date().getHours():"0"+new Date().getHours();
             let mm = new Date().getMinutes()>=10?new Date().getMinutes():"0"+new Date().getMinutes();
             let ss = new Date().getSeconds()>=10?new Date().getSeconds():"0"+new Date().getSeconds();
-            this.$refs[this.dateKey].setValue(y + "-" + m + "-" + d);
+            this.$refs[this.dateKey].setValue(y + this.splitStr + m + this.splitStr + d);
             this.$refs[this.timeKey].setValue(hh + ":" + mm + ":" + ss);
         },
         getNow(){

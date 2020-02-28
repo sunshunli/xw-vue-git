@@ -275,7 +275,9 @@ export default {
         });
     },
     mounted(){
-        this.setValue(this.value);
+        if(this.isDatetimePicker == undefined){
+            this.setValue(this.value);
+        }
         //为3个ul添加滚动事件
         $(this.getJQDom(this.KEYS.hourDomKey)).off("scroll").on("scroll",e=>{
             this.scrollFun(e.target);

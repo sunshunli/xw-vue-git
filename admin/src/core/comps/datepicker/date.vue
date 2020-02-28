@@ -68,7 +68,7 @@ let _tool = {
      * @returns 第一天是周几:int
      */
     getWeek(year,month){
-        let str = year + "/" + month + "/" + "01";
+        let str = year + "  " + month + "/" + "01";
         let data = new Date(str);
         return data.getDay();
     },
@@ -155,7 +155,7 @@ import tool from "../leCompsTool.js";
 
 export default {
     name:"LeDatePicker",
-    props:["isDatetimePicker","DatetimePickerKey","value","readonly"],
+    props:["isDatetimePicker","DatetimePickerKey","value","readonly","splitKey"],
     inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
     data(){
         return {
@@ -191,6 +191,12 @@ export default {
             }
             return this.dateKey;
         },
+        splitStr(){
+            if(!this.splitKey){
+                return "/";
+            }
+            return this.splitKey;
+        },
         labelWidthVal(){
             if(this.$attrs.labelWidth){
                 return this.$attrs.labelWidth;
@@ -213,13 +219,13 @@ export default {
             if(this.selectDay == ""){
                 return "";
             }
-            let tmp = this.selectDay.split('-');
+            let tmp = this.selectDay.split(this.splitStr);
             let y = tmp[0];
             let m = parseInt(tmp[1]);
             let d = parseInt(tmp[2]);
             m = m<10?"0"+m:m;
             d = d<10?"0"+d:d;
-            return y + "-" + m + "-" + d;
+            return y + this.splitStr + m + this.splitStr + d;
         },
         readonlyFlag(){
             if(this.readonly == undefined){
@@ -277,7 +283,7 @@ export default {
             }
             //如果选择了日期
             else{
-                let _arr = this.selectDay.split('-');
+                let _arr = this.selectDay.split(this.splitStr);
                 tmp = {y:_arr[0],m:_arr[1],d:_arr[2]};
             }
             for(let i=1;i<=currentDays;i++){
@@ -359,7 +365,7 @@ export default {
             });
             x.cls = "current";
             this.current.currentDay = x.day;
-            this.selectDay = x.year + "-" + x.month + "-" + x.day;
+            this.selectDay = x.year + this.splitStr + x.month + this.splitStr + x.day;
             if(this.isDatetimePicker == undefined){
                 this.isShowPicker = false;
             }
@@ -438,6 +444,7 @@ export default {
          * @returns
          */
         setValue(str){
+            console.log(1);
             if(!str){
                 this.current.currentYear = new Date().getFullYear();
                 this.current.currentMonth = parseInt(new Date().getMonth() + 1);
@@ -446,7 +453,7 @@ export default {
                 this.selectDay = "";
                 this.setPickerDateSource(this.current.currentYear,this.current.currentMonth);
             }else{
-                let _arr = str && str.split('-');
+                let _arr = str && str.split(this.splitStr);
                 this.current.currentYear = _arr[0];
                 this.current.currentMonth = parseInt(_arr[1]);
                 this.current.currentDay = parseInt(_arr[2]);
@@ -469,7 +476,9 @@ export default {
         });
     },
     mounted(){
-        this.setValue(this.value);
+        if(this.isDatetimePicker == undefined){
+            this.setValue(this.value);
+        }
     },
     beforeDestroy () {
     }

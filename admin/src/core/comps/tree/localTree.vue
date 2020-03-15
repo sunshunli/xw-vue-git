@@ -136,6 +136,15 @@ export default {
             };
             this._originData = _originData;
         },
+        checkExist(data,val){
+            let res = false;
+            data.forEach(x=>{
+                if(x == val){
+                    res = true;
+                }
+            })
+            return res;
+        },
         /**
          * @description 根据数据源，需绑定字段，绑定数据来递归绑定
          * @param {Array} data 
@@ -145,7 +154,7 @@ export default {
         recurrentStatus(data,field,array){
             if(data && data instanceof Array && data.length >0){
                 for(let i=0;i<data.length;i++){
-                    if(array && array instanceof Array && array.indexOf(data[i][field]) != -1){
+                    if(array && array instanceof Array && this.checkExist(array,data[i][field])){
                         data[i].__checkboxStatus = true;
                     }else{
                         data[i].__checkboxStatus = false;

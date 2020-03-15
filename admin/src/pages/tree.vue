@@ -70,7 +70,7 @@ export default {
             this.$refs["tree1"].reset();
         },
         bind(){
-            this.$refs["tree1"].bindCKByField("id",[1,3,4,5]);
+            this.$refs["tree1"].bindCKByField("code",["1","3","4","5"]);
         },
         expandAll(flag){
             this.$refs["tree1"].expandAll(flag);
@@ -112,9 +112,9 @@ export default {
             })
         },
         updateLocal(){
-            let data = {__displayName:"a",__children:[
-                {name:"B2_1",age:5,id:3},
-                {name:"B2_1",age:6,id:4}
+            let data = {__displayName:"newNodeName",__children:[
+                {name:"B2_1",age:5,code:3},
+                {name:"B2_1",age:6,code:4}
             ]};
             this.$refs["tree1"].reloadNode(this.selectNode, data);
         },
@@ -127,16 +127,16 @@ export default {
         // this.getTreeData(0);
 
         let localTreeData = [
-            {name:"A",age:1,id:1},
+            {name:"A",age:1,code:1},
             {name:"B",age:2,children:[
-                {name:"B1",age:3,id:12},
+                {name:"B1",age:3,code:12},
                 {name:"B2",age:4,children:[
-                    {name:"B2_1",age:5,id:3},
-                    {name:"B2_1",age:6,id:4},
+                    {name:"B2_1",age:5,code:3},
+                    {name:"B2_1",age:6,code:4},
                 ]}
             ]},
             {name:"C",age:7,children:[
-                {name:"C1_1",age:8,id:5},
+                {name:"C1_1",age:8,code:5},
             ]},
         ];
         this.$refs["tree1"].init(localTreeData);

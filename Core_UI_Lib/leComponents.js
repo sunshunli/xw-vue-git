@@ -11,6 +11,7 @@ import LeLocalSelect from "@CoreUILib/select/localSelect.vue";
 import TableList from "@CoreUILib/table/tableList.vue";
 import LocalTableList from "@CoreUILib/localTable/tableList.vue";
 import LeUpload from "@CoreUILib/upload/upload.vue";
+import LeLocalUpload from "@CoreUILib/upload/localUpload.vue";
 import LeAsynTree from "@CoreUILib/tree/asynTree.vue";
 import LeLocalTree from "@CoreUILib/tree/localTree.vue";
 import LeForm from "@CoreUILib/form/form.vue";
@@ -36,6 +37,7 @@ export default {
         Vue.component('TableList',TableList);
         Vue.component('LocalTableList',LocalTableList);
         Vue.component('LeUpload',ValidataHOC(LeUpload));
+        Vue.component('LeLocalUpload',ValidataHOC(LeLocalUpload));
         Vue.component('LeAsynTree',LeAsynTree);
         Vue.component('LeLocalTree',LeLocalTree);
         Vue.component('LeDatePicker',ValidataHOC(LeDatePicker));

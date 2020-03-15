@@ -13,7 +13,10 @@
             <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
             <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
             <le-button type="upload" @click="uploadb" value="上传"></le-button>
-            <le-upload :options="upo" ref="upod"></le-upload>
+            <le-button type="upload" @click="setFile" value="setFile"></le-button>
+            <le-button type="upload" @click="clear" value="clear"></le-button>
+
+            <le-local-upload :options="upo" ref="upod"></le-local-upload>
         </div>
         <div style="float:left">
             <le-button value="新增菜单" @click="save"></le-button>
@@ -45,12 +48,10 @@ export default {
                 }
             },
             upo:{
-                multiple:true,
                 fname:"file",
-                autoUpload:false,
-                notAutoCallback:(data)=>{
+                callback:(data=>{
                     this.postData = data;
-                }
+                })
             }
         }
     },
@@ -133,8 +134,17 @@ export default {
             this.$refs["tree1"].reloadNode(this.selectNode, data);
         },
         uploadb(){
-            this.ajax.uploadFetch("xxxx",this.postData)
-        }
+            this.postData.delete("key");
+            this.postData.append("key","abcd");
+            this.ajax.uploadFetch("xxxx",this.postData);
+        },
+        setFile(){
+            debugger
+            this.$refs.upod.getCurrentComponent().setValue("//p2.lefile.cn/resource/NEC-CTO/QQ20200218-0.fd52ddcd2a40594f.gif");
+        },
+        clear(){
+            // this.$refs.upod.getCurrentComponent().reset();
+        },
     },
     mounted(){
         // this.getTreeData(0);

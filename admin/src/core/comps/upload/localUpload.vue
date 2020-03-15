@@ -18,7 +18,8 @@
                         <div v-if="fileType != 'image'">
                             <span class="fileContent" v-for="(item,index) in srcs" :key="index">
                                 <a target="_blank" :href="item.name">{{"<#附件#>_" + item.idx}}</a>
-                                <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
+                                <!-- <a target="_blank" :href="item.name">{{"<#附件#>_" + item.idx}}</a> -->
+                                <!-- <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i> -->
                             </span>
                         </div>
                         <div v-else>
@@ -26,7 +27,7 @@
                                 <a target="_blank" :href="item.name" style="display:block;height:100px;">
                                     <img :src="item.name" style="width:100px;height:100px">
                                 </a>
-                                <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i>
+                                <!-- <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i> -->
                             </span>
                         </div>
                     </div>
@@ -45,7 +46,7 @@
     export default {
         components: {},
         props:["options","value","readonly"],
-        name: "LeUpload",
+        name: "LeLocalUpload",
         inheritAttrs:false,
         data(){
             return {
@@ -57,7 +58,8 @@
                     showError:false,
                     successIcon:""
                 },
-                formLabelWidth:"0"
+                formLabelWidth:"0",
+                allFileList:[]
             }
         },
         computed:{
@@ -74,12 +76,12 @@
                 return this.options.tip?this.options.tip:"";
             },
             multipleTag(){
-                if(this.options.multiple!=undefined){
-                    if(this.options.multiple === false){
-                        return false;
-                    }
-                    return true;
-                }
+                // if(this.options.multiple!=undefined){
+                //     if(this.options.multiple === false){
+                //         return false;
+                //     }
+                //     return true;
+                // }
                 return false;
             },
             noResultTag(){
@@ -93,12 +95,6 @@
             },
             fname(){
                 return this.options.fname;
-            },
-            url(){
-                return this.options.url;
-            },
-            completedCallback(){
-                return this.options.completedCallback;
             },
             vtype(){
                 return this.options.vtype?this.options.vtype:"";
@@ -165,10 +161,6 @@
                 let val = this.$refs[this.fkey].value;
                 this.upload();
             },
-            /**
-             * @description 重置file-input的value，防止value一样的情况下再次点击file-input按钮不生效
-             * @returns
-             */
             reloadFileInput(){
                 this.$refs[this.fkey].value = "";
             },
@@ -258,22 +250,44 @@
                 });
                 return resultPromise;
             },
+            addFileList(fls){
+                if(this.multipleTag){
+                    for(let k =0;k<fls.length;k++){
+                        let exist = false;
+                        let currentFils = fls[k];
+                        for(let i=0;i<this.allFileList.length;i++){
+                            if(currentFils.name == this.allFileList[i].name){
+                                exist = true;
+                            }
+                        }
+                        if(!exist){
+                            this.allFileList.push(currentFils);
+                        }
+                    }
+                }else{
+                    this.allFileList = fls;
+                }
+            },
+            getFormDataByFileList(){
+                let res = {count:0,formData:new FormData()}
+                for(let i=0;i<this.allFileList.length;i++){
+                    res.count++;
+                    res.formData.append(this.fname,this.allFileList[i]);
+                }
+                return res;
+            },
             /**
              * @description 上传的主体方法
              * @returns
              */
             upload(){
-                if(!this.url || !this.fname){
-                    this.alert.showAlert("error","<#上传url和fname必须配置#>!");
+                if(!this.fname){
+                    this.alert.showAlert("error","<#上传fname必须配置#>!");
                     return;
                 }
-                
                 let dom = this.$refs[this.fkey];
                 let fileList = dom.files;
-                let formData = new FormData();
-                for(let i=0;i<fileList.length;i++){
-                    formData.append(this.fname,fileList[i]);
-                }
+                
                 //控制格式
                 if(!this.checkSuffix(fileList)){
                     this.alert.showAlert("error","<#后缀名必须为#>:"+ this.vtype);
@@ -288,42 +302,31 @@
                 if(this.fileType == define.UPLOADFILETYPE.IMAGE && this.width && this.height){
                     this.checkSpecification(fileList).then(x=>{
                         if(x){
-                            this.doUploadAjax(formData);
+                            this.addFileList(fileList);
+                            this.setSrcs();
                         }else{
                             this.alert.showAlert("error","<#图片规格必须为#>:"+ this.width + "*" + this.height);
                         }
                     }).catch(e=>{})
                 }else{
-                    this.doUploadAjax(formData);
+                    this.addFileList(fileList);
+                    this.setSrcs();
                 }
-                this.reloadFileInput();
             },
-            doUploadAjax(formData){
-                this.showLoading = true;
-                this.ajax.uploadFetch(this.url,formData).then((result) => {
-                    // this.srcs = [];
-                    let src = this.options.analysis?this.options.analysis(result):result;
-                    this.alert.showAlert("success","<#上传成功#>");
-                    //多文件上传
-                    if(this.multipleTag){
-                        src && src.split(',').forEach(x=>{
-                            this.srcs.push({name:x,idx:this.getMaxIndex()});
-                        })
-                    }else{
-                        this.srcs = [{name:src,idx:1}];
-                    }
-                    this.$emit('input',this.getNames(this.srcs));
-                    this.showLoading = false;
-                    if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                        this.$attrs.setVerifyCompState();
-                    }
-                    this.completedCallback&&this.completedCallback({success:true,data:result});
-                }).catch((err) => {
-                    this.showLoading = false;
-                    this.showError = true;
-                    this.alert.showAlert("error","<#上传异常#>");
-                    this.completedCallback&&this.completedCallback({success:false,data:err});
-                });
+            setSrcs(){
+                this.srcs = [];
+                if(this.multipleTag){
+                    this.allFileList.forEach(x=>{
+                        this.srcs.push({name:x.name,idx:this.getMaxIndex()});
+                    })
+                }else{
+                    this.srcs = [{name:this.allFileList[0].name,idx:1}];
+                }
+
+                this.options.callback && this.options.callback(this.getFormDataByFileList().formData);
+
+                this.reloadFileInput();
+                this.$emit('input',this.getNames(this.srcs));
             },
             getValue(){
                 return this.getNames(this.srcs);
@@ -363,13 +366,14 @@
                 if(this.readonlyFlag){
                     return;
                 }
-                let tmp = [];
-                this.srcs.forEach(x=>{
+                let res = [];
+                this.allFileList.forEach(x=>{
                     if(x.name != item.name){
-                        tmp.push(x);
+                        res.push(x);
                     }
                 })
-                this.srcs = tmp;
+                this.allFileList = res;
+                this.setSrcs();
                 this.$emit('input',this.getNames(this.srcs));
             },
             //单独重写reset方法,不调用父组件的reset
@@ -377,7 +381,18 @@
                 this.$emit('input',"");
                 this.srcs = [];
                 this.$attrs.setStateByFlag(0);
-            }
+            },
+            // getFormData(){
+            //     return new Promise((resolve,reject)=>{
+            //         debugger
+            //         let result = this.getFormDataByFileList();
+            //         if(result.count > 0){
+            //             resolve(result.formData);
+            //         }else{
+            //             reject(null);
+            //         }
+            //     })
+            // }
         },
         created(){
             let that = this;
@@ -457,7 +472,7 @@
     color: #606266;
 }
 .upaload .fileList span.fileContent{
-    padding-right: 20px;
+    /* padding-right: 20px; */
     padding-top: 1px;
 }
 .upaload .fileList span.noResult{

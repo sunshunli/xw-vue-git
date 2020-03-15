@@ -106,6 +106,23 @@ let LeCompTool = {
                 })
             })
             return res;
+        },
+        deepClone(obj){
+            let res = {}
+            if(obj instanceof Array) {
+                res = obj.map(i => this.deepClone(i))
+            }else {
+                let keys = Object.keys(obj);
+                keys.forEach(i => {
+                    if(typeof obj[i] === 'object' && obj[i]) {
+                        res[i] = this.deepClone(obj[i])
+                    }else{
+                        res[i] = obj[i]
+                    }
+                })
+            }
+            
+            return res;
         }
     },
     string:{

@@ -12,7 +12,7 @@
             <button @click="checkall(false)">unCheckAll</button>
             <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
             <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
-        
+            <le-button type="upload" @click="uploadb" value="上传"></le-button>
             <le-upload :options="upo" ref="upod"></le-upload>
         </div>
         <div style="float:left">
@@ -35,6 +35,7 @@ export default {
         return {
             selectNode:null,
             data:[],
+            postData:null,
             asynOptions:{
                 getUrl:d=>{
                     return "/auth/resources/getResources?parent_id="+d.id;
@@ -130,11 +131,13 @@ export default {
         removeLocal(){
             let data = {__children:[]};
             this.$refs["tree1"].reloadNode(this.selectNode, data);
+        },
+        uploadb(){
+            this.ajax.uploadFetch("xxxx",this.postData)
         }
     },
     mounted(){
         // this.getTreeData(0);
-
         let tmp_data = DATA.data;
         this.$refs["tree1"].init(tmp_data);
     }

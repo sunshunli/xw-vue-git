@@ -11,8 +11,7 @@
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
             <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
-            <le-local-tree displayName="name" ref="tree1" :itemClick="itemClick" childrenKey="children" checkbox></le-local-tree>
-
+            <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
         </div>
         <div style="float:left">
             <le-button value="新增菜单" @click="save"></le-button>
@@ -26,7 +25,7 @@
 </template>
 
 <script>
-
+import DATA from "./data.js";
 import Uint from "../core/tool/commonUtil.js";
 export default {
     name:"TreeTest",
@@ -70,7 +69,7 @@ export default {
             this.$refs["tree1"].reset();
         },
         bind(){
-            this.$refs["tree1"].bindCKByField("code",["1","3","4","5"]);
+            this.$refs["tree1"].bindCKByField("code",["2610","2631","2715","2635","2735","2736","2738","2673"]);
         },
         expandAll(flag){
             this.$refs["tree1"].expandAll(flag);
@@ -126,20 +125,8 @@ export default {
     mounted(){
         // this.getTreeData(0);
 
-        let localTreeData = [
-            {name:"A",age:1,code:1},
-            {name:"B",age:2,children:[
-                {name:"B1",age:3,code:12},
-                {name:"B2",age:4,children:[
-                    {name:"B2_1",age:5,code:3},
-                    {name:"B2_1",age:6,code:4},
-                ]}
-            ]},
-            {name:"C",age:7,children:[
-                {name:"C1_1",age:8,code:5},
-            ]},
-        ];
-        this.$refs["tree1"].init(localTreeData);
+        let tmp_data = DATA.data;
+        this.$refs["tree1"].init(tmp_data);
     }
 }
 </script>

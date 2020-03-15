@@ -44,7 +44,7 @@
     import tool from "../leCompsTool.js";
     export default {
         components: {},
-        props:["options","value","readonly","tip"],
+        props:["options","value","readonly"],
         name: "LeUpload",
         inheritAttrs:false,//控制attrs的属性不渲染到根元素上面
         data(){
@@ -69,6 +69,16 @@
                     return this.formLabelWidth;
                 }
                 return define.LABELWIDTH;
+            },
+            autoUploadFlag(){
+                if(this.options.autoUpload != undefined){
+                    if(this.options.autoUpload === false){
+                        return false;
+                    }
+                    return true;
+                }else{
+                    return true;
+                }
             },
             tipStr(){
                 return this.options.tip?this.options.tip:"";
@@ -263,17 +273,8 @@
              * @returns
              */
             upload(){
-                if(!this.url || !this.fname){
-                    this.alert.showAlert("error","<#上传url和fname必须配置#>!");
-                    return;
-                }
-                
                 let dom = this.$refs[this.fkey];
                 let fileList = dom.files;
-                let formData = new FormData();
-                for(let i=0;i<fileList.length;i++){
-                    formData.append(this.fname,fileList[i]);
-                }
                 //控制格式
                 if(!this.checkSuffix(fileList)){
                     this.alert.showAlert("error","<#后缀名必须为#>:"+ this.vtype);
@@ -288,42 +289,65 @@
                 if(this.fileType == define.UPLOADFILETYPE.IMAGE && this.width && this.height){
                     this.checkSpecification(fileList).then(x=>{
                         if(x){
-                            this.doUploadAjax(formData);
+                            this.doUploadAjax(fileList);
                         }else{
                             this.alert.showAlert("error","<#图片规格必须为#>:"+ this.width + "*" + this.height);
                         }
                     }).catch(e=>{})
                 }else{
-                    this.doUploadAjax(formData);
+                    this.doUploadAjax(fileList);
                 }
                 this.reloadFileInput();
             },
-            doUploadAjax(formData){
-                this.showLoading = true;
-                this.ajax.uploadFetch(this.url,formData).then((result) => {
-                    // this.srcs = [];
-                    let src = this.options.analysis?this.options.analysis(result):result;
-                    this.alert.showAlert("success","<#上传成功#>");
-                    //多文件上传
-                    if(this.multipleTag){
-                        src && src.split(',').forEach(x=>{
-                            this.srcs.push({name:x,idx:this.getMaxIndex()});
-                        })
-                    }else{
-                        this.srcs = [{name:src,idx:1}];
+            setSrcsFileChange(names){
+                //多文件上传
+                if(this.multipleTag){
+                    names && names.split(',').forEach(x=>{
+                        this.srcs.push({name:x,idx:this.getMaxIndex()});
+                    })
+                }else{
+                    this.srcs = [{name:names,idx:1}];
+                }
+                this.$emit('input',this.getNames(this.srcs));
+            },
+            doUploadAjax(fileList){
+                let formData = new FormData();
+                for(let i=0;i<fileList.length;i++){
+                    formData.append(this.fname,fileList[i]);
+                }
+
+                if(this.autoUploadFlag){
+                    if(!this.url || !this.fname){
+                        this.alert.showAlert("error","<#上传url和fname必须配置#>!");
+                        return;
                     }
-                    this.$emit('input',this.getNames(this.srcs));
-                    this.showLoading = false;
-                    if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
-                        this.$attrs.setVerifyCompState();
+                    this.showLoading = true;
+                    this.ajax.uploadFetch(this.url,formData).then((result) => {
+                        // this.srcs = [];
+                        let src = this.options.analysis?this.options.analysis(result):result;
+                        this.alert.showAlert("success","<#上传成功#>");
+
+                        this.setSrcsFileChange(src);
+                        
+                        this.showLoading = false;
+                        if(this.$attrs.checkVerifyEnabled && this.$attrs.checkVerifyEnabled()){
+                            this.$attrs.setVerifyCompState();
+                        }
+                        this.completedCallback&&this.completedCallback({success:true,data:result});
+                    }).catch((err) => {
+                        this.showLoading = false;
+                        this.showError = true;
+                        this.alert.showAlert("error","<#上传异常#>");
+                        this.completedCallback&&this.completedCallback({success:false,data:err});
+                    });
+                }else{
+                    let filenames = [];
+                    for (let index = 0; index < fileList.length; index++) {
+                        filenames.push(fileList[index].name);
                     }
-                    this.completedCallback&&this.completedCallback({success:true,data:result});
-                }).catch((err) => {
-                    this.showLoading = false;
-                    this.showError = true;
-                    this.alert.showAlert("error","<#上传异常#>");
-                    this.completedCallback&&this.completedCallback({success:false,data:err});
-                });
+                    this.options.notAutoCallback && this.options.notAutoCallback(fileList);
+                    this.setSrcsFileChange(filenames.join(','));
+                }
             },
             getValue(){
                 return this.getNames(this.srcs);

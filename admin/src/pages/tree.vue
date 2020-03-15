@@ -12,6 +12,8 @@
             <button @click="checkall(false)">unCheckAll</button>
             <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
             <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
+        
+            <le-upload :options="upo" ref="upod"></le-upload>
         </div>
         <div style="float:left">
             <le-button value="新增菜单" @click="save"></le-button>
@@ -39,6 +41,14 @@ export default {
                 },
                 analysis:d=>{
                     return d.data;
+                }
+            },
+            upo:{
+                multiple:true,
+                fname:"file",
+                autoUpload:false,
+                notAutoCallback:(data)=>{
+                    this.postData = data;
                 }
             }
         }

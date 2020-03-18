@@ -38,7 +38,7 @@
             <table-list title="黑名单列表" ref='black_list_table' :options='tableOptions'></table-list>
         </div>
 
-        <le-dialog title="新建弹层" height="605" width="1000" v-model="showDialog" @closeCallback="closeDialog">
+        <le-dialog title="新建弹层" height="80vh" width="1000" v-model="showDialog" @closeCallback="closeDialog">
             <div slot="body">
                 <le-form labelWidth='180' ref="saveForm">
                     <div class="le_form_row_item">

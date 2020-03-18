@@ -33,10 +33,20 @@ export default {
     computed:{
         
         dialogStyle(){
-            return {
-                width:this.width?this.width + "px" : 700 + "px",
-                height:this.height?this.height + "px" : 300 + "px",
+            let w = 0;
+            let h = 0;
+            if(this.width && this.width.indexOf('vh') != -1){
+                w = this.width;
+            }else{
+                w = this.width?this.width + "px" : "700px";
             }
+            if(this.height && this.height.indexOf('vh') != -1){
+                h = this.height;
+            }else{
+                h = this.height?this.height + "px" : "300px";
+            }
+
+            return {width:w,height:h}
         },
         valueCls(){
             if(this.value){

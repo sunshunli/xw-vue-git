@@ -6,12 +6,13 @@
             <button @click="getNodes">获取被选中节点</button>
             <button @click="reSet">reSet</button>
             <button @click="bind">bind</button>
+            <button @click="setItem">setItem</button>
             <button @click="expandAll(true)">expand</button>
             <button @click="expandAll(false)">unExpand</button>
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
-            <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
-            <!-- <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree> -->
+            <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
+            <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
             <le-button type="upload" @click="uploadb" value="上传"></le-button>
             <le-button type="upload" @click="setFile" value="setFile"></le-button>
             <le-button type="upload" @click="clear" value="clear"></le-button>
@@ -57,8 +58,11 @@ export default {
     },
     methods:{
         itemClick(item){
-            console.log(item);
+            console.log(11111,item);
             this.selectNode = item;
+        },
+        setItem(){
+            this.$refs["tree1"].setSelectItem("code",2742);
         },
         deleteNode(){
             this.$refs["tree"].deleteSingleNode(this.selectNode);
@@ -150,9 +154,9 @@ export default {
         },
     },
     mounted(){
-        this.getTreeData(0);
+        // this.getTreeData(0);
         let tmp_data = DATA.data;
-        // this.$refs["tree1"].init(tmp_data);
+        this.$refs["tree1"].init(tmp_data);
     }
 }
 </script>

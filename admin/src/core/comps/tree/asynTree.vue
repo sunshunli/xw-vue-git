@@ -62,7 +62,6 @@ export default {
                 })
                 node.__checkboxStatus = count == node.__children.length?true:false;
 
-                // let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
                 this.setParentCheckBoxStatus(node.__parentNode);
             }
         },
@@ -141,7 +140,6 @@ export default {
          * @param node 需要删除的节点
          */
         deleteSingleNode(node){
-            // let parentNode = _treeTool.getNodeById(this.state.data,node.__parentId);
             let parentNode = node.__parentNode;
             //非根节点
             if(parentNode){
@@ -178,7 +176,6 @@ export default {
          * @description 处理所有订阅事件
          */
         tool._form_event_publisher.on(this.EVENTPUBLISHKEY,d=>{
-            // let item = _treeTool.getNodeById(that.state.data,d.__tmpId);
             let item = d.item;
             //如果数据错误，没有找到当前节点，直接return
             if(!item){
@@ -205,7 +202,6 @@ export default {
                 //改变所有子节点的checkbox状态
                 this.setChildrenCheckboxStatus(item,d.checkboxStatus);
                 //改变所有父节点的checkbox状态
-                // this.setParentCheckBoxStatus(_treeTool.getNodeById(that.state.data,item.__parentId));
                 this.setParentCheckBoxStatus(item.__parentNode);
             }
         })

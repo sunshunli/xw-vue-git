@@ -32,19 +32,20 @@ let _treeTool = {
     /**
      * @description 递归遍历tree的数据源，根据__tmpId找到当前节点
      * @param arr 数据源，初始为this.state.data
-     * @param id 唯一主键 __tmpId
+     * @param field 字段
+     * @param val 值
      * @returns node
      */
-    getNodeById(arr,id){
+    getNodeByField(arr,field,val){
         let res = null;
         for(let i =0;i<arr.length;i++){
-            if(arr[i].__tmpId == id){
+            if(arr[i][field] != undefined && arr[i][field].toString() == val.toString()){
                 res = arr[i];
                 return res;
             }
             let children = arr[i].__children;
             if(children instanceof Array && children && children.length >0){
-                let _tmp = _treeTool.getNodeById(children,id);
+                let _tmp = _treeTool.getNodeByField(children,field,val);
                 if(_tmp){
                     res = _tmp;
                     return res;

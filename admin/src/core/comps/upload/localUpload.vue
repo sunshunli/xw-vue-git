@@ -17,14 +17,14 @@
                     <div v-else>
                         <div v-if="fileType != 'image'">
                             <span class="fileContent" v-for="(item,index) in srcs" :key="index">
-                                <a target="_blank" :href="item.name">{{"<#附件#>_" + item.idx}}</a>
+                                <a href="javascript:void(0);">{{item.name}}</a>
                                 <!-- <a target="_blank" :href="item.name">{{"<#附件#>_" + item.idx}}</a> -->
                                 <!-- <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i> -->
                             </span>
                         </div>
                         <div v-else>
                             <span v-for="(item,index) in srcs" :key="index" style="height:auto">
-                                <a target="_blank" :href="item.name" style="display:block;height:100px;">
+                                <a href="javascript:void(0);" style="display:block;height:100px;">
                                     <img :src="item.name" style="width:100px;height:100px">
                                 </a>
                                 <!-- <i v-show="!readonlyFlag" @click="removeItem(item)" class="fa fa-times"></i> -->
@@ -415,7 +415,8 @@
     display: inline-block;
     overflow: hidden;
     text-align: center;
-    width: 50px;
+    padding:0px 6px;
+    /* width: 50px; */
     height: 26px;
     background-color: #2c7;
     border-radius: 4px;

@@ -10,8 +10,8 @@
             <button @click="expandAll(false)">unExpand</button>
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
-            <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
-            <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
+            <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree>
+            <!-- <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree> -->
             <le-button type="upload" @click="uploadb" value="上传"></le-button>
             <le-button type="upload" @click="setFile" value="setFile"></le-button>
             <le-button type="upload" @click="clear" value="clear"></le-button>
@@ -69,6 +69,9 @@ export default {
             console.log(res,res1);
         },
         getTreeData(id){
+            // if(this._store.treeData.length >0){
+            //     return;
+            // }
             this.ajax.getFetch("/auth/resources/getResources?parent_id="+id).then(d=>{
                 this.data = d.data;
                 this.$refs["tree"].init(d.data);
@@ -147,9 +150,9 @@ export default {
         },
     },
     mounted(){
-        // this.getTreeData(0);
+        this.getTreeData(0);
         let tmp_data = DATA.data;
-        this.$refs["tree1"].init(tmp_data);
+        // this.$refs["tree1"].init(tmp_data);
     }
 }
 </script>

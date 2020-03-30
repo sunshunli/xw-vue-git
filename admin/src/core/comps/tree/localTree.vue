@@ -217,6 +217,9 @@ export default {
         },
         setParentNodeExpand(node,tag){
             let parentNode = node.__parentNode;
+            if(!parentNode){
+                return;
+            }
             parentNode.__expand = tag;
             let _p_p_node = parentNode.__parentNode;
             if(_p_p_node){

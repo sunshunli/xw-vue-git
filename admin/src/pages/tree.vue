@@ -62,7 +62,7 @@ export default {
             this.selectNode = item;
         },
         setItem(){
-            this.$refs["tree1"].setSelectItem("code",2742);
+            this.$refs["tree1"].setSelectItem("categoryCode",1);
         },
         deleteNode(){
             this.$refs["tree"].deleteSingleNode(this.selectNode);

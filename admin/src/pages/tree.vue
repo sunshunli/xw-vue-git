@@ -147,7 +147,7 @@ export default {
         },
         setFile(){
             debugger
-            this.$refs.upod.getCurrentComponent().setValue("//p2.lefile.cn/resource/NEC-CTO/QQ20200218-0.fd52ddcd2a40594f.gif");
+            this.$refs.upod.getCurrentComponent().setValue("//p2-nec.static.pub//resource/NEC-CTO/QQ20200218-0.fd52ddcd2a40594f.gif");
         },
         clear(){
             // this.$refs.upod.getCurrentComponent().reset();

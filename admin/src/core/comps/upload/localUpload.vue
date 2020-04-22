@@ -427,6 +427,7 @@
     color: #fff;
     text-decoration: none;
     vertical-align: middle;
+    padding: 0 10px;
 }
 .upaload .input-file input[type="file"] {
     cursor:pointer;

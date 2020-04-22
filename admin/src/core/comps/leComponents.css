@@ -17,7 +17,8 @@ html,body{
     width: 25%;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+      /* align-items: baseline; */
+      align-items: center;
 }
 
 /* 一行放俩个 */
@@ -25,7 +26,8 @@ html,body{
     width: 50%;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+      /* align-items: baseline; */
+      align-items: center;
 }
 
 /* 一行放3个 */
@@ -33,7 +35,8 @@ html,body{
     width: 75%;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    /* align-items: baseline; */
+    align-items: center;
 }
 
 /* 一行放4个 */
@@ -41,7 +44,8 @@ html,body{
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+      /* align-items: baseline; */
+    align-items: center;
 }
 
 /* 页面名称 */

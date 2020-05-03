@@ -16,6 +16,11 @@
                     <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                 </div>
             </div> -->
+            <le-local-select  placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="选择职业Ful" :data-source="shopsFull" display-name="val" display-value="key" v-model='eshopFull'></le-local-select> 
+
+            <le-local-select multiple enabledInput placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="测试下拉多选的新样式" :data-source="newSelectItem" display-name="val" display-value="key" v-model='newSelectArr'></le-local-select> 
+
+
             <div class="col4">
                 <le-upload label="上传文件" :options="imgUploadOpt" v-model="files"></le-upload>
                 <le-button type="create" value="获取文件路径" @click="getUrls"></le-button>
@@ -35,14 +40,13 @@
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='130' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件123" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
             </div>
 
-            <le-editor labelWidth="130" height="300" on required msg = "pc端必填" label = " pc端:" :option = "editPcOption" ref = "pcEditor"></le-editor>
+            <!-- <le-editor labelWidth="130" height="300" on required msg = "pc端必填" label = " pc端:" :option = "editPcOption" ref = "pcEditor"></le-editor> -->
 
             <div class="col2 le_full_width">
                 <le-date-time-picker v-show="hideAllTag" @changeDateTime="update1" labelWidth='100' tip="输入当前之后的日期和事件" on placeholder="请选择日期时间" label="时间日期组件" :readonly="readonly" msg="日期and时间不允许为空" v-model="entity.datetime"></le-date-time-picker>           
                 <!-- <le-local-select v-show="hideAllTag" labelWidth='100' tip="职业选择2个" on label="选择职业" msg="职业必填" :readonly="readonly" :data-source="shops" multiple display-name="val" display-value="key" v-model='entity.job'></le-local-select>  -->
             </div>
             
-            <le-local-select placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="选择职业Ful" :data-source="shopsFull" display-name="val" display-value="key" v-model='eshopFull'></le-local-select> 
 
             <div class="col3 le_full_width">
                 <le-local-select placeholder='请选择' v-show="hide0" @change='changeShops0' label="选择职业0" :data-source="shops0" display-name="val" display-value="key" v-model='eshop1'></le-local-select> 
@@ -53,7 +57,7 @@
             <div class="le_new_page_btn_group">
                 <le-button value="返回" type="back" @click="back"></le-button>
                 <le-button value="确定1" :disabled='disabledFlag' type="save" @click="save"></le-button>
-                <le-button value="确定2" :disabled='disabledFlag' type="save" @click="save"></le-button>
+                <le-button value="确定2" type="save" @click="save"></le-button>
             </div>
         </le-form>
        
@@ -67,6 +71,29 @@ let _shops = [
     {val:'epp',key:"3"},
     {val:'17',key:"4"},
     {val:'moto',key:"5"},
+]
+
+let _newSelectItem  = [
+    {val:'12',key:"1"},
+    {val:'13',key:"2"},
+    {val:'14',key:"3"},
+    {val:'15',key:"4"},
+    {val:'16',key:"5"},
+    {val:'17',key:"6"},
+    {val:'18',key:"7"},
+    {val:'19',key:"8"},
+    {val:'20',key:"9"},
+    {val:'21',key:"10"},
+    {val:'22',key:"11"},
+    {val:'23',key:"12"},
+    {val:'24',key:"13"},
+    {val:'25',key:"14"},
+    {val:'嘻嘻',key:"15"},
+    {val:'哈哈',key:"16"},
+    {val:'奈奈',key:"17"},
+    {val:'喂喂',key:"18"},
+    {val:'沫沫',key:"19"},
+    {val:'顾未易',key:"20"},
 ]
 
 import tools from "../core/tool/commonUtil.js";
@@ -86,6 +113,8 @@ export default {
             shops1:[],
             shops2:[],
             files:"",
+            newSelectArr:'',
+            newSelectItem : _newSelectItem,
             imgUploadOpt:{
                 multiple:true,
                 vtype:"png,jpg",
@@ -242,6 +271,7 @@ export default {
             this.$router.push({path:'/'})
         },
         save(){
+            console.log(this.newSelectArr)
             let res = this.$refs.saveForm.validate();
             res.then(()=>{
                 this.alert.showAlert("success","必填项全部填写了")

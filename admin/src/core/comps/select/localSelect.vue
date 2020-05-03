@@ -363,14 +363,18 @@
 	    outline: none;
 	    display: inline-block;
 	    font-size: inherit;
-	    height: 40px;
+	    min-height: 40px;
 	    line-height: 40px;
-	    padding: 0 5px;
 	    width:180px;
         cursor: pointer;
         margin: 0;
         vertical-align: middle;
+        padding: 0 !important;
 	}
+
+    .searchMulSelect .tags{
+        padding-right: 26px;
+    }
 	
 	.searchMulSelect input:focus{
 		border-color: #409EFF;
@@ -378,13 +382,14 @@
 	
 	.searchMulSelect .tags{
 		width: 100%;
-        height: 100%;
-        position: absolute;
+        min-height: 100%;
+        /* position: absolute; */
         line-height: normal;
         white-space: normal;
         z-index: 1;
-        top: 0;
-        left: 0;
+        /* top: 0;
+        left: 0; */
+        position: relative;
 	}
 
     .searchMulSelect .tags.readonlyIcon{
@@ -398,7 +403,7 @@
 	    font-size: 14px;
 	    border:none;
 	    padding: 0 5px;
-	    height: 100%;
+	    height: 40px;
         line-height: 100%;
 	    background-color: transparent;
 	    width: 100px;
@@ -407,11 +412,11 @@
     
     .tags .icon-del{
         position: absolute;
-        top: 12px;
+        top: 50%;
         right: 8px;
         color: #c0c4cc;
         font-weight: normal;
-
+        transform: translateY(-50%);
     }
 
     .searchMulSelect.fa-check-circle-o {

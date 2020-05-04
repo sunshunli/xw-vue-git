@@ -207,6 +207,10 @@ export default {
         // this.getTreeData(0);
         let tmp_data = DATA.data;
         this.$refs["tree1"].init(tmp_data);
+
+        window.setTimeout(()=>{
+            this.entity.datetime = "2043/03/23 12:12:56";
+        },1200)
     }
 }
 </script>

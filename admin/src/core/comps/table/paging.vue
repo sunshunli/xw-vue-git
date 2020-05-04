@@ -2,6 +2,15 @@
     <div class="pageNumCls" >
         <nav aria-label="Page navigation example">
             <ul class="pagination">
+                <li class="page-item selectPages">
+                    <label>Size:</label>
+                    <select>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </li>
                 <li class="page-item"><a class="page-link span"><#总条数#>:{{count}}</a></li>
                 <li class="page-item" @click="this.prev"><a class="page-link button" ><#上一页#></a></li>
                 <li class="page-item" @click="this.next"><a class="page-link button" ><#下一页#></a></li>                
@@ -95,7 +104,7 @@
         list-style: none;overflow: hidden;font-weight: 600;
     }
     .pagination>li{
-        display: block;float: left;margin-left: 8px;height: auto;
+        display: block;float: left;margin-left: 8px;height: auto;color: #797979;
     }
     .pagination>li>a, .pagination>li>span{
         border:none;border-radius: 3px;line-height: 27px;color: #797979;
@@ -118,6 +127,16 @@
 
     .button:hover{
         background-color: rgba(0,0,0,0.5);
+    }
+
+    .selectPages{
+        line-height: 27px;
+        color: #797979;
+    }
+
+    .selectPages select{
+        border: 1px solid rgba(217,217,217,1);
+        color: #797979;
     }
 
 </style>

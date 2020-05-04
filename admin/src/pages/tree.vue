@@ -26,6 +26,14 @@
             <le-button value="Local更新节点" @click="updateLocal"></le-button>
             <le-button value="Local删除节点" @click="removeLocal"></le-button>
         </div>
+
+        <div style="clear:both">
+            <table-list
+                title="<#Compontent Template Mangerment#> "
+                ref="component_table"
+                :options="tableOptions"
+            ></table-list>
+        </div>            
     </div>
     
 </template>
@@ -53,6 +61,32 @@ export default {
                 callback:(data=>{
                     this.postData = data;
                 })
+            },
+            tableOptions:{
+                getUrl(){
+                    return "/tpl/component/pagelist?isEdit=true&types=3&categoryId=&nameLike=&terminal=1";
+                },
+                pageOption: {
+                    sizeKey: "pageSize",
+                    indexKey: "curPage",
+                    index: 1,
+                    size: 10
+                },
+                map: [
+                    { key:"id",val:"<#Component ID#>"},
+                    { key:"name",val:"<#Component Name#>"},
+                    { key:"remark",val:"<#Comp Description#>"},
+                ],
+                analysis: data => {
+                    if (data && data.data && data.data.dataList) {
+                        return {
+                            data: data.data.dataList,
+                            count: data.data.count
+                        };
+                    } else {
+                        return { data: [], count: 0 };
+                    }
+                }
             }
         }
     },

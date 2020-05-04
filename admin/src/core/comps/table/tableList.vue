@@ -248,6 +248,11 @@
         },
         mounted () {
             this.getData(this.state.pageOption.index);
+
+            tool._form_event_publisher.on("changeSize",(data)=>{
+                this.state.pageOption.size = data.size;
+                this.search();
+            });
         },
         destroyed(){
             

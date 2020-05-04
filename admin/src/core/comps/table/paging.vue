@@ -4,7 +4,7 @@
             <ul class="pagination">
                 <li class="page-item selectPages">
                     <label>Size:</label>
-                    <select>
+                    <select v-model='currentSize' @change="changeSize">
                         <option>10</option>
                         <option>20</option>
                         <option>50</option>
@@ -32,6 +32,7 @@
         name: "PagingSection",
         data(){
             return {
+                currentSize:this.options.size,
                 goIndexKey:tool._idSeed.newId(),
             }
         },
@@ -47,6 +48,9 @@
             }
         },
         methods:{
+            changeSize(){
+                tool._form_event_publisher.broadcast("changeSize",{size:this.currentSize});
+            },
             next:function () {
                 if(this.index >= this.total){
                     return;

@@ -7,7 +7,7 @@
             <!-- 添加current激活input current样式  去掉则是默认样式 -->
             <div class="div-box current" >
                 <i class="icon-date fa fa-calendar"></i>
-                <input :placeholder="placeholderStr" :isDatetimePicker="isDatetimePicker" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" readonly v-model="selectDayStr" :_body_tag="__DatetimePickerKey" @click="showPicker"/>
+                <input @blur="blurdate($event)" :placeholder="placeholderStr" :isDatetimePicker="isDatetimePicker" type="text" :class="{readonlyIcon:readonlyFlag}" class="form-item-input date" :value="selectDayStr" :_body_tag="__DatetimePickerKey" @click="showPicker"/>
                 <i v-show="showClear" class="fa fa-times-circle icon-del" @click.stop="clear"></i>
                 <p class="promptMsg" @click.stop v-show="state.showError">{{$attrs.msg}}</p>
                 <p class="tip" @click.stop v-show="!state.showError">{{$attrs.tip}}</p>
@@ -192,10 +192,12 @@ export default {
             return this.dateKey;
         },
         splitStr(){
-            if(!this.splitKey){
-                return "/";
-            }
-            return this.splitKey;
+            // if(!this.splitKey){
+            //     return "/";
+            // }
+            // return this.splitKey;
+
+            return "/";
         },
         labelWidthVal(){
             if(this.$attrs.labelWidth){
@@ -253,6 +255,20 @@ export default {
         },
     },
     methods:{
+        checkDate(str){
+            if(!str){
+                return false;
+            }
+            var expression = /^\d{4}\/\d{2}\/\d{2}$/ ;
+            let objExp = new RegExp(expression);
+            return objExp.test(str);
+        },
+        blurdate(e){
+            let value = e.target.value;
+            if(value){
+                this.checkDate(value)?this.setValue(value):this.setValue("");
+            }
+        },
         /**
          * @description 组装日历面板上面的 6*7 = 42天所有数据源, datepicker组件最核心的渲染方法
          * @param year:年份
@@ -444,7 +460,6 @@ export default {
          * @returns
          */
         setValue(str){
-            console.log(1);
             if(!str){
                 this.current.currentYear = new Date().getFullYear();
                 this.current.currentMonth = parseInt(new Date().getMonth() + 1);

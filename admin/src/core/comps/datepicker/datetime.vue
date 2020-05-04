@@ -9,7 +9,7 @@
                 <!-- <div class = "dateTimeText" :_body_tag="dateKey" :class="{readonlyIcon:readonlyFlag}" @click.stop="showDateTimePickerHandle" >
                     {{dateTimeStr}}
                 </div> -->
-                <input :placeholder="placeholderStr" class = "dateTimeText" readonly :_body_tag="dateTimeKey" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle" v-model='dateTimeStr'/>
+                <input @blur="blurdate($event)" :placeholder="placeholderStr" class = "dateTimeText" :_body_tag="dateTimeKey" :class="{readonlyIcon:readonlyFlag}" @click="showDateTimePickerHandle" v-model='dateTimeStr'/>
                 <!-- 展开日期下拉 -->
                 <div class="picker-box" v-show="showDateTimePicker">
                     <div class="picker-header" style = "height:272px;">
@@ -73,10 +73,11 @@ export default {
             return define.LABELWIDTH;
         },
         splitStr(){
-            if(!this.splitKey){
-                return "/";
-            }
-            return this.splitKey;
+            // if(!this.splitKey){
+            //     return "/";
+            // }
+            // return this.splitKey;
+            return "/";
         },
         placeholderStr(){
             if(this.$attrs.placeholder){
@@ -115,6 +116,31 @@ export default {
         }
     },
     methods:{
+        checkDateTime(str){
+            if(!str){
+                return false;
+            }
+            if(str.indexOf(' ') == -1){
+                return false;
+            }
+            let date = str.split(' ')[0];
+            let time = str.split(' ')[1];
+
+            var date_expression = /^\d{4}\/\d{2}\/\d{2}$/ ;
+            var time_expression = /^(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/;
+            let data_flag = date_expression.test(date);
+            let time_flag = time_expression.test(time);
+            if(data_flag && time_flag){
+                return true;
+            } 
+            return false;
+        },
+        blurdate(e){
+            let value = e.target.value;
+            if(value){
+                this.checkDateTime(value)?this.setValue(value):this.setValue("");
+            }
+        },
         getDateTimeStr(){
             let dateComp = this.$refs[this.dateKey];
             let timeComp = this.$refs[this.timeKey];

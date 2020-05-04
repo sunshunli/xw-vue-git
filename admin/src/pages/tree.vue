@@ -33,7 +33,13 @@
                 ref="component_table"
                 :options="tableOptions"
             ></table-list>
-        </div>            
+        </div>
+
+        <div style="clear:both">
+            <le-date-picker label="日期组件" v-model="entity.date"></le-date-picker>
+
+            <le-date-time-picker label="时间日期组件" v-model="entity.datetime"></le-date-time-picker>
+        </div>
     </div>
     
 </template>
@@ -45,6 +51,10 @@ export default {
     name:"TreeTest",
     data(){
         return {
+            entity:{
+                data:"",
+                datetime:""
+            },
             selectNode:null,
             data:[],
             postData:null,

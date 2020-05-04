@@ -39,6 +39,9 @@
             <le-date-picker label="日期组件" v-model="entity.date"></le-date-picker>
 
             <le-date-time-picker label="时间日期组件" v-model="entity.datetime"></le-date-time-picker>
+
+
+            <le-button value="sss" @click="getDT"></le-button>
         </div>
     </div>
     
@@ -101,6 +104,9 @@ export default {
         }
     },
     methods:{
+        getDT(){
+            console.log(this.entity.datetime);
+        },
         itemClick(item){
             console.log(11111,item);
             this.selectNode = item;

@@ -55,7 +55,7 @@ export default {
     data(){
         return {
             entity:{
-                data:"",
+                date:"",
                 datetime:""
             },
             selectNode:null,
@@ -115,7 +115,7 @@ export default {
     },
     methods:{
         getDT(){
-            console.log(this.entity.datetime);
+            console.log(this.entity.date);
         },
         itemClick(item){
             console.log(11111,item);

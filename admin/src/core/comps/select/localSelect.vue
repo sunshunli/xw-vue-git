@@ -6,10 +6,10 @@
 			<div class="tags" :_body_tag="inputdomKey" :class="{readonlyIcon:readonlyFlag}" @mouseenter="showArr" @mouseleave="hideArr">
                 <i v-show="showArrow" :_body_tag="inputdomKey" class="fa fa-chevron-down icon-del" @click="clickInput"></i>
                 <i v-show="!showArrow" class="fa fa-chevron-down icon-del fa-times-circle" @click.stop="clear"></i>
-
+                <span class="placeholderText" @click.stop="focusInput" v-show="placeholderStr && (!inputFlag && !readonlyFlag)">{{placeholderStr}}</span>
 				<left-section :readonly="readonlyFlag" :display-name="displayName" :data="leftArray" :notice-parent="noticeFromLeft"></left-section>
 				
-				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" @click="clickInput" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" class="searchMsg" @input="inputChange" v-model="searchName" />
+				<input :placeholder="placeholderStr" :_body_tag="inputdomKey" @click="clickInput" :ref="inputdomKey" :readonly=" !inputFlag || readonlyFlag" type="text" :class="{searchMsg:true,hideInput:!inputFlag || readonlyFlag}" v-model="searchName" />
 			
                 <p class="promptMsg" @click.stop v-show="state.showError">{{$attrs.msg}}</p>
                 <p class="tip" @click.stop v-show="!state.showError">{{$attrs.tip}}</p>
@@ -371,26 +371,31 @@
         vertical-align: middle;
         padding: 0 !important;
 	}
-
-    .searchMulSelect .tags{
-        padding-right: 26px;
-    }
 	
 	.searchMulSelect input:focus{
 		border-color: #409EFF;
 	}
 	
 	.searchMulSelect .tags{
+        padding-right: 26px;
 		width: 100%;
-        min-height: 100%;
-        /* position: absolute; */
+        /* min-height: 100%; */
+        min-height: 40px;
         line-height: normal;
         white-space: normal;
         z-index: 1;
-        /* top: 0;
-        left: 0; */
         position: relative;
 	}
+
+    .searchMulSelect .placeholderText{
+        color: #b9bdc3;
+        /* color: red; */
+        font-size: 14px;
+        position: absolute;
+        top: 52%;
+        left: 10px;
+        transform: translateY(-50%);    
+    }
 
     .searchMulSelect .tags.readonlyIcon{
         background-color: #f1f1f1;
@@ -408,6 +413,10 @@
 	    background-color: transparent;
 	    width: 100px;
 	    vertical-align: top;
+    }
+
+    .searchMulSelect .hideInput{
+        display: none;
     }
     
     .tags .icon-del{

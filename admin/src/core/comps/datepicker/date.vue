@@ -572,7 +572,7 @@ form .form-item .form-item-div .div-box {
 /* 选择器器部分 */ 
 .picker-body {width: 100%;display: inline-block; }
 .picker-body table { text-align: center; width: 100%; line-height: 26px}
-.picker-body table th { text-align: center}
+.picker-body table th { text-align: center;font-size:14px;}
 .picker-body table td { cursor: pointer}
 .picker-body table td.disable { background: #f0f0f0 !important; color: #cbcbcb !important;}
 .picker-body table td.current { background: #4fbba0 !important; color: #fff !important;}

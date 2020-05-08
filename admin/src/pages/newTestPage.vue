@@ -8,9 +8,10 @@
             <div class="col1">
                 <le-input placeholder="Order Number" labelWidth="120" label="订单编号:" v-model="searchModel.orderCode"></le-input>
             </div>
-            <div class="col2">
-                <le-local-select placeholder="请选择" labelWidth="120" label="商城" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
-                <!-- <le-date-time-picker placeholder="Order DateTime" labelWidth="120" label="订单有效截止日期:" v-model="searchModel.dateTime"></le-date-time-picker> -->
+            <div class="col3">
+                <le-local-select placeholder="请选择" labelWidth="120" label="商城商城商城商城商城商城商城商城商城商城商城商城:" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
+                <le-local-select placeholder="请选择就才能到机场南大街" labelWidth="120" label="商城:" :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
+                <le-local-select placeholder="请选择" labelWidth="120" label="商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城商城:" enabledInput :data-source="shops" v-model="searchModel.shop" display-name="val" display-value="key"></le-local-select>
             </div>
             <div class="col3">
                 <le-date-picker placeholder="Order Date" labelWidth="120" label="日期组件" v-model="searchModel.date"></le-date-picker>
@@ -73,6 +74,7 @@
 export default {
     data(){
         return {
+            hah:false,
             searchModel:{
                 orderCode:'',
                 shop:'',

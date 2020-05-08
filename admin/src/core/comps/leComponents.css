@@ -108,6 +108,8 @@ html,body{
 .le_comps_core_css .le_new_page_btn_group{
     text-align: center;
     padding-top: 20px;
+    /* 修改新建页面 底部新建与取消按钮 */
+    margin-bottom: 50px;
 }
 
 .le_comps_core_css .le_list_search_pannel{

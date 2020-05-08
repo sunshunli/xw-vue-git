@@ -265,6 +265,7 @@
             upload(){
                 if(!this.url || !this.fname){
                     this.alert.showAlert("error","<#上传url和fname必须配置#>!");
+                    this.reloadFileInput();
                     return;
                 }
                 
@@ -277,11 +278,14 @@
                 //控制格式
                 if(!this.checkSuffix(fileList)){
                     this.alert.showAlert("error","<#后缀名必须为#>:"+ this.vtype);
+
+                    this.reloadFileInput();
                     return;
                 }
                 //控制大小
                 if(!this.checkSize(fileList)){
                     this.alert.showAlert("error","<#文件大小必须小于#>:"+ this.size + "MB");
+                    this.reloadFileInput();
                     return;
                 }
                 //控制规格,仅支持图片规格
@@ -400,11 +404,11 @@
     display: inline-block;
     overflow: hidden;
     text-align: center;
-    width: 50px;
+    width: auto;
     height: 26px;
     background-color: #2c7;
     border-radius: 4px;
-    /* padding: 5px; */
+    padding:0 5px;
     font-size: 12px;
     font-weight: normal;
     line-height: 26px;

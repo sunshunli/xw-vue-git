@@ -16,7 +16,7 @@
                     <le-button v-show="hideAllTag" type="create" value="显示提醒" @click="showAlert"></le-button>
                 </div>
             </div> -->
-            <le-local-select  placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="选择职业Ful" :data-source="shopsFull" display-name="val" display-value="key" v-model='eshopFull'></le-local-select> 
+            <le-local-select placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="选择职业Ful" :data-source="shopsFull" display-name="val" display-value="key" v-model='eshopFull'></le-local-select> 
 
             <le-local-select multiple enabledInput placeholder='请选择' @change='changeShopsFull' labelWidth='150' label="测试下拉多选的新样式" :data-source="newSelectItem" display-name="val" display-value="key" v-model='newSelectArr'></le-local-select> 
 
@@ -74,19 +74,19 @@ let _shops = [
 ]
 
 let _newSelectItem  = [
-    {val:'12',key:"1"},
-    {val:'13',key:"2"},
-    {val:'14',key:"3"},
-    {val:'15',key:"4"},
-    {val:'16',key:"5"},
-    {val:'17',key:"6"},
-    {val:'18',key:"7"},
-    {val:'19',key:"8"},
-    {val:'20',key:"9"},
-    {val:'21',key:"10"},
-    {val:'22',key:"11"},
-    {val:'23',key:"12"},
-    {val:'24',key:"13"},
+    {val:'1212121212121212',key:"1"},
+    {val:'131313131313',key:"2"},
+    {val:'1414141414',key:"3"},
+    {val:'11515155',key:"4"},
+    {val:'16161616',key:"5"},
+    {val:'1717',key:"6"},
+    {val:'18181818',key:"7"},
+    {val:'191919191919',key:"8"},
+    {val:'20202020',key:"9"},
+    {val:'21212121',key:"10"},
+    {val:'222222222',key:"11"},
+    {val:'232323232323',key:"12"},
+    {val:'242424',key:"13"},
     {val:'25',key:"14"},
     {val:'嘻嘻',key:"15"},
     {val:'哈哈',key:"16"},

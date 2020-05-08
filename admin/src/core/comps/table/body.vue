@@ -131,7 +131,7 @@
         color: rgba(0,0,0,0.65);border: 1px solid #ddd;vertical-align: middle;text-align: center; 
         word-break: keep-all;
         white-space: nowrap;
-        padding: 0 10px;
+        padding: 10px;
         max-width: 300px;
         overflow: hidden;
     }
@@ -162,16 +162,17 @@
     }
 
     .btnContent{
-            width: auto;
+        width: auto;
         height: auto;
         display: inline-block;
-        transform: translateY(25%);
+        vertical-align: middle;
+        /* transform: translateY(25%); */
+        /* float: left;
+        transform: translateY(0); */
     }
 
     .opration{
-        /* text-align: left; */
-        white-space: nowrap;
-         max-width: 1000px;
+        max-width: 1000px;
     }
 
 </style>

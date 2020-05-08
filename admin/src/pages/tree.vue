@@ -85,6 +85,16 @@ export default {
                     index: 1,
                     size: 10
                 },
+                 actions:[
+                    {
+                        key:"update",
+                        val:"编辑",
+                    },
+                    {
+                        key:"remove",
+                        val:"注销",
+                    },
+                ],
                 map: [
                     { key:"id",val:"<#Component ID#>"},
                     { key:"name",val:"<#Component Name#>"},

@@ -267,6 +267,7 @@ export default {
             let value = e.target.value;
             if(value){
                 this.checkDate(value)?this.setValue(value):this.setValue("");
+                this.$emit("input",this.selectDayStr);
             }
         },
         /**

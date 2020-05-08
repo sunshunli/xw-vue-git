@@ -267,7 +267,7 @@ let LeCompTool = {
             m = m>=10?m:"0"+m;
             let day = d.getDate();
             day = d.getDate()>=10?d.getDate():"0"+d.getDate();
-            return d.getFullYear() + "-" + m + "-" + day;
+            return d.getFullYear() + "/" + m + "/" + day;
         },
         time:function(val){
             if(!val){return "";}

@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="localTreeContent">
         <tree-item
             v-for="(item,index) in state.data" :key="index"
             :item="item"
@@ -333,5 +333,9 @@ export default {
 </script>
 
 <style scoped>
-
+.localTreeContent{
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
 </style>

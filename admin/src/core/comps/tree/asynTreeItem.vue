@@ -143,8 +143,8 @@ export default {
         color: #606266;
         font-size: 14px;
         padding:2px;
-        overflow: hidden;
-        text-overflow:ellipsis;
+        /* overflow: hidden;
+        text-overflow:ellipsis; */
         white-space: nowrap;
         position: relative;
     }

@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="asynTreeContent">
         <tree-item
             v-for="(item,index) in state.data" :key="index"
             :item="item"
@@ -210,6 +210,10 @@ export default {
 </script>
 
 <style scoped>
-
+    .asynTreeContent{
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 

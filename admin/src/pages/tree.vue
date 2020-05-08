@@ -12,7 +12,11 @@
             <button @click="checkall(true)">checkAll</button>
             <button @click="checkall(false)">unCheckAll</button>
             <!-- <le-asyn-tree displayName="name" :asynOptions="asynOptions" ref="tree" :itemClick="itemClick" checkbox></le-asyn-tree> -->
-            <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
+            <div style="width:200px">
+                <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree>
+            </div>
+            <!-- <le-local-tree displayName="classificationName" ref="tree1" :itemClick="itemClick" childrenKey="nodes" checkbox></le-local-tree> -->
+
             <le-button type="upload" @click="uploadb" value="上传"></le-button>
             <le-button type="upload" @click="setFile" value="setFile"></le-button>
             <le-button type="upload" @click="clear" value="clear"></le-button>

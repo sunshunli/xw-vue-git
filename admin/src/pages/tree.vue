@@ -31,13 +31,13 @@
             <le-button value="Local删除节点" @click="removeLocal"></le-button>
         </div>
 
-        <div style="clear:both">
+        <!-- <div style="clear:both">
             <table-list
                 title="<#Compontent Template Mangerment#> "
                 ref="component_table"
                 :options="tableOptions"
             ></table-list>
-        </div>
+        </div> -->
 
         <div style="clear:both">
             <le-date-picker label="日期组件" v-model="entity.date"></le-date-picker>
@@ -119,7 +119,7 @@ export default {
     },
     methods:{
         getDT(){
-            console.log(this.entity.date);
+            this.alert.showAlert("success","asd");
         },
         itemClick(item){
             console.log(11111,item);

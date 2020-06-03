@@ -27,6 +27,10 @@ let _le_alert = {
         $(parentDiv).append($(html));
         $("body").append($(parentDiv));
 
+        $(parentDiv).on("click","i[tag=del]",function(){
+            $(this).parents('div.le_alert').remove();
+        })
+
         // $(parentDiv).css({'top':'-50px','opacity':0,'z-index':zIndex});
         $(parentDiv).animate({top:'16px',opacity:1},500,()=>{
             // setTimeout(()=>{

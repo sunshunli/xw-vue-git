@@ -45,7 +45,9 @@
             <le-date-time-picker label="时间日期组件" v-model="entity.datetime"></le-date-time-picker>
 
 
-            <le-button value="sss" @click="getDT"></le-button>
+            <le-button value="success" @click="getDT('success')"></le-button>
+            <le-button value="warning" @click="getDT('warning')"></le-button>
+            <le-button value="error" @click="getDT('error')"></le-button>
         </div>
     </div>
     
@@ -118,8 +120,8 @@ export default {
         }
     },
     methods:{
-        getDT(){
-            this.alert.showAlert("success","asd");
+        getDT(t){
+            this.alert.showAlert(t,"asd");
         },
         itemClick(item){
             console.log(11111,item);

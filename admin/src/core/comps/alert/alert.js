@@ -22,7 +22,7 @@ let _le_alert = {
         let html = "<div class='msgBox "+res.cls+"' style='opacity:1'>";
         html += "<i class='left "+res.iCls+"'></i>";
         html += "<p>"+msg+"</p>";
-        html += "<i class='right fa fa-times-circle closeBtn'></i>";
+        html += "<i tag='del' class='right fa fa-times-circle closeBtn'></i>";
         html += "</div>";
 
         $(parentDiv).append($(html));

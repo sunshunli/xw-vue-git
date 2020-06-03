@@ -20,8 +20,9 @@ let _le_alert = {
 
         let parentDiv = $("<div style='z-index:"+zIndex+";top:-50px;opacity:0;' class='le_alert content'></div>");
         let html = "<div class='msgBox "+res.cls+"' style='opacity:1'>";
-        html += "<i class='"+res.iCls+"'></i>";
+        html += "<i class='left "+res.iCls+"'></i>";
         html += "<p>"+msg+"</p>";
+        html += "<i class='right fa fa-times-circle closeBtn'></i>";
         html += "</div>";
 
         $(parentDiv).append($(html));

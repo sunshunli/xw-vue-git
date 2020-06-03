@@ -21,7 +21,7 @@
 	border: 1px solid #c7e0c7;
 	border-radius: 3px;
 	margin-top: 10px;
-	padding: 15px 20px;
+	padding: 15px 27px;
 	background-color: #caefca;
     margin: 0 auto;
     overflow: hidden;
@@ -41,13 +41,23 @@
 
 .le_alert.content i{
     width: 4%;
-    float: left;
-    margin-right: 2%;
+    margin-right: 6px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.le_alert.content .closeBtn{
+    left: auto;
+    right: 10px;
+    margin-right: 0;
+    cursor: pointer;
 }
 
 .le_alert.content p{
     float: left;
-    width: 94%;
+    /* width: 94%; */
     margin: 0;
     margin-top: -3px;
 }

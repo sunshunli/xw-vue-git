@@ -19,7 +19,7 @@
         data(){
             return {
                 username:"wupeng5",
-                password:"Chen19910208"
+                password:""
             }
         },
         methods:{

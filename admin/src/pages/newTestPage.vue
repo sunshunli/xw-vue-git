@@ -122,10 +122,8 @@ export default {
                 ],
                 getParams:()=>{
                     return {
-                        companyName:"a",
-                        status:-1,
-                        pageSize:1,
-                        pageNum:10
+                        companyName:this.searchModel.age,
+                        status:-1
                     }
                 },
                 getUrl:()=>{

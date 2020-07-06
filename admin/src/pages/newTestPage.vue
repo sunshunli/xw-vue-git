@@ -120,6 +120,14 @@ export default {
                     {key:"status",val:"状态"},
                     {key:"operateTime",val:"修改时间"}
                 ],
+                getParams:()=>{
+                    return {
+                        companyName:"a",
+                        status:-1,
+                        pageSize:1,
+                        pageNum:10
+                    }
+                },
                 getUrl:()=>{
                     return "/risk/limit/black/user/query/lst?isNeedAllCout=true&userName=&companyName="+this.searchModel.age+"&status=-1";
                 },

@@ -47,6 +47,9 @@
             }
         },
         computed:{
+            ajaxType(){
+                return this.options.ajaxType?this.options.ajaxType:"get";
+            },
             originCols:function(){
                 return tool.object.cloneObj(this.options.map);
             },
@@ -83,9 +86,19 @@
                     console.log("<#无有效的url#>!");
                     return;
                 }
-                let suffix = url.indexOf('?') === -1?"?":"&";
-                url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
-                this.ajax.getFetch(url).then(data=>{
+                let tmpPromise = null;
+                if(this.ajaxType == "get"){
+                    let suffix = url.indexOf('?') === -1?"?":"&";
+                    url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
+                    tmpPromise = this.ajax.getFetch(url);
+                }else{
+                    let tmpData = this.options.getParams?this.options.getParams():{};
+                    tmpData[this.options.pageOption.indexKey] = index;
+                    tmpData[this.options.pageOption.sizeKey] = size;
+                    tmpPromise = this.ajax.postFetch(url,tmpData);
+                }
+                
+                tmpPromise.then(data=>{
                     this.isLoading = false;
                     let res = {};
                     if(this.options.analysis){

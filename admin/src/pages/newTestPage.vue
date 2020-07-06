@@ -120,6 +120,7 @@ export default {
                     {key:"status",val:"状态"},
                     {key:"operateTime",val:"修改时间"}
                 ],
+                ajaxType:"post",
                 getParams:()=>{
                     return {
                         companyName:this.searchModel.age,

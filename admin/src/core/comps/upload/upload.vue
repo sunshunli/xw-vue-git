@@ -42,6 +42,8 @@
 <script>
     import define from "../define.js";
     import tool from "../leCompsTool.js";
+    import Ajax from "../../tool/http.js";
+    
     export default {
         components: {},
         props:["options","value","readonly"],
@@ -304,7 +306,7 @@
             },
             doUploadAjax(formData){
                 this.showLoading = true;
-                this.ajax.uploadFetch(this.url,formData).then((result) => {
+                Ajax.upload(this.url,formData).then((result) => {
                     // this.srcs = [];
                     let src = this.options.analysis?this.options.analysis(result):result;
                     this.alert.showAlert("success","<#上传成功#>");

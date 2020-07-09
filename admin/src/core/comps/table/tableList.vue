@@ -24,6 +24,7 @@
     import BodySection from "./body.vue";
     import PagingSection from "./paging.vue";
     import tool from "../leCompsTool.js";
+    import Ajax from "../../tool/http.js";
     
     export default {
         components: {HeaderSection,BodySection,PagingSection},
@@ -90,12 +91,12 @@
                 if(this.ajaxType == "get"){
                     let suffix = url.indexOf('?') === -1?"?":"&";
                     url += suffix + this.options.pageOption.indexKey + "=" + index + "&"+ this.options.pageOption.sizeKey + "=" + size;
-                    tmpPromise = this.ajax.getFetch(url);
+                    tmpPromise = Ajax.get(url);
                 }else{
                     let tmpData = this.options.getParams?this.options.getParams():{};
                     tmpData[this.options.pageOption.indexKey] = index;
                     tmpData[this.options.pageOption.sizeKey] = size;
-                    tmpPromise = this.ajax.postFetch(url,tmpData);
+                    tmpPromise = Ajax.post(url,tmpData);
                 }
                 
                 tmpPromise.then(data=>{

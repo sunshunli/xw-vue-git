@@ -92,9 +92,9 @@ class Ajax {
             .catch((err) => Promise.reject({ msg: err }))
     }
     upload(url, params = {}) {
-        const formData = ajaxTool.JsonToFormData(params);
+        // const formData = ajaxTool.JsonToFormData(params);
         const options = {
-            body: formData,
+            body: params,
             method: 'POST',
             headers: {
                 'content-type': 'multipart/form-data'

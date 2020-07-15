@@ -96,9 +96,9 @@ class Ajax {
         const options = {
             body: params,
             method: 'POST',
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
+            // headers: {
+            //     'content-type': 'multipart/form-data'
+            // }
         }
         return fetch(url, options)
             .then(ajaxTool.checkStatus)

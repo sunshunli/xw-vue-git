@@ -72,13 +72,10 @@ class Ajax {
         let headers = {
             'Content-Type': 'application/json; charset=UTF-8'
         };
-        const controller = new AbortController()
-        const signal = controller.signal;
         let options = {
             method:"get",
-            credentials:'include',
-            headers:headers,
-            signal
+            credentials:'same-origin',
+            headers:headers
         };
         url = ajaxTool.serializeUrl(url, params);
         url = `${url}${url.endsWith("?")?"":"&"}ran=${Math.random()}`;
@@ -92,6 +89,7 @@ class Ajax {
         const options = {
             body: JSON.stringify(params),
             method: "POST",
+            credentials:'same-origin',
             headers: {
                 'content-type': 'application/json'
             }

@@ -69,9 +69,20 @@ let ajaxTool = {
 
 class Ajax {
     get(url, params = {}) {
+        let headers = {
+            'Content-Type': 'application/json; charset=UTF-8'
+        };
+        const controller = new AbortController()
+        const signal = controller.signal;
+        let options = {
+            method:"get",
+            credentials:'include',
+            headers:headers,
+            signal
+        };
         url = ajaxTool.serializeUrl(url, params);
         url = `${url}${url.endsWith("?")?"":"&"}ran=${Math.random()}`;
-        return fetch(url)
+        return fetch(url,options)
             .then(ajaxTool.checkStatus)
             .then(ajaxTool.parseJSON)
             .then(ajaxTool.checkCode)

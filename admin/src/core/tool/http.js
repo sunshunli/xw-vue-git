@@ -105,6 +105,7 @@ class Ajax {
         const options = {
             body: params,
             method: 'POST',
+            credentials:'same-origin',
             // headers: {
             //     'content-type': 'multipart/form-data'
             // }

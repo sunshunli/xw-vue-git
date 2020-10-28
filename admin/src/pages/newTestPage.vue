@@ -150,7 +150,6 @@ export default {
                 ]
             },
             shops:[
-                {val:'lenovo',key:"1"},
                 {val:'lecoo',key:"2"},
             ],
             sex:[

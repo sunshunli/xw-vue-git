@@ -66,7 +66,6 @@
 
 <script>
 let _shops = [
-    {val:'lenovo',key:"1"},
     {val:'lecoo',key:"2"},
     {val:'epp',key:"3"},
     {val:'17',key:"4"},
@@ -195,7 +194,6 @@ export default {
                 ]
             },
             shops:[
-                {val:'lenovo',key:"1"},
                 {val:'lecoo',key:"2"},
             ],
             sex:[

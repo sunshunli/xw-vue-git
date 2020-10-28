@@ -140,6 +140,8 @@ export default {
             if(value){
                 this.checkDateTime(value)?this.setValue(value):this.setValue("");
                 this.$emit("input",this.dateTimeStr);
+            }else{
+                this.$emit("input","");
             }
         },
         getDateTimeStr(){

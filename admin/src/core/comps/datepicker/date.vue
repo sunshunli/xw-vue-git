@@ -268,6 +268,8 @@ export default {
             if(value){
                 this.checkDate(value)?this.setValue(value):this.setValue("");
                 this.$emit("input",this.selectDayStr);
+            }else{
+                this.$emit("input","");
             }
         },
         /**
